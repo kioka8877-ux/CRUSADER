@@ -13,10 +13,12 @@
 | F02 | CASTELLAN | Config créative + viewer → roadmap.json | SCELLÉE — EN TEST PROD | 2026-05-21 |
 | F03 | SIGISMUND | Rendu Remotion → short_render.mp4 | SCELLÉE — EN TEST PROD | 2026-05-21 |
 | F04 | HELBRECHT | Assemblage FFmpeg → final_master.mp4 | SCELLÉE — EN TEST PROD | 2026-05-21 |
+| META | METAPROMPTS | Guides opérateur (script + visuels) | SCELLÉS — PRÊTS À L'EMPLOI | 2026-05-21 |
 
 **Compteur de Guerre :**
 ```
 [████] 4/4 frégates scellées
+[██]   2/2 metaprompts scellés
 ```
 
 ---
@@ -61,6 +63,8 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 | 2026-05-21 | calculateMetadata pour métadonnées dynamiques | Remotion 4.x — dimensions/durée issues des JSON |
 | 2026-05-21 | FFmpeg remux sans réencodage (-c copy) | Pas de perte qualité, traitement 10-60s vs plusieurs minutes |
 | 2026-05-21 | +faststart obligatoire | MOOV atom en tête de fichier — requis YouTube/TikTok/Reels |
+| 2026-05-21 | Balisage [mots_forts] intégré dans META_01 | Continuité automatique vers F03 sans intervention manuelle |
+| 2026-05-21 | MODE GROUPED / 1:1 dans META_02 | Flexibilité test vs prod, même prompt — juste changer le paramètre |
 
 ---
 
@@ -78,6 +82,8 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 | 2026-05-21 | F03 | TEST PROD | En attente de tests avec roadmap.json + images/ + audio réels | — |
 | 2026-05-21 | F04 | FORGE | Développement terminé : crs_f04_helbrecht.py + CRS_F04.ipynb | ✓ |
 | 2026-05-21 | F04 | TEST PROD | En attente de tests avec short_render.mp4 (sortie F03) | — |
+| 2026-05-21 | META | FORGE | META_01_SCRIPT.md scellé — script viral + balisage [mots_forts] | ✓ |
+| 2026-05-21 | META | FORGE | META_02_VISUELS.md scellé — visuels Gemini + MODE GROUPED/1:1 | ✓ |
 
 ---
 
@@ -146,3 +152,19 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 
 **Tests de production :**
 *Prêt pour test — en attente de short_render.mp4 (sortie F03)*
+
+---
+
+## METAPROMPTS
+
+**Composants :**
+- `META_01_SCRIPT.md` — Génération de script viral via Claude (analyse patterns + balisage [mots_forts])
+- `META_02_VISUELS.md` — Génération de visuels via Gemini 3.1 Pro (MODE GROUPED ou 1:1)
+
+**Flux :**
+```
+Opérateur → META_01 (Claude) → script.txt
+Opérateur → META_02 (Gemini) → 1.png, 2.png... → SHARED/images/
+```
+
+**Statut :** SCELLÉS — prêts à l'emploi en production
