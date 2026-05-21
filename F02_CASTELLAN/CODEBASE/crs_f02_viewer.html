@@ -53,7 +53,7 @@
     border: 1px solid var(--border);
     color: var(--text-dim);
   }
-  header .status-pill.ok { border-color: var(--green-ok); color: var(--green-ok); }
+  header .status-pill.ok  { border-color: var(--green-ok); color: var(--green-ok); }
   header .status-pill.error { border-color: #e55; color: #e55; }
 
   /* ── Layout ── */
@@ -64,10 +64,10 @@
     height: calc(100vh - 45px);
   }
 
-  /* ── Left Panel (Style Config) ── */
+  /* ── Left Panel ── */
   .config-panel {
-    width: 280px;
-    min-width: 280px;
+    width: 300px;
+    min-width: 300px;
     background: var(--surface);
     border-right: 1px solid var(--border);
     overflow-y: auto;
@@ -134,7 +134,98 @@
   .checkbox-row input[type="checkbox"] { accent-color: var(--gold); cursor: pointer; }
   .checkbox-row label { cursor: pointer; font-size: 12px; color: var(--text); }
 
-  /* ── Auto-assign button ── */
+  /* ── Gemini mapping zone ── */
+  .gemini-box {
+    background: #0d1a0d;
+    border: 1px solid var(--gold-dim);
+    border-radius: var(--radius);
+    padding: 10px;
+  }
+  .gemini-box .gemini-hint {
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+  .gemini-textarea {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 6px 8px;
+    border-radius: var(--radius);
+    resize: vertical;
+    min-height: 80px;
+    max-height: 200px;
+    line-height: 1.4;
+  }
+  .gemini-textarea:focus { border-color: var(--gold-dim); outline: none; }
+  .gemini-apply-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .gemini-status {
+    font-size: 10px;
+    color: var(--text-dim);
+    flex: 1;
+  }
+  .gemini-status.ok  { color: var(--green-ok); }
+  .gemini-status.err { color: #e55; }
+
+  /* ── Position selector ── */
+  .pos-group { display: flex; gap: 6px; }
+  .pos-btn {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    padding: 6px 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-dim);
+    font-size: 10px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.15s;
+  }
+  .pos-btn:hover { border-color: var(--gold-dim); color: var(--text); }
+  .pos-btn.active { border-color: var(--gold); color: var(--gold); }
+  .pos-schema {
+    width: 24px;
+    height: 32px;
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    position: relative;
+    opacity: 0.8;
+  }
+  .pos-schema .bar {
+    position: absolute;
+    left: 3px;
+    right: 3px;
+    height: 3px;
+    background: currentColor;
+    border-radius: 1px;
+  }
+  .pos-schema .bar.top    { top: 4px; }
+  .pos-schema .bar.center { top: 50%; transform: translateY(-50%); }
+  .pos-schema .bar.bottom { bottom: 4px; }
+
+  /* ── Font other input ── */
+  .font-other-input {
+    display: none;
+    margin-top: 4px;
+  }
+  .font-other-input.visible { display: block; }
+
+  /* ── Buttons ── */
   .btn-secondary {
     background: var(--bg);
     border: 1px solid var(--gold-dim);
@@ -150,6 +241,23 @@
     transition: background 0.15s;
   }
   .btn-secondary:hover { background: #1a1500; }
+
+  .btn-small {
+    background: var(--gold-dim);
+    border: 1px solid var(--gold);
+    color: #000;
+    padding: 5px 12px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .btn-small:hover { background: var(--gold); }
 
   /* ── Timeline Panel ── */
   .timeline-panel {
@@ -187,30 +295,13 @@
   .segment-row:hover { border-color: var(--gold-dim); }
   .segment-row.has-image { border-color: #2a4a2a; }
 
-  .seg-id {
-    color: var(--gold);
-    font-size: 12px;
-    font-weight: bold;
-    text-align: center;
-  }
+  .seg-id { color: var(--gold); font-size: 12px; font-weight: bold; text-align: center; }
 
-  .seg-text {
-    color: var(--text);
-    font-size: 12px;
-    line-height: 1.4;
-  }
-  .seg-time {
-    font-size: 10px;
-    color: var(--text-dim);
-    margin-top: 2px;
-  }
+  .seg-text { color: var(--text); font-size: 12px; line-height: 1.4; }
+  .seg-time { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
   .seg-strong { color: var(--gold); font-style: italic; }
 
-  .seg-image-select {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
+  .seg-image-select { display: flex; flex-direction: column; gap: 4px; }
   .seg-image-select select {
     background: var(--bg);
     border: 1px solid var(--border);
@@ -235,13 +326,9 @@
     justify-content: center;
   }
   .img-thumb-wrap img { max-width: 100%; max-height: 100%; object-fit: cover; }
-  .img-thumb-wrap .placeholder {
-    color: var(--text-dim);
-    font-size: 10px;
-    text-align: center;
-  }
+  .img-thumb-wrap .placeholder { color: var(--text-dim); font-size: 10px; text-align: center; }
 
-  /* ── Footer (validate) ── */
+  /* ── Footer ── */
   footer {
     background: #0a0a0a;
     border-top: 2px solid var(--border);
@@ -250,11 +337,7 @@
     align-items: center;
     gap: 16px;
   }
-
-  .progress-info {
-    font-size: 11px;
-    color: var(--text-dim);
-  }
+  .progress-info { font-size: 11px; color: var(--text-dim); }
   .progress-info span { color: var(--gold); }
 
   .btn-validate {
@@ -281,7 +364,7 @@
     border-radius: var(--radius);
     display: none;
   }
-  .save-status.ok { background: #1a3a1a; border: 1px solid var(--green-ok); color: var(--green-ok); display: block; }
+  .save-status.ok    { background: #1a3a1a; border: 1px solid var(--green-ok); color: var(--green-ok); display: block; }
   .save-status.error { background: #3a1a1a; border: 1px solid #e55; color: #e55; display: block; }
 
   /* ── Toast ── */
@@ -296,7 +379,7 @@
     display: none;
     border: 1px solid;
   }
-  .toast.ok { background: #1a3a1a; border-color: var(--green-ok); color: var(--green-ok); display: block; }
+  .toast.ok    { background: #1a3a1a; border-color: var(--green-ok); color: var(--green-ok); display: block; }
   .toast.error { background: #3a1a1a; border-color: #e55; color: #e55; display: block; }
 
   /* ── Scrollbar ── */
@@ -309,7 +392,7 @@
 
 <header>
   <div>
-    <h1>⚔ CRUSADER — F02 CASTELLAN</h1>
+    <h1>&#9876; CRUSADER — F02 CASTELLAN</h1>
     <div class="subtitle">Config créative + Mapping images → roadmap.json</div>
   </div>
   <div id="statusPill" class="status-pill">Chargement…</div>
@@ -317,9 +400,28 @@
 
 <div class="layout">
 
-  <!-- ── Config Panel ─────────────────────────────────────────────────── -->
+  <!-- ── Config Panel ── -->
   <aside class="config-panel">
 
+    <!-- GEMINI MAPPING -->
+    <div>
+      <div class="section-title">Mapping Gemini</div>
+      <div class="gemini-box">
+        <div class="gemini-hint">Colle le tableau généré par Gemini (GROUPED ou 1:1).<br>Ctrl+Entrée ou bouton pour appliquer.</div>
+        <textarea
+          id="geminiInput"
+          class="gemini-textarea"
+          placeholder="| 1 | 1.png | seg 1-3 | &quot;texte...&quot; |&#10;| 2 | 2.png | seg 4-6 | &quot;texte...&quot; |&#10;..."
+          onkeydown="if(event.ctrlKey && event.key==='Enter'){ applyGeminiMapping(); }"
+        ></textarea>
+        <div class="gemini-apply-row">
+          <span class="gemini-status" id="geminiStatus">—</span>
+          <button class="btn-small" onclick="applyGeminiMapping()">Appliquer</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMAT -->
     <div>
       <div class="section-title">Format</div>
       <div class="field">
@@ -330,30 +432,75 @@
       </div>
     </div>
 
+    <!-- TYPOGRAPHIE -->
     <div>
       <div class="section-title">Typographie</div>
+
       <div class="field">
         <label>Police principale</label>
-        <input type="text" id="fontPrimary" value="Cinzel">
+        <select id="fontPrimary" onchange="onFontChange('fontPrimary','fontPrimaryOther')">
+          <option value="Cinzel" selected>Cinzel — Serif élégant</option>
+          <option value="Playfair Display">Playfair Display — Serif</option>
+          <option value="Cormorant Garamond">Cormorant Garamond — Serif fin</option>
+          <option value="Montserrat">Montserrat — Sans moderne</option>
+          <option value="Oswald">Oswald — Sans condensé</option>
+          <option value="Bebas Neue">Bebas Neue — Sans display</option>
+          <option value="Caveat">Caveat — Handwriting</option>
+          <option value="Permanent Marker">Permanent Marker — Marker</option>
+          <option value="Patrick Hand">Patrick Hand — Whiteboard</option>
+          <option value="Courier Prime">Courier Prime — Monospace</option>
+          <option value="Space Mono">Space Mono — Mono tech</option>
+          <option value="__other__">— Autre police —</option>
+        </select>
+        <input type="text" id="fontPrimaryOther" class="font-other-input" placeholder="Nom exact de la police…">
       </div>
+
       <div class="field">
         <label>Police accent (mots forts)</label>
-        <input type="text" id="fontAccent" value="Playfair Display">
+        <select id="fontAccent" onchange="onFontChange('fontAccent','fontAccentOther')">
+          <option value="Playfair Display" selected>Playfair Display — Serif</option>
+          <option value="Cinzel">Cinzel — Serif élégant</option>
+          <option value="Cormorant Garamond">Cormorant Garamond — Serif fin</option>
+          <option value="Montserrat">Montserrat — Sans moderne</option>
+          <option value="Oswald">Oswald — Sans condensé</option>
+          <option value="Bebas Neue">Bebas Neue — Sans display</option>
+          <option value="Caveat">Caveat — Handwriting</option>
+          <option value="Permanent Marker">Permanent Marker — Marker</option>
+          <option value="Patrick Hand">Patrick Hand — Whiteboard</option>
+          <option value="Courier Prime">Courier Prime — Monospace</option>
+          <option value="Space Mono">Space Mono — Mono tech</option>
+          <option value="__other__">— Autre police —</option>
+        </select>
+        <input type="text" id="fontAccentOther" class="font-other-input" placeholder="Nom exact de la police…">
       </div>
+
       <div class="field">
-        <label>Taille sous-titres (px)</label>
-        <input type="number" id="subtitleSize" value="72" min="20" max="200">
+        <label>Taille sous-titres — <span class="range-val" id="subtitleSizeVal">72</span> px</label>
+        <input type="range" id="subtitleSize" min="32" max="120" step="2" value="72"
+               oninput="document.getElementById('subtitleSizeVal').textContent=this.value">
       </div>
+
       <div class="field">
         <label>Position sous-titres</label>
-        <select id="subtitlePosition">
-          <option value="bottom" selected>Bas</option>
-          <option value="center">Centre</option>
-          <option value="top">Haut</option>
-        </select>
+        <div class="pos-group">
+          <button class="pos-btn" data-pos="top" onclick="setPosition('top')">
+            <div class="pos-schema"><div class="bar top"></div></div>
+            Haut
+          </button>
+          <button class="pos-btn" data-pos="center" onclick="setPosition('center')">
+            <div class="pos-schema"><div class="bar center"></div></div>
+            Centre
+          </button>
+          <button class="pos-btn active" data-pos="bottom" onclick="setPosition('bottom')">
+            <div class="pos-schema"><div class="bar bottom"></div></div>
+            Bas
+          </button>
+        </div>
+        <input type="hidden" id="subtitlePosition" value="bottom">
       </div>
     </div>
 
+    <!-- COULEURS -->
     <div>
       <div class="section-title">Couleurs</div>
       <div class="field">
@@ -370,6 +517,7 @@
       </div>
     </div>
 
+    <!-- EFFETS -->
     <div>
       <div class="section-title">Effets</div>
       <div class="field">
@@ -385,14 +533,15 @@
       </div>
     </div>
 
+    <!-- ACTIONS -->
     <div>
       <div class="section-title">Actions rapides</div>
-      <button class="btn-secondary" onclick="autoAssign()">Auto-assigner images</button>
+      <button class="btn-secondary" onclick="autoAssign()">Auto-assigner images (proportionnel)</button>
     </div>
 
   </aside>
 
-  <!-- ── Timeline Panel ───────────────────────────────────────────────── -->
+  <!-- ── Timeline Panel ── -->
   <main class="timeline-panel">
     <div class="timeline-header">
       <div>#</div>
@@ -421,8 +570,8 @@
 // ── State ──────────────────────────────────────────────────────────────────────
 let timingData = null;
 let imageList  = [];
-// Map: segmentId (string) → imageFilename (string)
-const assignments = {};
+const assignments = {};   // segmentId (string) → imageFilename (string)
+let subtitlePosition = 'bottom';
 
 // ── Init ───────────────────────────────────────────────────────────────────────
 async function init() {
@@ -436,7 +585,10 @@ async function loadTiming() {
     const r = await fetch('/api/timing');
     if (!r.ok) throw new Error(await r.text());
     timingData = await r.json();
-    setStatus('ok', `${timingData.segments.length} segments — ${timingData.meta.duration_seconds.toFixed(1)}s`);
+    const dur = timingData.meta && timingData.meta.duration_seconds
+      ? timingData.meta.duration_seconds.toFixed(1) + 's'
+      : '—';
+    setStatus('ok', `${timingData.segments.length} segments — ${dur}`);
   } catch(e) {
     setStatus('error', 'timing.json introuvable');
     document.getElementById('timeline').innerHTML =
@@ -460,7 +612,141 @@ function setStatus(type, msg) {
   el.className = 'status-pill ' + type;
 }
 
-// ── Render Timeline ─────────────────────────────────────────────────────────────
+// ── Gemini Mapping Parser ──────────────────────────────────────────────────────
+function applyGeminiMapping() {
+  const raw = document.getElementById('geminiInput').value.trim();
+  const statusEl = document.getElementById('geminiStatus');
+
+  if (!raw) {
+    statusEl.textContent = 'Tableau vide.';
+    statusEl.className = 'gemini-status err';
+    return;
+  }
+  if (!timingData) {
+    statusEl.textContent = 'timing.json non chargé.';
+    statusEl.className = 'gemini-status err';
+    return;
+  }
+
+  const lines = raw.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+  const dataLines = lines.filter(l => {
+    // Skip separator lines (|---|...| or |---...|)
+    if (/^\|[-\s|]+\|?$/.test(l)) return false;
+    // Skip header lines (contain "Image", "Nom", "Segment", "fichier")
+    if (/image|nom\s+fichier|segments?\s+couverts/i.test(l)) return false;
+    // Must start with | or contain |
+    return l.includes('|');
+  });
+
+  if (dataLines.length === 0) {
+    statusEl.textContent = 'Aucune ligne de données détectée.';
+    statusEl.className = 'gemini-status err';
+    return;
+  }
+
+  let applied = 0;
+  let errors  = 0;
+
+  dataLines.forEach(line => {
+    // Split by | and clean
+    const cols = line.split('|').map(c => c.trim()).filter(c => c.length > 0);
+    if (cols.length < 2) { errors++; return; }
+
+    // Find image filename (contains .png / .jpg / .jpeg / .webp)
+    const imgCol = cols.find(c => /\.(png|jpg|jpeg|webp|gif)$/i.test(c));
+    if (!imgCol) { errors++; return; }
+    const imgFile = imgCol.trim();
+
+    // Find segment range column (contains "seg" or range like "1-3" or "1, 2, 3")
+    const segCol = cols.find(c => /seg\s*\d|^\d+[-,\s]\d/i.test(c));
+    if (!segCol) { errors++; return; }
+
+    const segNums = parseSegmentRange(segCol);
+    if (segNums.length === 0) { errors++; return; }
+
+    // Apply to segments (1-indexed → array index)
+    segNums.forEach(n => {
+      const idx = n - 1;  // Convert to 0-based
+      if (idx >= 0 && idx < timingData.segments.length) {
+        const seg = timingData.segments[idx];
+        assignments[String(seg.id)] = imgFile;
+        applied++;
+      }
+    });
+  });
+
+  renderTimeline();
+  updateProgress();
+
+  if (applied > 0) {
+    statusEl.textContent = `${applied} segment(s) assigné(s).`;
+    statusEl.className = 'gemini-status ok';
+    showToast(`Mapping appliqué — ${applied} segments mis à jour.`, 'ok');
+  } else {
+    statusEl.textContent = `0 assigné. Vérifier le format. (${errors} err)`;
+    statusEl.className = 'gemini-status err';
+    showToast('Aucun segment assigné — vérifier le tableau.', 'error');
+  }
+}
+
+function parseSegmentRange(str) {
+  // "seg 1-3" → [1,2,3]
+  // "seg 1, 2, 3" → [1,2,3]
+  // "1-3" → [1,2,3]
+  // "seg 5" → [5]
+  // "1, 2" → [1,2]
+  const clean = str.replace(/seg\s*/gi, '').trim();
+  const nums = [];
+
+  // Range: "1-3"
+  const rangeMatch = clean.match(/^(\d+)\s*[-–]\s*(\d+)$/);
+  if (rangeMatch) {
+    const from = parseInt(rangeMatch[1], 10);
+    const to   = parseInt(rangeMatch[2], 10);
+    for (let i = from; i <= to; i++) nums.push(i);
+    return nums;
+  }
+
+  // List: "1, 2, 3" or "1 2 3"
+  const parts = clean.split(/[\s,]+/).filter(p => /^\d+$/.test(p));
+  if (parts.length > 0) {
+    parts.forEach(p => nums.push(parseInt(p, 10)));
+    return nums;
+  }
+
+  return nums;
+}
+
+// ── Font Dropdown ──────────────────────────────────────────────────────────────
+function onFontChange(selectId, otherId) {
+  const sel = document.getElementById(selectId);
+  const other = document.getElementById(otherId);
+  if (sel.value === '__other__') {
+    other.classList.add('visible');
+    other.focus();
+  } else {
+    other.classList.remove('visible');
+  }
+}
+
+function getFontValue(selectId, otherId) {
+  const sel = document.getElementById(selectId);
+  if (sel.value === '__other__') {
+    return document.getElementById(otherId).value.trim() || 'Cinzel';
+  }
+  return sel.value;
+}
+
+// ── Position Selector ─────────────────────────────────────────────────────────
+function setPosition(pos) {
+  subtitlePosition = pos;
+  document.getElementById('subtitlePosition').value = pos;
+  document.querySelectorAll('.pos-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.pos === pos);
+  });
+}
+
+// ── Render Timeline ────────────────────────────────────────────────────────────
 function renderTimeline() {
   if (!timingData) return;
   const container = document.getElementById('timeline');
@@ -471,7 +757,6 @@ function renderTimeline() {
     row.className = 'segment-row';
     row.id = `row-${seg.id}`;
 
-    // Highlight strong words in text
     let textHtml = seg.text;
     if (seg.words && seg.words.length) {
       textHtml = seg.words.map(w =>
@@ -481,7 +766,7 @@ function renderTimeline() {
       ).join(' ');
     }
 
-    const assigned = assignments[String(seg.id)] || '';
+    const assigned   = assignments[String(seg.id)] || '';
     const selectHtml = buildImageSelect(seg.id, assigned);
 
     row.innerHTML = `
@@ -490,13 +775,14 @@ function renderTimeline() {
         <div class="seg-text">${textHtml}</div>
         <div class="seg-time">${fmtTime(seg.start)} → ${fmtTime(seg.end)} | f${seg.start_frame}–f${seg.end_frame}</div>
       </div>
-      <div class="seg-image-select">
-        ${selectHtml}
-      </div>
+      <div class="seg-image-select">${selectHtml}</div>
       <div class="img-thumb-wrap" id="thumb-${seg.id}">
-        ${assigned ? `<img src="/api/image/${encodeURIComponent(assigned)}" alt="${escHtml(assigned)}">` : '<div class="placeholder">Aucune<br>image</div>'}
+        ${assigned
+          ? `<img src="/api/image/${encodeURIComponent(assigned)}" alt="${escHtml(assigned)}">`
+          : '<div class="placeholder">Aucune<br>image</div>'}
       </div>
     `;
+    if (assigned) row.classList.add('has-image');
     container.appendChild(row);
   });
 }
@@ -527,7 +813,7 @@ function onImageChange(segId, select) {
   updateProgress();
 }
 
-// ── Auto-assign ─────────────────────────────────────────────────────────────────
+// ── Auto-assign (proportionnel) ───────────────────────────────────────────────
 function autoAssign() {
   if (!timingData || imageList.length === 0) {
     showToast('Aucune image disponible pour l\'auto-assignation.', 'error');
@@ -540,48 +826,54 @@ function autoAssign() {
   });
   renderTimeline();
   updateProgress();
-  showToast('Images auto-assignées.', 'ok');
+  showToast('Images auto-assignées (proportionnel).', 'ok');
 }
 
-// ── Progress ─────────────────────────────────────────────────────────────────────
+// ── Progress ──────────────────────────────────────────────────────────────────
 function updateProgress() {
   if (!timingData) return;
   const total = timingData.segments.length;
-  const done  = Object.values(assignments).filter(v => v).length;
+  const done  = timingData.segments.filter(s => assignments[String(s.id)]).length;
   document.getElementById('progressInfo').innerHTML =
     `<span>${done}/${total}</span> segments assignés`;
   document.getElementById('btnValidate').disabled = (done === 0);
 }
 
-// ── Save Roadmap ──────────────────────────────────────────────────────────────────
+// ── Save Roadmap ──────────────────────────────────────────────────────────────
 async function saveRoadmap() {
   if (!timingData) return;
 
   const format = document.querySelector('input[name="format"]:checked').value;
   const dims   = format === 'vertical' ? {width: 1080, height: 1920} : {width: 1920, height: 1080};
+  const fps    = (timingData.meta && timingData.meta.fps) ? timingData.meta.fps : 30;
 
-  const timeline = timingData.segments.map((seg, idx) => ({
-    id:             idx + 1,
-    image_file:     assignments[String(seg.id)] || null,
-    text_subtitles: seg.text,
-    start_frame:    seg.start_frame,
-    end_frame:      seg.end_frame,
-    start:          seg.start,
-    end:            seg.end,
-  }));
+  const timeline = timingData.segments.map((seg, idx) => {
+    // Fallback: compute start/end from frames if not in timing.json
+    const startSec = (seg.start !== undefined) ? seg.start : (seg.start_frame / fps);
+    const endSec   = (seg.end   !== undefined) ? seg.end   : (seg.end_frame   / fps);
+    return {
+      id:             idx + 1,
+      image_file:     assignments[String(seg.id)] || null,
+      text_subtitles: seg.text,
+      start_frame:    seg.start_frame,
+      end_frame:      seg.end_frame,
+      start:          parseFloat(startSec.toFixed(3)),
+      end:            parseFloat(endSec.toFixed(3)),
+    };
+  });
 
   const payload = {
     meta: {
-      fps:        timingData.meta.fps,
-      format:     format,
-      width:      dims.width,
-      height:     dims.height,
-      audio_path: timingData.meta.audio_path,
+      fps:           fps,
+      format:        format,
+      width:         dims.width,
+      height:        dims.height,
+      audio_path:    (timingData.meta && timingData.meta.audio_path) ? timingData.meta.audio_path : null,
       source_timing: 'timing.json',
     },
     style: {
-      font_primary:      document.getElementById('fontPrimary').value,
-      font_accent:       document.getElementById('fontAccent').value,
+      font_primary:      getFontValue('fontPrimary', 'fontPrimaryOther'),
+      font_accent:       getFontValue('fontAccent',  'fontAccentOther'),
       subtitle_size:     parseInt(document.getElementById('subtitleSize').value, 10),
       subtitle_position: document.getElementById('subtitlePosition').value,
       subtitle_color:    document.getElementById('subtitleColor').value.toUpperCase(),
@@ -594,8 +886,13 @@ async function saveRoadmap() {
     validated_by_magos: true,
   };
 
+  // Warn if audio_path is null
+  if (!payload.meta.audio_path) {
+    console.warn('[CASTELLAN] audio_path non défini dans timing.json — roadmap.json sera incomplet pour F03.');
+  }
+
   const btn = document.getElementById('btnValidate');
-  btn.disabled = true;
+  btn.disabled  = true;
   btn.textContent = 'Sauvegarde…';
 
   try {
@@ -612,25 +909,27 @@ async function saveRoadmap() {
     st.className = 'save-status ok';
     showToast('MISSION ACCOMPLIE — roadmap.json écrit.', 'ok');
     btn.textContent = '✓ Sauvegardé';
-    btn.style.background = '#1a3a1a';
-    btn.style.borderColor = 'var(--green-ok)';
-    btn.style.color = 'var(--green-ok)';
+    btn.style.background   = '#1a3a1a';
+    btn.style.borderColor  = 'var(--green-ok)';
+    btn.style.color        = 'var(--green-ok)';
   } catch(e) {
     const st = document.getElementById('saveStatus');
     st.textContent = `Erreur : ${e.message}`;
     st.className = 'save-status error';
     showToast(`Erreur sauvegarde : ${e.message}`, 'error');
-    btn.disabled = false;
+    btn.disabled  = false;
     btn.textContent = 'Valider & Sauvegarder';
   }
 }
 
-// ── Helpers ────────────────────────────────────────────────────────────────────
+// ── Helpers ───────────────────────────────────────────────────────────────────
 function fmtTime(s) {
-  const m = Math.floor(s / 60);
+  if (s === undefined || s === null) return '??:??';
+  const m   = Math.floor(s / 60);
   const sec = (s - m * 60).toFixed(2).padStart(5, '0');
   return `${String(m).padStart(2,'0')}:${sec}`;
 }
+
 function escHtml(str) {
   return String(str)
     .replace(/&/g, '&amp;')
@@ -638,10 +937,11 @@ function escHtml(str) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
 }
+
 function showToast(msg, type) {
   const t = document.getElementById('toast');
   t.textContent = msg;
-  t.className = 'toast ' + type;
+  t.className   = 'toast ' + type;
   clearTimeout(t._to);
   t._to = setTimeout(() => { t.className = 'toast'; }, 4000);
 }
@@ -649,13 +949,13 @@ function showToast(msg, type) {
 // ── Format radio visual ────────────────────────────────────────────────────────
 document.querySelectorAll('input[name="format"]').forEach(r => {
   r.addEventListener('change', () => {
-    document.getElementById('lbl-vertical').classList.toggle('active', r.value === 'vertical' && r.checked);
+    document.getElementById('lbl-vertical').classList.toggle('active',   r.value === 'vertical'   && r.checked);
     document.getElementById('lbl-horizontal').classList.toggle('active', r.value === 'horizontal' && r.checked);
   });
 });
 document.getElementById('lbl-vertical').classList.add('active');
 
-// ── Boot ───────────────────────────────────────────────────────────────────────
+// ── Boot ──────────────────────────────────────────────────────────────────────
 init();
 </script>
 </body>
