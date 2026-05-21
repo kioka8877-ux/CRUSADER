@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F02 CASTELLAN — Configuration Créative</title>
+<style>
+  :root {
+    --bg:        #111111;
+    --surface:   #1c1c1c;
+    --border:    #333333;
+    --gold:      #c9a84c;
+    --gold-dim:  #8a6f2e;
+    --text:      #ddd8cc;
+    --text-dim:  #888880;
+    --red:       #8b2222;
+    --green:     #2a6b2a;
+    --green-ok:  #4caf50;
+    --radius:    4px;
+    --mono:      'Courier New', Courier, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 13px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Header ── */
+  header {
+    background: #0a0a0a;
+    border-bottom: 2px solid var(--gold);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  header h1 { font-size: 14px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
+  header .subtitle { color: var(--text-dim); font-size: 11px; }
+  header .status-pill {
+    margin-left: auto;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: bold;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+  header .status-pill.ok { border-color: var(--green-ok); color: var(--green-ok); }
+  header .status-pill.error { border-color: #e55; color: #e55; }
+
+  /* ── Layout ── */
+  .layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    height: calc(100vh - 45px);
+  }
+
+  /* ── Left Panel (Style Config) ── */
+  .config-panel {
+    width: 280px;
+    min-width: 280px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .section-title {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-bottom: 1px solid var(--gold-dim);
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 10px;
+  }
+  .field label { font-size: 11px; color: var(--text-dim); }
+  .field input[type="text"],
+  .field input[type="number"],
+  .field select {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 5px 8px;
+    border-radius: var(--radius);
+    font-family: var(--mono);
+    font-size: 12px;
+    width: 100%;
+  }
+  .field input[type="color"] {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    width: 100%;
+    height: 30px;
+    cursor: pointer;
+    border-radius: var(--radius);
+    padding: 2px;
+  }
+  .field input[type="range"] { width: 100%; accent-color: var(--gold); }
+  .field .range-val { color: var(--gold); font-size: 11px; text-align: right; }
+
+  .radio-group { display: flex; gap: 8px; }
+  .radio-group label {
+    display: flex; align-items: center; gap: 5px;
+    cursor: pointer; font-size: 12px; color: var(--text);
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+  }
+  .radio-group input[type="radio"] { accent-color: var(--gold); }
+  .radio-group label.active { border-color: var(--gold); color: var(--gold); }
+
+  .checkbox-row { display: flex; align-items: center; gap: 8px; }
+  .checkbox-row input[type="checkbox"] { accent-color: var(--gold); cursor: pointer; }
+  .checkbox-row label { cursor: pointer; font-size: 12px; color: var(--text); }
+
+  /* ── Auto-assign button ── */
+  .btn-secondary {
+    background: var(--bg);
+    border: 1px solid var(--gold-dim);
+    color: var(--gold);
+    padding: 6px 12px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    width: 100%;
+    transition: background 0.15s;
+  }
+  .btn-secondary:hover { background: #1a1500; }
+
+  /* ── Timeline Panel ── */
+  .timeline-panel {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    background: var(--bg);
+  }
+
+  .timeline-header {
+    display: grid;
+    grid-template-columns: 40px 1fr 180px 140px;
+    gap: 8px;
+    padding: 6px 10px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .segment-row {
+    display: grid;
+    grid-template-columns: 40px 1fr 180px 140px;
+    gap: 8px;
+    align-items: center;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 6px;
+    background: var(--surface);
+    transition: border-color 0.15s;
+  }
+  .segment-row:hover { border-color: var(--gold-dim); }
+  .segment-row.has-image { border-color: #2a4a2a; }
+
+  .seg-id {
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .seg-text {
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .seg-time {
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+  .seg-strong { color: var(--gold); font-style: italic; }
+
+  .seg-image-select {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .seg-image-select select {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 4px 6px;
+    border-radius: var(--radius);
+    font-family: var(--mono);
+    font-size: 11px;
+    width: 100%;
+  }
+  .seg-image-select select.selected { border-color: var(--green-ok); }
+
+  .img-thumb-wrap {
+    width: 120px;
+    height: 68px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .img-thumb-wrap img { max-width: 100%; max-height: 100%; object-fit: cover; }
+  .img-thumb-wrap .placeholder {
+    color: var(--text-dim);
+    font-size: 10px;
+    text-align: center;
+  }
+
+  /* ── Footer (validate) ── */
+  footer {
+    background: #0a0a0a;
+    border-top: 2px solid var(--border);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .progress-info {
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+  .progress-info span { color: var(--gold); }
+
+  .btn-validate {
+    margin-left: auto;
+    background: var(--gold-dim);
+    border: 2px solid var(--gold);
+    color: #000;
+    padding: 10px 30px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: background 0.15s;
+  }
+  .btn-validate:hover { background: var(--gold); }
+  .btn-validate:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .save-status {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: var(--radius);
+    display: none;
+  }
+  .save-status.ok { background: #1a3a1a; border: 1px solid var(--green-ok); color: var(--green-ok); display: block; }
+  .save-status.error { background: #3a1a1a; border: 1px solid #e55; color: #e55; display: block; }
+
+  /* ── Toast ── */
+  .toast {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    padding: 10px 18px;
+    border-radius: var(--radius);
+    font-size: 12px;
+    z-index: 999;
+    display: none;
+    border: 1px solid;
+  }
+  .toast.ok { background: #1a3a1a; border-color: var(--green-ok); color: var(--green-ok); display: block; }
+  .toast.error { background: #3a1a1a; border-color: #e55; color: #e55; display: block; }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>⚔ CRUSADER — F02 CASTELLAN</h1>
+    <div class="subtitle">Config créative + Mapping images → roadmap.json</div>
+  </div>
+  <div id="statusPill" class="status-pill">Chargement…</div>
+</header>
+
+<div class="layout">
+
+  <!-- ── Config Panel ─────────────────────────────────────────────────── -->
+  <aside class="config-panel">
+
+    <div>
+      <div class="section-title">Format</div>
+      <div class="field">
+        <div class="radio-group" id="formatGroup">
+          <label id="lbl-vertical"><input type="radio" name="format" value="vertical" checked> Vertical<br><small style="color:var(--text-dim)">1080×1920</small></label>
+          <label id="lbl-horizontal"><input type="radio" name="format" value="horizontal"> Horizontal<br><small style="color:var(--text-dim)">1920×1080</small></label>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-title">Typographie</div>
+      <div class="field">
+        <label>Police principale</label>
+        <input type="text" id="fontPrimary" value="Cinzel">
+      </div>
+      <div class="field">
+        <label>Police accent (mots forts)</label>
+        <input type="text" id="fontAccent" value="Playfair Display">
+      </div>
+      <div class="field">
+        <label>Taille sous-titres (px)</label>
+        <input type="number" id="subtitleSize" value="72" min="20" max="200">
+      </div>
+      <div class="field">
+        <label>Position sous-titres</label>
+        <select id="subtitlePosition">
+          <option value="bottom" selected>Bas</option>
+          <option value="center">Centre</option>
+          <option value="top">Haut</option>
+        </select>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-title">Couleurs</div>
+      <div class="field">
+        <label>Couleur sous-titres</label>
+        <input type="color" id="subtitleColor" value="#ffffff">
+      </div>
+      <div class="field">
+        <label>Couleur accent</label>
+        <input type="color" id="accentColor" value="#ffd700">
+      </div>
+      <div class="field">
+        <label>Fond (si pas d'image)</label>
+        <input type="color" id="bgColor" value="#f5f0e8">
+      </div>
+    </div>
+
+    <div>
+      <div class="section-title">Effets</div>
+      <div class="field">
+        <label>Grain <span class="range-val" id="grainVal">0.15</span></label>
+        <input type="range" id="grainIntensity" min="0" max="1" step="0.01" value="0.15"
+               oninput="document.getElementById('grainVal').textContent=this.value">
+      </div>
+      <div class="field">
+        <div class="checkbox-row">
+          <input type="checkbox" id="vignette" checked>
+          <label for="vignette">Vignetage activé</label>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-title">Actions rapides</div>
+      <button class="btn-secondary" onclick="autoAssign()">Auto-assigner images</button>
+    </div>
+
+  </aside>
+
+  <!-- ── Timeline Panel ───────────────────────────────────────────────── -->
+  <main class="timeline-panel">
+    <div class="timeline-header">
+      <div>#</div>
+      <div>Sous-titre / Segment</div>
+      <div>Image</div>
+      <div>Aperçu</div>
+    </div>
+    <div id="timeline">
+      <div style="color:var(--text-dim); padding:20px; text-align:center;">Chargement du timing.json…</div>
+    </div>
+  </main>
+
+</div>
+
+<footer>
+  <div class="progress-info" id="progressInfo">— segments assignés</div>
+  <div class="save-status" id="saveStatus"></div>
+  <button class="btn-validate" id="btnValidate" onclick="saveRoadmap()">
+    Valider &amp; Sauvegarder
+  </button>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── State ──────────────────────────────────────────────────────────────────────
+let timingData = null;
+let imageList  = [];
+// Map: segmentId (string) → imageFilename (string)
+const assignments = {};
+
+// ── Init ───────────────────────────────────────────────────────────────────────
+async function init() {
+  await Promise.all([loadTiming(), loadImages()]);
+  renderTimeline();
+  updateProgress();
+}
+
+async function loadTiming() {
+  try {
+    const r = await fetch('/api/timing');
+    if (!r.ok) throw new Error(await r.text());
+    timingData = await r.json();
+    setStatus('ok', `${timingData.segments.length} segments — ${timingData.meta.duration_seconds.toFixed(1)}s`);
+  } catch(e) {
+    setStatus('error', 'timing.json introuvable');
+    document.getElementById('timeline').innerHTML =
+      `<div style="color:#e55;padding:20px">Erreur : ${e.message}</div>`;
+  }
+}
+
+async function loadImages() {
+  try {
+    const r = await fetch('/api/images');
+    const d = await r.json();
+    imageList = d.images || [];
+  } catch(e) {
+    imageList = [];
+  }
+}
+
+function setStatus(type, msg) {
+  const el = document.getElementById('statusPill');
+  el.textContent = msg;
+  el.className = 'status-pill ' + type;
+}
+
+// ── Render Timeline ─────────────────────────────────────────────────────────────
+function renderTimeline() {
+  if (!timingData) return;
+  const container = document.getElementById('timeline');
+  container.innerHTML = '';
+
+  timingData.segments.forEach((seg, idx) => {
+    const row = document.createElement('div');
+    row.className = 'segment-row';
+    row.id = `row-${seg.id}`;
+
+    // Highlight strong words in text
+    let textHtml = seg.text;
+    if (seg.words && seg.words.length) {
+      textHtml = seg.words.map(w =>
+        w.is_strong
+          ? `<span class="seg-strong">${escHtml(w.word)}</span>`
+          : escHtml(w.word)
+      ).join(' ');
+    }
+
+    const assigned = assignments[String(seg.id)] || '';
+    const selectHtml = buildImageSelect(seg.id, assigned);
+
+    row.innerHTML = `
+      <div class="seg-id">${idx + 1}</div>
+      <div>
+        <div class="seg-text">${textHtml}</div>
+        <div class="seg-time">${fmtTime(seg.start)} → ${fmtTime(seg.end)} | f${seg.start_frame}–f${seg.end_frame}</div>
+      </div>
+      <div class="seg-image-select">
+        ${selectHtml}
+      </div>
+      <div class="img-thumb-wrap" id="thumb-${seg.id}">
+        ${assigned ? `<img src="/api/image/${encodeURIComponent(assigned)}" alt="${escHtml(assigned)}">` : '<div class="placeholder">Aucune<br>image</div>'}
+      </div>
+    `;
+    container.appendChild(row);
+  });
+}
+
+function buildImageSelect(segId, currentVal) {
+  const cls = currentVal ? 'selected' : '';
+  let opts = `<option value="">— aucune image —</option>`;
+  imageList.forEach(img => {
+    const sel = img === currentVal ? 'selected' : '';
+    opts += `<option value="${escHtml(img)}" ${sel}>${escHtml(img)}</option>`;
+  });
+  return `<select class="${cls}" onchange="onImageChange(${segId}, this)">${opts}</select>`;
+}
+
+function onImageChange(segId, select) {
+  const val = select.value;
+  assignments[String(segId)] = val;
+  select.className = val ? 'selected' : '';
+
+  const thumb = document.getElementById(`thumb-${segId}`);
+  if (val) {
+    thumb.innerHTML = `<img src="/api/image/${encodeURIComponent(val)}" alt="${escHtml(val)}">`;
+    document.getElementById(`row-${segId}`).classList.add('has-image');
+  } else {
+    thumb.innerHTML = '<div class="placeholder">Aucune<br>image</div>';
+    document.getElementById(`row-${segId}`).classList.remove('has-image');
+  }
+  updateProgress();
+}
+
+// ── Auto-assign ─────────────────────────────────────────────────────────────────
+function autoAssign() {
+  if (!timingData || imageList.length === 0) {
+    showToast('Aucune image disponible pour l\'auto-assignation.', 'error');
+    return;
+  }
+  const segs = timingData.segments;
+  segs.forEach((seg, i) => {
+    const imgIdx = Math.floor(i * imageList.length / segs.length);
+    assignments[String(seg.id)] = imageList[imgIdx];
+  });
+  renderTimeline();
+  updateProgress();
+  showToast('Images auto-assignées.', 'ok');
+}
+
+// ── Progress ─────────────────────────────────────────────────────────────────────
+function updateProgress() {
+  if (!timingData) return;
+  const total = timingData.segments.length;
+  const done  = Object.values(assignments).filter(v => v).length;
+  document.getElementById('progressInfo').innerHTML =
+    `<span>${done}/${total}</span> segments assignés`;
+  document.getElementById('btnValidate').disabled = (done === 0);
+}
+
+// ── Save Roadmap ──────────────────────────────────────────────────────────────────
+async function saveRoadmap() {
+  if (!timingData) return;
+
+  const format = document.querySelector('input[name="format"]:checked').value;
+  const dims   = format === 'vertical' ? {width: 1080, height: 1920} : {width: 1920, height: 1080};
+
+  const timeline = timingData.segments.map((seg, idx) => ({
+    id:             idx + 1,
+    image_file:     assignments[String(seg.id)] || null,
+    text_subtitles: seg.text,
+    start_frame:    seg.start_frame,
+    end_frame:      seg.end_frame,
+    start:          seg.start,
+    end:            seg.end,
+  }));
+
+  const payload = {
+    meta: {
+      fps:        timingData.meta.fps,
+      format:     format,
+      width:      dims.width,
+      height:     dims.height,
+      audio_path: timingData.meta.audio_path,
+      source_timing: 'timing.json',
+    },
+    style: {
+      font_primary:      document.getElementById('fontPrimary').value,
+      font_accent:       document.getElementById('fontAccent').value,
+      subtitle_size:     parseInt(document.getElementById('subtitleSize').value, 10),
+      subtitle_position: document.getElementById('subtitlePosition').value,
+      subtitle_color:    document.getElementById('subtitleColor').value.toUpperCase(),
+      accent_color:      document.getElementById('accentColor').value.toUpperCase(),
+      background_color:  document.getElementById('bgColor').value.toUpperCase(),
+      grain_intensity:   parseFloat(document.getElementById('grainIntensity').value),
+      vignette:          document.getElementById('vignette').checked,
+    },
+    timeline:           timeline,
+    validated_by_magos: true,
+  };
+
+  const btn = document.getElementById('btnValidate');
+  btn.disabled = true;
+  btn.textContent = 'Sauvegarde…';
+
+  try {
+    const r = await fetch('/api/save', {
+      method:  'POST',
+      headers: {'Content-Type': 'application/json'},
+      body:    JSON.stringify(payload),
+    });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || r.statusText);
+
+    const st = document.getElementById('saveStatus');
+    st.textContent = `✓ roadmap.json sauvegardé (${d.size_kb} KB)`;
+    st.className = 'save-status ok';
+    showToast('MISSION ACCOMPLIE — roadmap.json écrit.', 'ok');
+    btn.textContent = '✓ Sauvegardé';
+    btn.style.background = '#1a3a1a';
+    btn.style.borderColor = 'var(--green-ok)';
+    btn.style.color = 'var(--green-ok)';
+  } catch(e) {
+    const st = document.getElementById('saveStatus');
+    st.textContent = `Erreur : ${e.message}`;
+    st.className = 'save-status error';
+    showToast(`Erreur sauvegarde : ${e.message}`, 'error');
+    btn.disabled = false;
+    btn.textContent = 'Valider & Sauvegarder';
+  }
+}
+
+// ── Helpers ────────────────────────────────────────────────────────────────────
+function fmtTime(s) {
+  const m = Math.floor(s / 60);
+  const sec = (s - m * 60).toFixed(2).padStart(5, '0');
+  return `${String(m).padStart(2,'0')}:${sec}`;
+}
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + type;
+  clearTimeout(t._to);
+  t._to = setTimeout(() => { t.className = 'toast'; }, 4000);
+}
+
+// ── Format radio visual ────────────────────────────────────────────────────────
+document.querySelectorAll('input[name="format"]').forEach(r => {
+  r.addEventListener('change', () => {
+    document.getElementById('lbl-vertical').classList.toggle('active', r.value === 'vertical' && r.checked);
+    document.getElementById('lbl-horizontal').classList.toggle('active', r.value === 'horizontal' && r.checked);
+  });
+});
+document.getElementById('lbl-vertical').classList.add('active');
+
+// ── Boot ───────────────────────────────────────────────────────────────────────
+init();
+</script>
+</body>
+</html>
