@@ -12,11 +12,11 @@
 | F01 | GRIMALDUS | Transcription audio → timing.json | SCELLÉE — EN TEST PROD | 2026-05-21 |
 | F02 | CASTELLAN | Config créative + viewer → roadmap.json | SCELLÉE — EN TEST PROD | 2026-05-21 |
 | F03 | SIGISMUND | Rendu Remotion → short_render.mp4 | SCELLÉE — EN TEST PROD | 2026-05-21 |
-| F04 | HELBRECHT | Assemblage FFmpeg → final_master.mp4 | EN FORGE | — |
+| F04 | HELBRECHT | Assemblage FFmpeg → final_master.mp4 | SCELLÉE — EN TEST PROD | 2026-05-21 |
 
 **Compteur de Guerre :**
 ```
-[███░] 3/4 frégates scellées
+[████] 4/4 frégates scellées
 ```
 
 ---
@@ -59,6 +59,8 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 | 2026-05-21 | Viewer F02 HTML natif sans dépendances JS | Pas de React, pas de CDN — fonctionne offline |
 | 2026-05-21 | Remotion 4.x + --gl swangle | Rendu logiciel Colab, pas de GPU OpenGL requis |
 | 2026-05-21 | calculateMetadata pour métadonnées dynamiques | Remotion 4.x — dimensions/durée issues des JSON |
+| 2026-05-21 | FFmpeg remux sans réencodage (-c copy) | Pas de perte qualité, traitement 10-60s vs plusieurs minutes |
+| 2026-05-21 | +faststart obligatoire | MOOV atom en tête de fichier — requis YouTube/TikTok/Reels |
 
 ---
 
@@ -74,6 +76,8 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 | 2026-05-21 | F02 | TEST PROD | En attente de tests avec timing.json + images/ réels | — |
 | 2026-05-21 | F03 | FORGE | Développement terminé : Remotion (6 fichiers src/) + notebook | ✓ |
 | 2026-05-21 | F03 | TEST PROD | En attente de tests avec roadmap.json + images/ + audio réels | — |
+| 2026-05-21 | F04 | FORGE | Développement terminé : crs_f04_helbrecht.py + CRS_F04.ipynb | ✓ |
+| 2026-05-21 | F04 | TEST PROD | En attente de tests avec short_render.mp4 (sortie F03) | — |
 
 ---
 
@@ -133,11 +137,12 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 ## F04 — HELBRECHT
 
 **Composants :**
-- `CRS_F04.ipynb` — Notebook Colab
-- `crs_f04_helbrecht.py` — FFmpeg remux, injection métadonnées, viewer vidéo
+- `CRS_F04.ipynb` — Notebook Colab (point d'entrée opérateur)
+- `crs_f04_helbrecht.py` — FFmpeg remux, injection métadonnées, probe vidéo
+- `README_DEV.md` — Documentation développeur
 
 **IN :** `short_render.mp4`, `timing.json`
 **OUT :** `final_master.mp4`
 
 **Tests de production :**
-*Aucun test effectué — EN FORGE*
+*Prêt pour test — en attente de short_render.mp4 (sortie F03)*
