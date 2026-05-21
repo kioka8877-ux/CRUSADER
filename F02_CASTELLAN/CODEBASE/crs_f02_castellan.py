@@ -34,6 +34,15 @@ FORMATS = {
 
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif"}
 
+# Champs obligatoires attendus dans roadmap.json
+REQUIRED_META_KEYS  = {"fps", "format", "width", "height", "source_timing"}
+REQUIRED_STYLE_KEYS = {
+    "font_primary", "font_accent", "subtitle_size", "subtitle_position",
+    "subtitle_color", "accent_color", "background_color",
+    "grain_intensity", "vignette",
+}
+REQUIRED_TIMELINE_KEYS = {"id", "image_file", "text_subtitles", "start_frame", "end_frame", "start", "end"}
+
 # ─── Flask app ────────────────────────────────────────────────────────────────
 
 def create_app(input_dir: str, output_dir: str, viewer_path: str):
@@ -89,24 +98,62 @@ def create_app(input_dir: str, output_dir: str, viewer_path: str):
         if not payload:
             return jsonify({"error": "Payload JSON vide"}), 400
 
-        required = ["meta", "style", "timeline", "validated_by_magos"]
-        missing = [k for k in required if k not in payload]
-        if missing:
-            return jsonify({"error": f"Clés manquantes : {missing}"}), 400
+        # ── Validation de surface ──
+        required_top = ["meta", "style", "timeline", "validated_by_magos"]
+        missing_top = [k for k in required_top if k not in payload]
+        if missing_top:
+            return jsonify({"error": f"Clés manquantes (niveau racine) : {missing_top}"}), 400
 
         if not payload.get("validated_by_magos"):
             return jsonify({"error": "validated_by_magos doit être true"}), 400
 
-        if not isinstance(payload.get("timeline"), list) or len(payload["timeline"]) == 0:
-            return jsonify({"error": "timeline est vide"}), 400
+        # ── Validation meta ──
+        meta = payload.get("meta", {})
+        missing_meta = REQUIRED_META_KEYS - set(meta.keys())
+        if missing_meta:
+            return jsonify({"error": f"meta : clés manquantes : {sorted(missing_meta)}"}), 400
 
+        if meta.get("format") not in FORMATS:
+            return jsonify({"error": f"meta.format invalide : '{meta.get('format')}' — attendu : {list(FORMATS)}"}), 400
+
+        # Warning audio_path
+        if not meta.get("audio_path"):
+            print("[CASTELLAN][WARNING] meta.audio_path est null ou absent — F03 ne pourra pas lier l'audio.")
+
+        # ── Validation style ──
+        style = payload.get("style", {})
+        missing_style = REQUIRED_STYLE_KEYS - set(style.keys())
+        if missing_style:
+            return jsonify({"error": f"style : clés manquantes : {sorted(missing_style)}"}), 400
+
+        # ── Validation timeline ──
+        timeline = payload.get("timeline")
+        if not isinstance(timeline, list) or len(timeline) == 0:
+            return jsonify({"error": "timeline est vide ou n'est pas un tableau"}), 400
+
+        for i, entry in enumerate(timeline):
+            missing_entry = REQUIRED_TIMELINE_KEYS - set(entry.keys())
+            if missing_entry:
+                return jsonify({"error": f"timeline[{i}] : clés manquantes : {sorted(missing_entry)}"}), 400
+
+        # ── Écriture ──
         os.makedirs(output_dir, exist_ok=True)
         with open(roadmap_path, "w", encoding="utf-8") as f:
             json.dump(payload, f, ensure_ascii=False, indent=2)
 
         size_kb = os.path.getsize(roadmap_path) / 1024
         print(f"[CASTELLAN] roadmap.json écrit → {roadmap_path} ({size_kb:.1f} KB)")
-        return jsonify({"status": "ok", "path": roadmap_path, "size_kb": round(size_kb, 1)})
+
+        warnings = []
+        if not meta.get("audio_path"):
+            warnings.append("audio_path manquant — F03 ne pourra pas lier l'audio")
+
+        return jsonify({
+            "status":   "ok",
+            "path":     roadmap_path,
+            "size_kb":  round(size_kb, 1),
+            "warnings": warnings,
+        })
 
     @app.route("/api/status")
     def api_status():
