@@ -9,14 +9,14 @@
 
 | Frégate | Nom | Rôle | Statut | Date de Scellement |
 |---------|-----|------|--------|--------------------|
-| F01 | GRIMALDUS | Transcription audio → timing.json | EN FORGE | — |
-| F02 | CASTELLAN | Config créative + viewer → roadmap.json | EN FORGE | — |
+| F01 | GRIMALDUS | Transcription audio → timing.json | SCELLÉE — EN TEST PROD | 2026-05-21 |
+| F02 | CASTELLAN | Config créative + viewer → roadmap.json | SCELLÉE — EN TEST PROD | 2026-05-21 |
 | F03 | SIGISMUND | Rendu Remotion → short_render.mp4 | EN FORGE | — |
 | F04 | HELBRECHT | Assemblage FFmpeg → final_master.mp4 | EN FORGE | — |
 
 **Compteur de Guerre :**
 ```
-[░░░░] 0/4 frégates scellées
+[██░░] 2/4 frégates scellées
 ```
 
 ---
@@ -56,6 +56,7 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 | 2026-05-21 | Mots-clés via balisage [mot] | Option A : l'opérateur balise explicitement dans structure.json |
 | 2026-05-21 | Viewer F02 via port natif Colab | Pas de ngrok, pas de tunnel externe |
 | 2026-05-21 | CRS_CUSTOS en Python stdlib | Pas de pip, fonctionne dans tout env Colab |
+| 2026-05-21 | Viewer F02 HTML natif sans dépendances JS | Pas de React, pas de CDN — fonctionne offline |
 
 ---
 
@@ -65,6 +66,10 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 |------|---------|-------|--------|--------|
 | 2026-05-21 | — | INIT | Création du repo CRUSADER sur GitHub | ✓ |
 | 2026-05-21 | — | INIT | Structure des frégates initialisée | ✓ |
+| 2026-05-21 | F01 | FORGE | Développement terminé : crs_f01_grimaldus.py + CRS_F01.ipynb | ✓ |
+| 2026-05-21 | F01 | TEST PROD | En attente de tests sur audio réel (Colab GPU T4) | — |
+| 2026-05-21 | F02 | FORGE | Développement terminé : Flask server + HTML viewer + notebook | ✓ |
+| 2026-05-21 | F02 | TEST PROD | En attente de tests avec timing.json + images/ réels | — |
 
 ---
 
@@ -78,22 +83,23 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 **OUT :** `timing.json`
 
 **Tests de production :**
-*Aucun test effectué — EN FORGE*
+*Prêt pour test — en attente d'un audio réel sur Colab GPU T4*
 
 ---
 
 ## F02 — CASTELLAN
 
 **Composants :**
-- `CRS_F02.ipynb` — Notebook Colab
-- `crs_f02_flask.py` — Serveur Flask REST (port natif Colab)
-- `crs_f02_viewer.html` — Interface HTML interactive (mapping, style sous-titres, format)
+- `CRS_F02.ipynb` — Notebook Colab (point d'entrée opérateur)
+- `crs_f02_castellan.py` — Serveur Flask REST (port natif Colab)
+- `crs_f02_viewer.html` — Interface HTML interactive (mapping images, style sous-titres, format)
+- `README_DEV.md` — Documentation développeur
 
 **IN :** `timing.json`, `images/`
 **OUT :** `roadmap.json`
 
 **Tests de production :**
-*Aucun test effectué — EN FORGE*
+*Prêt pour test — en attente de timing.json (sortie F01) + images/ réels*
 
 ---
 
