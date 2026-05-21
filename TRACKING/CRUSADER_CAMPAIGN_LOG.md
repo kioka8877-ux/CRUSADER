@@ -11,12 +11,12 @@
 |---------|-----|------|--------|--------------------|
 | F01 | GRIMALDUS | Transcription audio → timing.json | SCELLÉE — EN TEST PROD | 2026-05-21 |
 | F02 | CASTELLAN | Config créative + viewer → roadmap.json | SCELLÉE — EN TEST PROD | 2026-05-21 |
-| F03 | SIGISMUND | Rendu Remotion → short_render.mp4 | EN FORGE | — |
+| F03 | SIGISMUND | Rendu Remotion → short_render.mp4 | SCELLÉE — EN TEST PROD | 2026-05-21 |
 | F04 | HELBRECHT | Assemblage FFmpeg → final_master.mp4 | EN FORGE | — |
 
 **Compteur de Guerre :**
 ```
-[██░░] 2/4 frégates scellées
+[███░] 3/4 frégates scellées
 ```
 
 ---
@@ -57,6 +57,8 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 | 2026-05-21 | Viewer F02 via port natif Colab | Pas de ngrok, pas de tunnel externe |
 | 2026-05-21 | CRS_CUSTOS en Python stdlib | Pas de pip, fonctionne dans tout env Colab |
 | 2026-05-21 | Viewer F02 HTML natif sans dépendances JS | Pas de React, pas de CDN — fonctionne offline |
+| 2026-05-21 | Remotion 4.x + --gl swangle | Rendu logiciel Colab, pas de GPU OpenGL requis |
+| 2026-05-21 | calculateMetadata pour métadonnées dynamiques | Remotion 4.x — dimensions/durée issues des JSON |
 
 ---
 
@@ -70,6 +72,8 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 | 2026-05-21 | F01 | TEST PROD | En attente de tests sur audio réel (Colab GPU T4) | — |
 | 2026-05-21 | F02 | FORGE | Développement terminé : Flask server + HTML viewer + notebook | ✓ |
 | 2026-05-21 | F02 | TEST PROD | En attente de tests avec timing.json + images/ réels | — |
+| 2026-05-21 | F03 | FORGE | Développement terminé : Remotion (6 fichiers src/) + notebook | ✓ |
+| 2026-05-21 | F03 | TEST PROD | En attente de tests avec roadmap.json + images/ + audio réels | — |
 
 ---
 
@@ -106,19 +110,23 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 ## F03 — SIGISMUND
 
 **Composants :**
-- `CRS_F03.ipynb` — Notebook Colab
-- `src/` — Projet Remotion (React/Node.js)
-  - `index.jsx` — Point d'entrée Remotion
-  - `Root.jsx` — Composition (durée depuis timing.json)
-  - `components/Scene.tsx` — Image + animations (wiggle, pop, pan)
-  - `components/Subtitle.tsx` — Sous-titres synchronisés (Cinzel + Playfair)
-  - `components/Background.tsx` — Texture papier, grain, vignetage
+- `CRS_F03.ipynb` — Notebook Colab (point d'entrée opérateur)
+- `crs_f03_sigismund.py` — Setup assets + lancement rendu Remotion
+- `package.json` — Dépendances Node.js (Remotion 4.x + React 18)
+- `remotion.config.js` — Configuration Remotion
+- `src/index.jsx` — Enregistrement Root
+- `src/Root.jsx` — Composition (calculateMetadata dynamique)
+- `src/Main.jsx` — Audio + Background + Sequences
+- `src/components/Scene.jsx` — Image Ken Burns + Subtitle
+- `src/components/Subtitle.jsx` — Texte + mots forts + fondu
+- `src/components/Background.jsx` — Fond + grain + vignette + Google Fonts
+- `README_DEV.md` — Documentation développeur
 
 **IN :** `timing.json`, `roadmap.json`, `audio_clean.mp3`, `images/`
 **OUT :** `short_render.mp4`
 
 **Tests de production :**
-*Aucun test effectué — EN FORGE*
+*Prêt pour test — en attente de roadmap.json (sortie F02) + images/ + audio réels*
 
 ---
 
