@@ -3,10 +3,17 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame } from "remotion";
 
-// Chargement Google Fonts (Cinzel + Playfair Display)
-const GOOGLE_FONTS_CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-`;
+// Convertit un nom de police en slug Google Fonts (espaces → +)
+const toGFSlug = (name) => name.trim().replace(/\s+/g, "+");
+
+// Construit l'URL Google Fonts pour les deux polices configurées
+const buildGoogleFontsUrl = (fontPrimary, fontAccent) => {
+  const slugs = [...new Set([fontPrimary, fontAccent].map(toGFSlug))];
+  const families = slugs
+    .map((s) => `family=${s}:ital,wght@0,400;0,700;1,400;1,700`)
+    .join("&");
+  return `https://fonts.googleapis.com/css2?${families}&display=swap`;
+};
 
 export const Background = ({ style }) => {
   const frame = useCurrentFrame();
@@ -15,10 +22,16 @@ export const Background = ({ style }) => {
   const grainSeed = Math.floor(frame / 3) % 64;
   const grainOpacity = style.grain_intensity ?? 0.15;
 
+  // ── Google Fonts dynamique selon les polices choisies dans F02 ────────────
+  const googleFontsCss = `@import url('${buildGoogleFontsUrl(
+    style.font_primary,
+    style.font_accent
+  )}');`;
+
   return (
     <AbsoluteFill>
-      {/* Injection Google Fonts */}
-      <style>{GOOGLE_FONTS_CSS}</style>
+      {/* Injection Google Fonts dynamique */}
+      <style>{googleFontsCss}</style>
 
       {/* Couleur de fond */}
       <AbsoluteFill style={{ backgroundColor: style.background_color }} />
