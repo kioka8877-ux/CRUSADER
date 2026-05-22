@@ -9,16 +9,17 @@
 
 | Frégate | Nom | Rôle | Statut | Date de Scellement |
 |---------|-----|------|--------|--------------------|
-| F01 | GRIMALDUS | Transcription audio → timing.json | SCELLÉE — EN TEST PROD | 2026-05-21 |
-| F02 | CASTELLAN | Config créative + viewer → roadmap.json | SCELLÉE — EN TEST PROD | 2026-05-21 |
+| F01 | GRIMALDUS | Transcription audio → timing.json | SCELLÉE — TEST PROD RÉUSSI | 2026-05-21 |
+| F02 | CASTELLAN | Config créative + viewer → roadmap.json | SCELLÉE — TEST PROD RÉUSSI | 2026-05-21 |
 | F03 | SIGISMUND | Rendu Remotion → short_render.mp4 | SCELLÉE — EN TEST PROD | 2026-05-21 |
-| F04 | HELBRECHT | Assemblage FFmpeg → final_master.mp4 | SCELLÉE — EN TEST PROD | 2026-05-21 |
+| F04 | HELBRECHT | Assemblage FFmpeg → final_master.mp4 | SCELLÉE — EN ATTENTE F03 | 2026-05-21 |
 | META | METAPROMPTS | Guides opérateur (script + visuels) | SCELLÉS — PRÊTS À L'EMPLOI | 2026-05-21 |
 
 **Compteur de Guerre :**
 ```
 [████] 4/4 frégates scellées
 [██]   2/2 metaprompts scellés
+[██░░] 2/4 tests de production réussis
 ```
 
 ---
@@ -65,6 +66,7 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 | 2026-05-21 | +faststart obligatoire | MOOV atom en tête de fichier — requis YouTube/TikTok/Reels |
 | 2026-05-21 | Balisage [mots_forts] intégré dans META_01 | Continuité automatique vers F03 sans intervention manuelle |
 | 2026-05-21 | MODE GROUPED / 1:1 dans META_02 | Flexibilité test vs prod, même prompt — juste changer le paramètre |
+| 2026-05-22 | Unification SCRIPT_DIR → /content/crusader | Cohérence inter-frégates, F02/F03/F04 alignés sur F01 |
 
 ---
 
@@ -75,15 +77,15 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 | 2026-05-21 | — | INIT | Création du repo CRUSADER sur GitHub | ✓ |
 | 2026-05-21 | — | INIT | Structure des frégates initialisée | ✓ |
 | 2026-05-21 | F01 | FORGE | Développement terminé : crs_f01_grimaldus.py + CRS_F01.ipynb | ✓ |
-| 2026-05-21 | F01 | TEST PROD | En attente de tests sur audio réel (Colab GPU T4) | — |
 | 2026-05-21 | F02 | FORGE | Développement terminé : Flask server + HTML viewer + notebook | ✓ |
-| 2026-05-21 | F02 | TEST PROD | En attente de tests avec timing.json + images/ réels | — |
 | 2026-05-21 | F03 | FORGE | Développement terminé : Remotion (6 fichiers src/) + notebook | ✓ |
-| 2026-05-21 | F03 | TEST PROD | En attente de tests avec roadmap.json + images/ + audio réels | — |
 | 2026-05-21 | F04 | FORGE | Développement terminé : crs_f04_helbrecht.py + CRS_F04.ipynb | ✓ |
-| 2026-05-21 | F04 | TEST PROD | En attente de tests avec short_render.mp4 (sortie F03) | — |
 | 2026-05-21 | META | FORGE | META_01_SCRIPT.md scellé — script viral + balisage [mots_forts] | ✓ |
 | 2026-05-21 | META | FORGE | META_02_VISUELS.md scellé — visuels Gemini + MODE GROUPED/1:1 | ✓ |
+| 2026-05-22 | F02/F03/F04 | CORRECTIF | Unification SCRIPT_DIR → /content/crusader (cells 6 & 8 par notebook) | ✓ |
+| 2026-05-22 | F01 | TEST PROD | RÉUSSI — timing.json produit : 43 segments, 109.7s, audio_path renseigné | ✓ |
+| 2026-05-22 | F02 | TEST PROD | RÉUSSI — roadmap.json produit : 43 segments, vertical 1080×1920, validated_by_magos | ✓ |
+| 2026-05-22 | F03 | TEST PROD | En cours — roadmap.json transféré en F03/IN, lancement imminent | — |
 
 ---
 
@@ -97,7 +99,7 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 **OUT :** `timing.json`
 
 **Tests de production :**
-*Prêt pour test — en attente d'un audio réel sur Colab GPU T4*
+- 2026-05-22 — RÉUSSI : 43 segments détectés, durée 109.7s, `audio_path` correctement renseigné dans meta
 
 ---
 
@@ -113,7 +115,9 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 **OUT :** `roadmap.json`
 
 **Tests de production :**
-*Prêt pour test — en attente de timing.json (sortie F01) + images/ réels*
+- 2026-05-22 — RÉUSSI : roadmap.json produit — 43 segments, format vertical 1080×1920, 30fps, 7 images assignées, `validated_by_magos: true`
+- CUSTOS check-out : VALIDATION OK
+- CUSTOS check-in : VALIDATION OK
 
 ---
 
@@ -136,7 +140,7 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 **OUT :** `short_render.mp4`
 
 **Tests de production :**
-*Prêt pour test — en attente de roadmap.json (sortie F02) + images/ + audio réels*
+- 2026-05-22 — EN COURS : roadmap.json disponible (F02 scellée), transfert F03/IN à compléter avant lancement
 
 ---
 
@@ -151,7 +155,7 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 **OUT :** `final_master.mp4`
 
 **Tests de production :**
-*Prêt pour test — en attente de short_render.mp4 (sortie F03)*
+- En attente de short_render.mp4 (sortie F03)
 
 ---
 
