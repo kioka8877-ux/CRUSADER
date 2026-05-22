@@ -134,7 +134,7 @@ def render_chunk(chunk_id: int, from_frame: int, to_frame: int, composition: str
         "src/index.jsx",
         composition,
         chunk_file,
-        "--gl=angle",
+        "--gl=swangle",
         f"--frames={from_frame}-{to_frame}",
         "--concurrency=4",
     ]
@@ -142,10 +142,15 @@ def render_chunk(chunk_id: int, from_frame: int, to_frame: int, composition: str
         cmd.append(f"--browser-executable={chrome}")
 
     print(f"[CHUNK {chunk_id}] Rendu frames {from_frame}→{to_frame}...")
-    result = subprocess.run(cmd, cwd=PROJECT_DIR)
+    result = subprocess.run(cmd, cwd=PROJECT_DIR, capture_output=True, text=True)
+    print(result.stdout[-3000:] if result.stdout else '')
 
     if result.returncode != 0:
-        raise RuntimeError(f"Chunk {chunk_id} : rendu échoué (exit {result.returncode})")
+        raise RuntimeError(
+            f"Chunk {chunk_id} : exit {result.returncode}\n"
+            f"STDOUT:\n{result.stdout[-2000:]}\n"
+            f"STDERR:\n{result.stderr[-2000:]}"
+        )
 
     with open(chunk_file, "rb") as f:
         data = f.read()
