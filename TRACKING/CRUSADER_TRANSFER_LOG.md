@@ -129,7 +129,10 @@ F04 OUT ─── final_master.mp4 ───────────────
 
 | # | Date | Campagne | Source | Destination | Fichiers | CUSTOS Out | CUSTOS In | Statut |
 |---|------|----------|--------|-------------|----------|-----------|-----------|--------|
-| — | — | — | — | — | — | — | — | En attente |
+| 1 | 2026-05-22 | CAMP_01 | F01 OUT | F02 IN | `timing.json` (43 seg, 109.7s) | OK | OK | VALIDÉ |
+| 2 | 2026-05-22 | CAMP_01 | F02 OUT | F03 IN | `roadmap.json` (43 seg, vertical, validated) | — | — | À FAIRE |
+| 3 | 2026-05-22 | CAMP_01 | F01 OUT | F03 IN | `timing.json` | — | — | À FAIRE |
+| 4 | 2026-05-22 | CAMP_01 | SHARED | F03 IN | `audio_clean.mp3`, `images/` | — | — | À CONFIRMER |
 
 ---
 
