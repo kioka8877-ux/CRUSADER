@@ -136,7 +136,6 @@ def render_chunk(chunk_id: int, from_frame: int, to_frame: int, composition: str
         chunk_file,
         "--gl=swangle",
         f"--frames={from_frame}-{to_frame}",
-        "--concurrency=4",
     ]
     if chrome:
         cmd.append(f"--browser-executable={chrome}")
