@@ -154,7 +154,41 @@ def render_chunk(chunk_id: int, from_frame: int, to_frame: int, composition: str
     with open(chunk_file, "rb") as f:
         data = f.read()
 
-    print(f"[CHUNK {chunk_id}] OK — {len(data) / 1024 / 1024:.1f} MB")
+    # ── Sauvegarde dans le Volume (permet récupération si Colab crash) ─────
+    chunk_vol_path = os.path.join(VOLUME_MOUNT, "chunks", f"chunk_{chunk_id:03d}.mp4")
+    os.makedirs(os.path.dirname(chunk_vol_path), exist_ok=True)
+    with open(chunk_vol_path, "wb") as f:
+        f.write(data)
+    volume.commit()
+    print(f"[CHUNK {chunk_id}] OK — {len(data) / 1024 / 1024:.1f} MB — sauvegardé dans Volume.")
+    return data
+
+
+# ─── helpers Volume (récupération après crash Colab) ─────────────────────────
+
+@app.function(volumes={VOLUME_MOUNT: volume}, timeout=60)
+def list_ready_chunks(n_workers: int) -> list:
+    """Retourne les chunk_ids déjà rendus et sauvegardés dans le Volume."""
+    import os
+    chunks_dir = os.path.join(VOLUME_MOUNT, "chunks")
+    volume.reload()
+    ready = []
+    for cid in range(n_workers):
+        path = os.path.join(chunks_dir, f"chunk_{cid:03d}.mp4")
+        if os.path.exists(path):
+            ready.append(cid)
+    return ready
+
+
+@app.function(volumes={VOLUME_MOUNT: volume}, timeout=120)
+def get_chunk_from_volume(chunk_id: int) -> bytes:
+    """Lit et retourne un chunk depuis le Volume."""
+    import os
+    volume.reload()
+    path = os.path.join(VOLUME_MOUNT, "chunks", f"chunk_{chunk_id:03d}.mp4")
+    with open(path, "rb") as f:
+        data = f.read()
+    print(f"[VOLUME] chunk_{chunk_id:03d}.mp4 — {len(data)/1024/1024:.1f} MB")
     return data
 
 
