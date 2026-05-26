@@ -9,7 +9,9 @@ Usage depuis le notebook Colab :
 
 Architecture :
     Colab monte Drive → lit assets → upload_assets() vers Modal Volume
-    → N × render_chunk() sur GPU A10G en parallèle (--frames=FROM-TO)
+    → Étape 8a : modal deploy + render_validation() (30 frames test)
+    → Étape 8b : N × render_chunk() sur GPU A10G en parallèle (--frames=FROM-TO)
+    → Étape 8c : récupération chunks depuis Volume si Colab crash
     → concat_chunks() FFmpeg → short_render.mp4 en bytes
     → Colab écrit sur Drive F03/OUT/
 """
@@ -93,6 +95,61 @@ def upload_assets(assets: dict):
 
     volume.commit()
     print(f"[UPLOAD] {len(assets)} fichier(s) versé(s) dans le Volume.")
+
+
+# ─── render_validation ────────────────────────────────────────────────────────
+
+@app.function(
+    gpu="A10G",
+    volumes={VOLUME_MOUNT: volume},
+    timeout=300,
+    memory=8192,
+)
+def render_validation(composition: str = "CrusaderShort") -> str:
+    """
+    Mini-render de validation : 30 frames (1 seconde).
+    Vérifie que Remotion + Chromium + Node fonctionnent correctement
+    sur l'image déjà déployée — avant de lancer le render de production.
+    Retourne 'OK' ou lève une RuntimeError.
+    """
+    import subprocess
+    import os
+
+    # Détection Chromium
+    chrome = ""
+    for candidate in ["chromium", "chromium-browser"]:
+        r = subprocess.run(["which", candidate], capture_output=True, text=True)
+        if r.returncode == 0:
+            chrome = r.stdout.strip()
+            break
+
+    output_file = "/tmp/validation_render.mp4"
+
+    cmd = [
+        "npx", "--yes", "remotion", "render",
+        "src/index.jsx",
+        composition,
+        output_file,
+        "--gl=swangle",
+        "--frames=0-29",
+    ]
+    if chrome:
+        cmd.append(f"--browser-executable={chrome}")
+
+    print("[VALIDATION] Lancement mini-render 30 frames...")
+    result = subprocess.run(cmd, cwd=PROJECT_DIR, capture_output=True, text=True)
+    print(result.stdout[-2000:] if result.stdout else "")
+
+    if result.returncode != 0:
+        raise RuntimeError(
+            f"Validation échouée : exit {result.returncode}\n"
+            f"STDOUT:\n{result.stdout[-1500:]}\n"
+            f"STDERR:\n{result.stderr[-1500:]}"
+        )
+
+    size_kb = os.path.getsize(output_file) / 1024
+    print(f"[VALIDATION] OK — {size_kb:.1f} KB — Remotion + Chromium opérationnels.")
+    return "OK"
 
 
 # ─── render_chunk ─────────────────────────────────────────────────────────────
