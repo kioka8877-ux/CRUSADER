@@ -114,6 +114,15 @@ def render_validation(composition: str = "CrusaderShort") -> str:
     """
     import subprocess
     import os
+    import shutil
+
+    # Copie les assets du Volume dans public/ du projet Remotion
+    public_src  = os.path.join(VOLUME_MOUNT, "public")
+    public_dest = os.path.join(PROJECT_DIR, "public")
+    if os.path.exists(public_dest):
+        shutil.rmtree(public_dest)
+    shutil.copytree(public_src, public_dest)
+    print(f"[VALIDATION] Assets copiés → {public_dest}")
 
     # Détection Chromium
     chrome = ""
@@ -289,3 +298,4 @@ def concat_chunks(chunks_data: list, output_name: str = "short_render.mp4") -> b
 
     print(f"[CONCAT] Vidéo finale — {len(data) / 1024 / 1024:.1f} MB")
     return data
+
