@@ -11,15 +11,15 @@
 |---------|-----|------|--------|--------------------|
 | F01 | GRIMALDUS | Transcription audio → timing.json | SCELLÉE — TEST PROD RÉUSSI | 2026-05-21 |
 | F02 | CASTELLAN | Config créative + viewer → roadmap.json | SCELLÉE — TEST PROD RÉUSSI | 2026-05-21 |
-| F03 | SIGISMUND | Rendu Remotion → short_render.mp4 | SCELLÉE — EN TEST PROD | 2026-05-21 |
-| F04 | HELBRECHT | Assemblage FFmpeg → final_master.mp4 | SCELLÉE — EN ATTENTE F03 | 2026-05-21 |
+| F03 | SIGISMUND | Rendu Remotion → short_render.mp4 | SCELLÉE — TEST PROD RÉUSSI | 2026-05-26 |
+| F04 | HELBRECHT | Assemblage FFmpeg → final_master.mp4 | SCELLÉE — EN TEST PROD | 2026-05-26 |
 | META | METAPROMPTS | Guides opérateur (script + visuels) | SCELLÉS — PRÊTS À L'EMPLOI | 2026-05-21 |
 
 **Compteur de Guerre :**
 ```
 [████] 4/4 frégates scellées
 [██]   2/2 metaprompts scellés
-[██░░] 2/4 tests de production réussis
+[███░] 3/4 tests de production réussis
 ```
 
 ---
@@ -67,6 +67,7 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 | 2026-05-21 | Balisage [mots_forts] intégré dans META_01 | Continuité automatique vers F03 sans intervention manuelle |
 | 2026-05-21 | MODE GROUPED / 1:1 dans META_02 | Flexibilité test vs prod, même prompt — juste changer le paramètre |
 | 2026-05-22 | Unification SCRIPT_DIR → /content/crusader | Cohérence inter-frégates, F02/F03/F04 alignés sur F01 |
+| 2026-05-26 | Chunking parallèle Modal (3 workers) | 3280 frames découpées en 3 chunks de ~1093 frames, rendu parallèle |
 
 ---
 
@@ -85,7 +86,7 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 | 2026-05-22 | F02/F03/F04 | CORRECTIF | Unification SCRIPT_DIR → /content/crusader (cells 6 & 8 par notebook) | ✓ |
 | 2026-05-22 | F01 | TEST PROD | RÉUSSI — timing.json produit : 43 segments, 109.7s, audio_path renseigné | ✓ |
 | 2026-05-22 | F02 | TEST PROD | RÉUSSI — roadmap.json produit : 43 segments, vertical 1080×1920, validated_by_magos | ✓ |
-| 2026-05-22 | F03 | TEST PROD | En cours — roadmap.json transféré en F03/IN, lancement imminent | — |
+| 2026-05-26 | F03 | TEST PROD | RÉUSSI — 3280 frames / 109.3s @ 30fps, 3 workers Modal (Succeeded : 12m09s, 12m22s, 17m14s), short_render.mp4 produit (45.4 MB), validé pour F04 | ✓ |
 
 ---
 
@@ -140,7 +141,15 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 **OUT :** `short_render.mp4`
 
 **Tests de production :**
-- 2026-05-22 — EN COURS : roadmap.json disponible (F02 scellée), transfert F03/IN à compléter avant lancement
+- 2026-05-26 — RÉUSSI
+  - 3280 frames totales (109.3s @ 30fps)
+  - 3 chunks Modal : chunk_000.mp4 (17.8 MB), chunk_001.mp4 (14.4 MB), chunk_002.mp4 (13.1 MB)
+  - Temps de rendu workers : 12m09s / 12m22s / 17m14s — tous Succeeded
+  - Concat + export Drive : OK
+  - `short_render.mp4` → 45.4 MB → validé étape 11
+- **Anomalies non bloquantes à corriger en v2 :**
+  - Flashs blancs aux transitions (gaps 1 frame dans timeline → origine F02)
+  - Ken Burns peu perceptible (zoom 1.0→1.04 sur durée complète)
 
 ---
 
@@ -155,7 +164,7 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 **OUT :** `final_master.mp4`
 
 **Tests de production :**
-- En attente de short_render.mp4 (sortie F03)
+- 2026-05-26 — EN COURS : short_render.mp4 (45.4 MB) disponible en F04/IN, lancement imminent
 
 ---
 
