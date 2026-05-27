@@ -5,6 +5,18 @@
 
 ---
 
+## VICTORIA AETERNA — AU NOM DE L'EMPEREUR
+
+**Phase de test terminée — 2026-05-27**
+Pipeline CRUSADER F01 → F04 validé en conditions de production réelles.
+La croisade est prête. Que l'Omnissiah guide chaque octet.
+
+```
+[████████████████] PIPELINE COMPLET — 4/4 FRÉGATES SCELLÉES
+```
+
+---
+
 ## Présentation
 
 **CRUSADER** est un pipeline de production vidéo automatisé en ligne de commande (headless), conçu pour générer des vidéos animées au style **Stickman Whiteboard** (tableau blanc / dessin fait main).
