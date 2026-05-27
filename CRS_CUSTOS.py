@@ -60,9 +60,9 @@ MANIFEST = {
     "F03": {
         "check-out": {
             "files": [
-                {"path": "F03_SIGISMUND/IN/timing.json",   "type": "json",  "required_keys": ["meta", "words", "segments"]},
-                {"path": "F03_SIGISMUND/IN/roadmap.json",  "type": "json",  "required_keys": ["meta", "timeline", "style", "validated_by_magos"]},
-                {"path": "F03_SIGISMUND/IN/audio_clean.mp3","type": "file", "min_size": 10000},
+                {"path": "F03_SIGISMUND/IN/timing.json",    "type": "json",  "required_keys": ["meta", "words", "segments"]},
+                {"path": "F03_SIGISMUND/IN/roadmap.json",   "type": "json",  "required_keys": ["meta", "timeline", "style", "validated_by_magos"]},
+                {"path": "F03_SIGISMUND/IN/audio_clean.mp3","type": "file",  "min_size": 10000},
             ],
             "dirs": ["F03_SIGISMUND/IN/images"],
         },
@@ -80,8 +80,11 @@ MANIFEST = {
             ]
         },
         "check-in": {
-            "files": [
-                {"path": "F04_HELBRECHT/OUT/final_master.mp4", "type": "file", "min_size": 100000},
+            # F04 v2 produit youtube_short.mp4 (vertical) ou youtube_long.mp4 (horizontal)
+            # → au moins un des deux doit être présent et valide
+            "one_of": [
+                {"path": "F04_HELBRECHT/OUT/youtube_short.mp4", "type": "file", "min_size": 100000},
+                {"path": "F04_HELBRECHT/OUT/youtube_long.mp4",  "type": "file", "min_size": 100000},
             ]
         },
     },
@@ -99,7 +102,7 @@ def log_info(msg):
     print(f"  [...]  {msg}")
 
 def validate_file(full_path, spec):
-    """Validate a single file entry from the manifest."""
+    """Valide un fichier selon son spec. Affiche le résultat. Retourne bool."""
     if not os.path.exists(full_path):
         log_fail(f"Fichier absent : {full_path}")
         return False
@@ -119,7 +122,7 @@ def validate_file(full_path, spec):
         return True
 
     if spec.get("type") == "file":
-        size = os.path.getsize(full_path)
+        size     = os.path.getsize(full_path)
         min_size = spec.get("min_size", 0)
         if size < min_size:
             log_fail(f"Fichier trop petit ({size} bytes < {min_size}) : {full_path}")
@@ -130,8 +133,27 @@ def validate_file(full_path, spec):
     log_ok(full_path)
     return True
 
+def validate_one_of(candidates, base):
+    """
+    Vérifie qu'au moins un fichier de la liste candidates est valide.
+    Retourne True dès qu'un candidat passe, False si aucun ne passe.
+    """
+    for spec in candidates:
+        full_path = os.path.join(base, spec["path"])
+        if not os.path.exists(full_path):
+            continue
+        size = os.path.getsize(full_path)
+        if spec.get("type") == "file" and size < spec.get("min_size", 0):
+            continue
+        log_ok(f"Vidéo finale : {os.path.basename(full_path)} ({size:,} bytes)")
+        return True
+
+    names = " | ".join(os.path.basename(s["path"]) for s in candidates)
+    log_fail(f"Aucun fichier de sortie valide trouvé parmi : {names}")
+    return False
+
 def validate_dir(full_path):
-    """Check a directory exists and is not empty."""
+    """Vérifie qu'un dossier existe et n'est pas vide."""
     if not os.path.isdir(full_path):
         log_fail(f"Dossier absent : {full_path}")
         return False
@@ -146,14 +168,14 @@ def validate_dir(full_path):
 
 def main():
     parser = argparse.ArgumentParser(description="CRS_CUSTOS — Gardien de Flotte CRUSADER")
-    parser.add_argument("--frigate", required=True, choices=["SHARED", "F01", "F02", "F03", "F04"])
-    parser.add_argument("--mode",    required=True, choices=["check-out", "check-in"])
+    parser.add_argument("--frigate",    required=True, choices=["SHARED", "F01", "F02", "F03", "F04"])
+    parser.add_argument("--mode",       required=True, choices=["check-out", "check-in"])
     parser.add_argument("--drive-base", default=DEFAULT_DRIVE_BASE)
     args = parser.parse_args()
 
-    base = args.drive_base
+    base    = args.drive_base
     frigate = args.frigate
-    mode = args.mode
+    mode    = args.mode
 
     print()
     print(f"═══════════════════════════════════════════════")
@@ -168,16 +190,26 @@ def main():
 
     errors = 0
 
+    # Validation fichiers individuels
     for file_spec in spec.get("files", []):
         full = os.path.join(base, file_spec["path"])
         log_info(f"Vérification : {file_spec['path']}")
         if not validate_file(full, file_spec):
             errors += 1
 
+    # Validation dossiers
     for dir_path in spec.get("dirs", []):
         full = os.path.join(base, dir_path)
         log_info(f"Vérification dossier : {dir_path}")
         if not validate_dir(full):
+            errors += 1
+
+    # Validation "au moins un parmi" (one_of)
+    one_of = spec.get("one_of", [])
+    if one_of:
+        names = " | ".join(os.path.basename(s["path"]) for s in one_of)
+        log_info(f"Vérification (un parmi) : {names}")
+        if not validate_one_of(one_of, base):
             errors += 1
 
     print()
@@ -189,6 +221,7 @@ def main():
         print(f"  VALIDATION FAIL — {errors} erreur(s) détectée(s). Transit interdit.")
         print(f"═══════════════════════════════════════════════")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()
