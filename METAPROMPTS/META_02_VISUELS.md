@@ -97,11 +97,11 @@ Après avoir généré toutes les images, fournis :
 
 **Tableau de mapping** (format exact — ne pas modifier) :
 
-| Image | Nom fichier | Segments couverts | Texte illustré |
-|-------|-------------|-------------------|----------------|
-| 1 | 1.png | seg 1-3 | "Vous pensez trop ?" |
-| 2 | 2.png | seg 4-6 | "C'est à cause de votre [téléphone]." |
-| ... | ... | ... | ... |
+| Image | Nom fichier | Segments couverts | Texte illustré | Overlay | Intensite |
+|-------|-------------|-------------------|----------------|---------|-----------|
+| 1 | 1.png | seg 1-3 | "Vous pensez trop ?" | INTERIEUR:neons | 2 |
+| 2 | 2.png | seg 4-6 | "C'est à cause de votre [téléphone]." | VITRE:pluie | 2 |
+| ... | ... | ... | ... | ... | ... |
 
 Puis génère chaque image dans l'ordre, nommée `1.png`, `2.png`, etc.
 
@@ -114,6 +114,12 @@ Puis génère chaque image dans l'ordre, nommée `1.png`, `2.png`, etc.
 - Style 100% cohérent entre toutes les images
 - Le fond doit correspondre au style de la vidéo de référence
 - Les personnages/éléments doivent être dans la même proportion que dans la référence
+- **Colonne Overlay** : pour chaque image générée, indique l'overlay le plus adapté au contexte visuel parmi ces valeurs :
+  `INTERIEUR:neons` | `INTERIEUR:lampe` | `INTERIEUR:ecran` | `INTERIEUR:sombre` |
+  `EXTERIEUR:pluie` | `EXTERIEUR:vent` | `EXTERIEUR:soleil` | `EXTERIEUR:nuit` |
+  `VITRE:pluie` | `VITRE:brouillard` | `defaut`
+  Utilise `VITRE:xxx` si le personnage est à l'intérieur mais qu'une fenêtre avec météo est visible. Valeur par défaut = `defaut`.
+- **Colonne Intensite** : 1 (discret) / 2 (normal) / 3 (dramatique). Utilise 3 uniquement pour les scènes à fort impact émotionnel.
 ```
 
 ---

@@ -269,7 +269,7 @@
 
   .timeline-header {
     display: grid;
-    grid-template-columns: 40px 1fr 180px 140px;
+    grid-template-columns: 40px 1fr 180px 140px auto;
     gap: 8px;
     padding: 6px 10px;
     font-size: 10px;
@@ -282,7 +282,7 @@
 
   .segment-row {
     display: grid;
-    grid-template-columns: 40px 1fr 180px 140px;
+    grid-template-columns: 40px 1fr 180px 140px auto;
     gap: 8px;
     align-items: center;
     padding: 8px 10px;
@@ -381,6 +381,18 @@
   }
   .toast.ok    { background: #1a3a1a; border-color: var(--green-ok); color: var(--green-ok); display: block; }
   .toast.error { background: #3a1a1a; border-color: #e55; color: #e55; display: block; }
+
+  /* ── Overlay badges ── */
+  .overlay-badge {
+    display: inline-block;
+    font-size: 9px; padding: 2px 7px; border-radius: 8px;
+    letter-spacing: 1px; text-transform: uppercase; font-weight: bold;
+    margin-top: 4px;
+  }
+  .cat-interieur { background:#2a2a1a; color:#d4c060; border:1px solid #d4c060; }
+  .cat-exterieur { background:#0d1a0d; color:#60d460; border:1px solid #60d460; }
+  .cat-vitre     { background:#0d1a2a; color:#60b4d4; border:1px solid #60b4d4; }
+  .cat-defaut    { background:#1a1a1a; color:#888;    border:1px solid #444;    }
 
   /* ── Scrollbar ── */
   ::-webkit-scrollbar { width: 6px; }
@@ -548,6 +560,7 @@
       <div>Sous-titre / Segment</div>
       <div>Image</div>
       <div>Aperçu</div>
+      <div>Overlay</div>
     </div>
     <div id="timeline">
       <div style="color:var(--text-dim); padding:20px; text-align:center;">Chargement du timing.json…</div>
@@ -570,7 +583,8 @@
 // ── State ──────────────────────────────────────────────────────────────────────
 let timingData = null;
 let imageList  = [];
-const assignments = {};   // segmentId (string) → imageFilename (string)
+const assignments = {};        // segmentId (string) → imageFilename (string)
+const overlayAssignments = {}; // segmentId (string) → { type, intensite }
 let subtitlePosition = 'bottom';
 
 // ── Init ───────────────────────────────────────────────────────────────────────
@@ -664,12 +678,21 @@ function applyGeminiMapping() {
     const segNums = parseSegmentRange(segCol);
     if (segNums.length === 0) { errors++; return; }
 
+    // Detect overlay column (starts with INTERIEUR, EXTERIEUR, VITRE or defaut)
+    const overlayCol = cols.find(c => /^(INTERIEUR|EXTERIEUR|VITRE|defaut)/i.test(c));
+    const overlayVal = overlayCol ? overlayCol.trim() : 'defaut';
+
+    // Detect intensite column (standalone 1, 2 or 3)
+    const intensiteCol = cols.find(c => /^[123]$/.test(c.trim()));
+    const intensiteVal = intensiteCol ? parseInt(intensiteCol, 10) : 2;
+
     // Apply to segments (1-indexed → array index)
     segNums.forEach(n => {
       const idx = n - 1;  // Convert to 0-based
       if (idx >= 0 && idx < timingData.segments.length) {
         const seg = timingData.segments[idx];
         assignments[String(seg.id)] = imgFile;
+        overlayAssignments[String(seg.id)] = { type: overlayVal, intensite: intensiteVal };
         applied++;
       }
     });
@@ -769,6 +792,11 @@ function renderTimeline() {
     const assigned   = assignments[String(seg.id)] || '';
     const selectHtml = buildImageSelect(seg.id, assigned);
 
+    const ov = overlayAssignments[String(seg.id)];
+    const ovBadge = ov
+      ? `<span class="overlay-badge cat-${ov.type.split(':')[0].toLowerCase()}">${escHtml(ov.type)} · ${ov.intensite}</span>`
+      : `<span class="overlay-badge cat-defaut">defaut · 2</span>`;
+
     row.innerHTML = `
       <div class="seg-id">${idx + 1}</div>
       <div>
@@ -781,6 +809,7 @@ function renderTimeline() {
           ? `<img src="/api/image/${encodeURIComponent(assigned)}" alt="${escHtml(assigned)}">`
           : '<div class="placeholder">Aucune<br>image</div>'}
       </div>
+      <div>${ovBadge}</div>
     `;
     if (assigned) row.classList.add('has-image');
     container.appendChild(row);
@@ -852,13 +881,15 @@ async function saveRoadmap() {
     const startSec = (seg.start !== undefined) ? seg.start : (seg.start_frame / fps);
     const endSec   = (seg.end   !== undefined) ? seg.end   : (seg.end_frame   / fps);
     return {
-      id:             idx + 1,
-      image_file:     assignments[String(seg.id)] || null,
-      text_subtitles: seg.text,
-      start_frame:    seg.start_frame,
-      end_frame:      seg.end_frame,
-      start:          parseFloat(startSec.toFixed(3)),
-      end:            parseFloat(endSec.toFixed(3)),
+      id:               idx + 1,
+      image_file:       assignments[String(seg.id)] || null,
+      text_subtitles:   seg.text,
+      start_frame:      seg.start_frame,
+      end_frame:        seg.end_frame,
+      start:            parseFloat(startSec.toFixed(3)),
+      end:              parseFloat(endSec.toFixed(3)),
+      overlay_type:     (overlayAssignments[String(seg.id)]?.type      || 'defaut'),
+      overlay_intensite:(overlayAssignments[String(seg.id)]?.intensite || 2),
     };
   });
 
