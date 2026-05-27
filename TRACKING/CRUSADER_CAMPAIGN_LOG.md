@@ -12,40 +12,36 @@
 | F01 | GRIMALDUS | Transcription audio → timing.json | SCELLÉE — TEST PROD RÉUSSI | 2026-05-21 |
 | F02 | CASTELLAN | Config créative + viewer → roadmap.json | SCELLÉE — TEST PROD RÉUSSI | 2026-05-21 |
 | F03 | SIGISMUND | Rendu Remotion → short_render.mp4 | SCELLÉE — TEST PROD RÉUSSI | 2026-05-26 |
-| F04 | HELBRECHT | Assemblage FFmpeg → final_master.mp4 | SCELLÉE — EN TEST PROD | 2026-05-26 |
+| F04 | HELBRECHT | Assemblage FFmpeg → youtube_short.mp4 | SCELLÉE — TEST PROD RÉUSSI | 2026-05-27 |
 | META | METAPROMPTS | Guides opérateur (script + visuels) | SCELLÉS — PRÊTS À L'EMPLOI | 2026-05-21 |
 
 **Compteur de Guerre :**
-```
 [████] 4/4 frégates scellées
 [██]   2/2 metaprompts scellés
-[███░] 3/4 tests de production réussis
-```
+[████] 4/4 tests de production réussis — PIPELINE COMPLET
 
 ---
 
 ## Flux de Données
 
-```
-SHARED/audio_clean.mp3 ──────────────────► F01 IN, F03 IN
-SHARED/images/ ──────────────────────────► F02 IN, F03 IN
+SHARED/audio_clean.mp3 ──► F01 IN, F03 IN
+SHARED/images/ ──────────► F02 IN, F03 IN
 
-F01 GRIMALDUS  → timing.json ────────────► F02 IN, F03 IN, F04 IN
-F02 CASTELLAN  → roadmap.json ───────────► F03 IN
-F03 SIGISMUND  → short_render.mp4 ───────► F04 IN
-F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement opérateur
-```
+F01 GRIMALDUS  → timing.json ────────► F02 IN, F03 IN, F04 IN
+F02 CASTELLAN  → roadmap.json ───────► F03 IN
+F03 SIGISMUND  → short_render.mp4 ───► F04 IN
+F04 HELBRECHT  → youtube_short.mp4 ──► Téléchargement opérateur
 
 ---
 
 ## Rites du Sang — Principes Gouvernants
 
-1. **Gratuit** — Aucun API payant, aucune dépendance commerciale
-2. **Colab-first** — Tout s'exécute sur Google Colab (GPU T4), le PC est une télécommande
-3. **30 fps** — Cible fixe, encodée dans le JSON meta
-4. **Dual format** — Vertical 1080×1920 (Shorts) et Horizontal 1920×1080 (Long-form)
-5. **Isolation des frégates** — Chaque frégate opère en silo, lit son IN/, écrit son OUT/
-6. **Transfert validé** — Tout transit inter-frégate passe par CRS_CUSTOS.py (check-out + check-in)
+1. Gratuit — Aucun API payant, aucune dépendance commerciale
+2. Colab-first — Tout s'exécute sur Google Colab (GPU T4), le PC est une télécommande
+3. 30 fps — Cible fixe, encodée dans le JSON meta
+4. Dual format — Vertical 1080×1920 (Shorts) et Horizontal 1920×1080 (Long-form)
+5. Isolation des frégates — Chaque frégate opère en silo, lit son IN/, écrit son OUT/
+6. Transfert validé — Tout transit inter-frégate passe par CRS_CUSTOS.py (check-out + check-in)
 
 ---
 
@@ -68,6 +64,7 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 | 2026-05-21 | MODE GROUPED / 1:1 dans META_02 | Flexibilité test vs prod, même prompt — juste changer le paramètre |
 | 2026-05-22 | Unification SCRIPT_DIR → /content/crusader | Cohérence inter-frégates, F02/F03/F04 alignés sur F01 |
 | 2026-05-26 | Chunking parallèle Modal (3 workers) | 3280 frames découpées en 3 chunks de ~1093 frames, rendu parallèle |
+| 2026-05-27 | F04 v2 : re-encode CRF18 + camouflage | Effacement fingerprints Remotion/OpenCV, loudnorm -14 LUFS, format auto-détecté |
 
 ---
 
@@ -87,97 +84,33 @@ F04 HELBRECHT  → final_master.mp4 ───────► Téléchargement op
 | 2026-05-22 | F01 | TEST PROD | RÉUSSI — timing.json produit : 43 segments, 109.7s, audio_path renseigné | ✓ |
 | 2026-05-22 | F02 | TEST PROD | RÉUSSI — roadmap.json produit : 43 segments, vertical 1080×1920, validated_by_magos | ✓ |
 | 2026-05-26 | F03 | TEST PROD | RÉUSSI — 3280 frames / 109.3s @ 30fps, 3 workers Modal (Succeeded : 12m09s, 12m22s, 17m14s), short_render.mp4 produit (45.4 MB), validé pour F04 | ✓ |
+| 2026-05-27 | F04 | TEST PROD | RÉUSSI — youtube_short.mp4 (36.9 MB, 1080×1920, 1m49s), camouflage PASS, QA pré/post PASS, loudnorm -14 LUFS, faststart activé, aucun tag suspect | ✓ |
 
 ---
 
 ## F01 — GRIMALDUS
-
-**Composants :**
-- `CRS_F01.ipynb` — Notebook Colab (point d'entrée opérateur)
-- `crs_f01_grimaldus.py` — Script faster-whisper, détection mots forts
-
-**IN :** `audio_clean.mp3`
-**OUT :** `timing.json`
-
-**Tests de production :**
-- 2026-05-22 — RÉUSSI : 43 segments détectés, durée 109.7s, `audio_path` correctement renseigné dans meta
-
----
+- CRS_F01.ipynb — Notebook Colab
+- crs_f01_grimaldus.py — Script faster-whisper, détection mots forts
+- IN: audio_clean.mp3 | OUT: timing.json
+- Test 2026-05-22: RÉUSSI — 43 segments, 109.7s
 
 ## F02 — CASTELLAN
-
-**Composants :**
-- `CRS_F02.ipynb` — Notebook Colab (point d'entrée opérateur)
-- `crs_f02_castellan.py` — Serveur Flask REST (port natif Colab)
-- `crs_f02_viewer.html` — Interface HTML interactive (mapping images, style sous-titres, format)
-- `README_DEV.md` — Documentation développeur
-
-**IN :** `timing.json`, `images/`
-**OUT :** `roadmap.json`
-
-**Tests de production :**
-- 2026-05-22 — RÉUSSI : roadmap.json produit — 43 segments, format vertical 1080×1920, 30fps, 7 images assignées, `validated_by_magos: true`
-- CUSTOS check-out : VALIDATION OK
-- CUSTOS check-in : VALIDATION OK
-
----
+- CRS_F02.ipynb, crs_f02_castellan.py, crs_f02_viewer.html, README_DEV.md
+- IN: timing.json, images/ | OUT: roadmap.json
+- Test 2026-05-22: RÉUSSI — 43 segments, 1080×1920, 7 images, validated_by_magos: true
 
 ## F03 — SIGISMUND
-
-**Composants :**
-- `CRS_F03.ipynb` — Notebook Colab (point d'entrée opérateur)
-- `crs_f03_sigismund.py` — Setup assets + lancement rendu Remotion
-- `package.json` — Dépendances Node.js (Remotion 4.x + React 18)
-- `remotion.config.js` — Configuration Remotion
-- `src/index.jsx` — Enregistrement Root
-- `src/Root.jsx` — Composition (calculateMetadata dynamique)
-- `src/Main.jsx` — Audio + Background + Sequences
-- `src/components/Scene.jsx` — Image Ken Burns + Subtitle
-- `src/components/Subtitle.jsx` — Texte + mots forts + fondu
-- `src/components/Background.jsx` — Fond + grain + vignette + Google Fonts
-- `README_DEV.md` — Documentation développeur
-
-**IN :** `timing.json`, `roadmap.json`, `audio_clean.mp3`, `images/`
-**OUT :** `short_render.mp4`
-
-**Tests de production :**
-- 2026-05-26 — RÉUSSI
-  - 3280 frames totales (109.3s @ 30fps)
-  - 3 chunks Modal : chunk_000.mp4 (17.8 MB), chunk_001.mp4 (14.4 MB), chunk_002.mp4 (13.1 MB)
-  - Temps de rendu workers : 12m09s / 12m22s / 17m14s — tous Succeeded
-  - Concat + export Drive : OK
-  - `short_render.mp4` → 45.4 MB → validé étape 11
-- **Anomalies non bloquantes à corriger en v2 :**
-  - Flashs blancs aux transitions (gaps 1 frame dans timeline → origine F02)
-  - Ken Burns peu perceptible (zoom 1.0→1.04 sur durée complète)
-
----
+- CRS_F03.ipynb, crs_f03_sigismund.py, package.json, remotion.config.js, src/ (5 JSX files), README_DEV.md
+- IN: timing.json, roadmap.json, audio_clean.mp3, images/ | OUT: short_render.mp4
+- Test 2026-05-26: RÉUSSI — 3280 frames, 3 Modal chunks (17.8+14.4+13.1 MB), 45.4 MB final
+- Anomalies non bloquantes v2: flashs blancs aux transitions, Ken Burns peu perceptible
 
 ## F04 — HELBRECHT
-
-**Composants :**
-- `CRS_F04.ipynb` — Notebook Colab (point d'entrée opérateur)
-- `crs_f04_helbrecht.py` — FFmpeg remux, injection métadonnées, probe vidéo
-- `README_DEV.md` — Documentation développeur
-
-**IN :** `short_render.mp4`, `timing.json`
-**OUT :** `final_master.mp4`
-
-**Tests de production :**
-- 2026-05-26 — EN COURS : short_render.mp4 (45.4 MB) disponible en F04/IN, lancement imminent
-
----
+- CRS_F04.ipynb, crs_f04_helbrecht.py, README_DEV.md
+- IN: short_render.mp4, timing.json | OUT: youtube_short.mp4 ou youtube_long.mp4
+- Test 2026-05-27: RÉUSSI — youtube_short.mp4 (36.9 MB, 1080×1920, 109.5s), H264/AAC, camouflage total, QA PASS
 
 ## METAPROMPTS
-
-**Composants :**
-- `META_01_SCRIPT.md` — Génération de script viral via Claude (analyse patterns + balisage [mots_forts])
-- `META_02_VISUELS.md` — Génération de visuels via Gemini 3.1 Pro (MODE GROUPED ou 1:1)
-
-**Flux :**
-```
-Opérateur → META_01 (Claude) → script.txt
-Opérateur → META_02 (Gemini) → 1.png, 2.png... → SHARED/images/
-```
-
-**Statut :** SCELLÉS — prêts à l'emploi en production
+- META_01_SCRIPT.md — Script viral via Claude
+- META_02_VISUELS.md — Visuels Gemini 3.1 Pro
+- Statut: SCELLÉS — prêts à l'emploi
