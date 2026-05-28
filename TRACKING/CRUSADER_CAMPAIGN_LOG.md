@@ -35,6 +35,20 @@ Chaque frégate a accompli sa mission. La flotte est prête à la croisade.
 
 ---
 
+## CAMP_02 — EN CROISADE
+
+**2026-05-28 — PRODUCTION RÉELLE**
+
+| Étape | Statut | Résultat |
+|-------|--------|---------|
+| F01-A CASTELLAN-AUDIO | VALIDÉE | audio_clean.mp3 — 16.7s, 9 silences supprimés |
+| F01-B GRIMALDUS | VALIDÉE | timing.json — 531 frames, 46 mots, 5 forts, EN 98.54% |
+| F02 CASTELLAN | EN ATTENTE | — |
+| F03 SIGISMUND | EN ATTENTE | — |
+| F04 HELBRECHT | EN ATTENTE | — |
+
+---
+
 ## Flux de Données
 
 SHARED/audio_clean.mp3 ──► F01 IN, F03 IN
@@ -99,14 +113,21 @@ F04 HELBRECHT  → youtube_short.mp4 ──► Téléchargement opérateur
 | 2026-05-26 | F03 | TEST PROD | RÉUSSI — 3280 frames / 109.3s @ 30fps, 3 workers Modal (Succeeded : 12m09s, 12m22s, 17m14s), short_render.mp4 produit (45.4 MB), validé pour F04 | ✓ |
 | 2026-05-27 | F04 | TEST PROD | RÉUSSI — youtube_short.mp4 (36.9 MB, 1080×1920, 1m49s), camouflage PASS, QA pré/post PASS, loudnorm -14 LUFS, faststart activé, aucun tag suspect | ✓ |
 | 2026-05-27 | PIPELINE | CLÔTURE TEST | Phase de test officiellement terminée — Pipeline CRUSADER F01→F04 validé. Victoria Aeterna. | ✓ |
+| 2026-05-28 | F03 | CORRECTIF | crs_f03_modal_worker.py — 8 fichiers overlays JSX ajoutés dans _build_remotion_project() (absents → import OverlayDispatch plantait au build Modal) | ✓ |
+| 2026-05-28 | F01B | CORRECTIF | CRS_F01.ipynb — URL script corrigée (ancien chemin F01_GRIMALDUS/CODEBASE/ → F01B_GRIMALDUS/CODEBASE/) | ✓ |
+| 2026-05-28 | F01A | CORRECTIF | CRS_CUSTOS.py — Support F01A ajouté (check-out: audio_raw.mp3, check-in: audio_clean.mp3) | ✓ |
+| 2026-05-28 | F01A | CORRECTIF | CRS_F01A.ipynb — Modes CUSTOS inversés corrigés (check-in ↔ check-out remis dans l'ordre) | ✓ |
+| 2026-05-28 | F01A | PROD RÉEL | RÉUSSI — CAMP_02 : audio_raw.mp3 (36.3s) → audio_clean.mp3 (16.7s), 9 silences supprimés (19.58s), CUSTOS OK | ✓ |
+| 2026-05-28 | F01B | PROD RÉEL | RÉUSSI — CAMP_02 : timing.json produit : 46 mots, 5 mots forts, 3 segments, 531 frames (17.7s @ 30fps), EN 98.54%, CUSTOS OK | ✓ |
 
 ---
 
 ## F01 — GRIMALDUS
-- CRS_F01.ipynb — Notebook Colab
-- crs_f01_grimaldus.py — Script faster-whisper, détection mots forts
-- IN: audio_clean.mp3 | OUT: timing.json
-- Test 2026-05-22: RÉUSSI — 43 segments, 109.7s
+- CRS_F01A.ipynb + crs_f01a.py — Nettoyage audio (suppression silences via Flask)
+- CRS_F01.ipynb + crs_f01_grimaldus.py — Transcription faster-whisper, détection mots forts
+- IN: audio_raw.mp3 → audio_clean.mp3 → OUT: timing.json
+- Test 2026-05-22 (CAMP_01): RÉUSSI — 43 segments, 109.7s
+- Prod réelle 2026-05-28 (CAMP_02): RÉUSSI — 46 mots, 5 forts, 3 seg, 531 frames, 17.7s, EN 98.54%
 
 ## F02 — CASTELLAN
 - CRS_F02.ipynb, crs_f02_castellan.py, crs_f02_viewer.html, README_DEV.md
