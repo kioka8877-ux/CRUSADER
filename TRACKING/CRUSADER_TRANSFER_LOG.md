@@ -61,6 +61,8 @@ Règle absolue : Aucun transfert sans validation CUSTOS aux deux extrémités.
 | 4 | 2026-05-22 | CAMP_01  | SHARED  | F03 IN      | audio_clean.mp3, images/                         | OK         | OK        | VALIDÉ  |
 | 5 | 2026-05-26 | CAMP_01  | F03 OUT | F04 IN      | short_render.mp4 (45.4 MB, 109.3s, 3280 frames) | OK         | OK        | VALIDÉ  |
 | 6 | 2026-05-27 | CAMP_01  | F04 OUT | OPÉRATEUR   | youtube_short.mp4 (36.9 MB, 109.5s, 1080×1920) | OK         | —         | LIVRÉ   |
+| 7 | 2026-05-28 | CAMP_02  | F01A OUT | F01B IN    | audio_clean.mp3 (16.7s, 9 silences supprimés)   | OK         | OK        | VALIDÉ  |
+| 8 | 2026-05-28 | CAMP_02  | F01B OUT | F02 IN     | timing.json (46 mots, 5 forts, 531f, 17.7s, EN) | OK         | EN ATT.   | EN COURS |
 
 ---
 
