@@ -34,14 +34,22 @@ def _build_remotion_project():
     import os
 
     files = [
-        ("F03_SIGISMUND/CODEBASE/package.json",                     "package.json"),
-        ("F03_SIGISMUND/CODEBASE/remotion.config.js",               "remotion.config.js"),
-        ("F03_SIGISMUND/CODEBASE/src/index.jsx",                    "src/index.jsx"),
-        ("F03_SIGISMUND/CODEBASE/src/Root.jsx",                     "src/Root.jsx"),
-        ("F03_SIGISMUND/CODEBASE/src/Main.jsx",                     "src/Main.jsx"),
-        ("F03_SIGISMUND/CODEBASE/src/components/Scene.jsx",         "src/components/Scene.jsx"),
-        ("F03_SIGISMUND/CODEBASE/src/components/Subtitle.jsx",      "src/components/Subtitle.jsx"),
-        ("F03_SIGISMUND/CODEBASE/src/components/Background.jsx",    "src/components/Background.jsx"),
+        ("F03_SIGISMUND/CODEBASE/package.json",                                          "package.json"),
+        ("F03_SIGISMUND/CODEBASE/remotion.config.js",                                    "remotion.config.js"),
+        ("F03_SIGISMUND/CODEBASE/src/index.jsx",                                         "src/index.jsx"),
+        ("F03_SIGISMUND/CODEBASE/src/Root.jsx",                                          "src/Root.jsx"),
+        ("F03_SIGISMUND/CODEBASE/src/Main.jsx",                                          "src/Main.jsx"),
+        ("F03_SIGISMUND/CODEBASE/src/components/Scene.jsx",                              "src/components/Scene.jsx"),
+        ("F03_SIGISMUND/CODEBASE/src/components/Subtitle.jsx",                           "src/components/Subtitle.jsx"),
+        ("F03_SIGISMUND/CODEBASE/src/components/Background.jsx",                         "src/components/Background.jsx"),
+        ("F03_SIGISMUND/CODEBASE/src/components/overlays/OverlayDispatch.jsx",           "src/components/overlays/OverlayDispatch.jsx"),
+        ("F03_SIGISMUND/CODEBASE/src/components/overlays/OverlayDefaut.jsx",             "src/components/overlays/OverlayDefaut.jsx"),
+        ("F03_SIGISMUND/CODEBASE/src/components/overlays/OverlayLampeInt.jsx",           "src/components/overlays/OverlayLampeInt.jsx"),
+        ("F03_SIGISMUND/CODEBASE/src/components/overlays/OverlayNeonsInt.jsx",           "src/components/overlays/OverlayNeonsInt.jsx"),
+        ("F03_SIGISMUND/CODEBASE/src/components/overlays/OverlayPluieExt.jsx",           "src/components/overlays/OverlayPluieExt.jsx"),
+        ("F03_SIGISMUND/CODEBASE/src/components/overlays/OverlaySoleilExt.jsx",          "src/components/overlays/OverlaySoleilExt.jsx"),
+        ("F03_SIGISMUND/CODEBASE/src/components/overlays/OverlayVentExt.jsx",            "src/components/overlays/OverlayVentExt.jsx"),
+        ("F03_SIGISMUND/CODEBASE/src/components/overlays/OverlayVitrePluie.jsx",         "src/components/overlays/OverlayVitrePluie.jsx"),
     ]
 
     for rel, dest in files:
