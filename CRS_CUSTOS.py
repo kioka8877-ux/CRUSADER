@@ -44,6 +44,18 @@ MANIFEST = {
             ]
         },
     },
+    "F01A": {
+        "check-out": {
+            "files": [
+                {"path": "F01_GRIMALDUS/F01A_CASTELLAN_AUDIO/IN/audio_raw.mp3", "type": "file", "min_size": 10000},
+            ]
+        },
+        "check-in": {
+            "files": [
+                {"path": "F01_GRIMALDUS/F01A_CASTELLAN_AUDIO/OUT/audio_clean.mp3", "type": "file", "min_size": 10000},
+            ]
+        },
+    },
     "F02": {
         "check-out": {
             "files": [
@@ -168,7 +180,7 @@ def validate_dir(full_path):
 
 def main():
     parser = argparse.ArgumentParser(description="CRS_CUSTOS — Gardien de Flotte CRUSADER")
-    parser.add_argument("--frigate",    required=True, choices=["SHARED", "F01", "F02", "F03", "F04"])
+    parser.add_argument("--frigate",    required=True, choices=["SHARED", "F01", "F01A", "F02", "F03", "F04"])
     parser.add_argument("--mode",       required=True, choices=["check-out", "check-in"])
     parser.add_argument("--drive-base", default=DEFAULT_DRIVE_BASE)
     args = parser.parse_args()
