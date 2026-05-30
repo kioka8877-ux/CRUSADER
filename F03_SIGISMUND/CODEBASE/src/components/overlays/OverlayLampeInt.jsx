@@ -9,7 +9,7 @@ export function OverlayLampeInt({ intensite, frame, fps }) {
   // Pulsation douce sinusoidale simulée
   const pulse = interpolate(t, [0, cycle * 0.5, cycle], [0.85, 1.0, 0.85], { extrapolateRight: "clamp" });
 
-  const baseOpacity = [0, 0.15, 0.25, 0.38][intensite] || 0.25;
+  const baseOpacity = [0, 0.3, 0.45, 0.62][intensite] || 0.45;
   const opacity = baseOpacity * pulse;
 
   return (

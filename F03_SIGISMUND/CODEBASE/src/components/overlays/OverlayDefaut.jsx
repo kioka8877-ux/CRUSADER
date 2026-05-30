@@ -12,7 +12,7 @@ const MOTES = Array.from({ length: 8 }, (_, i) => ({
 }));
 
 export function OverlayDefaut({ intensite, frame, fps }) {
-  const baseOpacity = [0, 0.06, 0.1, 0.15][intensite] || 0.1;
+  const baseOpacity = [0, 0.25, 0.4, 0.55][intensite] || 0.4;
   const cycleFps = fps * 6;
 
   return (

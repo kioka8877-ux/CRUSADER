@@ -394,6 +394,33 @@
   .cat-vitre     { background:#0d1a2a; color:#60b4d4; border:1px solid #60b4d4; }
   .cat-defaut    { background:#1a1a1a; color:#888;    border:1px solid #444;    }
 
+  /* ── Overlay visual preview ── */
+  .overlay-col { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+  .overlay-preview {
+    width: 80px; height: 45px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .overlay-preview .ov-base {
+    position: absolute; inset: 0;
+  }
+  .overlay-preview .ov-bar {
+    position: absolute;
+    height: 4px; border-radius: 2px;
+  }
+  .overlay-preview .ov-drop {
+    position: absolute;
+    width: 1px; border-radius: 1px;
+    transform: rotate(-12deg);
+  }
+  .overlay-preview .ov-glow {
+    position: absolute;
+    border-radius: 50%;
+  }
+
   /* ── Scrollbar ── */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
@@ -462,6 +489,7 @@
           <option value="Patrick Hand">Patrick Hand — Whiteboard</option>
           <option value="Courier Prime">Courier Prime — Monospace</option>
           <option value="Space Mono">Space Mono — Mono tech</option>
+          <option value="Arrib Black">Arrib Black — Display bold</option>
           <option value="__other__">— Autre police —</option>
         </select>
         <input type="text" id="fontPrimaryOther" class="font-other-input" placeholder="Nom exact de la police…">
@@ -481,6 +509,7 @@
           <option value="Patrick Hand">Patrick Hand — Whiteboard</option>
           <option value="Courier Prime">Courier Prime — Monospace</option>
           <option value="Space Mono">Space Mono — Mono tech</option>
+          <option value="Arrib Black">Arrib Black — Display bold</option>
           <option value="__other__">— Autre police —</option>
         </select>
         <input type="text" id="fontAccentOther" class="font-other-input" placeholder="Nom exact de la police…">
@@ -769,6 +798,69 @@ function setPosition(pos) {
   });
 }
 
+// ── Overlay Visual Preview ────────────────────────────────────────────────────
+function buildOverlayPreview(type, intensite) {
+  const cat = (type.split(':')[0] || 'defaut').toLowerCase();
+  let inner = '';
+
+  if (type === 'defaut' || type === 'INTERIEUR:sombre' || type === 'EXTERIEUR:nuit') {
+    // Poussière : fond sombre + quelques points
+    const op = [0, 0.5, 0.7, 0.9][intensite] || 0.7;
+    inner = `
+      <div class="ov-base" style="background:#111;"></div>
+      <div style="position:absolute;left:15%;top:20%;width:3px;height:3px;border-radius:50%;background:rgba(220,215,200,0.9);opacity:${op};"></div>
+      <div style="position:absolute;left:50%;top:55%;width:2px;height:2px;border-radius:50%;background:rgba(220,215,200,0.9);opacity:${op};"></div>
+      <div style="position:absolute;left:75%;top:30%;width:3px;height:3px;border-radius:50%;background:rgba(220,215,200,0.9);opacity:${op};"></div>
+      <div style="position:absolute;left:35%;top:70%;width:2px;height:2px;border-radius:50%;background:rgba(220,215,200,0.9);opacity:${op};"></div>`;
+  } else if (type === 'INTERIEUR:neons' || type === 'INTERIEUR:ecran') {
+    const op = [0, 0.5, 0.7, 0.95][intensite] || 0.7;
+    inner = `
+      <div class="ov-base" style="background:#0a0d14;"></div>
+      <div class="ov-bar" style="top:8%;left:5%;width:42%;background:rgba(180,240,255,0.95);box-shadow:0 0 6px 2px rgba(100,200,255,0.7);opacity:${op};"></div>
+      <div class="ov-bar" style="top:8%;right:5%;width:30%;background:rgba(180,240,255,0.95);box-shadow:0 0 6px 2px rgba(100,200,255,0.7);opacity:${op * 0.8};"></div>
+      <div style="position:absolute;top:13%;left:10%;width:80%;height:50%;background:linear-gradient(to bottom,rgba(160,220,255,0.2),transparent);clip-path:polygon(20% 0%,80% 0%,100% 100%,0% 100%);opacity:${op};"></div>`;
+  } else if (type === 'INTERIEUR:lampe') {
+    const op = [0, 0.5, 0.75, 0.95][intensite] || 0.75;
+    inner = `
+      <div class="ov-base" style="background:#0d0a06;"></div>
+      <div class="ov-glow" style="bottom:-10%;left:-5%;width:65%;height:80%;background:radial-gradient(ellipse at 30% 80%,rgba(255,180,50,0.7),rgba(255,140,20,0.2) 50%,transparent 75%);opacity:${op};mix-blend-mode:screen;"></div>`;
+  } else if (type === 'EXTERIEUR:pluie') {
+    const op = [0, 0.5, 0.75, 1.0][intensite] || 0.75;
+    inner = `
+      <div class="ov-base" style="background:linear-gradient(to bottom,rgba(60,75,100,0.9),rgba(40,55,80,0.7));"></div>
+      ${[10,22,35,48,60,72,85].map((x,i) => `<div class="ov-drop" style="left:${x}%;top:${(i*17)%90}%;width:1px;height:${8+i*2}px;background:rgba(180,210,240,0.8);opacity:${op};"></div>`).join('')}`;
+  } else if (type === 'EXTERIEUR:vent') {
+    const op = [0, 0.5, 0.8, 1.0][intensite] || 0.8;
+    inner = `
+      <div class="ov-base" style="background:#0d1a0d;"></div>
+      ${[5,20,38,55,70].map((y,i) => `<div style="position:absolute;left:${5+i*3}%;top:${y}%;width:${18+i*4}px;height:2px;background:rgba(200,220,240,0.7);border-radius:2px;transform:rotate(-8deg);opacity:${op};"></div>`).join('')}`;
+  } else if (type === 'EXTERIEUR:soleil') {
+    const op = [0, 0.4, 0.65, 0.9][intensite] || 0.65;
+    inner = `
+      <div class="ov-base" style="background:#0d0d06;"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 80% 10%,rgba(255,230,100,0.7),rgba(255,200,60,0.15) 55%,transparent 75%);opacity:${op};"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,240,100,0.3) 0%,transparent 45%);opacity:${op};"></div>`;
+  } else if (type === 'VITRE:pluie' || type === 'VITRE:brouillard') {
+    const op = [0, 0.55, 0.8, 1.0][intensite] || 0.8;
+    inner = `
+      <div class="ov-base" style="background:#0a0f14;"></div>
+      <div style="position:absolute;top:20%;left:5%;width:90%;height:40%;background:linear-gradient(to bottom,rgba(80,95,115,0.5),rgba(60,75,95,0.25));border-radius:1px;overflow:hidden;">
+        ${[10,25,42,58,72,85].map((x,i) => `<div style="position:absolute;left:${x}%;top:${(i*21)%100}%;width:1px;height:${7+i}px;background:rgba(180,210,240,0.85);transform:rotate(-10deg);opacity:${op};"></div>`).join('')}
+      </div>`;
+  }
+
+  const labelMap = { 'INTERIEUR:neons':'néons', 'INTERIEUR:lampe':'lampe', 'INTERIEUR:ecran':'écran',
+    'INTERIEUR:sombre':'sombre', 'EXTERIEUR:pluie':'pluie', 'EXTERIEUR:vent':'vent',
+    'EXTERIEUR:soleil':'soleil', 'EXTERIEUR:nuit':'nuit', 'VITRE:pluie':'vitre·pluie',
+    'VITRE:brouillard':'brouillard', 'defaut':'défaut' };
+  const label = labelMap[type] || escHtml(type);
+
+  return `<div class="overlay-col">
+    <div class="overlay-preview">${inner}</div>
+    <span class="overlay-badge cat-${cat}">${label} · ${intensite}</span>
+  </div>`;
+}
+
 // ── Render Timeline ────────────────────────────────────────────────────────────
 function renderTimeline() {
   if (!timingData) return;
@@ -792,10 +884,8 @@ function renderTimeline() {
     const assigned   = assignments[String(seg.id)] || '';
     const selectHtml = buildImageSelect(seg.id, assigned);
 
-    const ov = overlayAssignments[String(seg.id)];
-    const ovBadge = ov
-      ? `<span class="overlay-badge cat-${ov.type.split(':')[0].toLowerCase()}">${escHtml(ov.type)} · ${ov.intensite}</span>`
-      : `<span class="overlay-badge cat-defaut">defaut · 2</span>`;
+    const ov = overlayAssignments[String(seg.id)] || { type: 'defaut', intensite: 2 };
+    const ovBadge = buildOverlayPreview(ov.type, ov.intensite);
 
     row.innerHTML = `
       <div class="seg-id">${idx + 1}</div>

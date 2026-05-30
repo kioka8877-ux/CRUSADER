@@ -11,7 +11,7 @@ export function OverlayNeonsInt({ intensite, frame, fps }) {
   const flicker2 = interpolate(t, [0, cycle * 0.4, cycle * 0.41, cycle * 0.45, cycle], [1, 1, 0.5, 1, 1], { extrapolateRight: "clamp" });
   const flicker  = Math.min(flicker1, flicker2);
 
-  const baseOpacity = [0, 0.18, 0.28, 0.42][intensite] || 0.28;
+  const baseOpacity = [0, 0.32, 0.48, 0.65][intensite] || 0.48;
 
   return (
     <AbsoluteFill style={{ pointerEvents: "none" }}>

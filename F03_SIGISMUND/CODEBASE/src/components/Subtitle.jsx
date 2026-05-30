@@ -1,10 +1,12 @@
 // src/components/Subtitle.jsx — F03 SIGISMUND
-// Rendu des sous-titres. Mots forts (is_strong) en police accent + couleur dorée.
+// Rendu des sous-titres. Mots forts (is_strong) en couleur accent uniquement.
 import React from "react";
 import { interpolate, useCurrentFrame } from "remotion";
 
 // Constantes de fondu entrée / sortie (en frames)
 const FADE_FRAMES = 4;
+// Distance de glissement slide-in (en px)
+const SLIDE_PX = 30;
 
 export const Subtitle = ({ segment, timingSeg, style, durationInFrames }) => {
   const frame = useCurrentFrame();
@@ -17,6 +19,14 @@ export const Subtitle = ({ segment, timingSeg, style, durationInFrames }) => {
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
+  // ── Slide-in gauche → droite ───────────────────────────────────────────────
+  const slideX = interpolate(
+    frame,
+    [0, FADE_FRAMES],
+    [-SLIDE_PX, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+
   // ── Position verticale ─────────────────────────────────────────────────────
   const posStyle = {};
   switch (style.subtitle_position) {
@@ -25,18 +35,17 @@ export const Subtitle = ({ segment, timingSeg, style, durationInFrames }) => {
       break;
     case "center":
       posStyle.top = "50%";
-      posStyle.transform = "translateY(-50%)";
+      posStyle.transform = `translateY(-50%) translateX(${slideX}px)`;
       break;
     default: // bottom
       posStyle.bottom = "8%";
   }
 
-  // ── Rendu des mots (avec surlignage des mots forts) ───────────────────────
+  // ── Rendu des mots (mots forts = couleur accent, sinon couleur normale) ────
   const words = timingSeg?.words || [];
 
   const renderWords = () => {
     if (!words.length) {
-      // Fallback : texte brut en police principale
       return (
         <span
           style={{
@@ -53,10 +62,7 @@ export const Subtitle = ({ segment, timingSeg, style, durationInFrames }) => {
       <React.Fragment key={i}>
         <span
           style={{
-            fontFamily: w.is_strong
-              ? `'${style.font_accent}', Georgia, serif`
-              : `'${style.font_primary}', Georgia, serif`,
-            fontStyle: w.is_strong ? "italic" : "normal",
+            fontFamily: `'${style.font_primary}', Georgia, serif`,
             color: w.is_strong ? style.accent_color : style.subtitle_color,
           }}
         >
@@ -67,6 +73,12 @@ export const Subtitle = ({ segment, timingSeg, style, durationInFrames }) => {
     ));
   };
 
+  // Pour top et bottom, le transform contient uniquement le slide.
+  // Pour center, il est déjà intégré dans posStyle.transform ci-dessus.
+  const transformVal = style.subtitle_position === "center"
+    ? posStyle.transform
+    : `translateX(${slideX}px)`;
+
   return (
     <div
       style={{
@@ -76,12 +88,13 @@ export const Subtitle = ({ segment, timingSeg, style, durationInFrames }) => {
         padding: "0 64px",
         textAlign: "center",
         opacity,
+        transform: transformVal,
         ...posStyle,
       }}
     >
       <div
         style={{
-          fontSize: style.subtitle_size,
+          fontSize: parseInt(style.subtitle_size, 10),
           lineHeight: 1.25,
           textShadow: "0 2px 12px rgba(0,0,0,0.85), 0 0 4px rgba(0,0,0,0.5)",
           wordBreak: "break-word",
