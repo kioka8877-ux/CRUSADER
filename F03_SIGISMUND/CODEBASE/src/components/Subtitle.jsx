@@ -3,29 +3,35 @@
 import React from "react";
 import { interpolate, useCurrentFrame } from "remotion";
 
-// Constantes de fondu entrée / sortie (en frames)
-const FADE_FRAMES = 4;
 // Distance de glissement slide-in (en px)
 const SLIDE_PX = 30;
 
 export const Subtitle = ({ segment, timingSeg, style, durationInFrames }) => {
   const frame = useCurrentFrame();
 
+  // Lecture des paramètres d'animation depuis le roadmap.json
+  const animEnabled = style.subtitle_anim !== false;
+  const FADE_FRAMES = style.subtitle_anim_speed ?? 5;
+
   // ── Fondu in/out ───────────────────────────────────────────────────────────
-  const opacity = interpolate(
-    frame,
-    [0, FADE_FRAMES, durationInFrames - FADE_FRAMES, durationInFrames],
-    [0, 1, 1, 0],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
+  const opacity = animEnabled
+    ? interpolate(
+        frame,
+        [0, FADE_FRAMES, durationInFrames - FADE_FRAMES, durationInFrames],
+        [0, 1, 1, 0],
+        { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+      )
+    : 1;
 
   // ── Slide-in gauche → droite ───────────────────────────────────────────────
-  const slideX = interpolate(
-    frame,
-    [0, FADE_FRAMES],
-    [-SLIDE_PX, 0],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
+  const slideX = animEnabled
+    ? interpolate(
+        frame,
+        [0, FADE_FRAMES],
+        [-SLIDE_PX, 0],
+        { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+      )
+    : 0;
 
   // ── Position verticale ─────────────────────────────────────────────────────
   const posStyle = {};
