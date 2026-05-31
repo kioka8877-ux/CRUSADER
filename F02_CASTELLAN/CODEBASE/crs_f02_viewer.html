@@ -482,8 +482,18 @@
   .preview-overlay { position: absolute; inset: 0; }
   .preview-subtitle {
     position: absolute; left: 0; right: 0;
-    padding: 0 20px; text-align: center; line-height: 1.3;
+    padding: 0 20px; text-align: center;
+  }
+  .preview-sub-text {
+    line-height: 1.3;
     text-shadow: 1px 1px 6px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.6);
+  }
+  @keyframes sub-slide-in {
+    from { opacity: 0; transform: translateX(-30px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .preview-sub-text.anim-play {
+    animation: sub-slide-in var(--anim-dur, 0.167s) ease-out forwards;
   }
   .preview-seg-label {
     position: absolute; top: 8px; left: 10px;
@@ -644,6 +654,22 @@
       </div>
     </div>
 
+    <!-- ANIMATION -->
+    <div>
+      <div class="section-title">Animation sous-titres</div>
+      <div class="field">
+        <div class="checkbox-row">
+          <input type="checkbox" id="subtitleAnim" checked>
+          <label for="subtitleAnim">Animation activée</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Vitesse — <span class="range-val" id="animSpeedVal">5</span> frames</label>
+        <input type="range" id="animSpeed" min="1" max="15" step="1" value="5"
+               oninput="onAnimSpeedChange(this.value)">
+      </div>
+    </div>
+
     <!-- ACTIONS -->
     <div>
       <div class="section-title">Actions rapides</div>
@@ -687,7 +713,7 @@
     <div class="preview-frame">
       <div class="preview-bg"></div>
       <div class="preview-overlay"></div>
-      <div class="preview-subtitle"></div>
+      <div class="preview-subtitle"><div class="preview-sub-text"></div></div>
       <div class="preview-seg-label"></div>
     </div>
   </div>
@@ -1054,9 +1080,25 @@ function openPreview(segId) {
   modal.querySelector('.preview-overlay').style.cssText = overlayCSS;
 
   // Subtitle
-  const subEl = modal.querySelector('.preview-subtitle');
-  subEl.style.cssText = `position:absolute;left:0;right:0;padding:0 ${Math.round(16*scale)}px;text-align:center;${posCSS};font-family:'${font}',sans-serif;font-size:${Math.round(size*scale)}px;color:${subColor};line-height:1.3;text-shadow:1px 1px 4px rgba(0,0,0,0.85),0 0 18px rgba(0,0,0,0.6);`;
-  subEl.innerHTML = subHtml;
+  const subEl    = modal.querySelector('.preview-subtitle');
+  const subInner = modal.querySelector('.preview-sub-text');
+  subEl.style.cssText    = `position:absolute;left:0;right:0;padding:0 ${Math.round(16*scale)}px;text-align:center;${posCSS};`;
+  subInner.style.cssText = `font-family:'${font}',sans-serif;font-size:${Math.round(size*scale)}px;color:${subColor};line-height:1.3;text-shadow:1px 1px 4px rgba(0,0,0,0.85),0 0 18px rgba(0,0,0,0.6);`;
+  subInner.innerHTML = subHtml;
+
+  // Animation preview
+  const animOn    = document.getElementById('subtitleAnim').checked;
+  const animSpeed = parseInt(document.getElementById('animSpeed').value, 10);
+  const animMs    = Math.round(animSpeed * 1000 / 30);
+  subInner.classList.remove('anim-play');
+  if (animOn) {
+    subInner.style.setProperty('--anim-dur', animMs + 'ms');
+    void subInner.offsetWidth; // force reflow pour relancer l'animation
+    subInner.classList.add('anim-play');
+  } else {
+    subInner.style.opacity   = '1';
+    subInner.style.transform = 'none';
+  }
 
   // Label
   const labelMap = { 'INTERIEUR:neons':'néons','INTERIEUR:lampe':'lampe','INTERIEUR:ecran':'écran',
@@ -1105,6 +1147,10 @@ function buildPreviewOverlayCss(type, intensite) {
 
 function closePreview() {
   document.getElementById('previewModal').classList.remove('visible');
+}
+
+function onAnimSpeedChange(val) {
+  document.getElementById('animSpeedVal').textContent = val;
 }
 
 // ── Render Timeline ────────────────────────────────────────────────────────────
@@ -1256,6 +1302,8 @@ async function saveRoadmap() {
       background_color:  document.getElementById('bgColor').value.toUpperCase(),
       grain_intensity:   parseFloat(document.getElementById('grainIntensity').value),
       vignette:          document.getElementById('vignette').checked,
+      subtitle_anim:       document.getElementById('subtitleAnim').checked,
+      subtitle_anim_speed: parseInt(document.getElementById('animSpeed').value, 10),
     },
     timeline:           timeline,
     validated_by_magos: true,
