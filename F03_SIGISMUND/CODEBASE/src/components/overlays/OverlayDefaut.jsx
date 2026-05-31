@@ -1,41 +1,50 @@
-// overlays/OverlayDefaut.jsx — Poussière ambiante (fallback universel)
+// overlays/OverlayDefaut.jsx — Grain cinématique + vignette (fallback universel)
 import React from "react";
-import { AbsoluteFill, interpolate } from "remotion";
+import { AbsoluteFill } from "remotion";
 
-const MOTES = Array.from({ length: 8 }, (_, i) => ({
-  id: i,
-  x:     (i * 53 + 12) % 90 + 5,
-  y:     (i * 31 + 8)  % 85 + 5,
-  delay: (i * 29) % 100,
-  speed: 0.03 + (i % 4) * 0.01,
-  size:  2 + (i % 2),
-}));
+export function OverlayDefaut({ intensite, frame }) {
+  const lv = intensite / 3;
 
-export function OverlayDefaut({ intensite, frame, fps }) {
-  const baseOpacity = [0, 0.25, 0.4, 0.55][intensite] || 0.4;
-  const cycleFps = fps * 6;
+  // Grain — seed varie chaque frame pour simuler le bruit pellicule
+  const seed = (frame * 7 + 13) % 1000;
+  const grainOpacity = (0.04 + lv * 0.08).toFixed(3);
+
+  // Vignette — visible dès frame 1, intensité selon le niveau
+  const vigOpacity = (0.25 + lv * 0.30).toFixed(3);
 
   return (
     <AbsoluteFill style={{ pointerEvents: "none" }}>
-      {MOTES.map(m => {
-        const t = ((frame * m.speed + m.delay) % cycleFps) / cycleFps;
-        // Dérive verticale lente
-        const yOff = interpolate(t, [0, 0.5, 1], [0, -8, 0], { extrapolateRight: "clamp" });
-        // Pulsation d'opacité
-        const opPulse = interpolate(t, [0, 0.5, 1], [0.4, 1.0, 0.4], { extrapolateRight: "clamp" });
-        return (
-          <div key={m.id} style={{
-            position: "absolute",
-            left: `${m.x}%`,
-            top: `calc(${m.y}% + ${yOff}px)`,
-            width: `${m.size}px`,
-            height: `${m.size}px`,
-            borderRadius: "50%",
-            background: "rgba(220, 215, 200, 0.8)",
-            opacity: baseOpacity * opPulse,
-          }} />
-        );
-      })}
+      {/* Grain cinématique via SVG feTurbulence */}
+      <svg
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          opacity: grainOpacity,
+        }}
+      >
+        <filter id="crs-grain">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.65"
+            numOctaves="3"
+            seed={seed}
+            stitchTiles="stitch"
+          />
+          <feColorMatrix type="saturate" values="0" />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#crs-grain)" />
+      </svg>
+
+      {/* Vignette radiale — présente dès frame 1 */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: `radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0,0,0,${vigOpacity}) 100%)`,
+        }}
+      />
     </AbsoluteFill>
   );
 }
