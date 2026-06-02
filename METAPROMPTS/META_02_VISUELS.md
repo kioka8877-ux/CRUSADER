@@ -13,7 +13,31 @@
 3. Joints le **script généré** (META_01) et le **timing.json** (F01)
 4. Remplis les variables entre `« »`
 5. Envoie le tout à Gemini
-6. Récupère les images → renomme en `1.png`, `2.png`... → dépose dans `DRIVE_CRUSADER/SHARED/images/`
+6. Récupère les images → renomme selon la **convention timestamp** ci-dessous → dépose dans `DRIVE_CRUSADER/SHARED/images/`
+
+---
+
+## CONVENTION DE NOMMAGE DES IMAGES (OBLIGATOIRE)
+
+Chaque image doit être nommée selon le **timestamp de début du premier segment couvert**, au format :
+
+```
+MM_SS_mmm.png
+```
+
+| Champ | Description | Exemple |
+|-------|-------------|---------|
+| `MM`  | Minutes (2 chiffres) | `00`, `01`, `12` |
+| `SS`  | Secondes (2 chiffres) | `00`, `07`, `45` |
+| `mmm` | Millisecondes (3 chiffres) | `000`, `340`, `080` |
+
+**Exemples :**
+- Segment débute à `0.0s` → `00_00_000.png`
+- Segment débute à `7.34s` → `00_07_340.png`
+- Segment débute à `23.0s` → `00_23_000.png`
+- Segment débute à `1m 05.08s` → `01_05_080.png`
+
+> **Pourquoi ?** Le viewer F02 lit directement le timestamp dans le nom du fichier pour auto-matcher chaque image au bon segment. Le montage final est automatique : plus besoin de tableau de correspondance manuel.
 
 ---
 
@@ -67,7 +91,7 @@ Regarde la vidéo de référence et extrait avec précision :
 
 ## ÉTAPE 2 — LECTURE DU TIMING.JSON
 
-Identifie tous les segments (champ `"segments"`) avec leur texte, start et end.
+Identifie tous les segments (champ `"segments"`) avec leur texte, `start` et `end`.
 
 **Si MODE = GROUPED** :
 Regroupe les segments qui parlent de la même idée ou scène narrative. Crée des groupes de 3 à 6 segments. Vise 5 à 8 groupes au total.
@@ -99,11 +123,13 @@ Après avoir généré toutes les images, fournis :
 
 | Image | Nom fichier | Segments couverts | Texte illustré | Overlay | Intensite |
 |-------|-------------|-------------------|----------------|---------|-----------|
-| 1 | 1.png | seg 1-3 | "Vous pensez trop ?" | INTERIEUR:neons | 2 |
-| 2 | 2.png | seg 4-6 | "C'est à cause de votre [téléphone]." | VITRE:pluie | 2 |
+| 1 | 00_00_000.png | seg 1-3 | "Vous pensez trop ?" | INTERIEUR:neons | 2 |
+| 2 | 00_07_340.png | seg 4-6 | "C'est à cause de votre [téléphone]." | VITRE:pluie | 2 |
 | ... | ... | ... | ... | ... | ... |
 
-Puis génère chaque image dans l'ordre, nommée `1.png`, `2.png`, etc.
+> **Règle de nommage** : la colonne `Nom fichier` doit contenir le timestamp du `start` du **premier segment couvert**, au format `MM_SS_mmm.png`. Exemple : si le groupe couvre les segments 4-6 et que le segment 4 a `start: 7.34`, le fichier s'appelle `00_07_340.png`.
+
+Puis génère chaque image dans l'ordre, **nommée selon son timestamp de début**.
 
 ---
 
@@ -127,10 +153,14 @@ Puis génère chaque image dans l'ordre, nommée `1.png`, `2.png`, etc.
 ## APRÈS LA GÉNÉRATION
 
 1. Télécharge toutes les images générées
-2. Renomme-les exactement : `1.png`, `2.png`, `3.png`...
+2. **Renomme chaque image selon son timestamp de début** :
+   - Identifie le `start` du premier segment couvert (dans le timing.json)
+   - Applique le format `MM_SS_mmm.png`
+   - Exemples : `00_00_000.png`, `00_07_340.png`, `00_23_000.png`, `01_05_080.png`
 3. Dépose-les dans `DRIVE_CRUSADER/SHARED/images/`
 4. Copies également dans `DRIVE_CRUSADER/F02_CASTELLAN/IN/images/` et `DRIVE_CRUSADER/F03_SIGISMUND/IN/images/`
-5. Tu peux passer à **F02 CASTELLAN**
+5. Dans F02 CASTELLAN, colle le **tableau de mapping Gemini** dans la zone prévue, puis clique **Auto-match par timestamp** — le viewer assigne automatiquement chaque image au bon segment via le timestamp encodé dans le nom de fichier
+6. Tu peux passer à **F02 CASTELLAN**
 
 ---
 
@@ -139,3 +169,4 @@ Puis génère chaque image dans l'ordre, nommée `1.png`, `2.png`, etc.
 - **Passage de GROUPED à 1:1** : relance simplement le prompt en changeant `MODE = 1:1`. Tout le reste reste identique.
 - **Si une image ne correspond pas au style** : dis à Gemini "L'image N ne correspond pas au style de la référence. Régénère-la en accentuant [trait tremblé / fond papier / couleur de fond]."
 - **Nombre d'images typique** : GROUPED = 5-8 images / 1:1 = 15-30 images selon la durée de la vidéo.
+- **Ancien format numéroté (1.png, 2.png...)** : toujours supporté en fallback via le bouton "Auto-assigner (proportionnel)" dans F02.
