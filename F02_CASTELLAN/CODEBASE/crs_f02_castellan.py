@@ -43,6 +43,11 @@ REQUIRED_STYLE_KEYS = {
 }
 REQUIRED_TIMELINE_KEYS = {"id", "image_file", "text_subtitles", "start_frame", "end_frame", "start", "end"}
 
+# Champs optionnels dans style (présents si générés par le viewer mis à jour)
+# overlay_global_intensity : int 1-3, plafonne l'intensité de tous les overlays dans F03.
+#   Valeur par défaut dans Scene.jsx si absent : 3 (aucun plafonnement).
+OPTIONAL_STYLE_KEYS = {"overlay_global_intensity", "subtitle_anim", "subtitle_anim_speed"}
+
 # ─── Flask app ────────────────────────────────────────────────────────────────
 
 def create_app(input_dir: str, output_dir: str, viewer_path: str):
@@ -126,6 +131,12 @@ def create_app(input_dir: str, output_dir: str, viewer_path: str):
         if missing_style:
             return jsonify({"error": f"style : clés manquantes : {sorted(missing_style)}"}), 400
 
+        # Validation overlay_global_intensity si présent (optionnel)
+        if "overlay_global_intensity" in style:
+            ogi = style["overlay_global_intensity"]
+            if not isinstance(ogi, int) or ogi not in (1, 2, 3):
+                return jsonify({"error": "style.overlay_global_intensity doit être 1, 2 ou 3"}), 400
+
         # ── Validation timeline ──
         timeline = payload.get("timeline")
         if not isinstance(timeline, list) or len(timeline) == 0:
@@ -147,6 +158,9 @@ def create_app(input_dir: str, output_dir: str, viewer_path: str):
         warnings = []
         if not meta.get("audio_path"):
             warnings.append("audio_path manquant — F03 ne pourra pas lier l'audio")
+
+        ogi_val = style.get("overlay_global_intensity", 3)
+        print(f"[CASTELLAN] overlay_global_intensity = {ogi_val} — intensité max des overlays dans F03.")
 
         return jsonify({
             "status":   "ok",
