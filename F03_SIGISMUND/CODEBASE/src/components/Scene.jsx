@@ -19,6 +19,14 @@ export const Scene = ({ segment, timingSeg, style, durationInFrames }) => {
     extrapolateRight: "clamp",
   });
 
+  // ── Intensité effective : min(segment, global) ─────────────────────────────
+  // Gemini assigne une intensité par image (1-3).
+  // overlay_global_intensity dans le style plafonne toutes les intensités.
+  const effectiveIntensity = Math.min(
+    segment.overlay_intensite ?? 2,
+    style.overlay_global_intensity ?? 3
+  );
+
   return (
     <AbsoluteFill>
       {/* Image de fond du segment */}
@@ -40,7 +48,7 @@ export const Scene = ({ segment, timingSeg, style, durationInFrames }) => {
       {/* Overlay atmosphérique */}
       <OverlayDispatch
         type={segment.overlay_type || "defaut"}
-        intensite={segment.overlay_intensite || 2}
+        intensite={effectiveIntensity}
         frame={frame}
         fps={fps}
       />
