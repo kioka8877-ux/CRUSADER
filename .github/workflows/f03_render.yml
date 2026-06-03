@@ -265,15 +265,32 @@ jobs:
 
           echo "[CHUNK ${{ matrix.chunk }}] Début rendu — frames ${{ steps.frames.outputs.start }}-${{ steps.frames.outputs.end }}"
 
+          # ── BYPASS COMPOSITOR — séquence JPEG + FFmpeg (zero hang) ──────────────
+          FRAMES_DIR=/tmp/frames_${{ matrix.chunk }}
+          mkdir -p $FRAMES_DIR
+
           npx remotion render \
             src/index.jsx \
             "${{ github.event.inputs.composition }}" \
-            /tmp/chunk_${{ matrix.chunk }}.mp4 \
+            $FRAMES_DIR \
+            --sequence \
+            --image-format=jpeg \
             --gl=swangle \
             --frames=${{ steps.frames.outputs.start }}-${{ steps.frames.outputs.end }} \
-            --concurrency=2 \
+            --concurrency=1 \
             --timeout=60000 \
             ${CHROME:+--browser-executable=$CHROME}
+
+          FRAME_COUNT=$(ls $FRAMES_DIR/*.jpeg 2>/dev/null | wc -l)
+          echo "[CHUNK ${{ matrix.chunk }}] $FRAME_COUNT frames JPEG rendues"
+
+          # Encoder JPEG → mp4 video-only (audio muxé au concat final)
+          ffmpeg -y \
+            -framerate ${{ github.event.inputs.fps }} \
+            -pattern_type glob -i "$FRAMES_DIR/*.jpeg" \
+            -c:v libx264 -preset fast -crf 18 \
+            -pix_fmt yuv420p \
+            /tmp/chunk_${{ matrix.chunk }}.mp4
 
           END_TS=$(date +%s)
           ELAPSED=$((END_TS - START_TS))
@@ -299,6 +316,18 @@ jobs:
     steps:
       - name: Installer FFmpeg
         run: sudo apt-get install -y --no-install-recommends ffmpeg
+
+      - name: Télécharger audio depuis GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          BASE_URL="https://github.com/${{ github.repository }}/releases/download/${{ github.event.inputs.run_id }}"
+          wget -q \
+            --header="Authorization: token $GH_TOKEN" \
+            -O /tmp/audio_clean.mp3 \
+            "${BASE_URL}/audio_clean.mp3" && \
+            echo "[AUDIO] audio_clean.mp3 — $(du -h /tmp/audio_clean.mp3 | cut -f1) ✅" || \
+            echo "[AUDIO] audio_clean.mp3 — ABSENT (vidéo sans audio)"
 
       - name: Télécharger tous les chunks
         uses: actions/download-artifact@v4
@@ -330,7 +359,22 @@ jobs:
           echo "[CONCAT] Liste d'assemblage :"
           cat /tmp/concat_list.txt
 
-          ffmpeg -y -f concat -safe 0 -i /tmp/concat_list.txt -c copy /tmp/short_render.mp4
+          # Concat video-only (les chunks sont sans audio — encodés via FFmpeg séquence)
+          ffmpeg -y -f concat -safe 0 -i /tmp/concat_list.txt -c:v copy -an /tmp/short_render_video.mp4
+
+          # Muxer l'audio si disponible
+          if [ -f /tmp/audio_clean.mp3 ]; then
+            ffmpeg -y \
+              -i /tmp/short_render_video.mp4 \
+              -i /tmp/audio_clean.mp3 \
+              -c:v copy -c:a aac -b:a 192k \
+              -shortest \
+              /tmp/short_render.mp4
+            echo "[CONCAT] ✅ Audio muxé depuis audio_clean.mp3"
+          else
+            mv /tmp/short_render_video.mp4 /tmp/short_render.mp4
+            echo "[CONCAT] ⚠️ Pas d'audio — vidéo video-only"
+          fi
 
           SIZE=$(du -h /tmp/short_render.mp4 | cut -f1)
           DURATION=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /tmp/short_render.mp4 2>/dev/null | xargs printf "%.1f")
@@ -342,3 +386,4 @@ jobs:
           name: resultat-final
           path: /tmp/short_render.mp4
           retention-days: 7
+
