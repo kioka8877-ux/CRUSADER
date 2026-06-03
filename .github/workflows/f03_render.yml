@@ -71,12 +71,28 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           mkdir -p /tmp/assets
-          gh release download "${{ github.event.inputs.run_id }}" \
-            --repo "${{ github.repository }}" \
-            --dir /tmp/assets
+          BASE_URL="https://github.com/${{ github.repository }}/releases/download/${{ github.event.inputs.run_id }}"
+
+          echo "[ASSETS] Téléchargement depuis : $BASE_URL"
+
+          for FNAME in timing.json roadmap.json audio_clean.mp3 images.zip; do
+            HTTP_CODE=$(curl -sL \
+              -H "Authorization: token $GH_TOKEN" \
+              -w "%{http_code}" \
+              -o "/tmp/assets/${FNAME}" \
+              "${BASE_URL}/${FNAME}")
+            if [ "$HTTP_CODE" = "200" ]; then
+              SIZE=$(du -h "/tmp/assets/${FNAME}" | cut -f1)
+              echo "[ASSETS] ${FNAME} — ${SIZE} ✅"
+            else
+              echo "[ASSETS] ${FNAME} — HTTP ${HTTP_CODE} (ignoré)"
+              rm -f "/tmp/assets/${FNAME}"
+            fi
+          done
 
           if [ -f /tmp/assets/images.zip ]; then
             unzip -q /tmp/assets/images.zip -d /tmp/assets/
+            echo "[ASSETS] images.zip extrait : $(ls /tmp/assets/images/ 2>/dev/null | wc -l) images"
           fi
 
           mkdir -p F03_SIGISMUND/CODEBASE/public/images
@@ -177,9 +193,22 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           mkdir -p /tmp/assets
-          gh release download "${{ github.event.inputs.run_id }}" \
-            --repo "${{ github.repository }}" \
-            --dir /tmp/assets
+          BASE_URL="https://github.com/${{ github.repository }}/releases/download/${{ github.event.inputs.run_id }}"
+
+          for FNAME in timing.json roadmap.json audio_clean.mp3 images.zip; do
+            HTTP_CODE=$(curl -sL \
+              -H "Authorization: token $GH_TOKEN" \
+              -w "%{http_code}" \
+              -o "/tmp/assets/${FNAME}" \
+              "${BASE_URL}/${FNAME}")
+            if [ "$HTTP_CODE" = "200" ]; then
+              SIZE=$(du -h "/tmp/assets/${FNAME}" | cut -f1)
+              echo "[ASSETS] ${FNAME} — ${SIZE} ✅"
+            else
+              echo "[ASSETS] ${FNAME} — HTTP ${HTTP_CODE} (ignoré)"
+              rm -f "/tmp/assets/${FNAME}"
+            fi
+          done
 
           if [ -f /tmp/assets/images.zip ]; then
             unzip -q /tmp/assets/images.zip -d /tmp/assets/
@@ -271,7 +300,7 @@ jobs:
               SIZE=$(du -h "$F" | cut -f1)
               echo "  chunk_${i}.mp4 — ${SIZE} ✅"
             else
-              echo "  chunk_${i}.mp4— ABSENT ❌"
+              echo "  chunk_${i}.mp4 — ABSENT ❌"
               exit 1
             fi
           done
