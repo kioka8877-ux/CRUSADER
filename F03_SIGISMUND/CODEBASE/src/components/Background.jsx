@@ -25,14 +25,14 @@ const FONT_FACES = `
     font-family: 'Cinzel';
     font-weight: 400;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
     src: url('./fonts/Cinzel-Regular.woff2') format('woff2');
   }
   @font-face {
     font-family: 'Cinzel';
     font-weight: 700;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
     src: url('./fonts/Cinzel-Bold.woff2') format('woff2');
   }
 
@@ -41,28 +41,28 @@ const FONT_FACES = `
     font-family: 'Playfair Display';
     font-weight: 400;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
     src: url('./fonts/PlayfairDisplay-Regular.woff2') format('woff2');
   }
   @font-face {
     font-family: 'Playfair Display';
     font-weight: 700;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
     src: url('./fonts/PlayfairDisplay-Bold.woff2') format('woff2');
   }
   @font-face {
     font-family: 'Playfair Display';
     font-weight: 400;
     font-style: italic;
-    font-display: block;
+    font-display: swap;
     src: url('./fonts/PlayfairDisplay-Italic.woff2') format('woff2');
   }
   @font-face {
     font-family: 'Playfair Display';
     font-weight: 700;
     font-style: italic;
-    font-display: block;
+    font-display: swap;
     src: url('./fonts/PlayfairDisplay-BoldItalic.woff2') format('woff2');
   }
 
@@ -71,21 +71,21 @@ const FONT_FACES = `
     font-family: 'Lato';
     font-weight: 400;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
     src: url('./fonts/Lato-Regular.woff2') format('woff2');
   }
   @font-face {
     font-family: 'Lato';
     font-weight: 700;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
     src: url('./fonts/Lato-Bold.woff2') format('woff2');
   }
   @font-face {
     font-family: 'Lato';
     font-weight: 400;
     font-style: italic;
-    font-display: block;
+    font-display: swap;
     src: url('./fonts/Lato-Italic.woff2') format('woff2');
   }
 
@@ -94,21 +94,21 @@ const FONT_FACES = `
     font-family: 'Oswald';
     font-weight: 400;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
     src: url('./fonts/Oswald-Regular.woff2') format('woff2');
   }
   @font-face {
     font-family: 'Oswald';
     font-weight: 600;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
     src: url('./fonts/Oswald-SemiBold.woff2') format('woff2');
   }
   @font-face {
     font-family: 'Oswald';
     font-weight: 700;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
     src: url('./fonts/Oswald-Bold.woff2') format('woff2');
   }
 
@@ -117,14 +117,14 @@ const FONT_FACES = `
     font-family: 'Roboto Slab';
     font-weight: 400;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
     src: url('./fonts/RobotoSlab-Regular.woff2') format('woff2');
   }
   @font-face {
     font-family: 'Roboto Slab';
     font-weight: 700;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
     src: url('./fonts/RobotoSlab-Bold.woff2') format('woff2');
   }
 
@@ -133,21 +133,21 @@ const FONT_FACES = `
     font-family: 'Inter';
     font-weight: 400;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
     src: url('./fonts/Inter-Regular.woff2') format('woff2');
   }
   @font-face {
     font-family: 'Inter';
     font-weight: 700;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
     src: url('./fonts/Inter-Bold.woff2') format('woff2');
   }
   @font-face {
     font-family: 'Inter';
     font-weight: 900;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
     src: url('./fonts/Inter-Black.woff2') format('woff2');
   }
 `;
