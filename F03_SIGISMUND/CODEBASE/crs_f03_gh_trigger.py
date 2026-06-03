@@ -547,3 +547,104 @@ def preflight_result(gh_run_id: int, github_token: str, repo: str) -> dict:
     print(f"[PREFLIGHT] {icon} — {elapsed}")
 
     return {"go": go, "status": status, "elapsed": elapsed, "conclusion": concl}
+
+
+# ─── 7. Ensure Docker Image — Build si necessaire ─────────────────────────────
+
+def ensure_docker_image(github_token: str, repo: str, timeout_min: int = 25) -> bool:
+    """
+    Verifie si l'image Docker ghcr.io est disponible (dernier run docker-build.yml reussi).
+    Si non, declenche le build et attend sa completion.
+
+    Retourne True si l'image est prete, False si le build a echoue ou depasse le timeout.
+    """
+    import datetime
+
+    DOCKER_WORKFLOW = "docker-build.yml"
+    h = _headers(github_token)
+
+    # ── 1. Verifier si une image existe deja (dernier run reussi) ──────────
+    print("[DOCKER] Verification de l'image Docker...")
+    r = requests.get(
+        f"{GH_API}/repos/{repo}/actions/workflows/{DOCKER_WORKFLOW}/runs"
+        "?status=success&per_page=1",
+        headers=h,
+    )
+    if r.ok:
+        runs = r.json().get("workflow_runs", [])
+        if runs:
+            last_ok = runs[0]
+            ts = last_ok.get("updated_at", "?")
+            print(f"[DOCKER] Image existante — dernier build reussi le {ts[:10]}.")
+            print(f"[DOCKER] OK — image ghcr.io disponible. Build ignore.")
+            return True
+
+    # ── 2. Aucun build reussi : declencher le build ─────────────────────────
+    print("[DOCKER] Aucune image disponible. Declenchement du build Docker...")
+    r = requests.post(
+        f"{GH_API}/repos/{repo}/actions/workflows/{DOCKER_WORKFLOW}/dispatches",
+        headers=h,
+        json={"ref": "main"},
+    )
+    if not r.ok:
+        print(f"[DOCKER] ERREUR declenchement build : {r.status_code} — {r.text[:300]}")
+        return False
+
+    print("[DOCKER] Build declenche. Attente du run...")
+    time.sleep(5)  # laisser GitHub enregistrer le run
+
+    # ── 3. Recuperer l'ID du run le plus recent ─────────────────────────────
+    deadline = time.time() + timeout_min * 60
+    run_id = None
+
+    for _ in range(10):
+        r = requests.get(
+            f"{GH_API}/repos/{repo}/actions/workflows/{DOCKER_WORKFLOW}/runs"
+            "?per_page=1",
+            headers=h,
+        )
+        if r.ok:
+            runs = r.json().get("workflow_runs", [])
+            if runs and runs[0]["status"] != "completed":
+                run_id = runs[0]["id"]
+                print(f"[DOCKER] Run ID : {run_id}")
+                break
+        time.sleep(6)
+
+    if not run_id:
+        print("[DOCKER] Impossible de recuperer le run ID. Verifiez GitHub Actions.")
+        return False
+
+    # ── 4. Polling jusqu'a completion ───────────────────────────────────────
+    print(f"[DOCKER] Build en cours (timeout {timeout_min} min)...")
+    interval = 30
+    while time.time() < deadline:
+        r = requests.get(f"{GH_API}/repos/{repo}/actions/runs/{run_id}", headers=h)
+        if not r.ok:
+            time.sleep(interval)
+            continue
+
+        data       = r.json()
+        status     = data.get("status")
+        conclusion = data.get("conclusion")
+        elapsed    = int(time.time() - time.mktime(
+            time.strptime(data["created_at"], "%Y-%m-%dT%H:%M:%SZ")
+        ))
+        mins, secs = divmod(elapsed, 60)
+        print(f"  [{mins:02d}:{secs:02d}] status={status} conclusion={conclusion or '...'}",
+              flush=True)
+
+        if status == "completed":
+            if conclusion == "success":
+                print("[DOCKER] Build REUSSI — image disponible sur ghcr.io.")
+                return True
+            else:
+                print(f"[DOCKER] Build ECHEC — conclusion={conclusion}.")
+                print(f"[DOCKER] Lien : https://github.com/{repo}/actions/runs/{run_id}")
+                return False
+
+        time.sleep(interval)
+
+    print(f"[DOCKER] TIMEOUT ({timeout_min} min depasse). Build toujours en cours.")
+    print(f"[DOCKER] Lien : https://github.com/{repo}/actions/runs/{run_id}")
+    return False
