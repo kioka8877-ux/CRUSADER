@@ -36,8 +36,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
-          cache-dependency-path: F03_SIGISMUND/CODEBASE/package-lock.json
 
       - name: Install Node dependencies
         working-directory: F03_SIGISMUND/CODEBASE
@@ -160,3 +158,4 @@ jobs:
           name: resultat-final
           path: /tmp/short_render.mp4
           retention-days: 7
+
