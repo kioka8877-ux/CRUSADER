@@ -15,39 +15,58 @@ on:
         required: false
         default: "CrusaderShort"
       total_frames:
-        description: "Nombre total de frames a rendre"
+        description: "Nombre total de frames à rendre"
         required: true
 
+# ─────────────────────────────────────────────────────────────────────────────
+# ARCHITECTURE
+# Etape 1 : PREFLIGHT — 1 job, frames 0-9, timeout 6 min
+#           → Go / No-Go avant de lancer 70 GB de compute
+# Etape 2 : RENDER   — 10 jobs parallèles (needs: preflight)
+#           → ~7 GB RAM chacun = 70 GB total confirmés
+# Etape 3 : CONCAT   — 1 job FFmpeg (needs: render)
+#           → Assemblage final → artifact "resultat-final"
+# ─────────────────────────────────────────────────────────────────────────────
+
 jobs:
-  # ─── 10 workers en parallele ─────────────────────────────────────────────
-  render:
-    name: "Chunk ${{ matrix.chunk }}"
+
+  # ── ETAPE 1 : PREFLIGHT ──────────────────────────────────────────────────────
+  preflight:
+    name: "Preflight (frames 0-9)"
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-    strategy:
-      matrix:
-        chunk: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-      fail-fast: false
+    container:
+      image: ghcr.io/kioka8877-ux/crusader-remotion:latest
+    timeout-minutes: 6
+
+    outputs:
+      go: ${{ steps.verdict.outputs.go }}
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Node.js 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
-      - name: Install Node dependencies
-        working-directory: F03_SIGISMUND/CODEBASE
-        run: npm install
-
-      - name: Install system dependencies
+      - name: Setup — deps + fonts depuis image
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y chromium-browser ffmpeg
+          echo "=== PREFLIGHT RESSOURCES ==="
+          echo "Timestamp : $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          echo "RAM       : $(cat /proc/meminfo | grep MemTotal | awk '{printf "%.1f GB", $2/1024/1024}')"
+          echo "CPU       : $(nproc) cores"
+          echo "Disk      : $(df -h / | tail -1 | awk '{print $4}') libre"
+          echo "Node      : $(node --version)"
+          chromium --version 2>/dev/null || chromium-browser --version 2>/dev/null || echo "chromium: path custom"
+          ffmpeg -version 2>&1 | head -1
+          echo "============================"
 
-      - name: Download assets from GitHub Release
+          # Copier node_modules depuis l'image (pas de npm install)
+          cp -r $CRUSADER_DEPS/node_modules F03_SIGISMUND/CODEBASE/
+          echo "[DEPS] node_modules : OK ($(du -sh F03_SIGISMUND/CODEBASE/node_modules | cut -f1))"
+
+          # Copier les polices embarquées
+          mkdir -p F03_SIGISMUND/CODEBASE/public/fonts
+          cp /crusader-fonts/*.woff2 F03_SIGISMUND/CODEBASE/public/fonts/
+          echo "[FONTS] $(ls F03_SIGISMUND/CODEBASE/public/fonts/ | wc -l) polices disponibles"
+
+      - name: Télécharger assets depuis GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
@@ -56,12 +75,10 @@ jobs:
             --repo "${{ github.repository }}" \
             --dir /tmp/assets
 
-          # Dezipper les images si present
           if [ -f /tmp/assets/images.zip ]; then
             unzip -q /tmp/assets/images.zip -d /tmp/assets/
           fi
 
-          # Copier vers public/ du projet Remotion
           mkdir -p F03_SIGISMUND/CODEBASE/public/images
           cp /tmp/assets/timing.json     F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
           cp /tmp/assets/roadmap.json    F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
@@ -70,34 +87,138 @@ jobs:
             cp -r /tmp/assets/images/. F03_SIGISMUND/CODEBASE/public/images/
           fi
 
-          echo "Assets copies dans public/ :"
+          echo "[ASSETS] Contenu public/ :"
           ls -lh F03_SIGISMUND/CODEBASE/public/
 
-      - name: Calculate frame range
+      - name: Preflight render (frames 0-9)
+        working-directory: F03_SIGISMUND/CODEBASE
+        run: |
+          CHROME=$(which chromium-browser 2>/dev/null || which chromium 2>/dev/null || echo "$CHROMIUM_PATH")
+
+          echo "[PREFLIGHT] Démarrage rendu frames 0-9..."
+          START=$(date +%s)
+
+          npx remotion render \
+            src/index.jsx \
+            "${{ github.event.inputs.composition }}" \
+            /tmp/preflight.mp4 \
+            --gl=swangle \
+            --frames=0-9 \
+            --concurrency=2 \
+            --timeout=20000 \
+            ${CHROME:+--browser-executable=$CHROME}
+
+          END=$(date +%s)
+          echo "[PREFLIGHT] Rendu terminé en $((END - START))s"
+          ls -lh /tmp/preflight.mp4
+
+      - name: Verdict Go / No-Go
+        id: verdict
+        run: |
+          if [ -f /tmp/preflight.mp4 ]; then
+            SIZE=$(stat -c%s /tmp/preflight.mp4)
+            if [ "$SIZE" -gt 50000 ]; then
+              echo "go=true" >> $GITHUB_OUTPUT
+              echo "[PREFLIGHT] ✅ GO — $(du -h /tmp/preflight.mp4 | cut -f1), ${SIZE} octets"
+            else
+              echo "go=false" >> $GITHUB_OUTPUT
+              echo "[PREFLIGHT] ❌ NO-GO — fichier trop petit (${SIZE} octets < 50000)"
+              exit 1
+            fi
+          else
+            echo "go=false" >> $GITHUB_OUTPUT
+            echo "[PREFLIGHT] ❌ NO-GO — fichier absent"
+            exit 1
+          fi
+
+      - name: Upload preflight (validation visuelle)
+        uses: actions/upload-artifact@v4
+        with:
+          name: preflight-chunk
+          path: /tmp/preflight.mp4
+          retention-days: 1
+
+
+  # ── ETAPE 2 : 10 WORKERS EN PARALLELE ────────────────────────────────────────
+  render:
+    name: "Chunk ${{ matrix.chunk }}"
+    needs: preflight
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/kioka8877-ux/crusader-remotion:latest
+    timeout-minutes: 15
+
+    strategy:
+      matrix:
+        chunk: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+      fail-fast: false   # Un chunk raté ne tue pas les autres
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup — deps + fonts + ressources
+        run: |
+          echo "=== WORKER CHUNK ${{ matrix.chunk }} ==="
+          echo "Timestamp : $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          echo "RAM total : $(cat /proc/meminfo | grep MemTotal | awk '{printf "%.1f GB", $2/1024/1024}')"
+          echo "RAM libre : $(cat /proc/meminfo | grep MemAvailable | awk '{printf "%.1f GB", $2/1024/1024}')"
+          echo "CPU       : $(nproc) cores"
+          echo "Disk      : $(df -h / | tail -1 | awk '{print $4}') libre"
+          echo "Node      : $(node --version)"
+          echo "======================================"
+
+          cp -r $CRUSADER_DEPS/node_modules F03_SIGISMUND/CODEBASE/
+          mkdir -p F03_SIGISMUND/CODEBASE/public/fonts
+          cp /crusader-fonts/*.woff2 F03_SIGISMUND/CODEBASE/public/fonts/
+
+      - name: Télécharger assets depuis GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          mkdir -p /tmp/assets
+          gh release download "${{ github.event.inputs.run_id }}" \
+            --repo "${{ github.repository }}" \
+            --dir /tmp/assets
+
+          if [ -f /tmp/assets/images.zip ]; then
+            unzip -q /tmp/assets/images.zip -d /tmp/assets/
+          fi
+
+          mkdir -p F03_SIGISMUND/CODEBASE/public/images
+          cp /tmp/assets/timing.json     F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
+          cp /tmp/assets/roadmap.json    F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
+          cp /tmp/assets/audio_clean.mp3 F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
+          if [ -d /tmp/assets/images ]; then
+            cp -r /tmp/assets/images/. F03_SIGISMUND/CODEBASE/public/images/
+          fi
+
+      - name: Calculer la plage de frames
         id: frames
         run: |
           python3 - <<'PYEOF'
           import os
           chunk = ${{ matrix.chunk }}
           total = ${{ github.event.inputs.total_frames }}
-          n = 10
-          base = total // n
+          n     = 10
+          base  = total // n
           start = chunk * base
-          end = (total - 1) if chunk == n - 1 else (start + base - 1)
+          end   = (total - 1) if chunk == n - 1 else (start + base - 1)
+          count = end - start + 1
           with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
               f.write(f"start={start}\n")
               f.write(f"end={end}\n")
-          print(f"Chunk {chunk} : frames {start} -> {end} ({end - start + 1} frames)")
+              f.write(f"count={count}\n")
+          print(f"[CHUNK {chunk}] Frames {start} → {end} ({count} frames)")
           PYEOF
 
       - name: Render chunk
         working-directory: F03_SIGISMUND/CODEBASE
         run: |
-          CHROME=$(which chromium-browser 2>/dev/null || which chromium 2>/dev/null || echo "")
-          CHROME_ARG=""
-          if [ -n "$CHROME" ]; then
-            CHROME_ARG="--browser-executable=$CHROME"
-          fi
+          CHROME=$(which chromium-browser 2>/dev/null || which chromium 2>/dev/null || echo "$CHROMIUM_PATH")
+          START_TS=$(date +%s)
+
+          echo "[CHUNK ${{ matrix.chunk }}] Début rendu — frames ${{ steps.frames.outputs.start }}-${{ steps.frames.outputs.end }}"
 
           npx remotion render \
             src/index.jsx \
@@ -107,10 +228,13 @@ jobs:
             --frames=${{ steps.frames.outputs.start }}-${{ steps.frames.outputs.end }} \
             --concurrency=2 \
             --timeout=20000 \
-            $CHROME_ARG
+            ${CHROME:+--browser-executable=$CHROME}
 
-          echo "Chunk ${{ matrix.chunk }} rendu OK"
-          ls -lh /tmp/chunk_${{ matrix.chunk }}.mp4
+          END_TS=$(date +%s)
+          ELAPSED=$((END_TS - START_TS))
+          SIZE=$(du -h /tmp/chunk_${{ matrix.chunk }}.mp4 | cut -f1)
+          FPS_REAL=$(echo "${{ steps.frames.outputs.count }} $ELAPSED" | awk '{printf "%.1f", $1/$2}')
+          echo "[CHUNK ${{ matrix.chunk }}] ✅ Terminé en ${ELAPSED}s — ${SIZE} — ${FPS_REAL} fps réels"
 
       - name: Upload chunk artifact
         uses: actions/upload-artifact@v4
@@ -119,45 +243,57 @@ jobs:
           path: /tmp/chunk_${{ matrix.chunk }}.mp4
           retention-days: 1
 
-  # ─── Concat final (attend les 10 chunks) ─────────────────────────────────
+
+  # ── ETAPE 3 : CONCAT FINAL ────────────────────────────────────────────────────
   concat:
     name: "Concat Final"
-    runs-on: ubuntu-latest
     needs: render
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
-      - name: Install FFmpeg
-        run: sudo apt-get install -y ffmpeg
+      - name: Installer FFmpeg
+        run: sudo apt-get install -y --no-install-recommends ffmpeg
 
-      - name: Download all chunks
+      - name: Télécharger tous les chunks
         uses: actions/download-artifact@v4
         with:
           pattern: chunk-*
           merge-multiple: true
           path: /tmp/chunks
 
-      - name: Concat chunks
+      - name: Vérifier les chunks
         run: |
-          echo "Chunks disponibles :"
-          ls -lh /tmp/chunks/
+          echo "[CONCAT] Chunks reçus :"
+          for i in 0 1 2 3 4 5 6 7 8 9; do
+            F="/tmp/chunks/chunk_${i}.mp4"
+            if [ -f "$F" ]; then
+              SIZE=$(du -h "$F" | cut -f1)
+              echo "  chunk_${i}.mp4 — ${SIZE} ✅"
+            else
+              echo "  chunk_${i}.mp4— ABSENT ❌"
+              exit 1
+            fi
+          done
 
-          # Trier numeriquement et construire la liste FFmpeg
+      - name: Assemblage FFmpeg
+        run: |
           for i in 0 1 2 3 4 5 6 7 8 9; do
             echo "file '/tmp/chunks/chunk_${i}.mp4'" >> /tmp/concat_list.txt
           done
 
+          echo "[CONCAT] Liste d'assemblage :"
           cat /tmp/concat_list.txt
 
           ffmpeg -y -f concat -safe 0 -i /tmp/concat_list.txt -c copy /tmp/short_render.mp4
 
-          SIZE=$(du -sh /tmp/short_render.mp4 | cut -f1)
-          echo "Video finale assemblee : $SIZE"
-          ls -lh /tmp/short_render.mp4
+          SIZE=$(du -h /tmp/short_render.mp4 | cut -f1)
+          DURATION=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /tmp/short_render.mp4 2>/dev/null | xargs printf "%.1f")
+          echo "[CONCAT] ✅ short_render.mp4 — ${SIZE} — ${DURATION}s"
 
-      - name: Upload final video
+      - name: Upload vidéo finale
         uses: actions/upload-artifact@v4
         with:
           name: resultat-final
           path: /tmp/short_render.mp4
           retention-days: 7
-
