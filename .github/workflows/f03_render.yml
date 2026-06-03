@@ -233,21 +233,21 @@ jobs:
       - name: Calculer la plage de frames
         id: frames
         run: |
-          python3 - <<'PYEOF'
-          import os
-          chunk = ${{ matrix.chunk }}
-          total = ${{ github.event.inputs.total_frames }}
-          n     = 10
-          base  = total // n
-          start = chunk * base
-          end   = (total - 1) if chunk == n - 1 else (start + base - 1)
-          count = end - start + 1
-          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
-              f.write(f"start={start}\n")
-              f.write(f"end={end}\n")
-              f.write(f"count={count}\n")
-          print(f"[CHUNK {chunk}] Frames {start} → {end} ({count} frames)")
-          PYEOF
+          CHUNK=${{ matrix.chunk }}
+          TOTAL=${{ github.event.inputs.total_frames }}
+          N=10
+          BASE=$((TOTAL / N))
+          START=$((CHUNK * BASE))
+          if [ "$CHUNK" -eq "$((N - 1))" ]; then
+            END=$((TOTAL - 1))
+          else
+            END=$((START + BASE - 1))
+          fi
+          COUNT=$((END - START + 1))
+          echo "start=$START" >> $GITHUB_OUTPUT
+          echo "end=$END"     >> $GITHUB_OUTPUT
+          echo "count=$COUNT" >> $GITHUB_OUTPUT
+          echo "[CHUNK $CHUNK] Frames $START → $END ($COUNT frames)"
 
       - name: Render chunk
         working-directory: F03_SIGISMUND/CODEBASE
