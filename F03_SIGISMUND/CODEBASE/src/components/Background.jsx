@@ -1,7 +1,9 @@
 // src/components/Background.jsx — F03 SIGISMUND
 // Fond permanent : couleur papier + grain animé (film grain) + vignette.
-import React from "react";
-import { AbsoluteFill, useCurrentFrame } from "remotion";
+// Google Fonts est préchargé via delayRender/continueRender pour éviter
+// que Remotion attende indéfiniment un @import réseau pendant le rendu.
+import React, { useEffect, useRef } from "react";
+import { AbsoluteFill, continueRender, delayRender, useCurrentFrame } from "remotion";
 
 // Convertit un nom de police en slug Google Fonts (espaces → +)
 const toGFSlug = (name) => name.trim().replace(/\s+/g, "+");
@@ -18,21 +20,42 @@ const buildGoogleFontsUrl = (fontPrimary, fontAccent) => {
 export const Background = ({ style }) => {
   const frame = useCurrentFrame();
 
+  // ── Google Fonts : chargement contrôlé via delayRender ───────────────────
+  // On crée le handle une seule fois (useRef pour stabilité entre renders).
+  const handleRef = useRef(null);
+  if (handleRef.current === null) {
+    handleRef.current = delayRender("Loading Google Fonts");
+  }
+
+  useEffect(() => {
+    const handle = handleRef.current;
+    const url = buildGoogleFontsUrl(style.font_primary, style.font_accent);
+
+    // Vérifie si le lien existe déjà (idempotent entre renders)
+    const existing = document.querySelector(`link[data-gfonts="${url}"]`);
+    if (existing) {
+      continueRender(handle);
+      return;
+    }
+
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = url;
+    link.setAttribute("data-gfonts", url);
+    // Timeout de sécurité : si Google Fonts ne répond pas en 8s, on continue quand même
+    const fallback = setTimeout(() => continueRender(handle), 8000);
+    link.onload = () => { clearTimeout(fallback); continueRender(handle); };
+    link.onerror = () => { clearTimeout(fallback); continueRender(handle); };
+    document.head.appendChild(link);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // ── Grain animé : seed qui tourne toutes les 3 frames ────────────────────
   const grainSeed = Math.floor(frame / 3) % 64;
   const grainOpacity = style.grain_intensity ?? 0.15;
 
-  // ── Google Fonts dynamique selon les polices choisies dans F02 ────────────
-  const googleFontsCss = `@import url('${buildGoogleFontsUrl(
-    style.font_primary,
-    style.font_accent
-  )}');`;
-
   return (
     <AbsoluteFill>
-      {/* Injection Google Fonts dynamique */}
-      <style>{googleFontsCss}</style>
-
       {/* Couleur de fond */}
       <AbsoluteFill style={{ backgroundColor: style.background_color }} />
 
