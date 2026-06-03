@@ -61,10 +61,8 @@ jobs:
           cp -r $CRUSADER_DEPS/node_modules F03_SIGISMUND/CODEBASE/
           echo "[DEPS] node_modules : OK ($(du -sh F03_SIGISMUND/CODEBASE/node_modules | cut -f1))"
 
-          # Copier les polices embarquées
-          mkdir -p F03_SIGISMUND/CODEBASE/public/fonts
-          cp /crusader-fonts/*.woff2 F03_SIGISMUND/CODEBASE/public/fonts/
-          echo "[FONTS] $(ls F03_SIGISMUND/CODEBASE/public/fonts/ | wc -l) polices disponibles"
+          # Vérification + copie des polices via script — FAIL FAST si police manquante
+          bash F03_SIGISMUND/CODEBASE/crs_f03_verify_fonts.sh F03_SIGISMUND/CODEBASE/public/fonts
 
       - name: Télécharger assets depuis GitHub Release
         env:
@@ -195,8 +193,9 @@ jobs:
           echo "======================================"
 
           cp -r $CRUSADER_DEPS/node_modules F03_SIGISMUND/CODEBASE/
-          mkdir -p F03_SIGISMUND/CODEBASE/public/fonts
-          cp /crusader-fonts/*.woff2 F03_SIGISMUND/CODEBASE/public/fonts/
+
+          # Vérification + copie des polices via script — FAIL FAST si police manquante
+          bash F03_SIGISMUND/CODEBASE/crs_f03_verify_fonts.sh F03_SIGISMUND/CODEBASE/public/fonts
 
       - name: Télécharger assets depuis GitHub Release
         env:
@@ -252,9 +251,14 @@ jobs:
       - name: Render chunk
         working-directory: F03_SIGISMUND/CODEBASE
         run: |
-          mkdir -p public/fonts
-          cp /crusader-fonts/*.woff2 public/fonts/
-          echo "[FONTS] $(ls public/fonts/*.woff2 | wc -l) woff2 confirmes dans public/fonts/"
+          # Assertion finale — les polices doivent être là depuis le setup
+          FONT_COUNT=$(ls public/fonts/*.woff2 2>/dev/null | wc -l)
+          if [ "$FONT_COUNT" -lt 17 ]; then
+            echo "[FAIL] Polices manquantes dans public/fonts/ ($FONT_COUNT/17)"
+            echo "       crs_f03_verify_fonts.sh aurait dû échouer dans Setup"
+            exit 1
+          fi
+          echo "[FONTS] $FONT_COUNT/17 polices confirmées — Render autorisé"
 
           CHROME=$(which chromium-browser 2>/dev/null || which chromium 2>/dev/null || echo "$CHROMIUM_PATH")
           START_TS=$(date +%s)
