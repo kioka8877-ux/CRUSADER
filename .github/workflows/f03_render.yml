@@ -39,7 +39,7 @@ jobs:
 
       - name: Install Node dependencies
         working-directory: F03_SIGISMUND/CODEBASE
-        run: npm ci
+        run: npm install
 
       - name: Install system dependencies
         run: |
