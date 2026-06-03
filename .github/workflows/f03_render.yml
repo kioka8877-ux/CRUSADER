@@ -76,16 +76,14 @@ jobs:
           echo "[ASSETS] Téléchargement depuis : $BASE_URL"
 
           for FNAME in timing.json roadmap.json audio_clean.mp3 images.zip; do
-            HTTP_CODE=$(curl -sL \
-              -H "Authorization: token $GH_TOKEN" \
-              -w "%{http_code}" \
-              -o "/tmp/assets/${FNAME}" \
-              "${BASE_URL}/${FNAME}")
-            if [ "$HTTP_CODE" = "200" ]; then
+            if wget -q \
+              --header="Authorization: token $GH_TOKEN" \
+              -O "/tmp/assets/${FNAME}" \
+              "${BASE_URL}/${FNAME}" 2>/dev/null; then
               SIZE=$(du -h "/tmp/assets/${FNAME}" | cut -f1)
               echo "[ASSETS] ${FNAME} — ${SIZE} ✅"
             else
-              echo "[ASSETS] ${FNAME} — HTTP ${HTTP_CODE} (ignoré)"
+              echo "[ASSETS] ${FNAME} — ECHEC (ignoré)"
               rm -f "/tmp/assets/${FNAME}"
             fi
           done
@@ -196,16 +194,14 @@ jobs:
           BASE_URL="https://github.com/${{ github.repository }}/releases/download/${{ github.event.inputs.run_id }}"
 
           for FNAME in timing.json roadmap.json audio_clean.mp3 images.zip; do
-            HTTP_CODE=$(curl -sL \
-              -H "Authorization: token $GH_TOKEN" \
-              -w "%{http_code}" \
-              -o "/tmp/assets/${FNAME}" \
-              "${BASE_URL}/${FNAME}")
-            if [ "$HTTP_CODE" = "200" ]; then
+            if wget -q \
+              --header="Authorization: token $GH_TOKEN" \
+              -O "/tmp/assets/${FNAME}" \
+              "${BASE_URL}/${FNAME}" 2>/dev/null; then
               SIZE=$(du -h "/tmp/assets/${FNAME}" | cut -f1)
               echo "[ASSETS] ${FNAME} — ${SIZE} ✅"
             else
-              echo "[ASSETS] ${FNAME} — HTTP ${HTTP_CODE} (ignoré)"
+              echo "[ASSETS] ${FNAME} — ECHEC (ignoré)"
               rm -f "/tmp/assets/${FNAME}"
             fi
           done
