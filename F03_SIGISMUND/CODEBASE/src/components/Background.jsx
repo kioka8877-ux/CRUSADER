@@ -1,61 +1,169 @@
-// src/components/Background.jsx — F03 SIGISMUND
-// Fond permanent : couleur papier + grain animé (film grain) + vignette.
-// Google Fonts est préchargé via delayRender/continueRender pour éviter
-// que Remotion attende indéfiniment un @import réseau pendant le rendu.
-import React, { useEffect, useRef } from "react";
-import { AbsoluteFill, continueRender, delayRender, useCurrentFrame } from "remotion";
+// src/components/Background.jsx — F03 SIGISMUND v3
+// Fond permanent : couleur papier + grain animé + vignette.
+//
+// ── Polices locales ──────────────────────────────────────────────────────────
+// PLUS de Google Fonts. PLUS de delayRender. PLUS d'appel réseau.
+// Les fichiers .woff2 sont embarqués dans l'image Docker (/crusader-fonts/)
+// et copiés dans public/fonts/ avant chaque rendu.
+// Le CSS @font-face ci-dessous est synchrone et deterministe.
+//
+// Polices disponibles :
+//   Cinzel, Playfair Display, Lato, Oswald, Roboto Slab, Inter
+//   Arial / Arial Black (système — MS Core Fonts)
+//   Helvetica / Nimbus Sans L (système — fonts-urw-base35)
+// ─────────────────────────────────────────────────────────────────────────────
 
-// Convertit un nom de police en slug Google Fonts (espaces → +)
-const toGFSlug = (name) => name.trim().replace(/\s+/g, "+");
+import React from "react";
+import { AbsoluteFill, useCurrentFrame } from "remotion";
 
-// Construit l'URL Google Fonts pour les deux polices configurées
-const buildGoogleFontsUrl = (fontPrimary, fontAccent) => {
-  const slugs = [...new Set([fontPrimary, fontAccent].map(toGFSlug))];
-  const families = slugs
-    .map((s) => `family=${s}:ital,wght@0,400;0,700;1,400;1,700`)
-    .join("&");
-  return `https://fonts.googleapis.com/css2?${families}&display=swap`;
-};
+// CSS @font-face : référence les woff2 depuis public/fonts/ (servi par Remotion)
+// Syntaxe url('./fonts/...') → résolu par le serveur statique Remotion
+// = http://localhost:PORT/fonts/... → public/fonts/...
+const FONT_FACES = `
+  /* Cinzel — titres & accents stylistiques */
+  @font-face {
+    font-family: 'Cinzel';
+    font-weight: 400;
+    font-style: normal;
+    font-display: block;
+    src: url('./fonts/Cinzel-Regular.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Cinzel';
+    font-weight: 700;
+    font-style: normal;
+    font-display: block;
+    src: url('./fonts/Cinzel-Bold.woff2') format('woff2');
+  }
+
+  /* Playfair Display — sous-titres élégants */
+  @font-face {
+    font-family: 'Playfair Display';
+    font-weight: 400;
+    font-style: normal;
+    font-display: block;
+    src: url('./fonts/PlayfairDisplay-Regular.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Playfair Display';
+    font-weight: 700;
+    font-style: normal;
+    font-display: block;
+    src: url('./fonts/PlayfairDisplay-Bold.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Playfair Display';
+    font-weight: 400;
+    font-style: italic;
+    font-display: block;
+    src: url('./fonts/PlayfairDisplay-Italic.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Playfair Display';
+    font-weight: 700;
+    font-style: italic;
+    font-display: block;
+    src: url('./fonts/PlayfairDisplay-BoldItalic.woff2') format('woff2');
+  }
+
+  /* Lato — corps de texte, lisibilité */
+  @font-face {
+    font-family: 'Lato';
+    font-weight: 400;
+    font-style: normal;
+    font-display: block;
+    src: url('./fonts/Lato-Regular.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Lato';
+    font-weight: 700;
+    font-style: normal;
+    font-display: block;
+    src: url('./fonts/Lato-Bold.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Lato';
+    font-weight: 400;
+    font-style: italic;
+    font-display: block;
+    src: url('./fonts/Lato-Italic.woff2') format('woff2');
+  }
+
+  /* Oswald — condensé, impact visuel */
+  @font-face {
+    font-family: 'Oswald';
+    font-weight: 400;
+    font-style: normal;
+    font-display: block;
+    src: url('./fonts/Oswald-Regular.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Oswald';
+    font-weight: 600;
+    font-style: normal;
+    font-display: block;
+    src: url('./fonts/Oswald-SemiBold.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Oswald';
+    font-weight: 700;
+    font-style: normal;
+    font-display: block;
+    src: url('./fonts/Oswald-Bold.woff2') format('woff2');
+  }
+
+  /* Roboto Slab — serif moderne */
+  @font-face {
+    font-family: 'Roboto Slab';
+    font-weight: 400;
+    font-style: normal;
+    font-display: block;
+    src: url('./fonts/RobotoSlab-Regular.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Roboto Slab';
+    font-weight: 700;
+    font-style: normal;
+    font-display: block;
+    src: url('./fonts/RobotoSlab-Bold.woff2') format('woff2');
+  }
+
+  /* Inter — alternative moderne Arial / Arial Black */
+  @font-face {
+    font-family: 'Inter';
+    font-weight: 400;
+    font-style: normal;
+    font-display: block;
+    src: url('./fonts/Inter-Regular.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-weight: 700;
+    font-style: normal;
+    font-display: block;
+    src: url('./fonts/Inter-Bold.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-weight: 900;
+    font-style: normal;
+    font-display: block;
+    src: url('./fonts/Inter-Black.woff2') format('woff2');
+  }
+`;
 
 export const Background = ({ style }) => {
   const frame = useCurrentFrame();
 
-  // ── Google Fonts : chargement contrôlé via delayRender ───────────────────
-  // On crée le handle une seule fois (useRef pour stabilité entre renders).
-  const handleRef = useRef(null);
-  if (handleRef.current === null) {
-    handleRef.current = delayRender("Loading Google Fonts");
-  }
-
-  useEffect(() => {
-    const handle = handleRef.current;
-    const url = buildGoogleFontsUrl(style.font_primary, style.font_accent);
-
-    // Vérifie si le lien existe déjà (idempotent entre renders)
-    const existing = document.querySelector(`link[data-gfonts="${url}"]`);
-    if (existing) {
-      continueRender(handle);
-      return;
-    }
-
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = url;
-    link.setAttribute("data-gfonts", url);
-    // Timeout de sécurité : si Google Fonts ne répond pas en 8s, on continue quand même
-    const fallback = setTimeout(() => continueRender(handle), 8000);
-    link.onload = () => { clearTimeout(fallback); continueRender(handle); };
-    link.onerror = () => { clearTimeout(fallback); continueRender(handle); };
-    document.head.appendChild(link);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // ── Grain animé : seed qui tourne toutes les 3 frames ────────────────────
-  const grainSeed = Math.floor(frame / 3) % 64;
+  // Grain animé : seed change toutes les 3 frames → effet pellicule naturel
+  const grainSeed    = Math.floor(frame / 3) % 64;
   const grainOpacity = style.grain_intensity ?? 0.15;
 
   return (
     <AbsoluteFill>
+      {/* @font-face — injection synchrone, zéro réseau */}
+      <style>{FONT_FACES}</style>
+
       {/* Couleur de fond */}
       <AbsoluteFill style={{ backgroundColor: style.background_color }} />
 
