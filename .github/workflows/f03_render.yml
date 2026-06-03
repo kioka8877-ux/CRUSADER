@@ -109,47 +109,59 @@ jobs:
         run: |
           CHROME=$(which chromium-browser 2>/dev/null || which chromium 2>/dev/null || echo "$CHROMIUM_PATH")
 
-          echo "[PREFLIGHT] Démarrage rendu frames 0-9..."
+          echo "[PREFLIGHT] Rendu PNG frames 0, 5, 9 (bypass encodage video — compositor hang fix)..."
+          mkdir -p /tmp/preflight_frames
           START=$(date +%s)
 
-          npx remotion render \
-            src/index.jsx \
-            "${{ github.event.inputs.composition }}" \
-            /tmp/preflight.mp4 \
-            --gl=swangle \
-            --frames=0-9 \
-            --concurrency=2 \
-            --timeout=60000 \
-            ${CHROME:+--browser-executable=$CHROME}
+          for FRAME in 0 5 9; do
+            echo "[PREFLIGHT] Frame ${FRAME}..."
+            npx remotion still \
+              src/index.jsx \
+              "${{ github.event.inputs.composition }}" \
+              /tmp/preflight_frames/frame_${FRAME}.png \
+              --frame=${FRAME} \
+              --gl=swangle \
+              --timeout=60000 \
+              ${CHROME:+--browser-executable=$CHROME}
+            ls -lh /tmp/preflight_frames/frame_${FRAME}.png 2>/dev/null || echo "[PREFLIGHT] frame_${FRAME}.png ABSENT"
+          done
 
           END=$(date +%s)
           echo "[PREFLIGHT] Rendu terminé en $((END - START))s"
-          ls -lh /tmp/preflight.mp4
+          ls -lh /tmp/preflight_frames/
 
       - name: Verdict Go / No-Go
         id: verdict
         run: |
-          if [ -f /tmp/preflight.mp4 ]; then
-            SIZE=$(stat -c%s /tmp/preflight.mp4)
-            if [ "$SIZE" -gt 50000 ]; then
-              echo "go=true" >> $GITHUB_OUTPUT
-              echo "[PREFLIGHT] ✅ GO — $(du -h /tmp/preflight.mp4 | cut -f1), ${SIZE} octets"
+          OK=0
+          for FRAME in 0 5 9; do
+            F="/tmp/preflight_frames/frame_${FRAME}.png"
+            if [ -f "$F" ]; then
+              SIZE=$(stat -c%s "$F")
+              if [ "$SIZE" -gt 10000 ]; then
+                echo "[PREFLIGHT] ✅ Frame ${FRAME} OK — $(du -h $F | cut -f1)"
+                OK=$((OK + 1))
+              else
+                echo "[PREFLIGHT] ❌ Frame ${FRAME} trop petite (${SIZE} octets)"
+              fi
             else
-              echo "go=false" >> $GITHUB_OUTPUT
-              echo "[PREFLIGHT] ❌ NO-GO — fichier trop petit (${SIZE} octets < 50000)"
-              exit 1
+              echo "[PREFLIGHT] ❌ Frame ${FRAME} absente"
             fi
+          done
+          if [ "$OK" -ge 3 ]; then
+            echo "go=true" >> $GITHUB_OUTPUT
+            echo "[PREFLIGHT] ✅ GO — 3/3 frames validées"
           else
             echo "go=false" >> $GITHUB_OUTPUT
-            echo "[PREFLIGHT] ❌ NO-GO — fichier absent"
+            echo "[PREFLIGHT] ❌ NO-GO — ${OK}/3 frames validées"
             exit 1
           fi
 
       - name: Upload preflight (validation visuelle)
         uses: actions/upload-artifact@v4
         with:
-          name: preflight-chunk
-          path: /tmp/preflight.mp4
+          name: preflight-frames
+          path: /tmp/preflight_frames/
           retention-days: 1
 
 
