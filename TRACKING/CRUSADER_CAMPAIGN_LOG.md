@@ -22,7 +22,7 @@
 
 ---
 
-## ⚔ VICTORIA AETERNA
+## ⚔ VICTORIA AETERNA — PHASE DE TEST
 
 **2026-05-27 — AU NOM DE L'EMPEREUR**
 
@@ -35,9 +35,24 @@ Chaque frégate a accompli sa mission. La flotte est prête à la croisade.
 
 ---
 
-## CAMP_02 — EN CROISADE
+## ⚔ VICTORIA AETERNA — CAMP_02
 
-**2026-05-28 — PRODUCTION RÉELLE**
+**2026-06-04 — AU NOM DE L'EMPEREUR**
+
+La campagne CAMP_02 est officiellement terminée. Pipeline complet exécuté en production réelle :
+F01A → F01B → F02 → F03 (GitHub Actions, 10 workers, 4m12s) → F04 → youtube_short.mp4 livré.
+
+Le camouflage de F04 est parfait. La vidéo est propre, sans empreinte d'outil, prête à l'upload YouTube.
+
+Correctif final appliqué post-validation : tag `encoder=Lavf` neutralisé, QA renforcé (`lavf`/`lavc` dans SUSPICIOUS_TAGS).
+
+*"No pity. No remorse. No fear."* — Black Templars
+
+---
+
+## CAMP_02 — TERMINÉE
+
+**2026-05-28 → 2026-06-04 — PRODUCTION RÉELLE**
 
 | Étape | Statut | Résultat |
 |-------|--------|---------|
@@ -45,7 +60,7 @@ Chaque frégate a accompli sa mission. La flotte est prête à la croisade.
 | F01-B GRIMALDUS | VALIDÉE | timing.json — 531 frames, 46 mots, 5 forts, EN 98.54% |
 | F02 CASTELLAN | VALIDÉE | roadmap.json — 531 frames, vertical 1080×1920, validated_by_magos |
 | F03 SIGISMUND | VALIDÉE | short_render.mp4 — 531 frames, 17.7s @ 30fps, 16 MB, 10 workers GitHub Actions, 4m12s |
-| F04 HELBRECHT | EN ATTENTE | — |
+| F04 HELBRECHT | VALIDÉE | youtube_short.mp4 — 14.1 MB, 1080×1920, 17.6s, H264/AAC, camouflage PASS, QA PASS |
 
 ---
 
@@ -93,6 +108,7 @@ F04 HELBRECHT  → youtube_short.mp4 ──► Téléchargement opérateur
 | 2026-05-26 | Chunking parallèle Modal (3 workers) | 3280 frames découpées en 3 chunks de ~1093 frames, rendu parallèle |
 | 2026-05-27 | F04 v2 : re-encode CRF18 + camouflage | Effacement fingerprints Remotion/OpenCV, loudnorm -14 LUFS, format auto-détecté |
 | 2026-06-04 | Migration Modal → GitHub Actions pour F03 | Modal = CB requise après free tier. GHA = 2000 min/mois gratuit, 10 workers parallèles, zero CB — CAMP_02 validé en 4m12s |
+| 2026-06-04 | F04 : `-metadata encoder=` ajouté + `lavf`/`lavc` dans SUSPICIOUS_TAGS | Tag Lavf résiduel neutralisé post-validation CAMP_02 — camouflage désormais 100% |
 
 ---
 
@@ -123,6 +139,9 @@ F04 HELBRECHT  → youtube_short.mp4 ──► Téléchargement opérateur
 | 2026-06-04 | F03 | MIGRATION | Modal remplacé par GitHub Actions — f03_render.yml (10 workers, gratuit, aucune CB) — crs_f03_gh_trigger.py refactorisé | ✓ |
 | 2026-06-04 | F03 | CORRECTIF | CRS_F03.ipynb — suppression final_video_bytes redondant (Step 9 déjà sauvegarde sur Drive, Step 10 converti en vérification) | ✓ |
 | 2026-06-04 | F03 | PROD RÉEL | RÉUSSI — CAMP_02 : short_render.mp4 (16 MB, 531 frames, 17.7s @ 30fps), 10 workers GHA, 4m12s, Preflight+10 chunks+Concat SUCCESS | ✓ |
+| 2026-06-04 | F04 | PROD RÉEL | RÉUSSI — CAMP_02 : youtube_short.mp4 (14.1 MB, 1080×1920, 17.6s, H264 CRF18 / AAC 48kHz), camouflage PASS, QA pré/post PASS | ✓ |
+| 2026-06-04 | F04 | CORRECTIF | `-metadata encoder=` ajouté à la commande FFmpeg — tag Lavf résiduel neutralisé. `lavf`/`lavc` ajoutés dans SUSPICIOUS_TAGS | ✓ |
+| 2026-06-04 | PIPELINE | CLÔTURE CAMP_02 | CAMP_02 officiellement terminée — Pipeline F01A→F01B→F02→F03→F04 validé en production réelle. Victoria Aeterna. | ✓ |
 
 ---
 
@@ -149,8 +168,9 @@ F04 HELBRECHT  → youtube_short.mp4 ──► Téléchargement opérateur
 ## F04 — HELBRECHT
 - CRS_F04.ipynb, crs_f04_helbrecht.py, README_DEV.md
 - IN: short_render.mp4, timing.json | OUT: youtube_short.mp4 ou youtube_long.mp4
-- Test 2026-05-27: RÉUSSI — youtube_short.mp4 (36.9 MB, 1080×1920, 109.5s), H264/AAC, camouflage total, QA PASS
-- CAMP_02: EN ATTENTE — short_render.mp4 prêt pour transit F03→F04
+- Test 2026-05-27 (CAMP_01): RÉUSSI — youtube_short.mp4 (36.9 MB, 1080×1920, 109.5s), H264/AAC, camouflage total, QA PASS
+- Prod réelle 2026-06-04 (CAMP_02): RÉUSSI — youtube_short.mp4 (14.1 MB, 1080×1920, 17.6s), camouflage PASS, QA PASS
+- Correctif post-CAMP_02: tag encoder Lavf neutralisé (`-metadata encoder=`), SUSPICIOUS_TAGS renforcé
 
 ## METAPROMPTS
 - META_01_SCRIPT.md — Script viral via Claude
