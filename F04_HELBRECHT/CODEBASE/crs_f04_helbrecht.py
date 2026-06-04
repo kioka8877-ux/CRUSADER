@@ -158,7 +158,7 @@ def output_filename(fmt: str) -> str:
 
 SUSPICIOUS_TAGS = ("remotion", "opencv", "python", "openai", "runway",
                    "stable-diffusion", "suno", "udio", "elevenlabs",
-                   "whisper", "ffmpeg-python", "moviepy")
+                   "whisper", "ffmpeg-python", "moviepy", "lavf", "lavc")
 
 def qa_gate(info: dict, meta: dict, stage: str) -> list:
     """
@@ -234,6 +234,7 @@ def camouflage(input_path: str, output_path: str, meta: dict) -> bool:
         "ffmpeg", "-y",
         "-i", input_path,
         "-map_metadata", "-1",
+        "-metadata", "encoder=",
         # Vidéo
         "-c:v", "libx264",
         "-crf", "18",
