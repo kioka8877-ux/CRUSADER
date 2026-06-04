@@ -65,7 +65,8 @@ Règle absolue : Aucun transfert sans validation CUSTOS aux deux extrémités.
 | 8 | 2026-05-28 | CAMP_02  | F01B OUT | F02 IN     | timing.json (46 mots, 5 forts, 531f, 17.7s, EN) | OK         | OK        | VALIDÉ  |
 | 9 | 2026-06-04 | CAMP_02  | F02 OUT  | F03 IN     | roadmap.json (531 frames, vertical 1080×1920, validated_by_magos) | OK | OK | VALIDÉ  |
 | 10 | 2026-06-04 | CAMP_02 | F01+SHARED | F03 IN  | timing.json + audio_clean.mp3 + images.zip (via GitHub Release automatique) | OK | OK | VALIDÉ  |
-| 11 | —          | CAMP_02  | F03 OUT | F04 IN      | short_render.mp4 (16 MB, 531f, 17.7s) — EN ATTENTE transit | — | — | EN ATTENTE |
+| 11 | 2026-06-04 | CAMP_02 | F03 OUT | F04 IN      | short_render.mp4 (16 MB, 531f, 17.7s)          | OK         | OK        | VALIDÉ  |
+| 12 | 2026-06-04 | CAMP_02 | F04 OUT | OPÉRATEUR   | youtube_short.mp4 (14.1 MB, 17.6s, 1080×1920, H264/AAC, QA PASS) | OK | — | LIVRÉ |
 
 ---
 
