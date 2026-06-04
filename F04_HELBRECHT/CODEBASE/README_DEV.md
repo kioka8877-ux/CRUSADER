@@ -1,6 +1,9 @@
 # F04 HELBRECHT v2 — README DEV
 ## Camouflage universel + Finalisation YouTube
 
+> **SCELLÉE — 2026-05-27 (CAMP_01) | CAMP_02 VALIDÉE — 2026-06-04**
+> *"No pity. No remorse. No fear."* — Black Templars
+
 ---
 
 ## Rôle
@@ -97,6 +100,7 @@ Commande générée :
 ffmpeg -y \
   -i short_render.mp4 \
   -map_metadata -1 \
+  -metadata encoder= \
   -c:v libx264 -crf 18 -preset medium \
   -profile:v high -level 4.0 \
   -g 60 -keyint_min 60 \
@@ -111,6 +115,7 @@ ffmpeg -y \
 
 **Ce que ça efface :**
 - `-map_metadata -1` : wipe total des tags container (encoder, software, encoding_tool, creation_time, etc.)
+- `-metadata encoder=` : neutralise le tag `Lavf` réinjecté automatiquement par FFmpeg lors du muxing
 - Re-encode H.264 : efface les fingerprints du stream vidéo (Remotion, OpenCV, etc.)
 - Re-encode AAC : efface les fingerprints du stream audio (ElevenLabs, Suno, etc.)
 
@@ -130,6 +135,9 @@ Si non spécifié : date du jour.
 
 ### 5. QA post-camouflage
 Vérifie en plus : aucun tag suspect résiduel, codec H.264, audio AAC 48kHz.
+
+Liste complète des tags suspects détectés : `remotion`, `opencv`, `python`, `openai`, `runway`,
+`stable-diffusion`, `suno`, `udio`, `elevenlabs`, `whisper`, `ffmpeg-python`, `moviepy`, `lavf`, `lavc`.
 
 ### 6. Chapters YouTube
 Si `timing.json` contient un tableau `chapters`, génère le texte formaté :
@@ -178,10 +186,20 @@ Pour l'utiliser dans un projet différent (immobilier, fitness, etc.) :
 
 ---
 
+## Historique des versions
+
+| Date | Version | Changement |
+|------|---------|------------|
+| 2026-05-21 | v1 | Remux FFmpeg `-c copy` — rapide mais empreinte Remotion intacte |
+| 2026-05-27 | v2 | Re-encode CRF18 + camouflage complet + loudnorm -14 LUFS + détection format auto. CAMP_01 validée. |
+| 2026-06-04 | v2.1 | `-metadata encoder=` ajouté — neutralise le tag `Lavf` résiduel. `lavf`/`lavc` ajoutés dans SUSPICIOUS_TAGS. CAMP_02 validée. |
+
+---
+
 ## Notes de production
 
 - Re-encode CRF18 = qualité visuelle quasi-lossless mais fingerprint effacé.
 - Sur Colab CPU, compter ~2–8 min selon durée vidéo. GPU non requis.
 - `loudnorm` single-pass : précision suffisante pour production. Double-pass possible manuellement si besoin.
-- `final_master.mp4` de la v1 est remplacé par `youtube_short.mp4` / `youtube_long.mp4`.
+- Fichier de sortie : `youtube_short.mp4` (vertical) ou `youtube_long.mp4` (horizontal) — détection automatique par dimensions.
 - Aucune frégate ne dépend de F04 — c'est le terminus du pipeline.
