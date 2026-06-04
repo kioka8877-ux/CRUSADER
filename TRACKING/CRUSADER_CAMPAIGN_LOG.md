@@ -43,8 +43,8 @@ Chaque frégate a accompli sa mission. La flotte est prête à la croisade.
 |-------|--------|---------|
 | F01-A CASTELLAN-AUDIO | VALIDÉE | audio_clean.mp3 — 16.7s, 9 silences supprimés |
 | F01-B GRIMALDUS | VALIDÉE | timing.json — 531 frames, 46 mots, 5 forts, EN 98.54% |
-| F02 CASTELLAN | EN ATTENTE | — |
-| F03 SIGISMUND | EN ATTENTE | — |
+| F02 CASTELLAN | VALIDÉE | roadmap.json — 531 frames, vertical 1080×1920, validated_by_magos |
+| F03 SIGISMUND | VALIDÉE | short_render.mp4 — 531 frames, 17.7s @ 30fps, 16 MB, 10 workers GitHub Actions, 4m12s |
 | F04 HELBRECHT | EN ATTENTE | — |
 
 ---
@@ -92,6 +92,7 @@ F04 HELBRECHT  → youtube_short.mp4 ──► Téléchargement opérateur
 | 2026-05-22 | Unification SCRIPT_DIR → /content/crusader | Cohérence inter-frégates, F02/F03/F04 alignés sur F01 |
 | 2026-05-26 | Chunking parallèle Modal (3 workers) | 3280 frames découpées en 3 chunks de ~1093 frames, rendu parallèle |
 | 2026-05-27 | F04 v2 : re-encode CRF18 + camouflage | Effacement fingerprints Remotion/OpenCV, loudnorm -14 LUFS, format auto-détecté |
+| 2026-06-04 | Migration Modal → GitHub Actions pour F03 | Modal = CB requise après free tier. GHA = 2000 min/mois gratuit, 10 workers parallèles, zero CB — CAMP_02 validé en 4m12s |
 
 ---
 
@@ -119,6 +120,9 @@ F04 HELBRECHT  → youtube_short.mp4 ──► Téléchargement opérateur
 | 2026-05-28 | F01A | CORRECTIF | CRS_F01A.ipynb — Modes CUSTOS inversés corrigés (check-in ↔ check-out remis dans l'ordre) | ✓ |
 | 2026-05-28 | F01A | PROD RÉEL | RÉUSSI — CAMP_02 : audio_raw.mp3 (36.3s) → audio_clean.mp3 (16.7s), 9 silences supprimés (19.58s), CUSTOS OK | ✓ |
 | 2026-05-28 | F01B | PROD RÉEL | RÉUSSI — CAMP_02 : timing.json produit : 46 mots, 5 mots forts, 3 segments, 531 frames (17.7s @ 30fps), EN 98.54%, CUSTOS OK | ✓ |
+| 2026-06-04 | F03 | MIGRATION | Modal remplacé par GitHub Actions — f03_render.yml (10 workers, gratuit, aucune CB) — crs_f03_gh_trigger.py refactorisé | ✓ |
+| 2026-06-04 | F03 | CORRECTIF | CRS_F03.ipynb — suppression final_video_bytes redondant (Step 9 déjà sauvegarde sur Drive, Step 10 converti en vérification) | ✓ |
+| 2026-06-04 | F03 | PROD RÉEL | RÉUSSI — CAMP_02 : short_render.mp4 (16 MB, 531 frames, 17.7s @ 30fps), 10 workers GHA, 4m12s, Preflight+10 chunks+Concat SUCCESS | ✓ |
 
 ---
 
@@ -133,17 +137,20 @@ F04 HELBRECHT  → youtube_short.mp4 ──► Téléchargement opérateur
 - CRS_F02.ipynb, crs_f02_castellan.py, crs_f02_viewer.html, README_DEV.md
 - IN: timing.json, images/ | OUT: roadmap.json
 - Test 2026-05-22: RÉUSSI — 43 segments, 1080×1920, 7 images, validated_by_magos: true
+- Prod réelle CAMP_02: RÉUSSI — roadmap.json 531 frames, vertical, consommé avec succès par F03
 
 ## F03 — SIGISMUND
-- CRS_F03.ipynb, crs_f03_sigismund.py, package.json, remotion.config.js, src/ (5 JSX files), README_DEV.md
+- CRS_F03.ipynb, crs_f03_sigismund.py, crs_f03_gh_trigger.py, package.json, remotion.config.js, src/ (JSX), f03_render.yml
 - IN: timing.json, roadmap.json, audio_clean.mp3, images/ | OUT: short_render.mp4
-- Test 2026-05-26: RÉUSSI — 3280 frames, 3 Modal chunks (17.8+14.4+13.1 MB), 45.4 MB final
+- Test 2026-05-26 (CAMP_01 — Modal): RÉUSSI — 3280 frames, 3 workers, 45.4 MB final
+- Prod réelle 2026-06-04 (CAMP_02 — GitHub Actions): RÉUSSI — 531 frames, 10 workers, 16 MB, 4m12s
 - Anomalies non bloquantes v2: flashs blancs aux transitions, Ken Burns peu perceptible
 
 ## F04 — HELBRECHT
 - CRS_F04.ipynb, crs_f04_helbrecht.py, README_DEV.md
 - IN: short_render.mp4, timing.json | OUT: youtube_short.mp4 ou youtube_long.mp4
 - Test 2026-05-27: RÉUSSI — youtube_short.mp4 (36.9 MB, 1080×1920, 109.5s), H264/AAC, camouflage total, QA PASS
+- CAMP_02: EN ATTENTE — short_render.mp4 prêt pour transit F03→F04
 
 ## METAPROMPTS
 - META_01_SCRIPT.md — Script viral via Claude
