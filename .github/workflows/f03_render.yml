@@ -315,7 +315,19 @@ jobs:
 
     steps:
       - name: Installer FFmpeg
-        run: sudo apt-get install -y --no-install-recommends ffmpeg
+        run: |
+          # ── FIX(F03): ffmpeg est PRÉ-INSTALLÉ sur ubuntu-latest/24.04 ──────────────
+          # Cause atomique du bug exit 100 : `apt-get install` sans `apt-get update`
+          # → cache apt obsolète → 404 sur la dépendance libcaca0 → apt abandonne.
+          # Solution : utiliser le binaire déjà présent ; apt seulement en fallback.
+          if command -v ffmpeg >/dev/null 2>&1; then
+            echo "[FFMPEG] ✅ Déjà présent : $(ffmpeg -version 2>&1 | head -1)"
+          else
+            echo "[FFMPEG] ⚠️ Absent — installation via apt (update d'abord, --fix-missing)..."
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends --fix-missing ffmpeg
+          fi
+          ffmpeg -version | head -1
 
       - name: Télécharger audio depuis GitHub Release
         env:
