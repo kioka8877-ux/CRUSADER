@@ -1,5 +1,5 @@
 # META_01 — SCRIPT
-## Metaprompt CRUSADER — Génération de Script Viral
+## Metaprompt CRUSADER — Génération de Script Viral + Métadonnées
 
 > **Outil cible : Claude (claude-sonnet ou claude-opus)**
 > Colle ce prompt dans une conversation Claude, en remplissant les variables entre `« »`.
@@ -11,7 +11,7 @@
 1. Remplis les 5 variables ci-dessous
 2. Colle les 3 scripts de référence dans les blocs prévus
 3. Envoie le tout à Claude
-4. Récupère le script généré → enregistre ta voix off → `audio_clean.mp3`
+4. Récupère le script + les métadonnées → enregistre ta voix off → `audio_clean.mp3`
 
 ---
 
@@ -71,9 +71,42 @@ Génère un script sur le sujet demandé en reproduisant exactement ces patterns
 5. **Pas de ponctuation complexe** : pas de guillemets, pas de tirets longs. Virgules et points uniquement.
 6. **CTA final** : termine par un appel à l'action naturel (like, commentaire, abonnement) intégré dans le ton du script — jamais en rupture.
 
+**Étape 3 — Génération des métadonnées**
+
+Après le script, génère le bloc métadonnées YouTube/Reels selon les règles suivantes.
+
+**Titre :**
+- Maximum 45 caractères
+- Viral, percutant, reprend l'angle central du script
+- 1 emoji pertinent en fin de titre
+
+**Hashtags :**
+- Exactement 3 hashtags
+- 2 spécifiques au sujet traité
+- 1 hashtag récurrent de chaîne : `#animation`
+
+**Description — 4 blocs dans l'ordre suivant :**
+
+Bloc 1 — Accroche virale (2-3 lignes max) : reformule l'angle du script en texte de description, sans répéter mot pour mot l'accroche vocale.
+
+Bloc 2 — Bloc qualité et propriété (reproduire EXACTEMENT ce texte, mot pour mot) :
+---
+Chaque vidéo publiée sur cette chaîne est le résultat d'une enquête personnelle et minutieuse. Les faits, données et informations présentés ont été rigoureusement vérifiés et recoupés avant toute mise en production.
+
+Les animations sont intégralement conçues et réalisées par notre équipe — aucun template, aucune séquence générée en masse. Chaque mouvement, chaque plan, est pensé spécifiquement pour le sujet traité.
+
+Ce contenu est la propriété intellectuelle exclusive de cette chaîne. Toute reproduction, rediffusion ou réutilisation — partielle ou totale — sans autorisation écrite préalable est strictement interdite.
+---
+
+Bloc 3 — Hashtags en ligne : les 3 hashtags répétés sur une seule ligne.
+
+Bloc 4 — Mots-clés SEO : 10 à 15 mots-clés nus séparés par des espaces, liés au sujet, au format et à l'animation.
+
+---
+
 **FORMAT DE SORTIE ATTENDU :**
 
-Produis uniquement le script final, sans commentaire ni explication. Structure exacte :
+Produis uniquement le script puis les métadonnées, sans commentaire ni explication. Structure exacte :
 
 ---
 [ACCROCHE]
@@ -88,9 +121,28 @@ Phrase avec [mot_clé] important.
 
 [CHUTE / CTA]
 Dernière phrase.
+
 ---
 
-Aucun texte avant ou après le script. Uniquement le script formaté.
+[MÉTADONNÉES]
+
+TITRE : ...
+HASHTAGS : #tag1 #tag2 #animation
+DESCRIPTION :
+Accroche 2-3 lignes reformulant l'angle central.
+
+Chaque vidéo publiée sur cette chaîne est le résultat d'une enquête personnelle et minutieuse. Les faits, données et informations présentés ont été rigoureusement vérifiés et recoupés avant toute mise en production.
+
+Les animations sont intégralement conçues et réalisées par notre équipe — aucun template, aucune séquence générée en masse. Chaque mouvement, chaque plan, est pensé spécifiquement pour le sujet traité.
+
+Ce contenu est la propriété intellectuelle exclusive de cette chaîne. Toute reproduction, rediffusion ou réutilisation — partielle ou totale — sans autorisation écrite préalable est strictement interdite.
+
+#tag1 #tag2 #animation
+
+mots-clés seo mot1 mot2 mot3 mot4 mot5 mot6 mot7 mot8 mot9 mot10
+---
+
+Aucun texte avant ou après ces deux blocs. Uniquement le script et les métadonnées formatés.
 ```
 
 ---
@@ -99,5 +151,7 @@ Aucun texte avant ou après le script. Uniquement le script formaté.
 
 - **Durée vs nombre de lignes** : environ 2-3 secondes par ligne à débit normal. Pour 60s → 20-25 lignes. Pour 90s → 30-40 lignes.
 - **Les `[mots_forts]`** sont directement lus par le pipeline CRUSADER (F02/F03). Ne les modifie pas après génération.
+- **Le bloc qualité (Bloc 2)** est fixe et identique sur toutes les vidéos — c'est intentionnel. Il pose la signature de la chaîne.
 - **Si le script ne convient pas** : dis à Claude "Garde exactement la même structure mais change le ton vers [plus direct / plus pédagogue / plus percutant]".
+- **Les métadonnées sont prêtes à copier-coller** directement dans YouTube Studio / TikTok / Instagram sans retouche.
 - **Étape suivante** : enregistre ta voix off en lisant ce script → sauvegarde en `audio_clean.mp3` → dépose dans `DRIVE_CRUSADER/F01_GRIMALDUS/IN/`.
