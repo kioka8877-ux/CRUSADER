@@ -27,7 +27,7 @@ Tu es un expert en création de contenu viral pour les plateformes courtes (TikT
 - **Sujet** : « SUJET »
 - **Durée cible** : « DURÉE » secondes
 - **Langue** : « LANGUE »
-- **Format** : « FORMAT » (SHORT vertical 9:16 | LONG horizontal 16:9)
+- **Format** : « FORMAT » — SHORT (vertical 9:16, ≤ 60s) | LONG (horizontal 16:9, > 60s)
 
 ---
 
@@ -60,7 +60,12 @@ Avant de générer quoi que ce soit, analyse les 3 scripts et extrait en silence
 
 **Étape 2 — Génération du script**
 
-Génère un script sur le sujet demandé en reproduisant exactement ces patterns, adapté au format et à la durée cibles.
+Le format conditionne la narration :
+
+- **SHORT** : accroche dans les 3 premières secondes, rythme haché, chaque ligne doit forcer à rester. Pas de développement long — chaque phrase est une mini-révélation.
+- **LONG** : accroche forte mais tu peux te permettre une montée progressive. Le développement installe une vraie démonstration. La chute doit récompenser l'attention.
+
+Génère un script sur le sujet demandé en reproduisant exactement les patterns extraits, adapté au format et à la durée cibles.
 
 **RÈGLES OBLIGATOIRES DE FORMAT :**
 
@@ -73,12 +78,12 @@ Génère un script sur le sujet demandé en reproduisant exactement ces patterns
 
 **Étape 3 — Génération des métadonnées**
 
-Après le script, génère le bloc métadonnées YouTube/Reels selon les règles suivantes.
+Après le script, génère le bloc métadonnées selon les règles suivantes.
 
-**Titre :**
-- Maximum 45 caractères
-- Viral, percutant, reprend l'angle central du script
-- 1 emoji pertinent en fin de titre
+**Titre — règles selon le format :**
+
+- **SHORT** : titre choc. Question brutale, affirmation paradoxale ou chiffre qui claque. Donne envie de cliquer en moins de 2 secondes. 1 emoji en fin. Maximum 45 caractères.
+- **LONG** : titre avec angle viral mais qui peut être une promesse ou une révélation progressive. Légèrement plus descriptif que le SHORT. 1 emoji en fin. Maximum 45 caractères.
 
 **Hashtags :**
 - Exactement 3 hashtags
@@ -91,16 +96,16 @@ Bloc 1 — Accroche virale (2-3 lignes max) : reformule l'angle du script en tex
 
 Bloc 2 — Bloc qualité et propriété (reproduire EXACTEMENT ce texte, mot pour mot) :
 ---
-Chaque vidéo publiée sur cette chaîne est le résultat d'une enquête personnelle et minutieuse. Les faits, données et informations présentés ont été rigoureusement vérifiés et recoupés avant toute mise en production.
+Chaque vidéo publiée sur cette chaîne est le résultat d'une enquête personnelle et minutieuse menée par le propriétaire de la chaîne. Les faits, données et informations présentés ont été rigoureusement vérifiés et recoupés avant toute mise en production.
 
-Les animations sont intégralement conçues et réalisées par notre équipe — aucun template, aucune séquence générée en masse. Chaque mouvement, chaque plan, est pensé spécifiquement pour le sujet traité.
+Ce contenu — script, narration et production visuelle — est entièrement conçu et réalisé par le propriétaire de la chaîne, sans template ni production en série.
 
 Ce contenu est la propriété intellectuelle exclusive de cette chaîne. Toute reproduction, rediffusion ou réutilisation — partielle ou totale — sans autorisation écrite préalable est strictement interdite.
 ---
 
 Bloc 3 — Hashtags en ligne : les 3 hashtags répétés sur une seule ligne.
 
-Bloc 4 — Mots-clés SEO : 10 à 15 mots-clés nus séparés par des espaces, liés au sujet, au format et à l'animation.
+Bloc 4 — Mots-clés SEO : 10 à 15 mots-clés nus séparés par des espaces, liés au sujet, au format et au contenu.
 
 ---
 
@@ -131,9 +136,9 @@ HASHTAGS : #tag1 #tag2 #animation
 DESCRIPTION :
 Accroche 2-3 lignes reformulant l'angle central.
 
-Chaque vidéo publiée sur cette chaîne est le résultat d'une enquête personnelle et minutieuse. Les faits, données et informations présentés ont été rigoureusement vérifiés et recoupés avant toute mise en production.
+Chaque vidéo publiée sur cette chaîne est le résultat d'une enquête personnelle et minutieuse menée par le propriétaire de la chaîne. Les faits, données et informations présentés ont été rigoureusement vérifiés et recoupés avant toute mise en production.
 
-Les animations sont intégralement conçues et réalisées par notre équipe — aucun template, aucune séquence générée en masse. Chaque mouvement, chaque plan, est pensé spécifiquement pour le sujet traité.
+Ce contenu — script, narration et production visuelle — est entièrement conçu et réalisé par le propriétaire de la chaîne, sans template ni production en série.
 
 Ce contenu est la propriété intellectuelle exclusive de cette chaîne. Toute reproduction, rediffusion ou réutilisation — partielle ou totale — sans autorisation écrite préalable est strictement interdite.
 
@@ -152,6 +157,7 @@ Aucun texte avant ou après ces deux blocs. Uniquement le script et les métadon
 - **Durée vs nombre de lignes** : environ 2-3 secondes par ligne à débit normal. Pour 60s → 20-25 lignes. Pour 90s → 30-40 lignes.
 - **Les `[mots_forts]`** sont directement lus par le pipeline CRUSADER (F02/F03). Ne les modifie pas après génération.
 - **Le bloc qualité (Bloc 2)** est fixe et identique sur toutes les vidéos — c'est intentionnel. Il pose la signature de la chaîne.
+- **SHORT vs LONG** : le format change le titre ET la narration. Précise toujours le bon format dans les paramètres — Claude adapte l'accroche, le rythme et le style de titre en conséquence.
 - **Si le script ne convient pas** : dis à Claude "Garde exactement la même structure mais change le ton vers [plus direct / plus pédagogue / plus percutant]".
 - **Les métadonnées sont prêtes à copier-coller** directement dans YouTube Studio / TikTok / Instagram sans retouche.
 - **Étape suivante** : enregistre ta voix off en lisant ce script → sauvegarde en `audio_clean.mp3` → dépose dans `DRIVE_CRUSADER/F01_GRIMALDUS/IN/`.
