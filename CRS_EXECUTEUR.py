@@ -196,9 +196,10 @@ def run_gate_1(ledger: dict):
     print("\n[F02] Lancement viewer sur port 5002...")
     print("════════════════════════════════════════════")
     print("  GATE 2 — ACTION OPÉRATEUR REQUISE")
-    print(f"  Ouvrir : http://localhost:5002/")
-    print("  Valider roadmap.json dans le viewer")
-    print("  Puis : python CRS_EXECUTEUR.py --gate G2")
+    print(f"  1. Ouvrir : http://localhost:5002/")
+    print("  2. Valider roadmap.json dans le viewer")
+    print("  3. Ctrl+C ici pour stopper le serveur")
+    print("  4. python CRS_EXECUTEUR.py --gate G2")
     print("════════════════════════════════════════════\n")
 
     subprocess.run(
