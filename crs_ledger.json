@@ -1,0 +1,30 @@
+{
+  "version": "1.0",
+  "run_id": null,
+  "production_title": null,
+  "gate_actuelle": "G1",
+  "etapes_completees": [],
+  "repo_root": null,
+  "github_repo": "kioka8877-ux/CRUSADER",
+  "artefacts": {
+    "audio_raw": null,
+    "audio_clean": null,
+    "timing_json": null,
+    "roadmap_json": null,
+    "short_render": null,
+    "youtube_final": null
+  },
+  "gh_actions": {
+    "run_id": null,
+    "gh_run_id": null,
+    "status": null,
+    "workers": 10
+  },
+  "f03_meta": {
+    "fps": 30,
+    "composition": "CrusaderShort",
+    "total_frames": null
+  },
+  "derniere_mise_a_jour": null,
+  "instructions_cold_start": "Lire CRS_COLD_START.md. Cloner le repo. cd CRUSADER. python CRS_EXECUTEUR.py --resume"
+}
