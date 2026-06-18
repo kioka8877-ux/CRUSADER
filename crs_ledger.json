@@ -1,9 +1,13 @@
 {
   "version": "1.0",
-  "run_id": null,
-  "production_title": null,
-  "gate_actuelle": "G1",
-  "etapes_completees": [],
+  "run_id": "CRS_20260618_0718",
+  "production_title": "Jordan Belfort",
+  "gate_actuelle": "G4",
+  "etapes_completees": [
+    "F01",
+    "F02",
+    "F03_triggered"
+  ],
   "repo_root": null,
   "github_repo": "kioka8877-ux/CRUSADER",
   "artefacts": {
@@ -15,8 +19,8 @@
     "youtube_final": null
   },
   "gh_runs": {
-    "f01": null,
-    "f03": null,
+    "f01": 27743322921,
+    "f03": 27751769999,
     "f04": null
   },
   "gh_actions": {
@@ -28,8 +32,8 @@
   "f03_meta": {
     "fps": 30,
     "composition": "CrusaderShort",
-    "total_frames": null
+    "total_frames": 3276
   },
-  "derniere_mise_a_jour": null,
+  "derniere_mise_a_jour": "2026-06-18T10:00:12.716796",
   "instructions_cold_start": "Lire CRS_COLD_START.md. Cloner le repo. cd CRUSADER. python CRS_EXECUTEUR.py --resume"
 }
