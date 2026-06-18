@@ -82,7 +82,11 @@ def transcribe(audio_path: str, model_size: str, fps: int) -> dict:
         sys.exit(1)
 
     print(f"[GRIMALDUS] Chargement du modèle Whisper '{model_size}'...")
-    model = WhisperModel(model_size, device="cuda", compute_type="float16")
+    import ctranslate2
+    device = "cuda" if ctranslate2.get_cuda_device_count() > 0 else "cpu"
+    compute_type = "float16" if device == "cuda" else "int8"
+    print(f"[GRIMALDUS] Device : {device} / compute_type : {compute_type}")
+    model = WhisperModel(model_size, device=device, compute_type=compute_type)
 
     print(f"[GRIMALDUS] Transcription de : {audio_path}")
     segments_iter, info = model.transcribe(
