@@ -522,15 +522,45 @@
   <!-- ── Config Panel ── -->
   <aside class="config-panel">
 
+    <!-- MAPPING PRÉ-CALCULÉ -->
+    <div>
+      <div class="section-title">Mapping pré-calculé</div>
+      <div class="gemini-box" style="border-color:#3a5a3a;">
+        <div class="gemini-hint" style="color:#7ab87a;">17 segments · 28 images · timestamp auto<br>Overlay = <b>defaut</b> par défaut — ajuste par segment.</div>
+        <textarea id="precomputedMapping" class="gemini-textarea" style="min-height:110px;color:#9ad09a;border-color:#2a4a2a;" readonly>| 00_00_270.png | seg 1 | defaut | 2 |
+| 00_13_300.png | seg 2 | defaut | 2 |
+| 00_24_460.png | seg 3 | defaut | 2 |
+| 00_30_700.png | seg 4 | defaut | 2 |
+| 00_44_420.png | seg 5 | defaut | 2 |
+| 00_49_220.png | seg 6 | defaut | 2 |
+| 01_02_090.png | seg 7 | defaut | 2 |
+| 01_12_570.png | seg 8 | defaut | 2 |
+| 01_19_080.png | seg 9 | defaut | 2 |
+| 01_26_340.png | seg 10 | defaut | 2 |
+| 01_31_340.png | seg 11 | defaut | 2 |
+| 01_40_470.png | seg 12 | defaut | 2 |
+| 01_49_400.png | seg 13 | defaut | 2 |
+| 01_54_000.png | seg 14 | defaut | 2 |
+| 01_57_280.png | seg 15 | defaut | 2 |
+| 01_57_280.png | seg 16 | defaut | 2 |
+| 01_57_280.png | seg 17 | defaut | 2 |</textarea>
+        <div class="gemini-apply-row" style="margin-top:6px;">
+          <span class="gemini-status" id="precomputedStatus">—</span>
+          <button class="btn-small" style="margin-right:4px;" onclick="copyPrecomputed()">Copier</button>
+          <button class="btn-small" onclick="loadPrecomputed()">Charger &amp; Appliquer</button>
+        </div>
+      </div>
+    </div>
+
     <!-- GEMINI MAPPING -->
     <div>
-      <div class="section-title">Mapping Gemini</div>
+      <div class="section-title">Mapping Gemini (manuel)</div>
       <div class="gemini-box">
-        <div class="gemini-hint">Colle le tableau généré par Gemini (GROUPED ou 1:1).<br>Noms de fichiers : <b>MM_SS_mmm.png</b> (ex. 00_07_340.png)<br>Ctrl+Entrée ou bouton pour appliquer.</div>
+        <div class="gemini-hint">Colle un tableau modifié ou celui de Gemini.<br>Noms de fichiers : <b>MM_SS_mmm.png</b> (ex. 00_07_340.png)<br>Ctrl+Entrée ou bouton pour appliquer.</div>
         <textarea
           id="geminiInput"
           class="gemini-textarea"
-          placeholder="| 1 | 00_00_000.png | seg 1-3 | &quot;texte...&quot; | INTERIEUR:neons | 2 |&#10;| 2 | 00_07_340.png | seg 4-6 | &quot;texte...&quot; | VITRE:pluie | 2 |&#10;..."
+          placeholder="| 00_00_270.png | seg 1 | INTERIEUR:neons | 2 |&#10;..."
           onkeydown="if(event.ctrlKey && event.key==='Enter'){ applyGeminiMapping(); }"
         ></textarea>
         <div class="gemini-apply-row">
@@ -1260,6 +1290,32 @@ function autoAssign() {
   renderTimeline();
   updateProgress();
   showToast('Images auto-assignées (proportionnel).', 'ok');
+}
+
+// ── Precomputed mapping helpers ───────────────────────────────────────────────
+function copyPrecomputed() {
+  const ta = document.getElementById('precomputedMapping');
+  navigator.clipboard.writeText(ta.value).then(() => {
+    const st = document.getElementById('precomputedStatus');
+    st.textContent = 'Copié dans le presse-papier.';
+    st.className = 'gemini-status ok';
+    showToast('Mapping copié dans le presse-papier.', 'ok');
+  }).catch(() => {
+    ta.select();
+    document.execCommand('copy');
+    const st = document.getElementById('precomputedStatus');
+    st.textContent = 'Copié (fallback).';
+    st.className = 'gemini-status ok';
+  });
+}
+
+function loadPrecomputed() {
+  const content = document.getElementById('precomputedMapping').value;
+  document.getElementById('geminiInput').value = content;
+  applyGeminiMapping();
+  const st = document.getElementById('precomputedStatus');
+  st.textContent = 'Chargé et appliqué.';
+  st.className = 'gemini-status ok';
 }
 
 // ── Timestamp filename helpers ───────────────────────────────────────────────
