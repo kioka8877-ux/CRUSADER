@@ -1,0 +1,68 @@
+name: F04 HELBRECHT — Finalisation YouTube
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "Identifiant unique du run (ex: CRS_20240101_1200)"
+        required: true
+
+jobs:
+  helbrecht:
+    name: "F04 — Camouflage + Finalisation"
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Vérification FFmpeg
+        run: |
+          if command -v ffmpeg >/dev/null 2>&1; then
+            echo "[FFMPEG] ✅ $(ffmpeg -version 2>&1 | head -1)"
+          else
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends ffmpeg
+          fi
+
+      - name: Télécharger assets depuis GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          mkdir -p /tmp/f04_in
+          BASE_URL="https://github.com/${{ github.repository }}/releases/download/${{ github.event.inputs.run_id }}-f04"
+          for FNAME in short_render.mp4 timing.json; do
+            wget -q \
+              --header="Authorization: token $GH_TOKEN" \
+              -O "/tmp/f04_in/$FNAME" \
+              "${BASE_URL}/${FNAME}"
+            echo "[F04] $FNAME — $(du -h /tmp/f04_in/$FNAME | cut -f1) ✅"
+          done
+
+      - name: F04 — Assemblage final
+        run: |
+          mkdir -p /tmp/f04_out
+          python3 F04_HELBRECHT/CODEBASE/crs_f04_helbrecht.py \
+            --input /tmp/f04_in \
+            --output /tmp/f04_out
+
+      - name: Vérifier sortie F04
+        run: |
+          echo "[F04] Artefacts produits :"
+          ls -lh /tmp/f04_out/
+          MP4=$(ls /tmp/f04_out/*.mp4 2>/dev/null | head -1)
+          if [ -z "$MP4" ]; then
+            echo "❌ Aucun .mp4 trouvé dans /tmp/f04_out/"
+            exit 1
+          fi
+          DURATION=$(ffprobe -v error -show_entries format=duration \
+            -of default=noprint_wrappers=1:nokey=1 "$MP4" 2>/dev/null | xargs printf "%.1f")
+          echo "✅ $(basename $MP4) — $(du -h $MP4 | cut -f1) — ${DURATION}s"
+
+      - name: Upload artefact final
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-final
+          path: /tmp/f04_out/*.mp4
+          retention-days: 30
