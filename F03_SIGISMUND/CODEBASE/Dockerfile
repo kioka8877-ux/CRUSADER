@@ -64,3 +64,4 @@ RUN echo "=== CRUSADER IMAGE SANITY CHECK ===" && \
     ls /crusader-fonts/*.woff2 | wc -l && echo "fichiers woff2 OK" && \
     ls /crusader-deps/node_modules | wc -l && echo "modules node OK" && \
     echo "==================================="
+# build 20260619T032241Z
