@@ -1,9 +1,9 @@
 {
   "meta": {
     "fps": 30,
-    "format": "vertical",
-    "width": 1080,
-    "height": 1920,
+    "format": "horizontal",
+    "width": 1920,
+    "height": 1080,
     "audio_path": "/tmp/f01_out/audio_clean.mp3",
     "source_timing": "timing.json"
   },
