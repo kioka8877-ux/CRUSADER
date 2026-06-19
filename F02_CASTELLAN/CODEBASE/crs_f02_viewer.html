@@ -575,8 +575,8 @@
       <div class="section-title">Format</div>
       <div class="field">
         <div class="radio-group" id="formatGroup">
-          <label id="lbl-vertical"><input type="radio" name="format" value="vertical" checked> Vertical<br><small style="color:var(--text-dim)">1080×1920</small></label>
-          <label id="lbl-horizontal"><input type="radio" name="format" value="horizontal"> Horizontal<br><small style="color:var(--text-dim)">1920×1080</small></label>
+          <label id="lbl-vertical"><input type="radio" name="format" value="vertical"> Vertical<br><small style="color:var(--text-dim)">1080×1920</small></label>
+          <label id="lbl-horizontal"><input type="radio" name="format" value="horizontal" checked> Horizontal<br><small style="color:var(--text-dim)">1920×1080</small></label>
         </div>
       </div>
     </div>
@@ -787,6 +787,16 @@ async function loadTiming() {
       ? timingData.meta.duration_seconds.toFixed(1) + 's'
       : '—';
     setStatus('ok', `${timingData.segments.length} segments — ${dur}`);
+
+    // Pre-select format — priority: URL param > timing.json meta > default (horizontal)
+    const urlFmt = new URLSearchParams(window.location.search).get('format');
+    const metaFmt = timingData.meta && timingData.meta.format;
+    const fmt = urlFmt || metaFmt;
+    if (fmt === 'vertical' || fmt === 'horizontal') {
+      document.querySelector(`input[name="format"][value="${fmt}"]`).checked = true;
+      document.getElementById('lbl-vertical').classList.toggle('active',   fmt === 'vertical');
+      document.getElementById('lbl-horizontal').classList.toggle('active', fmt === 'horizontal');
+    }
   } catch(e) {
     setStatus('error', 'timing.json introuvable');
     document.getElementById('timeline').innerHTML =

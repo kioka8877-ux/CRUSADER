@@ -60,9 +60,68 @@ jobs:
             -of default=noprint_wrappers=1:nokey=1 "$MP4" 2>/dev/null | xargs printf "%.1f")
           echo "✅ $(basename $MP4) — $(du -h $MP4 | cut -f1) — ${DURATION}s"
 
-      - name: Upload artefact final
+      - name: Upload artefact F04 (pré-Luther)
         uses: actions/upload-artifact@v4
         with:
           name: youtube-final
           path: /tmp/f04_out/*.mp4
           retention-days: 30
+
+  luther:
+    name: "F05 LUTHER — Effacement empreinte"
+    runs-on: ubuntu-latest
+    needs: helbrecht
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Vérification FFmpeg
+        run: |
+          if command -v ffmpeg >/dev/null 2>&1; then
+            echo "[LUTHER] ✅ $(ffmpeg -version 2>&1 | head -1)"
+          else
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends ffmpeg
+          fi
+
+      - name: Télécharger artefact F04
+        uses: actions/download-artifact@v4
+        with:
+          name: youtube-final
+          path: /tmp/luther_in
+
+      - name: Renommer vers youtube_final.mp4
+        run: |
+          MP4=$(ls /tmp/luther_in/*.mp4 | head -1)
+          mv "$MP4" /tmp/luther_in/youtube_final.mp4
+          echo "[LUTHER] Source : $(du -h /tmp/luther_in/youtube_final.mp4 | cut -f1)"
+
+      - name: F05 LUTHER — Strip métadonnées
+        run: |
+          mkdir -p /tmp/luther_out
+          python3 F05_LUTHER/CODEBASE/crs_f05_luther.py \
+            --input  /tmp/luther_in \
+            --output /tmp/luther_out \
+            --date   "$(date +%Y-%m-%d)"
+
+      - name: Vérifier sortie Luther
+        run: |
+          MP4=/tmp/luther_out/clean_final.mp4
+          if [ ! -f "$MP4" ]; then
+            echo "❌ clean_final.mp4 absent"
+            exit 1
+          fi
+          SIZE=$(du -h "$MP4" | cut -f1)
+          echo "✅ clean_final.mp4 — $SIZE — empreinte effacée"
+          echo "Tags résiduels :"
+          ffprobe -v quiet -print_format json -show_format "$MP4" \
+            | python3 -c "import json,sys; d=json.load(sys.stdin); tags=d.get('format',{}).get('tags',{}); print(tags if tags else '  (aucun)')"
+
+      - name: Upload artefact final propre
+        uses: actions/upload-artifact@v4
+        with:
+          name: clean-final
+          path: /tmp/luther_out/clean_final.mp4
+          retention-days: 90
