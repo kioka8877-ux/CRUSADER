@@ -43,13 +43,30 @@ jobs:
               "${BASE_URL}/${FNAME}"
             echo "[F04] $FNAME — $(du -h /tmp/f04_in/$FNAME | cut -f1) ✅"
           done
+          # Beta : télécharger roadmap.json si disponible
+          if [ "${{ github.event.inputs.mode }}" = "beta" ]; then
+            RMURL="https://github.com/${{ github.repository }}/releases/download/${{ github.event.inputs.run_id }}/roadmap.json"
+            wget -q --header="Authorization: token $GH_TOKEN" -O "/tmp/f04_in/roadmap.json" "$RMURL" \
+              && echo "[F04-beta] roadmap.json téléchargé ✅" \
+              || echo "[F04-beta] roadmap.json absent (SFX ignorés)"
+            # SFX : copier depuis SHARED/IN/sfx/ du repo si présents
+            mkdir -p /tmp/f04_sfx
+            cp ${{ github.event.inputs.mode }}/SHARED/IN/sfx/*.mp3 /tmp/f04_sfx/ 2>/dev/null \
+              && echo "[F04-beta] fichiers SFX copiés ✅" \
+              || echo "[F04-beta] aucun SFX dans SHARED/IN/sfx/ (SFX ignorés)"
+          fi
 
       - name: F04 — Assemblage final
         run: |
           mkdir -p /tmp/f04_out
+          EXTRA_ARGS=""
+          if [ "${{ github.event.inputs.mode }}" = "beta" ] && [ -f /tmp/f04_in/roadmap.json ]; then
+            EXTRA_ARGS="--roadmap /tmp/f04_in/roadmap.json --sfx-dir /tmp/f04_sfx"
+          fi
           python3 ${{ github.event.inputs.mode }}/F04_HELBRECHT/CODEBASE/crs_f04_helbrecht.py \
             --input /tmp/f04_in \
-            --output /tmp/f04_out
+            --output /tmp/f04_out \
+            $EXTRA_ARGS
 
       - name: Vérifier sortie F04
         run: |

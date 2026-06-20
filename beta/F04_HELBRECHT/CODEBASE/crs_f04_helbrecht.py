@@ -213,58 +213,129 @@ def qa_gate(info: dict, meta: dict, stage: str) -> list:
 
 # ─── Camouflage FFmpeg ────────────────────────────────────────────────────────
 
-def camouflage(input_path: str, output_path: str, meta: dict) -> bool:
+def camouflage(input_path: str, output_path: str, meta: dict,
+               sfx_events=None) -> bool:
     """
-    Re-encode complet pour effacer toute empreinte d'outil :
-      - map_metadata -1   : wipe intégral des métadonnées source
-      - libx264 CRF 18    : qualité visuelle quasi-lossless, fingerprint effacé
-      - GOP régulier 2s   : structure standard (aucun artefact Remotion/outil)
-      - yuv420p           : compatibilité maximale plateformes
-      - AAC 192k 48kHz    : audio standard
-      - loudnorm -14 LUFS : standard YouTube (évite flags audio anormal)
-      - +faststart        : MOOV atom en tête (streaming instantané)
-      - Tags propres       : title + date uniquement, rien d'autre
+    Re-encode complet pour effacer toute empreinte d'outil.
+    sfx_events (optionnel, beta) : liste [{timestamp: float, file: str}]
+      → injecte sfx_swoosh.mp3 aux timestamps donnés via adelay/amix.
     """
     title = meta.get("title", "VIDEO")
     dt    = meta.get("date",  date.today().isoformat())
     fps   = int(meta.get("fps", 30))
-    gop   = fps * 2  # keyframe toutes les 2 secondes
+    gop   = fps * 2
 
-    cmd = [
-        "ffmpeg", "-y",
-        "-i", input_path,
-        "-map_metadata", "-1",
-        "-metadata", "encoder=",
-        # Vidéo
-        "-c:v", "libx264",
-        "-crf", "18",
-        "-preset", "medium",
-        "-profile:v", "high",
-        "-level", "4.0",
-        "-g", str(gop),
-        "-keyint_min", str(gop),
-        "-pix_fmt", "yuv420p",
-        # Audio
-        "-c:a", "aac",
-        "-b:a", "192k",
-        "-ar", "48000",
-        "-ac", "2",
-        "-af", "loudnorm=I=-14:TP=-1:LRA=11",
-        # Container
+    common_video = [
+        "-c:v", "libx264", "-crf", "18", "-preset", "medium",
+        "-profile:v", "high", "-level", "4.0",
+        "-g", str(gop), "-keyint_min", str(gop), "-pix_fmt", "yuv420p",
+    ]
+    common_audio = ["-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2"]
+    common_meta  = [
         "-movflags", "+faststart",
-        # Tags propres uniquement
         "-metadata", f"title={title}",
         "-metadata", f"date={dt}",
-        output_path,
     ]
 
-    print(f"  [CMD] ffmpeg camouflage → {os.path.basename(output_path)}")
+    if sfx_events:
+        # Ajoute chaque événement SFX comme input séparé (gère les répétitions)
+        extra_inputs = []
+        for ev in sfx_events:
+            extra_inputs += ["-i", ev["file"]]
+
+        delay_chains = []
+        mix_labels   = ["[0:a]"]
+        for idx, ev in enumerate(sfx_events):
+            delay_ms = int(ev["timestamp"] * 1000)
+            label    = f"s{idx}"
+            delay_chains.append(
+                f"[{idx + 1}:a]adelay={delay_ms}|{delay_ms},"
+                f"volume=0.25[{label}]"
+            )
+            mix_labels.append(f"[{label}]")
+
+        n = len(mix_labels)
+        filter_complex = (
+            ";".join(delay_chains) + ";"
+            + "".join(mix_labels)
+            + f"amix=inputs={n}:duration=first:normalize=0,"
+              f"loudnorm=I=-14:TP=-1:LRA=11[aout]"
+        )
+
+        cmd = (
+            ["ffmpeg", "-y", "-i", input_path]
+            + extra_inputs
+            + ["-map_metadata", "-1", "-metadata", "encoder="]
+            + ["-filter_complex", filter_complex]
+            + ["-map", "0:v", "-map", "[aout]"]
+            + common_video + common_audio + common_meta
+            + [output_path]
+        )
+        print(f"  [CMD] ffmpeg camouflage + {len(sfx_events)} SFX → {os.path.basename(output_path)}")
+    else:
+        cmd = (
+            ["ffmpeg", "-y", "-i", input_path]
+            + ["-map_metadata", "-1", "-metadata", "encoder="]
+            + common_video + common_audio
+            + ["-af", "loudnorm=I=-14:TP=-1:LRA=11"]
+            + common_meta
+            + [output_path]
+        )
+        print(f"  [CMD] ffmpeg camouflage → {os.path.basename(output_path)}")
+
     print()
     result = subprocess.run(cmd, check=False)
     if result.returncode != 0:
         log_fail(f"ffmpeg camouflage échoué (exit {result.returncode})")
         return False
     return True
+
+# ─── SFX injection (beta) ────────────────────────────────────────────────────
+
+def _parse_ts_from_filename(filename: str) -> float:
+    """Extrait le timestamp (s) depuis le nom de fichier image.
+    Format attendu : MM_SS_mmm[_...].ext  ex: 01_23_450.png → 83.45s
+    """
+    basename = os.path.splitext(os.path.basename(filename))[0]
+    parts = basename.split("_")
+    try:
+        return int(parts[0]) * 60 + int(parts[1]) + int(parts[2]) / 1000.0
+    except (IndexError, ValueError):
+        return 0.0
+
+
+def build_sfx_events(roadmap_path: str, sfx_dir: str) -> list:
+    """Retourne [{timestamp: float, file: str}] des SFX à injecter.
+    Retourne [] si le roadmap ou sfx_swoosh.mp3 sont absents (mode alpha).
+    """
+    if not roadmap_path or not os.path.isfile(roadmap_path):
+        return []
+
+    with open(roadmap_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    slots = data.get("timeline", data.get("slots", []))
+    if not slots:
+        return []
+
+    sfx_swoosh = os.path.join(sfx_dir, "sfx_swoosh.mp3")
+    if not os.path.isfile(sfx_swoosh):
+        log_warn(f"sfx_swoosh.mp3 introuvable dans {sfx_dir} — SFX ignorés")
+        return []
+
+    events = []
+    for slot in slots:
+        if not slot.get("sfx_trigger", False):
+            continue
+        image = slot.get("image", slot.get("image_file", ""))
+        if not image:
+            continue
+        ts = _parse_ts_from_filename(image)
+        events.append({"timestamp": ts, "file": sfx_swoosh})
+
+    log_info(f"{len(events)} événements SFX détectés depuis roadmap.json")
+    return events
+
 
 # ─── Touch timestamp ──────────────────────────────────────────────────────────
 
@@ -444,8 +515,10 @@ def main():
     parser = argparse.ArgumentParser(
         description="F04 HELBRECHT v2 — Camouflage universel + Finalisation YouTube"
     )
-    parser.add_argument("--input",  required=True, help="Chemin vers F04/IN/")
-    parser.add_argument("--output", required=True, help="Chemin vers F04/OUT/")
+    parser.add_argument("--input",    required=True,  help="Chemin vers F04/IN/")
+    parser.add_argument("--output",   required=True,  help="Chemin vers F04/OUT/")
+    parser.add_argument("--roadmap",  default=None,   help="(beta) Chemin vers roadmap.json F02")
+    parser.add_argument("--sfx-dir",  default=None,   help="(beta) Dossier contenant sfx_swoosh.mp3")
     args = parser.parse_args()
 
     input_video  = os.path.join(args.input,  INPUT_VIDEO)
@@ -503,10 +576,16 @@ def main():
         log_fail(f"QA fatale échouée : {fatal_pre}")
         sys.exit(1)
 
+    # 5b. SFX events (beta uniquement)
+    sfx_events = []
+    if args.roadmap and args.sfx_dir:
+        section("5b. SFX beta — lecture roadmap")
+        sfx_events = build_sfx_events(args.roadmap, args.sfx_dir)
+
     # 6. Camouflage FFmpeg
     section("6. Camouflage FFmpeg")
     log_info("Re-encode H.264 CRF18 + loudnorm -14 LUFS + wipe métadonnées...")
-    if not camouflage(input_video, output_video, meta):
+    if not camouflage(input_video, output_video, meta, sfx_events or None):
         sys.exit(1)
 
     # 7. Touch timestamp
