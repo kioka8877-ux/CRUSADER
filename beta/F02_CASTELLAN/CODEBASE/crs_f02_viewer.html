@@ -442,6 +442,15 @@
   .int-btn.active { border-color: var(--gold); color: var(--gold); background: #1a1500; }
   .int-btn:hover  { border-color: var(--gold-dim); }
 
+  .sfx-btn {
+    background: var(--bg); border: 1px solid var(--border);
+    color: var(--text-dim); font-family: var(--mono); font-size: 9px;
+    padding: 2px 0; border-radius: var(--radius); cursor: pointer;
+    width: 52px; flex-shrink: 0; letter-spacing: 1px; text-transform: uppercase;
+  }
+  .sfx-btn.active { border-color: #e55; color: #e55; background: #200808; }
+  .sfx-btn:hover  { border-color: var(--gold-dim); }
+
   /* ── Preview button ── */
   .btn-preview {
     background: var(--bg); border: 1px solid var(--gold-dim); color: var(--gold);
@@ -713,6 +722,17 @@
       </div>
     </div>
 
+    <!-- SFX BETA -->
+    <div>
+      <div class="section-title" style="color:#e55;border-color:#8b2222;">SFX — Mode Beta</div>
+      <div style="font-size:10px;color:var(--text-dim);line-height:1.6;background:#200808;border:1px solid #5a1a1a;border-radius:var(--radius);padding:8px;">
+        Bouton <b style="color:#e55;">SFX ON/OFF</b> par segment.<br>
+        Défaut auto : ON aux seg 1,2,3,6,9… (pattern 9-cycle).<br>
+        Cliquer sur le bouton bascule l'override éditorial.<br>
+        <span style="color:#888;">assets : SHARED/audio/sfx/</span>
+      </div>
+    </div>
+
     <!-- ACTIONS -->
     <div>
       <div class="section-title">Actions rapides</div>
@@ -769,6 +789,8 @@ let timingData = null;
 let imageList  = [];
 const assignments = {};        // segmentId (string) → imageFilename (string)
 const overlayAssignments = {}; // segmentId (string) → { type, intensite }
+const mediaTypes = {};         // segmentId (string) → 'image' | 'video' | 'gif'
+const sfxTags    = {};         // segmentId (string) → true|false (operator editorial override)
 let subtitlePosition = 'bottom';
 
 // ── Init ───────────────────────────────────────────────────────────────────────
@@ -1207,6 +1229,29 @@ function onAnimSpeedChange(val) {
   document.getElementById('animSpeedVal').textContent = val;
 }
 
+// ── SFX helpers ───────────────────────────────────────────────────────────────
+function defaultSfxPattern(idx) {
+  // Pattern éditorial par défaut : true aux positions 0,1,2,5,8 (cycle de 9)
+  const p = [true, true, true, false, false, true, false, false, true];
+  return p[idx % p.length];
+}
+
+function onMediaTypeChange(segId, val) {
+  mediaTypes[String(segId)] = val;
+}
+
+function toggleSfx(segId, idx) {
+  const current = sfxTags[String(segId)];
+  const def = defaultSfxPattern(idx);
+  sfxTags[String(segId)] = (current !== undefined) ? !current : !def;
+  const active = sfxTags[String(segId)];
+  const btn = document.getElementById(`sfx-${segId}`);
+  if (btn) {
+    btn.classList.toggle('active', active);
+    btn.textContent = active ? 'SFX ON' : 'SFX OFF';
+  }
+}
+
 // ── Render Timeline ────────────────────────────────────────────────────────────
 function renderTimeline() {
   if (!timingData) return;
@@ -1231,6 +1276,10 @@ function renderTimeline() {
     const selectHtml = buildImageSelect(seg.id, assigned);
 
     const ov = overlayAssignments[String(seg.id)] || { type: 'defaut', intensite: 2 };
+    const mediaCurrent = mediaTypes[String(seg.id)] || 'image';
+    const sfxActive    = sfxTags[String(seg.id)] !== undefined
+      ? sfxTags[String(seg.id)]
+      : defaultSfxPattern(idx);
 
     row.innerHTML = `
       <div class="seg-id">${idx + 1}</div>
@@ -1251,6 +1300,14 @@ function renderTimeline() {
         </select>
         <div class="intensity-row">
           ${[1,2,3].map(n => `<button class="int-btn${ov.intensite===n?' active':''}" onclick="setIntensity(${seg.id},${n})">${n}</button>`).join('')}
+        </div>
+        <div style="display:flex;gap:3px;margin-top:3px;">
+          <select class="ov-type-sel" style="flex:1;" onchange="onMediaTypeChange(${seg.id}, this.value)">
+            <option value="image"${mediaCurrent==='image'?' selected':''}>Image</option>
+            <option value="video"${mediaCurrent==='video'?' selected':''}>Vidéo</option>
+            <option value="gif"${mediaCurrent==='gif'?' selected':''}>GIF</option>
+          </select>
+          <button id="sfx-${seg.id}" class="sfx-btn${sfxActive?' active':''}" onclick="toggleSfx(${seg.id},${idx})">${sfxActive?'SFX ON':'SFX OFF'}</button>
         </div>
       </div>
       <button class="btn-preview" onclick="openPreview(${seg.id})">VOIR</button>
@@ -1401,6 +1458,10 @@ async function saveRoadmap() {
       end:              parseFloat(endSec.toFixed(3)),
       overlay_type:     (overlayAssignments[String(seg.id)]?.type      || 'defaut'),
       overlay_intensite:(overlayAssignments[String(seg.id)]?.intensite || 2),
+      media_type:       (mediaTypes[String(seg.id)] || 'image'),
+      sfx_trigger:      (sfxTags[String(seg.id)] !== undefined
+                          ? sfxTags[String(seg.id)]
+                          : defaultSfxPattern(idx)),
     };
   });
 
