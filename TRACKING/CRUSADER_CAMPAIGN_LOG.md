@@ -9,16 +9,60 @@
 
 | Frégate | Nom | Rôle | Statut | Date de Scellement |
 |---------|-----|------|--------|--------------------|
-| F01 | GRIMALDUS | Transcription audio → timing.json | SCELLÉE — TEST PROD RÉUSSI | 2026-05-21 |
-| F02 | CASTELLAN | Config créative + viewer → roadmap.json | SCELLÉE — TEST PROD RÉUSSI | 2026-05-21 |
-| F03 | SIGISMUND | Rendu Remotion → short_render.mp4 | SCELLÉE — TEST PROD RÉUSSI | 2026-05-26 |
-| F04 | HELBRECHT | Assemblage FFmpeg → youtube_short.mp4 | SCELLÉE — TEST PROD RÉUSSI | 2026-05-27 |
+| F01 | GRIMALDUS | Transcription audio → timing.json | SCELLÉE — PROD RÉELLE OK | 2026-05-21 |
+| F02 | CASTELLAN | Config créative + viewer → roadmap.json | SCELLÉE — CORRECTIF FORMAT 2026-06-18 | 2026-05-21 |
+| F03 | SIGISMUND | Rendu Remotion → short_render.mp4 | SCELLÉE — DOCKER CUSTOM OK | 2026-05-26 |
+| F04 | HELBRECHT | Assemblage FFmpeg → youtube_short.mp4 | SCELLÉE — PROD RÉELLE OK | 2026-05-27 |
+| F05 | LUTHER | Strip métadonnées → artefact empreinte zéro | SCELLÉE — AJOUTÉE 2026-06-18 | 2026-06-18 |
 | META | METAPROMPTS | Guides opérateur (script + visuels) | SCELLÉS — PRÊTS À L'EMPLOI | 2026-05-21 |
 
 **Compteur de Guerre :**
-[████] 4/4 frégates scellées
-[██]   2/2 metaprompts scellés
-[████] 4/4 tests de production réussis — PIPELINE COMPLET
+[█████] 5/5 frégates scellées
+[██]    2/2 metaprompts scellés
+[████]  4/4 gates opérateur — Sandbox = télécommande uniquement
+[█]     CAMP_03 EN COURS — CRUSADER BETA (redesign visuel caméra)
+
+---
+
+## ⚔ CAMP_03 — EN COURS — CRUSADER BETA
+
+**2026-06-18 → EN COURS — REDESIGN VISUEL + MIGRATION GH ACTIONS**
+
+### Objectif
+Remplacer le modèle visuel "composition d'écran" par un modèle "caméra dans un monde 2D".
+Toutes les frégates tournent désormais sur GitHub Actions. Sandbox = télécommande uniquement.
+
+### Spec visuelle BETA — VERROUILLÉE 2026-06-20
+
+**Paradigme caméra (nouveau) :**
+- Monde 2D : tous les visuels posés à des ancres fixes dans l'espace
+- Visuel actif N = plein cadre (100%), sync voix en temps réel
+- Visuel suivant N+1 = partiellement visible en bord de frame (~20%), ancré top-right ou bottom-right
+- Alternance stricte : jamais même position deux fois consécutives
+- La caméra voyage vers l'ancre N+1 (ressort), le texte/titre suit la caméra
+- Visuel N reste en place — la caméra l'a quitté, il n'est pas éjecté
+
+**Paramètres ressort :** mass 0.4 / stiffness 210.0 / damping 14.0 / 10 frames
+
+**Regard :** AVAL — la caméra regarde toujours vers N+1 (index direct F03)
+
+**Seuil terminal :** FANTÔME — le dernier visuel reste visible jusqu'à la fin
+
+**Flèche tactique :** pointe dynamiquement du centre vers l'ancre active (top-right ou bottom-right)
+
+**Types média :** static_image | video_clip | gif (via @remotion/gif)
+
+**Règle SFX :** `if (index < 3) || (index % 3 === 0)` — SFX sur les 3 premières apparitions, puis toutes les 3
+
+### État CAMP_03
+
+| Tâche | Statut |
+|-------|--------|
+| F05 LUTHER — strip métadonnées | SCELLÉE 2026-06-18 |
+| F02 format default → horizontal | CORRIGÉ 2026-06-18 |
+| Spec visuelle Beta | VERROUILLÉE 2026-06-20 |
+| F03 SIGISMUND — composants React Beta | EN COURS |
+| F02 CASTELLAN — champ type média (image/video/gif) | EN COURS |
 
 ---
 
@@ -142,6 +186,13 @@ F04 HELBRECHT  → youtube_short.mp4 ──► Téléchargement opérateur
 | 2026-06-04 | F04 | PROD RÉEL | RÉUSSI — CAMP_02 : youtube_short.mp4 (14.1 MB, 1080×1920, 17.6s, H264 CRF18 / AAC 48kHz), camouflage PASS, QA pré/post PASS | ✓ |
 | 2026-06-04 | F04 | CORRECTIF | `-metadata encoder=` ajouté à la commande FFmpeg — tag Lavf résiduel neutralisé. `lavf`/`lavc` ajoutés dans SUSPICIOUS_TAGS | ✓ |
 | 2026-06-04 | PIPELINE | CLÔTURE CAMP_02 | CAMP_02 officiellement terminée — Pipeline F01A→F01B→F02→F03→F04 validé en production réelle. Victoria Aeterna. | ✓ |
+| 2026-06-18 | PIPELINE | MIGRATION GH ACTIONS | Toutes frégates migrées sur GitHub Actions. Sandbox = télécommande uniquement. CRS_EXECUTEUR.py réécrit (5 commandes, zéro compute local). | ✓ |
+| 2026-06-18 | F05 | FORGE | F05 LUTHER scellée — strip métadonnées total (-c copy, zéro ré-encode), auto-trigger après F04, artifact clean-final | ✓ |
+| 2026-06-18 | F02 | CORRECTIF | Format default corrigé vertical→horizontal. Support param URL ?format=. Auto-detect depuis timing.json. | ✓ |
+| 2026-06-18 | F01 | CORRECTIF | CPU fallback ajouté dans crs_f01_grimaldus.py — runners GH sans CUDA, int8 sur CPU | ✓ |
+| 2026-06-18 | F03 | CORRECTIF | Docker custom ghcr.io/kioka8877-ux/crusader-remotion:latest — npm+Chromium+FFmpeg pré-installés, 16min→8min | ✓ |
+| 2026-06-18 | PIPELINE | PROD RÉELLE | Jordan Belfort 109s 1920×1080 h264 — F01→F02→F03→F04→F05 bout-en-bout. RUBICON FRANCHI. | ✓ |
+| 2026-06-20 | BETA | SPEC LOCK | Spec visuelle CRUSADER BETA verrouillée — paradigme caméra 2D, zigzag top-right/bottom-right, ressort A, SFX rule index<3 || index%3==0 | ✓ |
 
 ---
 
