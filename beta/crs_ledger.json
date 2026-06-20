@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "run_id": "CRS_20260618_0718",
+  "production_title": "Jordan Belfort",
+  "gate_actuelle": "CLOSE",
+  "statut": "VICTORIA_AETERNA",
+  "etapes_completees": [
+    "F01",
+    "F02",
+    "F03",
+    "F04",
+    "CLOSE"
+  ],
+  "repo_root": null,
+  "github_repo": "kioka8877-ux/CRUSADER",
+  "artefacts": {
+    "audio_raw": "SHARED/IN/audio_raw.mp3",
+    "audio_clean": "F01_GRIMALDUS/F01A_CASTELLAN_AUDIO/OUT/audio_clean.mp3",
+    "timing_json": "F01_GRIMALDUS/F01B_GRIMALDUS/OUT/timing.json",
+    "roadmap_json": "SHARED/OUT/roadmap.json",
+    "short_render": "F03_SIGISMUND/OUT/short_render.mp4",
+    "youtube_final": "F04_HELBRECHT/OUT/youtube_final.mp4"
+  },
+  "gh_runs": {
+    "f01": 27743322921,
+    "f03": 27805729066,
+    "f04": 27807245804
+  },
+  "gh_actions": {
+    "run_id": "CRS_20260618_0718",
+    "gh_run_id": 27807245804,
+    "status": "completed",
+    "workers": 10
+  },
+  "f03_meta": {
+    "fps": 30,
+    "composition": "CrusaderShort",
+    "total_frames": 3276,
+    "format": "horizontal",
+    "width": 1920,
+    "height": 1080
+  },
+  "f04_meta": {
+    "output_file": "youtube_long.mp4",
+    "size_mb": 76,
+    "title": "Jordan Belfort",
+    "codec": "h264"
+  },
+  "derniere_mise_a_jour": "2026-06-19T09:57:00.000000",
+  "instructions_cold_start": "Lire CRS_COLD_START.md. Cloner le repo. cd CRUSADER. python CRS_EXECUTEUR.py --resume"
+}

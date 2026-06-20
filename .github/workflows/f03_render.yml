@@ -17,6 +17,10 @@ on:
       total_frames:
         description: "Nombre total de frames à rendre"
         required: true
+      mode:
+        description: "Mode de production (alpha|beta)"
+        required: false
+        default: "alpha"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # ARCHITECTURE
@@ -58,11 +62,11 @@ jobs:
           echo "============================"
 
           # Copier node_modules depuis l'image (pas de npm install)
-          cp -r $CRUSADER_DEPS/node_modules F03_SIGISMUND/CODEBASE/
-          echo "[DEPS] node_modules : OK ($(du -sh F03_SIGISMUND/CODEBASE/node_modules | cut -f1))"
+          cp -r $CRUSADER_DEPS/node_modules ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/
+          echo "[DEPS] node_modules : OK ($(du -sh ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/node_modules | cut -f1))"
 
           # Vérification + copie des polices via script — FAIL FAST si police manquante
-          bash F03_SIGISMUND/CODEBASE/crs_f03_verify_fonts.sh F03_SIGISMUND/CODEBASE/public/fonts
+          bash ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/crs_f03_verify_fonts.sh ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/fonts
 
       - name: Télécharger assets depuis GitHub Release
         env:
@@ -91,19 +95,19 @@ jobs:
             echo "[ASSETS] images.zip extrait : $(ls /tmp/assets/images/ 2>/dev/null | wc -l) images"
           fi
 
-          mkdir -p F03_SIGISMUND/CODEBASE/public/images
-          cp /tmp/assets/timing.json     F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
-          cp /tmp/assets/roadmap.json    F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
-          cp /tmp/assets/audio_clean.mp3 F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
+          mkdir -p ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/images
+          cp /tmp/assets/timing.json     ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
+          cp /tmp/assets/roadmap.json    ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
+          cp /tmp/assets/audio_clean.mp3 ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
           if [ -d /tmp/assets/images ]; then
-            cp -r /tmp/assets/images/. F03_SIGISMUND/CODEBASE/public/images/
+            cp -r /tmp/assets/images/. ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/images/
           fi
 
           echo "[ASSETS] Contenu public/ :"
-          ls -lh F03_SIGISMUND/CODEBASE/public/
+          ls -lh ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/
 
       - name: Preflight render (frames 0-9)
-        working-directory: F03_SIGISMUND/CODEBASE
+        working-directory: ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE
         run: |
           CHROME=$(which chromium-browser 2>/dev/null || which chromium 2>/dev/null || echo "$CHROMIUM_PATH")
 
@@ -192,10 +196,10 @@ jobs:
           echo "Node      : $(node --version)"
           echo "======================================"
 
-          cp -r $CRUSADER_DEPS/node_modules F03_SIGISMUND/CODEBASE/
+          cp -r $CRUSADER_DEPS/node_modules ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/
 
           # Vérification + copie des polices via script — FAIL FAST si police manquante
-          bash F03_SIGISMUND/CODEBASE/crs_f03_verify_fonts.sh F03_SIGISMUND/CODEBASE/public/fonts
+          bash ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/crs_f03_verify_fonts.sh ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/fonts
 
       - name: Télécharger assets depuis GitHub Release
         env:
@@ -221,12 +225,12 @@ jobs:
             unzip -q /tmp/assets/images.zip -d /tmp/assets/
           fi
 
-          mkdir -p F03_SIGISMUND/CODEBASE/public/images
-          cp /tmp/assets/timing.json     F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
-          cp /tmp/assets/roadmap.json    F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
-          cp /tmp/assets/audio_clean.mp3 F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
+          mkdir -p ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/images
+          cp /tmp/assets/timing.json     ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
+          cp /tmp/assets/roadmap.json    ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
+          cp /tmp/assets/audio_clean.mp3 ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
           if [ -d /tmp/assets/images ]; then
-            cp -r /tmp/assets/images/. F03_SIGISMUND/CODEBASE/public/images/
+            cp -r /tmp/assets/images/. ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/images/
           fi
 
       - name: Calculer la plage de frames
@@ -249,7 +253,7 @@ jobs:
           echo "[CHUNK $CHUNK] Frames $START → $END ($COUNT frames)"
 
       - name: Render chunk
-        working-directory: F03_SIGISMUND/CODEBASE
+        working-directory: ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE
         run: |
           # Assertion finale — les polices doivent être là depuis le setup
           FONT_COUNT=$(ls public/fonts/*.woff2 2>/dev/null | wc -l)

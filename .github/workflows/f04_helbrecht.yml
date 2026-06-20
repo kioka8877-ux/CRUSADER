@@ -6,6 +6,10 @@ on:
       run_id:
         description: "Identifiant unique du run (ex: CRS_20240101_1200)"
         required: true
+      mode:
+        description: "Mode de production (alpha|beta)"
+        required: false
+        default: "alpha"
 
 jobs:
   helbrecht:
@@ -43,7 +47,7 @@ jobs:
       - name: F04 — Assemblage final
         run: |
           mkdir -p /tmp/f04_out
-          python3 F04_HELBRECHT/CODEBASE/crs_f04_helbrecht.py \
+          python3 ${{ github.event.inputs.mode }}/F04_HELBRECHT/CODEBASE/crs_f04_helbrecht.py \
             --input /tmp/f04_in \
             --output /tmp/f04_out
 
@@ -101,7 +105,7 @@ jobs:
       - name: F05 LUTHER — Strip métadonnées
         run: |
           mkdir -p /tmp/luther_out
-          python3 F05_LUTHER/CODEBASE/crs_f05_luther.py \
+          python3 ${{ github.event.inputs.mode }}/F05_LUTHER/CODEBASE/crs_f05_luther.py \
             --input  /tmp/luther_in \
             --output /tmp/luther_out \
             --date   "$(date +%Y-%m-%d)"

@@ -7,10 +7,10 @@ on:
   push:
     branches: [main]
     paths:
-      - "F03_SIGISMUND/CODEBASE/Dockerfile"
-      - "F03_SIGISMUND/CODEBASE/docker-fonts-dl.js"
-      - "F03_SIGISMUND/CODEBASE/package.json"
-      - "F03_SIGISMUND/CODEBASE/package-lock.json"
+      - "alpha/F03_SIGISMUND/CODEBASE/Dockerfile"
+      - "alpha/F03_SIGISMUND/CODEBASE/docker-fonts-dl.js"
+      - "alpha/F03_SIGISMUND/CODEBASE/package.json"
+      - "alpha/F03_SIGISMUND/CODEBASE/package-lock.json"
 
 jobs:
   build-and-push:
@@ -39,8 +39,8 @@ jobs:
       - name: Build & Push image
         uses: docker/build-push-action@v5
         with:
-          context: F03_SIGISMUND/CODEBASE
-          file: F03_SIGISMUND/CODEBASE/Dockerfile
+          context: alpha/F03_SIGISMUND/CODEBASE
+          file: alpha/F03_SIGISMUND/CODEBASE/Dockerfile
           push: true
           tags: |
             ghcr.io/kioka8877-ux/crusader-remotion:latest

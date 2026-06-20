@@ -61,8 +61,10 @@ Toutes les frégates tournent désormais sur GitHub Actions. Sandbox = télécom
 | F05 LUTHER — strip métadonnées | SCELLÉE 2026-06-18 |
 | F02 format default → horizontal | CORRIGÉ 2026-06-18 |
 | Spec visuelle Beta | VERROUILLÉE 2026-06-20 |
-| F03 SIGISMUND — composants React Beta | EN COURS |
-| F02 CASTELLAN — champ type média (image/video/gif) | EN COURS |
+| Restructuration alpha/ beta/ — repo reorganisé | FAIT 2026-06-20 |
+| Workflows GH Actions patchés (param mode alpha/beta) | FAIT 2026-06-20 |
+| F03 SIGISMUND — composants React Beta (composition caméra 2D) | EN COURS |
+| F02 CASTELLAN — champ type média (image/video/gif) + sfx_tag | EN COURS |
 
 ---
 
