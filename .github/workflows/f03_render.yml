@@ -65,6 +65,13 @@ jobs:
           cp -r $CRUSADER_DEPS/node_modules ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/
           echo "[DEPS] node_modules : OK ($(du -sh ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/node_modules | cut -f1))"
 
+          # Beta : installer les paquets delta absents de l'image Docker
+          if [ "${{ github.event.inputs.mode }}" = "beta" ]; then
+            cd ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE
+            npm install --ignore-scripts 2>&1 | tail -5
+            cd -
+          fi
+
           # Vérification + copie des polices via script — FAIL FAST si police manquante
           bash ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/crs_f03_verify_fonts.sh ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/fonts
 
@@ -197,6 +204,13 @@ jobs:
           echo "======================================"
 
           cp -r $CRUSADER_DEPS/node_modules ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/
+
+          # Beta : installer les paquets delta absents de l'image Docker
+          if [ "${{ github.event.inputs.mode }}" = "beta" ]; then
+            cd ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE
+            npm install --ignore-scripts 2>&1 | tail -5
+            cd -
+          fi
 
           # Vérification + copie des polices via script — FAIL FAST si police manquante
           bash ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/crs_f03_verify_fonts.sh ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/fonts
