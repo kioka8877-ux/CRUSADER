@@ -36,9 +36,9 @@ export const WorldScene = ({ segment, nextSegment, isTopRight, durationInFrames 
   const cornerCX = width - MARGIN - previewW / 2;
   const cornerCY = isTopRight ? MARGIN + previewH / 2 : height - MARGIN - previewH / 2;
 
-  // N translate toward corner on exit, scale down to 0.1
-  const exitDX = (cornerCX - width / 2) * exitProgress;
-  const exitDY = (cornerCY - height / 2) * exitProgress;
+  // Camera moves RIGHT → N exits LEFT, shrinks to 0.1 (ghost)
+  const exitDX = -width * 0.55 * exitProgress;
+  const exitDY = 0;
   const nScale = enterScale * interpolate(exitProgress, [0, 1], [1, 0.1]);
 
   const hasNext = !!nextSegment;
