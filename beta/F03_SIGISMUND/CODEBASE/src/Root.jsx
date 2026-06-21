@@ -16,6 +16,7 @@ const fetchData = async () => {
 
 export const Root = () => {
   return (
+    <>
     <Composition
       id="CrusaderShort"
       component={Main}
@@ -54,5 +55,6 @@ export const Root = () => {
         };
       }}
     />
+    </>
   );
 };
