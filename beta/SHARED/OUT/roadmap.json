@@ -31,7 +31,9 @@
       "start": 0.27,
       "end": 8.91,
       "overlay_type": "defaut",
-      "overlay_intensite": 2
+      "overlay_intensite": 2,
+      "media_type": "image",
+      "sfx_trigger": true
     },
     {
       "id": 2,
@@ -42,7 +44,9 @@
       "start": 8.91,
       "end": 16.13,
       "overlay_type": "defaut",
-      "overlay_intensite": 2
+      "overlay_intensite": 2,
+      "media_type": "image",
+      "sfx_trigger": true
     },
     {
       "id": 3,
@@ -53,7 +57,9 @@
       "start": 16.13,
       "end": 22.51,
       "overlay_type": "defaut",
-      "overlay_intensite": 2
+      "overlay_intensite": 2,
+      "media_type": "image",
+      "sfx_trigger": true
     },
     {
       "id": 4,
@@ -64,18 +70,22 @@
       "start": 23.03,
       "end": 28.39,
       "overlay_type": "defaut",
-      "overlay_intensite": 2
+      "overlay_intensite": 2,
+      "media_type": "image",
+      "sfx_trigger": false
     },
     {
       "id": 5,
-      "image_file": "00_44_420.png",
+      "image_file": "00_44_420.gif",
       "text_subtitles": "It was not investing. It was financial liquidation. The business model was simple. Hypnotize the buyer,",
       "start_frame": 852,
       "end_frame": 1070,
       "start": 28.39,
       "end": 35.67,
       "overlay_type": "defaut",
-      "overlay_intensite": 3
+      "overlay_intensite": 3,
+      "media_type": "gif",
+      "sfx_trigger": true
     },
     {
       "id": 6,
@@ -86,7 +96,9 @@
       "start": 36.25,
       "end": 43.55,
       "overlay_type": "defaut",
-      "overlay_intensite": 3
+      "overlay_intensite": 3,
+      "media_type": "image",
+      "sfx_trigger": true
     },
     {
       "id": 7,
@@ -97,7 +109,9 @@
       "start": 43.55,
       "end": 50.45,
       "overlay_type": "defaut",
-      "overlay_intensite": 3
+      "overlay_intensite": 3,
+      "media_type": "image",
+      "sfx_trigger": false
     },
     {
       "id": 8,
@@ -108,18 +122,22 @@
       "start": 50.45,
       "end": 57.43,
       "overlay_type": "defaut",
-      "overlay_intensite": 2
+      "overlay_intensite": 2,
+      "media_type": "image",
+      "sfx_trigger": false
     },
     {
       "id": 9,
-      "image_file": "01_19_080.png",
+      "image_file": "01_19_080.gif",
       "text_subtitles": "of the scam, you must look at the room. 100 phone lines ringing simultaneously, young men",
       "start_frame": 1723,
       "end_frame": 1918,
       "start": 57.43,
       "end": 63.93,
       "overlay_type": "defaut",
-      "overlay_intensite": 2
+      "overlay_intensite": 2,
+      "media_type": "gif",
+      "sfx_trigger": true
     },
     {
       "id": 10,
@@ -130,7 +148,9 @@
       "start": 63.93,
       "end": 69.17,
       "overlay_type": "defaut",
-      "overlay_intensite": 2
+      "overlay_intensite": 2,
+      "media_type": "image",
+      "sfx_trigger": false
     },
     {
       "id": 11,
@@ -141,7 +161,9 @@
       "start": 69.17,
       "end": 74.11,
       "overlay_type": "defaut",
-      "overlay_intensite": 2
+      "overlay_intensite": 2,
+      "media_type": "image",
+      "sfx_trigger": true
     },
     {
       "id": 12,
@@ -152,7 +174,9 @@
       "start": 74.11,
       "end": 80.19,
       "overlay_type": "defaut",
-      "overlay_intensite": 2
+      "overlay_intensite": 2,
+      "media_type": "image",
+      "sfx_trigger": false
     },
     {
       "id": 13,
@@ -163,7 +187,9 @@
       "start": 80.73,
       "end": 86.53,
       "overlay_type": "defaut",
-      "overlay_intensite": 2
+      "overlay_intensite": 2,
+      "media_type": "image",
+      "sfx_trigger": false
     },
     {
       "id": 14,
@@ -174,7 +200,9 @@
       "start": 86.53,
       "end": 93.55,
       "overlay_type": "defaut",
-      "overlay_intensite": 2
+      "overlay_intensite": 2,
+      "media_type": "image",
+      "sfx_trigger": true
     },
     {
       "id": 15,
@@ -185,7 +213,9 @@
       "start": 93.55,
       "end": 99.01,
       "overlay_type": "defaut",
-      "overlay_intensite": 2
+      "overlay_intensite": 2,
+      "media_type": "image",
+      "sfx_trigger": false
     },
     {
       "id": 16,
@@ -196,7 +226,9 @@
       "start": 99.55,
       "end": 104.63,
       "overlay_type": "defaut",
-      "overlay_intensite": 2
+      "overlay_intensite": 2,
+      "media_type": "image",
+      "sfx_trigger": false
     },
     {
       "id": 17,
@@ -207,7 +239,9 @@
       "start": 104.63,
       "end": 109.19,
       "overlay_type": "defaut",
-      "overlay_intensite": 2
+      "overlay_intensite": 2,
+      "media_type": "image",
+      "sfx_trigger": false
     }
   ],
   "validated_by_magos": true

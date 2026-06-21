@@ -250,7 +250,7 @@ def camouflage(input_path: str, output_path: str, meta: dict,
             label    = f"s{idx}"
             delay_chains.append(
                 f"[{idx + 1}:a]adelay={delay_ms}|{delay_ms},"
-                f"volume=0.25[{label}]"
+                f"volume=0.75[{label}]"
             )
             mix_labels.append(f"[{label}]")
 
