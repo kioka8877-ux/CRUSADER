@@ -102,12 +102,12 @@ jobs:
             echo "[ASSETS] images.zip extrait : $(ls /tmp/assets/images/ 2>/dev/null | wc -l) images"
           fi
 
-          mkdir -p ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/images
+          mkdir -p ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public
           cp /tmp/assets/timing.json     ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
           cp /tmp/assets/roadmap.json    ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
           cp /tmp/assets/audio_clean.mp3 ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
           if [ -d /tmp/assets/images ]; then
-            cp -r /tmp/assets/images/. ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/images/
+            cp -r /tmp/assets/images/. ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/
           fi
 
           echo "[ASSETS] Contenu public/ :"
@@ -239,12 +239,12 @@ jobs:
             unzip -q /tmp/assets/images.zip -d /tmp/assets/
           fi
 
-          mkdir -p ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/images
+          mkdir -p ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public
           cp /tmp/assets/timing.json     ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
           cp /tmp/assets/roadmap.json    ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
           cp /tmp/assets/audio_clean.mp3 ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
           if [ -d /tmp/assets/images ]; then
-            cp -r /tmp/assets/images/. ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/images/
+            cp -r /tmp/assets/images/. ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/
           fi
 
       - name: Calculer la plage de frames
