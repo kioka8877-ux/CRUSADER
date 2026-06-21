@@ -2,7 +2,7 @@ import React from "react";
 import { Img, OffthreadVideo, staticFile } from "remotion";
 
 export const WorldNode = ({ imageFile, mediaType = "image" }) => {
-  const src = staticFile(imageFile);
+  const src = staticFile(`images/${imageFile}`);
   const style = { width: "100%", height: "100%", objectFit: "cover" };
 
   if (mediaType === "gif") {
