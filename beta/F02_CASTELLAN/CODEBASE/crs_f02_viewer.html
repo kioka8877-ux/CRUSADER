@@ -789,8 +789,9 @@ let timingData = null;
 let imageList  = [];
 const assignments = {};        // segmentId (string) → imageFilename (string)
 const overlayAssignments = {}; // segmentId (string) → { type, intensite }
-const mediaTypes = {};         // segmentId (string) → 'image' | 'video' | 'gif'
-const sfxTags    = {};         // segmentId (string) → true|false (operator editorial override)
+const mediaTypes  = {};        // segmentId (string) → 'image' | 'video' | 'gif'
+const sfxTags     = {};        // segmentId (string) → true|false (operator editorial override)
+const transFrames = {};        // segmentId (string) → 8|12|18|30 (transition duration in frames)
 let subtitlePosition = 'bottom';
 
 // ── Init ───────────────────────────────────────────────────────────────────────
@@ -1240,6 +1241,10 @@ function onMediaTypeChange(segId, val) {
   mediaTypes[String(segId)] = val;
 }
 
+function onTransFrameChange(segId, val) {
+  transFrames[String(segId)] = parseInt(val, 10);
+}
+
 function toggleSfx(segId, idx) {
   const current = sfxTags[String(segId)];
   const def = defaultSfxPattern(idx);
@@ -1276,10 +1281,11 @@ function renderTimeline() {
     const selectHtml = buildImageSelect(seg.id, assigned);
 
     const ov = overlayAssignments[String(seg.id)] || { type: 'defaut', intensite: 2 };
-    const mediaCurrent = mediaTypes[String(seg.id)] || 'image';
-    const sfxActive    = sfxTags[String(seg.id)] !== undefined
+    const mediaCurrent  = mediaTypes[String(seg.id)]  || 'image';
+    const sfxActive     = sfxTags[String(seg.id)] !== undefined
       ? sfxTags[String(seg.id)]
       : defaultSfxPattern(idx);
+    const transCurrent  = transFrames[String(seg.id)] || 12;
 
     row.innerHTML = `
       <div class="seg-id">${idx + 1}</div>
@@ -1308,6 +1314,15 @@ function renderTimeline() {
             <option value="gif"${mediaCurrent==='gif'?' selected':''}>GIF</option>
           </select>
           <button id="sfx-${seg.id}" class="sfx-btn${sfxActive?' active':''}" onclick="toggleSfx(${seg.id},${idx})">${sfxActive?'SFX ON':'SFX OFF'}</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:4px;margin-top:4px;">
+          <span style="font-size:10px;color:var(--text-dim);white-space:nowrap;">TRANS</span>
+          <select class="ov-type-sel" style="flex:1;" onchange="onTransFrameChange(${seg.id}, this.value)">
+            <option value="8" ${transCurrent===8?'selected':''}>8f — brutal</option>
+            <option value="12" ${transCurrent===12?'selected':''}>12f — rapide</option>
+            <option value="18" ${transCurrent===18?'selected':''}>18f — smooth</option>
+            <option value="30" ${transCurrent===30?'selected':''}>30f — lent</option>
+          </select>
         </div>
       </div>
       <button class="btn-preview" onclick="openPreview(${seg.id})">VOIR</button>
@@ -1458,10 +1473,11 @@ async function saveRoadmap() {
       end:              parseFloat(endSec.toFixed(3)),
       overlay_type:     (overlayAssignments[String(seg.id)]?.type      || 'defaut'),
       overlay_intensite:(overlayAssignments[String(seg.id)]?.intensite || 2),
-      media_type:       (mediaTypes[String(seg.id)] || 'image'),
+      media_type:       (mediaTypes[String(seg.id)]  || 'image'),
       sfx_trigger:      (sfxTags[String(seg.id)] !== undefined
                           ? sfxTags[String(seg.id)]
                           : defaultSfxPattern(idx)),
+      trans_frames:     (transFrames[String(seg.id)] || 12),
     };
   });
 
