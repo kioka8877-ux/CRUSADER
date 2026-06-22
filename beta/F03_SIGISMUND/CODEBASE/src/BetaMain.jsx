@@ -1,5 +1,18 @@
+/**
+ * BetaMain.jsx — Composition principale CRUSADER Beta (spec 22/06)
+ *
+ * Passe trans_frames depuis roadmap.json au WorldScene sinusoïdal.
+ * Valeurs possibles : 8 / 12 / 18 / 30 (défaut 12 si absent).
+ * Alternance stricte isTopRight (idx % 2 === 0).
+ */
 import React from "react";
-import { AbsoluteFill, Audio, Sequence, staticFile, useVideoConfig } from "remotion";
+import {
+  AbsoluteFill,
+  Audio,
+  Sequence,
+  staticFile,
+  useVideoConfig,
+} from "remotion";
 import { Background } from "./components/Background";
 import { WorldScene } from "./components/WorldScene";
 
@@ -16,8 +29,11 @@ export const BetaMain = ({ timing, roadmap }) => {
         const dur = extendedEnd - seg.start_frame;
         if (dur <= 0) return null;
 
-        // Strict alternance top-right / bottom-right — jamais même coin deux fois
+        /* Alternance stricte — jamais même coin deux fois */
         const isTopRight = idx % 2 === 0;
+
+        /* trans_frames depuis F02 (8/12/18/30), défaut 12 */
+        const tf = seg.trans_frames || 12;
 
         return (
           <Sequence
@@ -31,6 +47,7 @@ export const BetaMain = ({ timing, roadmap }) => {
               nextSegment={nextSeg}
               isTopRight={isTopRight}
               durationInFrames={dur}
+              transFrames={tf}
             />
           </Sequence>
         );
