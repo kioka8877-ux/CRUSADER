@@ -67,7 +67,8 @@ Toutes les frégates tournent désormais sur GitHub Actions. Sandbox = télécom
 | F02 CASTELLAN — sélecteur trans_frames (8/12/18/30f) part 1 | SCELLÉE 2026-06-22 |
 | F02 CASTELLAN — mini preview transition CSS/JS part 2 | SCELLÉE 2026-06-22 |
 | F03 SIGISMUND — spec visuelle verrouillée (world canvas, Bézier, N+1 teaser) | VERROUILLÉE 2026-06-22 |
-| F03 SIGISMUND — réécriture WorldScene.jsx + TacticalArrow.jsx + BetaMain.jsx | EN COURS |
+| F03 SIGISMUND — réécriture WorldScene.jsx + TacticalArrow.jsx + BetaMain.jsx | SCELLÉE 2026-06-22 |
+| F03 SIGISMUND — test beta production (CrusaderBeta + sinusoïdal) | EN COURS |
 
 ---
 
@@ -198,6 +199,7 @@ F04 HELBRECHT  → youtube_short.mp4 ──► Téléchargement opérateur
 | 2026-06-18 | F03 | CORRECTIF | Docker custom ghcr.io/kioka8877-ux/crusader-remotion:latest — npm+Chromium+FFmpeg pré-installés, 16min→8min | ✓ |
 | 2026-06-18 | PIPELINE | PROD RÉELLE | Jordan Belfort 109s 1920×1080 h264 — F01→F02→F03→F04→F05 bout-en-bout. RUBICON FRANCHI. | ✓ |
 | 2026-06-20 | BETA | SPEC LOCK | Spec visuelle CRUSADER BETA verrouillée — paradigme caméra 2D, zigzag top-right/bottom-right, ressort A, SFX rule index<3 || index%3==0 | ✓ |
+| 2026-06-22 | F03 | FORGE | Réécriture sinusoïdale : WorldScene (Bézier easeInOut, teaser 12%), TacticalArrow (marque Bézier + spring draw), BetaMain (trans_frames 8/12/18/30) — 3 commits (c3eca99, 4d76f8e, 9095f19) | ✓ |
 
 ---
 
