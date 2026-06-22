@@ -2,14 +2,17 @@
 // Composition principale CRUSADER. Charge dynamiquement timing.json + roadmap.json
 // depuis public/ via calculateMetadata (Remotion 4.x).
 import React from "react";
-import { Composition, staticFile } from "remotion";
+import { Composition } from "remotion";
 import { Main } from "./Main";
 import { BetaMain } from "./BetaMain";
 
+// BYPASS staticFile() — npm install delta en beta corrompt la résolution
+// et retourne /public/timing.json au lieu de /timing.json → 404.
+// Les fichiers sont dans public/ et servis à la racine par le serveur Remotion.
 const fetchData = async () => {
   const [timing, roadmap] = await Promise.all([
-    fetch(staticFile("timing.json")).then((r) => r.json()),
-    fetch(staticFile("roadmap.json")).then((r) => r.json()),
+    fetch("/timing.json").then((r) => r.json()),
+    fetch("/roadmap.json").then((r) => r.json()),
   ]);
   return { timing, roadmap };
 };

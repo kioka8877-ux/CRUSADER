@@ -10,7 +10,6 @@ import {
   AbsoluteFill,
   Audio,
   Sequence,
-  staticFile,
   useVideoConfig,
 } from "remotion";
 import { Background } from "./components/Background";
@@ -53,7 +52,8 @@ export const BetaMain = ({ timing, roadmap }) => {
         );
       })}
 
-      <Audio src={staticFile("audio_clean.mp3")} />
+      {/* Bypass staticFile — même fix que Root.jsx */}
+      <Audio src="/audio_clean.mp3" />
     </AbsoluteFill>
   );
 };

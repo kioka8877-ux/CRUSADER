@@ -1,8 +1,13 @@
 import React from "react";
-import { Img, OffthreadVideo, staticFile } from "remotion";
+import { Img, OffthreadVideo } from "remotion";
+
+// Bypass staticFile() — npm install delta en beta corrompt la résolution
+// et retourne /public/file au lieu de /file → 404.
+// Les fichiers sont dans public/ et servis à la racine par le serveur Remotion.
+const sf = (f) => `/${f}`;
 
 export const WorldNode = ({ imageFile, mediaType = "image" }) => {
-  const src = staticFile(imageFile);
+  const src = sf(imageFile);
   const style = { width: "100%", height: "100%", objectFit: "cover" };
 
   if (mediaType === "gif") {
