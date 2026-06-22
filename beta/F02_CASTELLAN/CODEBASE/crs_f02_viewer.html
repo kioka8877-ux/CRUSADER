@@ -514,6 +514,9 @@
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+.tp-animate-n    { transition: transform var(--tp-dur, 400ms) cubic-bezier(0.42,0,0.58,1), opacity var(--tp-dur, 400ms) cubic-bezier(0.42,0,0.58,1); }
+.tp-animate-n1   { transition: transform var(--tp-dur, 400ms) cubic-bezier(0.42,0,0.58,1), opacity var(--tp-dur, 400ms) cubic-bezier(0.42,0,0.58,1); }
+.tp-animate-arr  { transition: transform var(--tp-dur, 400ms) cubic-bezier(0.42,0,0.58,1), opacity calc(var(--tp-dur, 400ms) * 0.4) ease; }
 </style>
 </head>
 <body>
@@ -731,6 +734,24 @@
         Cliquer sur le bouton bascule l'override éditorial.<br>
         <span style="color:#888;">assets : SHARED/audio/sfx/</span>
       </div>
+    </div>
+
+    <!-- TRANSITION PREVIEW -->
+    <div>
+      <div class="section-title" style="color:#7af;border-color:#2255aa;">Prévisualisation transition</div>
+      <div style="font-size:10px;color:var(--text-dim);margin-bottom:6px;">Vitesse sélectionnée dans la timeline :</div>
+      <div id="trans-preview-box" style="position:relative;height:56px;background:#111;border:1px solid #333;border-radius:var(--radius);overflow:hidden;margin-bottom:6px;">
+        <div id="tp-n" style="position:absolute;top:8px;left:8px;width:52px;height:40px;background:#7af;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:bold;color:#000;">N</div>
+        <div id="tp-n1" style="position:absolute;top:8px;right:8px;width:52px;height:40px;background:#fa7;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:bold;color:#000;opacity:0.3;transform:scale(0.5);transform-origin:right center;">N+1</div>
+        <div id="tp-arrow" style="position:absolute;top:24px;left:68px;right:68px;height:2px;background:#e00;transform:scaleX(0);transform-origin:left center;opacity:0;"></div>
+      </div>
+      <div style="display:flex;gap:4px;margin-bottom:4px;">
+        <button class="btn-secondary" style="flex:1;font-size:10px;padding:4px;" onclick="runPreview(8)">8f</button>
+        <button class="btn-secondary" style="flex:1;font-size:10px;padding:4px;" onclick="runPreview(12)">12f</button>
+        <button class="btn-secondary" style="flex:1;font-size:10px;padding:4px;" onclick="runPreview(18)">18f</button>
+        <button class="btn-secondary" style="flex:1;font-size:10px;padding:4px;" onclick="runPreview(30)">30f</button>
+      </div>
+      <button class="btn-secondary" onclick="runPreview(lastPreviewFrames||12)" style="width:100%;font-size:10px;">&#9654; Rejouer</button>
     </div>
 
     <!-- ACTIONS -->
@@ -1449,6 +1470,43 @@ function updateProgress() {
   document.getElementById('progressInfo').innerHTML =
     `<span>${done}/${total}</span> segments assignés`;
   document.getElementById('btnValidate').disabled = (done === 0);
+}
+
+// ── Transition Preview ────────────────────────────────────────────────────────
+let lastPreviewFrames = 12;
+let _tpTimer = null;
+
+function runPreview(frames) {
+  lastPreviewFrames = frames;
+  const dur = Math.round(frames / 30 * 1000);
+  const box = document.getElementById('trans-preview-box');
+  const nEl  = document.getElementById('tp-n');
+  const n1El = document.getElementById('tp-n1');
+  const arr  = document.getElementById('tp-arrow');
+  if (!box || !nEl || !n1El || !arr) return;
+
+  // reset without animation
+  [nEl, n1El, arr].forEach(el => el.classList.remove('tp-animate-n','tp-animate-n1','tp-animate-arr'));
+  box.style.setProperty('--tp-dur', dur + 'ms');
+  nEl.style.transform  = 'translateX(0) scale(1)';   nEl.style.opacity = '1';
+  n1El.style.transform = 'scale(0.5)'; n1El.style.opacity = '0.3';
+  arr.style.transform  = 'scaleX(0)';  arr.style.opacity  = '0';
+
+  if (_tpTimer) clearTimeout(_tpTimer);
+  _tpTimer = setTimeout(() => {
+    nEl.classList.add('tp-animate-n');
+    n1El.classList.add('tp-animate-n1');
+    arr.classList.add('tp-animate-arr');
+    // N exits right + shrinks, N+1 grows to full, arrow draws then fades
+    nEl.style.transform  = 'translateX(160px) scale(0.15)'; nEl.style.opacity = '0';
+    n1El.style.transform = 'scale(1)';                       n1El.style.opacity = '1';
+    arr.style.transform  = 'scaleX(1)';                      arr.style.opacity  = '1';
+    // arrow fade at impact
+    setTimeout(() => {
+      arr.classList.add('tp-animate-arr');
+      arr.style.opacity = '0';
+    }, dur);
+  }, 50);
 }
 
 // ── Save Roadmap ──────────────────────────────────────────────────────────────

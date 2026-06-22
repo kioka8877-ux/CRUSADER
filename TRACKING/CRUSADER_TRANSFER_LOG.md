@@ -24,7 +24,7 @@ Règle absolue : Aucun transfert sans validation CUSTOS aux deux extrémités.
   "segments": [{ "id": 0, "text": "Vous pensez trop ?", "start": 0.0, "end": 1.5, "start_frame": 0, "end_frame": 45, "words": [] }]
 }
 
-### roadmap.json (produit par F02 CASTELLAN)
+### roadmap.json (produit par F02 CASTELLAN — alpha)
 {
   "meta": { "fps": 30, "format": "vertical", "width": 1080, "height": 1920, "audio_path": "./assets/audio_clean.mp3" },
   "style": { "font_primary": "Cinzel", "font_accent": "Playfair Display", "subtitle_size": 72,
@@ -33,6 +33,25 @@ Règle absolue : Aucun transfert sans validation CUSTOS aux deux extrémités.
   "timeline": [{ "id": 1, "image_file": "1.png", "text_subtitles": "Vous pensez trop ?", "start_frame": 0, "end_frame": 90 }],
   "validated_by_magos": true
 }
+
+### roadmap.json (produit par F02 CASTELLAN — beta, schéma étendu)
+{
+  "meta": { "fps": 30, "format": "horizontal", "width": 1920, "height": 1080, "audio_path": "./assets/audio_clean.mp3" },
+  "timeline": [{
+    "id": 1,
+    "image_file": "00_00_270.png",
+    "media_type": "image",
+    "sfx_trigger": true,
+    "trans_frames": 12,
+    "text_subtitles": "POV. You are making $50,000 a minute...",
+    "start_frame": 0, "end_frame": 90
+  }],
+  "validated_by_magos": true
+}
+Champs beta supplémentaires :
+  media_type : "image" | "video" | "gif"
+  sfx_trigger : true|false — override éditorial du pattern SFX
+  trans_frames : 8|12|18|30 — durée de la transition caméra en frames (défaut 12)
 
 ---
 

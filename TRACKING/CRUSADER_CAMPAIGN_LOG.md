@@ -63,8 +63,11 @@ Toutes les frégates tournent désormais sur GitHub Actions. Sandbox = télécom
 | Spec visuelle Beta | VERROUILLÉE 2026-06-20 |
 | Restructuration alpha/ beta/ — repo reorganisé | FAIT 2026-06-20 |
 | Workflows GH Actions patchés (param mode alpha/beta) | FAIT 2026-06-20 |
-| F03 SIGISMUND — composants React Beta (composition caméra 2D) | EN COURS |
-| F02 CASTELLAN — champ type média (image/video/gif) + sfx_tag | EN COURS |
+| F02 CASTELLAN — champ media_type + sfx_tag | SCELLÉE 2026-06-21 |
+| F02 CASTELLAN — sélecteur trans_frames (8/12/18/30f) part 1 | SCELLÉE 2026-06-22 |
+| F02 CASTELLAN — mini preview transition CSS/JS part 2 | SCELLÉE 2026-06-22 |
+| F03 SIGISMUND — spec visuelle verrouillée (world canvas, Bézier, N+1 teaser) | VERROUILLÉE 2026-06-22 |
+| F03 SIGISMUND — réécriture WorldScene.jsx + TacticalArrow.jsx + BetaMain.jsx | EN COURS |
 
 ---
 
