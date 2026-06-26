@@ -1,4 +1,4 @@
-name: F01 GRIMALDUS — Audio + Transcription
+name: F01 GRIMALDUS - Audio + Transcription
 
 on:
   workflow_dispatch:
@@ -21,10 +21,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Vérification FFmpeg
+      - name: V�rification FFmpeg
         run: |
           if command -v ffmpeg >/dev/null 2>&1; then
-            echo "[FFMPEG] ✅ $(ffmpeg -version 2>&1 | head -1)"
+            echo "[FFMPEG] ? $(ffmpeg -version 2>&1 | head -1)"
           else
             sudo apt-get update -qq
             sudo apt-get install -y --no-install-recommends ffmpeg
@@ -33,19 +33,19 @@ jobs:
       - name: Installer faster-whisper
         run: pip install faster-whisper --quiet
 
-      - name: Télécharger audio depuis GitHub Release
+      - name: T�l�charger audio depuis GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           mkdir -p /tmp/f01_in
-          BASE_URL="https://github.com/${{ github.repository }}/releases/download/${{ github.event.inputs.run_id }}"
-          wget -q \
-            --header="Authorization: token $GH_TOKEN" \
-            -O /tmp/f01_in/audio_raw.mp3 \
-            "${BASE_URL}/audio_raw.mp3"
-          echo "[F01A] audio_raw.mp3 — $(du -h /tmp/f01_in/audio_raw.mp3 | cut -f1) ✅"
+          # Utilise gh CLI (gère auth + redirects GitHub Release)
+          gh release download "${{ github.event.inputs.run_id }}" \
+            --repo "${{ github.repository }}" \
+            --pattern "audio_raw.mp3" \
+            --dir /tmp/f01_in
+          echo "[F01A] audio_raw.mp3 - $(du -h /tmp/f01_in/audio_raw.mp3 | cut -f1) ?"
 
-      - name: F01A — Suppression silences
+      - name: F01A - Suppression silences
         run: |
           python3 -c "
           import sys, json, os
@@ -57,24 +57,24 @@ jobs:
           silences = detect_silences('/tmp/f01_in/audio_raw.mp3', -40.0, 0.5)
           with open('/tmp/f01_out/silence_map.json', 'w') as f:
               json.dump({'silences': silences, 'silence_count': len(silences)}, f, indent=2)
-          print(f'[F01A] {len(silences)} silences supprimés — audio_clean.mp3 produit')
+          print(f'[F01A] {len(silences)} silences supprim�s - audio_clean.mp3 produit')
           "
 
-      - name: F01B — Transcription Whisper
+      - name: F01B - Transcription Whisper
         run: |
           python3 ${{ github.event.inputs.mode }}/F01_GRIMALDUS/F01B_GRIMALDUS/CODEBASE/crs_f01_grimaldus.py \
             --input /tmp/f01_out \
             --output /tmp/f01_out \
             --model medium
 
-      - name: Vérifier les sorties F01
+      - name: V�rifier les sorties F01
         run: |
           echo "[F01] Artefacts produits :"
           for F in audio_clean.mp3 timing.json silence_map.json; do
             if [ -f "/tmp/f01_out/$F" ]; then
-              echo "  ✅ $F — $(du -h /tmp/f01_out/$F | cut -f1)"
+              echo "  ? $F - $(du -h /tmp/f01_out/$F | cut -f1)"
             else
-              echo "  ❌ $F — ABSENT"
+              echo "  ? $F - ABSENT"
               exit 1
             fi
           done
@@ -84,8 +84,25 @@ jobs:
               t = json.load(f)
           meta  = t.get('meta', {})
           words = t.get('words', [])
-          print(f'[F01B] Durée: {meta.get(\"duration_seconds\", \"?\")}s | Frames: {meta.get(\"total_frames\", \"?\")} | Mots: {len(words)}')
+          print(f'[F01B] Dur�e: {meta.get(\"duration_seconds\", \"?\")}s | Frames: {meta.get(\"total_frames\", \"?\")} | Mots: {len(words)}')
           "
+
+      - name: Commit outputs vers F01 OUT
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          MODE=${{ github.event.inputs.mode }}
+          OUT_DIR="${MODE}/F01_GRIMALDUS/F01B_GRIMALDUS/OUT"
+          mkdir -p "${OUT_DIR}"
+          cp /tmp/f01_out/audio_clean.mp3 "${OUT_DIR}/"
+          cp /tmp/f01_out/timing.json "${OUT_DIR}/"
+          cp /tmp/f01_out/silence_map.json "${OUT_DIR}/"
+          
+          git config user.name "CRUSADER-CI"
+          git config user.email "ci@crusader"
+          git add "${OUT_DIR}/"
+          git commit -m "ci(F01): outputs ${{ github.event.inputs.run_id }} → OUT/"
+          git push https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git HEAD:main
 
       - name: Upload artefacts F01
         uses: actions/upload-artifact@v4
