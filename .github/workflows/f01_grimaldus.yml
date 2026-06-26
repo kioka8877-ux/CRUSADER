@@ -33,18 +33,11 @@ jobs:
       - name: Installer faster-whisper
         run: pip install faster-whisper --quiet
 
-      - name: T�l�charger audio depuis GitHub Release
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Copier audio depuis le repo
         run: |
           mkdir -p /tmp/f01_in
-          # Utilise gh CLI (gère auth + redirects GitHub Release)
-          gh release download "${{ github.event.inputs.run_id }}" \
-            --repo "${{ github.repository }}" \
-            --pattern "audio_raw.mp3" \
-            --dir /tmp/f01_in
-          echo "[F01A] audio_raw.mp3 - $(du -h /tmp/f01_in/audio_raw.mp3 | cut -f1) ?"
-
+          cp ${{ github.event.inputs.mode }}/SHARED/IN/audio_raw.mp3 /tmp/f01_in/audio_raw.mp3
+          echo "[F01] audio_raw.mp3 copié depuis repo — $(du -h /tmp/f01_in/audio_raw.mp3 | cut -f1)"
       - name: F01A - Suppression silences
         run: |
           python3 -c "
@@ -89,7 +82,7 @@ jobs:
 
       - name: Commit outputs vers F01 OUT
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           MODE=${{ github.event.inputs.mode }}
           OUT_DIR="${MODE}/F01_GRIMALDUS/F01B_GRIMALDUS/OUT"
@@ -102,7 +95,7 @@ jobs:
           git config user.email "ci@crusader"
           git add "${OUT_DIR}/"
           git commit -m "ci(F01): outputs ${{ github.event.inputs.run_id }} → OUT/"
-          git push https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git HEAD:main
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
 
       - name: Upload artefacts F01
         uses: actions/upload-artifact@v4
