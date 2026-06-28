@@ -84,11 +84,18 @@ jobs:
 
           echo "[ASSETS] T?l?chargement depuis : $BASE_URL"
 
-          gh release download "${{ github.event.inputs.run_id }}" \
-            --repo "${{ github.repository }}" \
-            --pattern "timing.json" --pattern "roadmap.json" \
-            --pattern "audio_clean.mp3" --pattern "images.zip" \
-            --dir /tmp/assets || true
+          for FNAME in timing.json roadmap.json audio_clean.mp3 images.zip; do
+            if wget -q \
+              --header="Authorization: token $GH_TOKEN" \
+              -O "/tmp/assets/${FNAME}" \
+              "${BASE_URL}/${FNAME}" 2>/dev/null; then
+              SIZE=$(du -h "/tmp/assets/${FNAME}" | cut -f1)
+              echo "[ASSETS] ${FNAME} - ${SIZE}"
+            else
+              echo "[ASSETS] ${FNAME} - ECHEC (ignore)"
+              rm -f "/tmp/assets/${FNAME}"
+            fi
+          done
 
           # Fallback: copier depuis le repo si les fichiers sont deja committes
           MODE=${{ github.event.inputs.mode }}
