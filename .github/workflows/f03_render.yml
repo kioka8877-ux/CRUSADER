@@ -15,26 +15,26 @@ on:
         required: false
         default: "CrusaderShort"
       total_frames:
-        description: "Nombre total de frames � rendre"
+        description: "Nombre total de frames ? rendre"
         required: true
       mode:
         description: "Mode de production (alpha|beta)"
         required: false
         default: "alpha"
 
-# �����������������������������������������������������������������������������
+# ?????????????????????????????????????????????????????????????????????????????
 # ARCHITECTURE
 # Etape 1 : PREFLIGHT - 1 job, frames 0-9, timeout 6 min
 #            Go / No-Go avant de lancer 70 GB de compute
-# Etape 2 : RENDER   - 10 jobs parall�les (needs: preflight)
-#            ~7 GB RAM chacun = 70 GB total confirm�s
+# Etape 2 : RENDER   - 10 jobs parall?les (needs: preflight)
+#            ~7 GB RAM chacun = 70 GB total confirm?s
 # Etape 3 : CONCAT   - 1 job FFmpeg (needs: render)
 #            Assemblage final  artifact "resultat-final"
-# �����������������������������������������������������������������������������
+# ?????????????????????????????????????????????????????????????????????????????
 
 jobs:
 
-  # �� ETAPE 1 : PREFLIGHT ������������������������������������������������������
+  # ?? ETAPE 1 : PREFLIGHT ??????????????????????????????????????????????????????
   preflight:
     name: "Preflight (frames 0-9)"
     runs-on: ubuntu-latest
@@ -72,17 +72,17 @@ jobs:
             cd -
           fi
 
-          # V�rification + copie des polices via script - FAIL FAST si police manquante
+          # V?rification + copie des polices via script - FAIL FAST si police manquante
           bash ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/crs_f03_verify_fonts.sh ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/fonts
 
-      - name: T�l�charger assets depuis GitHub Release
+      - name: T?l?charger assets depuis GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p /tmp/assets
           BASE_URL="https://github.com/${{ github.repository }}/releases/download/${{ github.event.inputs.run_id }}"
 
-          echo "[ASSETS] T�l�chargement depuis : $BASE_URL"
+          echo "[ASSETS] T?l?chargement depuis : $BASE_URL"
 
           gh release download "${{ github.event.inputs.run_id }}" \
             --repo "${{ github.repository }}" \
@@ -90,7 +90,7 @@ jobs:
             --pattern "audio_clean.mp3" --pattern "images.zip" \
             --dir /tmp/assets || true
 
-          # Fallback: copier depuis le repo si les fichiers sont déjà committés
+          # Fallback: copier depuis le repo si les fichiers sont deja committes
           MODE=${{ github.event.inputs.mode }}
           [ ! -f /tmp/assets/timing.json ] && cp "${MODE}/F03_SIGISMUND/CODEBASE/public/timing.json" /tmp/assets/ 2>/dev/null || true
           [ ! -f /tmp/assets/roadmap.json ] && cp "${MODE}/F03_SIGISMUND/CODEBASE/public/roadmap.json" /tmp/assets/ 2>/dev/null || true
@@ -140,7 +140,7 @@ jobs:
           done
 
           END=$(date +%s)
-          echo "[PREFLIGHT] Rendu termin� en $((END - START))s"
+          echo "[PREFLIGHT] Rendu termin? en $((END - START))s"
           ls -lh /tmp/preflight_frames/
 
       - name: Verdict Go / No-Go
@@ -163,10 +163,10 @@ jobs:
           done
           if [ "$OK" -ge 3 ]; then
             echo "go=true" >> $GITHUB_OUTPUT
-            echo "[PREFLIGHT] ? GO - 3/3 frames valid�es"
+            echo "[PREFLIGHT] ? GO - 3/3 frames valid?es"
           else
             echo "go=false" >> $GITHUB_OUTPUT
-            echo "[PREFLIGHT] ? NO-GO - ${OK}/3 frames valid�es"
+            echo "[PREFLIGHT] ? NO-GO - ${OK}/3 frames valid?es"
             exit 1
           fi
 
@@ -178,7 +178,7 @@ jobs:
           retention-days: 1
 
 
-  # �� ETAPE 2 : 10 WORKERS EN PARALLELE ����������������������������������������
+  # ?? ETAPE 2 : 10 WORKERS EN PARALLELE ????????????????????????????????????????
   render:
     name: "Chunk ${{ matrix.chunk }}"
     needs: preflight
@@ -190,7 +190,7 @@ jobs:
     strategy:
       matrix:
         chunk: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-      fail-fast: false   # Un chunk rat� ne tue pas les autres
+      fail-fast: false   # Un chunk rat? ne tue pas les autres
 
     steps:
       - name: Checkout repo
@@ -216,10 +216,10 @@ jobs:
             cd -
           fi
 
-          # V�rification + copie des polices via script - FAIL FAST si police manquante
+          # V?rification + copie des polices via script - FAIL FAST si police manquante
           bash ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/crs_f03_verify_fonts.sh ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/fonts
 
-      - name: T�l�charger assets depuis GitHub Release
+      - name: T?l?charger assets depuis GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -234,7 +234,7 @@ jobs:
               SIZE=$(du -h "/tmp/assets/${FNAME}" | cut -f1)
               echo "[ASSETS] ${FNAME} - ${SIZE} ?"
             else
-              echo "[ASSETS] ${FNAME} - ECHEC (ignor�)"
+              echo "[ASSETS] ${FNAME} - ECHEC (ignor?)"
               rm -f "/tmp/assets/${FNAME}"
             fi
           done
@@ -273,21 +273,21 @@ jobs:
       - name: Render chunk
         working-directory: ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE
         run: |
-          # Assertion finale - les polices doivent �tre l� depuis le setup
+          # Assertion finale - les polices doivent ?tre l? depuis le setup
           FONT_COUNT=$(ls public/fonts/*.woff2 2>/dev/null | wc -l)
           if [ "$FONT_COUNT" -lt 17 ]; then
             echo "[FAIL] Polices manquantes dans public/fonts/ ($FONT_COUNT/17)"
-            echo "       crs_f03_verify_fonts.sh aurait d� �chouer dans Setup"
+            echo "       crs_f03_verify_fonts.sh aurait d? ?chouer dans Setup"
             exit 1
           fi
-          echo "[FONTS] $FONT_COUNT/17 polices confirm�es - Render autoris�"
+          echo "[FONTS] $FONT_COUNT/17 polices confirm?es - Render autoris?"
 
           CHROME=$(which chromium-browser 2>/dev/null || which chromium 2>/dev/null || echo "$CHROMIUM_PATH")
           START_TS=$(date +%s)
 
-          echo "[CHUNK ${{ matrix.chunk }}] D�but rendu - frames ${{ steps.frames.outputs.start }}-${{ steps.frames.outputs.end }}"
+          echo "[CHUNK ${{ matrix.chunk }}] D?but rendu - frames ${{ steps.frames.outputs.start }}-${{ steps.frames.outputs.end }}"
 
-          # �� BYPASS COMPOSITOR - s�quence JPEG + FFmpeg (zero hang) ��������������
+          # ?? BYPASS COMPOSITOR - s?quence JPEG + FFmpeg (zero hang) ??????????????
           FRAMES_DIR=/tmp/frames_${{ matrix.chunk }}
           mkdir -p $FRAMES_DIR
 
@@ -306,7 +306,7 @@ jobs:
           FRAME_COUNT=$(ls $FRAMES_DIR/*.jpeg 2>/dev/null | wc -l)
           echo "[CHUNK ${{ matrix.chunk }}] $FRAME_COUNT frames JPEG rendues"
 
-          # Encoder JPEG  mp4 video-only (audio mux� au concat final)
+          # Encoder JPEG  mp4 video-only (audio mux? au concat final)
           ffmpeg -y \
             -framerate ${{ github.event.inputs.fps }} \
             -pattern_type glob -i "$FRAMES_DIR/*.jpeg" \
@@ -318,7 +318,7 @@ jobs:
           ELAPSED=$((END_TS - START_TS))
           SIZE=$(du -h /tmp/chunk_${{ matrix.chunk }}.mp4 | cut -f1)
           FPS_REAL=$(echo "${{ steps.frames.outputs.count }} $ELAPSED" | awk '{printf "%.1f", $1/$2}')
-          echo "[CHUNK ${{ matrix.chunk }}] ? Termin� en ${ELAPSED}s - ${SIZE} - ${FPS_REAL} fps r�els"
+          echo "[CHUNK ${{ matrix.chunk }}] ? Termin? en ${ELAPSED}s - ${SIZE} - ${FPS_REAL} fps r?els"
 
       - name: Upload chunk artifact
         uses: actions/upload-artifact@v4
@@ -328,7 +328,7 @@ jobs:
           retention-days: 1
 
 
-  # �� ETAPE 3 : CONCAT FINAL ����������������������������������������������������
+  # ?? ETAPE 3 : CONCAT FINAL ????????????????????????????????????????????????????
   concat:
     name: "Concat Final"
     needs: render
@@ -341,7 +341,7 @@ jobs:
         with:
           ffmpeg-version: release
 
-      - name: T�l�charger audio depuis GitHub Release
+      - name: T?l?charger audio depuis GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -351,18 +351,18 @@ jobs:
             -O /tmp/audio_clean.mp3 \
             "${BASE_URL}/audio_clean.mp3" && \
             echo "[AUDIO] audio_clean.mp3 - $(du -h /tmp/audio_clean.mp3 | cut -f1) ?" || \
-            echo "[AUDIO] audio_clean.mp3 - ABSENT (vid�o sans audio)"
+            echo "[AUDIO] audio_clean.mp3 - ABSENT (vid?o sans audio)"
 
-      - name: T�l�charger tous les chunks
+      - name: T?l?charger tous les chunks
         uses: actions/download-artifact@v4
         with:
           pattern: chunk-*
           merge-multiple: true
           path: /tmp/chunks
 
-      - name: V�rifier les chunks
+      - name: V?rifier les chunks
         run: |
-          echo "[CONCAT] Chunks re�us :"
+          echo "[CONCAT] Chunks re?us :"
           for i in 0 1 2 3 4 5 6 7 8 9; do
             F="/tmp/chunks/chunk_${i}.mp4"
             if [ -f "$F" ]; then
@@ -383,7 +383,7 @@ jobs:
           echo "[CONCAT] Liste d'assemblage :"
           cat /tmp/concat_list.txt
 
-          # Concat video-only (les chunks sont sans audio - encod�s via FFmpeg s�quence)
+          # Concat video-only (les chunks sont sans audio - encod?s via FFmpeg s?quence)
           ffmpeg -y -f concat -safe 0 -i /tmp/concat_list.txt -c:v copy -an /tmp/short_render_video.mp4
 
           # Muxer l'audio si disponible
@@ -394,10 +394,10 @@ jobs:
               -c:v copy -c:a aac -b:a 192k \
               -shortest \
               /tmp/short_render.mp4
-            echo "[CONCAT] ? Audio mux� depuis audio_clean.mp3"
+            echo "[CONCAT] ? Audio mux? depuis audio_clean.mp3"
           else
             mv /tmp/short_render_video.mp4 /tmp/short_render.mp4
-            echo "[CONCAT] ?? Pas d'audio - vid�o video-only"
+            echo "[CONCAT] ?? Pas d'audio - vid?o video-only"
           fi
 
           SIZE=$(du -h /tmp/short_render.mp4 | cut -f1)
@@ -417,10 +417,10 @@ jobs:
           git config user.name "CRUSADER-CI"
           git config user.email "ci@crusader"
           git add "${OUT_DIR}/"
-          git commit -m "ci(F03): short_render.mp4 → OUT/" || echo "Nothing to commit"
+          git commit -m "ci(F03): short_render.mp4 -> OUT/" || echo "Nothing to commit"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
 
-      - name: Upload vid�o finale
+      - name: Upload vid?o finale
         uses: actions/upload-artifact@v4
         with:
           name: resultat-final
