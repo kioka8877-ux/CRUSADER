@@ -25,11 +25,11 @@ on:
 # ?????????????????????????????????????????????????????????????????????????????
 # ARCHITECTURE
 # Etape 1 : PREFLIGHT - 1 job, frames 0-9, timeout 6 min
-#            Go / No-Go avant de lancer 70 GB de compute
+#            Go / No-Go avant de lancer 70 GB de compute
 # Etape 2 : RENDER   - 10 jobs parall?les (needs: preflight)
-#            ~7 GB RAM chacun = 70 GB total confirm?s
+#            ~7 GB RAM chacun = 70 GB total confirm?s
 # Etape 3 : CONCAT   - 1 job FFmpeg (needs: render)
-#            Assemblage final  artifact "resultat-final"
+#            Assemblage final  artifact "resultat-final"
 # ?????????????????????????????????????????????????????????????????????????????
 
 jobs:
@@ -268,7 +268,7 @@ jobs:
           echo "start=$START" >> $GITHUB_OUTPUT
           echo "end=$END"     >> $GITHUB_OUTPUT
           echo "count=$COUNT" >> $GITHUB_OUTPUT
-          echo "[CHUNK $CHUNK] Frames $START  $END ($COUNT frames)"
+          echo "[CHUNK $CHUNK] Frames $START  $END ($COUNT frames)"
 
       - name: Render chunk
         working-directory: ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE
@@ -306,7 +306,7 @@ jobs:
           FRAME_COUNT=$(ls $FRAMES_DIR/*.jpeg 2>/dev/null | wc -l)
           echo "[CHUNK ${{ matrix.chunk }}] $FRAME_COUNT frames JPEG rendues"
 
-          # Encoder JPEG  mp4 video-only (audio mux? au concat final)
+          # Encoder JPEG  mp4 video-only (audio mux? au concat final)
           ffmpeg -y \
             -framerate ${{ github.event.inputs.fps }} \
             -pattern_type glob -i "$FRAMES_DIR/*.jpeg" \
