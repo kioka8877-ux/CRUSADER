@@ -480,9 +480,11 @@ jobs:
 
     steps:
       - name: Setup FFmpeg
-        uses: FedericoCarboni/setup-ffmpeg@v3
-        with:
-          ffmpeg-version: release
+        run: |
+          if ! command -v ffmpeg &>/dev/null; then
+            sudo apt-get update && sudo apt-get install -y ffmpeg
+          fi
+          echo "FFmpeg $(ffmpeg -version | head -1)"
 
       - name: Télécharger audio depuis GitHub Release (Python)
         env:
