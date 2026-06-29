@@ -624,7 +624,13 @@ jobs:
           echo "[CONCAT] ? short_render.mp4 - ${SIZE} - ${DURATION}s"
 
 
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.mode == 'beta' && 'beta-test-f03' || 'main' }}
+
       - name: Commit output vers F03 OUT
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
