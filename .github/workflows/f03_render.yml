@@ -229,8 +229,11 @@ jobs:
           fi
 
           # Verifier duree + nb frames encodees avec ffprobe (deja installe dans l'image)
-          DURATION=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$F" 2>/dev/null || echo 0)
-          NB_FRAMES=$(ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_frames -of csv=p=0 "$F" 2>/dev/null || echo 0)
+          # Format default=noprint_wrappers=1:nokey=1 + tr -d : sortie scalaire pure, pas de virgule traînante
+          DURATION=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$F" 2>/dev/null | tr -d '[:space:],')
+          NB_FRAMES=$(ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_frames -of default=noprint_wrappers=1:nokey=1 "$F" 2>/dev/null | tr -d '[:space:],')
+          DURATION=${DURATION:-0}
+          NB_FRAMES=${NB_FRAMES:-0}
 
           echo "[PREFLIGHT] MP4 : $(du -h $F | cut -f1) | duree=${DURATION}s | frames=${NB_FRAMES}"
 
