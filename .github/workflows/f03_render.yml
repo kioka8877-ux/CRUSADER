@@ -187,64 +187,69 @@ jobs:
           echo "[ASSETS] Contenu public/ :"
           ls -lh ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/
 
-      - name: Preflight render (frames 0-9)
+      - name: Preflight render (MP4 frames 0-60)
         working-directory: ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE
         run: |
           CHROME=$(which chromium-browser 2>/dev/null || which chromium 2>/dev/null || echo "$CHROMIUM_PATH")
 
-          echo "[PREFLIGHT] Rendu PNG frames 0, 5, 9 (bypass encodage video - compositor hang fix)..."
+          echo "[PREFLIGHT] Rendu MP4 frames 0-60 (2s @ 30fps) - validation animations + transitions..."
           mkdir -p /tmp/preflight_frames
           START=$(date +%s)
 
-          for FRAME in 0 5 9; do
-            echo "[PREFLIGHT] Frame ${FRAME}..."
-            npx remotion still \
-              src/index.jsx \
-              "${{ github.event.inputs.composition }}" \
-              /tmp/preflight_frames/frame_${FRAME}.png \
-              --frame=${FRAME} \
-              --gl=swangle \
-              --timeout=60000 \
-              ${CHROME:+--browser-executable=$CHROME}
-            ls -lh /tmp/preflight_frames/frame_${FRAME}.png 2>/dev/null || echo "[PREFLIGHT] frame_${FRAME}.png ABSENT"
-          done
+          npx remotion render \
+            src/index.jsx \
+            "${{ github.event.inputs.composition }}" \
+            /tmp/preflight_frames/preflight_preview.mp4 \
+            --frames=0-60 \
+            --codec=h264 \
+            --concurrency=1 \
+            --gl=swangle \
+            --timeout=120000 \
+            ${CHROME:+--browser-executable=$CHROME}
 
           END=$(date +%s)
-          echo "[PREFLIGHT] Rendu termin? en $((END - START))s"
+          echo "[PREFLIGHT] Rendu MP4 termine en $((END - START))s"
           ls -lh /tmp/preflight_frames/
 
       - name: Verdict Go / No-Go
         id: verdict
         run: |
-          OK=0
-          for FRAME in 0 5 9; do
-            F="/tmp/preflight_frames/frame_${FRAME}.png"
-            if [ -f "$F" ]; then
-              SIZE=$(stat -c%s "$F")
-              if [ "$SIZE" -gt 10000 ]; then
-                echo "[PREFLIGHT] ? Frame ${FRAME} OK - $(du -h $F | cut -f1)"
-                OK=$((OK + 1))
-              else
-                echo "[PREFLIGHT] ? Frame ${FRAME} trop petite (${SIZE} octets)"
-              fi
-            else
-              echo "[PREFLIGHT] ? Frame ${FRAME} absente"
-            fi
-          done
-          if [ "$OK" -ge 3 ]; then
+          F=/tmp/preflight_frames/preflight_preview.mp4
+          if [ ! -f "$F" ]; then
+            echo "[PREFLIGHT] X MP4 absent"
+            echo "go=false" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+
+          SIZE=$(stat -c%s "$F")
+          if [ "$SIZE" -lt 50000 ]; then
+            echo "[PREFLIGHT] X MP4 trop petit (${SIZE} octets, attendu > 50 KB)"
+            echo "go=false" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+
+          # Verifier duree + nb frames encodees avec ffprobe (deja installe dans l'image)
+          DURATION=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$F" 2>/dev/null || echo 0)
+          NB_FRAMES=$(ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_frames -of csv=p=0 "$F" 2>/dev/null || echo 0)
+
+          echo "[PREFLIGHT] MP4 : $(du -h $F | cut -f1) | duree=${DURATION}s | frames=${NB_FRAMES}"
+
+          # Go si duree >= 1.5s ET >= 45 frames encodees (sur 61 attendues, on tolere ~25 % de marge)
+          DURATION_OK=$(awk "BEGIN{print ($DURATION >= 1.5)}")
+          if [ "$DURATION_OK" = "1" ] && [ "$NB_FRAMES" -ge 45 ]; then
             echo "go=true" >> $GITHUB_OUTPUT
-            echo "[PREFLIGHT] ? GO - 3/3 frames valid?es"
+            echo "[PREFLIGHT] OK GO - MP4 valide (${NB_FRAMES} frames, ${DURATION}s)"
           else
             echo "go=false" >> $GITHUB_OUTPUT
-            echo "[PREFLIGHT] ? NO-GO - ${OK}/3 frames valid?es"
+            echo "[PREFLIGHT] X NO-GO - MP4 incomplet (frames=${NB_FRAMES}/61, duree=${DURATION}s)"
             exit 1
           fi
 
       - name: Upload preflight (validation visuelle)
         uses: actions/upload-artifact@v4
         with:
-          name: preflight-frames
-          path: /tmp/preflight_frames/
+          name: preflight-preview
+          path: /tmp/preflight_frames/preflight_preview.mp4
           retention-days: 1
 
 
