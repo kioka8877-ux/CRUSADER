@@ -80,34 +80,85 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_ID: ${{ github.event.inputs.run_id }}
         run: |
-          python3 -c "
-          import os, requests
-          token = os.environ['GH_TOKEN']
-          repo = os.environ['GITHUB_REPOSITORY']
-          run_id = os.environ['RUN_ID']
-          headers = {'Authorization': f'token {token}', 'Accept': 'application/vnd.github.v3+json'}
+          node -e "
+          const https = require('https');
+          const fs = require('fs');
+          const token = process.env.GH_TOKEN;
+          const repo = process.env.GITHUB_REPOSITORY;
+          const run_id = process.env.RUN_ID;
 
-          # Get release assets
-          url = f'https://api.github.com/repos/{repo}/releases/tags/{run_id}'
-          r = requests.get(url, headers=headers)
-          r.raise_for_status()
-          assets = r.json()['assets']
+          function getJSON(url, headers) {
+            return new Promise((resolve, reject) => {
+              https.get(url, { headers }, (res) => {
+                let data = '';
+                res.on('data', chunk => data += chunk);
+                res.on('end', () => {
+                  if (res.statusCode !== 200) {
+                    reject(new Error('Failed to get JSON: ' + res.statusCode + ' - ' + data));
+                  } else {
+                    try { resolve(JSON.parse(data)); } catch(e) { reject(e); }
+                  }
+                });
+              }).on('error', reject);
+            });
+          }
 
-          # Download assets
-          os.makedirs('/tmp/assets', exist_ok=True)
-          for asset in assets:
-              name = asset['name']
-              asset_id = asset['id']
-              print(f'Downloading {name}...')
-              download_url = f'https://api.github.com/repos/{repo}/releases/assets/{asset_id}'
-              asset_headers = {'Authorization': f'token {token}', 'Accept': 'application/octet-stream'}
-              with requests.get(download_url, headers=asset_headers, stream=True) as ar:
-                  ar.raise_for_status()
-                  with open(f'/tmp/assets/{name}', 'wb') as f:
-                      for chunk in ar.iter_content(chunk_size=8192):
-                          f.write(chunk)
-              print(f'Downloaded {name} successfully.')
-          "
+          function downloadAsset(assetId, name, dest) {
+            const downloadUrl = 'https://api.github.com/repos/' + repo + '/releases/assets/' + assetId;
+            const headers = {
+              'Authorization': 'token ' + token,
+              'Accept': 'application/octet-stream',
+              'User-Agent': 'NodeJS-Downloader'
+            };
+            return new Promise((resolve, reject) => {
+              https.get(downloadUrl, { headers }, (res) => {
+                if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+                  https.get(res.headers.location, (s3Res) => {
+                    if (s3Res.statusCode !== 200) {
+                      return reject(new Error('S3 download failed: status ' + s3Res.statusCode));
+                    }
+                    const file = fs.createWriteStream(dest);
+                    s3Res.pipe(file);
+                    file.on('finish', () => { file.close(); resolve(); });
+                  }).on('error', reject);
+                } else if (res.statusCode === 200) {
+                  const file = fs.createWriteStream(dest);
+                  res.pipe(file);
+                  file.on('finish', () => { file.close(); resolve(); });
+                } else {
+                  let errData = '';
+                  res.on('data', d => errData += d);
+                  res.on('end', () => reject(new Error('API download failed: status ' + res.statusCode + ' - ' + errData)));
+                }
+              }).on('error', reject);
+            });
+          }
+
+          async function run() {
+            try {
+              console.log('Querying release assets...');
+              const headers = {
+                'Authorization': 'token ' + token,
+                'Accept': 'application/vnd.github.v3+json',
+                'User-Agent': 'NodeJS-Downloader'
+              };
+              const releaseUrl = 'https://api.github.com/repos/' + repo + '/releases/tags/' + run_id;
+              const release = await getJSON(releaseUrl, headers);
+              console.log('Release found: ' + release.name + ' with ' + release.assets.length + ' assets.');
+
+              fs.mkdirSync('/tmp/assets', { recursive: true });
+              for (const asset of release.assets) {
+                console.log('Downloading ' + asset.name + '...');
+                await downloadAsset(asset.id, asset.name, '/tmp/assets/' + asset.name);
+                console.log('Downloaded ' + asset.name + ' successfully.');
+              }
+            } catch (err) {
+              console.error('Download Error:', err.message);
+              process.exit(1);
+            }
+          }
+          run();
+          " 
 
           # Fallback: copier depuis le repo si les fichiers sont deja committes
           MODE=${{ github.event.inputs.mode }}
@@ -243,34 +294,85 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_ID: ${{ github.event.inputs.run_id }}
         run: |
-          python3 -c "
-          import os, requests
-          token = os.environ['GH_TOKEN']
-          repo = os.environ['GITHUB_REPOSITORY']
-          run_id = os.environ['RUN_ID']
-          headers = {'Authorization': f'token {token}', 'Accept': 'application/vnd.github.v3+json'}
+          node -e "
+          const https = require('https');
+          const fs = require('fs');
+          const token = process.env.GH_TOKEN;
+          const repo = process.env.GITHUB_REPOSITORY;
+          const run_id = process.env.RUN_ID;
 
-          # Get release assets
-          url = f'https://api.github.com/repos/{repo}/releases/tags/{run_id}'
-          r = requests.get(url, headers=headers)
-          r.raise_for_status()
-          assets = r.json()['assets']
+          function getJSON(url, headers) {
+            return new Promise((resolve, reject) => {
+              https.get(url, { headers }, (res) => {
+                let data = '';
+                res.on('data', chunk => data += chunk);
+                res.on('end', () => {
+                  if (res.statusCode !== 200) {
+                    reject(new Error('Failed to get JSON: ' + res.statusCode + ' - ' + data));
+                  } else {
+                    try { resolve(JSON.parse(data)); } catch(e) { reject(e); }
+                  }
+                });
+              }).on('error', reject);
+            });
+          }
 
-          # Download assets
-          os.makedirs('/tmp/assets', exist_ok=True)
-          for asset in assets:
-              name = asset['name']
-              asset_id = asset['id']
-              print(f'Downloading {name}...')
-              download_url = f'https://api.github.com/repos/{repo}/releases/assets/{asset_id}'
-              asset_headers = {'Authorization': f'token {token}', 'Accept': 'application/octet-stream'}
-              with requests.get(download_url, headers=asset_headers, stream=True) as ar:
-                  ar.raise_for_status()
-                  with open(f'/tmp/assets/{name}', 'wb') as f:
-                      for chunk in ar.iter_content(chunk_size=8192):
-                          f.write(chunk)
-              print(f'Downloaded {name} successfully.')
-          "
+          function downloadAsset(assetId, name, dest) {
+            const downloadUrl = 'https://api.github.com/repos/' + repo + '/releases/assets/' + assetId;
+            const headers = {
+              'Authorization': 'token ' + token,
+              'Accept': 'application/octet-stream',
+              'User-Agent': 'NodeJS-Downloader'
+            };
+            return new Promise((resolve, reject) => {
+              https.get(downloadUrl, { headers }, (res) => {
+                if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+                  https.get(res.headers.location, (s3Res) => {
+                    if (s3Res.statusCode !== 200) {
+                      return reject(new Error('S3 download failed: status ' + s3Res.statusCode));
+                    }
+                    const file = fs.createWriteStream(dest);
+                    s3Res.pipe(file);
+                    file.on('finish', () => { file.close(); resolve(); });
+                  }).on('error', reject);
+                } else if (res.statusCode === 200) {
+                  const file = fs.createWriteStream(dest);
+                  res.pipe(file);
+                  file.on('finish', () => { file.close(); resolve(); });
+                } else {
+                  let errData = '';
+                  res.on('data', d => errData += d);
+                  res.on('end', () => reject(new Error('API download failed: status ' + res.statusCode + ' - ' + errData)));
+                }
+              }).on('error', reject);
+            });
+          }
+
+          async function run() {
+            try {
+              console.log('Querying release assets...');
+              const headers = {
+                'Authorization': 'token ' + token,
+                'Accept': 'application/vnd.github.v3+json',
+                'User-Agent': 'NodeJS-Downloader'
+              };
+              const releaseUrl = 'https://api.github.com/repos/' + repo + '/releases/tags/' + run_id;
+              const release = await getJSON(releaseUrl, headers);
+              console.log('Release found: ' + release.name + ' with ' + release.assets.length + ' assets.');
+
+              fs.mkdirSync('/tmp/assets', { recursive: true });
+              for (const asset of release.assets) {
+                console.log('Downloading ' + asset.name + '...');
+                await downloadAsset(asset.id, asset.name, '/tmp/assets/' + asset.name);
+                console.log('Downloaded ' + asset.name + ' successfully.');
+              }
+            } catch (err) {
+              console.error('Download Error:', err.message);
+              process.exit(1);
+            }
+          }
+          run();
+          " 
 
           if [ -f /tmp/assets/images.zip ]; then
             unzip -q /tmp/assets/images.zip -d /tmp/assets/
@@ -379,34 +481,86 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_ID: ${{ github.event.inputs.run_id }}
         run: |
-          python3 -c "
-          import os, requests
-          token = os.environ['GH_TOKEN']
-          repo = os.environ['GITHUB_REPOSITORY']
-          run_id = os.environ['RUN_ID']
-          headers = {'Authorization': f'token {token}', 'Accept': 'application/vnd.github.v3+json'}
+          node -e "
+          const https = require('https');
+          const fs = require('fs');
+          const token = process.env.GH_TOKEN;
+          const repo = process.env.GITHUB_REPOSITORY;
+          const run_id = process.env.RUN_ID;
 
-          # Get release assets
-          url = f'https://api.github.com/repos/{repo}/releases/tags/{run_id}'
-          r = requests.get(url, headers=headers)
-          r.raise_for_status()
-          assets = r.json()['assets']
+          function getJSON(url, headers) {
+            return new Promise((resolve, reject) => {
+              https.get(url, { headers }, (res) => {
+                let data = '';
+                res.on('data', chunk => data += chunk);
+                res.on('end', () => {
+                  if (res.statusCode !== 200) {
+                    reject(new Error('Failed to get JSON: ' + res.statusCode + ' - ' + data));
+                  } else {
+                    try { resolve(JSON.parse(data)); } catch(e) { reject(e); }
+                  }
+                });
+              }).on('error', reject);
+            });
+          }
 
-          # Download only audio_clean.mp3
-          for asset in assets:
-              if asset['name'] == 'audio_clean.mp3':
-                  asset_id = asset['id']
-                  print('Downloading audio_clean.mp3...')
-                  download_url = f'https://api.github.com/repos/{repo}/releases/assets/{asset_id}'
-                  asset_headers = {'Authorization': f'token {token}', 'Accept': 'application/octet-stream'}
-                  ar = requests.get(download_url, headers=asset_headers)
-                  if ar.status_code == 200:
-                      with open('/tmp/audio_clean.mp3', 'wb') as f:
-                          f.write(ar.content)
-                      print('Downloaded audio_clean.mp3 successfully.')
-                  else:
-                      print('Error downloading audio_clean.mp3:', ar.text)
-          "
+          function downloadAsset(assetId, name, dest) {
+            const downloadUrl = 'https://api.github.com/repos/' + repo + '/releases/assets/' + assetId;
+            const headers = {
+              'Authorization': 'token ' + token,
+              'Accept': 'application/octet-stream',
+              'User-Agent': 'NodeJS-Downloader'
+            };
+            return new Promise((resolve, reject) => {
+              https.get(downloadUrl, { headers }, (res) => {
+                if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+                  https.get(res.headers.location, (s3Res) => {
+                    if (s3Res.statusCode !== 200) {
+                      return reject(new Error('S3 download failed: status ' + s3Res.statusCode));
+                    }
+                    const file = fs.createWriteStream(dest);
+                    s3Res.pipe(file);
+                    file.on('finish', () => { file.close(); resolve(); });
+                  }).on('error', reject);
+                } else if (res.statusCode === 200) {
+                  const file = fs.createWriteStream(dest);
+                  res.pipe(file);
+                  file.on('finish', () => { file.close(); resolve(); });
+                } else {
+                  let errData = '';
+                  res.on('data', d => errData += d);
+                  res.on('end', () => reject(new Error('API download failed: status ' + res.statusCode + ' - ' + errData)));
+                }
+              }).on('error', reject);
+            });
+          }
+
+          async function run() {
+            try {
+              console.log('Querying release assets...');
+              const headers = {
+                'Authorization': 'token ' + token,
+                'Accept': 'application/vnd.github.v3+json',
+                'User-Agent': 'NodeJS-Downloader'
+              };
+              const releaseUrl = 'https://api.github.com/repos/' + repo + '/releases/tags/' + run_id;
+              const release = await getJSON(releaseUrl, headers);
+              console.log('Release found: ' + release.name + ' with ' + release.assets.length + ' assets.');
+
+              for (const asset of release.assets) {
+                if (asset.name === 'audio_clean.mp3') {
+                  console.log('Downloading audio_clean.mp3...');
+                  await downloadAsset(asset.id, asset.name, '/tmp/audio_clean.mp3');
+                  console.log('Downloaded audio_clean.mp3 successfully.');
+                }
+              }
+            } catch (err) {
+              console.error('Download Error:', err.message);
+              process.exit(1);
+            }
+          }
+          run();
+          " 
 
       - name: T?l?charger tous les chunks
         uses: actions/download-artifact@v4
