@@ -75,27 +75,39 @@ jobs:
           # V?rification + copie des polices via script - FAIL FAST si police manquante
           bash ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/crs_f03_verify_fonts.sh ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/fonts
 
-      - name: T?l?charger assets depuis GitHub Release
+      - name: Télécharger assets depuis GitHub Release (Python)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_ID: ${{ github.event.inputs.run_id }}
         run: |
-          mkdir -p /tmp/assets
-          BASE_URL="https://github.com/${{ github.repository }}/releases/download/${{ github.event.inputs.run_id }}"
+          python3 -c "
+          import os, requests
+          token = os.environ['GH_TOKEN']
+          repo = os.environ['GITHUB_REPOSITORY']
+          run_id = os.environ['RUN_ID']
+          headers = {'Authorization': f'token {token}', 'Accept': 'application/vnd.github.v3+json'}
 
-          echo "[ASSETS] T?l?chargement depuis : $BASE_URL"
+          # Get release assets
+          url = f'https://api.github.com/repos/{repo}/releases/tags/{run_id}'
+          r = requests.get(url, headers=headers)
+          r.raise_for_status()
+          assets = r.json()['assets']
 
-          for FNAME in timing.json roadmap.json audio_clean.mp3 images.zip; do
-            if wget -q \
-              --header="Authorization: token $GH_TOKEN" \
-              -O "/tmp/assets/${FNAME}" \
-              "${BASE_URL}/${FNAME}" 2>/dev/null; then
-              SIZE=$(du -h "/tmp/assets/${FNAME}" | cut -f1)
-              echo "[ASSETS] ${FNAME} - ${SIZE}"
-            else
-              echo "[ASSETS] ${FNAME} - ECHEC (ignore)"
-              rm -f "/tmp/assets/${FNAME}"
-            fi
-          done
+          # Download assets
+          os.makedirs('/tmp/assets', exist_ok=True)
+          for asset in assets:
+              name = asset['name']
+              asset_id = asset['id']
+              print(f'Downloading {name}...')
+              download_url = f'https://api.github.com/repos/{repo}/releases/assets/{asset_id}'
+              asset_headers = {'Authorization': f'token {token}', 'Accept': 'application/octet-stream'}
+              with requests.get(download_url, headers=asset_headers, stream=True) as ar:
+                  ar.raise_for_status()
+                  with open(f'/tmp/assets/{name}', 'wb') as f:
+                      for chunk in ar.iter_content(chunk_size=8192):
+                          f.write(chunk)
+              print(f'Downloaded {name} successfully.')
+          "
 
           # Fallback: copier depuis le repo si les fichiers sont deja committes
           MODE=${{ github.event.inputs.mode }}
@@ -226,25 +238,39 @@ jobs:
           # V?rification + copie des polices via script - FAIL FAST si police manquante
           bash ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/crs_f03_verify_fonts.sh ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/fonts
 
-      - name: T?l?charger assets depuis GitHub Release
+      - name: Télécharger assets depuis GitHub Release (Python)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_ID: ${{ github.event.inputs.run_id }}
         run: |
-          mkdir -p /tmp/assets
-          BASE_URL="https://github.com/${{ github.repository }}/releases/download/${{ github.event.inputs.run_id }}"
+          python3 -c "
+          import os, requests
+          token = os.environ['GH_TOKEN']
+          repo = os.environ['GITHUB_REPOSITORY']
+          run_id = os.environ['RUN_ID']
+          headers = {'Authorization': f'token {token}', 'Accept': 'application/vnd.github.v3+json'}
 
-          for FNAME in timing.json roadmap.json audio_clean.mp3 images.zip; do
-            if wget -q \
-              --header="Authorization: token $GH_TOKEN" \
-              -O "/tmp/assets/${FNAME}" \
-              "${BASE_URL}/${FNAME}" 2>/dev/null; then
-              SIZE=$(du -h "/tmp/assets/${FNAME}" | cut -f1)
-              echo "[ASSETS] ${FNAME} - ${SIZE} ?"
-            else
-              echo "[ASSETS] ${FNAME} - ECHEC (ignor?)"
-              rm -f "/tmp/assets/${FNAME}"
-            fi
-          done
+          # Get release assets
+          url = f'https://api.github.com/repos/{repo}/releases/tags/{run_id}'
+          r = requests.get(url, headers=headers)
+          r.raise_for_status()
+          assets = r.json()['assets']
+
+          # Download assets
+          os.makedirs('/tmp/assets', exist_ok=True)
+          for asset in assets:
+              name = asset['name']
+              asset_id = asset['id']
+              print(f'Downloading {name}...')
+              download_url = f'https://api.github.com/repos/{repo}/releases/assets/{asset_id}'
+              asset_headers = {'Authorization': f'token {token}', 'Accept': 'application/octet-stream'}
+              with requests.get(download_url, headers=asset_headers, stream=True) as ar:
+                  ar.raise_for_status()
+                  with open(f'/tmp/assets/{name}', 'wb') as f:
+                      for chunk in ar.iter_content(chunk_size=8192):
+                          f.write(chunk)
+              print(f'Downloaded {name} successfully.')
+          "
 
           if [ -f /tmp/assets/images.zip ]; then
             unzip -q /tmp/assets/images.zip -d /tmp/assets/
@@ -348,17 +374,39 @@ jobs:
         with:
           ffmpeg-version: release
 
-      - name: T?l?charger audio depuis GitHub Release
+      - name: Télécharger audio depuis GitHub Release (Python)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_ID: ${{ github.event.inputs.run_id }}
         run: |
-          BASE_URL="https://github.com/${{ github.repository }}/releases/download/${{ github.event.inputs.run_id }}"
-          wget -q \
-            --header="Authorization: token $GH_TOKEN" \
-            -O /tmp/audio_clean.mp3 \
-            "${BASE_URL}/audio_clean.mp3" && \
-            echo "[AUDIO] audio_clean.mp3 - $(du -h /tmp/audio_clean.mp3 | cut -f1) ?" || \
-            echo "[AUDIO] audio_clean.mp3 - ABSENT (vid?o sans audio)"
+          python3 -c "
+          import os, requests
+          token = os.environ['GH_TOKEN']
+          repo = os.environ['GITHUB_REPOSITORY']
+          run_id = os.environ['RUN_ID']
+          headers = {'Authorization': f'token {token}', 'Accept': 'application/vnd.github.v3+json'}
+
+          # Get release assets
+          url = f'https://api.github.com/repos/{repo}/releases/tags/{run_id}'
+          r = requests.get(url, headers=headers)
+          r.raise_for_status()
+          assets = r.json()['assets']
+
+          # Download only audio_clean.mp3
+          for asset in assets:
+              if asset['name'] == 'audio_clean.mp3':
+                  asset_id = asset['id']
+                  print('Downloading audio_clean.mp3...')
+                  download_url = f'https://api.github.com/repos/{repo}/releases/assets/{asset_id}'
+                  asset_headers = {'Authorization': f'token {token}', 'Accept': 'application/octet-stream'}
+                  ar = requests.get(download_url, headers=asset_headers)
+                  if ar.status_code == 200:
+                      with open('/tmp/audio_clean.mp3', 'wb') as f:
+                          f.write(ar.content)
+                      print('Downloaded audio_clean.mp3 successfully.')
+                  else:
+                      print('Error downloading audio_clean.mp3:', ar.text)
+          "
 
       - name: T?l?charger tous les chunks
         uses: actions/download-artifact@v4
