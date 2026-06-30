@@ -17,7 +17,6 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { TacticalArrow } from "./TacticalArrow";
 import { WorldNode } from "./WorldNode";
 
 /* ── Bézier cubique easeInOut ── caméra uniquement ── */
@@ -72,7 +71,7 @@ export const WorldScene = ({
   const n1Top = interpolate(t, [0, 1], [tY, 0]);
   const n1Width = interpolate(t, [0, 1], [tW, width]);
   const n1Height = interpolate(t, [0, 1], [tH, height]);
-  const n1Opacity = interpolate(t, [0, 0.2, 1], [0.2, 0.6, 1]);
+  const n1Opacity = interpolate(t, [0, 0.2, 1], [0.004, 0.6, 1]);
   const n1Radius = interpolate(t, [0, 1], [6, 0]);
 
   return (
@@ -110,17 +109,7 @@ export const WorldScene = ({
         </div>
       )}
 
-      {/* ── Marque — ligne tracée pendant le vol, spring uniquement ── */}
-      {hasNext && (
-        <TacticalArrow
-          fromX={width / 2}
-          fromY={height / 2}
-          toX={tCX}
-          toY={tCY}
-          transStart={transStart}
-          transFrames={tf}
-        />
-      )}
+      {/* ── Marque désactivée (TacticalArrow retirée) ── */}
     </AbsoluteFill>
   );
 };
