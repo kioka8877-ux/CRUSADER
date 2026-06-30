@@ -1,13 +1,15 @@
 /**
- * WorldScene.jsx — Style sinusoïdal (spec verrouillée 22/06)
+ * WorldScene.jsx — Sinusoidal Camera (v2 – spec beta-test3)
  *
- * World canvas pré-baked :
- *   - Caméra voyage via Bézier cubique easeInOut (PAS spring)
- *   - N plein cadre, reste en place — la caméra le quitte
- *   - N+1 minuscule teaser, alterne strict haut-droit / bas-droit
- *   - trans_frames lu depuis roadmap.json (8/12/18/30)
- *   - Seuil terminal fantôme (dernier visuel reste)
- *   - Spring réservé à la marque (TacticalArrow), pas à la caméra
+ * Tous les worlds sont positionnés sur une courbe sinusoïdale.
+ * La caméra voyage le long de cette courbe, se pause sur chaque world,
+ * puis transite vers le suivant avec un easing Bézier.
+ *
+ * Paramètres configurables via roadmap.style :
+ *   world_scale        – taille des visuels (0.0–1.0, défaut 0.70)
+ *   world_opacity      – opacité des visuels actifs (défaut 1.0)
+ *   camera_amplitude   – amplitude verticale de la sinusoïde (px, défaut 200)
+ *   camera_spacing     – espacement horizontal entre worlds (px, défaut 1500)
  */
 import React from "react";
 import {
@@ -22,94 +24,103 @@ import { WorldNode } from "./WorldNode";
 /* ── Bézier cubique easeInOut ── caméra uniquement ── */
 const BEZIER_EASE = Easing.bezier(0.42, 0, 0.58, 1);
 
-/* ── Teaser N+1 — minuscule ── */
-const TEASER_RATIO = 0.12; // 12 % du viewport
-const MARGIN = 28;
-const TOP_Y_RATIO = 0.08; // haut-droit — niveau titre
-const BOT_Y_RATIO = 0.82; // bas-droit — sous le sous-titre
-
-export const WorldScene = ({
-  segment,
-  nextSegment,
-  isTopRight,
-  durationInFrames,
-  transFrames,
-}) => {
+export const WorldScene = ({ timeline, style }) => {
   const frame = useCurrentFrame();
-  const { width, height } = useVideoConfig();
+  const { width, height, durationInFrames } = useVideoConfig();
 
-  const tf = transFrames || 12;
-  const transStart = durationInFrames - tf;
+  /* ── Style params avec défauts ── */
+  const worldScale = style.world_scale ?? 0.70;
+  const worldOpacity = style.world_opacity ?? 1.0;
+  const camAmplitude = style.camera_amplitude ?? 200;
+  const camSpacing = style.camera_spacing ?? 1500;
 
-  /* ── Camera travel — Bézier cubique easeInOut ── */
-  const rawT = interpolate(
-    frame,
-    [transStart, durationInFrames],
-    [0, 1],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-  const t = BEZIER_EASE(rawT);
+  /* ── Dimensions d'un world ── */
+  const wW = width * worldScale;
+  const wH = height * worldScale;
 
-  /* ── Teaser corner geometry ── */
-  const tW = width * TEASER_RATIO;
-  const tH = height * TEASER_RATIO;
-  const tX = width - MARGIN - tW;
-  const tY = isTopRight ? height * TOP_Y_RATIO : height * BOT_Y_RATIO;
-  const tCX = tX + tW / 2;
-  const tCY = tY + tH / 2;
+  /* ── Position de chaque world sur la sinusoïde ── */
+  /*    cos(i·π) alterne : +amp, -amp, +amp, -amp...   */
+  const worldPositions = timeline.map((_, i) => ({
+    x: i * camSpacing,
+    y: camAmplitude * Math.cos(i * Math.PI),
+  }));
 
-  const hasNext = !!nextSegment;
-  const mediaType = segment.media_type || "image";
-  const nextMediaType = nextSegment?.media_type || "image";
+  /* ── Trouver le segment actif ── */
+  let segIdx = 0;
+  for (let i = timeline.length - 1; i >= 0; i--) {
+    if (frame >= timeline[i].start_frame) {
+      segIdx = i;
+      break;
+    }
+  }
 
-  /* ── N — visuel actif : reste en place, la caméra le quitte ── */
-  const nScale = interpolate(t, [0, 1], [1, 0.55]);
-  const nOpacity = interpolate(t, [0, 0.5, 1], [1, 0.85, 0]);
+  const seg = timeline[segIdx];
+  const nextSeg = timeline[segIdx + 1] || null;
+  const segEnd = nextSeg ? nextSeg.start_frame : durationInFrames;
+  const tf = seg.trans_frames || 12;
+  const transStart = segEnd - tf;
 
-  /* ── N+1 — teaser minuscule → plein cadre ── */
-  const n1Left = interpolate(t, [0, 1], [tX, 0]);
-  const n1Top = interpolate(t, [0, 1], [tY, 0]);
-  const n1Width = interpolate(t, [0, 1], [tW, width]);
-  const n1Height = interpolate(t, [0, 1], [tH, height]);
-  const n1Opacity = interpolate(t, [0, 0.2, 1], [0.004, 0.6, 1]);
-  const n1Radius = interpolate(t, [0, 1], [6, 0]);
+  /* ── Camera progress (index flottant le long de la courbe) ── */
+  let cameraProgress = segIdx;
+
+  if (frame >= transStart && nextSeg) {
+    const rawT = interpolate(
+      frame,
+      [transStart, segEnd],
+      [0, 1],
+      { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+    );
+    cameraProgress = segIdx + BEZIER_EASE(rawT);
+  }
+
+  /* ── Position caméra sur la sinusoïde ── */
+  const cameraX = cameraProgress * camSpacing;
+  const cameraY = camAmplitude * Math.cos(cameraProgress * Math.PI);
+
+  /* ── Translation du container (centre la caméra dans le viewport) ── */
+  const translateX = width / 2 - cameraX;
+  const translateY = height / 2 - cameraY;
 
   return (
-    <AbsoluteFill>
-      {/* ── N — plein cadre → recule pendant le vol ── */}
-      <AbsoluteFill
+    <AbsoluteFill style={{ overflow: "hidden" }}>
+      <div
         style={{
-          transform: `scale(${nScale})`,
-          opacity: nOpacity,
-          transformOrigin: "center center",
+          position: "absolute",
+          transform: `translate(${translateX}px, ${translateY}px)`,
+          willChange: "transform",
         }}
       >
-        <WorldNode imageFile={segment.image_file} mediaType={mediaType} />
-      </AbsoluteFill>
+        {timeline.map((s, i) => {
+          const pos = worldPositions[i];
+          const mediaType = s.media_type || "image";
 
-      {/* ── N+1 — teaser minuscule → plein cadre (fantôme si dernier) ── */}
-      {hasNext && (
-        <div
-          style={{
-            position: "absolute",
-            left: n1Left,
-            top: n1Top,
-            width: n1Width,
-            height: n1Height,
-            opacity: n1Opacity,
-            borderRadius: n1Radius,
-            overflow: "hidden",
-            boxShadow: t < 0.5 ? "0 2px 16px rgba(0,0,0,0.85)" : "none",
-          }}
-        >
-          <WorldNode
-            imageFile={nextSegment.image_file}
-            mediaType={nextMediaType}
-          />
-        </div>
-      )}
+          /* Opacité basée sur la distance à la caméra */
+          const distance = Math.abs(i - cameraProgress);
+          const distOpacity = Math.max(0, Math.min(1, 1.5 - distance));
 
-      {/* ── Marque désactivée (TacticalArrow retirée) ── */}
+          return (
+            <div
+              key={s.id}
+              style={{
+                position: "absolute",
+                left: pos.x - wW / 2,
+                top: pos.y - wH / 2,
+                width: wW,
+                height: wH,
+                opacity: distOpacity * worldOpacity,
+                borderRadius: 8,
+                overflow: "hidden",
+                boxShadow:
+                  distOpacity > 0.3
+                    ? "0 4px 24px rgba(0,0,0,0.5)"
+                    : "none",
+              }}
+            >
+              <WorldNode imageFile={s.image_file} mediaType={mediaType} />
+            </div>
+          );
+        })}
+      </div>
     </AbsoluteFill>
   );
 };

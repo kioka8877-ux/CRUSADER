@@ -14,7 +14,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React from "react";
-import { AbsoluteFill, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Img, staticFile, useCurrentFrame } from "remotion";
 
 // CSS @font-face : référence les woff2 depuis public/fonts/ (servi par Remotion)
 // Syntaxe url('./fonts/...') → résolu par le serveur statique Remotion
@@ -164,8 +164,17 @@ export const Background = ({ style }) => {
       {/* @font-face — injection synchrone, zéro réseau */}
       <style>{FONT_FACES}</style>
 
-      {/* Couleur de fond */}
-      <AbsoluteFill style={{ backgroundColor: style.background_color }} />
+      {/* Fond (image ou couleur unie) */}
+      {style.background_type === "image" && style.background_image ? (
+        <AbsoluteFill>
+          <Img
+            src={staticFile(style.background_image)}
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
+        </AbsoluteFill>
+      ) : (
+        <AbsoluteFill style={{ backgroundColor: style.background_color }} />
+      )}
 
       {/* Grain (film grain via SVG feTurbulence) */}
       {grainOpacity > 0 && (
