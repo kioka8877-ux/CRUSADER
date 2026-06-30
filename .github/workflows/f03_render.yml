@@ -627,7 +627,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.inputs.mode == 'beta' && 'beta-test-f03' || 'main' }}
+          ref: ${{ github.event.inputs.mode == 'beta' && 'beta-test2-f03' || 'main' }}
 
       - name: Commit output vers F03 OUT
         continue-on-error: true
