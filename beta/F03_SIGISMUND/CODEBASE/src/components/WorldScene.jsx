@@ -125,7 +125,7 @@ export const WorldScene = ({ timeline, style }) => {
               }}
             >
               <WorldNode imageFile={s.image_file} mediaType={mediaType} />
-              <WorldTitle segment={s} style={style} />
+              <WorldTitle segment={s} style={style} index={i} />
             </div>
           );
         })}

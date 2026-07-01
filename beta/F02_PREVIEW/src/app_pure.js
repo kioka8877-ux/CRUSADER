@@ -28,11 +28,19 @@ const defaults = {
   background_image: "",
   background_color: "#F5F0E8",
   background_scale: 1.0,
+  // Titres
+  world_title_visible: false,
+  world_title_font: "Cinzel",
+  world_title_size: 28,
+  world_title_color: "#FFFFFF",
+  world_title_speed: 12,
+  // Sous-titres
   subtitle_font: "Cinzel",
   subtitle_size: 44,
   subtitle_color: "#FFFFFF",
   subtitle_position: "bottom",
   subtitle_align: "center",
+  subtitle_word_fade: 3,
   grain_intensity: 0.15,
   vignette: true,
 };
@@ -136,12 +144,20 @@ function buildControls() {
     ${color("background_color", "Couleur fond")}
     ${slider("background_scale", "Scale fond", 0.5, 2, 0.05)}
 
-    ${section("📝 Sous-titres")}
+    ${section("🏷️ Titres (au-dessus des visuels)")}
+    ${checkbox("world_title_visible", "Afficher les titres")}
+    ${select("world_title_font", "Police titre", FONTS, FONTS)}
+    ${slider("world_title_size", "Taille titre", 14, 60, 2)}
+    ${color("world_title_color", "Couleur titre")}
+    ${slider("world_title_speed", "Vitesse anim (frames)", 4, 30, 1)}
+
+    ${section("📝 Sous-titres (mot par mot)")}
     ${select("subtitle_font", "Police", FONTS, FONTS)}
     ${slider("subtitle_size", "Taille", 16, 80, 2)}
     ${color("subtitle_color", "Couleur")}
     ${select("subtitle_position", "Position", ["top","center","bottom"], ["Haut","Centre","Bas"])}
     ${select("subtitle_align", "Alignement", ["left","center","right"], ["Gauche","Centre","Droite"])}
+    ${slider("subtitle_word_fade", "Fondu mot (frames)", 1, 12, 1)}
 
     ${section("🎨 Effets")}
     ${slider("grain_intensity", "Grain", 0, 0.5, 0.01)}
@@ -160,6 +176,11 @@ function buildControls() {
       setS(el.dataset.key, el.value);
     });
   });
+  c.querySelectorAll("input[type=checkbox]").forEach(el => {
+    el.addEventListener("change", () => {
+      setS(el.dataset.key, el.checked);
+    });
+  });
   c.querySelectorAll("input[type=color]").forEach(el => {
     el.addEventListener("input", () => {
       setS(el.dataset.key, el.value);
@@ -169,6 +190,10 @@ function buildControls() {
 }
 
 function section(t) { return `<div class="section-title">${t}</div>`; }
+function checkbox(key, label) {
+  const v = getS(key);
+  return `<div class="ctrl-row"><label><span>${label}</span></label><input type="checkbox" data-key="${key}" ${v ? "checked" : ""} /></div>`;
+}
 function slider(key, label, min, max, step) {
   const v = getS(key);
   return `<div class="ctrl-row"><label><span>${label}</span><span class="val">${v}</span></label><input type="range" data-key="${key}" min="${min}" max="${max}" step="${step}" value="${v}"></div>`;
@@ -214,6 +239,13 @@ function renderViewport(id) {
   const subColor = getS("subtitle_color");
   const subPos = getS("subtitle_position");
   const subAlign = getS("subtitle_align");
+  const subWordFade = parseInt(getS("subtitle_word_fade")) || 3;
+  // Titres
+  const titleVisible = getS("world_title_visible");
+  const titleFont = getS("world_title_font");
+  const titleSize = parseFloat(getS("world_title_size"));
+  const titleColor = getS("world_title_color");
+  const titleSpeed = parseInt(getS("world_title_speed")) || 12;
 
   // ── Scale factor (viewport px / composition px) ──
   const compW = roadmap.meta.width || 1920;
@@ -276,22 +308,67 @@ function renderViewport(id) {
 
     html += `<div class="world-node" style="left:${left}px;top:${top}px;width:${wW}px;height:${wH}px;opacity:${thisOpacity.toFixed(3)}">`;
     html += `<img src="${s.image_file}" loading="lazy">`;
+
+    // —— Titre animé (alternance top/droite) ——
+    if (titleVisible && s.world_title) {
+      const isTop = i % 2 === 0;
+      const titleLocalFrame = currentFrame - s.start_frame;
+      const tProg = clamp01(titleLocalFrame / titleSpeed);
+      const tEased = tProg * tProg * (3 - 2 * tProg); // smoothstep
+      const titleFontPx = Math.max(titleSize * sf, 10);
+
+      let titlePos, titleTransform;
+      if (isTop) {
+        const dropY = -40 * (1 - tEased);
+        titlePos = "top:8px;left:0;right:0;text-align:center";
+        titleTransform = `translateY(${dropY}px)`;
+      } else {
+        const slideX = 60 * (1 - tEased);
+        titlePos = "top:8px;right:12px;text-align:right";
+        titleTransform = `translateX(${slideX}px)`;
+      }
+
+      html += `<div style="position:absolute;${titlePos};transform:${titleTransform};opacity:${tEased.toFixed(3)};font-family:'${titleFont}',Georgia,serif;font-size:${titleFontPx}px;color:${titleColor};text-shadow:0 2px 8px rgba(0,0,0,0.85);pointer-events:none;z-index:10">${s.world_title}</div>`;
+    }
+
     html += `</div>`;
   }
   html += `</div>`;
 
-  // Subtitle
+  // Subtitle — mot par mot synchronisé timing.json
   const subText = seg.text_subtitles;
   if (subText) {
-    const fontSize = subSize * sf;
+    const fontSize = Math.max(subSize * sf, 8);
     let posCSS = "";
     if (subPos === "top") posCSS = "top:8%";
     else if (subPos === "center") posCSS = "top:50%;transform:translateY(-50%)";
     else posCSS = "bottom:8%";
 
-    html += `<div class="subtitle-overlay" style="${posCSS};text-align:${subAlign}">`;
-    html += `<div style="font-family:'${subFont}',Georgia,serif;font-size:${Math.max(fontSize, 8)}px;color:${subColor};text-shadow:0 2px 8px rgba(0,0,0,0.85);line-height:1.3">${subText}</div>`;
-    html += `</div>`;
+    // Fade out en fin de segment (5 dernières frames)
+    const segDuration = segEnd - seg.start_frame;
+    const localFrame = currentFrame - seg.start_frame;
+    const fadeOut = clamp01((segDuration - localFrame) / 5);
+
+    html += `<div class="subtitle-overlay" style="${posCSS};text-align:${subAlign};opacity:${fadeOut.toFixed(3)}">`;
+    html += `<div style="font-family:'${subFont}',Georgia,serif;font-size:${fontSize}px;color:${subColor};text-shadow:0 2px 8px rgba(0,0,0,0.85);line-height:1.3">`;
+
+    // Mots depuis timing.json
+    const timingSeg = timing.segments?.[segIdx];
+    const words = timingSeg?.words || [];
+
+    if (words.length) {
+      for (const w of words) {
+        const wLocal = currentFrame - w.start_frame;
+        const wOpacity = clamp01(wLocal / subWordFade);
+        const wScale = 0.92 + 0.08 * clamp01(wLocal / subWordFade);
+        const wColor = w.is_strong ? (roadmap.style?.accent_color || "#FFD700") : subColor;
+        html += `<span style="opacity:${wOpacity.toFixed(3)};transform:scale(${wScale.toFixed(3)});display:inline;color:${wColor}">${w.word}</span> `;
+      }
+    } else {
+      html += subText;
+    }
+
+    html += `</div></div>`;
   }
 
   container.innerHTML = html;
