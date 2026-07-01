@@ -1,0 +1,5065 @@
+{
+  "meta": {
+    "fps": 30,
+    "duration_seconds": 109.212,
+    "total_frames": 3276,
+    "audio_path": "/tmp/f01_out/audio_clean.mp3",
+    "model": "medium",
+    "language": "en",
+    "language_probability": 0.9994,
+    "word_count": 271,
+    "strong_word_count": 62
+  },
+  "words": [
+    {
+      "word": "POV.",
+      "start": 0.27,
+      "end": 1.65,
+      "start_frame": 8,
+      "end_frame": 50,
+      "probability": 0.9406,
+      "is_strong": true
+    },
+    {
+      "word": "You",
+      "start": 1.97,
+      "end": 2.13,
+      "start_frame": 59,
+      "end_frame": 64,
+      "probability": 0.9671,
+      "is_strong": false
+    },
+    {
+      "word": "are",
+      "start": 2.13,
+      "end": 2.35,
+      "start_frame": 64,
+      "end_frame": 70,
+      "probability": 0.9832,
+      "is_strong": false
+    },
+    {
+      "word": "making",
+      "start": 2.35,
+      "end": 2.85,
+      "start_frame": 70,
+      "end_frame": 86,
+      "probability": 0.9977,
+      "is_strong": false
+    },
+    {
+      "word": "$50",
+      "start": 2.85,
+      "end": 3.49,
+      "start_frame": 86,
+      "end_frame": 105,
+      "probability": 0.8361,
+      "is_strong": true
+    },
+    {
+      "word": ",000",
+      "start": 3.49,
+      "end": 4.43,
+      "start_frame": 105,
+      "end_frame": 133,
+      "probability": 0.9866,
+      "is_strong": true
+    },
+    {
+      "word": "a",
+      "start": 4.43,
+      "end": 4.81,
+      "start_frame": 133,
+      "end_frame": 144,
+      "probability": 0.9106,
+      "is_strong": false
+    },
+    {
+      "word": "minute,",
+      "start": 4.81,
+      "end": 5.17,
+      "start_frame": 144,
+      "end_frame": 155,
+      "probability": 0.9963,
+      "is_strong": false
+    },
+    {
+      "word": "but",
+      "start": 5.57,
+      "end": 5.81,
+      "start_frame": 167,
+      "end_frame": 174,
+      "probability": 0.9903,
+      "is_strong": false
+    },
+    {
+      "word": "every",
+      "start": 5.81,
+      "end": 6.21,
+      "start_frame": 174,
+      "end_frame": 186,
+      "probability": 0.9972,
+      "is_strong": false
+    },
+    {
+      "word": "single",
+      "start": 6.21,
+      "end": 6.65,
+      "start_frame": 186,
+      "end_frame": 200,
+      "probability": 0.9845,
+      "is_strong": false
+    },
+    {
+      "word": "dollar",
+      "start": 6.65,
+      "end": 6.95,
+      "start_frame": 200,
+      "end_frame": 208,
+      "probability": 0.994,
+      "is_strong": false
+    },
+    {
+      "word": "is",
+      "start": 6.95,
+      "end": 7.31,
+      "start_frame": 208,
+      "end_frame": 219,
+      "probability": 0.9977,
+      "is_strong": false
+    },
+    {
+      "word": "a",
+      "start": 7.31,
+      "end": 7.49,
+      "start_frame": 219,
+      "end_frame": 225,
+      "probability": 0.9968,
+      "is_strong": false
+    },
+    {
+      "word": "ticking",
+      "start": 7.49,
+      "end": 7.79,
+      "start_frame": 225,
+      "end_frame": 234,
+      "probability": 0.9978,
+      "is_strong": true
+    },
+    {
+      "word": "federal",
+      "start": 7.79,
+      "end": 8.51,
+      "start_frame": 234,
+      "end_frame": 255,
+      "probability": 0.86,
+      "is_strong": true
+    },
+    {
+      "word": "time",
+      "start": 8.51,
+      "end": 8.91,
+      "start_frame": 255,
+      "end_frame": 267,
+      "probability": 0.9942,
+      "is_strong": false
+    },
+    {
+      "word": "bomb",
+      "start": 8.91,
+      "end": 9.19,
+      "start_frame": 267,
+      "end_frame": 276,
+      "probability": 0.9297,
+      "is_strong": false
+    },
+    {
+      "word": "and",
+      "start": 9.19,
+      "end": 9.87,
+      "start_frame": 276,
+      "end_frame": 296,
+      "probability": 0.1835,
+      "is_strong": true
+    },
+    {
+      "word": "the",
+      "start": 9.87,
+      "end": 10.07,
+      "start_frame": 296,
+      "end_frame": 302,
+      "probability": 0.9952,
+      "is_strong": false
+    },
+    {
+      "word": "countdown",
+      "start": 10.07,
+      "end": 10.45,
+      "start_frame": 302,
+      "end_frame": 314,
+      "probability": 0.9766,
+      "is_strong": true
+    },
+    {
+      "word": "just",
+      "start": 10.45,
+      "end": 11.35,
+      "start_frame": 314,
+      "end_frame": 340,
+      "probability": 0.869,
+      "is_strong": true
+    },
+    {
+      "word": "hit",
+      "start": 11.35,
+      "end": 11.59,
+      "start_frame": 340,
+      "end_frame": 348,
+      "probability": 0.9831,
+      "is_strong": false
+    },
+    {
+      "word": "zero.",
+      "start": 11.59,
+      "end": 12.07,
+      "start_frame": 348,
+      "end_frame": 362,
+      "probability": 0.9581,
+      "is_strong": false
+    },
+    {
+      "word": "He",
+      "start": 12.61,
+      "end": 12.81,
+      "start_frame": 378,
+      "end_frame": 384,
+      "probability": 0.9953,
+      "is_strong": false
+    },
+    {
+      "word": "was",
+      "start": 12.81,
+      "end": 13.09,
+      "start_frame": 384,
+      "end_frame": 393,
+      "probability": 0.9974,
+      "is_strong": false
+    },
+    {
+      "word": "not",
+      "start": 13.09,
+      "end": 13.39,
+      "start_frame": 393,
+      "end_frame": 402,
+      "probability": 0.9956,
+      "is_strong": false
+    },
+    {
+      "word": "a",
+      "start": 13.39,
+      "end": 13.53,
+      "start_frame": 402,
+      "end_frame": 406,
+      "probability": 0.9976,
+      "is_strong": false
+    },
+    {
+      "word": "financial",
+      "start": 13.53,
+      "end": 14.07,
+      "start_frame": 406,
+      "end_frame": 422,
+      "probability": 0.9986,
+      "is_strong": true
+    },
+    {
+      "word": "genius.",
+      "start": 14.07,
+      "end": 14.57,
+      "start_frame": 422,
+      "end_frame": 437,
+      "probability": 0.9989,
+      "is_strong": false
+    },
+    {
+      "word": "He",
+      "start": 15.07,
+      "end": 15.21,
+      "start_frame": 452,
+      "end_frame": 456,
+      "probability": 0.9953,
+      "is_strong": false
+    },
+    {
+      "word": "did",
+      "start": 15.21,
+      "end": 15.41,
+      "start_frame": 456,
+      "end_frame": 462,
+      "probability": 0.9939,
+      "is_strong": false
+    },
+    {
+      "word": "not",
+      "start": 15.41,
+      "end": 15.63,
+      "start_frame": 462,
+      "end_frame": 469,
+      "probability": 0.9993,
+      "is_strong": false
+    },
+    {
+      "word": "understand",
+      "start": 15.63,
+      "end": 16.13,
+      "start_frame": 469,
+      "end_frame": 484,
+      "probability": 0.9985,
+      "is_strong": true
+    },
+    {
+      "word": "quantitative",
+      "start": 16.13,
+      "end": 16.81,
+      "start_frame": 484,
+      "end_frame": 504,
+      "probability": 0.9888,
+      "is_strong": true
+    },
+    {
+      "word": "finance",
+      "start": 16.81,
+      "end": 17.43,
+      "start_frame": 504,
+      "end_frame": 523,
+      "probability": 0.997,
+      "is_strong": true
+    },
+    {
+      "word": "or",
+      "start": 17.43,
+      "end": 17.83,
+      "start_frame": 523,
+      "end_frame": 535,
+      "probability": 0.9728,
+      "is_strong": false
+    },
+    {
+      "word": "market",
+      "start": 17.83,
+      "end": 18.19,
+      "start_frame": 535,
+      "end_frame": 546,
+      "probability": 0.9974,
+      "is_strong": false
+    },
+    {
+      "word": "arbitrage.",
+      "start": 18.19,
+      "end": 18.85,
+      "start_frame": 546,
+      "end_frame": 566,
+      "probability": 0.9985,
+      "is_strong": true
+    },
+    {
+      "word": "He",
+      "start": 19.35,
+      "end": 19.61,
+      "start_frame": 580,
+      "end_frame": 588,
+      "probability": 0.9971,
+      "is_strong": false
+    },
+    {
+      "word": "understood",
+      "start": 19.61,
+      "end": 19.99,
+      "start_frame": 588,
+      "end_frame": 600,
+      "probability": 0.9991,
+      "is_strong": true
+    },
+    {
+      "word": "one",
+      "start": 19.99,
+      "end": 20.49,
+      "start_frame": 600,
+      "end_frame": 615,
+      "probability": 0.9911,
+      "is_strong": false
+    },
+    {
+      "word": "thing,",
+      "start": 20.49,
+      "end": 20.83,
+      "start_frame": 615,
+      "end_frame": 625,
+      "probability": 0.9987,
+      "is_strong": false
+    },
+    {
+      "word": "human",
+      "start": 21.47,
+      "end": 21.75,
+      "start_frame": 644,
+      "end_frame": 652,
+      "probability": 0.9847,
+      "is_strong": false
+    },
+    {
+      "word": "desperation.",
+      "start": 21.75,
+      "end": 22.51,
+      "start_frame": 652,
+      "end_frame": 675,
+      "probability": 0.9986,
+      "is_strong": true
+    },
+    {
+      "word": "He",
+      "start": 23.03,
+      "end": 23.35,
+      "start_frame": 691,
+      "end_frame": 700,
+      "probability": 0.9976,
+      "is_strong": false
+    },
+    {
+      "word": "took",
+      "start": 23.35,
+      "end": 23.65,
+      "start_frame": 700,
+      "end_frame": 710,
+      "probability": 0.9995,
+      "is_strong": false
+    },
+    {
+      "word": "worthless",
+      "start": 23.65,
+      "end": 24.29,
+      "start_frame": 710,
+      "end_frame": 729,
+      "probability": 0.9948,
+      "is_strong": true
+    },
+    {
+      "word": "pink",
+      "start": 24.29,
+      "end": 24.69,
+      "start_frame": 729,
+      "end_frame": 741,
+      "probability": 0.8541,
+      "is_strong": false
+    },
+    {
+      "word": "sheet",
+      "start": 24.69,
+      "end": 24.93,
+      "start_frame": 741,
+      "end_frame": 748,
+      "probability": 0.6382,
+      "is_strong": false
+    },
+    {
+      "word": "stocks",
+      "start": 24.93,
+      "end": 25.39,
+      "start_frame": 748,
+      "end_frame": 762,
+      "probability": 0.9964,
+      "is_strong": false
+    },
+    {
+      "word": "and",
+      "start": 25.39,
+      "end": 26.07,
+      "start_frame": 762,
+      "end_frame": 782,
+      "probability": 0.9252,
+      "is_strong": true
+    },
+    {
+      "word": "sold",
+      "start": 26.07,
+      "end": 26.31,
+      "start_frame": 782,
+      "end_frame": 789,
+      "probability": 0.9985,
+      "is_strong": false
+    },
+    {
+      "word": "them",
+      "start": 26.31,
+      "end": 26.47,
+      "start_frame": 789,
+      "end_frame": 794,
+      "probability": 0.9984,
+      "is_strong": false
+    },
+    {
+      "word": "to",
+      "start": 26.47,
+      "end": 26.73,
+      "start_frame": 794,
+      "end_frame": 802,
+      "probability": 0.999,
+      "is_strong": false
+    },
+    {
+      "word": "doctors",
+      "start": 26.73,
+      "end": 27.17,
+      "start_frame": 802,
+      "end_frame": 815,
+      "probability": 0.993,
+      "is_strong": true
+    },
+    {
+      "word": "looking",
+      "start": 27.17,
+      "end": 27.53,
+      "start_frame": 815,
+      "end_frame": 826,
+      "probability": 0.888,
+      "is_strong": true
+    },
+    {
+      "word": "for",
+      "start": 27.53,
+      "end": 27.77,
+      "start_frame": 826,
+      "end_frame": 833,
+      "probability": 0.9995,
+      "is_strong": false
+    },
+    {
+      "word": "a",
+      "start": 27.77,
+      "end": 28.01,
+      "start_frame": 833,
+      "end_frame": 840,
+      "probability": 0.9993,
+      "is_strong": false
+    },
+    {
+      "word": "miracle.",
+      "start": 28.01,
+      "end": 28.39,
+      "start_frame": 840,
+      "end_frame": 852,
+      "probability": 0.9901,
+      "is_strong": true
+    },
+    {
+      "word": "It",
+      "start": 28.39,
+      "end": 28.89,
+      "start_frame": 852,
+      "end_frame": 867,
+      "probability": 0.6395,
+      "is_strong": false
+    },
+    {
+      "word": "was",
+      "start": 28.89,
+      "end": 29.23,
+      "start_frame": 867,
+      "end_frame": 877,
+      "probability": 0.993,
+      "is_strong": false
+    },
+    {
+      "word": "not",
+      "start": 29.23,
+      "end": 29.35,
+      "start_frame": 877,
+      "end_frame": 880,
+      "probability": 0.9479,
+      "is_strong": false
+    },
+    {
+      "word": "investing.",
+      "start": 29.35,
+      "end": 29.93,
+      "start_frame": 880,
+      "end_frame": 898,
+      "probability": 0.9954,
+      "is_strong": true
+    },
+    {
+      "word": "It",
+      "start": 30.45,
+      "end": 30.55,
+      "start_frame": 914,
+      "end_frame": 916,
+      "probability": 0.9943,
+      "is_strong": false
+    },
+    {
+      "word": "was",
+      "start": 30.55,
+      "end": 30.79,
+      "start_frame": 916,
+      "end_frame": 924,
+      "probability": 0.9994,
+      "is_strong": false
+    },
+    {
+      "word": "financial",
+      "start": 30.79,
+      "end": 31.51,
+      "start_frame": 924,
+      "end_frame": 945,
+      "probability": 0.9904,
+      "is_strong": true
+    },
+    {
+      "word": "liquidation.",
+      "start": 31.51,
+      "end": 32.35,
+      "start_frame": 945,
+      "end_frame": 970,
+      "probability": 0.9889,
+      "is_strong": true
+    },
+    {
+      "word": "The",
+      "start": 32.83,
+      "end": 32.91,
+      "start_frame": 985,
+      "end_frame": 987,
+      "probability": 0.9866,
+      "is_strong": false
+    },
+    {
+      "word": "business",
+      "start": 32.91,
+      "end": 33.27,
+      "start_frame": 987,
+      "end_frame": 998,
+      "probability": 0.997,
+      "is_strong": true
+    },
+    {
+      "word": "model",
+      "start": 33.27,
+      "end": 33.53,
+      "start_frame": 998,
+      "end_frame": 1006,
+      "probability": 0.9987,
+      "is_strong": false
+    },
+    {
+      "word": "was",
+      "start": 33.53,
+      "end": 33.81,
+      "start_frame": 1006,
+      "end_frame": 1014,
+      "probability": 0.999,
+      "is_strong": false
+    },
+    {
+      "word": "simple.",
+      "start": 33.81,
+      "end": 34.21,
+      "start_frame": 1014,
+      "end_frame": 1026,
+      "probability": 0.9975,
+      "is_strong": false
+    },
+    {
+      "word": "Hypnotize",
+      "start": 34.59,
+      "end": 35.19,
+      "start_frame": 1038,
+      "end_frame": 1056,
+      "probability": 0.9562,
+      "is_strong": true
+    },
+    {
+      "word": "the",
+      "start": 35.19,
+      "end": 35.39,
+      "start_frame": 1056,
+      "end_frame": 1062,
+      "probability": 0.9958,
+      "is_strong": false
+    },
+    {
+      "word": "buyer,",
+      "start": 35.39,
+      "end": 35.67,
+      "start_frame": 1062,
+      "end_frame": 1070,
+      "probability": 0.9964,
+      "is_strong": false
+    },
+    {
+      "word": "pump",
+      "start": 36.25,
+      "end": 36.43,
+      "start_frame": 1088,
+      "end_frame": 1093,
+      "probability": 0.9851,
+      "is_strong": false
+    },
+    {
+      "word": "the",
+      "start": 36.43,
+      "end": 36.73,
+      "start_frame": 1093,
+      "end_frame": 1102,
+      "probability": 0.9975,
+      "is_strong": false
+    },
+    {
+      "word": "trash",
+      "start": 36.73,
+      "end": 36.99,
+      "start_frame": 1102,
+      "end_frame": 1110,
+      "probability": 0.9938,
+      "is_strong": false
+    },
+    {
+      "word": "stock,",
+      "start": 36.99,
+      "end": 37.47,
+      "start_frame": 1110,
+      "end_frame": 1124,
+      "probability": 0.9607,
+      "is_strong": false
+    },
+    {
+      "word": "dump",
+      "start": 37.89,
+      "end": 38.13,
+      "start_frame": 1137,
+      "end_frame": 1144,
+      "probability": 0.9852,
+      "is_strong": false
+    },
+    {
+      "word": "the",
+      "start": 38.13,
+      "end": 38.41,
+      "start_frame": 1144,
+      "end_frame": 1152,
+      "probability": 0.9949,
+      "is_strong": false
+    },
+    {
+      "word": "shares,",
+      "start": 38.41,
+      "end": 38.75,
+      "start_frame": 1152,
+      "end_frame": 1162,
+      "probability": 0.9978,
+      "is_strong": false
+    },
+    {
+      "word": "collect",
+      "start": 39.29,
+      "end": 39.63,
+      "start_frame": 1179,
+      "end_frame": 1189,
+      "probability": 0.9797,
+      "is_strong": true
+    },
+    {
+      "word": "the",
+      "start": 39.63,
+      "end": 39.87,
+      "start_frame": 1189,
+      "end_frame": 1196,
+      "probability": 0.9967,
+      "is_strong": false
+    },
+    {
+      "word": "cash.",
+      "start": 39.87,
+      "end": 40.17,
+      "start_frame": 1196,
+      "end_frame": 1205,
+      "probability": 0.9987,
+      "is_strong": false
+    },
+    {
+      "word": "The",
+      "start": 40.71,
+      "end": 40.95,
+      "start_frame": 1221,
+      "end_frame": 1228,
+      "probability": 0.9911,
+      "is_strong": false
+    },
+    {
+      "word": "SEC",
+      "start": 40.95,
+      "end": 41.31,
+      "start_frame": 1228,
+      "end_frame": 1239,
+      "probability": 0.9152,
+      "is_strong": true
+    },
+    {
+      "word": "looked",
+      "start": 41.31,
+      "end": 41.69,
+      "start_frame": 1239,
+      "end_frame": 1251,
+      "probability": 0.9964,
+      "is_strong": false
+    },
+    {
+      "word": "away.",
+      "start": 41.69,
+      "end": 42.11,
+      "start_frame": 1251,
+      "end_frame": 1263,
+      "probability": 0.9985,
+      "is_strong": false
+    },
+    {
+      "word": "The",
+      "start": 42.51,
+      "end": 42.77,
+      "start_frame": 1275,
+      "end_frame": 1283,
+      "probability": 0.9952,
+      "is_strong": false
+    },
+    {
+      "word": "banks",
+      "start": 42.77,
+      "end": 42.95,
+      "start_frame": 1283,
+      "end_frame": 1288,
+      "probability": 0.9705,
+      "is_strong": false
+    },
+    {
+      "word": "processed",
+      "start": 42.95,
+      "end": 43.55,
+      "start_frame": 1288,
+      "end_frame": 1306,
+      "probability": 0.9071,
+      "is_strong": true
+    },
+    {
+      "word": "the",
+      "start": 43.55,
+      "end": 43.83,
+      "start_frame": 1306,
+      "end_frame": 1315,
+      "probability": 0.9984,
+      "is_strong": false
+    },
+    {
+      "word": "wire",
+      "start": 43.83,
+      "end": 44.07,
+      "start_frame": 1315,
+      "end_frame": 1322,
+      "probability": 0.9978,
+      "is_strong": false
+    },
+    {
+      "word": "transfers.",
+      "start": 44.07,
+      "end": 44.53,
+      "start_frame": 1322,
+      "end_frame": 1336,
+      "probability": 0.9919,
+      "is_strong": true
+    },
+    {
+      "word": "He",
+      "start": 45.11,
+      "end": 45.27,
+      "start_frame": 1353,
+      "end_frame": 1358,
+      "probability": 0.987,
+      "is_strong": false
+    },
+    {
+      "word": "bought",
+      "start": 45.27,
+      "end": 45.49,
+      "start_frame": 1358,
+      "end_frame": 1365,
+      "probability": 0.9941,
+      "is_strong": false
+    },
+    {
+      "word": "yachts,",
+      "start": 45.49,
+      "end": 46.41,
+      "start_frame": 1365,
+      "end_frame": 1392,
+      "probability": 0.9924,
+      "is_strong": true
+    },
+    {
+      "word": "helicopters,",
+      "start": 46.67,
+      "end": 47.07,
+      "start_frame": 1400,
+      "end_frame": 1412,
+      "probability": 0.9943,
+      "is_strong": true
+    },
+    {
+      "word": "and",
+      "start": 47.41,
+      "end": 47.57,
+      "start_frame": 1422,
+      "end_frame": 1427,
+      "probability": 0.9965,
+      "is_strong": false
+    },
+    {
+      "word": "a",
+      "start": 47.57,
+      "end": 47.83,
+      "start_frame": 1427,
+      "end_frame": 1435,
+      "probability": 0.9977,
+      "is_strong": false
+    },
+    {
+      "word": "mansion",
+      "start": 47.83,
+      "end": 48.13,
+      "start_frame": 1435,
+      "end_frame": 1444,
+      "probability": 0.9982,
+      "is_strong": true
+    },
+    {
+      "word": "in",
+      "start": 48.13,
+      "end": 48.37,
+      "start_frame": 1444,
+      "end_frame": 1451,
+      "probability": 0.9973,
+      "is_strong": false
+    },
+    {
+      "word": "the",
+      "start": 48.37,
+      "end": 48.53,
+      "start_frame": 1451,
+      "end_frame": 1456,
+      "probability": 0.9658,
+      "is_strong": false
+    },
+    {
+      "word": "Hamptons,",
+      "start": 48.53,
+      "end": 48.97,
+      "start_frame": 1456,
+      "end_frame": 1469,
+      "probability": 0.9885,
+      "is_strong": true
+    },
+    {
+      "word": "an",
+      "start": 49.51,
+      "end": 49.77,
+      "start_frame": 1485,
+      "end_frame": 1493,
+      "probability": 0.9822,
+      "is_strong": false
+    },
+    {
+      "word": "empire",
+      "start": 49.77,
+      "end": 50.13,
+      "start_frame": 1493,
+      "end_frame": 1504,
+      "probability": 0.9607,
+      "is_strong": false
+    },
+    {
+      "word": "built",
+      "start": 50.13,
+      "end": 50.45,
+      "start_frame": 1504,
+      "end_frame": 1514,
+      "probability": 0.9966,
+      "is_strong": false
+    },
+    {
+      "word": "entirely",
+      "start": 50.45,
+      "end": 51.09,
+      "start_frame": 1514,
+      "end_frame": 1533,
+      "probability": 0.9975,
+      "is_strong": true
+    },
+    {
+      "word": "on",
+      "start": 51.09,
+      "end": 51.49,
+      "start_frame": 1533,
+      "end_frame": 1545,
+      "probability": 0.997,
+      "is_strong": false
+    },
+    {
+      "word": "paper",
+      "start": 51.49,
+      "end": 51.87,
+      "start_frame": 1545,
+      "end_frame": 1556,
+      "probability": 0.9964,
+      "is_strong": false
+    },
+    {
+      "word": "and",
+      "start": 51.87,
+      "end": 52.31,
+      "start_frame": 1556,
+      "end_frame": 1569,
+      "probability": 0.997,
+      "is_strong": false
+    },
+    {
+      "word": "lies.",
+      "start": 52.31,
+      "end": 52.65,
+      "start_frame": 1569,
+      "end_frame": 1580,
+      "probability": 0.9945,
+      "is_strong": false
+    },
+    {
+      "word": "Part",
+      "start": 53.21,
+      "end": 53.47,
+      "start_frame": 1596,
+      "end_frame": 1604,
+      "probability": 0.9075,
+      "is_strong": false
+    },
+    {
+      "word": "Two.",
+      "start": 53.47,
+      "end": 53.93,
+      "start_frame": 1604,
+      "end_frame": 1618,
+      "probability": 0.2081,
+      "is_strong": false
+    },
+    {
+      "word": "The",
+      "start": 54.15,
+      "end": 54.49,
+      "start_frame": 1624,
+      "end_frame": 1635,
+      "probability": 0.9756,
+      "is_strong": false
+    },
+    {
+      "word": "Mechanism",
+      "start": 54.49,
+      "end": 54.99,
+      "start_frame": 1635,
+      "end_frame": 1650,
+      "probability": 0.878,
+      "is_strong": true
+    },
+    {
+      "word": "of",
+      "start": 54.99,
+      "end": 55.15,
+      "start_frame": 1650,
+      "end_frame": 1654,
+      "probability": 0.9347,
+      "is_strong": false
+    },
+    {
+      "word": "the",
+      "start": 55.15,
+      "end": 55.41,
+      "start_frame": 1654,
+      "end_frame": 1662,
+      "probability": 0.9589,
+      "is_strong": false
+    },
+    {
+      "word": "Trap.",
+      "start": 55.41,
+      "end": 55.79,
+      "start_frame": 1662,
+      "end_frame": 1674,
+      "probability": 0.9863,
+      "is_strong": false
+    },
+    {
+      "word": "To",
+      "start": 56.19,
+      "end": 56.41,
+      "start_frame": 1686,
+      "end_frame": 1692,
+      "probability": 0.9955,
+      "is_strong": false
+    },
+    {
+      "word": "understand",
+      "start": 56.41,
+      "end": 56.89,
+      "start_frame": 1692,
+      "end_frame": 1707,
+      "probability": 0.9981,
+      "is_strong": true
+    },
+    {
+      "word": "the",
+      "start": 56.89,
+      "end": 57.15,
+      "start_frame": 1707,
+      "end_frame": 1714,
+      "probability": 0.9987,
+      "is_strong": false
+    },
+    {
+      "word": "size",
+      "start": 57.15,
+      "end": 57.43,
+      "start_frame": 1714,
+      "end_frame": 1723,
+      "probability": 0.9963,
+      "is_strong": false
+    },
+    {
+      "word": "of",
+      "start": 57.43,
+      "end": 57.59,
+      "start_frame": 1723,
+      "end_frame": 1728,
+      "probability": 0.5268,
+      "is_strong": false
+    },
+    {
+      "word": "the",
+      "start": 57.59,
+      "end": 57.71,
+      "start_frame": 1728,
+      "end_frame": 1731,
+      "probability": 0.8879,
+      "is_strong": false
+    },
+    {
+      "word": "scam,",
+      "start": 57.71,
+      "end": 58.03,
+      "start_frame": 1731,
+      "end_frame": 1741,
+      "probability": 0.9765,
+      "is_strong": false
+    },
+    {
+      "word": "you",
+      "start": 58.53,
+      "end": 58.59,
+      "start_frame": 1756,
+      "end_frame": 1758,
+      "probability": 0.9857,
+      "is_strong": false
+    },
+    {
+      "word": "must",
+      "start": 58.59,
+      "end": 58.83,
+      "start_frame": 1758,
+      "end_frame": 1765,
+      "probability": 0.9958,
+      "is_strong": false
+    },
+    {
+      "word": "look",
+      "start": 58.83,
+      "end": 59.11,
+      "start_frame": 1765,
+      "end_frame": 1773,
+      "probability": 0.9923,
+      "is_strong": false
+    },
+    {
+      "word": "at",
+      "start": 59.11,
+      "end": 59.31,
+      "start_frame": 1773,
+      "end_frame": 1779,
+      "probability": 0.9966,
+      "is_strong": false
+    },
+    {
+      "word": "the",
+      "start": 59.31,
+      "end": 59.53,
+      "start_frame": 1779,
+      "end_frame": 1786,
+      "probability": 0.9545,
+      "is_strong": false
+    },
+    {
+      "word": "room.",
+      "start": 59.53,
+      "end": 59.79,
+      "start_frame": 1786,
+      "end_frame": 1794,
+      "probability": 0.9872,
+      "is_strong": false
+    },
+    {
+      "word": "100",
+      "start": 60.27,
+      "end": 60.83,
+      "start_frame": 1808,
+      "end_frame": 1825,
+      "probability": 0.4632,
+      "is_strong": false
+    },
+    {
+      "word": "phone",
+      "start": 60.83,
+      "end": 61.29,
+      "start_frame": 1825,
+      "end_frame": 1839,
+      "probability": 0.9941,
+      "is_strong": false
+    },
+    {
+      "word": "lines",
+      "start": 61.29,
+      "end": 61.57,
+      "start_frame": 1839,
+      "end_frame": 1847,
+      "probability": 0.9935,
+      "is_strong": false
+    },
+    {
+      "word": "ringing",
+      "start": 61.57,
+      "end": 61.93,
+      "start_frame": 1847,
+      "end_frame": 1858,
+      "probability": 0.9457,
+      "is_strong": true
+    },
+    {
+      "word": "simultaneously,",
+      "start": 61.93,
+      "end": 63.09,
+      "start_frame": 1858,
+      "end_frame": 1893,
+      "probability": 0.9907,
+      "is_strong": true
+    },
+    {
+      "word": "young",
+      "start": 63.53,
+      "end": 63.65,
+      "start_frame": 1906,
+      "end_frame": 1910,
+      "probability": 0.9921,
+      "is_strong": false
+    },
+    {
+      "word": "men",
+      "start": 63.65,
+      "end": 63.93,
+      "start_frame": 1910,
+      "end_frame": 1918,
+      "probability": 0.9978,
+      "is_strong": false
+    },
+    {
+      "word": "straight",
+      "start": 63.93,
+      "end": 64.27,
+      "start_frame": 1918,
+      "end_frame": 1928,
+      "probability": 0.9554,
+      "is_strong": true
+    },
+    {
+      "word": "out",
+      "start": 64.27,
+      "end": 64.47,
+      "start_frame": 1928,
+      "end_frame": 1934,
+      "probability": 0.9975,
+      "is_strong": false
+    },
+    {
+      "word": "of",
+      "start": 64.47,
+      "end": 64.55,
+      "start_frame": 1934,
+      "end_frame": 1936,
+      "probability": 0.9986,
+      "is_strong": false
+    },
+    {
+      "word": "high",
+      "start": 64.55,
+      "end": 64.77,
+      "start_frame": 1936,
+      "end_frame": 1943,
+      "probability": 0.9951,
+      "is_strong": false
+    },
+    {
+      "word": "school,",
+      "start": 64.77,
+      "end": 65.11,
+      "start_frame": 1943,
+      "end_frame": 1953,
+      "probability": 0.9962,
+      "is_strong": false
+    },
+    {
+      "word": "wearing",
+      "start": 65.43,
+      "end": 65.63,
+      "start_frame": 1963,
+      "end_frame": 1969,
+      "probability": 0.9967,
+      "is_strong": true
+    },
+    {
+      "word": "cheap",
+      "start": 65.63,
+      "end": 65.99,
+      "start_frame": 1969,
+      "end_frame": 1980,
+      "probability": 0.9979,
+      "is_strong": false
+    },
+    {
+      "word": "suits",
+      "start": 65.99,
+      "end": 66.35,
+      "start_frame": 1980,
+      "end_frame": 1990,
+      "probability": 0.9984,
+      "is_strong": false
+    },
+    {
+      "word": "and",
+      "start": 66.35,
+      "end": 66.63,
+      "start_frame": 1990,
+      "end_frame": 1999,
+      "probability": 0.9532,
+      "is_strong": false
+    },
+    {
+      "word": "expensive",
+      "start": 66.63,
+      "end": 67.05,
+      "start_frame": 1999,
+      "end_frame": 2012,
+      "probability": 0.9987,
+      "is_strong": true
+    },
+    {
+      "word": "watches,",
+      "start": 67.05,
+      "end": 67.51,
+      "start_frame": 2012,
+      "end_frame": 2025,
+      "probability": 0.9992,
+      "is_strong": true
+    },
+    {
+      "word": "reading",
+      "start": 68.21,
+      "end": 68.29,
+      "start_frame": 2046,
+      "end_frame": 2049,
+      "probability": 0.9937,
+      "is_strong": true
+    },
+    {
+      "word": "from",
+      "start": 68.29,
+      "end": 68.51,
+      "start_frame": 2049,
+      "end_frame": 2055,
+      "probability": 0.9987,
+      "is_strong": false
+    },
+    {
+      "word": "a",
+      "start": 68.51,
+      "end": 68.75,
+      "start_frame": 2055,
+      "end_frame": 2062,
+      "probability": 0.9964,
+      "is_strong": false
+    },
+    {
+      "word": "laminated",
+      "start": 68.75,
+      "end": 69.17,
+      "start_frame": 2062,
+      "end_frame": 2075,
+      "probability": 0.9993,
+      "is_strong": true
+    },
+    {
+      "word": "script",
+      "start": 69.17,
+      "end": 69.53,
+      "start_frame": 2075,
+      "end_frame": 2086,
+      "probability": 0.9991,
+      "is_strong": false
+    },
+    {
+      "word": "that",
+      "start": 69.53,
+      "end": 69.75,
+      "start_frame": 2086,
+      "end_frame": 2092,
+      "probability": 0.9917,
+      "is_strong": false
+    },
+    {
+      "word": "left",
+      "start": 69.75,
+      "end": 69.99,
+      "start_frame": 2092,
+      "end_frame": 2100,
+      "probability": 0.9993,
+      "is_strong": false
+    },
+    {
+      "word": "no",
+      "start": 69.99,
+      "end": 70.39,
+      "start_frame": 2100,
+      "end_frame": 2112,
+      "probability": 0.9981,
+      "is_strong": false
+    },
+    {
+      "word": "room",
+      "start": 70.39,
+      "end": 70.59,
+      "start_frame": 2112,
+      "end_frame": 2118,
+      "probability": 0.9996,
+      "is_strong": false
+    },
+    {
+      "word": "for",
+      "start": 70.59,
+      "end": 70.79,
+      "start_frame": 2118,
+      "end_frame": 2124,
+      "probability": 0.9996,
+      "is_strong": false
+    },
+    {
+      "word": "objections.",
+      "start": 70.79,
+      "end": 71.27,
+      "start_frame": 2124,
+      "end_frame": 2138,
+      "probability": 0.9937,
+      "is_strong": true
+    },
+    {
+      "word": "They",
+      "start": 71.85,
+      "end": 71.99,
+      "start_frame": 2156,
+      "end_frame": 2160,
+      "probability": 0.9944,
+      "is_strong": false
+    },
+    {
+      "word": "were",
+      "start": 71.99,
+      "end": 72.23,
+      "start_frame": 2160,
+      "end_frame": 2167,
+      "probability": 0.9984,
+      "is_strong": false
+    },
+    {
+      "word": "selling",
+      "start": 72.23,
+      "end": 72.41,
+      "start_frame": 2167,
+      "end_frame": 2172,
+      "probability": 0.9716,
+      "is_strong": true
+    },
+    {
+      "word": "a",
+      "start": 72.41,
+      "end": 72.75,
+      "start_frame": 2172,
+      "end_frame": 2182,
+      "probability": 0.9959,
+      "is_strong": false
+    },
+    {
+      "word": "dream",
+      "start": 72.75,
+      "end": 72.99,
+      "start_frame": 2182,
+      "end_frame": 2190,
+      "probability": 0.9992,
+      "is_strong": false
+    },
+    {
+      "word": "to",
+      "start": 72.99,
+      "end": 73.15,
+      "start_frame": 2190,
+      "end_frame": 2194,
+      "probability": 0.9972,
+      "is_strong": false
+    },
+    {
+      "word": "people",
+      "start": 73.15,
+      "end": 73.41,
+      "start_frame": 2194,
+      "end_frame": 2202,
+      "probability": 0.9993,
+      "is_strong": false
+    },
+    {
+      "word": "who",
+      "start": 73.41,
+      "end": 73.67,
+      "start_frame": 2202,
+      "end_frame": 2210,
+      "probability": 0.9974,
+      "is_strong": false
+    },
+    {
+      "word": "could",
+      "start": 73.67,
+      "end": 73.89,
+      "start_frame": 2210,
+      "end_frame": 2217,
+      "probability": 0.9956,
+      "is_strong": false
+    },
+    {
+      "word": "not",
+      "start": 73.89,
+      "end": 74.11,
+      "start_frame": 2217,
+      "end_frame": 2223,
+      "probability": 0.9993,
+      "is_strong": false
+    },
+    {
+      "word": "afford",
+      "start": 74.11,
+      "end": 74.39,
+      "start_frame": 2223,
+      "end_frame": 2232,
+      "probability": 0.9999,
+      "is_strong": false
+    },
+    {
+      "word": "to",
+      "start": 74.39,
+      "end": 74.65,
+      "start_frame": 2232,
+      "end_frame": 2240,
+      "probability": 0.9995,
+      "is_strong": false
+    },
+    {
+      "word": "lose,",
+      "start": 74.65,
+      "end": 74.93,
+      "start_frame": 2240,
+      "end_frame": 2248,
+      "probability": 0.9968,
+      "is_strong": false
+    },
+    {
+      "word": "but",
+      "start": 75.39,
+      "end": 75.59,
+      "start_frame": 2262,
+      "end_frame": 2268,
+      "probability": 0.9975,
+      "is_strong": false
+    },
+    {
+      "word": "the",
+      "start": 75.59,
+      "end": 75.81,
+      "start_frame": 2268,
+      "end_frame": 2274,
+      "probability": 0.9988,
+      "is_strong": false
+    },
+    {
+      "word": "numbers",
+      "start": 75.81,
+      "end": 76.07,
+      "start_frame": 2274,
+      "end_frame": 2282,
+      "probability": 0.999,
+      "is_strong": true
+    },
+    {
+      "word": "were",
+      "start": 76.07,
+      "end": 76.41,
+      "start_frame": 2282,
+      "end_frame": 2292,
+      "probability": 0.9976,
+      "is_strong": false
+    },
+    {
+      "word": "completely",
+      "start": 76.41,
+      "end": 77.01,
+      "start_frame": 2292,
+      "end_frame": 2310,
+      "probability": 0.9968,
+      "is_strong": true
+    },
+    {
+      "word": "fabricated.",
+      "start": 77.01,
+      "end": 77.89,
+      "start_frame": 2310,
+      "end_frame": 2337,
+      "probability": 0.9983,
+      "is_strong": true
+    },
+    {
+      "word": "A",
+      "start": 78.29,
+      "end": 78.43,
+      "start_frame": 2349,
+      "end_frame": 2353,
+      "probability": 0.9625,
+      "is_strong": false
+    },
+    {
+      "word": "penny",
+      "start": 78.43,
+      "end": 78.65,
+      "start_frame": 2353,
+      "end_frame": 2360,
+      "probability": 0.9896,
+      "is_strong": false
+    },
+    {
+      "word": "stock",
+      "start": 78.65,
+      "end": 78.89,
+      "start_frame": 2360,
+      "end_frame": 2367,
+      "probability": 0.9909,
+      "is_strong": false
+    },
+    {
+      "word": "has",
+      "start": 78.89,
+      "end": 79.19,
+      "start_frame": 2367,
+      "end_frame": 2376,
+      "probability": 0.9973,
+      "is_strong": false
+    },
+    {
+      "word": "no",
+      "start": 79.19,
+      "end": 79.49,
+      "start_frame": 2376,
+      "end_frame": 2385,
+      "probability": 0.9986,
+      "is_strong": false
+    },
+    {
+      "word": "real",
+      "start": 79.49,
+      "end": 79.77,
+      "start_frame": 2385,
+      "end_frame": 2393,
+      "probability": 0.9995,
+      "is_strong": false
+    },
+    {
+      "word": "value,",
+      "start": 79.77,
+      "end": 80.19,
+      "start_frame": 2393,
+      "end_frame": 2406,
+      "probability": 0.9993,
+      "is_strong": false
+    },
+    {
+      "word": "no",
+      "start": 80.73,
+      "end": 80.93,
+      "start_frame": 2422,
+      "end_frame": 2428,
+      "probability": 0.9978,
+      "is_strong": false
+    },
+    {
+      "word": "product,",
+      "start": 80.93,
+      "end": 81.37,
+      "start_frame": 2428,
+      "end_frame": 2441,
+      "probability": 0.9992,
+      "is_strong": true
+    },
+    {
+      "word": "no",
+      "start": 81.83,
+      "end": 81.99,
+      "start_frame": 2455,
+      "end_frame": 2460,
+      "probability": 0.9985,
+      "is_strong": false
+    },
+    {
+      "word": "revenue.",
+      "start": 81.99,
+      "end": 82.33,
+      "start_frame": 2460,
+      "end_frame": 2470,
+      "probability": 0.9991,
+      "is_strong": true
+    },
+    {
+      "word": "It",
+      "start": 82.87,
+      "end": 83.13,
+      "start_frame": 2486,
+      "end_frame": 2494,
+      "probability": 0.9975,
+      "is_strong": false
+    },
+    {
+      "word": "exists",
+      "start": 83.13,
+      "end": 83.43,
+      "start_frame": 2494,
+      "end_frame": 2503,
+      "probability": 0.9976,
+      "is_strong": false
+    },
+    {
+      "word": "only",
+      "start": 83.43,
+      "end": 83.91,
+      "start_frame": 2503,
+      "end_frame": 2517,
+      "probability": 0.9981,
+      "is_strong": false
+    },
+    {
+      "word": "as",
+      "start": 83.91,
+      "end": 84.11,
+      "start_frame": 2517,
+      "end_frame": 2523,
+      "probability": 0.999,
+      "is_strong": false
+    },
+    {
+      "word": "a",
+      "start": 84.11,
+      "end": 84.35,
+      "start_frame": 2523,
+      "end_frame": 2530,
+      "probability": 0.999,
+      "is_strong": false
+    },
+    {
+      "word": "digital",
+      "start": 84.35,
+      "end": 84.69,
+      "start_frame": 2530,
+      "end_frame": 2541,
+      "probability": 0.9992,
+      "is_strong": true
+    },
+    {
+      "word": "ticker",
+      "start": 84.69,
+      "end": 85.07,
+      "start_frame": 2541,
+      "end_frame": 2552,
+      "probability": 0.9962,
+      "is_strong": false
+    },
+    {
+      "word": "on",
+      "start": 85.07,
+      "end": 85.23,
+      "start_frame": 2552,
+      "end_frame": 2557,
+      "probability": 0.9955,
+      "is_strong": false
+    },
+    {
+      "word": "a",
+      "start": 85.23,
+      "end": 85.43,
+      "start_frame": 2557,
+      "end_frame": 2563,
+      "probability": 0.9983,
+      "is_strong": false
+    },
+    {
+      "word": "cold",
+      "start": 85.43,
+      "end": 85.69,
+      "start_frame": 2563,
+      "end_frame": 2571,
+      "probability": 0.993,
+      "is_strong": false
+    },
+    {
+      "word": "computer",
+      "start": 85.69,
+      "end": 86.17,
+      "start_frame": 2571,
+      "end_frame": 2585,
+      "probability": 0.9987,
+      "is_strong": true
+    },
+    {
+      "word": "screen.",
+      "start": 86.17,
+      "end": 86.53,
+      "start_frame": 2585,
+      "end_frame": 2596,
+      "probability": 0.9971,
+      "is_strong": false
+    },
+    {
+      "word": "You",
+      "start": 86.53,
+      "end": 87.19,
+      "start_frame": 2596,
+      "end_frame": 2616,
+      "probability": 0.6249,
+      "is_strong": true
+    },
+    {
+      "word": "artificially",
+      "start": 87.19,
+      "end": 87.85,
+      "start_frame": 2616,
+      "end_frame": 2636,
+      "probability": 0.9939,
+      "is_strong": true
+    },
+    {
+      "word": "constrict",
+      "start": 87.85,
+      "end": 88.31,
+      "start_frame": 2636,
+      "end_frame": 2649,
+      "probability": 0.9908,
+      "is_strong": true
+    },
+    {
+      "word": "the",
+      "start": 88.31,
+      "end": 88.51,
+      "start_frame": 2649,
+      "end_frame": 2655,
+      "probability": 0.9928,
+      "is_strong": false
+    },
+    {
+      "word": "supply.",
+      "start": 88.51,
+      "end": 88.89,
+      "start_frame": 2655,
+      "end_frame": 2667,
+      "probability": 0.9959,
+      "is_strong": false
+    },
+    {
+      "word": "You",
+      "start": 89.47,
+      "end": 89.53,
+      "start_frame": 2684,
+      "end_frame": 2686,
+      "probability": 0.9944,
+      "is_strong": false
+    },
+    {
+      "word": "create",
+      "start": 89.53,
+      "end": 89.85,
+      "start_frame": 2686,
+      "end_frame": 2696,
+      "probability": 0.9976,
+      "is_strong": false
+    },
+    {
+      "word": "a",
+      "start": 89.85,
+      "end": 90.15,
+      "start_frame": 2696,
+      "end_frame": 2704,
+      "probability": 0.998,
+      "is_strong": false
+    },
+    {
+      "word": "fake",
+      "start": 90.15,
+      "end": 90.33,
+      "start_frame": 2704,
+      "end_frame": 2710,
+      "probability": 0.9901,
+      "is_strong": false
+    },
+    {
+      "word": "panic.",
+      "start": 90.33,
+      "end": 90.71,
+      "start_frame": 2710,
+      "end_frame": 2721,
+      "probability": 0.9935,
+      "is_strong": false
+    },
+    {
+      "word": "The",
+      "start": 91.29,
+      "end": 91.47,
+      "start_frame": 2739,
+      "end_frame": 2744,
+      "probability": 0.9958,
+      "is_strong": false
+    },
+    {
+      "word": "price",
+      "start": 91.47,
+      "end": 91.71,
+      "start_frame": 2744,
+      "end_frame": 2751,
+      "probability": 0.9988,
+      "is_strong": false
+    },
+    {
+      "word": "climbs",
+      "start": 91.71,
+      "end": 92.03,
+      "start_frame": 2751,
+      "end_frame": 2761,
+      "probability": 0.9863,
+      "is_strong": false
+    },
+    {
+      "word": "by",
+      "start": 92.03,
+      "end": 92.43,
+      "start_frame": 2761,
+      "end_frame": 2773,
+      "probability": 0.9937,
+      "is_strong": false
+    },
+    {
+      "word": "400",
+      "start": 92.43,
+      "end": 92.81,
+      "start_frame": 2773,
+      "end_frame": 2784,
+      "probability": 0.9366,
+      "is_strong": false
+    },
+    {
+      "word": "percent",
+      "start": 92.81,
+      "end": 93.29,
+      "start_frame": 2784,
+      "end_frame": 2799,
+      "probability": 0.2666,
+      "is_strong": true
+    },
+    {
+      "word": "in",
+      "start": 93.29,
+      "end": 93.55,
+      "start_frame": 2799,
+      "end_frame": 2806,
+      "probability": 0.9953,
+      "is_strong": false
+    },
+    {
+      "word": "48",
+      "start": 93.55,
+      "end": 93.91,
+      "start_frame": 2806,
+      "end_frame": 2817,
+      "probability": 0.9818,
+      "is_strong": false
+    },
+    {
+      "word": "hours.",
+      "start": 93.91,
+      "end": 94.39,
+      "start_frame": 2817,
+      "end_frame": 2832,
+      "probability": 0.9953,
+      "is_strong": false
+    },
+    {
+      "word": "Every",
+      "start": 95.05,
+      "end": 95.25,
+      "start_frame": 2852,
+      "end_frame": 2858,
+      "probability": 0.9982,
+      "is_strong": false
+    },
+    {
+      "word": "retail",
+      "start": 95.25,
+      "end": 95.63,
+      "start_frame": 2858,
+      "end_frame": 2869,
+      "probability": 0.9972,
+      "is_strong": false
+    },
+    {
+      "word": "investor",
+      "start": 95.63,
+      "end": 96.03,
+      "start_frame": 2869,
+      "end_frame": 2881,
+      "probability": 0.9976,
+      "is_strong": true
+    },
+    {
+      "word": "watches",
+      "start": 96.03,
+      "end": 96.39,
+      "start_frame": 2881,
+      "end_frame": 2892,
+      "probability": 0.9976,
+      "is_strong": true
+    },
+    {
+      "word": "the",
+      "start": 96.39,
+      "end": 96.67,
+      "start_frame": 2892,
+      "end_frame": 2900,
+      "probability": 0.9982,
+      "is_strong": false
+    },
+    {
+      "word": "chart",
+      "start": 96.67,
+      "end": 96.85,
+      "start_frame": 2900,
+      "end_frame": 2906,
+      "probability": 0.9981,
+      "is_strong": false
+    },
+    {
+      "word": "and",
+      "start": 96.85,
+      "end": 97.33,
+      "start_frame": 2906,
+      "end_frame": 2920,
+      "probability": 0.9528,
+      "is_strong": false
+    },
+    {
+      "word": "feels",
+      "start": 97.33,
+      "end": 97.57,
+      "start_frame": 2920,
+      "end_frame": 2927,
+      "probability": 0.9942,
+      "is_strong": false
+    },
+    {
+      "word": "the",
+      "start": 97.57,
+      "end": 97.91,
+      "start_frame": 2927,
+      "end_frame": 2937,
+      "probability": 0.9944,
+      "is_strong": false
+    },
+    {
+      "word": "burning",
+      "start": 97.91,
+      "end": 98.23,
+      "start_frame": 2937,
+      "end_frame": 2947,
+      "probability": 0.9977,
+      "is_strong": true
+    },
+    {
+      "word": "sting",
+      "start": 98.23,
+      "end": 98.49,
+      "start_frame": 2947,
+      "end_frame": 2955,
+      "probability": 0.9978,
+      "is_strong": false
+    },
+    {
+      "word": "of",
+      "start": 98.49,
+      "end": 98.79,
+      "start_frame": 2955,
+      "end_frame": 2964,
+      "probability": 0.9988,
+      "is_strong": false
+    },
+    {
+      "word": "greed.",
+      "start": 98.79,
+      "end": 99.01,
+      "start_frame": 2964,
+      "end_frame": 2970,
+      "probability": 0.9973,
+      "is_strong": false
+    },
+    {
+      "word": "They",
+      "start": 99.55,
+      "end": 99.75,
+      "start_frame": 2986,
+      "end_frame": 2992,
+      "probability": 0.996,
+      "is_strong": false
+    },
+    {
+      "word": "call",
+      "start": 99.75,
+      "end": 99.99,
+      "start_frame": 2992,
+      "end_frame": 3000,
+      "probability": 0.9977,
+      "is_strong": false
+    },
+    {
+      "word": "back.",
+      "start": 99.99,
+      "end": 100.35,
+      "start_frame": 3000,
+      "end_frame": 3010,
+      "probability": 0.9976,
+      "is_strong": false
+    },
+    {
+      "word": "They",
+      "start": 100.75,
+      "end": 100.93,
+      "start_frame": 3022,
+      "end_frame": 3028,
+      "probability": 0.9976,
+      "is_strong": false
+    },
+    {
+      "word": "buy",
+      "start": 100.93,
+      "end": 101.13,
+      "start_frame": 3028,
+      "end_frame": 3034,
+      "probability": 0.9982,
+      "is_strong": false
+    },
+    {
+      "word": "more.",
+      "start": 101.13,
+      "end": 101.49,
+      "start_frame": 3034,
+      "end_frame": 3045,
+      "probability": 0.9989,
+      "is_strong": false
+    },
+    {
+      "word": "They",
+      "start": 101.99,
+      "end": 102.27,
+      "start_frame": 3060,
+      "end_frame": 3068,
+      "probability": 0.9931,
+      "is_strong": false
+    },
+    {
+      "word": "wire",
+      "start": 102.27,
+      "end": 102.47,
+      "start_frame": 3068,
+      "end_frame": 3074,
+      "probability": 0.9939,
+      "is_strong": false
+    },
+    {
+      "word": "their",
+      "start": 102.47,
+      "end": 102.75,
+      "start_frame": 3074,
+      "end_frame": 3082,
+      "probability": 0.9976,
+      "is_strong": false
+    },
+    {
+      "word": "life",
+      "start": 102.75,
+      "end": 103.03,
+      "start_frame": 3082,
+      "end_frame": 3091,
+      "probability": 0.9909,
+      "is_strong": false
+    },
+    {
+      "word": "savings.",
+      "start": 103.03,
+      "end": 103.37,
+      "start_frame": 3091,
+      "end_frame": 3101,
+      "probability": 0.973,
+      "is_strong": true
+    },
+    {
+      "word": "They",
+      "start": 103.97,
+      "end": 104.15,
+      "start_frame": 3119,
+      "end_frame": 3124,
+      "probability": 0.9958,
+      "is_strong": false
+    },
+    {
+      "word": "think",
+      "start": 104.15,
+      "end": 104.25,
+      "start_frame": 3124,
+      "end_frame": 3128,
+      "probability": 0.9977,
+      "is_strong": false
+    },
+    {
+      "word": "they",
+      "start": 104.25,
+      "end": 104.41,
+      "start_frame": 3128,
+      "end_frame": 3132,
+      "probability": 0.9938,
+      "is_strong": false
+    },
+    {
+      "word": "are",
+      "start": 104.41,
+      "end": 104.63,
+      "start_frame": 3132,
+      "end_frame": 3139,
+      "probability": 0.7881,
+      "is_strong": false
+    },
+    {
+      "word": "with",
+      "start": 104.63,
+      "end": 104.95,
+      "start_frame": 3139,
+      "end_frame": 3148,
+      "probability": 0.2051,
+      "is_strong": false
+    },
+    {
+      "word": "a",
+      "start": 104.95,
+      "end": 105.23,
+      "start_frame": 3148,
+      "end_frame": 3157,
+      "probability": 0.9137,
+      "is_strong": false
+    },
+    {
+      "word": "Wall",
+      "start": 105.23,
+      "end": 105.41,
+      "start_frame": 3157,
+      "end_frame": 3162,
+      "probability": 0.7331,
+      "is_strong": false
+    },
+    {
+      "word": "Street",
+      "start": 105.41,
+      "end": 105.67,
+      "start_frame": 3162,
+      "end_frame": 3170,
+      "probability": 0.9328,
+      "is_strong": false
+    },
+    {
+      "word": "Titan,",
+      "start": 105.67,
+      "end": 105.99,
+      "start_frame": 3170,
+      "end_frame": 3180,
+      "probability": 0.7742,
+      "is_strong": false
+    },
+    {
+      "word": "but",
+      "start": 106.51,
+      "end": 106.61,
+      "start_frame": 3195,
+      "end_frame": 3198,
+      "probability": 0.9788,
+      "is_strong": false
+    },
+    {
+      "word": "they",
+      "start": 106.61,
+      "end": 106.73,
+      "start_frame": 3198,
+      "end_frame": 3202,
+      "probability": 0.9931,
+      "is_strong": false
+    },
+    {
+      "word": "were",
+      "start": 106.73,
+      "end": 106.87,
+      "start_frame": 3202,
+      "end_frame": 3206,
+      "probability": 0.8275,
+      "is_strong": false
+    },
+    {
+      "word": "just",
+      "start": 106.87,
+      "end": 107.11,
+      "start_frame": 3206,
+      "end_frame": 3213,
+      "probability": 0.9951,
+      "is_strong": false
+    },
+    {
+      "word": "funding",
+      "start": 107.11,
+      "end": 107.31,
+      "start_frame": 3213,
+      "end_frame": 3219,
+      "probability": 0.9882,
+      "is_strong": true
+    },
+    {
+      "word": "a",
+      "start": 107.31,
+      "end": 107.71,
+      "start_frame": 3219,
+      "end_frame": 3231,
+      "probability": 0.9683,
+      "is_strong": false
+    },
+    {
+      "word": "three",
+      "start": 107.71,
+      "end": 107.87,
+      "start_frame": 3231,
+      "end_frame": 3236,
+      "probability": 0.8145,
+      "is_strong": false
+    },
+    {
+      "word": "-day",
+      "start": 107.87,
+      "end": 108.09,
+      "start_frame": 3236,
+      "end_frame": 3243,
+      "probability": 0.8693,
+      "is_strong": false
+    },
+    {
+      "word": "drug",
+      "start": 108.09,
+      "end": 108.35,
+      "start_frame": 3243,
+      "end_frame": 3250,
+      "probability": 0.9973,
+      "is_strong": false
+    },
+    {
+      "word": "binge",
+      "start": 108.35,
+      "end": 108.61,
+      "start_frame": 3250,
+      "end_frame": 3258,
+      "probability": 0.7075,
+      "is_strong": false
+    },
+    {
+      "word": "in",
+      "start": 108.61,
+      "end": 108.79,
+      "start_frame": 3258,
+      "end_frame": 3264,
+      "probability": 0.8837,
+      "is_strong": false
+    },
+    {
+      "word": "a",
+      "start": 108.79,
+      "end": 109.01,
+      "start_frame": 3264,
+      "end_frame": 3270,
+      "probability": 0.958,
+      "is_strong": false
+    },
+    {
+      "word": "five",
+      "start": 109.01,
+      "end": 109.15,
+      "start_frame": 3270,
+      "end_frame": 3274,
+      "probability": 0.804,
+      "is_strong": false
+    },
+    {
+      "word": "-star",
+      "start": 109.15,
+      "end": 109.19,
+      "start_frame": 3274,
+      "end_frame": 3276,
+      "probability": 0.7668,
+      "is_strong": false
+    }
+  ],
+  "segments": [
+    {
+      "id": 0,
+      "text": "POV. You are making $50,000 a minute, but every single dollar is a ticking federal time",
+      "start": 0.27,
+      "end": 8.91,
+      "start_frame": 8,
+      "end_frame": 267,
+      "words": [
+        {
+          "word": "POV.",
+          "start": 0.27,
+          "end": 1.65,
+          "start_frame": 8,
+          "end_frame": 50,
+          "probability": 0.9406,
+          "is_strong": true
+        },
+        {
+          "word": "You",
+          "start": 1.97,
+          "end": 2.13,
+          "start_frame": 59,
+          "end_frame": 64,
+          "probability": 0.9671,
+          "is_strong": false
+        },
+        {
+          "word": "are",
+          "start": 2.13,
+          "end": 2.35,
+          "start_frame": 64,
+          "end_frame": 70,
+          "probability": 0.9832,
+          "is_strong": false
+        },
+        {
+          "word": "making",
+          "start": 2.35,
+          "end": 2.85,
+          "start_frame": 70,
+          "end_frame": 86,
+          "probability": 0.9977,
+          "is_strong": false
+        },
+        {
+          "word": "$50",
+          "start": 2.85,
+          "end": 3.49,
+          "start_frame": 86,
+          "end_frame": 105,
+          "probability": 0.8361,
+          "is_strong": true
+        },
+        {
+          "word": ",000",
+          "start": 3.49,
+          "end": 4.43,
+          "start_frame": 105,
+          "end_frame": 133,
+          "probability": 0.9866,
+          "is_strong": true
+        },
+        {
+          "word": "a",
+          "start": 4.43,
+          "end": 4.81,
+          "start_frame": 133,
+          "end_frame": 144,
+          "probability": 0.9106,
+          "is_strong": false
+        },
+        {
+          "word": "minute,",
+          "start": 4.81,
+          "end": 5.17,
+          "start_frame": 144,
+          "end_frame": 155,
+          "probability": 0.9963,
+          "is_strong": false
+        },
+        {
+          "word": "but",
+          "start": 5.57,
+          "end": 5.81,
+          "start_frame": 167,
+          "end_frame": 174,
+          "probability": 0.9903,
+          "is_strong": false
+        },
+        {
+          "word": "every",
+          "start": 5.81,
+          "end": 6.21,
+          "start_frame": 174,
+          "end_frame": 186,
+          "probability": 0.9972,
+          "is_strong": false
+        },
+        {
+          "word": "single",
+          "start": 6.21,
+          "end": 6.65,
+          "start_frame": 186,
+          "end_frame": 200,
+          "probability": 0.9845,
+          "is_strong": false
+        },
+        {
+          "word": "dollar",
+          "start": 6.65,
+          "end": 6.95,
+          "start_frame": 200,
+          "end_frame": 208,
+          "probability": 0.994,
+          "is_strong": false
+        },
+        {
+          "word": "is",
+          "start": 6.95,
+          "end": 7.31,
+          "start_frame": 208,
+          "end_frame": 219,
+          "probability": 0.9977,
+          "is_strong": false
+        },
+        {
+          "word": "a",
+          "start": 7.31,
+          "end": 7.49,
+          "start_frame": 219,
+          "end_frame": 225,
+          "probability": 0.9968,
+          "is_strong": false
+        },
+        {
+          "word": "ticking",
+          "start": 7.49,
+          "end": 7.79,
+          "start_frame": 225,
+          "end_frame": 234,
+          "probability": 0.9978,
+          "is_strong": true
+        },
+        {
+          "word": "federal",
+          "start": 7.79,
+          "end": 8.51,
+          "start_frame": 234,
+          "end_frame": 255,
+          "probability": 0.86,
+          "is_strong": true
+        },
+        {
+          "word": "time",
+          "start": 8.51,
+          "end": 8.91,
+          "start_frame": 255,
+          "end_frame": 267,
+          "probability": 0.9942,
+          "is_strong": false
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "text": "bomb and the countdown just hit zero. He was not a financial genius. He did not understand",
+      "start": 8.91,
+      "end": 16.13,
+      "start_frame": 267,
+      "end_frame": 484,
+      "words": [
+        {
+          "word": "bomb",
+          "start": 8.91,
+          "end": 9.19,
+          "start_frame": 267,
+          "end_frame": 276,
+          "probability": 0.9297,
+          "is_strong": false
+        },
+        {
+          "word": "and",
+          "start": 9.19,
+          "end": 9.87,
+          "start_frame": 276,
+          "end_frame": 296,
+          "probability": 0.1835,
+          "is_strong": true
+        },
+        {
+          "word": "the",
+          "start": 9.87,
+          "end": 10.07,
+          "start_frame": 296,
+          "end_frame": 302,
+          "probability": 0.9952,
+          "is_strong": false
+        },
+        {
+          "word": "countdown",
+          "start": 10.07,
+          "end": 10.45,
+          "start_frame": 302,
+          "end_frame": 314,
+          "probability": 0.9766,
+          "is_strong": true
+        },
+        {
+          "word": "just",
+          "start": 10.45,
+          "end": 11.35,
+          "start_frame": 314,
+          "end_frame": 340,
+          "probability": 0.869,
+          "is_strong": true
+        },
+        {
+          "word": "hit",
+          "start": 11.35,
+          "end": 11.59,
+          "start_frame": 340,
+          "end_frame": 348,
+          "probability": 0.9831,
+          "is_strong": false
+        },
+        {
+          "word": "zero.",
+          "start": 11.59,
+          "end": 12.07,
+          "start_frame": 348,
+          "end_frame": 362,
+          "probability": 0.9581,
+          "is_strong": false
+        },
+        {
+          "word": "He",
+          "start": 12.61,
+          "end": 12.81,
+          "start_frame": 378,
+          "end_frame": 384,
+          "probability": 0.9953,
+          "is_strong": false
+        },
+        {
+          "word": "was",
+          "start": 12.81,
+          "end": 13.09,
+          "start_frame": 384,
+          "end_frame": 393,
+          "probability": 0.9974,
+          "is_strong": false
+        },
+        {
+          "word": "not",
+          "start": 13.09,
+          "end": 13.39,
+          "start_frame": 393,
+          "end_frame": 402,
+          "probability": 0.9956,
+          "is_strong": false
+        },
+        {
+          "word": "a",
+          "start": 13.39,
+          "end": 13.53,
+          "start_frame": 402,
+          "end_frame": 406,
+          "probability": 0.9976,
+          "is_strong": false
+        },
+        {
+          "word": "financial",
+          "start": 13.53,
+          "end": 14.07,
+          "start_frame": 406,
+          "end_frame": 422,
+          "probability": 0.9986,
+          "is_strong": true
+        },
+        {
+          "word": "genius.",
+          "start": 14.07,
+          "end": 14.57,
+          "start_frame": 422,
+          "end_frame": 437,
+          "probability": 0.9989,
+          "is_strong": false
+        },
+        {
+          "word": "He",
+          "start": 15.07,
+          "end": 15.21,
+          "start_frame": 452,
+          "end_frame": 456,
+          "probability": 0.9953,
+          "is_strong": false
+        },
+        {
+          "word": "did",
+          "start": 15.21,
+          "end": 15.41,
+          "start_frame": 456,
+          "end_frame": 462,
+          "probability": 0.9939,
+          "is_strong": false
+        },
+        {
+          "word": "not",
+          "start": 15.41,
+          "end": 15.63,
+          "start_frame": 462,
+          "end_frame": 469,
+          "probability": 0.9993,
+          "is_strong": false
+        },
+        {
+          "word": "understand",
+          "start": 15.63,
+          "end": 16.13,
+          "start_frame": 469,
+          "end_frame": 484,
+          "probability": 0.9985,
+          "is_strong": true
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "quantitative finance or market arbitrage. He understood one thing, human desperation.",
+      "start": 16.13,
+      "end": 22.51,
+      "start_frame": 484,
+      "end_frame": 675,
+      "words": [
+        {
+          "word": "quantitative",
+          "start": 16.13,
+          "end": 16.81,
+          "start_frame": 484,
+          "end_frame": 504,
+          "probability": 0.9888,
+          "is_strong": true
+        },
+        {
+          "word": "finance",
+          "start": 16.81,
+          "end": 17.43,
+          "start_frame": 504,
+          "end_frame": 523,
+          "probability": 0.997,
+          "is_strong": true
+        },
+        {
+          "word": "or",
+          "start": 17.43,
+          "end": 17.83,
+          "start_frame": 523,
+          "end_frame": 535,
+          "probability": 0.9728,
+          "is_strong": false
+        },
+        {
+          "word": "market",
+          "start": 17.83,
+          "end": 18.19,
+          "start_frame": 535,
+          "end_frame": 546,
+          "probability": 0.9974,
+          "is_strong": false
+        },
+        {
+          "word": "arbitrage.",
+          "start": 18.19,
+          "end": 18.85,
+          "start_frame": 546,
+          "end_frame": 566,
+          "probability": 0.9985,
+          "is_strong": true
+        },
+        {
+          "word": "He",
+          "start": 19.35,
+          "end": 19.61,
+          "start_frame": 580,
+          "end_frame": 588,
+          "probability": 0.9971,
+          "is_strong": false
+        },
+        {
+          "word": "understood",
+          "start": 19.61,
+          "end": 19.99,
+          "start_frame": 588,
+          "end_frame": 600,
+          "probability": 0.9991,
+          "is_strong": true
+        },
+        {
+          "word": "one",
+          "start": 19.99,
+          "end": 20.49,
+          "start_frame": 600,
+          "end_frame": 615,
+          "probability": 0.9911,
+          "is_strong": false
+        },
+        {
+          "word": "thing,",
+          "start": 20.49,
+          "end": 20.83,
+          "start_frame": 615,
+          "end_frame": 625,
+          "probability": 0.9987,
+          "is_strong": false
+        },
+        {
+          "word": "human",
+          "start": 21.47,
+          "end": 21.75,
+          "start_frame": 644,
+          "end_frame": 652,
+          "probability": 0.9847,
+          "is_strong": false
+        },
+        {
+          "word": "desperation.",
+          "start": 21.75,
+          "end": 22.51,
+          "start_frame": 652,
+          "end_frame": 675,
+          "probability": 0.9986,
+          "is_strong": true
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "He took worthless pink sheet stocks and sold them to doctors looking for a miracle.",
+      "start": 23.03,
+      "end": 28.39,
+      "start_frame": 691,
+      "end_frame": 852,
+      "words": [
+        {
+          "word": "He",
+          "start": 23.03,
+          "end": 23.35,
+          "start_frame": 691,
+          "end_frame": 700,
+          "probability": 0.9976,
+          "is_strong": false
+        },
+        {
+          "word": "took",
+          "start": 23.35,
+          "end": 23.65,
+          "start_frame": 700,
+          "end_frame": 710,
+          "probability": 0.9995,
+          "is_strong": false
+        },
+        {
+          "word": "worthless",
+          "start": 23.65,
+          "end": 24.29,
+          "start_frame": 710,
+          "end_frame": 729,
+          "probability": 0.9948,
+          "is_strong": true
+        },
+        {
+          "word": "pink",
+          "start": 24.29,
+          "end": 24.69,
+          "start_frame": 729,
+          "end_frame": 741,
+          "probability": 0.8541,
+          "is_strong": false
+        },
+        {
+          "word": "sheet",
+          "start": 24.69,
+          "end": 24.93,
+          "start_frame": 741,
+          "end_frame": 748,
+          "probability": 0.6382,
+          "is_strong": false
+        },
+        {
+          "word": "stocks",
+          "start": 24.93,
+          "end": 25.39,
+          "start_frame": 748,
+          "end_frame": 762,
+          "probability": 0.9964,
+          "is_strong": false
+        },
+        {
+          "word": "and",
+          "start": 25.39,
+          "end": 26.07,
+          "start_frame": 762,
+          "end_frame": 782,
+          "probability": 0.9252,
+          "is_strong": true
+        },
+        {
+          "word": "sold",
+          "start": 26.07,
+          "end": 26.31,
+          "start_frame": 782,
+          "end_frame": 789,
+          "probability": 0.9985,
+          "is_strong": false
+        },
+        {
+          "word": "them",
+          "start": 26.31,
+          "end": 26.47,
+          "start_frame": 789,
+          "end_frame": 794,
+          "probability": 0.9984,
+          "is_strong": false
+        },
+        {
+          "word": "to",
+          "start": 26.47,
+          "end": 26.73,
+          "start_frame": 794,
+          "end_frame": 802,
+          "probability": 0.999,
+          "is_strong": false
+        },
+        {
+          "word": "doctors",
+          "start": 26.73,
+          "end": 27.17,
+          "start_frame": 802,
+          "end_frame": 815,
+          "probability": 0.993,
+          "is_strong": true
+        },
+        {
+          "word": "looking",
+          "start": 27.17,
+          "end": 27.53,
+          "start_frame": 815,
+          "end_frame": 826,
+          "probability": 0.888,
+          "is_strong": true
+        },
+        {
+          "word": "for",
+          "start": 27.53,
+          "end": 27.77,
+          "start_frame": 826,
+          "end_frame": 833,
+          "probability": 0.9995,
+          "is_strong": false
+        },
+        {
+          "word": "a",
+          "start": 27.77,
+          "end": 28.01,
+          "start_frame": 833,
+          "end_frame": 840,
+          "probability": 0.9993,
+          "is_strong": false
+        },
+        {
+          "word": "miracle.",
+          "start": 28.01,
+          "end": 28.39,
+          "start_frame": 840,
+          "end_frame": 852,
+          "probability": 0.9901,
+          "is_strong": true
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "It was not investing. It was financial liquidation. The business model was simple. Hypnotize the buyer,",
+      "start": 28.39,
+      "end": 35.67,
+      "start_frame": 852,
+      "end_frame": 1070,
+      "words": [
+        {
+          "word": "It",
+          "start": 28.39,
+          "end": 28.89,
+          "start_frame": 852,
+          "end_frame": 867,
+          "probability": 0.6395,
+          "is_strong": false
+        },
+        {
+          "word": "was",
+          "start": 28.89,
+          "end": 29.23,
+          "start_frame": 867,
+          "end_frame": 877,
+          "probability": 0.993,
+          "is_strong": false
+        },
+        {
+          "word": "not",
+          "start": 29.23,
+          "end": 29.35,
+          "start_frame": 877,
+          "end_frame": 880,
+          "probability": 0.9479,
+          "is_strong": false
+        },
+        {
+          "word": "investing.",
+          "start": 29.35,
+          "end": 29.93,
+          "start_frame": 880,
+          "end_frame": 898,
+          "probability": 0.9954,
+          "is_strong": true
+        },
+        {
+          "word": "It",
+          "start": 30.45,
+          "end": 30.55,
+          "start_frame": 914,
+          "end_frame": 916,
+          "probability": 0.9943,
+          "is_strong": false
+        },
+        {
+          "word": "was",
+          "start": 30.55,
+          "end": 30.79,
+          "start_frame": 916,
+          "end_frame": 924,
+          "probability": 0.9994,
+          "is_strong": false
+        },
+        {
+          "word": "financial",
+          "start": 30.79,
+          "end": 31.51,
+          "start_frame": 924,
+          "end_frame": 945,
+          "probability": 0.9904,
+          "is_strong": true
+        },
+        {
+          "word": "liquidation.",
+          "start": 31.51,
+          "end": 32.35,
+          "start_frame": 945,
+          "end_frame": 970,
+          "probability": 0.9889,
+          "is_strong": true
+        },
+        {
+          "word": "The",
+          "start": 32.83,
+          "end": 32.91,
+          "start_frame": 985,
+          "end_frame": 987,
+          "probability": 0.9866,
+          "is_strong": false
+        },
+        {
+          "word": "business",
+          "start": 32.91,
+          "end": 33.27,
+          "start_frame": 987,
+          "end_frame": 998,
+          "probability": 0.997,
+          "is_strong": true
+        },
+        {
+          "word": "model",
+          "start": 33.27,
+          "end": 33.53,
+          "start_frame": 998,
+          "end_frame": 1006,
+          "probability": 0.9987,
+          "is_strong": false
+        },
+        {
+          "word": "was",
+          "start": 33.53,
+          "end": 33.81,
+          "start_frame": 1006,
+          "end_frame": 1014,
+          "probability": 0.999,
+          "is_strong": false
+        },
+        {
+          "word": "simple.",
+          "start": 33.81,
+          "end": 34.21,
+          "start_frame": 1014,
+          "end_frame": 1026,
+          "probability": 0.9975,
+          "is_strong": false
+        },
+        {
+          "word": "Hypnotize",
+          "start": 34.59,
+          "end": 35.19,
+          "start_frame": 1038,
+          "end_frame": 1056,
+          "probability": 0.9562,
+          "is_strong": true
+        },
+        {
+          "word": "the",
+          "start": 35.19,
+          "end": 35.39,
+          "start_frame": 1056,
+          "end_frame": 1062,
+          "probability": 0.9958,
+          "is_strong": false
+        },
+        {
+          "word": "buyer,",
+          "start": 35.39,
+          "end": 35.67,
+          "start_frame": 1062,
+          "end_frame": 1070,
+          "probability": 0.9964,
+          "is_strong": false
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "pump the trash stock, dump the shares, collect the cash. The SEC looked away. The banks processed",
+      "start": 36.25,
+      "end": 43.55,
+      "start_frame": 1088,
+      "end_frame": 1306,
+      "words": [
+        {
+          "word": "pump",
+          "start": 36.25,
+          "end": 36.43,
+          "start_frame": 1088,
+          "end_frame": 1093,
+          "probability": 0.9851,
+          "is_strong": false
+        },
+        {
+          "word": "the",
+          "start": 36.43,
+          "end": 36.73,
+          "start_frame": 1093,
+          "end_frame": 1102,
+          "probability": 0.9975,
+          "is_strong": false
+        },
+        {
+          "word": "trash",
+          "start": 36.73,
+          "end": 36.99,
+          "start_frame": 1102,
+          "end_frame": 1110,
+          "probability": 0.9938,
+          "is_strong": false
+        },
+        {
+          "word": "stock,",
+          "start": 36.99,
+          "end": 37.47,
+          "start_frame": 1110,
+          "end_frame": 1124,
+          "probability": 0.9607,
+          "is_strong": false
+        },
+        {
+          "word": "dump",
+          "start": 37.89,
+          "end": 38.13,
+          "start_frame": 1137,
+          "end_frame": 1144,
+          "probability": 0.9852,
+          "is_strong": false
+        },
+        {
+          "word": "the",
+          "start": 38.13,
+          "end": 38.41,
+          "start_frame": 1144,
+          "end_frame": 1152,
+          "probability": 0.9949,
+          "is_strong": false
+        },
+        {
+          "word": "shares,",
+          "start": 38.41,
+          "end": 38.75,
+          "start_frame": 1152,
+          "end_frame": 1162,
+          "probability": 0.9978,
+          "is_strong": false
+        },
+        {
+          "word": "collect",
+          "start": 39.29,
+          "end": 39.63,
+          "start_frame": 1179,
+          "end_frame": 1189,
+          "probability": 0.9797,
+          "is_strong": true
+        },
+        {
+          "word": "the",
+          "start": 39.63,
+          "end": 39.87,
+          "start_frame": 1189,
+          "end_frame": 1196,
+          "probability": 0.9967,
+          "is_strong": false
+        },
+        {
+          "word": "cash.",
+          "start": 39.87,
+          "end": 40.17,
+          "start_frame": 1196,
+          "end_frame": 1205,
+          "probability": 0.9987,
+          "is_strong": false
+        },
+        {
+          "word": "The",
+          "start": 40.71,
+          "end": 40.95,
+          "start_frame": 1221,
+          "end_frame": 1228,
+          "probability": 0.9911,
+          "is_strong": false
+        },
+        {
+          "word": "SEC",
+          "start": 40.95,
+          "end": 41.31,
+          "start_frame": 1228,
+          "end_frame": 1239,
+          "probability": 0.9152,
+          "is_strong": true
+        },
+        {
+          "word": "looked",
+          "start": 41.31,
+          "end": 41.69,
+          "start_frame": 1239,
+          "end_frame": 1251,
+          "probability": 0.9964,
+          "is_strong": false
+        },
+        {
+          "word": "away.",
+          "start": 41.69,
+          "end": 42.11,
+          "start_frame": 1251,
+          "end_frame": 1263,
+          "probability": 0.9985,
+          "is_strong": false
+        },
+        {
+          "word": "The",
+          "start": 42.51,
+          "end": 42.77,
+          "start_frame": 1275,
+          "end_frame": 1283,
+          "probability": 0.9952,
+          "is_strong": false
+        },
+        {
+          "word": "banks",
+          "start": 42.77,
+          "end": 42.95,
+          "start_frame": 1283,
+          "end_frame": 1288,
+          "probability": 0.9705,
+          "is_strong": false
+        },
+        {
+          "word": "processed",
+          "start": 42.95,
+          "end": 43.55,
+          "start_frame": 1288,
+          "end_frame": 1306,
+          "probability": 0.9071,
+          "is_strong": true
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "the wire transfers. He bought yachts, helicopters, and a mansion in the Hamptons, an empire built",
+      "start": 43.55,
+      "end": 50.45,
+      "start_frame": 1306,
+      "end_frame": 1514,
+      "words": [
+        {
+          "word": "the",
+          "start": 43.55,
+          "end": 43.83,
+          "start_frame": 1306,
+          "end_frame": 1315,
+          "probability": 0.9984,
+          "is_strong": false
+        },
+        {
+          "word": "wire",
+          "start": 43.83,
+          "end": 44.07,
+          "start_frame": 1315,
+          "end_frame": 1322,
+          "probability": 0.9978,
+          "is_strong": false
+        },
+        {
+          "word": "transfers.",
+          "start": 44.07,
+          "end": 44.53,
+          "start_frame": 1322,
+          "end_frame": 1336,
+          "probability": 0.9919,
+          "is_strong": true
+        },
+        {
+          "word": "He",
+          "start": 45.11,
+          "end": 45.27,
+          "start_frame": 1353,
+          "end_frame": 1358,
+          "probability": 0.987,
+          "is_strong": false
+        },
+        {
+          "word": "bought",
+          "start": 45.27,
+          "end": 45.49,
+          "start_frame": 1358,
+          "end_frame": 1365,
+          "probability": 0.9941,
+          "is_strong": false
+        },
+        {
+          "word": "yachts,",
+          "start": 45.49,
+          "end": 46.41,
+          "start_frame": 1365,
+          "end_frame": 1392,
+          "probability": 0.9924,
+          "is_strong": true
+        },
+        {
+          "word": "helicopters,",
+          "start": 46.67,
+          "end": 47.07,
+          "start_frame": 1400,
+          "end_frame": 1412,
+          "probability": 0.9943,
+          "is_strong": true
+        },
+        {
+          "word": "and",
+          "start": 47.41,
+          "end": 47.57,
+          "start_frame": 1422,
+          "end_frame": 1427,
+          "probability": 0.9965,
+          "is_strong": false
+        },
+        {
+          "word": "a",
+          "start": 47.57,
+          "end": 47.83,
+          "start_frame": 1427,
+          "end_frame": 1435,
+          "probability": 0.9977,
+          "is_strong": false
+        },
+        {
+          "word": "mansion",
+          "start": 47.83,
+          "end": 48.13,
+          "start_frame": 1435,
+          "end_frame": 1444,
+          "probability": 0.9982,
+          "is_strong": true
+        },
+        {
+          "word": "in",
+          "start": 48.13,
+          "end": 48.37,
+          "start_frame": 1444,
+          "end_frame": 1451,
+          "probability": 0.9973,
+          "is_strong": false
+        },
+        {
+          "word": "the",
+          "start": 48.37,
+          "end": 48.53,
+          "start_frame": 1451,
+          "end_frame": 1456,
+          "probability": 0.9658,
+          "is_strong": false
+        },
+        {
+          "word": "Hamptons,",
+          "start": 48.53,
+          "end": 48.97,
+          "start_frame": 1456,
+          "end_frame": 1469,
+          "probability": 0.9885,
+          "is_strong": true
+        },
+        {
+          "word": "an",
+          "start": 49.51,
+          "end": 49.77,
+          "start_frame": 1485,
+          "end_frame": 1493,
+          "probability": 0.9822,
+          "is_strong": false
+        },
+        {
+          "word": "empire",
+          "start": 49.77,
+          "end": 50.13,
+          "start_frame": 1493,
+          "end_frame": 1504,
+          "probability": 0.9607,
+          "is_strong": false
+        },
+        {
+          "word": "built",
+          "start": 50.13,
+          "end": 50.45,
+          "start_frame": 1504,
+          "end_frame": 1514,
+          "probability": 0.9966,
+          "is_strong": false
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "entirely on paper and lies. Part Two. The Mechanism of the Trap. To understand the size",
+      "start": 50.45,
+      "end": 57.43,
+      "start_frame": 1514,
+      "end_frame": 1723,
+      "words": [
+        {
+          "word": "entirely",
+          "start": 50.45,
+          "end": 51.09,
+          "start_frame": 1514,
+          "end_frame": 1533,
+          "probability": 0.9975,
+          "is_strong": true
+        },
+        {
+          "word": "on",
+          "start": 51.09,
+          "end": 51.49,
+          "start_frame": 1533,
+          "end_frame": 1545,
+          "probability": 0.997,
+          "is_strong": false
+        },
+        {
+          "word": "paper",
+          "start": 51.49,
+          "end": 51.87,
+          "start_frame": 1545,
+          "end_frame": 1556,
+          "probability": 0.9964,
+          "is_strong": false
+        },
+        {
+          "word": "and",
+          "start": 51.87,
+          "end": 52.31,
+          "start_frame": 1556,
+          "end_frame": 1569,
+          "probability": 0.997,
+          "is_strong": false
+        },
+        {
+          "word": "lies.",
+          "start": 52.31,
+          "end": 52.65,
+          "start_frame": 1569,
+          "end_frame": 1580,
+          "probability": 0.9945,
+          "is_strong": false
+        },
+        {
+          "word": "Part",
+          "start": 53.21,
+          "end": 53.47,
+          "start_frame": 1596,
+          "end_frame": 1604,
+          "probability": 0.9075,
+          "is_strong": false
+        },
+        {
+          "word": "Two.",
+          "start": 53.47,
+          "end": 53.93,
+          "start_frame": 1604,
+          "end_frame": 1618,
+          "probability": 0.2081,
+          "is_strong": false
+        },
+        {
+          "word": "The",
+          "start": 54.15,
+          "end": 54.49,
+          "start_frame": 1624,
+          "end_frame": 1635,
+          "probability": 0.9756,
+          "is_strong": false
+        },
+        {
+          "word": "Mechanism",
+          "start": 54.49,
+          "end": 54.99,
+          "start_frame": 1635,
+          "end_frame": 1650,
+          "probability": 0.878,
+          "is_strong": true
+        },
+        {
+          "word": "of",
+          "start": 54.99,
+          "end": 55.15,
+          "start_frame": 1650,
+          "end_frame": 1654,
+          "probability": 0.9347,
+          "is_strong": false
+        },
+        {
+          "word": "the",
+          "start": 55.15,
+          "end": 55.41,
+          "start_frame": 1654,
+          "end_frame": 1662,
+          "probability": 0.9589,
+          "is_strong": false
+        },
+        {
+          "word": "Trap.",
+          "start": 55.41,
+          "end": 55.79,
+          "start_frame": 1662,
+          "end_frame": 1674,
+          "probability": 0.9863,
+          "is_strong": false
+        },
+        {
+          "word": "To",
+          "start": 56.19,
+          "end": 56.41,
+          "start_frame": 1686,
+          "end_frame": 1692,
+          "probability": 0.9955,
+          "is_strong": false
+        },
+        {
+          "word": "understand",
+          "start": 56.41,
+          "end": 56.89,
+          "start_frame": 1692,
+          "end_frame": 1707,
+          "probability": 0.9981,
+          "is_strong": true
+        },
+        {
+          "word": "the",
+          "start": 56.89,
+          "end": 57.15,
+          "start_frame": 1707,
+          "end_frame": 1714,
+          "probability": 0.9987,
+          "is_strong": false
+        },
+        {
+          "word": "size",
+          "start": 57.15,
+          "end": 57.43,
+          "start_frame": 1714,
+          "end_frame": 1723,
+          "probability": 0.9963,
+          "is_strong": false
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "of the scam, you must look at the room. 100 phone lines ringing simultaneously, young men",
+      "start": 57.43,
+      "end": 63.93,
+      "start_frame": 1723,
+      "end_frame": 1918,
+      "words": [
+        {
+          "word": "of",
+          "start": 57.43,
+          "end": 57.59,
+          "start_frame": 1723,
+          "end_frame": 1728,
+          "probability": 0.5268,
+          "is_strong": false
+        },
+        {
+          "word": "the",
+          "start": 57.59,
+          "end": 57.71,
+          "start_frame": 1728,
+          "end_frame": 1731,
+          "probability": 0.8879,
+          "is_strong": false
+        },
+        {
+          "word": "scam,",
+          "start": 57.71,
+          "end": 58.03,
+          "start_frame": 1731,
+          "end_frame": 1741,
+          "probability": 0.9765,
+          "is_strong": false
+        },
+        {
+          "word": "you",
+          "start": 58.53,
+          "end": 58.59,
+          "start_frame": 1756,
+          "end_frame": 1758,
+          "probability": 0.9857,
+          "is_strong": false
+        },
+        {
+          "word": "must",
+          "start": 58.59,
+          "end": 58.83,
+          "start_frame": 1758,
+          "end_frame": 1765,
+          "probability": 0.9958,
+          "is_strong": false
+        },
+        {
+          "word": "look",
+          "start": 58.83,
+          "end": 59.11,
+          "start_frame": 1765,
+          "end_frame": 1773,
+          "probability": 0.9923,
+          "is_strong": false
+        },
+        {
+          "word": "at",
+          "start": 59.11,
+          "end": 59.31,
+          "start_frame": 1773,
+          "end_frame": 1779,
+          "probability": 0.9966,
+          "is_strong": false
+        },
+        {
+          "word": "the",
+          "start": 59.31,
+          "end": 59.53,
+          "start_frame": 1779,
+          "end_frame": 1786,
+          "probability": 0.9545,
+          "is_strong": false
+        },
+        {
+          "word": "room.",
+          "start": 59.53,
+          "end": 59.79,
+          "start_frame": 1786,
+          "end_frame": 1794,
+          "probability": 0.9872,
+          "is_strong": false
+        },
+        {
+          "word": "100",
+          "start": 60.27,
+          "end": 60.83,
+          "start_frame": 1808,
+          "end_frame": 1825,
+          "probability": 0.4632,
+          "is_strong": false
+        },
+        {
+          "word": "phone",
+          "start": 60.83,
+          "end": 61.29,
+          "start_frame": 1825,
+          "end_frame": 1839,
+          "probability": 0.9941,
+          "is_strong": false
+        },
+        {
+          "word": "lines",
+          "start": 61.29,
+          "end": 61.57,
+          "start_frame": 1839,
+          "end_frame": 1847,
+          "probability": 0.9935,
+          "is_strong": false
+        },
+        {
+          "word": "ringing",
+          "start": 61.57,
+          "end": 61.93,
+          "start_frame": 1847,
+          "end_frame": 1858,
+          "probability": 0.9457,
+          "is_strong": true
+        },
+        {
+          "word": "simultaneously,",
+          "start": 61.93,
+          "end": 63.09,
+          "start_frame": 1858,
+          "end_frame": 1893,
+          "probability": 0.9907,
+          "is_strong": true
+        },
+        {
+          "word": "young",
+          "start": 63.53,
+          "end": 63.65,
+          "start_frame": 1906,
+          "end_frame": 1910,
+          "probability": 0.9921,
+          "is_strong": false
+        },
+        {
+          "word": "men",
+          "start": 63.65,
+          "end": 63.93,
+          "start_frame": 1910,
+          "end_frame": 1918,
+          "probability": 0.9978,
+          "is_strong": false
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "straight out of high school, wearing cheap suits and expensive watches, reading from a laminated",
+      "start": 63.93,
+      "end": 69.17,
+      "start_frame": 1918,
+      "end_frame": 2075,
+      "words": [
+        {
+          "word": "straight",
+          "start": 63.93,
+          "end": 64.27,
+          "start_frame": 1918,
+          "end_frame": 1928,
+          "probability": 0.9554,
+          "is_strong": true
+        },
+        {
+          "word": "out",
+          "start": 64.27,
+          "end": 64.47,
+          "start_frame": 1928,
+          "end_frame": 1934,
+          "probability": 0.9975,
+          "is_strong": false
+        },
+        {
+          "word": "of",
+          "start": 64.47,
+          "end": 64.55,
+          "start_frame": 1934,
+          "end_frame": 1936,
+          "probability": 0.9986,
+          "is_strong": false
+        },
+        {
+          "word": "high",
+          "start": 64.55,
+          "end": 64.77,
+          "start_frame": 1936,
+          "end_frame": 1943,
+          "probability": 0.9951,
+          "is_strong": false
+        },
+        {
+          "word": "school,",
+          "start": 64.77,
+          "end": 65.11,
+          "start_frame": 1943,
+          "end_frame": 1953,
+          "probability": 0.9962,
+          "is_strong": false
+        },
+        {
+          "word": "wearing",
+          "start": 65.43,
+          "end": 65.63,
+          "start_frame": 1963,
+          "end_frame": 1969,
+          "probability": 0.9967,
+          "is_strong": true
+        },
+        {
+          "word": "cheap",
+          "start": 65.63,
+          "end": 65.99,
+          "start_frame": 1969,
+          "end_frame": 1980,
+          "probability": 0.9979,
+          "is_strong": false
+        },
+        {
+          "word": "suits",
+          "start": 65.99,
+          "end": 66.35,
+          "start_frame": 1980,
+          "end_frame": 1990,
+          "probability": 0.9984,
+          "is_strong": false
+        },
+        {
+          "word": "and",
+          "start": 66.35,
+          "end": 66.63,
+          "start_frame": 1990,
+          "end_frame": 1999,
+          "probability": 0.9532,
+          "is_strong": false
+        },
+        {
+          "word": "expensive",
+          "start": 66.63,
+          "end": 67.05,
+          "start_frame": 1999,
+          "end_frame": 2012,
+          "probability": 0.9987,
+          "is_strong": true
+        },
+        {
+          "word": "watches,",
+          "start": 67.05,
+          "end": 67.51,
+          "start_frame": 2012,
+          "end_frame": 2025,
+          "probability": 0.9992,
+          "is_strong": true
+        },
+        {
+          "word": "reading",
+          "start": 68.21,
+          "end": 68.29,
+          "start_frame": 2046,
+          "end_frame": 2049,
+          "probability": 0.9937,
+          "is_strong": true
+        },
+        {
+          "word": "from",
+          "start": 68.29,
+          "end": 68.51,
+          "start_frame": 2049,
+          "end_frame": 2055,
+          "probability": 0.9987,
+          "is_strong": false
+        },
+        {
+          "word": "a",
+          "start": 68.51,
+          "end": 68.75,
+          "start_frame": 2055,
+          "end_frame": 2062,
+          "probability": 0.9964,
+          "is_strong": false
+        },
+        {
+          "word": "laminated",
+          "start": 68.75,
+          "end": 69.17,
+          "start_frame": 2062,
+          "end_frame": 2075,
+          "probability": 0.9993,
+          "is_strong": true
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "script that left no room for objections. They were selling a dream to people who could not",
+      "start": 69.17,
+      "end": 74.11,
+      "start_frame": 2075,
+      "end_frame": 2223,
+      "words": [
+        {
+          "word": "script",
+          "start": 69.17,
+          "end": 69.53,
+          "start_frame": 2075,
+          "end_frame": 2086,
+          "probability": 0.9991,
+          "is_strong": false
+        },
+        {
+          "word": "that",
+          "start": 69.53,
+          "end": 69.75,
+          "start_frame": 2086,
+          "end_frame": 2092,
+          "probability": 0.9917,
+          "is_strong": false
+        },
+        {
+          "word": "left",
+          "start": 69.75,
+          "end": 69.99,
+          "start_frame": 2092,
+          "end_frame": 2100,
+          "probability": 0.9993,
+          "is_strong": false
+        },
+        {
+          "word": "no",
+          "start": 69.99,
+          "end": 70.39,
+          "start_frame": 2100,
+          "end_frame": 2112,
+          "probability": 0.9981,
+          "is_strong": false
+        },
+        {
+          "word": "room",
+          "start": 70.39,
+          "end": 70.59,
+          "start_frame": 2112,
+          "end_frame": 2118,
+          "probability": 0.9996,
+          "is_strong": false
+        },
+        {
+          "word": "for",
+          "start": 70.59,
+          "end": 70.79,
+          "start_frame": 2118,
+          "end_frame": 2124,
+          "probability": 0.9996,
+          "is_strong": false
+        },
+        {
+          "word": "objections.",
+          "start": 70.79,
+          "end": 71.27,
+          "start_frame": 2124,
+          "end_frame": 2138,
+          "probability": 0.9937,
+          "is_strong": true
+        },
+        {
+          "word": "They",
+          "start": 71.85,
+          "end": 71.99,
+          "start_frame": 2156,
+          "end_frame": 2160,
+          "probability": 0.9944,
+          "is_strong": false
+        },
+        {
+          "word": "were",
+          "start": 71.99,
+          "end": 72.23,
+          "start_frame": 2160,
+          "end_frame": 2167,
+          "probability": 0.9984,
+          "is_strong": false
+        },
+        {
+          "word": "selling",
+          "start": 72.23,
+          "end": 72.41,
+          "start_frame": 2167,
+          "end_frame": 2172,
+          "probability": 0.9716,
+          "is_strong": true
+        },
+        {
+          "word": "a",
+          "start": 72.41,
+          "end": 72.75,
+          "start_frame": 2172,
+          "end_frame": 2182,
+          "probability": 0.9959,
+          "is_strong": false
+        },
+        {
+          "word": "dream",
+          "start": 72.75,
+          "end": 72.99,
+          "start_frame": 2182,
+          "end_frame": 2190,
+          "probability": 0.9992,
+          "is_strong": false
+        },
+        {
+          "word": "to",
+          "start": 72.99,
+          "end": 73.15,
+          "start_frame": 2190,
+          "end_frame": 2194,
+          "probability": 0.9972,
+          "is_strong": false
+        },
+        {
+          "word": "people",
+          "start": 73.15,
+          "end": 73.41,
+          "start_frame": 2194,
+          "end_frame": 2202,
+          "probability": 0.9993,
+          "is_strong": false
+        },
+        {
+          "word": "who",
+          "start": 73.41,
+          "end": 73.67,
+          "start_frame": 2202,
+          "end_frame": 2210,
+          "probability": 0.9974,
+          "is_strong": false
+        },
+        {
+          "word": "could",
+          "start": 73.67,
+          "end": 73.89,
+          "start_frame": 2210,
+          "end_frame": 2217,
+          "probability": 0.9956,
+          "is_strong": false
+        },
+        {
+          "word": "not",
+          "start": 73.89,
+          "end": 74.11,
+          "start_frame": 2217,
+          "end_frame": 2223,
+          "probability": 0.9993,
+          "is_strong": false
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "text": "afford to lose, but the numbers were completely fabricated. A penny stock has no real value,",
+      "start": 74.11,
+      "end": 80.19,
+      "start_frame": 2223,
+      "end_frame": 2406,
+      "words": [
+        {
+          "word": "afford",
+          "start": 74.11,
+          "end": 74.39,
+          "start_frame": 2223,
+          "end_frame": 2232,
+          "probability": 0.9999,
+          "is_strong": false
+        },
+        {
+          "word": "to",
+          "start": 74.39,
+          "end": 74.65,
+          "start_frame": 2232,
+          "end_frame": 2240,
+          "probability": 0.9995,
+          "is_strong": false
+        },
+        {
+          "word": "lose,",
+          "start": 74.65,
+          "end": 74.93,
+          "start_frame": 2240,
+          "end_frame": 2248,
+          "probability": 0.9968,
+          "is_strong": false
+        },
+        {
+          "word": "but",
+          "start": 75.39,
+          "end": 75.59,
+          "start_frame": 2262,
+          "end_frame": 2268,
+          "probability": 0.9975,
+          "is_strong": false
+        },
+        {
+          "word": "the",
+          "start": 75.59,
+          "end": 75.81,
+          "start_frame": 2268,
+          "end_frame": 2274,
+          "probability": 0.9988,
+          "is_strong": false
+        },
+        {
+          "word": "numbers",
+          "start": 75.81,
+          "end": 76.07,
+          "start_frame": 2274,
+          "end_frame": 2282,
+          "probability": 0.999,
+          "is_strong": true
+        },
+        {
+          "word": "were",
+          "start": 76.07,
+          "end": 76.41,
+          "start_frame": 2282,
+          "end_frame": 2292,
+          "probability": 0.9976,
+          "is_strong": false
+        },
+        {
+          "word": "completely",
+          "start": 76.41,
+          "end": 77.01,
+          "start_frame": 2292,
+          "end_frame": 2310,
+          "probability": 0.9968,
+          "is_strong": true
+        },
+        {
+          "word": "fabricated.",
+          "start": 77.01,
+          "end": 77.89,
+          "start_frame": 2310,
+          "end_frame": 2337,
+          "probability": 0.9983,
+          "is_strong": true
+        },
+        {
+          "word": "A",
+          "start": 78.29,
+          "end": 78.43,
+          "start_frame": 2349,
+          "end_frame": 2353,
+          "probability": 0.9625,
+          "is_strong": false
+        },
+        {
+          "word": "penny",
+          "start": 78.43,
+          "end": 78.65,
+          "start_frame": 2353,
+          "end_frame": 2360,
+          "probability": 0.9896,
+          "is_strong": false
+        },
+        {
+          "word": "stock",
+          "start": 78.65,
+          "end": 78.89,
+          "start_frame": 2360,
+          "end_frame": 2367,
+          "probability": 0.9909,
+          "is_strong": false
+        },
+        {
+          "word": "has",
+          "start": 78.89,
+          "end": 79.19,
+          "start_frame": 2367,
+          "end_frame": 2376,
+          "probability": 0.9973,
+          "is_strong": false
+        },
+        {
+          "word": "no",
+          "start": 79.19,
+          "end": 79.49,
+          "start_frame": 2376,
+          "end_frame": 2385,
+          "probability": 0.9986,
+          "is_strong": false
+        },
+        {
+          "word": "real",
+          "start": 79.49,
+          "end": 79.77,
+          "start_frame": 2385,
+          "end_frame": 2393,
+          "probability": 0.9995,
+          "is_strong": false
+        },
+        {
+          "word": "value,",
+          "start": 79.77,
+          "end": 80.19,
+          "start_frame": 2393,
+          "end_frame": 2406,
+          "probability": 0.9993,
+          "is_strong": false
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "text": "no product, no revenue. It exists only as a digital ticker on a cold computer screen.",
+      "start": 80.73,
+      "end": 86.53,
+      "start_frame": 2422,
+      "end_frame": 2596,
+      "words": [
+        {
+          "word": "no",
+          "start": 80.73,
+          "end": 80.93,
+          "start_frame": 2422,
+          "end_frame": 2428,
+          "probability": 0.9978,
+          "is_strong": false
+        },
+        {
+          "word": "product,",
+          "start": 80.93,
+          "end": 81.37,
+          "start_frame": 2428,
+          "end_frame": 2441,
+          "probability": 0.9992,
+          "is_strong": true
+        },
+        {
+          "word": "no",
+          "start": 81.83,
+          "end": 81.99,
+          "start_frame": 2455,
+          "end_frame": 2460,
+          "probability": 0.9985,
+          "is_strong": false
+        },
+        {
+          "word": "revenue.",
+          "start": 81.99,
+          "end": 82.33,
+          "start_frame": 2460,
+          "end_frame": 2470,
+          "probability": 0.9991,
+          "is_strong": true
+        },
+        {
+          "word": "It",
+          "start": 82.87,
+          "end": 83.13,
+          "start_frame": 2486,
+          "end_frame": 2494,
+          "probability": 0.9975,
+          "is_strong": false
+        },
+        {
+          "word": "exists",
+          "start": 83.13,
+          "end": 83.43,
+          "start_frame": 2494,
+          "end_frame": 2503,
+          "probability": 0.9976,
+          "is_strong": false
+        },
+        {
+          "word": "only",
+          "start": 83.43,
+          "end": 83.91,
+          "start_frame": 2503,
+          "end_frame": 2517,
+          "probability": 0.9981,
+          "is_strong": false
+        },
+        {
+          "word": "as",
+          "start": 83.91,
+          "end": 84.11,
+          "start_frame": 2517,
+          "end_frame": 2523,
+          "probability": 0.999,
+          "is_strong": false
+        },
+        {
+          "word": "a",
+          "start": 84.11,
+          "end": 84.35,
+          "start_frame": 2523,
+          "end_frame": 2530,
+          "probability": 0.999,
+          "is_strong": false
+        },
+        {
+          "word": "digital",
+          "start": 84.35,
+          "end": 84.69,
+          "start_frame": 2530,
+          "end_frame": 2541,
+          "probability": 0.9992,
+          "is_strong": true
+        },
+        {
+          "word": "ticker",
+          "start": 84.69,
+          "end": 85.07,
+          "start_frame": 2541,
+          "end_frame": 2552,
+          "probability": 0.9962,
+          "is_strong": false
+        },
+        {
+          "word": "on",
+          "start": 85.07,
+          "end": 85.23,
+          "start_frame": 2552,
+          "end_frame": 2557,
+          "probability": 0.9955,
+          "is_strong": false
+        },
+        {
+          "word": "a",
+          "start": 85.23,
+          "end": 85.43,
+          "start_frame": 2557,
+          "end_frame": 2563,
+          "probability": 0.9983,
+          "is_strong": false
+        },
+        {
+          "word": "cold",
+          "start": 85.43,
+          "end": 85.69,
+          "start_frame": 2563,
+          "end_frame": 2571,
+          "probability": 0.993,
+          "is_strong": false
+        },
+        {
+          "word": "computer",
+          "start": 85.69,
+          "end": 86.17,
+          "start_frame": 2571,
+          "end_frame": 2585,
+          "probability": 0.9987,
+          "is_strong": true
+        },
+        {
+          "word": "screen.",
+          "start": 86.17,
+          "end": 86.53,
+          "start_frame": 2585,
+          "end_frame": 2596,
+          "probability": 0.9971,
+          "is_strong": false
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "text": "You artificially constrict the supply. You create a fake panic. The price climbs by 400 percent in",
+      "start": 86.53,
+      "end": 93.55,
+      "start_frame": 2596,
+      "end_frame": 2806,
+      "words": [
+        {
+          "word": "You",
+          "start": 86.53,
+          "end": 87.19,
+          "start_frame": 2596,
+          "end_frame": 2616,
+          "probability": 0.6249,
+          "is_strong": true
+        },
+        {
+          "word": "artificially",
+          "start": 87.19,
+          "end": 87.85,
+          "start_frame": 2616,
+          "end_frame": 2636,
+          "probability": 0.9939,
+          "is_strong": true
+        },
+        {
+          "word": "constrict",
+          "start": 87.85,
+          "end": 88.31,
+          "start_frame": 2636,
+          "end_frame": 2649,
+          "probability": 0.9908,
+          "is_strong": true
+        },
+        {
+          "word": "the",
+          "start": 88.31,
+          "end": 88.51,
+          "start_frame": 2649,
+          "end_frame": 2655,
+          "probability": 0.9928,
+          "is_strong": false
+        },
+        {
+          "word": "supply.",
+          "start": 88.51,
+          "end": 88.89,
+          "start_frame": 2655,
+          "end_frame": 2667,
+          "probability": 0.9959,
+          "is_strong": false
+        },
+        {
+          "word": "You",
+          "start": 89.47,
+          "end": 89.53,
+          "start_frame": 2684,
+          "end_frame": 2686,
+          "probability": 0.9944,
+          "is_strong": false
+        },
+        {
+          "word": "create",
+          "start": 89.53,
+          "end": 89.85,
+          "start_frame": 2686,
+          "end_frame": 2696,
+          "probability": 0.9976,
+          "is_strong": false
+        },
+        {
+          "word": "a",
+          "start": 89.85,
+          "end": 90.15,
+          "start_frame": 2696,
+          "end_frame": 2704,
+          "probability": 0.998,
+          "is_strong": false
+        },
+        {
+          "word": "fake",
+          "start": 90.15,
+          "end": 90.33,
+          "start_frame": 2704,
+          "end_frame": 2710,
+          "probability": 0.9901,
+          "is_strong": false
+        },
+        {
+          "word": "panic.",
+          "start": 90.33,
+          "end": 90.71,
+          "start_frame": 2710,
+          "end_frame": 2721,
+          "probability": 0.9935,
+          "is_strong": false
+        },
+        {
+          "word": "The",
+          "start": 91.29,
+          "end": 91.47,
+          "start_frame": 2739,
+          "end_frame": 2744,
+          "probability": 0.9958,
+          "is_strong": false
+        },
+        {
+          "word": "price",
+          "start": 91.47,
+          "end": 91.71,
+          "start_frame": 2744,
+          "end_frame": 2751,
+          "probability": 0.9988,
+          "is_strong": false
+        },
+        {
+          "word": "climbs",
+          "start": 91.71,
+          "end": 92.03,
+          "start_frame": 2751,
+          "end_frame": 2761,
+          "probability": 0.9863,
+          "is_strong": false
+        },
+        {
+          "word": "by",
+          "start": 92.03,
+          "end": 92.43,
+          "start_frame": 2761,
+          "end_frame": 2773,
+          "probability": 0.9937,
+          "is_strong": false
+        },
+        {
+          "word": "400",
+          "start": 92.43,
+          "end": 92.81,
+          "start_frame": 2773,
+          "end_frame": 2784,
+          "probability": 0.9366,
+          "is_strong": false
+        },
+        {
+          "word": "percent",
+          "start": 92.81,
+          "end": 93.29,
+          "start_frame": 2784,
+          "end_frame": 2799,
+          "probability": 0.2666,
+          "is_strong": true
+        },
+        {
+          "word": "in",
+          "start": 93.29,
+          "end": 93.55,
+          "start_frame": 2799,
+          "end_frame": 2806,
+          "probability": 0.9953,
+          "is_strong": false
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "text": "48 hours. Every retail investor watches the chart and feels the burning sting of greed.",
+      "start": 93.55,
+      "end": 99.01,
+      "start_frame": 2806,
+      "end_frame": 2970,
+      "words": [
+        {
+          "word": "48",
+          "start": 93.55,
+          "end": 93.91,
+          "start_frame": 2806,
+          "end_frame": 2817,
+          "probability": 0.9818,
+          "is_strong": false
+        },
+        {
+          "word": "hours.",
+          "start": 93.91,
+          "end": 94.39,
+          "start_frame": 2817,
+          "end_frame": 2832,
+          "probability": 0.9953,
+          "is_strong": false
+        },
+        {
+          "word": "Every",
+          "start": 95.05,
+          "end": 95.25,
+          "start_frame": 2852,
+          "end_frame": 2858,
+          "probability": 0.9982,
+          "is_strong": false
+        },
+        {
+          "word": "retail",
+          "start": 95.25,
+          "end": 95.63,
+          "start_frame": 2858,
+          "end_frame": 2869,
+          "probability": 0.9972,
+          "is_strong": false
+        },
+        {
+          "word": "investor",
+          "start": 95.63,
+          "end": 96.03,
+          "start_frame": 2869,
+          "end_frame": 2881,
+          "probability": 0.9976,
+          "is_strong": true
+        },
+        {
+          "word": "watches",
+          "start": 96.03,
+          "end": 96.39,
+          "start_frame": 2881,
+          "end_frame": 2892,
+          "probability": 0.9976,
+          "is_strong": true
+        },
+        {
+          "word": "the",
+          "start": 96.39,
+          "end": 96.67,
+          "start_frame": 2892,
+          "end_frame": 2900,
+          "probability": 0.9982,
+          "is_strong": false
+        },
+        {
+          "word": "chart",
+          "start": 96.67,
+          "end": 96.85,
+          "start_frame": 2900,
+          "end_frame": 2906,
+          "probability": 0.9981,
+          "is_strong": false
+        },
+        {
+          "word": "and",
+          "start": 96.85,
+          "end": 97.33,
+          "start_frame": 2906,
+          "end_frame": 2920,
+          "probability": 0.9528,
+          "is_strong": false
+        },
+        {
+          "word": "feels",
+          "start": 97.33,
+          "end": 97.57,
+          "start_frame": 2920,
+          "end_frame": 2927,
+          "probability": 0.9942,
+          "is_strong": false
+        },
+        {
+          "word": "the",
+          "start": 97.57,
+          "end": 97.91,
+          "start_frame": 2927,
+          "end_frame": 2937,
+          "probability": 0.9944,
+          "is_strong": false
+        },
+        {
+          "word": "burning",
+          "start": 97.91,
+          "end": 98.23,
+          "start_frame": 2937,
+          "end_frame": 2947,
+          "probability": 0.9977,
+          "is_strong": true
+        },
+        {
+          "word": "sting",
+          "start": 98.23,
+          "end": 98.49,
+          "start_frame": 2947,
+          "end_frame": 2955,
+          "probability": 0.9978,
+          "is_strong": false
+        },
+        {
+          "word": "of",
+          "start": 98.49,
+          "end": 98.79,
+          "start_frame": 2955,
+          "end_frame": 2964,
+          "probability": 0.9988,
+          "is_strong": false
+        },
+        {
+          "word": "greed.",
+          "start": 98.79,
+          "end": 99.01,
+          "start_frame": 2964,
+          "end_frame": 2970,
+          "probability": 0.9973,
+          "is_strong": false
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "text": "They call back. They buy more. They wire their life savings. They think they are",
+      "start": 99.55,
+      "end": 104.63,
+      "start_frame": 2986,
+      "end_frame": 3139,
+      "words": [
+        {
+          "word": "They",
+          "start": 99.55,
+          "end": 99.75,
+          "start_frame": 2986,
+          "end_frame": 2992,
+          "probability": 0.996,
+          "is_strong": false
+        },
+        {
+          "word": "call",
+          "start": 99.75,
+          "end": 99.99,
+          "start_frame": 2992,
+          "end_frame": 3000,
+          "probability": 0.9977,
+          "is_strong": false
+        },
+        {
+          "word": "back.",
+          "start": 99.99,
+          "end": 100.35,
+          "start_frame": 3000,
+          "end_frame": 3010,
+          "probability": 0.9976,
+          "is_strong": false
+        },
+        {
+          "word": "They",
+          "start": 100.75,
+          "end": 100.93,
+          "start_frame": 3022,
+          "end_frame": 3028,
+          "probability": 0.9976,
+          "is_strong": false
+        },
+        {
+          "word": "buy",
+          "start": 100.93,
+          "end": 101.13,
+          "start_frame": 3028,
+          "end_frame": 3034,
+          "probability": 0.9982,
+          "is_strong": false
+        },
+        {
+          "word": "more.",
+          "start": 101.13,
+          "end": 101.49,
+          "start_frame": 3034,
+          "end_frame": 3045,
+          "probability": 0.9989,
+          "is_strong": false
+        },
+        {
+          "word": "They",
+          "start": 101.99,
+          "end": 102.27,
+          "start_frame": 3060,
+          "end_frame": 3068,
+          "probability": 0.9931,
+          "is_strong": false
+        },
+        {
+          "word": "wire",
+          "start": 102.27,
+          "end": 102.47,
+          "start_frame": 3068,
+          "end_frame": 3074,
+          "probability": 0.9939,
+          "is_strong": false
+        },
+        {
+          "word": "their",
+          "start": 102.47,
+          "end": 102.75,
+          "start_frame": 3074,
+          "end_frame": 3082,
+          "probability": 0.9976,
+          "is_strong": false
+        },
+        {
+          "word": "life",
+          "start": 102.75,
+          "end": 103.03,
+          "start_frame": 3082,
+          "end_frame": 3091,
+          "probability": 0.9909,
+          "is_strong": false
+        },
+        {
+          "word": "savings.",
+          "start": 103.03,
+          "end": 103.37,
+          "start_frame": 3091,
+          "end_frame": 3101,
+          "probability": 0.973,
+          "is_strong": true
+        },
+        {
+          "word": "They",
+          "start": 103.97,
+          "end": 104.15,
+          "start_frame": 3119,
+          "end_frame": 3124,
+          "probability": 0.9958,
+          "is_strong": false
+        },
+        {
+          "word": "think",
+          "start": 104.15,
+          "end": 104.25,
+          "start_frame": 3124,
+          "end_frame": 3128,
+          "probability": 0.9977,
+          "is_strong": false
+        },
+        {
+          "word": "they",
+          "start": 104.25,
+          "end": 104.41,
+          "start_frame": 3128,
+          "end_frame": 3132,
+          "probability": 0.9938,
+          "is_strong": false
+        },
+        {
+          "word": "are",
+          "start": 104.41,
+          "end": 104.63,
+          "start_frame": 3132,
+          "end_frame": 3139,
+          "probability": 0.7881,
+          "is_strong": false
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "text": "with a Wall Street Titan, but they were just funding a three-day drug binge in a five-star",
+      "start": 104.63,
+      "end": 109.19,
+      "start_frame": 3139,
+      "end_frame": 3276,
+      "words": [
+        {
+          "word": "with",
+          "start": 104.63,
+          "end": 104.95,
+          "start_frame": 3139,
+          "end_frame": 3148,
+          "probability": 0.2051,
+          "is_strong": false
+        },
+        {
+          "word": "a",
+          "start": 104.95,
+          "end": 105.23,
+          "start_frame": 3148,
+          "end_frame": 3157,
+          "probability": 0.9137,
+          "is_strong": false
+        },
+        {
+          "word": "Wall",
+          "start": 105.23,
+          "end": 105.41,
+          "start_frame": 3157,
+          "end_frame": 3162,
+          "probability": 0.7331,
+          "is_strong": false
+        },
+        {
+          "word": "Street",
+          "start": 105.41,
+          "end": 105.67,
+          "start_frame": 3162,
+          "end_frame": 3170,
+          "probability": 0.9328,
+          "is_strong": false
+        },
+        {
+          "word": "Titan,",
+          "start": 105.67,
+          "end": 105.99,
+          "start_frame": 3170,
+          "end_frame": 3180,
+          "probability": 0.7742,
+          "is_strong": false
+        },
+        {
+          "word": "but",
+          "start": 106.51,
+          "end": 106.61,
+          "start_frame": 3195,
+          "end_frame": 3198,
+          "probability": 0.9788,
+          "is_strong": false
+        },
+        {
+          "word": "they",
+          "start": 106.61,
+          "end": 106.73,
+          "start_frame": 3198,
+          "end_frame": 3202,
+          "probability": 0.9931,
+          "is_strong": false
+        },
+        {
+          "word": "were",
+          "start": 106.73,
+          "end": 106.87,
+          "start_frame": 3202,
+          "end_frame": 3206,
+          "probability": 0.8275,
+          "is_strong": false
+        },
+        {
+          "word": "just",
+          "start": 106.87,
+          "end": 107.11,
+          "start_frame": 3206,
+          "end_frame": 3213,
+          "probability": 0.9951,
+          "is_strong": false
+        },
+        {
+          "word": "funding",
+          "start": 107.11,
+          "end": 107.31,
+          "start_frame": 3213,
+          "end_frame": 3219,
+          "probability": 0.9882,
+          "is_strong": true
+        },
+        {
+          "word": "a",
+          "start": 107.31,
+          "end": 107.71,
+          "start_frame": 3219,
+          "end_frame": 3231,
+          "probability": 0.9683,
+          "is_strong": false
+        },
+        {
+          "word": "three",
+          "start": 107.71,
+          "end": 107.87,
+          "start_frame": 3231,
+          "end_frame": 3236,
+          "probability": 0.8145,
+          "is_strong": false
+        },
+        {
+          "word": "-day",
+          "start": 107.87,
+          "end": 108.09,
+          "start_frame": 3236,
+          "end_frame": 3243,
+          "probability": 0.8693,
+          "is_strong": false
+        },
+        {
+          "word": "drug",
+          "start": 108.09,
+          "end": 108.35,
+          "start_frame": 3243,
+          "end_frame": 3250,
+          "probability": 0.9973,
+          "is_strong": false
+        },
+        {
+          "word": "binge",
+          "start": 108.35,
+          "end": 108.61,
+          "start_frame": 3250,
+          "end_frame": 3258,
+          "probability": 0.7075,
+          "is_strong": false
+        },
+        {
+          "word": "in",
+          "start": 108.61,
+          "end": 108.79,
+          "start_frame": 3258,
+          "end_frame": 3264,
+          "probability": 0.8837,
+          "is_strong": false
+        },
+        {
+          "word": "a",
+          "start": 108.79,
+          "end": 109.01,
+          "start_frame": 3264,
+          "end_frame": 3270,
+          "probability": 0.958,
+          "is_strong": false
+        },
+        {
+          "word": "five",
+          "start": 109.01,
+          "end": 109.15,
+          "start_frame": 3270,
+          "end_frame": 3274,
+          "probability": 0.804,
+          "is_strong": false
+        },
+        {
+          "word": "-star",
+          "start": 109.15,
+          "end": 109.19,
+          "start_frame": 3274,
+          "end_frame": 3276,
+          "probability": 0.7668,
+          "is_strong": false
+        }
+      ]
+    }
+  ]
+}
