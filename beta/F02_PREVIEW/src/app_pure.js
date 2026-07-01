@@ -34,6 +34,7 @@ const defaults = {
   world_title_size: 28,
   world_title_color: "#FFFFFF",
   world_title_speed: 12,
+  world_title_gap: 20,
   // Sous-titres
   subtitle_font: "Cinzel",
   subtitle_size: 44,
@@ -151,6 +152,7 @@ function buildControls() {
     ${slider("world_title_size", "Taille titre", 14, 60, 2)}
     ${color("world_title_color", "Couleur titre")}
     ${slider("world_title_speed", "Vitesse anim (frames)", 4, 30, 1)}
+    ${slider("world_title_gap", "Espace titre↔visuel (px)", 0, 80, 2)}
 
     ${section("📝 Sous-titres (mot par mot)")}
     ${select("subtitle_font", "Police", FONTS, FONTS)}
@@ -248,6 +250,7 @@ function renderViewport(id) {
   const titleSize = parseFloat(getS("world_title_size"));
   const titleColor = getS("world_title_color");
   const titleSpeed = parseInt(getS("world_title_speed")) || 12;
+  const titleGap = parseFloat(getS("world_title_gap")) || 20;
 
   // ── Scale factor (viewport px / composition px) ──
   const compW = roadmap.meta.width || 1920;
@@ -310,31 +313,35 @@ function renderViewport(id) {
 
     html += `<div class="world-node" style="left:${left}px;top:${top}px;width:${wW}px;height:${wH}px;opacity:${thisOpacity.toFixed(3)}">`;
     html += `<img src="${s.image_file}" loading="lazy">`;
+    html += `</div>`;
 
-    // —— Titre animé (alternance top/droite) ——
+    // —— Titre animé HORS du visuel (alternance dessus/droite) ——
     const titleText = s.world_title || (s.text_subtitles ? s.text_subtitles.split(" ").slice(0, 4).join(" ") : null);
     if (titleVisible && titleText) {
-      const isTop = i % 2 === 0;
+      const isAbove = i % 2 === 0;
       const titleLocalFrame = currentFrame - s.start_frame;
       const tProg = clamp01(titleLocalFrame / titleSpeed);
-      const tEased = tProg * tProg * (3 - 2 * tProg); // smoothstep
+      const tEased = tProg * tProg * (3 - 2 * tProg);
       const titleFontPx = Math.max(titleSize * sf, 10);
+      const gapPx = titleGap * sf;
 
-      let titlePos, titleTransform;
-      if (isTop) {
-        const dropY = -40 * (1 - tEased);
-        titlePos = "top:8px;left:0;right:0;text-align:center";
-        titleTransform = `translateY(${dropY}px)`;
+      let tLeft, tTop, titleTransform;
+      if (isAbove) {
+        // Au-dessus du visuel, centré horizontalement
+        const dropOffset = -30 * (1 - tEased);
+        tLeft = posX;
+        tTop = posY - wH / 2 - gapPx;
+        titleTransform = `translate(-50%, calc(-100% + ${dropOffset}px))`;
       } else {
-        const slideX = 60 * (1 - tEased);
-        titlePos = "top:8px;right:12px;text-align:right";
-        titleTransform = `translateX(${slideX}px)`;
+        // Côté droit du visuel, centré verticalement le long du bord
+        const slideOffset = 40 * (1 - tEased);
+        tLeft = posX + wW / 2 + gapPx;
+        tTop = posY;
+        titleTransform = `translateY(-50%) translateX(${slideOffset}px)`;
       }
 
-      html += `<div style="position:absolute;${titlePos};transform:${titleTransform};opacity:${tEased.toFixed(3)};font-family:'${titleFont}',Georgia,serif;font-size:${titleFontPx}px;color:${titleColor};text-shadow:0 2px 8px rgba(0,0,0,0.85);pointer-events:none;z-index:10">${titleText}</div>`;
+      html += `<div style="position:absolute;left:${tLeft}px;top:${tTop}px;transform:${titleTransform};opacity:${tEased.toFixed(3)};font-family:'${titleFont}',Georgia,serif;font-size:${titleFontPx}px;color:${titleColor};text-shadow:0 2px 8px rgba(0,0,0,0.85);pointer-events:none;z-index:10;white-space:nowrap">${titleText}</div>`;
     }
-
-    html += `</div>`;
   }
   html += `</div>`;
 
