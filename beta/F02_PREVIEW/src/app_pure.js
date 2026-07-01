@@ -41,6 +41,7 @@ const defaults = {
   subtitle_position: "bottom",
   subtitle_align: "center",
   subtitle_word_fade: 3,
+  accent_color: "#FFD700",
   grain_intensity: 0.15,
   vignette: true,
 };
@@ -158,6 +159,7 @@ function buildControls() {
     ${select("subtitle_position", "Position", ["top","center","bottom"], ["Haut","Centre","Bas"])}
     ${select("subtitle_align", "Alignement", ["left","center","right"], ["Gauche","Centre","Droite"])}
     ${slider("subtitle_word_fade", "Fondu mot (frames)", 1, 12, 1)}
+    ${color("accent_color", "Couleur mots forts")}
 
     ${section("🎨 Effets")}
     ${slider("grain_intensity", "Grain", 0, 0.5, 0.01)}
@@ -310,7 +312,8 @@ function renderViewport(id) {
     html += `<img src="${s.image_file}" loading="lazy">`;
 
     // —— Titre animé (alternance top/droite) ——
-    if (titleVisible && s.world_title) {
+    const titleText = s.world_title || (s.text_subtitles ? s.text_subtitles.split(" ").slice(0, 4).join(" ") : null);
+    if (titleVisible && titleText) {
       const isTop = i % 2 === 0;
       const titleLocalFrame = currentFrame - s.start_frame;
       const tProg = clamp01(titleLocalFrame / titleSpeed);
@@ -328,7 +331,7 @@ function renderViewport(id) {
         titleTransform = `translateX(${slideX}px)`;
       }
 
-      html += `<div style="position:absolute;${titlePos};transform:${titleTransform};opacity:${tEased.toFixed(3)};font-family:'${titleFont}',Georgia,serif;font-size:${titleFontPx}px;color:${titleColor};text-shadow:0 2px 8px rgba(0,0,0,0.85);pointer-events:none;z-index:10">${s.world_title}</div>`;
+      html += `<div style="position:absolute;${titlePos};transform:${titleTransform};opacity:${tEased.toFixed(3)};font-family:'${titleFont}',Georgia,serif;font-size:${titleFontPx}px;color:${titleColor};text-shadow:0 2px 8px rgba(0,0,0,0.85);pointer-events:none;z-index:10">${titleText}</div>`;
     }
 
     html += `</div>`;
@@ -361,7 +364,7 @@ function renderViewport(id) {
         const wLocal = currentFrame - w.start_frame;
         const wOpacity = clamp01(wLocal / subWordFade);
         const wScale = 0.92 + 0.08 * clamp01(wLocal / subWordFade);
-        const wColor = w.is_strong ? (roadmap.style?.accent_color || "#FFD700") : subColor;
+        const wColor = w.is_strong ? getS("accent_color") : subColor;
         html += `<span style="opacity:${wOpacity.toFixed(3)};transform:scale(${wScale.toFixed(3)});display:inline;color:${wColor}">${w.word}</span> `;
       }
     } else {
