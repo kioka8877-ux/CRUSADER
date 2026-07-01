@@ -84,18 +84,36 @@ function setS(key, val) {
     animId = requestAnimationFrame(animate);
   }
 
-  // Export
+  // Export — ouvre une nouvelle fenêtre pour contourner l'iframe sandboxée
   document.getElementById("btnExport").addEventListener("click", () => {
     const merged = { ...roadmap, style: { ...roadmap.style, ...style } };
     const json = JSON.stringify(merged, null, 2);
-    const dataUri = "data:application/json;charset=utf-8," + encodeURIComponent(json);
-    const a = document.createElement("a");
-    a.setAttribute("href", dataUri);
-    a.setAttribute("download", "roadmap.json");
-    a.setAttribute("target", "_blank");
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    const w = window.open("", "_blank");
+    if (w) {
+      w.document.write(`<!DOCTYPE html><html><head><title>roadmap.json</title></head><body>
+        <pre style="white-space:pre-wrap;word-break:break-all;font-size:12px;font-family:monospace;max-width:900px;margin:20px auto;">${json.replace(/</g,"&lt;").replace(/>/g,"&gt;")}</pre>
+        <script>
+          var a=document.createElement("a");
+          a.href="data:application/json;charset=utf-8,"+encodeURIComponent(${JSON.stringify(json)});
+          a.download="roadmap.json";
+          document.body.appendChild(a);
+          a.click();
+        <\/script></body></html>`);
+      w.document.close();
+    } else {
+      // Fallback: copier dans le presse-papier
+      navigator.clipboard.writeText(json).then(() => {
+        alert("roadmap.json copié dans le presse-papier ! Colle-le dans un fichier.");
+      }).catch(() => {
+        // Dernier recours: textarea
+        const ta = document.createElement("textarea");
+        ta.value = json;
+        ta.style.cssText = "position:fixed;top:10%;left:10%;width:80%;height:80%;z-index:99999;font-size:11px;font-family:monospace;";
+        document.body.appendChild(ta);
+        ta.select();
+        alert("Copie le contenu (Ctrl+A puis Ctrl+C) et colle dans roadmap.json");
+      });
+    }
   });
 })();
 
