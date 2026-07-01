@@ -8,42 +8,55 @@
     (function(){try{if(localStorage.getItem('theme')==='light'){document.documentElement.classList.remove('dark')}else if(!localStorage.getItem('theme')&&!window.matchMedia('(prefers-color-scheme: dark)').matches){document.documentElement.classList.remove('dark')}}catch(e){}})();
   </script>
   <script src="https://cdn.tailwindcss.com/3.4.16"></script>
-  <script>tailwind.config={darkMode:'class',theme:{extend:{}}}</script>
+  <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{templar:{gold:'#C5A44E',red:'#8B0000',bone:'#E8DCC8',black:'#0A0A0A'}}}}}</script>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="bg-gray-950 text-gray-100 min-h-screen">
+<body class="bg-[#0A0A0A] text-gray-100 min-h-screen">
   <div id="app" class="flex flex-col h-screen">
     <!-- Header -->
-    <header class="px-4 py-3 border-b border-gray-800 flex items-center justify-between shrink-0">
-      <h1 class="text-lg font-bold">🎬 F02 — CRUSADER Preview</h1>
-      <div class="flex gap-2">
-        <button id="btnExport" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-500 rounded text-sm font-semibold">📥 Export roadmap.json</button>
+    <header class="px-4 py-3 border-b border-templar-gold/40 flex items-center justify-between shrink-0 bg-[#0D0D0D]">
+      <div class="flex items-center gap-3">
+        <!-- Black Templars Cross Pattée -->
+        <svg viewBox="0 0 100 100" width="32" height="32" class="shrink-0">
+          <path d="M50,2 L58,38 L96,22 L66,46 L98,50 L66,54 L96,78 L58,62 L50,98 L42,62 L4,78 L34,54 L2,50 L34,46 L4,22 L42,38 Z" fill="#C5A44E"/>
+        </svg>
+        <div>
+          <h1 class="text-lg font-bold tracking-wide" style="font-family:'Cinzel',Georgia,serif;color:#C5A44E;">CRUSADER</h1>
+          <span class="text-[10px] text-gray-500 tracking-widest uppercase">F02 — Preview Engine</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <!-- Small cross divider -->
+        <svg viewBox="0 0 100 100" width="14" height="14" class="opacity-30">
+          <path d="M50,2 L58,38 L96,22 L66,46 L98,50 L66,54 L96,78 L58,62 L50,98 L42,62 L4,78 L34,54 L2,50 L34,46 L4,22 L42,38 Z" fill="#C5A44E"/>
+        </svg>
+        <button id="btnExport" class="px-4 py-1.5 rounded text-sm font-semibold transition-colors" style="background:#8B0000;color:#E8DCC8;font-family:'Cinzel',Georgia,serif;" onmouseover="this.style.background='#A30000'" onmouseout="this.style.background='#8B0000'">⚔ Export roadmap.json</button>
       </div>
     </header>
 
     <div class="flex flex-1 overflow-hidden">
       <!-- Controls -->
-      <aside id="controls" class="w-72 border-r border-gray-800 overflow-y-auto p-3 shrink-0 text-sm"></aside>
+      <aside id="controls" class="w-72 border-r border-templar-gold/20 overflow-y-auto p-3 shrink-0 text-sm bg-[#0D0D0D]"></aside>
 
       <!-- Preview -->
       <main class="flex-1 overflow-y-auto p-4 flex flex-col gap-6">
         <!-- Timeline -->
         <div class="flex items-center gap-3 shrink-0">
-          <button id="btnPlay" class="px-3 py-1 bg-gray-800 rounded hover:bg-gray-700 text-xs">▶ Play</button>
-          <input id="timeline" type="range" min="0" max="100" value="0" class="flex-1 accent-amber-500" />
-          <span id="frameLabel" class="text-xs font-mono text-gray-400 w-28 text-right">Frame 0 / 0</span>
+          <button id="btnPlay" class="px-3 py-1 rounded text-xs font-semibold border border-templar-gold/30 text-templar-gold hover:bg-templar-gold/10 transition-colors" style="font-family:'Cinzel',Georgia,serif;">▶ Play</button>
+          <input id="timeline" type="range" min="0" max="100" value="0" class="flex-1" style="accent-color:#C5A44E;" />
+          <span id="frameLabel" class="text-xs font-mono text-gray-500 w-28 text-right">Frame 0 / 0</span>
         </div>
 
         <!-- Desktop viewport -->
         <div class="flex flex-col items-center gap-1">
-          <span class="text-xs text-gray-500 font-mono">Desktop — 1920×1080</span>
-          <div id="viewport-desktop" class="border-2 border-gray-700 rounded-xl overflow-hidden bg-black shadow-2xl w-full" style="aspect-ratio:16/9; position:relative;"></div>
+          <span class="text-[10px] tracking-widest uppercase" style="color:#C5A44E66;">Desktop — 1920×1080</span>
+          <div id="viewport-desktop" class="border border-templar-gold/20 rounded-lg overflow-hidden bg-black shadow-2xl w-full" style="aspect-ratio:16/9; position:relative;"></div>
         </div>
 
         <!-- iPhone viewport -->
         <div class="flex flex-col items-center gap-1">
-          <span class="text-xs text-gray-500 font-mono">iPhone 16 Pro Max</span>
-          <div id="viewport-iphone" class="border-2 border-gray-700 rounded-xl overflow-hidden bg-black shadow-2xl mx-auto" style="aspect-ratio:9/19.5; width:220px; position:relative;"></div>
+          <span class="text-[10px] tracking-widest uppercase" style="color:#C5A44E66;">iPhone 16 Pro Max</span>
+          <div id="viewport-iphone" class="border border-templar-gold/20 rounded-lg overflow-hidden bg-black shadow-2xl mx-auto" style="aspect-ratio:9/19.5; width:220px; position:relative;"></div>
         </div>
       </main>
     </div>

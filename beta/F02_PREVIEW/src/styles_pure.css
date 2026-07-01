@@ -1,27 +1,67 @@
-/* F02 CRUSADER Preview — Styles */
+/* F02 CRUSADER Preview — Black Templars Theme */
+
+/* ── Section titles ── */
 #controls .section-title {
-  @apply text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-4 mb-1.5 pb-1 border-b border-gray-800;
-}
-#controls .ctrl-row {
-  @apply mb-2;
-}
-#controls .ctrl-row label {
-  @apply text-[11px] text-gray-400 flex justify-between;
-}
-#controls .ctrl-row .val {
-  @apply font-mono text-amber-400;
-}
-#controls input[type="range"] {
-  @apply w-full mt-0.5 accent-amber-500;
-}
-#controls select {
-  @apply w-full mt-0.5 bg-gray-800 border border-gray-700 rounded px-1.5 py-0.5 text-xs;
-}
-#controls input[type="color"] {
-  @apply w-7 h-7 rounded border border-gray-600 cursor-pointer;
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #C5A44E;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(197, 164, 78, 0.2);
 }
 
-/* Viewport rendering */
+#controls .ctrl-row {
+  margin-bottom: 8px;
+}
+#controls .ctrl-row label {
+  font-size: 11px;
+  color: #999;
+  display: flex;
+  justify-content: space-between;
+}
+#controls .ctrl-row .val {
+  font-family: monospace;
+  color: #C5A44E;
+}
+#controls input[type="range"] {
+  width: 100%;
+  margin-top: 2px;
+  accent-color: #C5A44E;
+}
+#controls select {
+  width: 100%;
+  margin-top: 2px;
+  background: #1A1A1A;
+  border: 1px solid rgba(197, 164, 78, 0.25);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 12px;
+  color: #E8DCC8;
+}
+#controls select:focus {
+  border-color: #C5A44E;
+  outline: none;
+}
+#controls input[type="color"] {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  border: 1px solid rgba(197, 164, 78, 0.3);
+  cursor: pointer;
+  background: transparent;
+}
+#controls input[type="checkbox"] {
+  accent-color: #C5A44E;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* ── Viewport rendering ── */
 .viewport-scene {
   position: absolute;
   inset: 0;
@@ -42,9 +82,9 @@
 }
 .world-node {
   position: absolute;
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.6), 0 0 1px rgba(197,164,78,0.3);
 }
 .world-node img {
   width: 100%;
@@ -58,4 +98,16 @@
   right: 0;
   padding: 0 5%;
   pointer-events: none;
+}
+
+/* ── Scrollbar ── */
+#controls::-webkit-scrollbar {
+  width: 4px;
+}
+#controls::-webkit-scrollbar-track {
+  background: transparent;
+}
+#controls::-webkit-scrollbar-thumb {
+  background: rgba(197, 164, 78, 0.3);
+  border-radius: 2px;
 }
