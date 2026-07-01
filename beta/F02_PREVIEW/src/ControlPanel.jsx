@@ -81,6 +81,7 @@ export const ControlPanel = ({ style, onChange }) => {
       <SectionTitle>🖼️ Background</SectionTitle>
       <Select label="Type" paramKey="background_type" value={s.background_type ?? "solid"} options={["solid", "image"]} onChange={onChange} />
       <ColorPicker label="Couleur fond" paramKey="background_color" value={s.background_color ?? "#F5F0E8"} onChange={onChange} />
+      <Slider label="Scale fond" paramKey="background_scale" value={s.background_scale ?? 1} min={0.5} max={2} step={0.05} onChange={onChange} />
 
       <SectionTitle>📝 Sous-titres</SectionTitle>
       <Select label="Police" paramKey="subtitle_font" value={s.subtitle_font ?? s.font_primary ?? "Cinzel"} options={FONTS} onChange={onChange} />

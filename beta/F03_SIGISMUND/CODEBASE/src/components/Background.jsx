@@ -166,10 +166,16 @@ export const Background = ({ style }) => {
 
       {/* Fond (image ou couleur unie) */}
       {style.background_type === "image" && style.background_image ? (
-        <AbsoluteFill>
+        <AbsoluteFill style={{ overflow: "hidden" }}>
           <Img
             src={staticFile(style.background_image)}
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              transform: `scale(${style.background_scale ?? 1})`,
+              transformOrigin: "center center",
+            }}
           />
         </AbsoluteFill>
       ) : (
