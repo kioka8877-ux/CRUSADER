@@ -2208,14 +2208,12 @@ function drawBgTexture(ctx, W, H, type) {
 
   const img = bgImages[type];
   if (img && img.complete && img.naturalWidth > 0) {
-    // Draw the actual PNG, scaled
+    // Draw the actual PNG — cover-fit THEN apply bgScale on top
     ctx.save();
-    const iw = img.naturalWidth * bgScale;
-    const ih = img.naturalHeight * bgScale;
-    // Cover the canvas
-    const scale = Math.max(W / iw, H / ih);
-    const dw = iw * scale;
-    const dh = ih * scale;
+    const coverScale = Math.max(W / img.naturalWidth, H / img.naturalHeight);
+    const finalScale = coverScale * bgScale;
+    const dw = img.naturalWidth * finalScale;
+    const dh = img.naturalHeight * finalScale;
     const dx = (W - dw) / 2;
     const dy = (H - dh) / 2;
     ctx.drawImage(img, dx, dy, dw, dh);
@@ -2382,24 +2380,63 @@ function renderCanvas(canvasId, charKey) {
   ctx.textAlign = 'right';
   ctx.fillText(`CASTELLAN · ${W}×${H} · ${storyboard.global?.fps || 30}fps`, W - 16 * sf, 26 * sf);
 
-  // Scene title
+  // Scene title — alternance dessus/droite (comme gamma)
   if (getS('world_title_visible') && scene.world_title) {
     const tSize = parseFloat(getS('world_title_size'));
     const tGap = parseFloat(getS('world_title_gap') || 20);
     const tColor = getS('world_title_color');
-    const tPos = getS('world_title_position');
-    const titleY = (60 + tGap) * sf;
+    const titleSpeed = parseInt(getS('world_title_speed')) || 12;
+    const isAbove = currentSceneIndex % 2 === 0;
 
-    ctx.font = `bold ${tSize * sf}px '${titleFont}', Georgia, serif`;
+    // Smoothstep easing based on scene progress
+    const tProg = Math.min(1, progress * (30 / Math.max(1, titleSpeed)));
+    const tEased = tProg * tProg * (3 - 2 * tProg);
+
+    const titleFontPx = Math.max(tSize * sf, 10);
+    const gapPx = tGap * sf;
+
+    ctx.save();
+    ctx.globalAlpha = tEased;
+    ctx.font = `bold ${titleFontPx}px '${titleFont}', Georgia, serif`;
     ctx.fillStyle = tColor;
-    ctx.textAlign = tPos === 'right' ? 'right' : 'left';
-    ctx.textBaseline = 'top';
-    const titleX = tPos === 'right' ? W - 24 * sf : 24 * sf;
-    ctx.fillText(scene.world_title, titleX, titleY);
+    ctx.shadowColor = 'rgba(0,0,0,0.85)';
+    ctx.shadowBlur = 8 * sf;
+    ctx.shadowOffsetY = 2 * sf;
 
-    ctx.font = `${14 * sf}px '${titleFont}', monospace`;
-    ctx.fillStyle = '#666';
-    ctx.fillText(`SCENE ${currentSceneIndex + 1} / ${storyboard.scenes.length}`, titleX, titleY + tSize * sf + 6 * sf);
+    if (isAbove) {
+      // Au-dessus de la capsule, centré horizontalement — drop animation
+      const dropOffset = -30 * sf * (1 - tEased);
+      const tx = capsuleX + capsuleW / 2;
+      const ty = capsuleY - gapPx + dropOffset;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'bottom';
+      ctx.fillText(scene.world_title, tx, ty);
+
+      // Scene counter
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetY = 0;
+      ctx.font = `${14 * sf}px '${titleFont}', monospace`;
+      ctx.fillStyle = '#666';
+      ctx.globalAlpha = tEased * 0.7;
+      ctx.fillText(`SCENE ${currentSceneIndex + 1} / ${storyboard.scenes.length}`, tx, ty - titleFontPx - 4 * sf);
+    } else {
+      // À droite de la capsule, centré verticalement — slide animation
+      const slideOffset = 40 * sf * (1 - tEased);
+      const tx = capsuleX + capsuleW + gapPx + slideOffset;
+      const ty = capsuleY + capsuleH / 2;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(scene.world_title, tx, ty);
+
+      // Scene counter
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetY = 0;
+      ctx.font = `${14 * sf}px '${titleFont}', monospace`;
+      ctx.fillStyle = '#666';
+      ctx.globalAlpha = tEased * 0.7;
+      ctx.fillText(`SCENE ${currentSceneIndex + 1} / ${storyboard.scenes.length}`, tx, ty + titleFontPx + 4 * sf);
+    }
+    ctx.restore();
   }
 
   // ─── Subtitle with **mots forts** ───
@@ -2651,7 +2688,6 @@ function buildControls() {
     ${fontSelect("world_title_font", "Police titre")}
     ${slider("world_title_size", "Taille titre", 14, 60, 2)}
     ${colorCtrl("world_title_color", "Couleur titre")}
-    ${selectCtrl("world_title_position", "Position", ["left","right"], ["Gauche","Droite"])}
     ${slider("world_title_speed", "Vitesse anim (frames)", 4, 30, 1)}
     ${slider("world_title_gap", "Espace titre↔visuel (px)", 0, 80, 2)}
 
