@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>CRUSADER Delta — F03C VibeForge Proof of Concept</title>
+  <style>
+    * { margin: 0; padding: 0; }
+    body { background: #000; overflow: hidden; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="1920" height="1080"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const W = 1920;
+    const H = 1080;
+    const FPS = 30;
+    const DURATION = 3; // seconds
+    const TOTAL_FRAMES = FPS * DURATION; // 90
+
+    /**
+     * drawFrame(frameIndex)
+     * Draws a single frame of the proof-of-concept animation.
+     * A red square moves across the screen from left to right,
+     * with a subtle rotation and scale bounce.
+     */
+    function drawFrame(frameIndex) {
+      const progress = frameIndex / TOTAL_FRAMES; // 0 → 1
+
+      // Clear
+      ctx.fillStyle = '#1a1a2e';
+      ctx.fillRect(0, 0, W, H);
+
+      // Grid lines (subtle background)
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+      ctx.lineWidth = 1;
+      for (let x = 0; x < W; x += 60) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, H);
+        ctx.stroke();
+      }
+      for (let y = 0; y < H; y += 60) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(W, y);
+        ctx.stroke();
+      }
+
+      // Red square — moves left to right
+      const squareSize = 120;
+      const x = (W - squareSize) * progress;
+      const y = H / 2 - squareSize / 2 + Math.sin(progress * Math.PI * 4) * 80;
+      const rotation = progress * Math.PI * 2;
+      const scale = 1 + Math.sin(progress * Math.PI * 6) * 0.15;
+
+      ctx.save();
+      ctx.translate(x + squareSize / 2, y + squareSize / 2);
+      ctx.rotate(rotation);
+      ctx.scale(scale, scale);
+
+      // Shadow
+      ctx.shadowColor = 'rgba(255, 0, 0, 0.5)';
+      ctx.shadowBlur = 30;
+
+      // Square
+      ctx.fillStyle = '#e74c3c';
+      ctx.fillRect(-squareSize / 2, -squareSize / 2, squareSize, squareSize);
+
+      // Inner highlight
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+      ctx.fillRect(-squareSize / 4, -squareSize / 4, squareSize / 2, squareSize / 2);
+
+      ctx.restore();
+
+      // HUD text
+      ctx.shadowColor = 'transparent';
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 36px monospace';
+      ctx.fillText(`CRUSADER Delta — VibeForge PoC`, 40, 50);
+      ctx.font = '24px monospace';
+      ctx.fillText(`Frame: ${frameIndex}/${TOTAL_FRAMES}  |  Progress: ${(progress * 100).toFixed(1)}%`, 40, 90);
+      ctx.fillText(`FPS: ${FPS}  |  Duration: ${DURATION}s  |  Engine: Canvas2D`, 40, 125);
+
+      // Progress bar
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+      ctx.fillRect(40, H - 60, W - 80, 20);
+      ctx.fillStyle = '#e74c3c';
+      ctx.fillRect(40, H - 60, (W - 80) * progress, 20);
+    }
+
+    // Expose for Puppeteer
+    window.CRUSADER_CONFIG = { FPS, DURATION, TOTAL_FRAMES, W, H };
+    window.drawFrame = drawFrame;
+
+    // Auto-play preview in browser
+    let currentFrame = 0;
+    function animate() {
+      drawFrame(currentFrame);
+      currentFrame = (currentFrame + 1) % TOTAL_FRAMES;
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>

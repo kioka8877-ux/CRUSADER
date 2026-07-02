@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F01-A CASTELLAN-AUDIO — Analyse & Traitement Audio</title>
+<style>
+  :root {
+    --bg:        #111111;
+    --surface:   #1c1c1c;
+    --surface2:  #242424;
+    --border:    #333333;
+    --gold:      #c9a84c;
+    --gold-dim:  #8a6f2e;
+    --text:      #ddd8cc;
+    --text-dim:  #888880;
+    --red:       #8b2222;
+    --green:     #2a6b2a;
+    --green-ok:  #4caf50;
+    --blue:      #3a6ea8;
+    --blue-ok:   #5b9bdf;
+    --orange:    #c97a2a;
+    --radius:    4px;
+    --mono:      'Courier New', Courier, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 13px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Header ── */
+  header {
+    background: #0a0a0a;
+    border-bottom: 2px solid var(--gold);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+  header h1 { font-size: 14px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
+  header .subtitle { color: var(--text-dim); font-size: 11px; }
+  header .status-pill {
+    margin-left: auto;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: bold;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+  header .status-pill.ok    { border-color: var(--green-ok); color: var(--green-ok); }
+  header .status-pill.error { border-color: #e55; color: #e55; }
+  header .status-pill.warn  { border-color: var(--orange); color: var(--orange); }
+
+  /* ── Layout ── */
+  .layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    height: calc(100vh - 45px);
+  }
+
+  /* ── Left Panel ── */
+  .config-panel {
+    width: 300px;
+    min-width: 300px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .section-title {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+    margin-bottom: 4px;
+  }
+
+  .section { display: flex; flex-direction: column; gap: 10px; }
+
+  /* ── Controls ── */
+  .ctrl-row { display: flex; flex-direction: column; gap: 4px; }
+  .ctrl-label { font-size: 11px; color: var(--text-dim); display: flex; justify-content: space-between; }
+  .ctrl-label span { color: var(--gold); font-size: 12px; }
+  input[type=range] {
+    width: 100%;
+    accent-color: var(--gold);
+    cursor: pointer;
+  }
+
+  /* ── Toggle Mode ── */
+  .mode-toggle { display: flex; flex-direction: column; gap: 8px; }
+  .mode-btn {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: var(--radius);
+    text-align: left;
+    transition: all 0.15s;
+  }
+  .mode-btn:hover { border-color: var(--gold-dim); color: var(--text); }
+  .mode-btn.active.preserve {
+    border-color: var(--blue-ok);
+    color: var(--blue-ok);
+    background: rgba(91,155,223,0.08);
+  }
+  .mode-btn.active.remove {
+    border-color: var(--green-ok);
+    color: var(--green-ok);
+    background: rgba(76,175,80,0.08);
+  }
+  .mode-btn .mode-icon { font-size: 14px; margin-right: 8px; }
+  .mode-desc { font-size: 10px; color: var(--text-dim); margin-top: 3px; }
+
+  /* ── Stats ── */
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .stat-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 8px 10px;
+  }
+  .stat-box .stat-label { font-size: 10px; color: var(--text-dim); margin-bottom: 4px; }
+  .stat-box .stat-value { font-size: 16px; color: var(--gold); }
+  .stat-box .stat-unit  { font-size: 10px; color: var(--text-dim); }
+  .stat-box.highlight   { border-color: var(--green-ok); }
+  .stat-box.highlight .stat-value { color: var(--green-ok); }
+
+  /* ── Validate button ── */
+  .btn-validate {
+    width: 100%;
+    padding: 13px;
+    background: var(--green);
+    border: 1px solid var(--green-ok);
+    color: var(--green-ok);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: var(--radius);
+    transition: all 0.15s;
+  }
+  .btn-validate:hover  { background: #2f7a2f; }
+  .btn-validate:active { background: #1a4a1a; }
+  .btn-validate:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* ── Right Panel ── */
+  .main-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 20px;
+    gap: 16px;
+  }
+
+  /* ── Waveform Area ── */
+  .waveform-container {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    flex-shrink: 0;
+  }
+  .waveform-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .waveform-title { font-size: 11px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; }
+  .waveform-legend { display: flex; gap: 14px; font-size: 10px; color: var(--text-dim); }
+  .legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: middle; }
+  .dot-signal  { background: var(--gold); opacity: 0.8; }
+  .dot-silence { background: #e55; opacity: 0.5; }
+
+  #waveformCanvas {
+    width: 100%;
+    height: 120px;
+    display: block;
+    border-radius: 2px;
+    cursor: crosshair;
+  }
+
+  .waveform-timeline {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    font-size: 10px;
+    color: var(--text-dim);
+  }
+
+  /* ── Silence List ── */
+  .silence-panel {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .silence-panel-header {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .silence-count-badge {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+  .silence-list {
+    overflow-y: auto;
+    flex: 1;
+  }
+  .silence-item {
+    display: grid;
+    grid-template-columns: 40px 1fr 1fr 1fr;
+    padding: 7px 16px;
+    border-bottom: 1px solid #1e1e1e;
+    font-size: 11px;
+    color: var(--text-dim);
+    transition: background 0.1s;
+  }
+  .silence-item:hover { background: var(--surface2); }
+  .silence-item .idx  { color: var(--gold-dim); }
+  .silence-item .val  { color: var(--text); }
+  .silence-item .dur  { color: #e57; }
+  .silence-list-header {
+    display: grid;
+    grid-template-columns: 40px 1fr 1fr 1fr;
+    padding: 6px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: var(--surface2);
+    flex-shrink: 0;
+  }
+  .silence-empty {
+    padding: 30px;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 12px;
+  }
+
+  /* ── Log / Toast ── */
+  #logBar {
+    padding: 8px 16px;
+    font-size: 11px;
+    color: var(--text-dim);
+    background: #0a0a0a;
+    border-top: 1px solid var(--border);
+    min-height: 32px;
+    flex-shrink: 0;
+  }
+  #logBar.ok     { color: var(--green-ok); }
+  #logBar.error  { color: #e55; }
+  #logBar.info   { color: var(--blue-ok); }
+  #logBar.warn   { color: var(--orange); }
+
+  /* ── Loader ── */
+  .spinner {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border: 2px solid var(--border);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gold-dim); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ HEADER ══════════════════════════════════ -->
+<header>
+  <h1>F01-A CASTELLAN-AUDIO</h1>
+  <span class="subtitle">Analyse &amp; Traitement Audio — Pré-transcription Whisper</span>
+  <span id="statusPill" class="status-pill">INIT...</span>
+</header>
+
+<!-- ═══════════════════════════════ LAYOUT ══════════════════════════════════ -->
+<div class="layout">
+
+  <!-- ── LEFT PANEL ── -->
+  <div class="config-panel">
+
+    <div class="section">
+      <div class="section-title">Detection Silences</div>
+
+      <div class="ctrl-row">
+        <div class="ctrl-label">
+          Seuil de bruit
+          <span id="thresholdVal">-40 dB</span>
+        </div>
+        <input type="range" id="thresholdSlider" min="-70" max="-20" step="1" value="-40">
+      </div>
+
+      <div class="ctrl-row">
+        <div class="ctrl-label">
+          Durée minimum
+          <span id="minDurVal">0.5 s</span>
+        </div>
+        <input type="range" id="minDurSlider" min="0.1" max="3.0" step="0.1" value="0.5">
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Mode de Traitement</div>
+      <div class="mode-toggle">
+        <button class="mode-btn preserve active" id="btnPreserve" onclick="setMode('preserve')">
+          <span class="mode-icon">&#9679;</span>CONSERVER les silences
+          <div class="mode-desc">F03 prolongera le dernier visuel pendant chaque silence</div>
+        </button>
+        <button class="mode-btn remove" id="btnRemove" onclick="setMode('remove')">
+          <span class="mode-icon">&#9675;</span>SUPPRIMER les silences
+          <div class="mode-desc">Rythme rapide — séquences contiguës sans pause</div>
+        </button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Durée Audio</div>
+      <div class="stat-grid">
+        <div class="stat-box">
+          <div class="stat-label">Original</div>
+          <div class="stat-value" id="durOriginal">—</div>
+          <div class="stat-unit">secondes</div>
+        </div>
+        <div class="stat-box highlight">
+          <div class="stat-label">Après traitement</div>
+          <div class="stat-value" id="durAfter">—</div>
+          <div class="stat-unit">secondes</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Silences total</div>
+          <div class="stat-value" id="silenceTotal">—</div>
+          <div class="stat-unit">secondes</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Nb silences</div>
+          <div class="stat-value" id="silenceCount">—</div>
+          <div class="stat-unit">détectés</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Action</div>
+      <button class="btn-validate" id="btnValidate" onclick="validateAndProcess()" disabled>
+        VALIDER &amp; PRODUIRE audio_clean.mp3
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ── RIGHT PANEL ── -->
+  <div class="main-panel">
+
+    <!-- Waveform -->
+    <div class="waveform-container">
+      <div class="waveform-header">
+        <span class="waveform-title">Waveform — audio_raw.mp3</span>
+        <div class="waveform-legend">
+          <span><span class="legend-dot dot-signal"></span>Signal audio</span>
+          <span><span class="legend-dot dot-silence"></span>Silence détecté</span>
+        </div>
+      </div>
+      <canvas id="waveformCanvas" width="900" height="120"></canvas>
+      <div class="waveform-timeline">
+        <span id="timeStart">0:00</span>
+        <span id="timeMid">—</span>
+        <span id="timeEnd">—</span>
+      </div>
+    </div>
+
+    <!-- Silence list -->
+    <div class="silence-panel">
+      <div class="silence-panel-header">
+        Silences Détectés
+        <span class="silence-count-badge" id="silenceBadge">0</span>
+      </div>
+      <div class="silence-list-header">
+        <span>#</span>
+        <span>Début</span>
+        <span>Fin</span>
+        <span>Durée</span>
+      </div>
+      <div class="silence-list" id="silenceList">
+        <div class="silence-empty">En attente d'analyse...</div>
+      </div>
+    </div>
+
+    <!-- Log bar -->
+    <div id="logBar">Initialisation...</div>
+
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════ STATE ════════════════════════════════════════
+let state = {
+  mode:         'preserve',
+  thresholdDb:  -40.0,
+  minDuration:  0.5,
+  waveformData: null,
+  analyzeData:  null,
+  duration:     0,
+  loading:      false,
+};
+
+let analyzeTimer = null;
+
+// ═══════════════════════════════ INIT ════════════════════════════════════════
+window.addEventListener('DOMContentLoaded', async () => {
+  bindControls();
+  await checkStatus();
+  await loadWaveform();
+  await analyzeAudio();
+});
+
+// ═══════════════════════════════ CONTROLS ═════════════════════════════════════
+function bindControls() {
+  const thSlider = document.getElementById('thresholdSlider');
+  const mdSlider = document.getElementById('minDurSlider');
+
+  thSlider.addEventListener('input', () => {
+    state.thresholdDb = parseFloat(thSlider.value);
+    document.getElementById('thresholdVal').textContent = `${thSlider.value} dB`;
+    scheduleAnalyze();
+  });
+
+  mdSlider.addEventListener('input', () => {
+    state.minDuration = parseFloat(mdSlider.value);
+    document.getElementById('minDurVal').textContent = `${parseFloat(mdSlider.value).toFixed(1)} s`;
+    scheduleAnalyze();
+  });
+}
+
+function scheduleAnalyze() {
+  if (analyzeTimer) clearTimeout(analyzeTimer);
+  analyzeTimer = setTimeout(() => analyzeAudio(), 600);
+}
+
+function setMode(mode) {
+  state.mode = mode;
+  document.getElementById('btnPreserve').classList.toggle('active', mode === 'preserve');
+  document.getElementById('btnRemove').classList.toggle('active', mode === 'remove');
+}
+
+// ═══════════════════════════════ API CALLS ════════════════════════════════════
+async function checkStatus() {
+  try {
+    const r = await fetch('/api/status');
+    const d = await r.json();
+    const pill = document.getElementById('statusPill');
+    if (d.audio_in_ready) {
+      pill.textContent = 'AUDIO PRÊT';
+      pill.className = 'status-pill ok';
+      document.getElementById('btnValidate').disabled = false;
+    } else {
+      pill.textContent = 'AUDIO MANQUANT';
+      pill.className = 'status-pill error';
+      log('audio_raw.mp3 introuvable dans IN/', 'error');
+    }
+  } catch(e) {
+    log('Erreur connexion serveur : ' + e.message, 'error');
+  }
+}
+
+async function loadWaveform() {
+  log('<span class="spinner"></span>Chargement waveform...', 'info');
+  try {
+    const r = await fetch('/api/waveform');
+    if (!r.ok) { log('Waveform indisponible', 'warn'); return; }
+    const d = await r.json();
+    state.waveformData = d.peaks;
+    state.duration     = d.duration;
+    document.getElementById('durOriginal').textContent = d.duration.toFixed(1);
+    updateTimeline(d.duration);
+    drawWaveform();
+    log('Waveform chargée — durée : ' + fmtTime(d.duration), 'ok');
+  } catch(e) {
+    log('Erreur waveform : ' + e.message, 'error');
+  }
+}
+
+async function analyzeAudio() {
+  log('<span class="spinner"></span>Analyse des silences en cours...', 'info');
+  try {
+    const url = `/api/analyze?threshold_db=${state.thresholdDb}&min_duration=${state.minDuration}`;
+    const r = await fetch(url);
+    if (!r.ok) { log('Analyse échouée', 'error'); return; }
+    const d = await r.json();
+    state.analyzeData = d;
+    updateStats(d);
+    renderSilenceList(d.silences);
+    drawWaveform();
+    log(
+      `Analyse : ${d.silence_count} silence(s) — ${d.silence_total_seconds.toFixed(2)}s retirables — ` +
+      `durée après : ${fmtTime(d.duration_after_removal)}`,
+      'ok'
+    );
+  } catch(e) {
+    log('Erreur analyse : ' + e.message, 'error');
+  }
+}
+
+async function validateAndProcess() {
+  if (state.loading) return;
+  state.loading = true;
+  document.getElementById('btnValidate').disabled = true;
+  log('<span class="spinner"></span>Traitement audio en cours...', 'info');
+
+  try {
+    const payload = {
+      remove_silences: state.mode === 'remove',
+      threshold_db:    state.thresholdDb,
+      min_duration:    state.minDuration,
+    };
+    const r = await fetch('/api/process', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(payload),
+    });
+    const d = await r.json();
+    if (!r.ok) {
+      log('ERREUR : ' + (d.error || 'inconnue'), 'error');
+      document.getElementById('statusPill').textContent = 'ERREUR';
+      document.getElementById('statusPill').className = 'status-pill error';
+    } else {
+      const modeLabel = d.mode === 'removed' ? 'SUPPRIMÉS' : 'CONSERVÉS';
+      log(
+        `✓ MISSION ACCOMPLIE — Silences ${modeLabel} — ` +
+        `${d.duration_in.toFixed(1)}s → ${d.duration_out.toFixed(1)}s — audio_clean.mp3 produit`,
+        'ok'
+      );
+      document.getElementById('statusPill').textContent = 'AUDIO CLEAN PRODUIT';
+      document.getElementById('statusPill').className = 'status-pill ok';
+      document.getElementById('durAfter').textContent = d.duration_out.toFixed(1);
+    }
+  } catch(e) {
+    log('Erreur réseau : ' + e.message, 'error');
+  } finally {
+    state.loading = false;
+    document.getElementById('btnValidate').disabled = false;
+  }
+}
+
+// ═══════════════════════════════ UI UPDATES ═══════════════════════════════════
+function updateStats(d) {
+  document.getElementById('durOriginal').textContent  = d.original_duration.toFixed(1);
+  document.getElementById('durAfter').textContent     = d.duration_after_removal.toFixed(1);
+  document.getElementById('silenceTotal').textContent = d.silence_total_seconds.toFixed(2);
+  document.getElementById('silenceCount').textContent = d.silence_count;
+  document.getElementById('silenceBadge').textContent = d.silence_count;
+}
+
+function renderSilenceList(silences) {
+  const list = document.getElementById('silenceList');
+  if (!silences || silences.length === 0) {
+    list.innerHTML = '<div class="silence-empty">Aucun silence détecté avec ces paramètres.</div>';
+    return;
+  }
+  list.innerHTML = silences.map((s, i) => `
+    <div class="silence-item">
+      <span class="idx">${i + 1}</span>
+      <span class="val">${fmtTime(s.start)}</span>
+      <span class="val">${fmtTime(s.end)}</span>
+      <span class="dur">${s.duration.toFixed(3)}s</span>
+    </div>
+  `).join('');
+}
+
+function updateTimeline(duration) {
+  document.getElementById('timeEnd').textContent = fmtTime(duration);
+  document.getElementById('timeMid').textContent = fmtTime(duration / 2);
+}
+
+// ═══════════════════════════════ CANVAS ═══════════════════════════════════════
+function drawWaveform() {
+  const canvas = document.getElementById('waveformCanvas');
+  const ctx    = canvas.getContext('2d');
+  const W = canvas.width  = canvas.offsetWidth;
+  const H = canvas.height = 120;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Background
+  ctx.fillStyle = '#0d0d0d';
+  ctx.fillRect(0, 0, W, H);
+
+  // Center line
+  ctx.strokeStyle = '#2a2a2a';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(0, H / 2);
+  ctx.lineTo(W, H / 2);
+  ctx.stroke();
+
+  const peaks    = state.waveformData;
+  const silences = state.analyzeData ? state.analyzeData.silences : [];
+  const duration = state.duration;
+
+  // Draw silence regions
+  if (silences.length > 0 && duration > 0) {
+    ctx.fillStyle = 'rgba(220, 80, 80, 0.18)';
+    for (const s of silences) {
+      const x1 = (s.start / duration) * W;
+      const x2 = (s.end   / duration) * W;
+      ctx.fillRect(x1, 0, x2 - x1, H);
+    }
+    // Silence border lines
+    ctx.strokeStyle = 'rgba(220, 80, 80, 0.4)';
+    ctx.lineWidth = 1;
+    for (const s of silences) {
+      const x1 = (s.start / duration) * W;
+      const x2 = (s.end   / duration) * W;
+      ctx.beginPath(); ctx.moveTo(x1, 0); ctx.lineTo(x1, H); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x2, 0); ctx.lineTo(x2, H); ctx.stroke();
+    }
+  }
+
+  // Draw waveform bars
+  if (peaks && peaks.length > 0) {
+    const barW = W / peaks.length;
+    for (let i = 0; i < peaks.length; i++) {
+      const x   = i * barW;
+      const amp = peaks[i] * (H / 2 - 4);
+      const y   = H / 2 - amp;
+      const h   = amp * 2;
+
+      // Check if this sample is in a silence zone (for color)
+      let inSilence = false;
+      if (duration > 0) {
+        const t = (i / peaks.length) * duration;
+        inSilence = silences.some(s => t >= s.start && t <= s.end);
+      }
+
+      ctx.fillStyle = inSilence
+        ? 'rgba(220, 80, 80, 0.55)'
+        : `rgba(201, 168, 76, ${0.4 + peaks[i] * 0.5})`;
+      ctx.fillRect(Math.floor(x), y, Math.max(barW - 1, 1), Math.max(h, 1));
+    }
+  } else {
+    ctx.fillStyle = 'rgba(201, 168, 76, 0.15)';
+    ctx.font = '12px Courier New';
+    ctx.textAlign = 'center';
+    ctx.fillText('Chargement de la waveform...', W / 2, H / 2 + 4);
+  }
+}
+
+window.addEventListener('resize', () => {
+  if (state.waveformData) drawWaveform();
+});
+
+// ═══════════════════════════════ UTILS ════════════════════════════════════════
+function fmtTime(s) {
+  if (s === undefined || s === null || isNaN(s)) return '—';
+  const m = Math.floor(s / 60);
+  const sec = (s % 60).toFixed(1).padStart(4, '0');
+  return `${m}:${sec}`;
+}
+
+function log(msg, type) {
+  const el = document.getElementById('logBar');
+  el.innerHTML = msg;
+  el.className = type || '';
+}
+</script>
+</body>
+</html>

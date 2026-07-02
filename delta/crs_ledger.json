@@ -1,0 +1,68 @@
+{
+  "version": "1.0",
+  "run_id": null,
+  "production_title": null,
+  "gate_actuelle": "PHASE_0",
+  "statut": "INITIALISATION",
+  "etapes_completees": [],
+  "repo_root": null,
+  "github_repo": "kioka8877-ux/CRUSADER",
+  "canonical_mode": "delta",
+  "source": "gamma",
+  "engine": "VibeForge (Canvas 2D + Puppeteer)",
+  "branch": "delta-test1-f03",
+  "artefacts": {
+    "audio_raw": "SHARED/IN/audio_raw.mp3",
+    "audio_clean": "F01_GRIMALDUS/F01A_CASTELLAN_AUDIO/OUT/audio_clean.mp3",
+    "timing_json": "F01_GRIMALDUS/F01B_GRIMALDUS/OUT/timing.json",
+    "storyboard_json": "F02_CASTELLAN/OUT/storyboard.json",
+    "style_tokens_json": "F02_CASTELLAN/OUT/style_tokens.json",
+    "characters_js": "F03_SIGISMUND/F03A_INTERPRETEUR/OUT/characters.js",
+    "backgrounds_js": "F03_SIGISMUND/F03A_INTERPRETEUR/OUT/backgrounds.js",
+    "index_html": "F03_SIGISMUND/F03B_SCRIPTORIUM/OUT/index.html",
+    "short_render": "F03_SIGISMUND/F03C_FONDERIE/OUT/short_render.mp4",
+    "youtube_final": "F04_HELBRECHT/OUT/youtube_final.mp4",
+    "clean_final": "F05_LUTHER/OUT/clean_final.mp4"
+  },
+  "f03_meta": {
+    "fps": 30,
+    "engine": "Canvas2D+Puppeteer",
+    "total_frames": null,
+    "format": "horizontal",
+    "width": 1920,
+    "height": 1080,
+    "workers": 10
+  },
+  "phases": {
+    "phase_0": {
+      "status": "in_progress",
+      "description": "Fondations — branche + structure + squelettes"
+    },
+    "phase_1": {
+      "status": "pending",
+      "description": "F03C Proof of Concept — carré rouge → MP4"
+    },
+    "phase_2": {
+      "status": "pending",
+      "description": "F03C Parallélisation — 10 workers"
+    },
+    "phase_3": {
+      "status": "pending",
+      "description": "F03A Interpréteur — personnage paramétrique"
+    },
+    "phase_4": {
+      "status": "pending",
+      "description": "F03B Scriptorium — moteur rendu complet"
+    },
+    "phase_5": {
+      "status": "pending",
+      "description": "F02 Preview Canvas"
+    },
+    "phase_6": {
+      "status": "pending",
+      "description": "Intégration complète"
+    }
+  },
+  "derniere_mise_a_jour": "2026-07-02T09:28:49.793247+01:00",
+  "instructions_cold_start": "Lire delta/README_DEV.md. Cloner le repo. Branche delta-test1-f03. Mode delta VibeForge (Canvas 2D)."
+}
