@@ -2485,31 +2485,10 @@ function renderCanvas(canvasId, charKey) {
       else if (subPos === 'center') subY = H * 0.5;
       else subY = H - 100 * sf;
 
-      // Pill
-      const pillPad = 24 * sf;
+      // Draw each part (no pill background)
       const maxFontSize = Math.max(subSize, accentSize);
-      const pillH = (maxFontSize + 20) * sf;
-      const pillW = totalWidth + pillPad * 2;
-      const pillX = W / 2 - pillW / 2;
-
-      ctx.fillStyle = 'rgba(0,0,0,0.65)';
-      const pr = 12 * sf;
-      ctx.beginPath();
-      ctx.moveTo(pillX + pr, subY);
-      ctx.lineTo(pillX + pillW - pr, subY);
-      ctx.quadraticCurveTo(pillX + pillW, subY, pillX + pillW, subY + pr);
-      ctx.lineTo(pillX + pillW, subY + pillH - pr);
-      ctx.quadraticCurveTo(pillX + pillW, subY + pillH, pillX + pillW - pr, subY + pillH);
-      ctx.lineTo(pillX + pr, subY + pillH);
-      ctx.quadraticCurveTo(pillX, subY + pillH, pillX, subY + pillH - pr);
-      ctx.lineTo(pillX, subY + pr);
-      ctx.quadraticCurveTo(pillX, subY, pillX + pr, subY);
-      ctx.closePath();
-      ctx.fill();
-
-      // Draw each part
       let drawX = W / 2 - totalWidth / 2;
-      const drawY = subY + pillH / 2;
+      const drawY = subY + (maxFontSize * sf) / 2;
       ctx.textBaseline = 'middle';
       ctx.textAlign = 'left';
 
@@ -2557,23 +2536,25 @@ function parseStrongWords(text) {
 // ════════════════════════════════════════════════════
 
 function renderLoop() {
-  if (playing) {
-    const now = performance.now() / 1000;
-    const sceneElapsed = now - sceneStartTime;
-    const scene = storyboard.scenes[currentSceneIndex];
-    if (sceneElapsed >= scene.duration) {
-      if (currentSceneIndex < storyboard.scenes.length - 1) {
-        currentSceneIndex++;
-        sceneStartTime = now;
-        loadSceneEditor();
-        buildSceneList();
-      } else { stopPlay(); }
+  try {
+    if (playing) {
+      const now = performance.now() / 1000;
+      const sceneElapsed = now - sceneStartTime;
+      const scene = storyboard.scenes[currentSceneIndex];
+      if (sceneElapsed >= scene.duration) {
+        if (currentSceneIndex < storyboard.scenes.length - 1) {
+          currentSceneIndex++;
+          sceneStartTime = now;
+          loadSceneEditor();
+          buildSceneList();
+        } else { stopPlay(); }
+      }
+      updateTimelineSlider();
     }
-    updateTimelineSlider();
-  }
-  animTime += 1/60;
-  renderCanvas('canvas-desktop', 'desktop');
-  renderCanvas('canvas-iphone', 'iphone');
+    animTime += 1/60;
+    renderCanvas('canvas-desktop', 'desktop');
+    renderCanvas('canvas-iphone', 'iphone');
+  } catch (e) { console.error('renderLoop error:', e); }
   animFrameId = requestAnimationFrame(renderLoop);
 }
 
@@ -2590,9 +2571,9 @@ function stopPlay() {
   document.getElementById('btnPlay').textContent = '▶ Play';
 }
 function goToScene(i) {
-  currentSceneIndex = i;
+  currentSceneIndex = Math.max(0, Math.min(i, storyboard.scenes.length - 1));
   if (playing) sceneStartTime = performance.now() / 1000;
-  loadSceneEditor();
+  try { loadSceneEditor(); } catch(e) { console.error('loadSceneEditor:', e); }
   buildSceneList();
   updateTimelineSlider();
 }
