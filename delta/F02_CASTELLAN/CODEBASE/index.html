@@ -3014,6 +3014,14 @@ function updateFooterInfo() {
 function exportStoryboard() {
   const merged = JSON.parse(JSON.stringify(storyboard));
   Object.keys(styleOverrides).forEach(k => { merged.global[k] = styleOverrides[k]; });
+  // Map F02 panel keys → F03B-compatible keys
+  const g = merged.global;
+  if (g.world_title_font && !g.title_font) g.title_font = g.world_title_font;
+  if (g.world_title_size && !g.title_size) g.title_size = g.world_title_size;
+  if (g.world_title_color && !g.title_color) g.title_color = g.world_title_color;
+  if (!g.fps) g.fps = 30;
+  if (!g.width) g.width = 1920;
+  if (!g.height) g.height = 1080;
   const json = JSON.stringify(merged, null, 2);
   const blob = new Blob([json], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
