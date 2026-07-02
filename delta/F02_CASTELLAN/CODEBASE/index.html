@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>F02 CASTELLAN — CRUSADER Delta Preview</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;700&family=Oswald:wght@400;700&family=Bebas+Neue&family=Caveat:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=Permanent+Marker&family=Patrick+Hand&family=Courier+Prime&family=Space+Mono&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto+Slab:wght@400;700&family=Inter:wght@400;700" rel="stylesheet"/>
 <style>
   :root {
     --bg:        #0A0A0A;
@@ -1786,55 +1787,85 @@ if (typeof module !== 'undefined') {
 }
 
 
+
+
 // ════════════════════════════════════════════════════
-// CRUSADER DELTA — F02 CASTELLAN PREVIEW ENGINE
+// CRUSADER DELTA — F02 CASTELLAN PREVIEW ENGINE v3
 // ════════════════════════════════════════════════════
 
 const FONTS = [
   "Cinzel", "Playfair Display", "Cormorant Garamond", "Montserrat",
   "Oswald", "Bebas Neue", "Caveat", "Permanent Marker",
-  "Patrick Hand", "Courier Prime", "Space Mono"
+  "Patrick Hand", "Courier Prime", "Space Mono", "Arial Black"
+];
+const FONTS_WITH_OTHER = [...FONTS, "__other__"];
+const FONT_LABELS = [
+  "Cinzel — Serif élégant", "Playfair Display — Serif", "Cormorant Garamond — Serif fin",
+  "Montserrat — Sans moderne", "Oswald — Sans condensé", "Bebas Neue — Sans display",
+  "Caveat — Handwriting", "Permanent Marker — Marker", "Patrick Hand — Whiteboard",
+  "Courier Prime — Monospace", "Space Mono — Mono tech", "Arial Black — Display bold",
+  "— Autre police —"
 ];
 
-const BG_COLORS = [
-  { label: "Noir profond", value: "#0A0A0A" },
-  { label: "Bleu nuit", value: "#0D0D1A" },
-  { label: "Gris charbon", value: "#1A1A2E" },
-  { label: "Bone parchment", value: "#F5F0E8" },
-  { label: "Papyrus", value: "#E8DCC8" },
+const BG_OPTIONS = [
+  { label: "Couleur unie", value: "solid" },
+  { label: "Quadrillé bleu", value: "grid_dark" },
+  { label: "Bleu uni", value: "solid_blue" },
+  { label: "Papier neuf", value: "paper_new" },
+  { label: "Papier froissé", value: "paper_crumpled" },
+  { label: "Papyrus ancien", value: "papyrus_old" },
 ];
 
-// ─── Default style ───
 const defaults = {
   // Format
   format: "horizontal",
   // Capsules
   world_scale: 0.85,
+  world_next_scale: 0.35,
   world_opacity: 1.0,
+  world_next_opacity: 0.3,
+  // Camera
+  camera_amplitude: 200,
+  camera_spacing: 1500,
   // Background
+  background_type: "solid",
   background_color: "#0D0D1A",
+  background_scale: 1.0,
   // Titles
   world_title_visible: true,
   world_title_font: "Cinzel",
   world_title_size: 32,
   world_title_color: "#C5A44E",
+  world_title_position: "left",
+  world_title_speed: 12,
   world_title_gap: 20,
   // Subtitles
+  font_primary: "Cinzel",
+  font_accent: "Playfair Display",
+  font_primary_other: "",
+  font_accent_other: "",
   subtitle_font: "Cinzel",
   subtitle_size: 44,
   subtitle_color: "#FFFFFF",
   subtitle_position: "bottom",
   subtitle_align: "center",
+  subtitle_word_fade: 3,
+  subtitle_anim_enabled: true,
+  subtitle_anim_speed: 5,
+  // Accent / mots forts
   accent_color: "#FFD700",
+  accent_size: 48,
+  accent_font: "Playfair Display",
   // Production
   production_title: "Jordan Belfort",
   // Effects
-  grain_intensity: 0.12,
+  grain_intensity: 0.15,
   vignette: true,
   // Character
   character_scale: 2.5,
   // Transitions
   transition_duration: 0.5,
+  transition_frames: 12,
 };
 
 let storyboard = {
@@ -2086,7 +2117,6 @@ function getS(key) {
 }
 function setS(key, val) {
   styleOverrides[key] = val;
-  // Also update storyboard.global for export
   if (storyboard.global) storyboard.global[key] = val;
 }
 
@@ -2106,7 +2136,6 @@ function getBackground(ctx, w, h, type) {
   return bgInstances[key];
 }
 
-// ─── Character instances per canvas ───
 const charInstances = {};
 function getCharacter(ctx, key) {
   if (!charInstances[key]) {
@@ -2117,11 +2146,8 @@ function getCharacter(ctx, key) {
   }
   return charInstances[key];
 }
-function rebuildCharacters() {
-  Object.keys(charInstances).forEach(k => delete charInstances[k]);
-}
+function rebuildCharacters() { Object.keys(charInstances).forEach(k => delete charInstances[k]); }
 
-// ─── Particle instances ───
 const particleInstances = {};
 function getParticles(ctx, w, h, type) {
   if (!type) return null;
@@ -2132,9 +2158,133 @@ function getParticles(ctx, w, h, type) {
   return particleInstances[key];
 }
 
+
 // ════════════════════════════════════════════════════
-// RENDER SCENE ON CANVAS
+// BACKGROUND TEXTURES (procedural — replaces gamma's PNG files)
 // ════════════════════════════════════════════════════
+
+const bgTextureCache = {};
+
+function drawBgTexture(ctx, W, H, type) {
+  const bgColor = getS('background_color');
+  const bgScale = parseFloat(getS('background_scale'));
+
+  switch(type) {
+    case 'solid':
+      ctx.fillStyle = bgColor;
+      ctx.fillRect(0, 0, W, H);
+      break;
+
+    case 'grid_dark':
+      // Quadrillé bleu foncé
+      ctx.fillStyle = '#0A0E1A';
+      ctx.fillRect(0, 0, W, H);
+      ctx.strokeStyle = 'rgba(40,80,160,0.15)';
+      ctx.lineWidth = 1;
+      const gridSize = 40 * bgScale;
+      for (let x = 0; x < W; x += gridSize) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+      }
+      for (let y = 0; y < H; y += gridSize) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+      }
+      // Major grid
+      ctx.strokeStyle = 'rgba(40,80,160,0.3)';
+      ctx.lineWidth = 1.5;
+      for (let x = 0; x < W; x += gridSize * 5) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+      }
+      for (let y = 0; y < H; y += gridSize * 5) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+      }
+      break;
+
+    case 'solid_blue':
+      const blueGrad = ctx.createLinearGradient(0, 0, 0, H);
+      blueGrad.addColorStop(0, '#1a2a4a');
+      blueGrad.addColorStop(1, '#0a1528');
+      ctx.fillStyle = blueGrad;
+      ctx.fillRect(0, 0, W, H);
+      break;
+
+    case 'paper_new':
+      // Clean paper texture
+      ctx.fillStyle = '#F8F4EC';
+      ctx.fillRect(0, 0, W, H);
+      // Subtle fiber noise
+      for (let i = 0; i < 3000; i++) {
+        const x = Math.random() * W;
+        const y = Math.random() * H;
+        const a = 0.02 + Math.random() * 0.04;
+        ctx.fillStyle = `rgba(180,170,150,${a})`;
+        ctx.fillRect(x, y, 1 + Math.random() * 3, 1);
+      }
+      break;
+
+    case 'paper_crumpled':
+      // Froissé / crumpled paper
+      ctx.fillStyle = '#EDE5D5';
+      ctx.fillRect(0, 0, W, H);
+      // Crumple lines
+      ctx.strokeStyle = 'rgba(160,140,110,0.08)';
+      ctx.lineWidth = 1;
+      for (let i = 0; i < 40; i++) {
+        ctx.beginPath();
+        let x = Math.random() * W, y = Math.random() * H;
+        ctx.moveTo(x, y);
+        for (let j = 0; j < 5; j++) {
+          x += (Math.random() - 0.5) * 200;
+          y += (Math.random() - 0.5) * 200;
+          ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+      // Shadow patches
+      for (let i = 0; i < 15; i++) {
+        const cx = Math.random() * W, cy = Math.random() * H;
+        const r = 50 + Math.random() * 150;
+        const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+        grad.addColorStop(0, 'rgba(140,120,90,0.06)');
+        grad.addColorStop(1, 'rgba(140,120,90,0)');
+        ctx.fillStyle = grad;
+        ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
+      }
+      break;
+
+    case 'papyrus_old':
+      // Old papyrus
+      const papGrad = ctx.createLinearGradient(0, 0, 0, H);
+      papGrad.addColorStop(0, '#D4C4A0');
+      papGrad.addColorStop(0.5, '#C8B890');
+      papGrad.addColorStop(1, '#BCA878');
+      ctx.fillStyle = papGrad;
+      ctx.fillRect(0, 0, W, H);
+      // Age spots
+      for (let i = 0; i < 50; i++) {
+        const cx = Math.random() * W, cy = Math.random() * H;
+        const r = 10 + Math.random() * 60;
+        const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+        grad.addColorStop(0, 'rgba(100,80,40,0.08)');
+        grad.addColorStop(1, 'rgba(100,80,40,0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      // Dark edges
+      const edgeGrad = ctx.createRadialGradient(W/2, H/2, Math.min(W,H)*0.3, W/2, H/2, Math.max(W,H)*0.7);
+      edgeGrad.addColorStop(0, 'rgba(0,0,0,0)');
+      edgeGrad.addColorStop(1, 'rgba(80,60,20,0.15)');
+      ctx.fillStyle = edgeGrad;
+      ctx.fillRect(0, 0, W, H);
+      break;
+
+    default:
+      ctx.fillStyle = bgColor;
+      ctx.fillRect(0, 0, W, H);
+  }
+}
+
 
 function renderCanvas(canvasId, charKey) {
   const canvas = document.getElementById(canvasId);
@@ -2150,7 +2300,7 @@ function renderCanvas(canvasId, charKey) {
   let elapsed = 0;
   for (let i = 0; i < currentSceneIndex; i++) elapsed += storyboard.scenes[i].duration;
 
-  let progress = 0.5; // static preview at midpoint
+  let progress = 0.5;
   let sceneTime = animTime;
 
   if (playing) {
@@ -2160,18 +2310,17 @@ function renderCanvas(canvasId, charKey) {
     sceneTime = now - playStartTime;
   }
 
-  // Clear
   ctx.clearRect(0, 0, W, H);
 
-  // Background color behind everything
-  ctx.fillStyle = getS('background_color');
-  ctx.fillRect(0, 0, W, H);
+  // 1. Background texture (from gamma BG_OPTIONS)
+  const bgType = getS('background_type');
+  drawBgTexture(ctx, W, H, bgType);
 
-  // Scene background
+  // 2. Scene background (Canvas animated - nature/city/office/abstract)
   const bg = getBackground(ctx, W, H, scene.background);
   bg.draw(sceneTime);
 
-  // Character
+  // 3. Character
   const charData = scene.character;
   const cx = charData.start_x / 1920 * W + ((charData.end_x - charData.start_x) / 1920 * W) * progress;
   const cy = H * charData.y_ratio;
@@ -2181,7 +2330,7 @@ function renderCanvas(canvasId, charKey) {
   char.setState(charData.posture, charData.emotion, charData.direction);
   char.draw(cx, cy, sceneTime);
 
-  // Particles
+  // 4. Particles
   const particles = getParticles(ctx, W, H, scene.effects?.particles);
   if (particles) {
     particles.update(sceneTime);
@@ -2189,10 +2338,12 @@ function renderCanvas(canvasId, charKey) {
   }
 
   // ─── HUD Overlay ───
-  const titleFont = getS('world_title_font');
-  const subFont = getS('subtitle_font');
+  const sf = W / 1920;
+  const fontPrimary = getS('font_primary') || getS('subtitle_font') || 'Cinzel';
+  const fontAccent = getS('font_accent') || getS('accent_font') || 'Playfair Display';
   const accentColor = getS('accent_color');
-  const sf = W / 1920; // scale factor
+  const accentSize = parseFloat(getS('accent_size')) || 48;
+  const titleFont = getS('world_title_font') || fontPrimary;
 
   // Title bar
   ctx.fillStyle = 'rgba(0,0,0,0.6)';
@@ -2201,50 +2352,84 @@ function renderCanvas(canvasId, charKey) {
   ctx.fillRect(0, 48 * sf, W, 3 * sf);
 
   // Production title (left)
-  ctx.font = `bold ${20 * sf}px ${titleFont}, Georgia, serif`;
+  ctx.font = `bold ${20 * sf}px '${titleFont}', Georgia, serif`;
   ctx.fillStyle = accentColor;
   ctx.textAlign = 'left';
   ctx.textBaseline = 'middle';
   ctx.fillText('⚔ ' + getS('production_title'), 16 * sf, 26 * sf);
 
   // Tech info (right)
-  ctx.font = `${13 * sf}px ${getS('subtitle_font')}, monospace`;
+  ctx.font = `${13 * sf}px 'Courier Prime', monospace`;
   ctx.fillStyle = '#666';
   ctx.textAlign = 'right';
   ctx.fillText(`CASTELLAN · ${W}×${H} · ${storyboard.global?.fps || 30}fps`, W - 16 * sf, 26 * sf);
 
   // Scene title
   if (getS('world_title_visible') && scene.world_title) {
-    const titleSize = parseFloat(getS('world_title_size'));
-    const titleGap = parseFloat(getS('world_title_gap') || 20);
-    const titleY = (60 + titleGap) * sf;
+    const tSize = parseFloat(getS('world_title_size'));
+    const tGap = parseFloat(getS('world_title_gap') || 20);
+    const tColor = getS('world_title_color');
+    const tSpeed = parseInt(getS('world_title_speed')) || 12;
+    const tPos = getS('world_title_position');
+    const titleY = (60 + tGap) * sf;
 
-    ctx.font = `bold ${titleSize * sf}px ${titleFont}, Georgia, serif`;
-    ctx.fillStyle = getS('world_title_color');
-    ctx.textAlign = 'center';
+    // Animated ease-in
+    const tProg = Math.min(1, (animTime * 30) / tSpeed);
+    const tEased = tProg * tProg * (3 - 2 * tProg);
+
+    ctx.font = `bold ${tSize * sf}px '${titleFont}', Georgia, serif`;
+    ctx.fillStyle = tColor;
+    ctx.globalAlpha = tEased;
+    ctx.textAlign = tPos === 'right' ? 'right' : 'left';
     ctx.textBaseline = 'top';
-    ctx.fillText(scene.world_title, W / 2, titleY);
+    const titleX = tPos === 'right' ? W - 24 * sf : 24 * sf;
+    ctx.fillText(scene.world_title, titleX, titleY);
 
-    ctx.font = `${14 * sf}px ${titleFont}, monospace`;
+    ctx.font = `${14 * sf}px '${titleFont}', monospace`;
     ctx.fillStyle = '#666';
-    ctx.fillText(`SCENE ${currentSceneIndex + 1} / ${storyboard.scenes.length}`, W / 2, titleY + titleSize * sf + 6 * sf);
+    ctx.fillText(`SCENE ${currentSceneIndex + 1} / ${storyboard.scenes.length}`, titleX, titleY + tSize * sf + 6 * sf);
+    ctx.globalAlpha = 1;
   }
 
-  // Subtitle
+  // Subtitle with **mots forts** support
   if (scene.text) {
     const subSize = parseFloat(getS('subtitle_size'));
     const subColor = getS('subtitle_color');
     const subPos = getS('subtitle_position');
     const subAlign = getS('subtitle_align');
+    const animEnabled = getS('subtitle_anim_enabled');
+    const animSpeed = parseInt(getS('subtitle_anim_speed')) || 5;
+
+    // Parse **strong** words
+    const parts = parseStrongWords(scene.text);
 
     // Typing effect
-    const typingProgress = Math.min(1, progress * 3);
-    const visibleChars = Math.floor(scene.text.length * typingProgress);
-    const visibleText = scene.text.substring(0, visibleChars);
+    const totalChars = parts.reduce((s, p) => s + p.text.length, 0);
+    let visibleChars;
+    if (animEnabled) {
+      const typingProgress = Math.min(1, progress * (30 / animSpeed));
+      visibleChars = Math.floor(totalChars * typingProgress);
+    } else {
+      visibleChars = totalChars;
+    }
 
-    if (visibleText) {
-      ctx.font = `${subSize * sf}px '${subFont}', Georgia, serif`;
-      const textWidth = ctx.measureText(visibleText).width;
+    if (visibleChars > 0) {
+      // Measure full visible text width
+      let fullText = '';
+      let charCount = 0;
+      const visibleParts = [];
+      for (const part of parts) {
+        const remaining = visibleChars - charCount;
+        if (remaining <= 0) break;
+        const shown = part.text.substring(0, remaining);
+        visibleParts.push({ text: shown, strong: part.strong });
+        fullText += shown;
+        charCount += part.text.length;
+      }
+
+      // Measure width using primary font
+      ctx.font = `${subSize * sf}px '${fontPrimary}', Georgia, serif`;
+      const textWidth = ctx.measureText(fullText).width;
 
       // Position
       let subY;
@@ -2254,21 +2439,18 @@ function renderCanvas(canvasId, charKey) {
 
       // Pill background
       const pillPad = 20 * sf;
-      const pillH = (subSize + 16) * sf;
-      let pillX;
-      if (subAlign === 'left') pillX = 40 * sf;
-      else if (subAlign === 'right') pillX = W - textWidth - 60 * sf;
-      else pillX = W / 2 - textWidth / 2 - pillPad;
+      const pillH = (Math.max(subSize, accentSize) + 16) * sf;
+      const pillW = textWidth + pillPad * 2 + 40 * sf; // extra for accent size diff
+      let pillX = W / 2 - pillW / 2;
 
       ctx.fillStyle = 'rgba(0,0,0,0.6)';
       const r = 10 * sf;
-      const pw = textWidth + pillPad * 2;
       ctx.beginPath();
       ctx.moveTo(pillX + r, subY);
-      ctx.lineTo(pillX + pw - r, subY);
-      ctx.quadraticCurveTo(pillX + pw, subY, pillX + pw, subY + r);
-      ctx.lineTo(pillX + pw, subY + pillH - r);
-      ctx.quadraticCurveTo(pillX + pw, subY + pillH, pillX + pw - r, subY + pillH);
+      ctx.lineTo(pillX + pillW - r, subY);
+      ctx.quadraticCurveTo(pillX + pillW, subY, pillX + pillW, subY + r);
+      ctx.lineTo(pillX + pillW, subY + pillH - r);
+      ctx.quadraticCurveTo(pillX + pillW, subY + pillH, pillX + pillW - r, subY + pillH);
       ctx.lineTo(pillX + r, subY + pillH);
       ctx.quadraticCurveTo(pillX, subY + pillH, pillX, subY + pillH - r);
       ctx.lineTo(pillX, subY + r);
@@ -2276,15 +2458,33 @@ function renderCanvas(canvasId, charKey) {
       ctx.closePath();
       ctx.fill();
 
-      // Text
-      ctx.fillStyle = subColor;
-      ctx.textAlign = subAlign;
+      // Draw text parts
       ctx.textBaseline = 'middle';
-      let textX;
-      if (subAlign === 'left') textX = pillX + pillPad;
-      else if (subAlign === 'right') textX = pillX + pw - pillPad;
-      else textX = pillX + pw / 2;
-      ctx.fillText(visibleText, textX, subY + pillH / 2);
+      let drawX;
+      if (subAlign === 'left') {
+        ctx.textAlign = 'left';
+        drawX = pillX + pillPad;
+      } else if (subAlign === 'right') {
+        ctx.textAlign = 'right';
+        drawX = pillX + pillW - pillPad;
+      } else {
+        ctx.textAlign = 'left';
+        drawX = W / 2 - textWidth / 2;
+      }
+
+      const drawY = subY + pillH / 2;
+
+      for (const part of visibleParts) {
+        if (part.strong) {
+          ctx.font = `bold ${accentSize * sf}px '${fontAccent}', Georgia, serif`;
+          ctx.fillStyle = accentColor;
+        } else {
+          ctx.font = `${subSize * sf}px '${fontPrimary}', Georgia, serif`;
+          ctx.fillStyle = subColor;
+        }
+        ctx.fillText(part.text, drawX, drawY);
+        drawX += ctx.measureText(part.text).width;
+      }
     }
   }
 
@@ -2299,10 +2499,10 @@ function renderCanvas(canvasId, charKey) {
 
   // Grain
   const grainIntensity = parseFloat(getS('grain_intensity'));
-  if (grainIntensity > 0) {
+  if (grainIntensity > 0.01) {
     const imageData = ctx.getImageData(0, 0, W, H);
     const pixels = imageData.data;
-    const step = Math.max(4, Math.floor(16 / grainIntensity));
+    const step = Math.max(4, Math.floor(12 / grainIntensity));
     for (let i = 0; i < pixels.length; i += step * 4) {
       const noise = (Math.random() - 0.5) * 255 * grainIntensity;
       pixels[i] = Math.min(255, Math.max(0, pixels[i] + noise));
@@ -2320,6 +2520,26 @@ function renderCanvas(canvasId, charKey) {
   ctx.fillRect(0, H - 6 * sf, W * (totalElapsed / totalDur), 6 * sf);
 }
 
+// Parse **strong words** from text
+function parseStrongWords(text) {
+  const parts = [];
+  const regex = /\*\*(.+?)\*\*/g;
+  let lastIndex = 0;
+  let match;
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push({ text: text.slice(lastIndex, match.index), strong: false });
+    }
+    parts.push({ text: match[1], strong: true });
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < text.length) {
+    parts.push({ text: text.slice(lastIndex), strong: false });
+  }
+  if (parts.length === 0) parts.push({ text, strong: false });
+  return parts;
+}
+
 // ════════════════════════════════════════════════════
 // ANIMATION LOOP
 // ════════════════════════════════════════════════════
@@ -2329,33 +2549,23 @@ function renderLoop() {
     const now = performance.now() / 1000;
     const sceneElapsed = now - sceneStartTime;
     const scene = storyboard.scenes[currentSceneIndex];
-
     if (sceneElapsed >= scene.duration) {
       if (currentSceneIndex < storyboard.scenes.length - 1) {
         currentSceneIndex++;
         sceneStartTime = now;
         loadSceneEditor();
         buildSceneList();
-      } else {
-        stopPlay();
-      }
+      } else { stopPlay(); }
     }
-
-    // Update timeline slider
     updateTimelineSlider();
   }
-
   animTime += 1/60;
   renderCanvas('canvas-desktop', 'desktop');
   renderCanvas('canvas-iphone', 'iphone');
   animFrameId = requestAnimationFrame(renderLoop);
 }
 
-function togglePlay() {
-  if (playing) stopPlay();
-  else startPlay();
-}
-
+function togglePlay() { if (playing) stopPlay(); else startPlay(); }
 function startPlay() {
   playing = true;
   const now = performance.now() / 1000;
@@ -2363,12 +2573,10 @@ function startPlay() {
   sceneStartTime = now;
   document.getElementById('btnPlay').textContent = '⏸ Pause';
 }
-
 function stopPlay() {
   playing = false;
   document.getElementById('btnPlay').textContent = '▶ Play';
 }
-
 function goToScene(i) {
   currentSceneIndex = i;
   if (playing) sceneStartTime = performance.now() / 1000;
@@ -2381,26 +2589,17 @@ function updateTimelineSlider() {
   const totalDur = storyboard.scenes.reduce((s, sc) => s + sc.duration, 0);
   let elapsed = 0;
   for (let i = 0; i < currentSceneIndex; i++) elapsed += storyboard.scenes[i].duration;
-
-  if (playing) {
-    const now = performance.now() / 1000;
-    elapsed += now - sceneStartTime;
-  } else {
-    elapsed += storyboard.scenes[currentSceneIndex].duration * 0.5;
-  }
-
-  const pct = (elapsed / totalDur) * 100;
-  document.getElementById('timeline').value = pct;
+  if (playing) { elapsed += (performance.now() / 1000) - sceneStartTime; }
+  else { elapsed += storyboard.scenes[currentSceneIndex].duration * 0.5; }
+  document.getElementById('timeline').value = (elapsed / totalDur) * 100;
   document.getElementById('frameLabel').textContent = `${elapsed.toFixed(1)}s / ${totalDur.toFixed(1)}s`;
 }
 
-// Timeline scrub
 document.getElementById('timeline').addEventListener('input', function() {
   if (playing) stopPlay();
   const pct = parseFloat(this.value) / 100;
   const totalDur = storyboard.scenes.reduce((s, sc) => s + sc.duration, 0);
-  let target = pct * totalDur;
-  let elapsed = 0;
+  let target = pct * totalDur, elapsed = 0;
   for (let i = 0; i < storyboard.scenes.length; i++) {
     if (elapsed + storyboard.scenes[i].duration >= target) {
       currentSceneIndex = i;
@@ -2412,9 +2611,20 @@ document.getElementById('timeline').addEventListener('input', function() {
   }
 });
 
-// ════════════════════════════════════════════════════
-// CONTROL PANEL (left sidebar)
-// ════════════════════════════════════════════════════
+function updateCanvasFormat() {
+  const fmt = getS('format');
+  const dc = document.getElementById('canvas-desktop');
+  const db = document.querySelector('.viewport-desktop');
+  if (fmt === 'vertical') {
+    dc.width = 1080; dc.height = 1920;
+    db.style.aspectRatio = '9/16'; db.style.maxWidth = '400px'; db.style.margin = '0 auto';
+  } else {
+    dc.width = 1920; dc.height = 1080;
+    db.style.aspectRatio = '16/9'; db.style.maxWidth = ''; db.style.margin = '';
+  }
+  Object.keys(bgInstances).forEach(k => delete bgInstances[k]);
+  rebuildCharacters();
+}
 
 function buildControls() {
   const c = document.getElementById('controls');
@@ -2425,23 +2635,69 @@ function buildControls() {
       {value:"vertical", label:"Vertical — 1080×1920"}
     ])}
 
-    ${section("🏷️ Titres (scène)")}
-    ${checkbox("world_title_visible", "Afficher les titres")}
-    ${selectCtrl("world_title_font", "Police titre", FONTS, FONTS)}
-    ${slider("world_title_size", "Taille titre", 14, 60, 2)}
-    ${colorCtrl("world_title_color", "Couleur titre")}
-    ${slider("world_title_gap", "Espace titre↔visuel (px)", 0, 80, 2)}
+    ${section("📐 Capsules (Worlds)")}
+    ${slider("world_scale", "Taille visuel actif", 0.2, 1, 0.05)}
+    ${slider("world_next_scale", "Taille visuel N+1", 0.1, 1, 0.05)}
+    ${slider("world_opacity", "Opacité visuel actif", 0, 1, 0.05)}
+    ${slider("world_next_opacity", "Opacité visuel N+1", 0, 1, 0.01)}
 
-    ${section("📝 Sous-titres")}
-    ${selectCtrl("subtitle_font", "Police", FONTS, FONTS)}
-    ${slider("subtitle_size", "Taille", 16, 120, 2)}
-    ${colorCtrl("subtitle_color", "Couleur sous-titres")}
-    ${selectCtrl("subtitle_position", "Position", ["top","center","bottom"], ["Haut","Centre","Bas"])}
-    ${selectCtrl("subtitle_align", "Alignement", ["left","center","right"], ["Gauche","Centre","Droite"])}
-    ${colorCtrl("accent_color", "Couleur mots forts")}
+    ${section("🎥 Caméra sinusoïdale")}
+    ${slider("camera_amplitude", "Amplitude (px)", 0, 500, 10)}
+    ${slider("camera_spacing", "Espacement (px)", 500, 3000, 50)}
 
     ${section("🖼️ Background")}
+    ${selectCtrl("background_type", "Type de fond",
+      BG_OPTIONS.map(o=>o.value), BG_OPTIONS.map(o=>o.label))}
     ${colorCtrl("background_color", "Couleur fond")}
+    ${slider("background_scale", "Scale fond", 0.5, 2, 0.05)}
+
+    ${section("📝 Typographie")}
+    ${fontSelect("font_primary", "Police principale")}
+    ${fontSelect("font_accent", "Police accent (mots forts)")}
+    ${slider("subtitle_size", "Taille sous-titres (px)", 16, 120, 2)}
+    ${positionButtons("subtitle_position", "Position sous-titres")}
+
+    ${section("🎨 Couleurs")}
+    ${colorCtrl("subtitle_color", "Couleur sous-titres")}
+    ${colorCtrl("accent_color", "Couleur accent")}
+    ${colorCtrl("background_color", "Fond (si pas d'image)")}
+
+    ${section("💪 Mots forts (accent)")}
+    <div style="font-size:10px;color:var(--text-dim);margin-bottom:6px;line-height:1.4;">
+      Les mots entre <b style="color:var(--gold)">**doubles astérisques**</b> dans les sous-titres
+      utilisent la police accent avec ces paramètres.
+    </div>
+    ${fontSelect("accent_font", "Police mots forts")}
+    ${slider("accent_size", "Taille mots forts (px)", 16, 120, 2)}
+    ${colorCtrl("accent_color", "Couleur mots forts")}
+
+    ${section("🏷️ Titres (scène)")}
+    ${checkbox("world_title_visible", "Afficher les titres")}
+    ${fontSelect("world_title_font", "Police titre")}
+    ${slider("world_title_size", "Taille titre", 14, 60, 2)}
+    ${colorCtrl("world_title_color", "Couleur titre")}
+    ${selectCtrl("world_title_position", "Position", ["left","right"], ["Gauche","Droite"])}
+    ${slider("world_title_speed", "Vitesse anim (frames)", 4, 30, 1)}
+    ${slider("world_title_gap", "Espace titre↔visuel (px)", 0, 80, 2)}
+
+    ${section("📺 Animation sous-titres")}
+    ${checkbox("subtitle_anim_enabled", "Animation activée")}
+    ${slider("subtitle_anim_speed", "Vitesse (frames)", 1, 15, 1)}
+    ${slider("subtitle_word_fade", "Fondu mot (frames)", 1, 12, 1)}
+
+    ${section("🔄 Prévisualisation transition")}
+    <div style="position:relative;height:56px;background:#111;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:6px;">
+      <div id="tp-n" style="position:absolute;top:8px;left:8px;width:52px;height:40px;background:rgba(119,170,255,0.8);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:bold;color:#000;">N</div>
+      <div id="tp-n1" style="position:absolute;top:8px;right:8px;width:52px;height:40px;background:rgba(255,170,119,0.8);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:bold;color:#000;opacity:0.3;transform:scale(0.5);transform-origin:right center;">N+1</div>
+      <div id="tp-arrow" style="position:absolute;top:24px;left:68px;right:68px;height:2px;background:#e00;transform:scaleX(0);transform-origin:left center;opacity:0;"></div>
+    </div>
+    <div style="display:flex;gap:4px;margin-bottom:4px;">
+      <button class="btn-small" style="flex:1;font-size:10px;padding:4px;" onclick="runTransPreview(8)">8f</button>
+      <button class="btn-small" style="flex:1;font-size:10px;padding:4px;" onclick="runTransPreview(12)">12f</button>
+      <button class="btn-small" style="flex:1;font-size:10px;padding:4px;" onclick="runTransPreview(18)">18f</button>
+      <button class="btn-small" style="flex:1;font-size:10px;padding:4px;" onclick="runTransPreview(30)">30f</button>
+    </div>
+    <button class="btn-small" onclick="runTransPreview(lastTransFrames||12)" style="width:100%;font-size:10px;">▶ Rejouer</button>
 
     ${section("🧍 Personnage")}
     ${slider("character_scale", "Taille personnage", 0.5, 5, 0.1)}
@@ -2451,11 +2707,136 @@ function buildControls() {
     ${textInput("production_title", "Titre production")}
 
     ${section("🎨 Effets")}
-    ${slider("grain_intensity", "Grain", 0, 0.5, 0.01)}
+    ${slider("grain_intensity", "Grain", 0, 1, 0.01)}
     ${checkbox("vignette", "Vignetage activé")}
   `;
 
-  // Bind events
+  bindControlEvents();
+}
+
+
+// ─── Control builder helpers ───
+function section(t) { return `<div class="section-title">${t}</div>`; }
+
+function slider(key, label, min, max, step) {
+  const v = getS(key);
+  return `<div class="ctrl-row"><label><span>${label}</span><span class="val">${v}</span></label><input type="range" data-key="${key}" min="${min}" max="${max}" step="${step}" value="${v}"></div>`;
+}
+
+function selectCtrl(key, label, values, labels) {
+  const v = getS(key);
+  const opts = values.map((val, i) => `<option value="${val}" ${String(val)===String(v)?"selected":""}>${labels[i]}</option>`).join('');
+  return `<div class="ctrl-row"><label>${label}</label><select data-key="${key}">${opts}</select></div>`;
+}
+
+function fontSelect(key, label) {
+  const v = getS(key);
+  const otherKey = key + '_other';
+  const isOther = !FONTS.includes(v) && v !== '';
+  const opts = FONTS_WITH_OTHER.map((f, i) => {
+    const selected = (f === v || (f === '__other__' && isOther)) ? 'selected' : '';
+    return `<option value="${f}" ${selected}>${FONT_LABELS[i]}</option>`;
+  }).join('');
+  const showOther = isOther || v === '__other__' ? '' : 'display:none;';
+  return `<div class="ctrl-row">
+    <label>${label}</label>
+    <select data-key="${key}" data-font="true" onchange="onFontChange('${key}','${otherKey}',this)">${opts}</select>
+    <input type="text" data-key="${otherKey}" value="${isOther ? v : ''}" placeholder="Nom exact de la police…" 
+      style="${showOther}margin-top:3px;background:#1A1A1A;border:1px solid var(--gold-dim);border-radius:var(--radius);padding:3px 6px;font-size:11px;color:var(--bone);font-family:var(--mono);width:100%;"
+      oninput="setS('${key}', this.value)">
+  </div>`;
+}
+
+function onFontChange(key, otherKey, selectEl) {
+  const val = selectEl.value;
+  const otherInput = selectEl.parentElement.querySelector(`input[data-key="${otherKey}"]`);
+  if (val === '__other__') {
+    otherInput.style.display = '';
+    otherInput.focus();
+  } else {
+    otherInput.style.display = 'none';
+    setS(key, val);
+  }
+}
+
+function colorCtrl(key, label) {
+  const v = getS(key);
+  return `<div class="ctrl-row" style="display:flex;align-items:center;gap:8px"><input type="color" data-key="${key}" value="${v}"><label style="flex:1">${label}</label><span class="val" style="font-size:10px">${v}</span></div>`;
+}
+
+function checkbox(key, label) {
+  const v = getS(key);
+  return `<div class="ctrl-row"><label style="gap:8px;cursor:pointer;display:flex;align-items:center"><input type="checkbox" data-key="${key}" ${v?"checked":""}> ${label}</label></div>`;
+}
+
+function textInput(key, label) {
+  const v = getS(key);
+  return `<div class="ctrl-row"><label>${label}</label><input type="text" data-key="${key}" value="${v||''}" style="width:100%;margin-top:2px;background:#1A1A1A;border:1px solid var(--gold-dim);border-radius:var(--radius);padding:3px 6px;font-size:11px;color:var(--bone);font-family:var(--mono);"></div>`;
+}
+
+function radioGroup(key, options) {
+  const v = getS(key);
+  return `<div class="ctrl-row" style="display:flex;gap:6px">${options.map(o => `
+    <label style="flex:1;display:flex;align-items:center;gap:4px;padding:6px 8px;background:${o.value===v?'var(--gold-glow)':'#1A1A1A'};border:1px solid ${o.value===v?'var(--gold-dim)':'var(--border)'};border-radius:var(--radius);cursor:pointer;font-size:10px;color:${o.value===v?'var(--gold)':'var(--bone)'}">
+      <input type="radio" name="${key}" value="${o.value}" ${o.value===v?"checked":""} style="accent-color:var(--gold)"> ${o.label}
+    </label>`).join('')}</div>`;
+}
+
+function positionButtons(key, label) {
+  const v = getS(key);
+  return `<div class="ctrl-row">
+    <label style="margin-bottom:4px">${label}</label>
+    <div style="display:flex;gap:6px;">
+      ${['top','center','bottom'].map(pos => {
+        const active = pos === v;
+        const barPos = pos === 'top' ? 'top:4px' : pos === 'center' ? 'top:50%;transform:translateY(-50%)' : 'bottom:4px';
+        const lbl = pos === 'top' ? 'Haut' : pos === 'center' ? 'Centre' : 'Bas';
+        return `<button class="btn-small" style="flex:1;padding:4px;${active?'border-color:var(--gold);color:var(--gold);background:var(--gold-glow)':''}" 
+          onclick="setS('${key}','${pos}');buildControls()">
+          <div style="position:relative;width:100%;height:28px;background:#111;border-radius:2px;margin-bottom:2px;">
+            <div style="position:absolute;left:15%;right:15%;height:4px;background:${active?'var(--gold)':'#555'};border-radius:1px;${barPos}"></div>
+          </div>
+          <span style="font-size:9px">${lbl}</span>
+        </button>`;
+      }).join('')}
+    </div>
+  </div>`;
+}
+
+// ─── Transition preview animation ───
+let lastTransFrames = 12;
+function runTransPreview(frames) {
+  lastTransFrames = frames;
+  setS('transition_frames', frames);
+  const n = document.getElementById('tp-n');
+  const n1 = document.getElementById('tp-n1');
+  const arrow = document.getElementById('tp-arrow');
+
+  // Reset
+  n.style.transition = 'none';
+  n1.style.transition = 'none';
+  arrow.style.transition = 'none';
+  n.style.opacity = '1'; n.style.transform = 'scale(1)';
+  n1.style.opacity = '0.3'; n1.style.transform = 'scale(0.5)';
+  arrow.style.transform = 'scaleX(0)'; arrow.style.opacity = '0';
+
+  requestAnimationFrame(() => {
+    const dur = (frames / 30).toFixed(2) + 's';
+    n.style.transition = `all ${dur} ease-in-out`;
+    n1.style.transition = `all ${dur} ease-in-out`;
+    arrow.style.transition = `all ${dur} ease-in-out`;
+
+    requestAnimationFrame(() => {
+      n.style.opacity = '0.3'; n.style.transform = 'scale(0.5)';
+      n1.style.opacity = '1'; n1.style.transform = 'scale(1)';
+      arrow.style.transform = 'scaleX(1)'; arrow.style.opacity = '1';
+    });
+  });
+}
+
+// ─── Bind all control events ───
+function bindControlEvents() {
+  const c = document.getElementById('controls');
   c.querySelectorAll('input[type=range]').forEach(el => {
     el.addEventListener('input', () => {
       const v = parseFloat(el.value);
@@ -2465,8 +2846,14 @@ function buildControls() {
       if (el.dataset.key === 'character_scale') rebuildCharacters();
     });
   });
-  c.querySelectorAll('select').forEach(el => {
-    el.addEventListener('change', () => setS(el.dataset.key, el.value));
+  c.querySelectorAll('select:not([data-font])').forEach(el => {
+    el.addEventListener('change', () => {
+      setS(el.dataset.key, el.value);
+      if (el.dataset.key === 'background_type') drawBgTextures();
+    });
+  });
+  c.querySelectorAll('select[data-font]').forEach(el => {
+    // Handled by onFontChange inline
   });
   c.querySelectorAll('input[type=checkbox]').forEach(el => {
     el.addEventListener('change', () => setS(el.dataset.key, el.checked));
@@ -2479,7 +2866,9 @@ function buildControls() {
     });
   });
   c.querySelectorAll('input[type=text]').forEach(el => {
-    el.addEventListener('input', () => setS(el.dataset.key, el.value));
+    if (el.dataset.key && !el.dataset.key.endsWith('_other')) {
+      el.addEventListener('input', () => setS(el.dataset.key, el.value));
+    }
   });
   c.querySelectorAll('input[name=format]').forEach(el => {
     el.addEventListener('change', () => {
@@ -2489,65 +2878,8 @@ function buildControls() {
   });
 }
 
-// ─── Control helpers ───
-function section(t) { return `<div class="section-title">${t}</div>`; }
-function slider(key, label, min, max, step) {
-  const v = getS(key);
-  return `<div class="ctrl-row"><label><span>${label}</span><span class="val">${v}</span></label><input type="range" data-key="${key}" min="${min}" max="${max}" step="${step}" value="${v}"></div>`;
-}
-function selectCtrl(key, label, values, labels) {
-  const v = getS(key);
-  const opts = values.map((val, i) => `<option value="${val}" ${val===v?"selected":""}>${labels[i]}</option>`).join('');
-  return `<div class="ctrl-row"><label>${label}</label><select data-key="${key}">${opts}</select></div>`;
-}
-function colorCtrl(key, label) {
-  const v = getS(key);
-  return `<div class="ctrl-row" style="display:flex;align-items:center;gap:8px"><input type="color" data-key="${key}" value="${v}"><label style="flex:1">${label}</label><span class="val" style="font-size:10px">${v}</span></div>`;
-}
-function checkbox(key, label) {
-  const v = getS(key);
-  return `<div class="ctrl-row"><label style="gap:8px;cursor:pointer"><input type="checkbox" data-key="${key}" ${v?"checked":""}> ${label}</label></div>`;
-}
-function textInput(key, label) {
-  const v = getS(key);
-  return `<div class="ctrl-row"><label>${label}</label><input type="text" data-key="${key}" value="${v||''}" style="width:100%;margin-top:2px;background:#1A1A1A;border:1px solid var(--gold-dim);border-radius:var(--radius);padding:3px 6px;font-size:11px;color:var(--bone);font-family:var(--mono);"></div>`;
-}
-function radioGroup(key, options) {
-  const v = getS(key);
-  return `<div class="ctrl-row" style="display:flex;gap:6px">${options.map(o => `
-    <label style="flex:1;display:flex;align-items:center;gap:4px;padding:6px 8px;background:${o.value===v?'var(--gold-glow)':'#1A1A1A'};border:1px solid ${o.value===v?'var(--gold-dim)':'var(--border)'};border-radius:var(--radius);cursor:pointer;font-size:10px;color:${o.value===v?'var(--gold)':'var(--bone)'}">
-      <input type="radio" name="${key}" value="${o.value}" ${o.value===v?"checked":""} style="accent-color:var(--gold)"> ${o.label}
-    </label>`).join('')}</div>`;
-}
-
-function updateCanvasFormat() {
-  const fmt = getS('format');
-  const desktopCanvas = document.getElementById('canvas-desktop');
-  const iphoneCanvas = document.getElementById('canvas-iphone');
-  const desktopBox = document.querySelector('.viewport-desktop');
-  const iphoneBox = document.querySelector('.viewport-iphone');
-
-  if (fmt === 'vertical') {
-    desktopCanvas.width = 1080;
-    desktopCanvas.height = 1920;
-    desktopBox.style.aspectRatio = '9/16';
-    desktopBox.style.maxWidth = '400px';
-    desktopBox.style.margin = '0 auto';
-  } else {
-    desktopCanvas.width = 1920;
-    desktopCanvas.height = 1080;
-    desktopBox.style.aspectRatio = '16/9';
-    desktopBox.style.maxWidth = '';
-    desktopBox.style.margin = '';
-  }
-
-  // Reset bg instances for new dimensions
-  Object.keys(bgInstances).forEach(k => delete bgInstances[k]);
-  rebuildCharacters();
-}
-
 // ════════════════════════════════════════════════════
-// SCENE LIST + EDITOR (right sidebar)
+// SCENE LIST + EDITOR
 // ════════════════════════════════════════════════════
 
 function buildSceneList() {
@@ -2637,31 +2969,22 @@ function loadSceneEditor() {
       <input type="text" value="${scene.world_title||''}" onchange="updateSceneField('world_title', this.value)"/>
     </div>
     <div class="scene-field">
-      <label>Sous-titre</label>
+      <label>Sous-titre <span style="color:var(--text-dim);font-size:9px">(**mot** = accent)</span></label>
       <textarea rows="2" onchange="updateSceneField('text', this.value)">${scene.text||''}</textarea>
     </div>
   `;
-
   updateFooterInfo();
 }
 
 function updateSceneField(field, value) {
   storyboard.scenes[currentSceneIndex][field] = value;
-  if (field === 'background') {
-    Object.keys(bgInstances).forEach(k => delete bgInstances[k]);
-  }
+  if (field === 'background') Object.keys(bgInstances).forEach(k => delete bgInstances[k]);
   buildSceneList();
   updateFooterInfo();
 }
-
-function updateCharField(field, value) {
-  storyboard.scenes[currentSceneIndex].character[field] = value;
-}
-
+function updateCharField(field, value) { storyboard.scenes[currentSceneIndex].character[field] = value; }
 function updateEffectField(field, value) {
-  if (!storyboard.scenes[currentSceneIndex].effects) {
-    storyboard.scenes[currentSceneIndex].effects = {};
-  }
+  if (!storyboard.scenes[currentSceneIndex].effects) storyboard.scenes[currentSceneIndex].effects = {};
   storyboard.scenes[currentSceneIndex].effects[field] = value || null;
   Object.keys(particleInstances).forEach(k => delete particleInstances[k]);
 }
@@ -2670,35 +2993,26 @@ function addScene() {
   const n = storyboard.scenes.length + 1;
   storyboard.scenes.push({
     id: 'scene_' + String(n).padStart(2,'0'),
-    name: 'Nouvelle scène',
-    duration: 3.0,
-    background: 'nature',
+    name: 'Nouvelle scène', duration: 3.0, background: 'nature',
     character: { posture:'idle', emotion:'neutral', direction:1, start_x:960, end_x:960, y_ratio:0.72 },
-    effects: { particles:null, vignette:true },
-    text: '',
-    world_title: 'Nouvelle scène',
+    effects: { particles:null, vignette:true }, text: '', world_title: 'Nouvelle scène',
   });
   currentSceneIndex = storyboard.scenes.length - 1;
-  buildSceneList();
-  loadSceneEditor();
-  showToast('Scène ajoutée ✅');
+  buildSceneList(); loadSceneEditor(); showToast('Scène ajoutée ✅');
 }
 
 function deleteScene() {
   if (storyboard.scenes.length <= 1) { showToast('Au moins 1 scène requise'); return; }
   storyboard.scenes.splice(currentSceneIndex, 1);
   if (currentSceneIndex >= storyboard.scenes.length) currentSceneIndex--;
-  buildSceneList();
-  loadSceneEditor();
-  showToast('Scène supprimée');
+  buildSceneList(); loadSceneEditor(); showToast('Scène supprimée');
 }
 
 function updateFooterInfo() {
   const totalDur = storyboard.scenes.reduce((s, sc) => s + sc.duration, 0);
   const fps = storyboard.global?.fps || 30;
-  const totalFrames = Math.ceil(totalDur * fps);
   document.getElementById('progressInfo').textContent = 
-    `${storyboard.scenes.length} scènes · ${totalDur.toFixed(1)}s · ${totalFrames} frames @ ${fps}fps`;
+    `${storyboard.scenes.length} scènes · ${totalDur.toFixed(1)}s · ${Math.ceil(totalDur * fps)} frames @ ${fps}fps`;
 }
 
 // ════════════════════════════════════════════════════
@@ -2707,24 +3021,17 @@ function updateFooterInfo() {
 
 function exportStoryboard() {
   const merged = JSON.parse(JSON.stringify(storyboard));
-  // Merge style overrides into global
   Object.keys(styleOverrides).forEach(k => { merged.global[k] = styleOverrides[k]; });
-
   const json = JSON.stringify(merged, null, 2);
   const blob = new Blob([json], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url;
-  a.download = 'storyboard.json';
-  a.click();
+  a.href = url; a.download = 'storyboard.json'; a.click();
   URL.revokeObjectURL(url);
   showToast('⚔ storyboard.json exporté');
 }
 
-function importStoryboard() {
-  document.getElementById('fileInput').click();
-}
-
+function importStoryboard() { document.getElementById('fileInput').click(); }
 function handleImport(event) {
   const file = event.target.files[0];
   if (!file) return;
@@ -2737,9 +3044,7 @@ function handleImport(event) {
       Object.keys(bgInstances).forEach(k => delete bgInstances[k]);
       Object.keys(particleInstances).forEach(k => delete particleInstances[k]);
       rebuildCharacters();
-      buildControls();
-      buildSceneList();
-      loadSceneEditor();
+      buildControls(); buildSceneList(); loadSceneEditor();
       showToast('Storyboard importé ✅');
     } catch (err) { showToast('Erreur JSON: ' + err.message); }
   };
@@ -2747,7 +3052,6 @@ function handleImport(event) {
   event.target.value = '';
 }
 
-// ─── Toast ───
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
