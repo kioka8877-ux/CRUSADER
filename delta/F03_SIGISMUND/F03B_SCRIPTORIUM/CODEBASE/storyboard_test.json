@@ -1,0 +1,214 @@
+{
+  "version": "1.0",
+  "title": "CRUSADER Delta — Scriptorium Test",
+  "engine": "VibeForge (Canvas 2D)",
+  "global": {
+    "fps": 30,
+    "width": 1920,
+    "height": 1080,
+    "character_scale": 2.5,
+    "transition_duration": 0.4
+  },
+  "character": {
+    "palette": {
+      "skin": "#F4C280",
+      "outline": "#2C3E50",
+      "hair": "#34495E",
+      "shirt": "#3498DB",
+      "pants": "#2C3E50",
+      "shoes": "#1A1A2E"
+    }
+  },
+  "scenes": [
+    {
+      "id": "scene_01",
+      "name": "Intro — Nature Walk",
+      "duration": 3.0,
+      "background": "nature",
+      "character": {
+        "posture": "walk",
+        "emotion": "happy",
+        "direction": 1,
+        "start_x": 150,
+        "end_x": 1500,
+        "y_ratio": 0.72
+      },
+      "effects": {
+        "particles": null,
+        "vignette": true
+      },
+      "text": "Le voyage commence..."
+    },
+    {
+      "id": "scene_02",
+      "name": "Nature — Contemplation",
+      "duration": 3.0,
+      "background": "nature",
+      "character": {
+        "posture": "idle",
+        "emotion": "neutral",
+        "direction": 1,
+        "start_x": 960,
+        "end_x": 960,
+        "y_ratio": 0.72
+      },
+      "effects": {
+        "particles": null,
+        "vignette": true
+      },
+      "text": ""
+    },
+    {
+      "id": "scene_03",
+      "name": "City — Night Walk",
+      "duration": 3.0,
+      "background": "city",
+      "character": {
+        "posture": "walk",
+        "emotion": "neutral",
+        "direction": 1,
+        "start_x": 200,
+        "end_x": 1200,
+        "y_ratio": 0.72
+      },
+      "effects": {
+        "particles": "dust",
+        "vignette": true
+      },
+      "text": "La ville ne dort jamais"
+    },
+    {
+      "id": "scene_04",
+      "name": "City — Conversation",
+      "duration": 3.0,
+      "background": "city",
+      "character": {
+        "posture": "talk",
+        "emotion": "happy",
+        "direction": 1,
+        "start_x": 700,
+        "end_x": 900,
+        "y_ratio": 0.72
+      },
+      "effects": {
+        "particles": "dust",
+        "vignette": true
+      },
+      "text": ""
+    },
+    {
+      "id": "scene_05",
+      "name": "Office — Deep Thought",
+      "duration": 3.0,
+      "background": "office",
+      "character": {
+        "posture": "sit",
+        "emotion": "thinking",
+        "direction": -1,
+        "start_x": 450,
+        "end_x": 450,
+        "y_ratio": 0.72
+      },
+      "effects": {
+        "particles": null,
+        "vignette": true
+      },
+      "text": "Et si on changeait tout ?"
+    },
+    {
+      "id": "scene_06",
+      "name": "Office — Eureka",
+      "duration": 3.0,
+      "background": "office",
+      "character": {
+        "posture": "gesture",
+        "emotion": "surprised",
+        "direction": -1,
+        "start_x": 500,
+        "end_x": 600,
+        "y_ratio": 0.72
+      },
+      "effects": {
+        "particles": "sparks",
+        "vignette": true
+      },
+      "text": "Eureka !"
+    },
+    {
+      "id": "scene_07",
+      "name": "Abstract — Creative Space",
+      "duration": 3.0,
+      "background": "abstract",
+      "character": {
+        "posture": "idle",
+        "emotion": "happy",
+        "direction": 1,
+        "start_x": 960,
+        "end_x": 960,
+        "y_ratio": 0.6
+      },
+      "effects": {
+        "particles": "sparks",
+        "vignette": true
+      },
+      "text": ""
+    },
+    {
+      "id": "scene_08",
+      "name": "City — Melancholic Return",
+      "duration": 3.0,
+      "background": "city",
+      "character": {
+        "posture": "walk",
+        "emotion": "sad",
+        "direction": 1,
+        "start_x": 300,
+        "end_x": 1400,
+        "y_ratio": 0.72
+      },
+      "effects": {
+        "particles": "dust",
+        "vignette": true
+      },
+      "text": "Parfois il faut avancer..."
+    },
+    {
+      "id": "scene_09",
+      "name": "Nature — Joyful Conclusion",
+      "duration": 3.0,
+      "background": "nature",
+      "character": {
+        "posture": "gesture",
+        "emotion": "happy",
+        "direction": 1,
+        "start_x": 800,
+        "end_x": 1000,
+        "y_ratio": 0.72
+      },
+      "effects": {
+        "particles": null,
+        "vignette": true
+      },
+      "text": "Le meilleur est à venir"
+    },
+    {
+      "id": "scene_10",
+      "name": "Abstract — Fade Out",
+      "duration": 3.0,
+      "background": "abstract",
+      "character": {
+        "posture": "idle",
+        "emotion": "neutral",
+        "direction": 1,
+        "start_x": 960,
+        "end_x": 960,
+        "y_ratio": 0.6
+      },
+      "effects": {
+        "particles": null,
+        "vignette": true
+      },
+      "text": "FIN"
+    }
+  ]
+}
