@@ -2,9 +2,17 @@
   "version": "1.0",
   "run_id": null,
   "production_title": null,
-  "gate_actuelle": "PHASE_0",
-  "statut": "INITIALISATION",
-  "etapes_completees": [],
+  "gate_actuelle": "PHASE_6",
+  "statut": "INTEGRATION_COMPLETE",
+  "etapes_completees": [
+    "PHASE_0",
+    "PHASE_1",
+    "PHASE_2",
+    "PHASE_3",
+    "PHASE_4",
+    "PHASE_5",
+    "PHASE_6"
+  ],
   "repo_root": null,
   "github_repo": "kioka8877-ux/CRUSADER",
   "canonical_mode": "delta",
@@ -35,32 +43,44 @@
   },
   "phases": {
     "phase_0": {
-      "status": "in_progress",
+      "status": "done",
       "description": "Fondations — branche + structure + squelettes"
     },
     "phase_1": {
-      "status": "pending",
+      "status": "done",
       "description": "F03C Proof of Concept — carré rouge → MP4"
     },
     "phase_2": {
-      "status": "pending",
+      "status": "done",
       "description": "F03C Parallélisation — 10 workers"
     },
     "phase_3": {
-      "status": "pending",
+      "status": "done",
       "description": "F03A Interpréteur — personnage paramétrique"
     },
     "phase_4": {
-      "status": "pending",
+      "status": "done",
       "description": "F03B Scriptorium — moteur rendu complet"
     },
     "phase_5": {
-      "status": "pending",
+      "status": "done",
       "description": "F02 Preview Canvas"
     },
     "phase_6": {
-      "status": "pending",
-      "description": "Intégration complète"
+      "status": "done",
+      "description": "Intégration complète — F02→F03B→F03C→F04 pipeline câblé",
+      "files": [
+        "delta/F02_CASTELLAN/CODEBASE/index.html",
+        "delta/F03_SIGISMUND/F03B_SCRIPTORIUM/CODEBASE/crs_f03b_scriptorium.py"
+      ],
+      "changes": [
+        "F02 export maps world_title_font→title_font for F03B compat",
+        "F03B title alternation dessus/droite (i%2) + smoothstep easing",
+        "F03B subtitle pill removed + mots forts (**bold**) support",
+        "F03B reads accent_size, accent_font, title_color, title_speed, title_gap",
+        "Ledger updated to INTEGRATION_COMPLETE"
+      ],
+      "date": "2026-07-02"
     },
     "phase_5_F02_preview": {
       "status": "done",
@@ -71,6 +91,6 @@
       "date": "2026-07-02"
     }
   },
-  "derniere_mise_a_jour": "2026-07-02T09:28:49.793247+01:00",
+  "derniere_mise_a_jour": "2026-07-02T17:28:11.932812+01:00",
   "instructions_cold_start": "Lire delta/README_DEV.md. Cloner le repo. Branche delta-test1-f03. Mode delta VibeForge (Canvas 2D)."
 }
