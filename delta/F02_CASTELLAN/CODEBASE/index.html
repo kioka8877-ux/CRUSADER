@@ -2160,128 +2160,74 @@ function getParticles(ctx, w, h, type) {
 
 
 // ════════════════════════════════════════════════════
-// BACKGROUND TEXTURES (procedural — replaces gamma's PNG files)
+// ════════════════════════════════════════════════════
+// BACKGROUND TEXTURES — Real PNGs from gamma
 // ════════════════════════════════════════════════════
 
-const bgTextureCache = {};
+const BG_IMAGE_URLS = {
+  grid_dark: "https://raw.githubusercontent.com/kioka8877-ux/CRUSADER/main/gamma/F02_PREVIEW/dist/bg_grid_dark.png",
+  solid_blue: "https://raw.githubusercontent.com/kioka8877-ux/CRUSADER/main/gamma/F02_PREVIEW/dist/bg_solid_blue.png",
+  paper_new: "https://raw.githubusercontent.com/kioka8877-ux/CRUSADER/main/gamma/F02_PREVIEW/dist/bg_paper_new.png",
+  paper_crumpled: "https://raw.githubusercontent.com/kioka8877-ux/CRUSADER/main/gamma/F02_PREVIEW/dist/bg_paper_crumpled.png",
+  papyrus_old: "https://raw.githubusercontent.com/kioka8877-ux/CRUSADER/main/gamma/F02_PREVIEW/dist/bg_papyrus_old.png",
+};
+
+const bgImages = {};
+let bgImagesLoaded = false;
+
+// Preload all background images
+(function preloadBgImages() {
+  const keys = Object.keys(BG_IMAGE_URLS);
+  let loaded = 0;
+  keys.forEach(key => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => {
+      bgImages[key] = img;
+      loaded++;
+      if (loaded === keys.length) bgImagesLoaded = true;
+    };
+    img.onerror = () => {
+      console.warn("Failed to load bg:", key);
+      loaded++;
+      if (loaded === keys.length) bgImagesLoaded = true;
+    };
+    img.src = BG_IMAGE_URLS[key];
+  });
+})();
 
 function drawBgTexture(ctx, W, H, type) {
   const bgColor = getS('background_color');
-  const bgScale = parseFloat(getS('background_scale'));
+  const bgScale = parseFloat(getS('background_scale')) || 1.0;
 
-  switch(type) {
-    case 'solid':
-      ctx.fillStyle = bgColor;
-      ctx.fillRect(0, 0, W, H);
-      break;
+  if (type === 'solid' || !type) {
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, W, H);
+    return;
+  }
 
-    case 'grid_dark':
-      // Quadrillé bleu foncé
-      ctx.fillStyle = '#0A0E1A';
-      ctx.fillRect(0, 0, W, H);
-      ctx.strokeStyle = 'rgba(40,80,160,0.15)';
-      ctx.lineWidth = 1;
-      const gridSize = 40 * bgScale;
-      for (let x = 0; x < W; x += gridSize) {
-        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
-      }
-      for (let y = 0; y < H; y += gridSize) {
-        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
-      }
-      // Major grid
-      ctx.strokeStyle = 'rgba(40,80,160,0.3)';
-      ctx.lineWidth = 1.5;
-      for (let x = 0; x < W; x += gridSize * 5) {
-        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
-      }
-      for (let y = 0; y < H; y += gridSize * 5) {
-        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
-      }
-      break;
-
-    case 'solid_blue':
-      const blueGrad = ctx.createLinearGradient(0, 0, 0, H);
-      blueGrad.addColorStop(0, '#1a2a4a');
-      blueGrad.addColorStop(1, '#0a1528');
-      ctx.fillStyle = blueGrad;
-      ctx.fillRect(0, 0, W, H);
-      break;
-
-    case 'paper_new':
-      // Clean paper texture
-      ctx.fillStyle = '#F8F4EC';
-      ctx.fillRect(0, 0, W, H);
-      // Subtle fiber noise
-      for (let i = 0; i < 3000; i++) {
-        const x = Math.random() * W;
-        const y = Math.random() * H;
-        const a = 0.02 + Math.random() * 0.04;
-        ctx.fillStyle = `rgba(180,170,150,${a})`;
-        ctx.fillRect(x, y, 1 + Math.random() * 3, 1);
-      }
-      break;
-
-    case 'paper_crumpled':
-      // Froissé / crumpled paper
-      ctx.fillStyle = '#EDE5D5';
-      ctx.fillRect(0, 0, W, H);
-      // Crumple lines
-      ctx.strokeStyle = 'rgba(160,140,110,0.08)';
-      ctx.lineWidth = 1;
-      for (let i = 0; i < 40; i++) {
-        ctx.beginPath();
-        let x = Math.random() * W, y = Math.random() * H;
-        ctx.moveTo(x, y);
-        for (let j = 0; j < 5; j++) {
-          x += (Math.random() - 0.5) * 200;
-          y += (Math.random() - 0.5) * 200;
-          ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-      }
-      // Shadow patches
-      for (let i = 0; i < 15; i++) {
-        const cx = Math.random() * W, cy = Math.random() * H;
-        const r = 50 + Math.random() * 150;
-        const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
-        grad.addColorStop(0, 'rgba(140,120,90,0.06)');
-        grad.addColorStop(1, 'rgba(140,120,90,0)');
-        ctx.fillStyle = grad;
-        ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
-      }
-      break;
-
-    case 'papyrus_old':
-      // Old papyrus
-      const papGrad = ctx.createLinearGradient(0, 0, 0, H);
-      papGrad.addColorStop(0, '#D4C4A0');
-      papGrad.addColorStop(0.5, '#C8B890');
-      papGrad.addColorStop(1, '#BCA878');
-      ctx.fillStyle = papGrad;
-      ctx.fillRect(0, 0, W, H);
-      // Age spots
-      for (let i = 0; i < 50; i++) {
-        const cx = Math.random() * W, cy = Math.random() * H;
-        const r = 10 + Math.random() * 60;
-        const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
-        grad.addColorStop(0, 'rgba(100,80,40,0.08)');
-        grad.addColorStop(1, 'rgba(100,80,40,0)');
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(cx, cy, r, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      // Dark edges
-      const edgeGrad = ctx.createRadialGradient(W/2, H/2, Math.min(W,H)*0.3, W/2, H/2, Math.max(W,H)*0.7);
-      edgeGrad.addColorStop(0, 'rgba(0,0,0,0)');
-      edgeGrad.addColorStop(1, 'rgba(80,60,20,0.15)');
-      ctx.fillStyle = edgeGrad;
-      ctx.fillRect(0, 0, W, H);
-      break;
-
-    default:
-      ctx.fillStyle = bgColor;
-      ctx.fillRect(0, 0, W, H);
+  const img = bgImages[type];
+  if (img && img.complete && img.naturalWidth > 0) {
+    // Draw the actual PNG, scaled
+    ctx.save();
+    const iw = img.naturalWidth * bgScale;
+    const ih = img.naturalHeight * bgScale;
+    // Cover the canvas
+    const scale = Math.max(W / iw, H / ih);
+    const dw = iw * scale;
+    const dh = ih * scale;
+    const dx = (W - dw) / 2;
+    const dy = (H - dh) / 2;
+    ctx.drawImage(img, dx, dy, dw, dh);
+    ctx.restore();
+  } else {
+    // Fallback while loading
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, W, H);
+    ctx.font = "14px 'Courier Prime', monospace";
+    ctx.fillStyle = "rgba(197,164,78,0.3)";
+    ctx.textAlign = "center";
+    ctx.fillText("Chargement fond...", W/2, H/2);
   }
 }
 
