@@ -116,16 +116,23 @@ export const WorldScene = ({ timeline, style }) => {
                 width: wW,
                 height: wH,
                 opacity: thisOpacity,
-                borderRadius: 8,
-                overflow: "hidden",
-                boxShadow:
-                  thisOpacity > 0.3
-                    ? "0 4px 24px rgba(0,0,0,0.5)"
-                    : "none",
               }}
             >
-              <WorldNode imageFile={s.image_file} mediaType={mediaType} />
-              <WorldTitle segment={s} style={style} index={i} />
+              <div
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: 8,
+                  overflow: "hidden",
+                  boxShadow:
+                    thisOpacity > 0.3
+                      ? "0 4px 24px rgba(0,0,0,0.5)"
+                      : "none",
+                }}
+              >
+                <WorldNode imageFile={s.image_file} mediaType={mediaType} />
+              </div>
+              <WorldTitle segment={s} style={style} index={i} worldW={wW} worldH={wH} />
             </div>
           );
         })}

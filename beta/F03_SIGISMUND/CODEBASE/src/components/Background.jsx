@@ -165,7 +165,7 @@ export const Background = ({ style }) => {
       <style>{FONT_FACES}</style>
 
       {/* Fond (image ou couleur unie) */}
-      {style.background_type === "image" && style.background_image ? (
+      {style.background_image && style.background_image !== "solid" ? (
         <AbsoluteFill style={{ overflow: "hidden" }}>
           <Img
             src={staticFile(style.background_image)}
