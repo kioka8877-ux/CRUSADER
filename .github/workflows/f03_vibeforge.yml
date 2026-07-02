@@ -1,0 +1,251 @@
+name: "F03 SIGISMUND — VibeForge (Delta)"
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Phase: poc (single worker) | parallel (10 workers)"
+        required: true
+        default: "poc"
+        type: choice
+        options:
+          - poc
+          - parallel
+      html_file:
+        description: "HTML file to render (relative to F03C_FONDERIE/CODEBASE/)"
+        required: true
+        default: "test_minimal.html"
+      fps:
+        description: "Frames per second"
+        required: true
+        default: "30"
+
+jobs:
+  # ──────────────────────────────────────────────────
+  # Phase 1: Single worker proof of concept
+  # ──────────────────────────────────────────────────
+  poc-render:
+    if: ${{ inputs.mode == 'poc' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Puppeteer
+        working-directory: delta/F03_SIGISMUND/F03C_FONDERIE/CODEBASE
+        run: |
+          npm init -y
+          npm install puppeteer@latest
+          echo "✅ Puppeteer installed"
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          ffmpeg -version | head -1
+
+      - name: Render all frames (single worker)
+        working-directory: delta/F03_SIGISMUND/F03C_FONDERIE/CODEBASE
+        run: |
+          echo "🔥 Starting VibeForge PoC render..."
+          node puppeteer_renderer.js \
+            "${{ inputs.html_file }}" \
+            ../OUT/frames
+          echo "✅ Frames rendered"
+          ls -la ../OUT/frames/ | head -5
+          echo "Total frames: $(ls ../OUT/frames/*.png 2>/dev/null | wc -l)"
+
+      - name: FFmpeg — Assemble frames to MP4
+        working-directory: delta/F03_SIGISMUND/F03C_FONDERIE
+        run: |
+          echo "🎬 Assembling MP4..."
+          ffmpeg -y \
+            -framerate ${{ inputs.fps }} \
+            -i OUT/frames/frame_%06d.png \
+            -c:v libx264 \
+            -pix_fmt yuv420p \
+            -preset fast \
+            -crf 18 \
+            -movflags +faststart \
+            OUT/short_render.mp4
+          echo "✅ MP4 assembled"
+          ls -lh OUT/short_render.mp4
+          ffprobe -v quiet -print_format json -show_format -show_streams OUT/short_render.mp4 | head -30
+
+      - name: Upload MP4 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vibeforge-poc-render
+          path: delta/F03_SIGISMUND/F03C_FONDERIE/OUT/short_render.mp4
+          retention-days: 30
+
+      - name: Upload frames (debug)
+        uses: actions/upload-artifact@v4
+        with:
+          name: vibeforge-poc-frames
+          path: delta/F03_SIGISMUND/F03C_FONDERIE/OUT/frames/
+          retention-days: 7
+
+      - name: Summary
+        run: |
+          echo "## 🏰 CRUSADER Delta — VibeForge PoC" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| HTML Source | \`${{ inputs.html_file }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| FPS | ${{ inputs.fps }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Mode | PoC (single worker) |" >> $GITHUB_STEP_SUMMARY
+          FRAME_COUNT=$(ls delta/F03_SIGISMUND/F03C_FONDERIE/OUT/frames/*.png 2>/dev/null | wc -l)
+          MP4_SIZE=$(ls -lh delta/F03_SIGISMUND/F03C_FONDERIE/OUT/short_render.mp4 | awk '{print $5}')
+          echo "| Frames | ${FRAME_COUNT} |" >> $GITHUB_STEP_SUMMARY
+          echo "| MP4 Size | ${MP4_SIZE} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Engine | Canvas2D + Puppeteer |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ **Phase 1 test: If you see a 3-second MP4 with a moving red square, delta is VIABLE.**" >> $GITHUB_STEP_SUMMARY
+
+  # ──────────────────────────────────────────────────
+  # Phase 2: 10 parallel workers (future)
+  # ──────────────────────────────────────────────────
+  compute-matrix:
+    if: ${{ inputs.mode == 'parallel' }}
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+      total_frames: ${{ steps.matrix.outputs.total_frames }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compute chunk matrix
+        id: matrix
+        run: |
+          # For now, hardcoded 90 frames / 10 workers = 9 frames each
+          # TODO: Phase 2 will read TOTAL_FRAMES from the HTML dynamically
+          TOTAL=90
+          WORKERS=10
+          CHUNK=$((TOTAL / WORKERS))
+          
+          MATRIX="["
+          for i in $(seq 0 $((WORKERS - 1))); do
+            START=$((i * CHUNK))
+            END=$(( (i + 1) * CHUNK - 1 ))
+            if [ $i -eq $((WORKERS - 1)) ]; then
+              END=$((TOTAL - 1))
+            fi
+            if [ $i -gt 0 ]; then MATRIX="${MATRIX},"; fi
+            MATRIX="${MATRIX}{\"worker\":${i},\"start\":${START},\"end\":${END}}"
+          done
+          MATRIX="${MATRIX}]"
+          
+          echo "matrix=${MATRIX}" >> $GITHUB_OUTPUT
+          echo "total_frames=${TOTAL}" >> $GITHUB_OUTPUT
+          echo "Matrix: ${MATRIX}"
+
+  parallel-render:
+    if: ${{ inputs.mode == 'parallel' }}
+    needs: compute-matrix
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        include: ${{ fromJson(needs.compute-matrix.outputs.matrix) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Puppeteer
+        working-directory: delta/F03_SIGISMUND/F03C_FONDERIE/CODEBASE
+        run: |
+          npm init -y
+          npm install puppeteer@latest
+
+      - name: "Render chunk: frames ${{ matrix.start }}-${{ matrix.end }}"
+        working-directory: delta/F03_SIGISMUND/F03C_FONDERIE/CODEBASE
+        run: |
+          echo "🔥 Worker ${{ matrix.worker }}: frames ${{ matrix.start }} → ${{ matrix.end }}"
+          node puppeteer_renderer.js \
+            "${{ inputs.html_file }}" \
+            ../OUT/chunks/worker_${{ matrix.worker }} \
+            ${{ matrix.start }} \
+            ${{ matrix.end }}
+
+      - name: Upload chunk
+        uses: actions/upload-artifact@v4
+        with:
+          name: chunk-${{ matrix.worker }}
+          path: delta/F03_SIGISMUND/F03C_FONDERIE/OUT/chunks/worker_${{ matrix.worker }}/
+          retention-days: 1
+
+  concat:
+    if: ${{ inputs.mode == 'parallel' }}
+    needs: [compute-matrix, parallel-render]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+
+      - name: Download all chunks
+        uses: actions/download-artifact@v4
+        with:
+          path: chunks/
+          pattern: chunk-*
+
+      - name: Merge frames and assemble MP4
+        run: |
+          mkdir -p all_frames
+          # Copy all frames from all chunks into one directory
+          for chunk_dir in chunks/chunk-*/; do
+            cp "${chunk_dir}"*.png all_frames/ 2>/dev/null || true
+          done
+          
+          FRAME_COUNT=$(ls all_frames/*.png 2>/dev/null | wc -l)
+          echo "Total frames collected: ${FRAME_COUNT}"
+          
+          ffmpeg -y \
+            -framerate ${{ inputs.fps }} \
+            -i all_frames/frame_%06d.png \
+            -c:v libx264 \
+            -pix_fmt yuv420p \
+            -preset fast \
+            -crf 18 \
+            -movflags +faststart \
+            short_render.mp4
+          
+          echo "✅ MP4 assembled"
+          ls -lh short_render.mp4
+
+      - name: Upload final MP4
+        uses: actions/upload-artifact@v4
+        with:
+          name: vibeforge-parallel-render
+          path: short_render.mp4
+          retention-days: 30
+
+      - name: Summary
+        run: |
+          echo "## 🏰 CRUSADER Delta — VibeForge Parallel Render" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Mode | Parallel (10 workers) |" >> $GITHUB_STEP_SUMMARY
+          echo "| FPS | ${{ inputs.fps }} |" >> $GITHUB_STEP_SUMMARY
+          FRAME_COUNT=$(ls all_frames/*.png 2>/dev/null | wc -l)
+          MP4_SIZE=$(ls -lh short_render.mp4 | awk '{print $5}')
+          echo "| Frames | ${FRAME_COUNT} |" >> $GITHUB_STEP_SUMMARY
+          echo "| MP4 Size | ${MP4_SIZE} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Workers | 10 |" >> $GITHUB_STEP_SUMMARY
+          echo "| Engine | Canvas2D + Puppeteer |" >> $GITHUB_STEP_SUMMARY
