@@ -264,109 +264,111 @@ def generate_index_html(storyboard, js_files, timing, output_dir):
     return scenes.length - 1;
   }}
 
-  // ─── World Title (like gamma WorldTitle.jsx) ───
+  // ─── World Title (alternance dessus/droite like F02 CASTELLAN) ───
   function drawWorldTitle(scene, sceneIdx, sceneTime) {{
     if (!scene.worldTitle) return;
 
     const title = scene.worldTitle;
-    const animFrames = 15; // ~500ms at 30fps
-    const progress = Math.min(1, sceneTime * FPS / animFrames);
-    const eased = progress * progress * (3 - 2 * progress); // smoothstep
+    const titleSpeed = {title_speed};
+    const titleGap = {title_gap};
+    const isAbove = sceneIdx % 2 === 0;
+    const progress = Math.min(1, sceneTime * FPS / titleSpeed);
+    const eased = progress * progress * (3 - 2 * progress);
 
     ctx.save();
     ctx.globalAlpha = eased;
-
-    // Position: above the scene visual area
-    const titleY = 130;
-    const dropY = (1 - eased) * -30;
-
     ctx.font = 'bold {title_size}px {title_font}';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-
-    // Text shadow (like gamma)
+    ctx.fillStyle = '{title_color}';
     ctx.shadowColor = 'rgba(0,0,0,0.85)';
     ctx.shadowBlur = 12;
     ctx.shadowOffsetY = 2;
 
-    // Accent line above title
-    const titleWidth = ctx.measureText(title).width;
-    ctx.strokeStyle = '{accent_color}';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(W/2 - titleWidth/2 - 20, titleY - 22 + dropY);
-    ctx.lineTo(W/2 + titleWidth/2 + 20, titleY - 22 + dropY);
-    ctx.stroke();
+    if (isAbove) {{
+      const dropOffset = -30 * (1 - eased);
+      const tx = W / 2;
+      const ty = 100 + titleGap + dropOffset;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'bottom';
+      ctx.fillText(title, tx, ty);
+      ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
+      ctx.font = 'bold 14px monospace';
+      ctx.fillStyle = '#666';
+      ctx.globalAlpha = eased * 0.7;
+      ctx.fillText('SCENE ' + (sceneIdx + 1) + '/' + scenes.length, tx, ty - {title_size} - 4);
+    }} else {{
+      const slideOffset = 40 * (1 - eased);
+      const tx = W - 80 + slideOffset;
+      const ty = H / 2;
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(title, tx, ty);
+      ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
+      ctx.font = 'bold 14px monospace';
+      ctx.fillStyle = '#666';
+      ctx.globalAlpha = eased * 0.7;
+      ctx.fillText('SCENE ' + (sceneIdx + 1) + '/' + scenes.length, tx, ty + {title_size} + 8);
+    }}
 
-    // Title text
-    ctx.fillStyle = '#FFFFFF';
-    ctx.fillText(title, W / 2, titleY + dropY);
-
-    // Scene number badge
-    ctx.font = 'bold 16px monospace';
-    ctx.fillStyle = '{accent_color}';
-    ctx.fillText('SCENE ' + (sceneIdx + 1) + '/' + scenes.length, W / 2, titleY + 28 + dropY);
-
-    ctx.shadowBlur = 0;
-    ctx.shadowOffsetY = 0;
     ctx.restore();
   }}
 
-  // ─── Subtitle (like gamma BetaSubtitle.jsx) ───
+  // ─── Subtitle with **mots forts** (like F02 CASTELLAN) ───
   function drawSubtitle(scene, sceneTime) {{
     if (!scene.text) return;
 
-    // Typing effect
-    const charsVisible = Math.floor(sceneTime * 15);
-    const displayText = scene.text.substring(0, Math.min(charsVisible, scene.text.length));
-    if (!displayText) return;
+    const duration = scene.duration;
+    const progress = Math.min(1, sceneTime / duration);
+    const alpha = progress > 0.85 ? (1 - progress) / 0.15 : 1;
 
-    // Fade in/out
-    let alpha = 1;
-    if (sceneTime < 0.3) alpha = sceneTime / 0.3;
-    const timeToEnd = scene.duration - sceneTime;
-    if (timeToEnd < 0.5) alpha = Math.max(0, timeToEnd / 0.5);
+    // Parse **mots forts**
+    const parts = [];
+    const regex = /\*\*(.+?)\*\*/g;
+    let lastIndex = 0, match;
+    const rawText = scene.text;
+    while ((match = regex.exec(rawText)) !== null) {{
+      if (match.index > lastIndex) parts.push({{ text: rawText.slice(lastIndex, match.index), strong: false }});
+      parts.push({{ text: match[1], strong: true }});
+      lastIndex = match.index + match[0].length;
+    }}
+    if (lastIndex < rawText.length) parts.push({{ text: rawText.slice(lastIndex), strong: false }});
+    if (parts.length === 0) parts.push({{ text: rawText, strong: false }});
+
+    const displayText = parts.map(p => p.text).join('');
+    if (!displayText) return;
 
     ctx.save();
     ctx.globalAlpha = alpha;
-
     const subY = H - 85;
 
-    // Background pill behind subtitle
-    ctx.font = '{sub_size}px {sub_font}';
-    ctx.textAlign = 'center';
-    const textWidth = ctx.measureText(displayText).width;
-    const pillPadX = 30;
-    const pillPadY = 12;
-    const pillX = W/2 - textWidth/2 - pillPadX;
-    const pillW = textWidth + pillPadX * 2;
-    const pillH = {sub_size} + pillPadY * 2;
+    // Measure total width
+    let totalWidth = 0;
+    for (const part of parts) {{
+      const fontSize = part.strong ? {accent_size} : {sub_size};
+      const font = part.strong ? '{accent_font}' : '{sub_font}';
+      ctx.font = (part.strong ? 'bold ' : '') + fontSize + 'px ' + font;
+      totalWidth += ctx.measureText(part.text).width;
+    }}
 
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
-    // Rounded rect
-    const r = 8;
-    ctx.beginPath();
-    ctx.moveTo(pillX + r, subY - pillH/2);
-    ctx.lineTo(pillX + pillW - r, subY - pillH/2);
-    ctx.quadraticCurveTo(pillX + pillW, subY - pillH/2, pillX + pillW, subY - pillH/2 + r);
-    ctx.lineTo(pillX + pillW, subY + pillH/2 - r);
-    ctx.quadraticCurveTo(pillX + pillW, subY + pillH/2, pillX + pillW - r, subY + pillH/2);
-    ctx.lineTo(pillX + r, subY + pillH/2);
-    ctx.quadraticCurveTo(pillX, subY + pillH/2, pillX, subY + pillH/2 - r);
-    ctx.lineTo(pillX, subY - pillH/2 + r);
-    ctx.quadraticCurveTo(pillX, subY - pillH/2, pillX + r, subY - pillH/2);
-    ctx.closePath();
-    ctx.fill();
-
-    // Text shadow
+    // Draw text shadow
     ctx.shadowColor = 'rgba(0,0,0,0.85)';
     ctx.shadowBlur = 12;
     ctx.shadowOffsetY = 2;
 
-    // Subtitle text
-    ctx.fillStyle = '{sub_color}';
+    // Draw each part (no pill background)
+    let drawX = W / 2 - totalWidth / 2;
+    const maxFontSize = Math.max({sub_size}, {accent_size});
+    const drawY = subY;
     ctx.textBaseline = 'middle';
-    ctx.fillText(displayText, W / 2, subY);
+    ctx.textAlign = 'left';
+
+    for (const part of parts) {{
+      const fontSize = part.strong ? {accent_size} : {sub_size};
+      const font = part.strong ? '{accent_font}' : '{sub_font}';
+      ctx.font = (part.strong ? 'bold ' : '') + fontSize + 'px ' + font;
+      ctx.fillStyle = part.strong ? '{accent_color}' : '{sub_color}';
+      ctx.fillText(part.text, drawX, drawY);
+      drawX += ctx.measureText(part.text).width;
+    }}
 
     ctx.shadowBlur = 0;
     ctx.restore();
