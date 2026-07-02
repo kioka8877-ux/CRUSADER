@@ -54,7 +54,9 @@ async function render() {
   await page.setViewport({ width: 1920, height: 1080 });
 
   // Load HTML
-  await page.goto(`file://${htmlFile}`, { waitUntil: 'networkidle0' });
+  // Use 'load' instead of 'networkidle0' — the animation loop keeps firing
+  // network events, so networkidle0 never resolves on large inline HTML
+  await page.goto(`file://${htmlFile}`, { waitUntil: 'load', timeout: 60000 });
 
   // Get config from the page
   const config = await page.evaluate(() => window.CRUSADER_CONFIG);
