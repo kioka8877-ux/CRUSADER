@@ -18,7 +18,7 @@ on:
         description: "Nombre total de frames ? rendre"
         required: true
       mode:
-        description: "Mode de production (alpha|beta)"
+        description: "Mode de production (alpha|beta|gamma)"
         required: false
         default: "alpha"
 
@@ -66,7 +66,7 @@ jobs:
           echo "[DEPS] node_modules : OK ($(du -sh ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/node_modules | cut -f1))"
 
           # Beta : installer les paquets delta absents de l'image Docker
-          if [ "${{ github.event.inputs.mode }}" = "beta" ]; then
+          if [ "${{ github.event.inputs.mode }}" = "beta" ] || [ "${{ github.event.inputs.mode }}" = "gamma" ]; then
             cd ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE
             npm install --ignore-scripts 2>&1 | tail -5
             cd -
@@ -217,7 +217,7 @@ jobs:
           cp -r $CRUSADER_DEPS/node_modules ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/
 
           # Beta : installer les paquets delta absents de l'image Docker
-          if [ "${{ github.event.inputs.mode }}" = "beta" ]; then
+          if [ "${{ github.event.inputs.mode }}" = "beta" ] || [ "${{ github.event.inputs.mode }}" = "gamma" ]; then
             cd ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE
             npm install --ignore-scripts 2>&1 | tail -5
             cd -

@@ -7,7 +7,7 @@ on:
         description: "Identifiant unique du run (ex: CRS_20240101_1200)"
         required: true
       mode:
-        description: "Mode de production (alpha|beta)"
+        description: "Mode de production (alpha|beta|gamma)"
         required: false
         default: "alpha"
 
@@ -44,7 +44,7 @@ jobs:
             echo "[F04] $FNAME — $(du -h /tmp/f04_in/$FNAME | cut -f1) ✅"
           done
           # Beta : télécharger roadmap.json si disponible
-          if [ "${{ github.event.inputs.mode }}" = "beta" ]; then
+          if [ "${{ github.event.inputs.mode }}" = "beta" ] || [ "${{ github.event.inputs.mode }}" = "gamma" ]; then
             RMURL="https://github.com/${{ github.repository }}/releases/download/${{ github.event.inputs.run_id }}/roadmap.json"
             wget -q --header="Authorization: token $GH_TOKEN" -O "/tmp/f04_in/roadmap.json" "$RMURL" \
               && echo "[F04-beta] roadmap.json téléchargé ✅" \
@@ -60,7 +60,7 @@ jobs:
         run: |
           mkdir -p /tmp/f04_out
           EXTRA_ARGS=""
-          if [ "${{ github.event.inputs.mode }}" = "beta" ] && [ -f /tmp/f04_in/roadmap.json ]; then
+          if [ "${{ github.event.inputs.mode }}" = "beta" ] || [ "${{ github.event.inputs.mode }}" = "gamma" ] && [ -f /tmp/f04_in/roadmap.json ]; then
             EXTRA_ARGS="--roadmap /tmp/f04_in/roadmap.json --sfx-dir /tmp/f04_sfx"
           fi
           python3 ${{ github.event.inputs.mode }}/F04_HELBRECHT/CODEBASE/crs_f04_helbrecht.py \
