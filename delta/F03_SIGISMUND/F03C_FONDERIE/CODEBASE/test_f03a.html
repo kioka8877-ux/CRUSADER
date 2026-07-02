@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>CRUSADER Delta — F03A Test: Character + Backgrounds</title>
+  <style>
+    * { margin: 0; padding: 0; }
+    body { background: #000; overflow: hidden; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="1920" height="1080"></canvas>
+
+  <script src="characters.js"></script>
+  <script src="backgrounds.js"></script>
+  <script src="effects.js"></script>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const W = 1920;
+    const H = 1080;
+    const FPS = 30;
+    const DURATION = 12; // 12 seconds — 4 scenes × 3s each
+    const TOTAL_FRAMES = FPS * DURATION; // 360 frames
+
+    // ─── SCENES SETUP ─────────────────────────────
+    //
+    // Scene 1 (0-3s):   Nature + walking character (happy)
+    // Scene 2 (3-6s):   City night + talking character (neutral) + dust particles
+    // Scene 3 (6-9s):   Office + gesturing character (thinking)
+    // Scene 4 (9-12s):  Abstract + idle character (surprised) + sparks
+
+    const backgrounds = {
+      nature: new NatureBackground(ctx, W, H),
+      city: new CityBackground(ctx, W, H),
+      office: new OfficeBackground(ctx, W, H),
+      abstract: new AbstractBackground(ctx, W, H),
+    };
+
+    const character = new CrusaderCharacter(ctx, {
+      scale: 2.5,
+      palette: {
+        skin: '#F4C280',
+        hair: '#34495E',
+        shirt: '#3498DB',
+        pants: '#2C3E50',
+        shoes: '#1A1A2E',
+      },
+    });
+
+    const dustParticles = new ParticleSystem(ctx, W, H, { type: 'dust', count: 40 });
+    const sparkParticles = new ParticleSystem(ctx, W, H, { type: 'sparks', count: 30 });
+    const vignette = new VignetteEffect(ctx, W, H, { intensity: 0.35 });
+    const textOverlay = new TextOverlay(ctx, {
+      font: 'bold 28px monospace',
+      color: '#FFFFFF',
+    });
+    const titleOverlay = new TextOverlay(ctx, {
+      font: 'bold 42px monospace',
+      color: '#FFFFFF',
+    });
+
+    const scenes = [
+      {
+        name: 'Nature Walk',
+        bg: 'nature',
+        posture: 'walk',
+        emotion: 'happy',
+        direction: 1,
+        charStartX: 200,
+        charEndX: 1400,
+        charY: H * 0.72,
+        particles: null,
+      },
+      {
+        name: 'City Night Talk',
+        bg: 'city',
+        posture: 'talk',
+        emotion: 'neutral',
+        direction: 1,
+        charStartX: 700,
+        charEndX: 900,
+        charY: H * 0.72,
+        particles: 'dust',
+      },
+      {
+        name: 'Office Thinking',
+        bg: 'office',
+        posture: 'gesture',
+        emotion: 'thinking',
+        direction: -1,
+        charStartX: 500,
+        charEndX: 600,
+        charY: H * 0.72,
+        particles: null,
+      },
+      {
+        name: 'Abstract Surprise',
+        bg: 'abstract',
+        posture: 'idle',
+        emotion: 'surprised',
+        direction: 1,
+        charStartX: 900,
+        charEndX: 1000,
+        charY: H * 0.6,
+        particles: 'sparks',
+      },
+    ];
+
+    // ─── FRAME RENDERER ───────────────────────────
+
+    function drawFrame(frameIndex) {
+      const globalTime = frameIndex / FPS;
+      const sceneIndex = Math.min(Math.floor(globalTime / 3), scenes.length - 1);
+      const scene = scenes[sceneIndex];
+      const sceneTime = globalTime - sceneIndex * 3;
+      const sceneProgress = sceneTime / 3; // 0 → 1
+
+      // Scene transition (crossfade)
+      const transitionDuration = 0.3; // seconds
+      let transitionAlpha = 1;
+      if (sceneTime < transitionDuration) {
+        transitionAlpha = sceneTime / transitionDuration;
+      }
+
+      // Clear
+      ctx.clearRect(0, 0, W, H);
+
+      // Draw background
+      backgrounds[scene.bg].draw(globalTime);
+
+      // Scene transition fade
+      if (transitionAlpha < 1) {
+        ctx.fillStyle = `rgba(0, 0, 0, ${1 - transitionAlpha})`;
+        ctx.fillRect(0, 0, W, H);
+      }
+
+      // Draw particles (behind character)
+      if (scene.particles === 'dust') {
+        dustParticles.draw(globalTime);
+      }
+
+      // Character position (interpolate)
+      const charX = scene.charStartX + (scene.charEndX - scene.charStartX) * sceneProgress;
+      character.setState(scene.posture, scene.emotion, scene.direction);
+      character.draw(charX, scene.charY, globalTime);
+
+      // Draw particles (in front — sparks)
+      if (scene.particles === 'sparks') {
+        sparkParticles.draw(globalTime);
+      }
+
+      // Vignette
+      vignette.draw(globalTime);
+
+      // HUD
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+      ctx.fillRect(0, 0, W, 100);
+
+      titleOverlay.draw('CRUSADER Delta — F03A L\'INTERPRÉTEUR', W / 2, 35, globalTime);
+      textOverlay.draw(
+        `Scene ${sceneIndex + 1}/4: ${scene.name}  |  Frame: ${frameIndex}/${TOTAL_FRAMES}  |  ${scene.posture} / ${scene.emotion}`,
+        W / 2, 70, globalTime
+      );
+
+      // Progress bar
+      const progress = frameIndex / TOTAL_FRAMES;
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+      ctx.fillRect(30, H - 40, W - 60, 12);
+      ctx.fillStyle = '#3498DB';
+      ctx.fillRect(30, H - 40, (W - 60) * progress, 12);
+
+      // Scene markers on progress bar
+      for (let i = 1; i < scenes.length; i++) {
+        const markerX = 30 + (W - 60) * (i / scenes.length);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.fillRect(markerX, H - 44, 2, 20);
+      }
+    }
+
+    // Expose for Puppeteer
+    window.CRUSADER_CONFIG = { FPS, DURATION, TOTAL_FRAMES, W, H };
+    window.drawFrame = drawFrame;
+
+    // Auto-play preview
+    let currentFrame = 0;
+    function animate() {
+      drawFrame(currentFrame);
+      currentFrame = (currentFrame + 1) % TOTAL_FRAMES;
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>
