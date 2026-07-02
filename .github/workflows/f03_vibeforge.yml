@@ -27,7 +27,7 @@ jobs:
   poc-render:
     if: ${{ inputs.mode == 'poc' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -124,17 +124,35 @@ jobs:
 
       - name: Compute chunk matrix
         id: matrix
+        working-directory: delta/F03_SIGISMUND/F03C_FONDERIE/CODEBASE
         run: |
-          # For now, hardcoded 90 frames / 10 workers = 9 frames each
-          # TODO: Phase 2 will read TOTAL_FRAMES from the HTML dynamically
-          TOTAL=90
+          # Read TOTAL_FRAMES dynamically from the HTML via Node
+          npm init -y > /dev/null 2>&1
+          npm install puppeteer@latest > /dev/null 2>&1
+          
+          TOTAL=$(node -e "
+            const puppeteer = require('puppeteer');
+            const path = require('path');
+            (async () => {
+              const browser = await puppeteer.launch({headless:'new',args:['--no-sandbox','--disable-setuid-sandbox']});
+              const page = await browser.newPage();
+              await page.goto('file://' + path.resolve('${{ inputs.html_file }}'), {waitUntil:'load',timeout:30000});
+              const config = await page.evaluate(() => window.CRUSADER_CONFIG);
+              console.log(config.TOTAL_FRAMES);
+              await browser.close();
+            })();
+          ")
+          
+          echo "Total frames detected: ${TOTAL}"
           WORKERS=10
           CHUNK=$((TOTAL / WORKERS))
+          REMAINDER=$((TOTAL % WORKERS))
           
           MATRIX="["
           for i in $(seq 0 $((WORKERS - 1))); do
             START=$((i * CHUNK))
             END=$(( (i + 1) * CHUNK - 1 ))
+            # Last worker gets the remainder
             if [ $i -eq $((WORKERS - 1)) ]; then
               END=$((TOTAL - 1))
             fi
