@@ -2,15 +2,23 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>CRUSADER Delta — F03B Scriptorium Output</title>
+  <title>Jordan Belfort — CRUSADER Delta</title>
   <style>
     * { margin: 0; padding: 0; }
-    body { background: #000; overflow: hidden; }
+    body { background: #0D0D1A; overflow: hidden; }
     canvas { display: block; }
   </style>
 </head>
 <body>
   <canvas id="canvas" width="1920" height="1080"></canvas>
+
+  <!-- Film grain SVG (like gamma Background.jsx) -->
+  <svg id="grain-svg" width="0" height="0" style="position:absolute">
+    <filter id="grain-filter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" seed="0" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </svg>
 
   <script>
 // ═══════════════════════════════════════════════════
@@ -1351,6 +1359,7 @@ if (typeof module !== 'undefined') {
 
 // ═══════════════════════════════════════════════════
 // SCRIPTORIUM — Scene Engine (generated)
+// Gamma-style framing: title, grain, vignette, subtitles
 // ═══════════════════════════════════════════════════
 (function() {
   const canvas = document.getElementById('canvas');
@@ -1360,7 +1369,10 @@ if (typeof module !== 'undefined') {
   const FPS = 30;
   const TOTAL_FRAMES = 900;
   const TOTAL_DURATION = 30.0;
-  const TRANSITION_DURATION = 0.4;
+  const TRANSITION_DURATION = 0.5;
+  const PROD_TITLE = "Jordan Belfort";
+  const GRAIN_INTENSITY = 0.12;
+  const BG_COLOR = "#0D0D1A";
 
   // ─── Scenes from storyboard.json ───
   const scenes = [
@@ -1378,6 +1390,7 @@ if (typeof module !== 'undefined') {
       particles: null,
       vignette: true,
       text: "Le voyage commence...",
+      worldTitle: "Intro — Nature Walk",
     },
     {
       id: "scene_02",
@@ -1393,6 +1406,7 @@ if (typeof module !== 'undefined') {
       particles: null,
       vignette: true,
       text: "",
+      worldTitle: "Nature — Contemplation",
     },
     {
       id: "scene_03",
@@ -1408,6 +1422,7 @@ if (typeof module !== 'undefined') {
       particles: "dust",
       vignette: true,
       text: "La ville ne dort jamais",
+      worldTitle: "City — Night Walk",
     },
     {
       id: "scene_04",
@@ -1423,6 +1438,7 @@ if (typeof module !== 'undefined') {
       particles: "dust",
       vignette: true,
       text: "",
+      worldTitle: "City — Conversation",
     },
     {
       id: "scene_05",
@@ -1438,6 +1454,7 @@ if (typeof module !== 'undefined') {
       particles: null,
       vignette: true,
       text: "Et si on changeait tout ?",
+      worldTitle: "Office — Deep Thought",
     },
     {
       id: "scene_06",
@@ -1453,6 +1470,7 @@ if (typeof module !== 'undefined') {
       particles: "sparks",
       vignette: true,
       text: "Eureka !",
+      worldTitle: "Office — Eureka",
     },
     {
       id: "scene_07",
@@ -1468,6 +1486,7 @@ if (typeof module !== 'undefined') {
       particles: "sparks",
       vignette: true,
       text: "",
+      worldTitle: "Abstract — Creative Space",
     },
     {
       id: "scene_08",
@@ -1483,6 +1502,7 @@ if (typeof module !== 'undefined') {
       particles: "dust",
       vignette: true,
       text: "Parfois il faut avancer...",
+      worldTitle: "City — Melancholic Return",
     },
     {
       id: "scene_09",
@@ -1498,6 +1518,7 @@ if (typeof module !== 'undefined') {
       particles: null,
       vignette: true,
       text: "Le meilleur est à venir",
+      worldTitle: "Nature — Joyful Conclusion",
     },
     {
       id: "scene_10",
@@ -1513,6 +1534,7 @@ if (typeof module !== 'undefined') {
       particles: null,
       vignette: true,
       text: "FIN",
+      worldTitle: "Abstract — Fade Out",
     },
   ];
 
@@ -1546,19 +1568,35 @@ if (typeof module !== 'undefined') {
     snow: new ParticleSystem(ctx, W, H, { type: 'snow', count: 50 }),
   };
 
-  const vignette = new VignetteEffect(ctx, W, H, { intensity: 0.35 });
-  const textOverlay = new TextOverlay(ctx, {
-    font: 'bold 28px monospace',
-    color: '#FFFFFF',
-  });
-  const titleOverlay = new TextOverlay(ctx, {
-    font: 'bold 36px monospace',
-    color: '#FFFFFF',
-  });
-  const subtitleOverlay = new TextOverlay(ctx, {
-    font: '24px sans-serif',
-    color: 'rgba(255,255,255,0.8)',
-  });
+  const vignette = new VignetteEffect(ctx, W, H, { intensity: 0.4 });
+
+  // ─── Grain canvas (offscreen, drawn as overlay) ───
+  const grainCanvas = document.createElement('canvas');
+  grainCanvas.width = W;
+  grainCanvas.height = H;
+  const grainCtx = grainCanvas.getContext('2d');
+
+  function drawGrain(frameIndex) {
+    // Change grain pattern every 3 frames (like gamma)
+    const seed = Math.floor(frameIndex / 3) % 64;
+    // Simple procedural grain
+    const imageData = grainCtx.createImageData(W / 4, H / 4);
+    const data = imageData.data;
+    for (let i = 0; i < data.length; i += 4) {
+      const v = Math.random() * 255;
+      data[i] = v;
+      data[i+1] = v;
+      data[i+2] = v;
+      data[i+3] = 255;
+    }
+    grainCtx.putImageData(imageData, 0, 0);
+    // Draw scaled grain onto main canvas
+    ctx.save();
+    ctx.globalAlpha = GRAIN_INTENSITY;
+    ctx.globalCompositeOperation = 'overlay';
+    ctx.drawImage(grainCanvas, 0, 0, W / 4, H / 4, 0, 0, W, H);
+    ctx.restore();
+  }
 
   // ─── Find scene for a given frame ───
   function getSceneAtFrame(frameIndex) {
@@ -1569,6 +1607,175 @@ if (typeof module !== 'undefined') {
     return scenes.length - 1;
   }
 
+  // ─── World Title (like gamma WorldTitle.jsx) ───
+  function drawWorldTitle(scene, sceneIdx, sceneTime) {
+    if (!scene.worldTitle) return;
+
+    const title = scene.worldTitle;
+    const animFrames = 15; // ~500ms at 30fps
+    const progress = Math.min(1, sceneTime * FPS / animFrames);
+    const eased = progress * progress * (3 - 2 * progress); // smoothstep
+
+    ctx.save();
+    ctx.globalAlpha = eased;
+
+    // Position: above the scene visual area
+    const titleY = 130;
+    const dropY = (1 - eased) * -30;
+
+    ctx.font = 'bold 32px Georgia, serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    // Text shadow (like gamma)
+    ctx.shadowColor = 'rgba(0,0,0,0.85)';
+    ctx.shadowBlur = 12;
+    ctx.shadowOffsetY = 2;
+
+    // Accent line above title
+    const titleWidth = ctx.measureText(title).width;
+    ctx.strokeStyle = '#FFD700';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(W/2 - titleWidth/2 - 20, titleY - 22 + dropY);
+    ctx.lineTo(W/2 + titleWidth/2 + 20, titleY - 22 + dropY);
+    ctx.stroke();
+
+    // Title text
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillText(title, W / 2, titleY + dropY);
+
+    // Scene number badge
+    ctx.font = 'bold 16px monospace';
+    ctx.fillStyle = '#FFD700';
+    ctx.fillText('SCENE ' + (sceneIdx + 1) + '/' + scenes.length, W / 2, titleY + 28 + dropY);
+
+    ctx.shadowBlur = 0;
+    ctx.shadowOffsetY = 0;
+    ctx.restore();
+  }
+
+  // ─── Subtitle (like gamma BetaSubtitle.jsx) ───
+  function drawSubtitle(scene, sceneTime) {
+    if (!scene.text) return;
+
+    // Typing effect
+    const charsVisible = Math.floor(sceneTime * 15);
+    const displayText = scene.text.substring(0, Math.min(charsVisible, scene.text.length));
+    if (!displayText) return;
+
+    // Fade in/out
+    let alpha = 1;
+    if (sceneTime < 0.3) alpha = sceneTime / 0.3;
+    const timeToEnd = scene.duration - sceneTime;
+    if (timeToEnd < 0.5) alpha = Math.max(0, timeToEnd / 0.5);
+
+    ctx.save();
+    ctx.globalAlpha = alpha;
+
+    const subY = H - 85;
+
+    // Background pill behind subtitle
+    ctx.font = '44px Georgia, serif';
+    ctx.textAlign = 'center';
+    const textWidth = ctx.measureText(displayText).width;
+    const pillPadX = 30;
+    const pillPadY = 12;
+    const pillX = W/2 - textWidth/2 - pillPadX;
+    const pillW = textWidth + pillPadX * 2;
+    const pillH = 44 + pillPadY * 2;
+
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
+    // Rounded rect
+    const r = 8;
+    ctx.beginPath();
+    ctx.moveTo(pillX + r, subY - pillH/2);
+    ctx.lineTo(pillX + pillW - r, subY - pillH/2);
+    ctx.quadraticCurveTo(pillX + pillW, subY - pillH/2, pillX + pillW, subY - pillH/2 + r);
+    ctx.lineTo(pillX + pillW, subY + pillH/2 - r);
+    ctx.quadraticCurveTo(pillX + pillW, subY + pillH/2, pillX + pillW - r, subY + pillH/2);
+    ctx.lineTo(pillX + r, subY + pillH/2);
+    ctx.quadraticCurveTo(pillX, subY + pillH/2, pillX, subY + pillH/2 - r);
+    ctx.lineTo(pillX, subY - pillH/2 + r);
+    ctx.quadraticCurveTo(pillX, subY - pillH/2, pillX + r, subY - pillH/2);
+    ctx.closePath();
+    ctx.fill();
+
+    // Text shadow
+    ctx.shadowColor = 'rgba(0,0,0,0.85)';
+    ctx.shadowBlur = 12;
+    ctx.shadowOffsetY = 2;
+
+    // Subtitle text
+    ctx.fillStyle = '#FFFFFF';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(displayText, W / 2, subY);
+
+    ctx.shadowBlur = 0;
+    ctx.restore();
+  }
+
+  // ─── Production Title Bar (persistent top bar like gamma) ───
+  function drawTitleBar(frameIndex) {
+    ctx.save();
+
+    // Top bar background
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+    ctx.fillRect(0, 0, W, 55);
+
+    // Bottom line accent
+    ctx.fillStyle = '#FFD700';
+    ctx.fillRect(0, 53, W, 2);
+
+    // Production title (left)
+    ctx.font = 'bold 22px Georgia, serif';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#FFD700';
+    ctx.fillText('⚔ ' + PROD_TITLE, 25, 27);
+
+    // Engine badge (right)
+    ctx.font = '14px monospace';
+    ctx.textAlign = 'right';
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.fillText('VIBEFORGE · Canvas2D · ' + W + '×' + H + ' · ' + FPS + 'fps', W - 25, 20);
+
+    // Frame counter (right)
+    ctx.fillText('Frame ' + frameIndex + '/' + TOTAL_FRAMES, W - 25, 38);
+
+    ctx.restore();
+  }
+
+  // ─── Progress Bar (bottom) ───
+  function drawProgressBar(frameIndex, sceneIdx) {
+    ctx.save();
+
+    const barY = H - 20;
+    const barH = 4;
+    const barX = 0;
+    const barW = W;
+    const progress = frameIndex / TOTAL_FRAMES;
+
+    // Bar background
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+    ctx.fillRect(barX, barY, barW, barH);
+
+    // Bar fill
+    ctx.fillStyle = '#FFD700';
+    ctx.fillRect(barX, barY, barW * progress, barH);
+
+    // Scene markers
+    let markerTime = 0;
+    for (let i = 0; i < scenes.length - 1; i++) {
+      markerTime += scenes[i].duration;
+      const markerX = barW * (markerTime / TOTAL_DURATION);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+      ctx.fillRect(markerX, barY - 2, 1, barH + 4);
+    }
+
+    ctx.restore();
+  }
+
   // ─── Main draw function ───
   function drawFrame(frameIndex) {
     const globalTime = frameIndex / FPS;
@@ -1577,8 +1784,9 @@ if (typeof module !== 'undefined') {
     const sceneTime = globalTime - scene._startTime;
     const sceneProgress = Math.min(1, sceneTime / scene.duration);
 
-    // Clear
-    ctx.clearRect(0, 0, W, H);
+    // Clear with background color
+    ctx.fillStyle = BG_COLOR;
+    ctx.fillRect(0, 0, W, H);
 
     // Background
     if (backgrounds[scene.background]) {
@@ -1616,52 +1824,31 @@ if (typeof module !== 'undefined') {
       particleSystems.sparks.draw(globalTime);
     }
 
-    // Vignette
+    // Vignette (like gamma — radial gradient)
     if (scene.vignette) {
       vignette.draw(globalTime);
     }
 
-    // Scene text (subtitle)
-    if (scene.text) {
-      subtitleOverlay.draw(scene.text, W / 2, H - 80, sceneTime, {
-        typing: true,
-        typingSpeed: 12,
-      });
-    }
+    // Film grain overlay (like gamma Background.jsx)
+    drawGrain(frameIndex);
+
+    // World Title (like gamma WorldTitle.jsx)
+    drawWorldTitle(scene, sceneIdx, sceneTime);
+
+    // Subtitle (like gamma BetaSubtitle.jsx)
+    drawSubtitle(scene, sceneTime);
+
+    // Title bar (persistent top)
+    drawTitleBar(frameIndex);
+
+    // Progress bar (bottom)
+    drawProgressBar(frameIndex, sceneIdx);
 
     // Final scene fade to black
     if (sceneIdx === scenes.length - 1 && sceneProgress > 0.7) {
       const finalFade = (sceneProgress - 0.7) / 0.3;
       ctx.fillStyle = 'rgba(0, 0, 0, ' + finalFade + ')';
       ctx.fillRect(0, 0, W, H);
-    }
-
-    // HUD
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
-    ctx.fillRect(0, 0, W, 80);
-
-    titleOverlay.draw('CRUSADER Delta — F03B SCRIPTORIUM', W / 2, 28, globalTime);
-    textOverlay.draw(
-      'Scene ' + (sceneIdx + 1) + '/' + scenes.length + ': ' + scene.name +
-      '  |  Frame: ' + frameIndex + '/' + TOTAL_FRAMES +
-      '  |  ' + scene.posture + ' / ' + scene.emotion,
-      W / 2, 58, globalTime
-    );
-
-    // Progress bar
-    const progress = frameIndex / TOTAL_FRAMES;
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
-    ctx.fillRect(30, H - 35, W - 60, 10);
-    ctx.fillStyle = '#3498DB';
-    ctx.fillRect(30, H - 35, (W - 60) * progress, 10);
-
-    // Scene markers
-    let markerTime = 0;
-    for (let i = 0; i < scenes.length - 1; i++) {
-      markerTime += scenes[i].duration;
-      const markerX = 30 + (W - 60) * (markerTime / TOTAL_DURATION);
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-      ctx.fillRect(markerX, H - 38, 1, 16);
     }
   }
 

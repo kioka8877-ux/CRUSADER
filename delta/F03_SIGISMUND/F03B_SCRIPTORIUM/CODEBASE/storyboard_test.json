@@ -1,13 +1,24 @@
 {
   "version": "1.0",
-  "title": "CRUSADER Delta — Scriptorium Test",
+  "title": "CRUSADER Delta — VibeForge",
   "engine": "VibeForge (Canvas 2D)",
   "global": {
     "fps": 30,
     "width": 1920,
     "height": 1080,
     "character_scale": 2.5,
-    "transition_duration": 0.4
+    "transition_duration": 0.5,
+    "production_title": "Jordan Belfort",
+    "grain_intensity": 0.12,
+    "vignette": true,
+    "subtitle_font": "Georgia, serif",
+    "subtitle_size": 44,
+    "subtitle_color": "#FFFFFF",
+    "accent_color": "#FFD700",
+    "title_font": "Georgia, serif",
+    "title_size": 32,
+    "world_title_visible": true,
+    "background_color": "#0D0D1A"
   },
   "character": {
     "palette": {
@@ -37,7 +48,8 @@
         "particles": null,
         "vignette": true
       },
-      "text": "Le voyage commence..."
+      "text": "Le voyage commence...",
+      "world_title": "Intro — Nature Walk"
     },
     {
       "id": "scene_02",
@@ -56,7 +68,8 @@
         "particles": null,
         "vignette": true
       },
-      "text": ""
+      "text": "",
+      "world_title": "Nature — Contemplation"
     },
     {
       "id": "scene_03",
@@ -75,7 +88,8 @@
         "particles": "dust",
         "vignette": true
       },
-      "text": "La ville ne dort jamais"
+      "text": "La ville ne dort jamais",
+      "world_title": "City — Night Walk"
     },
     {
       "id": "scene_04",
@@ -94,7 +108,8 @@
         "particles": "dust",
         "vignette": true
       },
-      "text": ""
+      "text": "",
+      "world_title": "City — Conversation"
     },
     {
       "id": "scene_05",
@@ -113,7 +128,8 @@
         "particles": null,
         "vignette": true
       },
-      "text": "Et si on changeait tout ?"
+      "text": "Et si on changeait tout ?",
+      "world_title": "Office — Deep Thought"
     },
     {
       "id": "scene_06",
@@ -132,7 +148,8 @@
         "particles": "sparks",
         "vignette": true
       },
-      "text": "Eureka !"
+      "text": "Eureka !",
+      "world_title": "Office — Eureka"
     },
     {
       "id": "scene_07",
@@ -151,7 +168,8 @@
         "particles": "sparks",
         "vignette": true
       },
-      "text": ""
+      "text": "",
+      "world_title": "Abstract — Creative Space"
     },
     {
       "id": "scene_08",
@@ -170,7 +188,8 @@
         "particles": "dust",
         "vignette": true
       },
-      "text": "Parfois il faut avancer..."
+      "text": "Parfois il faut avancer...",
+      "world_title": "City — Melancholic Return"
     },
     {
       "id": "scene_09",
@@ -189,7 +208,8 @@
         "particles": null,
         "vignette": true
       },
-      "text": "Le meilleur est à venir"
+      "text": "Le meilleur est à venir",
+      "world_title": "Nature — Joyful Conclusion"
     },
     {
       "id": "scene_10",
@@ -208,7 +228,8 @@
         "particles": null,
         "vignette": true
       },
-      "text": "FIN"
+      "text": "FIN",
+      "world_title": "Abstract — Fade Out"
     }
   ]
 }

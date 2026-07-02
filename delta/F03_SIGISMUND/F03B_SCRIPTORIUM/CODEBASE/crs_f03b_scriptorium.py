@@ -86,7 +86,7 @@ def generate_timing_json(storyboard, output_dir):
 
 
 def generate_index_html(storyboard, js_files, timing, output_dir):
-    """Assemble the self-contained index.html."""
+    """Assemble the self-contained index.html with gamma-style framing."""
 
     fps = storyboard["global"]["fps"]
     width = storyboard["global"]["width"]
@@ -94,8 +94,18 @@ def generate_index_html(storyboard, js_files, timing, output_dir):
     total_frames = timing["total_frames"]
     total_duration = timing["total_duration"]
     char_scale = storyboard["global"].get("character_scale", 2.5)
-    transition_dur = storyboard["global"].get("transition_duration", 0.4)
+    transition_dur = storyboard["global"].get("transition_duration", 0.5)
     palette = storyboard.get("character", {}).get("palette", {})
+    prod_title = storyboard["global"].get("production_title", storyboard.get("title", "CRUSADER"))
+    grain_intensity = storyboard["global"].get("grain_intensity", 0.12)
+    bg_color = storyboard["global"].get("background_color", "#0D0D1A")
+    sub_font = storyboard["global"].get("subtitle_font", "Georgia, serif")
+    sub_size = storyboard["global"].get("subtitle_size", 44)
+    sub_color = storyboard["global"].get("subtitle_color", "#FFFFFF")
+    accent_color = storyboard["global"].get("accent_color", "#FFD700")
+    title_font = storyboard["global"].get("title_font", "Georgia, serif")
+    title_size = storyboard["global"].get("title_size", 32)
+    world_title_visible = storyboard["global"].get("world_title_visible", True)
 
     # Build scenes JS array from storyboard
     scenes_js_array = "[\n"
@@ -104,6 +114,7 @@ def generate_index_html(storyboard, js_files, timing, output_dir):
         e = s.get("effects", {})
         particles = f'"{e["particles"]}"' if e.get("particles") else "null"
         text_escaped = s.get("text", "").replace("'", "\\'").replace('"', '\\"')
+        world_title = s.get("world_title", s["name"]).replace("'", "\\'").replace('"', '\\"')
         scenes_js_array += f"""    {{
       id: "{s['id']}",
       name: "{s['name']}",
@@ -118,6 +129,7 @@ def generate_index_html(storyboard, js_files, timing, output_dir):
       particles: {particles},
       vignette: {str(e.get('vignette', True)).lower()},
       text: "{text_escaped}",
+      worldTitle: "{world_title}",
     }},
 """
     scenes_js_array += "  ]"
@@ -129,15 +141,23 @@ def generate_index_html(storyboard, js_files, timing, output_dir):
 <html>
 <head>
   <meta charset="utf-8">
-  <title>CRUSADER Delta — F03B Scriptorium Output</title>
+  <title>{prod_title} — CRUSADER Delta</title>
   <style>
     * {{ margin: 0; padding: 0; }}
-    body {{ background: #000; overflow: hidden; }}
+    body {{ background: {bg_color}; overflow: hidden; }}
     canvas {{ display: block; }}
   </style>
 </head>
 <body>
   <canvas id="canvas" width="{width}" height="{height}"></canvas>
+
+  <!-- Film grain SVG (like gamma Background.jsx) -->
+  <svg id="grain-svg" width="0" height="0" style="position:absolute">
+    <filter id="grain-filter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" seed="0" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </svg>
 
   <script>
 // ═══════════════════════════════════════════════════
@@ -157,6 +177,7 @@ def generate_index_html(storyboard, js_files, timing, output_dir):
 
 // ═══════════════════════════════════════════════════
 // SCRIPTORIUM — Scene Engine (generated)
+// Gamma-style framing: title, grain, vignette, subtitles
 // ═══════════════════════════════════════════════════
 (function() {{
   const canvas = document.getElementById('canvas');
@@ -167,6 +188,9 @@ def generate_index_html(storyboard, js_files, timing, output_dir):
   const TOTAL_FRAMES = {total_frames};
   const TOTAL_DURATION = {total_duration};
   const TRANSITION_DURATION = {transition_dur};
+  const PROD_TITLE = "{prod_title}";
+  const GRAIN_INTENSITY = {grain_intensity};
+  const BG_COLOR = "{bg_color}";
 
   // ─── Scenes from storyboard.json ───
   const scenes = {scenes_js_array};
@@ -201,19 +225,35 @@ def generate_index_html(storyboard, js_files, timing, output_dir):
     snow: new ParticleSystem(ctx, W, H, {{ type: 'snow', count: 50 }}),
   }};
 
-  const vignette = new VignetteEffect(ctx, W, H, {{ intensity: 0.35 }});
-  const textOverlay = new TextOverlay(ctx, {{
-    font: 'bold 28px monospace',
-    color: '#FFFFFF',
-  }});
-  const titleOverlay = new TextOverlay(ctx, {{
-    font: 'bold 36px monospace',
-    color: '#FFFFFF',
-  }});
-  const subtitleOverlay = new TextOverlay(ctx, {{
-    font: '24px sans-serif',
-    color: 'rgba(255,255,255,0.8)',
-  }});
+  const vignette = new VignetteEffect(ctx, W, H, {{ intensity: 0.4 }});
+
+  // ─── Grain canvas (offscreen, drawn as overlay) ───
+  const grainCanvas = document.createElement('canvas');
+  grainCanvas.width = W;
+  grainCanvas.height = H;
+  const grainCtx = grainCanvas.getContext('2d');
+
+  function drawGrain(frameIndex) {{
+    // Change grain pattern every 3 frames (like gamma)
+    const seed = Math.floor(frameIndex / 3) % 64;
+    // Simple procedural grain
+    const imageData = grainCtx.createImageData(W / 4, H / 4);
+    const data = imageData.data;
+    for (let i = 0; i < data.length; i += 4) {{
+      const v = Math.random() * 255;
+      data[i] = v;
+      data[i+1] = v;
+      data[i+2] = v;
+      data[i+3] = 255;
+    }}
+    grainCtx.putImageData(imageData, 0, 0);
+    // Draw scaled grain onto main canvas
+    ctx.save();
+    ctx.globalAlpha = GRAIN_INTENSITY;
+    ctx.globalCompositeOperation = 'overlay';
+    ctx.drawImage(grainCanvas, 0, 0, W / 4, H / 4, 0, 0, W, H);
+    ctx.restore();
+  }}
 
   // ─── Find scene for a given frame ───
   function getSceneAtFrame(frameIndex) {{
@@ -224,6 +264,175 @@ def generate_index_html(storyboard, js_files, timing, output_dir):
     return scenes.length - 1;
   }}
 
+  // ─── World Title (like gamma WorldTitle.jsx) ───
+  function drawWorldTitle(scene, sceneIdx, sceneTime) {{
+    if (!scene.worldTitle) return;
+
+    const title = scene.worldTitle;
+    const animFrames = 15; // ~500ms at 30fps
+    const progress = Math.min(1, sceneTime * FPS / animFrames);
+    const eased = progress * progress * (3 - 2 * progress); // smoothstep
+
+    ctx.save();
+    ctx.globalAlpha = eased;
+
+    // Position: above the scene visual area
+    const titleY = 130;
+    const dropY = (1 - eased) * -30;
+
+    ctx.font = 'bold {title_size}px {title_font}';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    // Text shadow (like gamma)
+    ctx.shadowColor = 'rgba(0,0,0,0.85)';
+    ctx.shadowBlur = 12;
+    ctx.shadowOffsetY = 2;
+
+    // Accent line above title
+    const titleWidth = ctx.measureText(title).width;
+    ctx.strokeStyle = '{accent_color}';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(W/2 - titleWidth/2 - 20, titleY - 22 + dropY);
+    ctx.lineTo(W/2 + titleWidth/2 + 20, titleY - 22 + dropY);
+    ctx.stroke();
+
+    // Title text
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillText(title, W / 2, titleY + dropY);
+
+    // Scene number badge
+    ctx.font = 'bold 16px monospace';
+    ctx.fillStyle = '{accent_color}';
+    ctx.fillText('SCENE ' + (sceneIdx + 1) + '/' + scenes.length, W / 2, titleY + 28 + dropY);
+
+    ctx.shadowBlur = 0;
+    ctx.shadowOffsetY = 0;
+    ctx.restore();
+  }}
+
+  // ─── Subtitle (like gamma BetaSubtitle.jsx) ───
+  function drawSubtitle(scene, sceneTime) {{
+    if (!scene.text) return;
+
+    // Typing effect
+    const charsVisible = Math.floor(sceneTime * 15);
+    const displayText = scene.text.substring(0, Math.min(charsVisible, scene.text.length));
+    if (!displayText) return;
+
+    // Fade in/out
+    let alpha = 1;
+    if (sceneTime < 0.3) alpha = sceneTime / 0.3;
+    const timeToEnd = scene.duration - sceneTime;
+    if (timeToEnd < 0.5) alpha = Math.max(0, timeToEnd / 0.5);
+
+    ctx.save();
+    ctx.globalAlpha = alpha;
+
+    const subY = H - 85;
+
+    // Background pill behind subtitle
+    ctx.font = '{sub_size}px {sub_font}';
+    ctx.textAlign = 'center';
+    const textWidth = ctx.measureText(displayText).width;
+    const pillPadX = 30;
+    const pillPadY = 12;
+    const pillX = W/2 - textWidth/2 - pillPadX;
+    const pillW = textWidth + pillPadX * 2;
+    const pillH = {sub_size} + pillPadY * 2;
+
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
+    // Rounded rect
+    const r = 8;
+    ctx.beginPath();
+    ctx.moveTo(pillX + r, subY - pillH/2);
+    ctx.lineTo(pillX + pillW - r, subY - pillH/2);
+    ctx.quadraticCurveTo(pillX + pillW, subY - pillH/2, pillX + pillW, subY - pillH/2 + r);
+    ctx.lineTo(pillX + pillW, subY + pillH/2 - r);
+    ctx.quadraticCurveTo(pillX + pillW, subY + pillH/2, pillX + pillW - r, subY + pillH/2);
+    ctx.lineTo(pillX + r, subY + pillH/2);
+    ctx.quadraticCurveTo(pillX, subY + pillH/2, pillX, subY + pillH/2 - r);
+    ctx.lineTo(pillX, subY - pillH/2 + r);
+    ctx.quadraticCurveTo(pillX, subY - pillH/2, pillX + r, subY - pillH/2);
+    ctx.closePath();
+    ctx.fill();
+
+    // Text shadow
+    ctx.shadowColor = 'rgba(0,0,0,0.85)';
+    ctx.shadowBlur = 12;
+    ctx.shadowOffsetY = 2;
+
+    // Subtitle text
+    ctx.fillStyle = '{sub_color}';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(displayText, W / 2, subY);
+
+    ctx.shadowBlur = 0;
+    ctx.restore();
+  }}
+
+  // ─── Production Title Bar (persistent top bar like gamma) ───
+  function drawTitleBar(frameIndex) {{
+    ctx.save();
+
+    // Top bar background
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+    ctx.fillRect(0, 0, W, 55);
+
+    // Bottom line accent
+    ctx.fillStyle = '{accent_color}';
+    ctx.fillRect(0, 53, W, 2);
+
+    // Production title (left)
+    ctx.font = 'bold 22px {title_font}';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '{accent_color}';
+    ctx.fillText('⚔ ' + PROD_TITLE, 25, 27);
+
+    // Engine badge (right)
+    ctx.font = '14px monospace';
+    ctx.textAlign = 'right';
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.fillText('VIBEFORGE · Canvas2D · ' + W + '×' + H + ' · ' + FPS + 'fps', W - 25, 20);
+
+    // Frame counter (right)
+    ctx.fillText('Frame ' + frameIndex + '/' + TOTAL_FRAMES, W - 25, 38);
+
+    ctx.restore();
+  }}
+
+  // ─── Progress Bar (bottom) ───
+  function drawProgressBar(frameIndex, sceneIdx) {{
+    ctx.save();
+
+    const barY = H - 20;
+    const barH = 4;
+    const barX = 0;
+    const barW = W;
+    const progress = frameIndex / TOTAL_FRAMES;
+
+    // Bar background
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+    ctx.fillRect(barX, barY, barW, barH);
+
+    // Bar fill
+    ctx.fillStyle = '{accent_color}';
+    ctx.fillRect(barX, barY, barW * progress, barH);
+
+    // Scene markers
+    let markerTime = 0;
+    for (let i = 0; i < scenes.length - 1; i++) {{
+      markerTime += scenes[i].duration;
+      const markerX = barW * (markerTime / TOTAL_DURATION);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+      ctx.fillRect(markerX, barY - 2, 1, barH + 4);
+    }}
+
+    ctx.restore();
+  }}
+
   // ─── Main draw function ───
   function drawFrame(frameIndex) {{
     const globalTime = frameIndex / FPS;
@@ -232,8 +441,9 @@ def generate_index_html(storyboard, js_files, timing, output_dir):
     const sceneTime = globalTime - scene._startTime;
     const sceneProgress = Math.min(1, sceneTime / scene.duration);
 
-    // Clear
-    ctx.clearRect(0, 0, W, H);
+    // Clear with background color
+    ctx.fillStyle = BG_COLOR;
+    ctx.fillRect(0, 0, W, H);
 
     // Background
     if (backgrounds[scene.background]) {{
@@ -271,52 +481,31 @@ def generate_index_html(storyboard, js_files, timing, output_dir):
       particleSystems.sparks.draw(globalTime);
     }}
 
-    // Vignette
+    // Vignette (like gamma — radial gradient)
     if (scene.vignette) {{
       vignette.draw(globalTime);
     }}
 
-    // Scene text (subtitle)
-    if (scene.text) {{
-      subtitleOverlay.draw(scene.text, W / 2, H - 80, sceneTime, {{
-        typing: true,
-        typingSpeed: 12,
-      }});
-    }}
+    // Film grain overlay (like gamma Background.jsx)
+    drawGrain(frameIndex);
+
+    // World Title (like gamma WorldTitle.jsx)
+    drawWorldTitle(scene, sceneIdx, sceneTime);
+
+    // Subtitle (like gamma BetaSubtitle.jsx)
+    drawSubtitle(scene, sceneTime);
+
+    // Title bar (persistent top)
+    drawTitleBar(frameIndex);
+
+    // Progress bar (bottom)
+    drawProgressBar(frameIndex, sceneIdx);
 
     // Final scene fade to black
     if (sceneIdx === scenes.length - 1 && sceneProgress > 0.7) {{
       const finalFade = (sceneProgress - 0.7) / 0.3;
       ctx.fillStyle = 'rgba(0, 0, 0, ' + finalFade + ')';
       ctx.fillRect(0, 0, W, H);
-    }}
-
-    // HUD
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
-    ctx.fillRect(0, 0, W, 80);
-
-    titleOverlay.draw('CRUSADER Delta — F03B SCRIPTORIUM', W / 2, 28, globalTime);
-    textOverlay.draw(
-      'Scene ' + (sceneIdx + 1) + '/' + scenes.length + ': ' + scene.name +
-      '  |  Frame: ' + frameIndex + '/' + TOTAL_FRAMES +
-      '  |  ' + scene.posture + ' / ' + scene.emotion,
-      W / 2, 58, globalTime
-    );
-
-    // Progress bar
-    const progress = frameIndex / TOTAL_FRAMES;
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
-    ctx.fillRect(30, H - 35, W - 60, 10);
-    ctx.fillStyle = '#3498DB';
-    ctx.fillRect(30, H - 35, (W - 60) * progress, 10);
-
-    // Scene markers
-    let markerTime = 0;
-    for (let i = 0; i < scenes.length - 1; i++) {{
-      markerTime += scenes[i].duration;
-      const markerX = 30 + (W - 60) * (markerTime / TOTAL_DURATION);
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-      ctx.fillRect(markerX, H - 38, 1, 16);
     }}
   }}
 
