@@ -1,505 +1,453 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="dark">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>⚔ CRUSADER — F02 CASTELLAN Preview</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: #0D0D1A;
-      color: #E0E0E0;
-      font-family: 'Georgia', serif;
-      overflow-x: hidden;
-    }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>F02 CASTELLAN — CRUSADER Delta Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;700&family=Oswald:wght@400;700&family=Bebas+Neue&family=Caveat:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=Permanent+Marker&family=Patrick+Hand&family=Courier+Prime&family=Space+Mono&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg:        #0A0A0A;
+    --surface:   #0D0D0D;
+    --surface2:  #141414;
+    --border:    #1A1A1A;
+    --gold:      #C5A44E;
+    --gold-dim:  rgba(197,164,78,0.25);
+    --gold-glow: rgba(197,164,78,0.08);
+    --red:       #8B0000;
+    --bone:      #E8DCC8;
+    --text:      #E8DCC8;
+    --text-dim:  #666;
+    --mono:      'Courier Prime','Courier New',monospace;
+    --cinzel:    'Cinzel',Georgia,serif;
+    --radius:    4px;
+  }
 
-    /* ─── HEADER ─────────────────────────── */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 24px;
-      background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
-      border-bottom: 2px solid #FFD700;
-    }
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .header-left .logo {
-      color: #FFD700;
-      font-size: 20px;
-      font-weight: bold;
-    }
-    .header-left .subtitle {
-      color: #888;
-      font-size: 13px;
-    }
-    .header-right {
-      display: flex;
-      gap: 10px;
-    }
-    .btn {
-      padding: 8px 16px;
-      border: 1px solid #FFD700;
-      background: transparent;
-      color: #FFD700;
-      font-family: 'Georgia', serif;
-      cursor: pointer;
-      border-radius: 4px;
-      font-size: 13px;
-      transition: all 0.2s;
-    }
-    .btn:hover {
-      background: #FFD700;
-      color: #0D0D1A;
-    }
-    .btn-primary {
-      background: #FFD700;
-      color: #0D0D1A;
-      font-weight: bold;
-    }
-    .btn-primary:hover {
-      background: #FFC107;
-    }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ─── MAIN LAYOUT ────────────────────── */
-    .main {
-      display: flex;
-      height: calc(100vh - 54px);
-    }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 12px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
 
-    /* ─── CANVAS AREA ────────────────────── */
-    .canvas-area {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-      position: relative;
-      background: #0A0A18;
-    }
-    .canvas-wrapper {
-      position: relative;
-      border: 2px solid #FFD700;
-      border-radius: 4px;
-      box-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
-    }
-    canvas {
-      display: block;
-      max-width: 100%;
-      height: auto;
-    }
-    .canvas-info {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      max-width: 960px;
-      margin-top: 8px;
-      font-size: 12px;
-      color: #666;
-    }
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 2px solid var(--gold);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+  .header-left { display: flex; align-items: center; gap: 12px; }
+  .header-title {
+    font-family: var(--cinzel);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 3px;
+  }
+  .header-sub {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .header-right { display: flex; gap: 8px; align-items: center; }
 
-    /* ─── SCENE NAV ──────────────────────── */
-    .scene-nav {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-top: 12px;
-    }
-    .scene-nav .btn-nav {
-      width: 44px;
-      height: 44px;
-      border: 1px solid #FFD700;
-      background: transparent;
-      color: #FFD700;
-      font-size: 22px;
-      cursor: pointer;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-    }
-    .scene-nav .btn-nav:hover {
-      background: #FFD700;
-      color: #0D0D1A;
-    }
-    .scene-nav .btn-nav:disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
-    }
-    .scene-counter {
-      font-size: 16px;
-      color: #FFD700;
-      min-width: 120px;
-      text-align: center;
-    }
-    .play-btn {
-      width: 50px;
-      height: 50px;
-      border: 2px solid #FFD700;
-      background: rgba(255, 215, 0, 0.1);
-      color: #FFD700;
-      font-size: 24px;
-      cursor: pointer;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-    }
-    .play-btn:hover {
-      background: #FFD700;
-      color: #0D0D1A;
-    }
+  /* ── BUTTONS ── */
+  .btn-export {
+    padding: 6px 16px;
+    background: var(--red);
+    color: var(--bone);
+    font-family: var(--cinzel);
+    font-size: 12px;
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-export:hover { background: #A30000; }
+  .btn-import {
+    padding: 6px 12px;
+    background: transparent;
+    color: var(--gold);
+    font-family: var(--cinzel);
+    font-size: 11px;
+    border: 1px solid var(--gold-dim);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-import:hover { background: var(--gold-glow); }
+  .btn-small {
+    padding: 4px 10px;
+    background: var(--surface2);
+    color: var(--bone);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 11px;
+    transition: all 0.15s;
+  }
+  .btn-small:hover { border-color: var(--gold); color: var(--gold); }
+  .btn-gold {
+    background: var(--gold);
+    color: var(--bg);
+    border-color: var(--gold);
+    font-weight: bold;
+  }
+  .btn-gold:hover { background: #D4B35D; }
 
-    /* ─── SIDEBAR ────────────────────────── */
-    .sidebar {
-      width: 320px;
-      background: #12122A;
-      border-left: 1px solid #2A2A4A;
-      overflow-y: auto;
-      padding: 16px;
-    }
-    .panel {
-      margin-bottom: 16px;
-      border: 1px solid #2A2A4A;
-      border-radius: 6px;
-      overflow: hidden;
-    }
-    .panel-header {
-      background: #1A1A35;
-      padding: 10px 14px;
-      font-size: 13px;
-      color: #FFD700;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      cursor: pointer;
-      user-select: none;
-    }
-    .panel-body {
-      padding: 12px 14px;
-    }
-    .field {
-      margin-bottom: 10px;
-    }
-    .field label {
-      display: block;
-      font-size: 11px;
-      color: #888;
-      margin-bottom: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .field select, .field input, .field textarea {
-      width: 100%;
-      padding: 8px 10px;
-      background: #1A1A35;
-      border: 1px solid #2A2A4A;
-      color: #E0E0E0;
-      font-family: 'Georgia', serif;
-      font-size: 13px;
-      border-radius: 4px;
-    }
-    .field select:focus, .field input:focus, .field textarea:focus {
-      outline: none;
-      border-color: #FFD700;
-    }
-    .field textarea {
-      resize: vertical;
-      min-height: 50px;
-    }
-    .field-row {
-      display: flex;
-      gap: 8px;
-    }
-    .field-row .field {
-      flex: 1;
-    }
-    .color-input {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .color-input input[type="color"] {
-      width: 36px;
-      height: 36px;
-      padding: 2px;
-      border: 1px solid #2A2A4A;
-      border-radius: 4px;
-      cursor: pointer;
-      background: transparent;
-    }
-    .color-input input[type="text"] {
-      flex: 1;
-    }
+  /* ── LAYOUT ── */
+  .layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    height: calc(100vh - 50px);
+  }
 
-    /* ─── SCENE LIST ─────────────────────── */
-    .scene-list {
-      max-height: 200px;
-      overflow-y: auto;
-    }
-    .scene-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 8px;
-      cursor: pointer;
-      border-radius: 4px;
-      font-size: 12px;
-      transition: background 0.15s;
-    }
-    .scene-item:hover {
-      background: #1A1A35;
-    }
-    .scene-item.active {
-      background: rgba(255, 215, 0, 0.15);
-      border: 1px solid rgba(255, 215, 0, 0.3);
-    }
-    .scene-item .scene-num {
-      color: #FFD700;
-      font-weight: bold;
-      min-width: 24px;
-    }
-    .scene-item .scene-name {
-      flex: 1;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .scene-item .scene-dur {
-      color: #666;
-      font-size: 11px;
-    }
+  /* ── CONFIG PANEL (left) ── */
+  .config-panel {
+    width: 280px;
+    min-width: 280px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 12px;
+    flex-shrink: 0;
+  }
+  .config-panel::-webkit-scrollbar { width: 4px; }
+  .config-panel::-webkit-scrollbar-track { background: transparent; }
+  .config-panel::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
 
-    /* ─── TIMELINE ───────────────────────── */
-    .timeline {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 6px;
-      background: #1A1A35;
-    }
-    .timeline-progress {
-      height: 100%;
-      background: #FFD700;
-      transition: width 0.05s linear;
-    }
+  .section-title {
+    font-family: var(--cinzel);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    margin-top: 14px;
+    margin-bottom: 6px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--gold-dim);
+  }
+  .section-title:first-child { margin-top: 0; }
 
-    /* ─── TOAST ───────────────────────────── */
-    .toast {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: #FFD700;
-      color: #0D0D1A;
-      padding: 10px 24px;
-      border-radius: 6px;
-      font-weight: bold;
-      font-size: 14px;
-      transition: transform 0.3s ease;
-      z-index: 100;
-    }
-    .toast.show {
-      transform: translateX(-50%) translateY(0);
-    }
-  </style>
+  .ctrl-row { margin-bottom: 8px; }
+  .ctrl-row label {
+    font-size: 11px;
+    color: #999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .ctrl-row .val { font-family: monospace; color: var(--gold); font-size: 10px; }
+  .ctrl-row input[type="range"] { width: 100%; margin-top: 2px; accent-color: var(--gold); }
+  .ctrl-row select {
+    width: 100%;
+    margin-top: 2px;
+    background: #1A1A1A;
+    border: 1px solid var(--gold-dim);
+    border-radius: var(--radius);
+    padding: 3px 6px;
+    font-size: 11px;
+    color: var(--bone);
+    font-family: var(--mono);
+  }
+  .ctrl-row select:focus { border-color: var(--gold); outline: none; }
+  .ctrl-row input[type="color"] {
+    width: 28px; height: 28px;
+    border-radius: var(--radius);
+    border: 1px solid var(--gold-dim);
+    cursor: pointer;
+    background: transparent;
+    padding: 1px;
+  }
+  .ctrl-row input[type="checkbox"] {
+    accent-color: var(--gold);
+    width: 15px; height: 15px;
+    cursor: pointer;
+  }
+
+  /* ── MAIN PREVIEW ── */
+  .preview-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .preview-area::-webkit-scrollbar { width: 4px; }
+  .preview-area::-webkit-scrollbar-track { background: transparent; }
+  .preview-area::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+
+  /* Timeline bar */
+  .timeline-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    padding: 8px 0;
+  }
+  .timeline-bar input[type="range"] { flex: 1; accent-color: var(--gold); }
+  .timeline-bar .frame-label {
+    font-size: 10px;
+    font-family: var(--mono);
+    color: var(--text-dim);
+    min-width: 100px;
+    text-align: right;
+  }
+  .btn-play {
+    padding: 4px 12px;
+    font-family: var(--cinzel);
+    font-size: 11px;
+    border: 1px solid var(--gold-dim);
+    background: transparent;
+    color: var(--gold);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-play:hover { background: var(--gold-glow); }
+
+  /* Viewport labels */
+  .viewport-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(197,164,78,0.4);
+    text-align: center;
+  }
+  .viewport-box {
+    border: 1px solid var(--gold-dim);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.6), 0 0 1px rgba(197,164,78,0.3);
+    position: relative;
+  }
+  .viewport-desktop {
+    width: 100%;
+    aspect-ratio: 16/9;
+  }
+  .viewport-iphone {
+    width: 220px;
+    aspect-ratio: 9/19.5;
+    margin: 0 auto;
+  }
+  .viewport-box canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ── SCENE PANEL (right) ── */
+  .scene-panel {
+    width: 300px;
+    min-width: 300px;
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 12px;
+    flex-shrink: 0;
+  }
+  .scene-panel::-webkit-scrollbar { width: 4px; }
+  .scene-panel::-webkit-scrollbar-track { background: transparent; }
+  .scene-panel::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+
+  .scene-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 8px;
+    cursor: pointer;
+    border-radius: var(--radius);
+    font-size: 11px;
+    transition: background 0.1s;
+    border: 1px solid transparent;
+  }
+  .scene-item:hover { background: var(--surface2); }
+  .scene-item.active {
+    background: var(--gold-glow);
+    border-color: var(--gold-dim);
+  }
+  .scene-item .snum { color: var(--gold); font-weight: bold; min-width: 20px; }
+  .scene-item .sname { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--bone); }
+  .scene-item .sdur { color: var(--text-dim); font-size: 10px; }
+
+  .scene-field { margin-bottom: 8px; }
+  .scene-field label {
+    display: block;
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .scene-field select, .scene-field input, .scene-field textarea {
+    width: 100%;
+    padding: 5px 8px;
+    background: #1A1A1A;
+    border: 1px solid var(--border);
+    color: var(--bone);
+    font-family: var(--mono);
+    font-size: 11px;
+    border-radius: var(--radius);
+  }
+  .scene-field select:focus, .scene-field input:focus, .scene-field textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+  .scene-field textarea { resize: vertical; min-height: 40px; }
+  .field-row { display: flex; gap: 6px; }
+  .field-row .scene-field { flex: 1; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--gold-dim);
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+  .progress-info {
+    flex: 1;
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+  .btn-validate {
+    padding: 8px 24px;
+    background: var(--gold);
+    color: var(--bg);
+    font-family: var(--cinzel);
+    font-size: 13px;
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: background 0.2s;
+  }
+  .btn-validate:hover { background: #D4B35D; }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--gold);
+    color: var(--bg);
+    padding: 8px 20px;
+    border-radius: var(--radius);
+    font-weight: bold;
+    font-size: 12px;
+    font-family: var(--mono);
+    transition: transform 0.3s ease;
+    z-index: 100;
+    pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* Cross separator */
+  .cross-sep { opacity: 0.25; }
+</style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <div class="header">
-    <div class="header-left">
-      <span class="logo">⚔ CASTELLAN</span>
-      <span class="subtitle">F02 Preview — CRUSADER Delta</span>
-    </div>
-    <div class="header-right">
-      <button class="btn" onclick="importStoryboard()">📂 Import JSON</button>
-      <button class="btn btn-primary" onclick="exportStoryboard()">💾 Export JSON</button>
-    </div>
-  </div>
-
-  <!-- MAIN -->
-  <div class="main">
-    <!-- CANVAS AREA -->
-    <div class="canvas-area">
-      <div class="canvas-wrapper">
-        <canvas id="preview" width="1920" height="1080"></canvas>
-        <div class="timeline">
-          <div class="timeline-progress" id="timelineProgress"></div>
-        </div>
-      </div>
-      <div class="canvas-info">
-        <span id="infoLeft">1920×1080 · 30fps</span>
-        <span id="infoRight">Scene 1/10</span>
-      </div>
-      <div class="scene-nav">
-        <button class="btn-nav" id="btnPrev" onclick="prevScene()">◀</button>
-        <button class="play-btn" id="btnPlay" onclick="togglePlay()">▶</button>
-        <span class="scene-counter" id="sceneCounter">SCENE 1 / 10</span>
-        <button class="btn-nav" id="btnNext" onclick="nextScene()">▶</button>
-      </div>
-    </div>
-
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-      <!-- Scene List -->
-      <div class="panel">
-        <div class="panel-header">📋 Scènes</div>
-        <div class="panel-body">
-          <div class="scene-list" id="sceneList"></div>
-          <div style="margin-top:8px; display:flex; gap:6px;">
-            <button class="btn" style="flex:1; font-size:11px;" onclick="addScene()">+ Ajouter</button>
-            <button class="btn" style="flex:1; font-size:11px; border-color:#E74C3C; color:#E74C3C;" onclick="deleteScene()">✕ Supprimer</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Scene Properties -->
-      <div class="panel">
-        <div class="panel-header">🎬 Scène active</div>
-        <div class="panel-body">
-          <div class="field">
-            <label>Nom</label>
-            <input type="text" id="sceneName" onchange="updateScene()"/>
-          </div>
-          <div class="field-row">
-            <div class="field">
-              <label>Durée (s)</label>
-              <input type="number" id="sceneDuration" min="0.5" max="60" step="0.5" onchange="updateScene()"/>
-            </div>
-            <div class="field">
-              <label>Décor</label>
-              <select id="sceneBackground" onchange="updateScene()">
-                <option value="nature">🌿 Nature</option>
-                <option value="city">🌃 Ville</option>
-                <option value="office">🏢 Bureau</option>
-                <option value="abstract">✨ Abstrait</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Character -->
-      <div class="panel">
-        <div class="panel-header">🧍 Personnage</div>
-        <div class="panel-body">
-          <div class="field-row">
-            <div class="field">
-              <label>Posture</label>
-              <select id="charPosture" onchange="updateScene()">
-                <option value="idle">Idle</option>
-                <option value="walk">Walk</option>
-                <option value="talk">Talk</option>
-                <option value="gesture">Gesture</option>
-                <option value="sit">Sit</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Émotion</label>
-              <select id="charEmotion" onchange="updateScene()">
-                <option value="neutral">😐 Neutral</option>
-                <option value="happy">😊 Happy</option>
-                <option value="sad">😢 Sad</option>
-                <option value="angry">😠 Angry</option>
-                <option value="surprised">😮 Surprised</option>
-                <option value="thinking">🤔 Thinking</option>
-              </select>
-            </div>
-          </div>
-          <div class="field-row">
-            <div class="field">
-              <label>Direction</label>
-              <select id="charDirection" onchange="updateScene()">
-                <option value="1">→ Droite</option>
-                <option value="-1">← Gauche</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Y ratio</label>
-              <input type="number" id="charY" min="0.2" max="0.95" step="0.02" onchange="updateScene()"/>
-            </div>
-          </div>
-          <div class="field-row">
-            <div class="field">
-              <label>Start X</label>
-              <input type="number" id="charStartX" min="0" max="1920" step="10" onchange="updateScene()"/>
-            </div>
-            <div class="field">
-              <label>End X</label>
-              <input type="number" id="charEndX" min="0" max="1920" step="10" onchange="updateScene()"/>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Effects & Text -->
-      <div class="panel">
-        <div class="panel-header">✨ Effets & Texte</div>
-        <div class="panel-body">
-          <div class="field">
-            <label>Particules</label>
-            <select id="effectParticles" onchange="updateScene()">
-              <option value="">Aucune</option>
-              <option value="dust">Poussière</option>
-              <option value="rain">Pluie</option>
-              <option value="snow">Neige</option>
-              <option value="sparks">Étincelles</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Sous-titre</label>
-            <textarea id="sceneText" rows="2" onchange="updateScene()"></textarea>
-          </div>
-          <div class="field">
-            <label>Titre de scène</label>
-            <input type="text" id="worldTitle" onchange="updateScene()"/>
-          </div>
-        </div>
-      </div>
-
-      <!-- Global Settings -->
-      <div class="panel">
-        <div class="panel-header">⚙ Global</div>
-        <div class="panel-body">
-          <div class="field">
-            <label>Titre de production</label>
-            <input type="text" id="globalTitle" onchange="updateGlobal()"/>
-          </div>
-          <div class="field">
-            <label>Accent color</label>
-            <div class="color-input">
-              <input type="color" id="globalAccent" value="#FFD700" onchange="updateGlobal()"/>
-              <input type="text" id="globalAccentText" value="#FFD700" onchange="document.getElementById('globalAccent').value=this.value; updateGlobal()"/>
-            </div>
-          </div>
-          <div class="field-row">
-            <div class="field">
-              <label>Scale perso</label>
-              <input type="number" id="globalScale" min="0.5" max="5" step="0.1" onchange="updateGlobal()"/>
-            </div>
-            <div class="field">
-              <label>Transition (s)</label>
-              <input type="number" id="globalTransition" min="0" max="3" step="0.1" onchange="updateGlobal()"/>
-            </div>
-          </div>
-        </div>
-      </div>
+<!-- ═══ HEADER ═══ -->
+<header>
+  <div class="header-left">
+    <svg viewBox="0 0 100 100" width="30" height="30">
+      <path d="M50,2 L58,38 L96,22 L66,46 L98,50 L66,54 L96,78 L58,62 L50,98 L42,62 L4,78 L34,54 L2,50 L34,46 L4,22 L42,38 Z" fill="#C5A44E"/>
+    </svg>
+    <div>
+      <div class="header-title">CRUSADER</div>
+      <div class="header-sub">F02 CASTELLAN — Delta Preview Engine</div>
     </div>
   </div>
+  <div class="header-right">
+    <svg viewBox="0 0 100 100" width="12" height="12" class="cross-sep">
+      <path d="M50,2 L58,38 L96,22 L66,46 L98,50 L66,54 L96,78 L58,62 L50,98 L42,62 L4,78 L34,54 L2,50 L34,46 L4,22 L42,38 Z" fill="#C5A44E"/>
+    </svg>
+    <button class="btn-import" onclick="importStoryboard()">📂 Import JSON</button>
+    <button class="btn-export" onclick="exportStoryboard()">⚔ Export storyboard.json</button>
+  </div>
+</header>
 
-  <!-- TOAST -->
-  <div class="toast" id="toast"></div>
+<!-- ═══ LAYOUT ═══ -->
+<div class="layout">
 
-  <!-- HIDDEN FILE INPUT -->
-  <input type="file" id="fileInput" accept=".json" style="display:none" onchange="handleImport(event)"/>
+  <!-- LEFT: Config Panel -->
+  <aside class="config-panel" id="controls"></aside>
+
+  <!-- CENTER: Preview -->
+  <main class="preview-area">
+    <!-- Timeline -->
+    <div class="timeline-bar">
+      <button class="btn-play" id="btnPlay" onclick="togglePlay()">▶ Play</button>
+      <input id="timeline" type="range" min="0" max="100" value="50"/>
+      <span id="frameLabel" class="frame-label">0.0s / 30.0s</span>
+    </div>
+
+    <!-- Desktop viewport -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+      <span class="viewport-label">Desktop — 1920×1080</span>
+      <div class="viewport-box viewport-desktop" id="vp-desktop">
+        <canvas id="canvas-desktop" width="1920" height="1080"></canvas>
+      </div>
+    </div>
+
+    <!-- iPhone viewport -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+      <span class="viewport-label">iPhone 16 Pro Max</span>
+      <div class="viewport-box viewport-iphone" id="vp-iphone">
+        <canvas id="canvas-iphone" width="1080" height="1920"></canvas>
+      </div>
+    </div>
+  </main>
+
+  <!-- RIGHT: Scene Panel -->
+  <aside class="scene-panel">
+    <div class="section-title" style="margin-top:0;">📋 Scènes</div>
+    <div id="sceneList"></div>
+    <div style="display:flex;gap:4px;margin:8px 0;">
+      <button class="btn-small" style="flex:1;" onclick="addScene()">+ Ajouter</button>
+      <button class="btn-small" style="flex:1;color:#e55;border-color:rgba(229,85,85,0.3);" onclick="deleteScene()">✕ Supprimer</button>
+    </div>
+    <div class="section-title">🎬 Scène active</div>
+    <div id="sceneEditor"></div>
+  </aside>
+
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="progress-info" id="progressInfo">10 scènes · 30.0s · 900 frames @ 30fps</div>
+  <svg viewBox="0 0 100 100" width="12" height="12" class="cross-sep">
+    <path d="M50,2 L58,38 L96,22 L66,46 L98,50 L66,54 L96,78 L58,62 L50,98 L42,62 L4,78 L34,54 L2,50 L34,46 L4,22 L42,38 Z" fill="#C5A44E"/>
+  </svg>
+  <button class="btn-validate" onclick="exportStoryboard()">Valider & Sauvegarder</button>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+<input type="file" id="fileInput" accept=".json" style="display:none" onchange="handleImport(event)"/>
 
 <script>
 // ════════════════════════════════════════════════════
@@ -1839,14 +1787,56 @@ if (typeof module !== 'undefined') {
 
 
 // ════════════════════════════════════════════════════
-// CASTELLAN PREVIEW ENGINE
+// CRUSADER DELTA — F02 CASTELLAN PREVIEW ENGINE
 // ════════════════════════════════════════════════════
 
-const canvas = document.getElementById('preview');
-const ctx = canvas.getContext('2d');
-const W = 1920, H = 1080;
+const FONTS = [
+  "Cinzel", "Playfair Display", "Cormorant Garamond", "Montserrat",
+  "Oswald", "Bebas Neue", "Caveat", "Permanent Marker",
+  "Patrick Hand", "Courier Prime", "Space Mono"
+];
 
-// ─── State ───────────────────────────────────
+const BG_COLORS = [
+  { label: "Noir profond", value: "#0A0A0A" },
+  { label: "Bleu nuit", value: "#0D0D1A" },
+  { label: "Gris charbon", value: "#1A1A2E" },
+  { label: "Bone parchment", value: "#F5F0E8" },
+  { label: "Papyrus", value: "#E8DCC8" },
+];
+
+// ─── Default style ───
+const defaults = {
+  // Format
+  format: "horizontal",
+  // Capsules
+  world_scale: 0.85,
+  world_opacity: 1.0,
+  // Background
+  background_color: "#0D0D1A",
+  // Titles
+  world_title_visible: true,
+  world_title_font: "Cinzel",
+  world_title_size: 32,
+  world_title_color: "#C5A44E",
+  world_title_gap: 20,
+  // Subtitles
+  subtitle_font: "Cinzel",
+  subtitle_size: 44,
+  subtitle_color: "#FFFFFF",
+  subtitle_position: "bottom",
+  subtitle_align: "center",
+  accent_color: "#FFD700",
+  // Production
+  production_title: "Jordan Belfort",
+  // Effects
+  grain_intensity: 0.12,
+  vignette: true,
+  // Character
+  character_scale: 2.5,
+  // Transitions
+  transition_duration: 0.5,
+};
+
 let storyboard = {
   "version": "1.0",
   "title": "CRUSADER Delta — VibeForge",
@@ -2083,151 +2073,223 @@ let storyboard = {
   ]
 };
 
+let styleOverrides = {};
 let currentSceneIndex = 0;
 let playing = false;
+let animTime = 0;
 let playStartTime = 0;
 let sceneStartTime = 0;
-let animTime = 0;
 let animFrameId = null;
 
-// ─── Background instances (lazy init) ────────
+function getS(key) {
+  return styleOverrides[key] ?? storyboard.global?.[key] ?? defaults[key];
+}
+function setS(key, val) {
+  styleOverrides[key] = val;
+  // Also update storyboard.global for export
+  if (storyboard.global) storyboard.global[key] = val;
+}
+
+// ─── Background instances ───
 const bgInstances = {};
-function getBackground(type) {
-  if (!bgInstances[type]) {
+function getBackground(ctx, w, h, type) {
+  const key = type + '_' + w + '_' + h;
+  if (!bgInstances[key]) {
     switch (type) {
-      case 'city':     bgInstances[type] = new CityBackground(ctx, W, H); break;
-      case 'nature':   bgInstances[type] = new NatureBackground(ctx, W, H); break;
-      case 'office':   bgInstances[type] = new OfficeBackground(ctx, W, H); break;
-      case 'abstract': bgInstances[type] = new AbstractBackground(ctx, W, H); break;
-      default:         bgInstances[type] = new AbstractBackground(ctx, W, H);
+      case 'city':     bgInstances[key] = new CityBackground(ctx, w, h); break;
+      case 'nature':   bgInstances[key] = new NatureBackground(ctx, w, h); break;
+      case 'office':   bgInstances[key] = new OfficeBackground(ctx, w, h); break;
+      case 'abstract': bgInstances[key] = new AbstractBackground(ctx, w, h); break;
+      default:         bgInstances[key] = new AbstractBackground(ctx, w, h);
     }
   }
-  return bgInstances[type];
+  return bgInstances[key];
 }
 
-// ─── Character instance ──────────────────────
-let character = new CrusaderCharacter(ctx, {
-  scale: storyboard.global.character_scale,
-  palette: storyboard.character.palette,
-});
-
-function rebuildCharacter() {
-  character = new CrusaderCharacter(ctx, {
-    scale: storyboard.global.character_scale,
-    palette: storyboard.character.palette,
-  });
+// ─── Character instances per canvas ───
+const charInstances = {};
+function getCharacter(ctx, key) {
+  if (!charInstances[key]) {
+    charInstances[key] = new CrusaderCharacter(ctx, {
+      scale: parseFloat(getS('character_scale')),
+      palette: storyboard.character?.palette,
+    });
+  }
+  return charInstances[key];
+}
+function rebuildCharacters() {
+  Object.keys(charInstances).forEach(k => delete charInstances[k]);
 }
 
-// ─── Particle instances (lazy) ───────────────
+// ─── Particle instances ───
 const particleInstances = {};
-function getParticles(type) {
+function getParticles(ctx, w, h, type) {
   if (!type) return null;
-  const key = type;
+  const key = type + '_' + w + '_' + h;
   if (!particleInstances[key]) {
-    particleInstances[key] = new ParticleSystem(ctx, W, H, { type, count: 50 });
+    particleInstances[key] = new ParticleSystem(ctx, w, h, { type, count: 50 });
   }
   return particleInstances[key];
 }
 
 // ════════════════════════════════════════════════════
-// RENDERING
+// RENDER SCENE ON CANVAS
 // ════════════════════════════════════════════════════
 
-function drawScene(sceneIndex, progress, globalTime) {
-  const scene = storyboard.scenes[sceneIndex];
+function renderCanvas(canvasId, charKey) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width;
+  const H = canvas.height;
+
+  const scene = storyboard.scenes[currentSceneIndex];
   if (!scene) return;
 
-  // Background
-  const bg = getBackground(scene.background);
-  bg.draw(globalTime);
+  const totalDur = storyboard.scenes.reduce((s, sc) => s + sc.duration, 0);
+  let elapsed = 0;
+  for (let i = 0; i < currentSceneIndex; i++) elapsed += storyboard.scenes[i].duration;
 
-  // Character position (interpolate start_x → end_x)
+  let progress = 0.5; // static preview at midpoint
+  let sceneTime = animTime;
+
+  if (playing) {
+    const now = performance.now() / 1000;
+    const sceneElapsed = now - sceneStartTime;
+    progress = Math.min(1, sceneElapsed / scene.duration);
+    sceneTime = now - playStartTime;
+  }
+
+  // Clear
+  ctx.clearRect(0, 0, W, H);
+
+  // Background color behind everything
+  ctx.fillStyle = getS('background_color');
+  ctx.fillRect(0, 0, W, H);
+
+  // Scene background
+  const bg = getBackground(ctx, W, H, scene.background);
+  bg.draw(sceneTime);
+
+  // Character
   const charData = scene.character;
-  const cx = charData.start_x + (charData.end_x - charData.start_x) * progress;
+  const cx = charData.start_x / 1920 * W + ((charData.end_x - charData.start_x) / 1920 * W) * progress;
   const cy = H * charData.y_ratio;
 
-  // Update character state
-  character.setState(charData.posture, charData.emotion, charData.direction);
-  character.draw(cx, cy, globalTime);
+  const char = getCharacter(ctx, charKey);
+  char.scale = parseFloat(getS('character_scale')) * (W / 1920);
+  char.setState(charData.posture, charData.emotion, charData.direction);
+  char.draw(cx, cy, sceneTime);
 
   // Particles
-  const particles = getParticles(scene.effects?.particles);
+  const particles = getParticles(ctx, W, H, scene.effects?.particles);
   if (particles) {
-    particles.update(globalTime);
+    particles.update(sceneTime);
     particles.draw();
   }
 
-  // ─── HUD Overlay (gamma style) ────────────
-  const g = storyboard.global;
+  // ─── HUD Overlay ───
+  const titleFont = getS('world_title_font');
+  const subFont = getS('subtitle_font');
+  const accentColor = getS('accent_color');
+  const sf = W / 1920; // scale factor
 
   // Title bar
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
-  ctx.fillRect(0, 0, W, 48);
-  ctx.fillStyle = g.accent_color || '#FFD700';
-  ctx.fillRect(0, 48, W, 3);
+  ctx.fillStyle = 'rgba(0,0,0,0.6)';
+  ctx.fillRect(0, 0, W, 48 * sf);
+  ctx.fillStyle = accentColor;
+  ctx.fillRect(0, 48 * sf, W, 3 * sf);
 
   // Production title (left)
-  ctx.font = `bold 20px ${g.title_font || 'Georgia, serif'}`;
-  ctx.fillStyle = g.accent_color || '#FFD700';
+  ctx.font = `bold ${20 * sf}px ${titleFont}, Georgia, serif`;
+  ctx.fillStyle = accentColor;
   ctx.textAlign = 'left';
-  ctx.fillText('⚔ ' + (g.production_title || 'CRUSADER'), 16, 32);
+  ctx.textBaseline = 'middle';
+  ctx.fillText('⚔ ' + getS('production_title'), 16 * sf, 26 * sf);
 
   // Tech info (right)
-  ctx.font = '14px Georgia, serif';
-  ctx.fillStyle = '#888';
+  ctx.font = `${13 * sf}px ${getS('subtitle_font')}, monospace`;
+  ctx.fillStyle = '#666';
   ctx.textAlign = 'right';
-  ctx.fillText(`CASTELLAN · ${W}×${H} · ${g.fps}fps`, W - 16, 32);
+  ctx.fillText(`CASTELLAN · ${W}×${H} · ${storyboard.global?.fps || 30}fps`, W - 16 * sf, 26 * sf);
 
   // Scene title
-  if (g.world_title_visible && scene.world_title) {
-    const titleY = 90;
-    ctx.font = `bold ${g.title_size || 32}px ${g.title_font || 'Georgia, serif'}`;
-    ctx.fillStyle = g.accent_color || '#FFD700';
+  if (getS('world_title_visible') && scene.world_title) {
+    const titleSize = parseFloat(getS('world_title_size'));
+    const titleGap = parseFloat(getS('world_title_gap') || 20);
+    const titleY = (60 + titleGap) * sf;
+
+    ctx.font = `bold ${titleSize * sf}px ${titleFont}, Georgia, serif`;
+    ctx.fillStyle = getS('world_title_color');
     ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
     ctx.fillText(scene.world_title, W / 2, titleY);
 
-    ctx.font = '16px Georgia, serif';
-    ctx.fillStyle = '#888';
-    ctx.fillText(`SCENE ${sceneIndex + 1} / ${storyboard.scenes.length}`, W / 2, titleY + 28);
+    ctx.font = `${14 * sf}px ${titleFont}, monospace`;
+    ctx.fillStyle = '#666';
+    ctx.fillText(`SCENE ${currentSceneIndex + 1} / ${storyboard.scenes.length}`, W / 2, titleY + titleSize * sf + 6 * sf);
   }
 
   // Subtitle
   if (scene.text) {
+    const subSize = parseFloat(getS('subtitle_size'));
+    const subColor = getS('subtitle_color');
+    const subPos = getS('subtitle_position');
+    const subAlign = getS('subtitle_align');
+
+    // Typing effect
     const typingProgress = Math.min(1, progress * 3);
     const visibleChars = Math.floor(scene.text.length * typingProgress);
     const visibleText = scene.text.substring(0, visibleChars);
 
     if (visibleText) {
-      ctx.font = `${g.subtitle_size || 44}px ${g.subtitle_font || 'Georgia, serif'}`;
+      ctx.font = `${subSize * sf}px '${subFont}', Georgia, serif`;
       const textWidth = ctx.measureText(visibleText).width;
-      const pillX = W / 2 - textWidth / 2 - 20;
-      const pillY = H - 120;
-      const pillW = textWidth + 40;
-      const pillH = 60;
 
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
-      const r = 12;
+      // Position
+      let subY;
+      if (subPos === 'top') subY = H * 0.12;
+      else if (subPos === 'center') subY = H * 0.5;
+      else subY = H - 120 * sf;
+
+      // Pill background
+      const pillPad = 20 * sf;
+      const pillH = (subSize + 16) * sf;
+      let pillX;
+      if (subAlign === 'left') pillX = 40 * sf;
+      else if (subAlign === 'right') pillX = W - textWidth - 60 * sf;
+      else pillX = W / 2 - textWidth / 2 - pillPad;
+
+      ctx.fillStyle = 'rgba(0,0,0,0.6)';
+      const r = 10 * sf;
+      const pw = textWidth + pillPad * 2;
       ctx.beginPath();
-      ctx.moveTo(pillX + r, pillY);
-      ctx.lineTo(pillX + pillW - r, pillY);
-      ctx.quadraticCurveTo(pillX + pillW, pillY, pillX + pillW, pillY + r);
-      ctx.lineTo(pillX + pillW, pillY + pillH - r);
-      ctx.quadraticCurveTo(pillX + pillW, pillY + pillH, pillX + pillW - r, pillY + pillH);
-      ctx.lineTo(pillX + r, pillY + pillH);
-      ctx.quadraticCurveTo(pillX, pillY + pillH, pillX, pillY + pillH - r);
-      ctx.lineTo(pillX, pillY + r);
-      ctx.quadraticCurveTo(pillX, pillY, pillX + r, pillY);
+      ctx.moveTo(pillX + r, subY);
+      ctx.lineTo(pillX + pw - r, subY);
+      ctx.quadraticCurveTo(pillX + pw, subY, pillX + pw, subY + r);
+      ctx.lineTo(pillX + pw, subY + pillH - r);
+      ctx.quadraticCurveTo(pillX + pw, subY + pillH, pillX + pw - r, subY + pillH);
+      ctx.lineTo(pillX + r, subY + pillH);
+      ctx.quadraticCurveTo(pillX, subY + pillH, pillX, subY + pillH - r);
+      ctx.lineTo(pillX, subY + r);
+      ctx.quadraticCurveTo(pillX, subY, pillX + r, subY);
       ctx.closePath();
       ctx.fill();
 
-      ctx.fillStyle = g.subtitle_color || '#FFFFFF';
-      ctx.textAlign = 'center';
-      ctx.fillText(visibleText, W / 2, pillY + 44);
+      // Text
+      ctx.fillStyle = subColor;
+      ctx.textAlign = subAlign;
+      ctx.textBaseline = 'middle';
+      let textX;
+      if (subAlign === 'left') textX = pillX + pillPad;
+      else if (subAlign === 'right') textX = pillX + pw - pillPad;
+      else textX = pillX + pw / 2;
+      ctx.fillText(visibleText, textX, subY + pillH / 2);
     }
   }
 
   // Vignette
-  if (scene.effects?.vignette || g.vignette) {
+  if (getS('vignette')) {
     const vg = ctx.createRadialGradient(W/2, H/2, W*0.3, W/2, H/2, W*0.75);
     vg.addColorStop(0, 'rgba(0,0,0,0)');
     vg.addColorStop(1, 'rgba(0,0,0,0.5)');
@@ -2235,57 +2297,63 @@ function drawScene(sceneIndex, progress, globalTime) {
     ctx.fillRect(0, 0, W, H);
   }
 
+  // Grain
+  const grainIntensity = parseFloat(getS('grain_intensity'));
+  if (grainIntensity > 0) {
+    const imageData = ctx.getImageData(0, 0, W, H);
+    const pixels = imageData.data;
+    const step = Math.max(4, Math.floor(16 / grainIntensity));
+    for (let i = 0; i < pixels.length; i += step * 4) {
+      const noise = (Math.random() - 0.5) * 255 * grainIntensity;
+      pixels[i] = Math.min(255, Math.max(0, pixels[i] + noise));
+      pixels[i+1] = Math.min(255, Math.max(0, pixels[i+1] + noise));
+      pixels[i+2] = Math.min(255, Math.max(0, pixels[i+2] + noise));
+    }
+    ctx.putImageData(imageData, 0, 0);
+  }
+
   // Progress bar
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
-  ctx.fillRect(0, H - 6, W, 6);
-  ctx.fillStyle = g.accent_color || '#FFD700';
-  const totalDuration = storyboard.scenes.reduce((sum, s) => sum + s.duration, 0);
-  let elapsed = 0;
-  for (let i = 0; i < sceneIndex; i++) elapsed += storyboard.scenes[i].duration;
-  elapsed += scene.duration * progress;
-  ctx.fillRect(0, H - 6, W * (elapsed / totalDuration), 6);
+  ctx.fillStyle = 'rgba(0,0,0,0.4)';
+  ctx.fillRect(0, H - 6 * sf, W, 6 * sf);
+  ctx.fillStyle = accentColor;
+  const totalElapsed = elapsed + scene.duration * progress;
+  ctx.fillRect(0, H - 6 * sf, W * (totalElapsed / totalDur), 6 * sf);
 }
 
 // ════════════════════════════════════════════════════
 // ANIMATION LOOP
 // ════════════════════════════════════════════════════
 
-function renderFrame() {
+function renderLoop() {
   if (playing) {
     const now = performance.now() / 1000;
     const sceneElapsed = now - sceneStartTime;
     const scene = storyboard.scenes[currentSceneIndex];
-    const progress = Math.min(1, sceneElapsed / scene.duration);
-    animTime = now - playStartTime;
 
-    drawScene(currentSceneIndex, progress, animTime);
-    updateTimelineProgress();
-
-    // Auto-advance
-    if (progress >= 1) {
+    if (sceneElapsed >= scene.duration) {
       if (currentSceneIndex < storyboard.scenes.length - 1) {
         currentSceneIndex++;
         sceneStartTime = now;
-        loadSceneUI();
+        loadSceneEditor();
+        buildSceneList();
       } else {
         stopPlay();
       }
     }
-    animFrameId = requestAnimationFrame(renderFrame);
-  } else {
-    // Static preview — animate at current scene
-    animTime += 1/60;
-    drawScene(currentSceneIndex, 0.5, animTime);
-    animFrameId = requestAnimationFrame(renderFrame);
+
+    // Update timeline slider
+    updateTimelineSlider();
   }
+
+  animTime += 1/60;
+  renderCanvas('canvas-desktop', 'desktop');
+  renderCanvas('canvas-iphone', 'iphone');
+  animFrameId = requestAnimationFrame(renderLoop);
 }
 
 function togglePlay() {
-  if (playing) {
-    stopPlay();
-  } else {
-    startPlay();
-  }
+  if (playing) stopPlay();
+  else startPlay();
 }
 
 function startPlay() {
@@ -2293,176 +2361,344 @@ function startPlay() {
   const now = performance.now() / 1000;
   playStartTime = now;
   sceneStartTime = now;
-  document.getElementById('btnPlay').textContent = '⏸';
+  document.getElementById('btnPlay').textContent = '⏸ Pause';
 }
 
 function stopPlay() {
   playing = false;
-  document.getElementById('btnPlay').textContent = '▶';
+  document.getElementById('btnPlay').textContent = '▶ Play';
 }
 
-function prevScene() {
-  if (currentSceneIndex > 0) {
-    currentSceneIndex--;
-    loadSceneUI();
-    if (playing) sceneStartTime = performance.now() / 1000;
-  }
-}
-
-function nextScene() {
-  if (currentSceneIndex < storyboard.scenes.length - 1) {
-    currentSceneIndex++;
-    loadSceneUI();
-    if (playing) sceneStartTime = performance.now() / 1000;
-  }
-}
-
-function goToScene(index) {
-  currentSceneIndex = index;
-  loadSceneUI();
+function goToScene(i) {
+  currentSceneIndex = i;
   if (playing) sceneStartTime = performance.now() / 1000;
-}
-
-// ════════════════════════════════════════════════════
-// UI SYNC
-// ════════════════════════════════════════════════════
-
-function loadSceneUI() {
-  const scene = storyboard.scenes[currentSceneIndex];
-
-  document.getElementById('sceneName').value = scene.name || '';
-  document.getElementById('sceneDuration').value = scene.duration;
-  document.getElementById('sceneBackground').value = scene.background;
-
-  document.getElementById('charPosture').value = scene.character.posture;
-  document.getElementById('charEmotion').value = scene.character.emotion;
-  document.getElementById('charDirection').value = scene.character.direction;
-  document.getElementById('charY').value = scene.character.y_ratio;
-  document.getElementById('charStartX').value = scene.character.start_x;
-  document.getElementById('charEndX').value = scene.character.end_x;
-
-  document.getElementById('effectParticles').value = scene.effects?.particles || '';
-  document.getElementById('sceneText').value = scene.text || '';
-  document.getElementById('worldTitle').value = scene.world_title || '';
-
-  document.getElementById('sceneCounter').textContent = `SCENE ${currentSceneIndex + 1} / ${storyboard.scenes.length}`;
-  document.getElementById('infoRight').textContent = `Scene ${currentSceneIndex + 1}/${storyboard.scenes.length}`;
-
-  document.getElementById('btnPrev').disabled = currentSceneIndex === 0;
-  document.getElementById('btnNext').disabled = currentSceneIndex === storyboard.scenes.length - 1;
-
+  loadSceneEditor();
   buildSceneList();
+  updateTimelineSlider();
 }
 
-function loadGlobalUI() {
-  const g = storyboard.global;
-  document.getElementById('globalTitle').value = g.production_title || '';
-  document.getElementById('globalAccent').value = g.accent_color || '#FFD700';
-  document.getElementById('globalAccentText').value = g.accent_color || '#FFD700';
-  document.getElementById('globalScale').value = g.character_scale;
-  document.getElementById('globalTransition').value = g.transition_duration;
-  document.getElementById('infoLeft').textContent = `${g.width}×${g.height} · ${g.fps}fps`;
+function updateTimelineSlider() {
+  const totalDur = storyboard.scenes.reduce((s, sc) => s + sc.duration, 0);
+  let elapsed = 0;
+  for (let i = 0; i < currentSceneIndex; i++) elapsed += storyboard.scenes[i].duration;
+
+  if (playing) {
+    const now = performance.now() / 1000;
+    elapsed += now - sceneStartTime;
+  } else {
+    elapsed += storyboard.scenes[currentSceneIndex].duration * 0.5;
+  }
+
+  const pct = (elapsed / totalDur) * 100;
+  document.getElementById('timeline').value = pct;
+  document.getElementById('frameLabel').textContent = `${elapsed.toFixed(1)}s / ${totalDur.toFixed(1)}s`;
 }
 
-function buildSceneList() {
-  const container = document.getElementById('sceneList');
-  container.innerHTML = '';
-  storyboard.scenes.forEach((scene, i) => {
-    const bgEmoji = { nature: '🌿', city: '🌃', office: '🏢', abstract: '✨' };
-    const item = document.createElement('div');
-    item.className = 'scene-item' + (i === currentSceneIndex ? ' active' : '');
-    item.innerHTML = `
-      <span class="scene-num">${i + 1}</span>
-      <span class="scene-name">${bgEmoji[scene.background] || '🎬'} ${scene.name}</span>
-      <span class="scene-dur">${scene.duration}s</span>
-    `;
-    item.onclick = () => goToScene(i);
-    container.appendChild(item);
+// Timeline scrub
+document.getElementById('timeline').addEventListener('input', function() {
+  if (playing) stopPlay();
+  const pct = parseFloat(this.value) / 100;
+  const totalDur = storyboard.scenes.reduce((s, sc) => s + sc.duration, 0);
+  let target = pct * totalDur;
+  let elapsed = 0;
+  for (let i = 0; i < storyboard.scenes.length; i++) {
+    if (elapsed + storyboard.scenes[i].duration >= target) {
+      currentSceneIndex = i;
+      loadSceneEditor();
+      buildSceneList();
+      break;
+    }
+    elapsed += storyboard.scenes[i].duration;
+  }
+});
+
+// ════════════════════════════════════════════════════
+// CONTROL PANEL (left sidebar)
+// ════════════════════════════════════════════════════
+
+function buildControls() {
+  const c = document.getElementById('controls');
+  c.innerHTML = `
+    ${section("📐 Format")}
+    ${radioGroup("format", [
+      {value:"horizontal", label:"Horizontal — 1920×1080"},
+      {value:"vertical", label:"Vertical — 1080×1920"}
+    ])}
+
+    ${section("🏷️ Titres (scène)")}
+    ${checkbox("world_title_visible", "Afficher les titres")}
+    ${selectCtrl("world_title_font", "Police titre", FONTS, FONTS)}
+    ${slider("world_title_size", "Taille titre", 14, 60, 2)}
+    ${colorCtrl("world_title_color", "Couleur titre")}
+    ${slider("world_title_gap", "Espace titre↔visuel (px)", 0, 80, 2)}
+
+    ${section("📝 Sous-titres")}
+    ${selectCtrl("subtitle_font", "Police", FONTS, FONTS)}
+    ${slider("subtitle_size", "Taille", 16, 120, 2)}
+    ${colorCtrl("subtitle_color", "Couleur sous-titres")}
+    ${selectCtrl("subtitle_position", "Position", ["top","center","bottom"], ["Haut","Centre","Bas"])}
+    ${selectCtrl("subtitle_align", "Alignement", ["left","center","right"], ["Gauche","Centre","Droite"])}
+    ${colorCtrl("accent_color", "Couleur mots forts")}
+
+    ${section("🖼️ Background")}
+    ${colorCtrl("background_color", "Couleur fond")}
+
+    ${section("🧍 Personnage")}
+    ${slider("character_scale", "Taille personnage", 0.5, 5, 0.1)}
+    ${slider("transition_duration", "Transition (s)", 0, 3, 0.1)}
+
+    ${section("🎬 Production")}
+    ${textInput("production_title", "Titre production")}
+
+    ${section("🎨 Effets")}
+    ${slider("grain_intensity", "Grain", 0, 0.5, 0.01)}
+    ${checkbox("vignette", "Vignetage activé")}
+  `;
+
+  // Bind events
+  c.querySelectorAll('input[type=range]').forEach(el => {
+    el.addEventListener('input', () => {
+      const v = parseFloat(el.value);
+      setS(el.dataset.key, v);
+      const valEl = el.closest('.ctrl-row').querySelector('.val');
+      if (valEl) valEl.textContent = v;
+      if (el.dataset.key === 'character_scale') rebuildCharacters();
+    });
+  });
+  c.querySelectorAll('select').forEach(el => {
+    el.addEventListener('change', () => setS(el.dataset.key, el.value));
+  });
+  c.querySelectorAll('input[type=checkbox]').forEach(el => {
+    el.addEventListener('change', () => setS(el.dataset.key, el.checked));
+  });
+  c.querySelectorAll('input[type=color]').forEach(el => {
+    el.addEventListener('input', () => {
+      setS(el.dataset.key, el.value);
+      const valEl = el.closest('.ctrl-row').querySelector('.val');
+      if (valEl) valEl.textContent = el.value;
+    });
+  });
+  c.querySelectorAll('input[type=text]').forEach(el => {
+    el.addEventListener('input', () => setS(el.dataset.key, el.value));
+  });
+  c.querySelectorAll('input[name=format]').forEach(el => {
+    el.addEventListener('change', () => {
+      setS('format', el.value);
+      updateCanvasFormat();
+    });
   });
 }
 
-function updateScene() {
+// ─── Control helpers ───
+function section(t) { return `<div class="section-title">${t}</div>`; }
+function slider(key, label, min, max, step) {
+  const v = getS(key);
+  return `<div class="ctrl-row"><label><span>${label}</span><span class="val">${v}</span></label><input type="range" data-key="${key}" min="${min}" max="${max}" step="${step}" value="${v}"></div>`;
+}
+function selectCtrl(key, label, values, labels) {
+  const v = getS(key);
+  const opts = values.map((val, i) => `<option value="${val}" ${val===v?"selected":""}>${labels[i]}</option>`).join('');
+  return `<div class="ctrl-row"><label>${label}</label><select data-key="${key}">${opts}</select></div>`;
+}
+function colorCtrl(key, label) {
+  const v = getS(key);
+  return `<div class="ctrl-row" style="display:flex;align-items:center;gap:8px"><input type="color" data-key="${key}" value="${v}"><label style="flex:1">${label}</label><span class="val" style="font-size:10px">${v}</span></div>`;
+}
+function checkbox(key, label) {
+  const v = getS(key);
+  return `<div class="ctrl-row"><label style="gap:8px;cursor:pointer"><input type="checkbox" data-key="${key}" ${v?"checked":""}> ${label}</label></div>`;
+}
+function textInput(key, label) {
+  const v = getS(key);
+  return `<div class="ctrl-row"><label>${label}</label><input type="text" data-key="${key}" value="${v||''}" style="width:100%;margin-top:2px;background:#1A1A1A;border:1px solid var(--gold-dim);border-radius:var(--radius);padding:3px 6px;font-size:11px;color:var(--bone);font-family:var(--mono);"></div>`;
+}
+function radioGroup(key, options) {
+  const v = getS(key);
+  return `<div class="ctrl-row" style="display:flex;gap:6px">${options.map(o => `
+    <label style="flex:1;display:flex;align-items:center;gap:4px;padding:6px 8px;background:${o.value===v?'var(--gold-glow)':'#1A1A1A'};border:1px solid ${o.value===v?'var(--gold-dim)':'var(--border)'};border-radius:var(--radius);cursor:pointer;font-size:10px;color:${o.value===v?'var(--gold)':'var(--bone)'}">
+      <input type="radio" name="${key}" value="${o.value}" ${o.value===v?"checked":""} style="accent-color:var(--gold)"> ${o.label}
+    </label>`).join('')}</div>`;
+}
+
+function updateCanvasFormat() {
+  const fmt = getS('format');
+  const desktopCanvas = document.getElementById('canvas-desktop');
+  const iphoneCanvas = document.getElementById('canvas-iphone');
+  const desktopBox = document.querySelector('.viewport-desktop');
+  const iphoneBox = document.querySelector('.viewport-iphone');
+
+  if (fmt === 'vertical') {
+    desktopCanvas.width = 1080;
+    desktopCanvas.height = 1920;
+    desktopBox.style.aspectRatio = '9/16';
+    desktopBox.style.maxWidth = '400px';
+    desktopBox.style.margin = '0 auto';
+  } else {
+    desktopCanvas.width = 1920;
+    desktopCanvas.height = 1080;
+    desktopBox.style.aspectRatio = '16/9';
+    desktopBox.style.maxWidth = '';
+    desktopBox.style.margin = '';
+  }
+
+  // Reset bg instances for new dimensions
+  Object.keys(bgInstances).forEach(k => delete bgInstances[k]);
+  rebuildCharacters();
+}
+
+// ════════════════════════════════════════════════════
+// SCENE LIST + EDITOR (right sidebar)
+// ════════════════════════════════════════════════════
+
+function buildSceneList() {
+  const container = document.getElementById('sceneList');
+  const bgEmoji = { nature:'🌿', city:'🌃', office:'🏢', abstract:'✨' };
+  container.innerHTML = storyboard.scenes.map((scene, i) => `
+    <div class="scene-item ${i===currentSceneIndex?'active':''}" onclick="goToScene(${i})">
+      <span class="snum">${i+1}</span>
+      <span class="sname">${bgEmoji[scene.background]||'🎬'} ${scene.name}</span>
+      <span class="sdur">${scene.duration}s</span>
+    </div>
+  `).join('');
+}
+
+function loadSceneEditor() {
   const scene = storyboard.scenes[currentSceneIndex];
-  scene.name = document.getElementById('sceneName').value;
-  scene.duration = parseFloat(document.getElementById('sceneDuration').value) || 3;
-  scene.background = document.getElementById('sceneBackground').value;
+  const ed = document.getElementById('sceneEditor');
+  ed.innerHTML = `
+    <div class="scene-field">
+      <label>Nom</label>
+      <input type="text" value="${scene.name||''}" onchange="updateSceneField('name', this.value)"/>
+    </div>
+    <div class="field-row">
+      <div class="scene-field">
+        <label>Durée (s)</label>
+        <input type="number" value="${scene.duration}" min="0.5" max="60" step="0.5" onchange="updateSceneField('duration', parseFloat(this.value))"/>
+      </div>
+      <div class="scene-field">
+        <label>Décor</label>
+        <select onchange="updateSceneField('background', this.value)">
+          <option value="nature" ${scene.background==='nature'?'selected':''}>🌿 Nature</option>
+          <option value="city" ${scene.background==='city'?'selected':''}>🌃 Ville</option>
+          <option value="office" ${scene.background==='office'?'selected':''}>🏢 Bureau</option>
+          <option value="abstract" ${scene.background==='abstract'?'selected':''}>✨ Abstrait</option>
+        </select>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="scene-field">
+        <label>Posture</label>
+        <select onchange="updateCharField('posture', this.value)">
+          ${['idle','walk','talk','gesture','sit'].map(p => `<option value="${p}" ${scene.character.posture===p?'selected':''}>${p}</option>`).join('')}
+        </select>
+      </div>
+      <div class="scene-field">
+        <label>Émotion</label>
+        <select onchange="updateCharField('emotion', this.value)">
+          ${['neutral','happy','sad','angry','surprised','thinking'].map(e => `<option value="${e}" ${scene.character.emotion===e?'selected':''}>${e}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="scene-field">
+        <label>Direction</label>
+        <select onchange="updateCharField('direction', parseInt(this.value))">
+          <option value="1" ${scene.character.direction===1?'selected':''}>→ Droite</option>
+          <option value="-1" ${scene.character.direction===-1?'selected':''}>← Gauche</option>
+        </select>
+      </div>
+      <div class="scene-field">
+        <label>Y ratio</label>
+        <input type="number" value="${scene.character.y_ratio}" min="0.2" max="0.95" step="0.02" onchange="updateCharField('y_ratio', parseFloat(this.value))"/>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="scene-field">
+        <label>Start X</label>
+        <input type="number" value="${scene.character.start_x}" min="0" max="1920" step="10" onchange="updateCharField('start_x', parseInt(this.value))"/>
+      </div>
+      <div class="scene-field">
+        <label>End X</label>
+        <input type="number" value="${scene.character.end_x}" min="0" max="1920" step="10" onchange="updateCharField('end_x', parseInt(this.value))"/>
+      </div>
+    </div>
+    <div class="scene-field">
+      <label>Particules</label>
+      <select onchange="updateEffectField('particles', this.value || null)">
+        <option value="" ${!scene.effects?.particles?'selected':''}>Aucune</option>
+        <option value="dust" ${scene.effects?.particles==='dust'?'selected':''}>Poussière</option>
+        <option value="rain" ${scene.effects?.particles==='rain'?'selected':''}>Pluie</option>
+        <option value="snow" ${scene.effects?.particles==='snow'?'selected':''}>Neige</option>
+        <option value="sparks" ${scene.effects?.particles==='sparks'?'selected':''}>Étincelles</option>
+      </select>
+    </div>
+    <div class="scene-field">
+      <label>Titre de scène</label>
+      <input type="text" value="${scene.world_title||''}" onchange="updateSceneField('world_title', this.value)"/>
+    </div>
+    <div class="scene-field">
+      <label>Sous-titre</label>
+      <textarea rows="2" onchange="updateSceneField('text', this.value)">${scene.text||''}</textarea>
+    </div>
+  `;
 
-  scene.character.posture = document.getElementById('charPosture').value;
-  scene.character.emotion = document.getElementById('charEmotion').value;
-  scene.character.direction = parseInt(document.getElementById('charDirection').value);
-  scene.character.y_ratio = parseFloat(document.getElementById('charY').value) || 0.72;
-  scene.character.start_x = parseInt(document.getElementById('charStartX').value) || 960;
-  scene.character.end_x = parseInt(document.getElementById('charEndX').value) || 960;
+  updateFooterInfo();
+}
 
-  scene.effects = scene.effects || {};
-  const particles = document.getElementById('effectParticles').value;
-  scene.effects.particles = particles || null;
-  scene.text = document.getElementById('sceneText').value;
-  scene.world_title = document.getElementById('worldTitle').value;
-
+function updateSceneField(field, value) {
+  storyboard.scenes[currentSceneIndex][field] = value;
+  if (field === 'background') {
+    Object.keys(bgInstances).forEach(k => delete bgInstances[k]);
+  }
   buildSceneList();
+  updateFooterInfo();
 }
 
-function updateGlobal() {
-  storyboard.global.production_title = document.getElementById('globalTitle').value;
-  storyboard.global.accent_color = document.getElementById('globalAccent').value;
-  document.getElementById('globalAccentText').value = document.getElementById('globalAccent').value;
-  storyboard.global.character_scale = parseFloat(document.getElementById('globalScale').value) || 2.5;
-  storyboard.global.transition_duration = parseFloat(document.getElementById('globalTransition').value) || 0.5;
-  rebuildCharacter();
+function updateCharField(field, value) {
+  storyboard.scenes[currentSceneIndex].character[field] = value;
 }
 
-function updateTimelineProgress() {
-  const totalDuration = storyboard.scenes.reduce((sum, s) => sum + s.duration, 0);
-  let elapsed = 0;
-  for (let i = 0; i < currentSceneIndex; i++) elapsed += storyboard.scenes[i].duration;
-  const scene = storyboard.scenes[currentSceneIndex];
-  const now = performance.now() / 1000;
-  const sceneElapsed = now - sceneStartTime;
-  elapsed += Math.min(scene.duration, sceneElapsed);
-  const pct = (elapsed / totalDuration) * 100;
-  document.getElementById('timelineProgress').style.width = pct + '%';
+function updateEffectField(field, value) {
+  if (!storyboard.scenes[currentSceneIndex].effects) {
+    storyboard.scenes[currentSceneIndex].effects = {};
+  }
+  storyboard.scenes[currentSceneIndex].effects[field] = value || null;
+  Object.keys(particleInstances).forEach(k => delete particleInstances[k]);
 }
-
-// ════════════════════════════════════════════════════
-// ADD / DELETE SCENE
-// ════════════════════════════════════════════════════
 
 function addScene() {
-  const newScene = {
-    id: 'scene_' + String(storyboard.scenes.length + 1).padStart(2, '0'),
+  const n = storyboard.scenes.length + 1;
+  storyboard.scenes.push({
+    id: 'scene_' + String(n).padStart(2,'0'),
     name: 'Nouvelle scène',
     duration: 3.0,
     background: 'nature',
-    character: {
-      posture: 'idle',
-      emotion: 'neutral',
-      direction: 1,
-      start_x: 960,
-      end_x: 960,
-      y_ratio: 0.72,
-    },
-    effects: { particles: null, vignette: true },
+    character: { posture:'idle', emotion:'neutral', direction:1, start_x:960, end_x:960, y_ratio:0.72 },
+    effects: { particles:null, vignette:true },
     text: '',
     world_title: 'Nouvelle scène',
-  };
-  storyboard.scenes.push(newScene);
+  });
   currentSceneIndex = storyboard.scenes.length - 1;
-  loadSceneUI();
+  buildSceneList();
+  loadSceneEditor();
   showToast('Scène ajoutée ✅');
 }
 
 function deleteScene() {
-  if (storyboard.scenes.length <= 1) {
-    showToast('Impossible — au moins 1 scène requise');
-    return;
-  }
+  if (storyboard.scenes.length <= 1) { showToast('Au moins 1 scène requise'); return; }
   storyboard.scenes.splice(currentSceneIndex, 1);
-  if (currentSceneIndex >= storyboard.scenes.length) {
-    currentSceneIndex = storyboard.scenes.length - 1;
-  }
-  loadSceneUI();
+  if (currentSceneIndex >= storyboard.scenes.length) currentSceneIndex--;
+  buildSceneList();
+  loadSceneEditor();
   showToast('Scène supprimée');
+}
+
+function updateFooterInfo() {
+  const totalDur = storyboard.scenes.reduce((s, sc) => s + sc.duration, 0);
+  const fps = storyboard.global?.fps || 30;
+  const totalFrames = Math.ceil(totalDur * fps);
+  document.getElementById('progressInfo').textContent = 
+    `${storyboard.scenes.length} scènes · ${totalDur.toFixed(1)}s · ${totalFrames} frames @ ${fps}fps`;
 }
 
 // ════════════════════════════════════════════════════
@@ -2470,7 +2706,11 @@ function deleteScene() {
 // ════════════════════════════════════════════════════
 
 function exportStoryboard() {
-  const json = JSON.stringify(storyboard, null, 2);
+  const merged = JSON.parse(JSON.stringify(storyboard));
+  // Merge style overrides into global
+  Object.keys(styleOverrides).forEach(k => { merged.global[k] = styleOverrides[k]; });
+
+  const json = JSON.stringify(merged, null, 2);
   const blob = new Blob([json], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -2478,7 +2718,7 @@ function exportStoryboard() {
   a.download = 'storyboard.json';
   a.click();
   URL.revokeObjectURL(url);
-  showToast('storyboard.json exporté 💾');
+  showToast('⚔ storyboard.json exporté');
 }
 
 function importStoryboard() {
@@ -2492,36 +2732,36 @@ function handleImport(event) {
   reader.onload = (e) => {
     try {
       storyboard = JSON.parse(e.target.result);
+      styleOverrides = {};
       currentSceneIndex = 0;
-      rebuildCharacter();
-      // Reset background instances
       Object.keys(bgInstances).forEach(k => delete bgInstances[k]);
       Object.keys(particleInstances).forEach(k => delete particleInstances[k]);
-      loadSceneUI();
-      loadGlobalUI();
+      rebuildCharacters();
+      buildControls();
+      buildSceneList();
+      loadSceneEditor();
       showToast('Storyboard importé ✅');
-    } catch (err) {
-      showToast('Erreur JSON: ' + err.message);
-    }
+    } catch (err) { showToast('Erreur JSON: ' + err.message); }
   };
   reader.readAsText(file);
   event.target.value = '';
 }
 
-// ─── Toast ────────────────────────────────
+// ─── Toast ───
 function showToast(msg) {
-  const toast = document.getElementById('toast');
-  toast.textContent = msg;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2500);
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
 }
 
 // ════════════════════════════════════════════════════
 // INIT
 // ════════════════════════════════════════════════════
-loadSceneUI();
-loadGlobalUI();
-renderFrame();
+buildControls();
+buildSceneList();
+loadSceneEditor();
+renderLoop();
 
 </script>
 </body>
