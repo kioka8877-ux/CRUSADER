@@ -475,15 +475,19 @@ class CrusaderCharacter {
     this.ctx = ctx;
     this.scale = options.scale || 1;
     this.palette = {
-      skin: options.palette?.skin || '#F4C280',
-      outline: options.palette?.outline || '#2C3E50',
-      hair: options.palette?.hair || '#34495E',
-      shirt: options.palette?.shirt || '#3498DB',
-      pants: options.palette?.pants || '#2C3E50',
-      shoes: options.palette?.shoes || '#1A1A2E',
-      eye: options.palette?.eye || '#FFFFFF',
-      pupil: options.palette?.pupil || '#2C3E50',
-      mouth: options.palette?.mouth || '#C0392B',
+      skin: options.palette?.skin || '#FFFEF5',
+      outline: options.palette?.outline || '#222222',
+      hair: options.palette?.hair || '#5C3317',
+      shirt: options.palette?.shirt || '#2C2C2C',
+      pants: options.palette?.pants || '#6B4226',
+      shoes: options.palette?.shoes || '#1A1A1A',
+      eye: options.palette?.eye || '#FFFEF5',
+      pupil: options.palette?.pupil || '#111111',
+      mouth: options.palette?.mouth || '#333333',
+      tie: options.palette?.tie || '#CC2222',
+      shirtInner: options.palette?.shirtInner || '#F0EDE5',
+      lapel: options.palette?.lapel || '#222222',
+      pocket: options.palette?.pocket || '#444444',
       ...options.palette,
     };
     this.lineWidth = options.lineWidth || 3;
@@ -710,10 +714,29 @@ class CrusaderCharacter {
     ctx.fill();
     ctx.stroke();
 
-    // Hair (top of head)
+    // Hair — brown curly volumetric mass
     ctx.fillStyle = p.hair;
+    // Main hair volume
+    const hairY = y - r * 0.7;
     ctx.beginPath();
-    ctx.arc(x, y - r * 0.15, r * 1.05, Math.PI, Math.PI * 2);
+    ctx.ellipse(x, hairY, r * 1.15, r * 0.65, 0, Math.PI, 0);
+    ctx.fill();
+    // Curly bumps on top
+    const bumps = [
+      [-0.6, -0.1, 0.35], [-0.2, -0.25, 0.38], [0.15, -0.28, 0.4],
+      [0.5, -0.18, 0.35], [0.78, -0.05, 0.3], [-0.82, 0, 0.28]
+    ];
+    bumps.forEach(([bx, by, br]) => {
+      ctx.beginPath();
+      ctx.arc(x + bx * r, hairY + by * r - r * 0.15, br * r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    // Side hair
+    ctx.beginPath();
+    ctx.ellipse(x - r * 0.9, y - r * 0.2, r * 0.22, r * 0.45, 0.2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(x + r * 0.9, y - r * 0.2, r * 0.22, r * 0.45, -0.2, 0, Math.PI * 2);
     ctx.fill();
 
     // Eyes
@@ -886,48 +909,109 @@ class CrusaderCharacter {
   _drawBody(sk) {
     const ctx = this.ctx;
     const p = this.palette;
+    const s = this.scale;
 
-    // Torso — filled shape
-    ctx.fillStyle = p.shirt;
+    // ── LEGS (thin brown sticks — stickman style) ──
+    this._drawLimb(sk.hipL, sk.kneeL, this.lineWidth * 1.6, p.pants);
+    this._drawLimb(sk.hipR, sk.kneeR, this.lineWidth * 1.6, p.pants);
+    this._drawLimb(sk.kneeL, sk.footL, this.lineWidth * 1.4, p.pants);
+    this._drawLimb(sk.kneeR, sk.footR, this.lineWidth * 1.4, p.pants);
+
+    // Feet (small)
+    ctx.fillStyle = p.shoes;
+    ctx.beginPath();
+    ctx.ellipse(sk.footL.x, sk.footL.y, 6 * s, 3 * s, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(sk.footR.x, sk.footR.y, 6 * s, 3 * s, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // ── TORSO / SUIT JACKET ──
+    const torsoW = (sk.shoulderR.x - sk.shoulderL.x);
+
+    // Main jacket
+    ctx.fillStyle = p.shirt; // shirt = suit color (#2C2C2C)
     ctx.strokeStyle = p.outline;
     ctx.lineWidth = this.lineWidth;
     ctx.beginPath();
-    ctx.moveTo(sk.shoulderL.x, sk.shoulderL.y);
-    ctx.lineTo(sk.shoulderR.x, sk.shoulderR.y);
-    ctx.lineTo(sk.hipR.x + 2, sk.torsoBottom.y);
-    ctx.lineTo(sk.hipL.x - 2, sk.torsoBottom.y);
+    ctx.moveTo(sk.shoulderL.x - 3 * s, sk.shoulderL.y);
+    ctx.lineTo(sk.shoulderR.x + 3 * s, sk.shoulderR.y);
+    ctx.lineTo(sk.hipR.x + 4 * s, sk.torsoBottom.y);
+    ctx.lineTo(sk.hipL.x - 4 * s, sk.torsoBottom.y);
     ctx.closePath();
     ctx.fill();
     ctx.stroke();
 
-    // Legs
-    this._drawLimb(sk.hipL, sk.kneeL, this.lineWidth * 2.2, p.pants);
-    this._drawLimb(sk.hipR, sk.kneeR, this.lineWidth * 2.2, p.pants);
-    this._drawLimb(sk.kneeL, sk.footL, this.lineWidth * 2, p.pants);
-    this._drawLimb(sk.kneeR, sk.footR, this.lineWidth * 2, p.pants);
-
-    // Shoes
-    ctx.fillStyle = p.shoes;
+    // White shirt visible between lapels
+    const shirtCX = (sk.shoulderL.x + sk.shoulderR.x) / 2;
+    const shirtTop = sk.shoulderL.y + 3 * s;
+    const shirtBot = sk.torsoBottom.y - 2 * s;
+    ctx.fillStyle = p.shirtInner || '#F0EDE5';
     ctx.beginPath();
-    ctx.ellipse(sk.footL.x, sk.footL.y, 7 * this.scale, 4 * this.scale, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.beginPath();
-    ctx.ellipse(sk.footR.x, sk.footR.y, 7 * this.scale, 4 * this.scale, 0, 0, Math.PI * 2);
+    ctx.moveTo(shirtCX - 4 * s, shirtTop);
+    ctx.lineTo(shirtCX + 4 * s, shirtTop);
+    ctx.lineTo(shirtCX + 3 * s, shirtBot);
+    ctx.lineTo(shirtCX - 3 * s, shirtBot);
+    ctx.closePath();
     ctx.fill();
 
-    // Arms
-    this._drawLimb(sk.shoulderL, sk.elbowL, this.lineWidth * 1.8, p.shirt);
-    this._drawLimb(sk.shoulderR, sk.elbowR, this.lineWidth * 1.8, p.shirt);
+    // Lapels (darker V shapes)
+    ctx.fillStyle = p.lapel || '#222222';
+    // Left lapel
+    ctx.beginPath();
+    ctx.moveTo(shirtCX - 3 * s, shirtTop);
+    ctx.lineTo(shirtCX - 10 * s, shirtTop + 18 * s);
+    ctx.lineTo(shirtCX - 4 * s, shirtTop + 18 * s);
+    ctx.closePath();
+    ctx.fill();
+    // Right lapel
+    ctx.beginPath();
+    ctx.moveTo(shirtCX + 3 * s, shirtTop);
+    ctx.lineTo(shirtCX + 10 * s, shirtTop + 18 * s);
+    ctx.lineTo(shirtCX + 4 * s, shirtTop + 18 * s);
+    ctx.closePath();
+    ctx.fill();
+
+    // RED TIE
+    const tieTop = shirtTop + 2 * s;
+    ctx.fillStyle = p.tie || '#CC2222';
+    ctx.beginPath();
+    ctx.moveTo(shirtCX - 2 * s, tieTop);
+    ctx.lineTo(shirtCX + 2 * s, tieTop);
+    ctx.lineTo(shirtCX + 2.5 * s, tieTop + 5 * s);
+    ctx.lineTo(shirtCX + 0.5 * s, shirtBot);
+    ctx.lineTo(shirtCX - 0.5 * s, shirtBot);
+    ctx.lineTo(shirtCX - 2.5 * s, tieTop + 5 * s);
+    ctx.closePath();
+    ctx.fill();
+    // Tie knot
+    ctx.fillStyle = p.tie || '#CC2222';
+    ctx.beginPath();
+    ctx.arc(shirtCX, tieTop + 2 * s, 2.5 * s, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Breast pocket (left side)
+    const pocketX = shirtCX - 12 * s;
+    const pocketY = shirtTop + 8 * s;
+    ctx.fillStyle = p.pocket || '#444';
+    ctx.fillRect(pocketX, pocketY, 6 * s, 5 * s);
+    // Pocket square
+    ctx.fillStyle = p.shirtInner || '#F0EDE5';
+    ctx.fillRect(pocketX + 1.5 * s, pocketY - 2 * s, 2 * s, 3 * s);
+
+    // ── ARMS (suit sleeves + skin forearms) ──
+    this._drawLimb(sk.shoulderL, sk.elbowL, this.lineWidth * 2.2, p.shirt);
+    this._drawLimb(sk.shoulderR, sk.elbowR, this.lineWidth * 2.2, p.shirt);
     this._drawLimb(sk.elbowL, sk.handL, this.lineWidth * 1.5, p.skin);
     this._drawLimb(sk.elbowR, sk.handR, this.lineWidth * 1.5, p.skin);
 
     // Hands
     ctx.fillStyle = p.skin;
     ctx.beginPath();
-    ctx.arc(sk.handL.x, sk.handL.y, 4.5 * this.scale, 0, Math.PI * 2);
+    ctx.arc(sk.handL.x, sk.handL.y, 4.5 * s, 0, Math.PI * 2);
     ctx.fill();
     ctx.beginPath();
-    ctx.arc(sk.handR.x, sk.handR.y, 4.5 * this.scale, 0, Math.PI * 2);
+    ctx.arc(sk.handR.x, sk.handR.y, 4.5 * s, 0, Math.PI * 2);
     ctx.fill();
   }
 
@@ -1892,12 +1976,19 @@ let storyboard = {
   },
   "character": {
     "palette": {
-      "skin": "#F4C280",
-      "outline": "#2C3E50",
-      "hair": "#34495E",
-      "shirt": "#3498DB",
-      "pants": "#2C3E50",
-      "shoes": "#1A1A2E"
+      "skin": "#FFFEF5",
+      "outline": "#222222",
+      "hair": "#5C3317",
+      "shirt": "#2C2C2C",
+      "pants": "#6B4226",
+      "shoes": "#1A1A1A",
+      "tie": "#CC2222",
+      "shirtInner": "#F0EDE5",
+      "lapel": "#222222",
+      "pocket": "#444444",
+      "eye": "#FFFEF5",
+      "pupil": "#111111",
+      "mouth": "#333333"
     }
   },
   "scenes": [
