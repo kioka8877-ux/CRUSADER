@@ -1,0 +1,3064 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>F02 CASTELLAN — CRUSADER Delta Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;700&family=Oswald:wght@400;700&family=Bebas+Neue&family=Caveat:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=Permanent+Marker&family=Patrick+Hand&family=Courier+Prime&family=Space+Mono&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto+Slab:wght@400;700&family=Inter:wght@400;700" rel="stylesheet"/>
+<style>
+  :root {
+    --bg:        #0A0A0A;
+    --surface:   #0D0D0D;
+    --surface2:  #141414;
+    --border:    #1A1A1A;
+    --gold:      #C5A44E;
+    --gold-dim:  rgba(197,164,78,0.25);
+    --gold-glow: rgba(197,164,78,0.08);
+    --red:       #8B0000;
+    --bone:      #E8DCC8;
+    --text:      #E8DCC8;
+    --text-dim:  #666;
+    --mono:      'Courier Prime','Courier New',monospace;
+    --cinzel:    'Cinzel',Georgia,serif;
+    --radius:    4px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 12px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 2px solid var(--gold);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+  .header-left { display: flex; align-items: center; gap: 12px; }
+  .header-title {
+    font-family: var(--cinzel);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 3px;
+  }
+  .header-sub {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .header-right { display: flex; gap: 8px; align-items: center; }
+
+  /* ── BUTTONS ── */
+  .btn-export {
+    padding: 6px 16px;
+    background: var(--red);
+    color: var(--bone);
+    font-family: var(--cinzel);
+    font-size: 12px;
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-export:hover { background: #A30000; }
+  .btn-import {
+    padding: 6px 12px;
+    background: transparent;
+    color: var(--gold);
+    font-family: var(--cinzel);
+    font-size: 11px;
+    border: 1px solid var(--gold-dim);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-import:hover { background: var(--gold-glow); }
+  .btn-small {
+    padding: 4px 10px;
+    background: var(--surface2);
+    color: var(--bone);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 11px;
+    transition: all 0.15s;
+  }
+  .btn-small:hover { border-color: var(--gold); color: var(--gold); }
+  .btn-gold {
+    background: var(--gold);
+    color: var(--bg);
+    border-color: var(--gold);
+    font-weight: bold;
+  }
+  .btn-gold:hover { background: #D4B35D; }
+
+  /* ── LAYOUT ── */
+  .layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    height: calc(100vh - 50px);
+  }
+
+  /* ── CONFIG PANEL (left) ── */
+  .config-panel {
+    width: 280px;
+    min-width: 280px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 12px;
+    flex-shrink: 0;
+  }
+  .config-panel::-webkit-scrollbar { width: 4px; }
+  .config-panel::-webkit-scrollbar-track { background: transparent; }
+  .config-panel::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+
+  .section-title {
+    font-family: var(--cinzel);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    margin-top: 14px;
+    margin-bottom: 6px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--gold-dim);
+  }
+  .section-title:first-child { margin-top: 0; }
+
+  .ctrl-row { margin-bottom: 8px; }
+  .ctrl-row label {
+    font-size: 11px;
+    color: #999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .ctrl-row .val { font-family: monospace; color: var(--gold); font-size: 10px; }
+  .ctrl-row input[type="range"] { width: 100%; margin-top: 2px; accent-color: var(--gold); }
+  .ctrl-row select {
+    width: 100%;
+    margin-top: 2px;
+    background: #1A1A1A;
+    border: 1px solid var(--gold-dim);
+    border-radius: var(--radius);
+    padding: 3px 6px;
+    font-size: 11px;
+    color: var(--bone);
+    font-family: var(--mono);
+  }
+  .ctrl-row select:focus { border-color: var(--gold); outline: none; }
+  .ctrl-row input[type="color"] {
+    width: 28px; height: 28px;
+    border-radius: var(--radius);
+    border: 1px solid var(--gold-dim);
+    cursor: pointer;
+    background: transparent;
+    padding: 1px;
+  }
+  .ctrl-row input[type="checkbox"] {
+    accent-color: var(--gold);
+    width: 15px; height: 15px;
+    cursor: pointer;
+  }
+
+  /* ── MAIN PREVIEW ── */
+  .preview-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .preview-area::-webkit-scrollbar { width: 4px; }
+  .preview-area::-webkit-scrollbar-track { background: transparent; }
+  .preview-area::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+
+  /* Timeline bar */
+  .timeline-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    padding: 8px 0;
+  }
+  .timeline-bar input[type="range"] { flex: 1; accent-color: var(--gold); }
+  .timeline-bar .frame-label {
+    font-size: 10px;
+    font-family: var(--mono);
+    color: var(--text-dim);
+    min-width: 100px;
+    text-align: right;
+  }
+  .btn-play {
+    padding: 4px 12px;
+    font-family: var(--cinzel);
+    font-size: 11px;
+    border: 1px solid var(--gold-dim);
+    background: transparent;
+    color: var(--gold);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-play:hover { background: var(--gold-glow); }
+
+  /* Viewport labels */
+  .viewport-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(197,164,78,0.4);
+    text-align: center;
+  }
+  .viewport-box {
+    border: 1px solid var(--gold-dim);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.6), 0 0 1px rgba(197,164,78,0.3);
+    position: relative;
+  }
+  .viewport-desktop {
+    width: 100%;
+    aspect-ratio: 16/9;
+  }
+  .viewport-iphone {
+    width: 220px;
+    aspect-ratio: 9/19.5;
+    margin: 0 auto;
+  }
+  .viewport-box canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ── SCENE PANEL (right) ── */
+  .scene-panel {
+    width: 300px;
+    min-width: 300px;
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 12px;
+    flex-shrink: 0;
+  }
+  .scene-panel::-webkit-scrollbar { width: 4px; }
+  .scene-panel::-webkit-scrollbar-track { background: transparent; }
+  .scene-panel::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+
+  .scene-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 8px;
+    cursor: pointer;
+    border-radius: var(--radius);
+    font-size: 11px;
+    transition: background 0.1s;
+    border: 1px solid transparent;
+  }
+  .scene-item:hover { background: var(--surface2); }
+  .scene-item.active {
+    background: var(--gold-glow);
+    border-color: var(--gold-dim);
+  }
+  .scene-item .snum { color: var(--gold); font-weight: bold; min-width: 20px; }
+  .scene-item .sname { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--bone); }
+  .scene-item .sdur { color: var(--text-dim); font-size: 10px; }
+
+  .scene-field { margin-bottom: 8px; }
+  .scene-field label {
+    display: block;
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .scene-field select, .scene-field input, .scene-field textarea {
+    width: 100%;
+    padding: 5px 8px;
+    background: #1A1A1A;
+    border: 1px solid var(--border);
+    color: var(--bone);
+    font-family: var(--mono);
+    font-size: 11px;
+    border-radius: var(--radius);
+  }
+  .scene-field select:focus, .scene-field input:focus, .scene-field textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+  .scene-field textarea { resize: vertical; min-height: 40px; }
+  .field-row { display: flex; gap: 6px; }
+  .field-row .scene-field { flex: 1; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--gold-dim);
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+  .progress-info {
+    flex: 1;
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+  .btn-validate {
+    padding: 8px 24px;
+    background: var(--gold);
+    color: var(--bg);
+    font-family: var(--cinzel);
+    font-size: 13px;
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: background 0.2s;
+  }
+  .btn-validate:hover { background: #D4B35D; }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--gold);
+    color: var(--bg);
+    padding: 8px 20px;
+    border-radius: var(--radius);
+    font-weight: bold;
+    font-size: 12px;
+    font-family: var(--mono);
+    transition: transform 0.3s ease;
+    z-index: 100;
+    pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* Cross separator */
+  .cross-sep { opacity: 0.25; }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <div class="header-left">
+    <svg viewBox="0 0 100 100" width="30" height="30">
+      <path d="M50,2 L58,38 L96,22 L66,46 L98,50 L66,54 L96,78 L58,62 L50,98 L42,62 L4,78 L34,54 L2,50 L34,46 L4,22 L42,38 Z" fill="#C5A44E"/>
+    </svg>
+    <div>
+      <div class="header-title">CRUSADER</div>
+      <div class="header-sub">F02 CASTELLAN — Delta Preview Engine</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <svg viewBox="0 0 100 100" width="12" height="12" class="cross-sep">
+      <path d="M50,2 L58,38 L96,22 L66,46 L98,50 L66,54 L96,78 L58,62 L50,98 L42,62 L4,78 L34,54 L2,50 L34,46 L4,22 L42,38 Z" fill="#C5A44E"/>
+    </svg>
+    <button class="btn-import" onclick="importStoryboard()">📂 Import JSON</button>
+    <button class="btn-export" onclick="exportStoryboard()">⚔ Export storyboard.json</button>
+  </div>
+</header>
+
+<!-- ═══ LAYOUT ═══ -->
+<div class="layout">
+
+  <!-- LEFT: Config Panel -->
+  <aside class="config-panel" id="controls"></aside>
+
+  <!-- CENTER: Preview -->
+  <main class="preview-area">
+    <!-- Timeline -->
+    <div class="timeline-bar">
+      <button class="btn-play" id="btnPlay" onclick="togglePlay()">▶ Play</button>
+      <input id="timeline" type="range" min="0" max="100" value="50"/>
+      <span id="frameLabel" class="frame-label">0.0s / 30.0s</span>
+    </div>
+
+    <!-- Desktop viewport -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+      <span class="viewport-label">Desktop — 1920×1080</span>
+      <div class="viewport-box viewport-desktop" id="vp-desktop">
+        <canvas id="canvas-desktop" width="1920" height="1080"></canvas>
+      </div>
+    </div>
+
+    <!-- iPhone viewport -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+      <span class="viewport-label">iPhone 16 Pro Max</span>
+      <div class="viewport-box viewport-iphone" id="vp-iphone">
+        <canvas id="canvas-iphone" width="1080" height="1920"></canvas>
+      </div>
+    </div>
+  </main>
+
+  <!-- RIGHT: Scene Panel -->
+  <aside class="scene-panel">
+    <div class="section-title" style="margin-top:0;">📋 Scènes</div>
+    <div id="sceneList"></div>
+    <div style="display:flex;gap:4px;margin:8px 0;">
+      <button class="btn-small" style="flex:1;" onclick="addScene()">+ Ajouter</button>
+      <button class="btn-small" style="flex:1;color:#e55;border-color:rgba(229,85,85,0.3);" onclick="deleteScene()">✕ Supprimer</button>
+    </div>
+    <div class="section-title">🎬 Scène active</div>
+    <div id="sceneEditor"></div>
+  </aside>
+
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="progress-info" id="progressInfo">10 scènes · 30.0s · 900 frames @ 30fps</div>
+  <svg viewBox="0 0 100 100" width="12" height="12" class="cross-sep">
+    <path d="M50,2 L58,38 L96,22 L66,46 L98,50 L66,54 L96,78 L58,62 L50,98 L42,62 L4,78 L34,54 L2,50 L34,46 L4,22 L42,38 Z" fill="#C5A44E"/>
+  </svg>
+  <button class="btn-validate" onclick="exportStoryboard()">Valider & Sauvegarder</button>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+<input type="file" id="fileInput" accept=".json" style="display:none" onchange="handleImport(event)"/>
+
+<script>
+// ════════════════════════════════════════════════════
+// CHARACTERS.JS (embedded)
+// ════════════════════════════════════════════════════
+/**
+ * CRUSADER Delta — F03A L'INTERPRÉTEUR
+ * characters.js
+ *
+ * Personnage paramétrique Canvas 2D avec :
+ * - Corps articulé (tête, torse, bras, jambes avec articulations)
+ * - Système de postures (idle, walk, talk, gesture, sit)
+ * - Émotions faciales (neutral, happy, sad, angry, surprised, thinking)
+ * - 12 principes d'animation Disney intégrés
+ *
+ * Usage:
+ *   const char = new CrusaderCharacter(ctx, { scale: 1, palette: {...} });
+ *   char.setState('walk', 'happy');
+ *   char.draw(x, y, time);
+ */
+
+class CrusaderCharacter {
+  constructor(ctx, options = {}) {
+    this.ctx = ctx;
+    this.scale = options.scale || 1;
+    this.palette = {
+      skin: options.palette?.skin || '#F4C280',
+      outline: options.palette?.outline || '#2C3E50',
+      hair: options.palette?.hair || '#34495E',
+      shirt: options.palette?.shirt || '#3498DB',
+      pants: options.palette?.pants || '#2C3E50',
+      shoes: options.palette?.shoes || '#1A1A2E',
+      eye: options.palette?.eye || '#FFFFFF',
+      pupil: options.palette?.pupil || '#2C3E50',
+      mouth: options.palette?.mouth || '#C0392B',
+      ...options.palette,
+    };
+    this.lineWidth = options.lineWidth || 3;
+    this.posture = 'idle';
+    this.emotion = 'neutral';
+    this.direction = 1; // 1 = right, -1 = left
+    this.transitionProgress = 1;
+    this.prevPosture = 'idle';
+  }
+
+  setState(posture, emotion, direction) {
+    if (posture && posture !== this.posture) {
+      this.prevPosture = this.posture;
+      this.posture = posture;
+      this.transitionProgress = 0;
+    }
+    if (emotion) this.emotion = emotion;
+    if (direction !== undefined) this.direction = direction;
+  }
+
+  // ─── 12 PRINCIPLES HELPERS ───────────────────────
+
+  /** Principle 1: Squash & Stretch */
+  _squashStretch(t, intensity = 0.08) {
+    const s = Math.sin(t * 3) * intensity;
+    return { sx: 1 - s, sy: 1 + s };
+  }
+
+  /** Principle 2: Anticipation — wind-up before action */
+  _anticipation(t, phase, amount = 0.05) {
+    if (phase < 0.15) return -amount * Math.sin((phase / 0.15) * Math.PI);
+    return 0;
+  }
+
+  /** Principle 5: Follow-through & overlapping — delayed secondary motion */
+  _followThrough(t, delay = 0.3) {
+    return Math.sin((t - delay) * 2);
+  }
+
+  /** Principle 6: Slow in / Slow out — ease curve */
+  _easeInOut(t) {
+    return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+  }
+
+  /** Principle 7: Arcs — natural arc motion */
+  _arc(t, radius = 5) {
+    return Math.sin(t) * radius;
+  }
+
+  /** Principle 9: Timing — variable speed cycles */
+  _timing(t, speed = 1) {
+    return t * speed;
+  }
+
+  /** Principle 10: Exaggeration */
+  _exaggerate(value, factor = 1.3) {
+    return value * factor;
+  }
+
+  // ─── BODY SKELETON ──────────────────────────────
+
+  _getSkeleton(time, posture) {
+    const t = time;
+    const s = this.scale;
+
+    // Base skeleton (idle standing)
+    const skeleton = {
+      head: { x: 0, y: -70 * s, radius: 18 * s },
+      neck: { x: 0, y: -52 * s },
+      shoulderL: { x: -18 * s, y: -48 * s },
+      shoulderR: { x: 18 * s, y: -48 * s },
+      elbowL: { x: -28 * s, y: -28 * s },
+      elbowR: { x: 28 * s, y: -28 * s },
+      handL: { x: -30 * s, y: -8 * s },
+      handR: { x: 30 * s, y: -8 * s },
+      hip: { x: 0, y: -8 * s },
+      hipL: { x: -10 * s, y: -6 * s },
+      hipR: { x: 10 * s, y: -6 * s },
+      kneeL: { x: -12 * s, y: 22 * s },
+      kneeR: { x: 12 * s, y: 22 * s },
+      footL: { x: -14 * s, y: 48 * s },
+      footR: { x: 14 * s, y: 48 * s },
+      torsoTop: { x: 0, y: -48 * s },
+      torsoBottom: { x: 0, y: -8 * s },
+    };
+
+    // Apply posture-specific deformations
+    switch (posture) {
+      case 'walk':
+        this._applyWalk(skeleton, t, s);
+        break;
+      case 'talk':
+        this._applyTalk(skeleton, t, s);
+        break;
+      case 'gesture':
+        this._applyGesture(skeleton, t, s);
+        break;
+      case 'sit':
+        this._applySit(skeleton, t, s);
+        break;
+      case 'idle':
+      default:
+        this._applyIdle(skeleton, t, s);
+        break;
+    }
+
+    return skeleton;
+  }
+
+  _applyIdle(sk, t, s) {
+    // Principle 8: Secondary action — subtle breathing
+    const breathe = Math.sin(t * 1.5) * 2 * s;
+    sk.head.y += breathe * 0.5;
+    sk.shoulderL.y += breathe * 0.3;
+    sk.shoulderR.y += breathe * 0.3;
+    sk.neck.y += breathe * 0.4;
+    sk.torsoTop.y += breathe * 0.3;
+
+    // Subtle arm sway
+    sk.handL.x += Math.sin(t * 0.8) * 3 * s;
+    sk.handR.x -= Math.sin(t * 0.8 + 0.5) * 3 * s;
+    sk.elbowL.x += Math.sin(t * 0.8) * 1.5 * s;
+    sk.elbowR.x -= Math.sin(t * 0.8 + 0.5) * 1.5 * s;
+  }
+
+  _applyWalk(sk, t, s) {
+    const cycle = t * 3; // walk speed
+    const stride = Math.sin(cycle) * 15 * s;
+    const bounce = Math.abs(Math.sin(cycle)) * 4 * s;
+
+    // Principle 1: Squash & stretch on bounce
+    const { sy } = this._squashStretch(cycle, 0.03);
+
+    // Legs — alternating stride
+    sk.footL.x = -14 * s + stride;
+    sk.footR.x = 14 * s - stride;
+    sk.kneeL.x = -12 * s + stride * 0.5;
+    sk.kneeR.x = 12 * s - stride * 0.5;
+    sk.kneeL.y = 22 * s - Math.abs(Math.sin(cycle)) * 8 * s;
+    sk.kneeR.y = 22 * s - Math.abs(Math.sin(cycle + Math.PI)) * 8 * s;
+    sk.footL.y = 48 * s - Math.max(0, Math.sin(cycle)) * 12 * s;
+    sk.footR.y = 48 * s - Math.max(0, Math.sin(cycle + Math.PI)) * 12 * s;
+
+    // Body bounce
+    sk.head.y -= bounce * sy;
+    sk.neck.y -= bounce * 0.8;
+    sk.torsoTop.y -= bounce * 0.7;
+    sk.hip.y -= bounce * 0.3;
+
+    // Principle 7: Arcs — arms swing in arcs
+    sk.handL.x = -30 * s - stride * 0.6;
+    sk.handR.x = 30 * s + stride * 0.6;
+    sk.handL.y = -8 * s + this._arc(cycle, 5 * s);
+    sk.handR.y = -8 * s + this._arc(cycle + Math.PI, 5 * s);
+    sk.elbowL.x = -28 * s - stride * 0.3;
+    sk.elbowR.x = 28 * s + stride * 0.3;
+
+    // Principle 5: Follow-through — head lags slightly
+    sk.head.x = Math.sin(cycle - 0.3) * 2 * s;
+  }
+
+  _applyTalk(sk, t, s) {
+    this._applyIdle(sk, t, s);
+
+    // Principle 8: Secondary action — hand gestures while talking
+    const talkCycle = t * 4;
+    sk.handR.x = 30 * s + Math.sin(talkCycle) * 10 * s;
+    sk.handR.y = -25 * s + Math.sin(talkCycle * 1.3) * 8 * s;
+    sk.elbowR.x = 28 * s + Math.sin(talkCycle) * 5 * s;
+    sk.elbowR.y = -35 * s + Math.sin(talkCycle * 0.7) * 4 * s;
+  }
+
+  _applyGesture(sk, t, s) {
+    this._applyIdle(sk, t, s);
+
+    // Both arms up in expressive gesture
+    const gestCycle = t * 2;
+    const raise = this._easeInOut((Math.sin(gestCycle) + 1) / 2);
+
+    sk.handL.x = -35 * s - raise * 10 * s;
+    sk.handL.y = -40 * s - raise * 25 * s;
+    sk.handR.x = 35 * s + raise * 10 * s;
+    sk.handR.y = -40 * s - raise * 25 * s;
+    sk.elbowL.x = -30 * s - raise * 5 * s;
+    sk.elbowL.y = -40 * s - raise * 10 * s;
+    sk.elbowR.x = 30 * s + raise * 5 * s;
+    sk.elbowR.y = -40 * s - raise * 10 * s;
+
+    // Slight body lean
+    sk.head.y -= raise * 3 * s;
+  }
+
+  _applySit(sk, t, s) {
+    // Seated posture
+    sk.hip.y = 10 * s;
+    sk.hipL.y = 12 * s;
+    sk.hipR.y = 12 * s;
+    sk.kneeL = { x: -20 * s, y: 15 * s };
+    sk.kneeR = { x: 20 * s, y: 15 * s };
+    sk.footL = { x: -22 * s, y: 40 * s };
+    sk.footR = { x: 22 * s, y: 40 * s };
+    sk.torsoBottom.y = 10 * s;
+
+    // Breathing
+    const breathe = Math.sin(t * 1.5) * 1.5 * s;
+    sk.head.y += breathe * 0.3;
+    sk.shoulderL.y += breathe * 0.2;
+    sk.shoulderR.y += breathe * 0.2;
+  }
+
+  // ─── FACE / EMOTION ─────────────────────────────
+
+  _drawFace(x, y, radius, time) {
+    const ctx = this.ctx;
+    const r = radius;
+    const p = this.palette;
+
+    // Head circle
+    ctx.fillStyle = p.skin;
+    ctx.strokeStyle = p.outline;
+    ctx.lineWidth = this.lineWidth;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+
+    // Hair (top of head)
+    ctx.fillStyle = p.hair;
+    ctx.beginPath();
+    ctx.arc(x, y - r * 0.15, r * 1.05, Math.PI, Math.PI * 2);
+    ctx.fill();
+
+    // Eyes
+    const eyeSpacing = r * 0.35;
+    const eyeY = y - r * 0.1;
+    const eyeR = r * 0.18;
+    const pupilR = r * 0.09;
+
+    // Eye whites
+    ctx.fillStyle = p.eye;
+    ctx.beginPath();
+    ctx.ellipse(x - eyeSpacing, eyeY, eyeR, eyeR * 1.1, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = p.outline;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.ellipse(x + eyeSpacing, eyeY, eyeR, eyeR * 1.1, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+
+    // Pupils — with subtle look direction
+    const lookX = Math.sin(time * 0.5) * pupilR * 0.3;
+    ctx.fillStyle = p.pupil;
+    ctx.beginPath();
+    ctx.arc(x - eyeSpacing + lookX, eyeY, pupilR, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(x + eyeSpacing + lookX, eyeY, pupilR, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Emotion-specific features
+    this._drawEmotion(x, y, r, time);
+  }
+
+  _drawEmotion(x, y, r, time) {
+    const ctx = this.ctx;
+    const mouthY = y + r * 0.35;
+    const mouthW = r * 0.4;
+    const eyeY = y - r * 0.1;
+    const eyeSpacing = r * 0.35;
+    const browY = y - r * 0.32;
+
+    ctx.strokeStyle = this.palette.outline;
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+
+    switch (this.emotion) {
+      case 'happy':
+        // Smile
+        ctx.beginPath();
+        ctx.arc(x, mouthY - r * 0.05, mouthW, 0.1 * Math.PI, 0.9 * Math.PI);
+        ctx.stroke();
+        // Raised eyebrows
+        ctx.beginPath();
+        ctx.arc(x - eyeSpacing, browY + 2, r * 0.2, Math.PI * 1.2, Math.PI * 1.8);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(x + eyeSpacing, browY + 2, r * 0.2, Math.PI * 1.2, Math.PI * 1.8);
+        ctx.stroke();
+        // Blush
+        ctx.fillStyle = 'rgba(255, 150, 150, 0.3)';
+        ctx.beginPath();
+        ctx.ellipse(x - eyeSpacing - 2, mouthY - r * 0.15, r * 0.15, r * 0.08, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(x + eyeSpacing + 2, mouthY - r * 0.15, r * 0.15, r * 0.08, 0, 0, Math.PI * 2);
+        ctx.fill();
+        break;
+
+      case 'sad':
+        // Frown
+        ctx.beginPath();
+        ctx.arc(x, mouthY + r * 0.15, mouthW * 0.7, Math.PI * 1.2, Math.PI * 1.8);
+        ctx.stroke();
+        // Droopy eyebrows
+        ctx.beginPath();
+        ctx.moveTo(x - eyeSpacing - r * 0.15, browY - 2);
+        ctx.lineTo(x - eyeSpacing + r * 0.15, browY + 3);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x + eyeSpacing + r * 0.15, browY - 2);
+        ctx.lineTo(x + eyeSpacing - r * 0.15, browY + 3);
+        ctx.stroke();
+        break;
+
+      case 'angry':
+        // Tight mouth
+        ctx.beginPath();
+        ctx.moveTo(x - mouthW * 0.5, mouthY);
+        ctx.lineTo(x + mouthW * 0.5, mouthY);
+        ctx.stroke();
+        // Angry V eyebrows
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(x - eyeSpacing - r * 0.18, browY - 4);
+        ctx.lineTo(x - eyeSpacing + r * 0.1, browY + 2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x + eyeSpacing + r * 0.18, browY - 4);
+        ctx.lineTo(x + eyeSpacing - r * 0.1, browY + 2);
+        ctx.stroke();
+        break;
+
+      case 'surprised':
+        // O mouth
+        ctx.fillStyle = this.palette.mouth;
+        ctx.beginPath();
+        ctx.ellipse(x, mouthY, mouthW * 0.35, mouthW * 0.45, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+        // Raised eyebrows (high)
+        ctx.beginPath();
+        ctx.arc(x - eyeSpacing, browY - 4, r * 0.2, Math.PI * 1.2, Math.PI * 1.8);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(x + eyeSpacing, browY - 4, r * 0.2, Math.PI * 1.2, Math.PI * 1.8);
+        ctx.stroke();
+        break;
+
+      case 'thinking':
+        // Side mouth
+        ctx.beginPath();
+        ctx.moveTo(x + mouthW * 0.1, mouthY);
+        ctx.quadraticCurveTo(x + mouthW * 0.4, mouthY - 3, x + mouthW * 0.5, mouthY + 2);
+        ctx.stroke();
+        // One raised eyebrow
+        ctx.beginPath();
+        ctx.arc(x - eyeSpacing, browY, r * 0.2, Math.PI * 1.2, Math.PI * 1.8);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(x + eyeSpacing, browY - 5, r * 0.2, Math.PI * 1.15, Math.PI * 1.85);
+        ctx.stroke();
+        break;
+
+      case 'neutral':
+      default:
+        // Simple line mouth
+        ctx.beginPath();
+        ctx.moveTo(x - mouthW * 0.4, mouthY);
+        ctx.quadraticCurveTo(x, mouthY + 2, x + mouthW * 0.4, mouthY);
+        ctx.stroke();
+        // Flat eyebrows
+        ctx.beginPath();
+        ctx.moveTo(x - eyeSpacing - r * 0.15, browY);
+        ctx.lineTo(x - eyeSpacing + r * 0.15, browY);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x + eyeSpacing - r * 0.15, browY);
+        ctx.lineTo(x + eyeSpacing + r * 0.15, browY);
+        ctx.stroke();
+        break;
+    }
+  }
+
+  // ─── BODY DRAWING ───────────────────────────────
+
+  _drawLimb(from, to, width, color) {
+    const ctx = this.ctx;
+    ctx.strokeStyle = color || this.palette.outline;
+    ctx.lineWidth = width || this.lineWidth * 1.5;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(from.x, from.y);
+    ctx.lineTo(to.x, to.y);
+    ctx.stroke();
+  }
+
+  _drawBody(sk) {
+    const ctx = this.ctx;
+    const p = this.palette;
+
+    // Torso — filled shape
+    ctx.fillStyle = p.shirt;
+    ctx.strokeStyle = p.outline;
+    ctx.lineWidth = this.lineWidth;
+    ctx.beginPath();
+    ctx.moveTo(sk.shoulderL.x, sk.shoulderL.y);
+    ctx.lineTo(sk.shoulderR.x, sk.shoulderR.y);
+    ctx.lineTo(sk.hipR.x + 2, sk.torsoBottom.y);
+    ctx.lineTo(sk.hipL.x - 2, sk.torsoBottom.y);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // Legs
+    this._drawLimb(sk.hipL, sk.kneeL, this.lineWidth * 2.2, p.pants);
+    this._drawLimb(sk.hipR, sk.kneeR, this.lineWidth * 2.2, p.pants);
+    this._drawLimb(sk.kneeL, sk.footL, this.lineWidth * 2, p.pants);
+    this._drawLimb(sk.kneeR, sk.footR, this.lineWidth * 2, p.pants);
+
+    // Shoes
+    ctx.fillStyle = p.shoes;
+    ctx.beginPath();
+    ctx.ellipse(sk.footL.x, sk.footL.y, 7 * this.scale, 4 * this.scale, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(sk.footR.x, sk.footR.y, 7 * this.scale, 4 * this.scale, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Arms
+    this._drawLimb(sk.shoulderL, sk.elbowL, this.lineWidth * 1.8, p.shirt);
+    this._drawLimb(sk.shoulderR, sk.elbowR, this.lineWidth * 1.8, p.shirt);
+    this._drawLimb(sk.elbowL, sk.handL, this.lineWidth * 1.5, p.skin);
+    this._drawLimb(sk.elbowR, sk.handR, this.lineWidth * 1.5, p.skin);
+
+    // Hands
+    ctx.fillStyle = p.skin;
+    ctx.beginPath();
+    ctx.arc(sk.handL.x, sk.handL.y, 4.5 * this.scale, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(sk.handR.x, sk.handR.y, 4.5 * this.scale, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // ─── MAIN DRAW ──────────────────────────────────
+
+  draw(x, y, time) {
+    const ctx = this.ctx;
+
+    // Transition blending (Principle 6: Slow in/out)
+    if (this.transitionProgress < 1) {
+      this.transitionProgress = Math.min(1, this.transitionProgress + 0.05);
+    }
+
+    const skeleton = this._getSkeleton(time, this.posture);
+
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.scale(this.direction, 1);
+
+    // Principle 1: Global squash & stretch
+    const { sx, sy } = this._squashStretch(time, 0.02);
+    ctx.scale(sx, sy);
+
+    // Draw order: legs → body → arms → head (back to front)
+    this._drawBody(skeleton);
+    this._drawFace(
+      skeleton.head.x,
+      skeleton.head.y,
+      skeleton.head.radius,
+      time
+    );
+
+    // Neck
+    this._drawLimb(skeleton.neck, skeleton.head, this.lineWidth * 1.2, this.palette.skin);
+
+    ctx.restore();
+  }
+}
+
+// Export for both browser and Node
+if (typeof module !== 'undefined') module.exports = { CrusaderCharacter };
+
+
+// ════════════════════════════════════════════════════
+// BACKGROUNDS.JS (embedded)
+// ════════════════════════════════════════════════════
+/**
+ * CRUSADER Delta — F03A L'INTERPRÉTEUR
+ * backgrounds.js
+ *
+ * Décors vivants Canvas 2D — chaque élément "respire" via Math.sin(time).
+ * Système modulaire : un Background peut combiner plusieurs layers.
+ *
+ * Backgrounds disponibles :
+ * - CityBackground      : Ville nocturne avec gratte-ciels et néons
+ * - NatureBackground     : Paysage nature avec collines, arbres, nuages
+ * - OfficeBackground     : Bureau/intérieur avec fenêtres et mobilier
+ * - AbstractBackground   : Fond abstrait géométrique (pour transitions)
+ *
+ * Usage:
+ *   const bg = new NatureBackground(ctx, 1920, 1080);
+ *   bg.draw(time);
+ */
+
+// ─── BASE CLASS ────────────────────────────────────
+
+class CrusaderBackground {
+  constructor(ctx, width, height, options = {}) {
+    this.ctx = ctx;
+    this.W = width;
+    this.H = height;
+    this.palette = options.palette || {};
+  }
+
+  draw(time) {
+    // Override in subclass
+  }
+
+  _gradient(x0, y0, x1, y1, stops) {
+    const g = this.ctx.createLinearGradient(x0, y0, x1, y1);
+    stops.forEach(([offset, color]) => g.addColorStop(offset, color));
+    return g;
+  }
+}
+
+// ─── CITY BACKGROUND ──────────────────────────────
+
+class CityBackground extends CrusaderBackground {
+  constructor(ctx, width, height, options = {}) {
+    super(ctx, width, height, options);
+    this.buildings = this._generateBuildings();
+    this.stars = this._generateStars(80);
+  }
+
+  _generateBuildings() {
+    const buildings = [];
+    let x = 0;
+    while (x < this.W + 100) {
+      const w = 40 + Math.random() * 80;
+      const h = 100 + Math.random() * 350;
+      buildings.push({
+        x, w, h,
+        windows: Math.floor(h / 30),
+        windowCols: Math.floor(w / 20),
+        hue: Math.floor(Math.random() * 360),
+        neonChance: Math.random(),
+      });
+      x += w + 5 + Math.random() * 15;
+    }
+    return buildings;
+  }
+
+  _generateStars(count) {
+    const stars = [];
+    for (let i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * this.W,
+        y: Math.random() * this.H * 0.4,
+        size: 0.5 + Math.random() * 2,
+        twinkleSpeed: 1 + Math.random() * 3,
+        phase: Math.random() * Math.PI * 2,
+      });
+    }
+    return stars;
+  }
+
+  draw(time) {
+    const ctx = this.ctx;
+    const W = this.W;
+    const H = this.H;
+
+    // Sky gradient — breathing color shift
+    const skyShift = Math.sin(time * 0.2) * 10;
+    const sky = this._gradient(0, 0, 0, H, [
+      [0, `rgb(${10 + skyShift}, ${10 + skyShift}, ${40 + skyShift})`],
+      [0.4, `rgb(${20 + skyShift}, ${15 + skyShift}, ${55 + skyShift})`],
+      [0.8, `rgb(${30 + skyShift}, ${25 + skyShift}, ${70 + skyShift})`],
+      [1, `rgb(${45 + skyShift}, ${35 + skyShift}, ${85 + skyShift})`],
+    ]);
+    ctx.fillStyle = sky;
+    ctx.fillRect(0, 0, W, H);
+
+    // Stars — twinkling
+    this.stars.forEach(star => {
+      const alpha = 0.3 + Math.sin(time * star.twinkleSpeed + star.phase) * 0.5;
+      ctx.fillStyle = `rgba(255, 255, 255, ${Math.max(0, alpha)})`;
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // Moon — subtle glow
+    const moonX = W * 0.8;
+    const moonY = H * 0.12;
+    const moonGlow = 30 + Math.sin(time * 0.5) * 10;
+    ctx.fillStyle = `rgba(255, 255, 200, 0.08)`;
+    ctx.beginPath();
+    ctx.arc(moonX, moonY, moonGlow * 2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#FFFDE7';
+    ctx.beginPath();
+    ctx.arc(moonX, moonY, 25, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Ground
+    ctx.fillStyle = '#1A1A2E';
+    ctx.fillRect(0, H * 0.75, W, H * 0.25);
+
+    // Buildings
+    this.buildings.forEach(b => {
+      const groundY = H * 0.75;
+      const bx = b.x;
+      const by = groundY - b.h;
+
+      // Building body
+      ctx.fillStyle = `hsl(${b.hue}, 5%, 12%)`;
+      ctx.fillRect(bx, by, b.w, b.h);
+
+      // Building outline
+      ctx.strokeStyle = `hsl(${b.hue}, 10%, 20%)`;
+      ctx.lineWidth = 1;
+      ctx.strokeRect(bx, by, b.w, b.h);
+
+      // Windows — some lit, some dark, breathing
+      for (let row = 0; row < b.windows; row++) {
+        for (let col = 0; col < b.windowCols; col++) {
+          const wx = bx + 8 + col * 18;
+          const wy = by + 10 + row * 28;
+          if (wx + 10 > bx + b.w - 5) continue;
+
+          const isLit = Math.sin(row * 3.7 + col * 2.3 + b.hue) > -0.3;
+          if (isLit) {
+            const flicker = 0.5 + Math.sin(time * 2 + row + col * 0.5 + b.hue) * 0.3;
+            ctx.fillStyle = `rgba(255, 220, 100, ${flicker})`;
+          } else {
+            ctx.fillStyle = 'rgba(20, 20, 40, 0.8)';
+          }
+          ctx.fillRect(wx, wy, 10, 14);
+        }
+      }
+
+      // Neon sign (some buildings)
+      if (b.neonChance > 0.7) {
+        const neonAlpha = 0.5 + Math.sin(time * 3 + b.hue) * 0.4;
+        ctx.fillStyle = `hsla(${b.hue + 180}, 100%, 60%, ${neonAlpha})`;
+        ctx.fillRect(bx + b.w * 0.2, by + 15, b.w * 0.6, 6);
+        // Glow
+        ctx.shadowColor = `hsla(${b.hue + 180}, 100%, 60%, 0.5)`;
+        ctx.shadowBlur = 15;
+        ctx.fillRect(bx + b.w * 0.2, by + 15, b.w * 0.6, 6);
+        ctx.shadowBlur = 0;
+      }
+    });
+
+    // Ground road lines
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([30, 20]);
+    ctx.beginPath();
+    ctx.moveTo(0, H * 0.88);
+    ctx.lineTo(W, H * 0.88);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Atmospheric fog at ground level — breathing
+    const fogAlpha = 0.08 + Math.sin(time * 0.3) * 0.04;
+    const fogGrad = this._gradient(0, H * 0.7, 0, H, [
+      [0, 'rgba(100, 100, 150, 0)'],
+      [1, `rgba(100, 100, 150, ${fogAlpha})`],
+    ]);
+    ctx.fillStyle = fogGrad;
+    ctx.fillRect(0, H * 0.7, W, H * 0.3);
+  }
+}
+
+// ─── NATURE BACKGROUND ────────────────────────────
+
+class NatureBackground extends CrusaderBackground {
+  constructor(ctx, width, height, options = {}) {
+    super(ctx, width, height, options);
+    this.clouds = this._generateClouds(6);
+    this.trees = this._generateTrees(12);
+  }
+
+  _generateClouds(count) {
+    const clouds = [];
+    for (let i = 0; i < count; i++) {
+      clouds.push({
+        x: Math.random() * this.W * 1.5,
+        y: 50 + Math.random() * this.H * 0.2,
+        scale: 0.5 + Math.random() * 1,
+        speed: 8 + Math.random() * 15,
+        phase: Math.random() * Math.PI * 2,
+      });
+    }
+    return clouds;
+  }
+
+  _generateTrees(count) {
+    const trees = [];
+    for (let i = 0; i < count; i++) {
+      trees.push({
+        x: (i / count) * this.W + Math.random() * 80 - 40,
+        scale: 0.6 + Math.random() * 0.8,
+        swayPhase: Math.random() * Math.PI * 2,
+        swaySpeed: 0.8 + Math.random() * 0.6,
+        type: Math.random() > 0.5 ? 'pine' : 'round',
+      });
+    }
+    return trees;
+  }
+
+  draw(time) {
+    const ctx = this.ctx;
+    const W = this.W;
+    const H = this.H;
+
+    // Sky — breathing gradient
+    const dayShift = Math.sin(time * 0.15) * 20;
+    const sky = this._gradient(0, 0, 0, H * 0.6, [
+      [0, `rgb(${100 + dayShift}, ${170 + dayShift}, ${240 + dayShift})`],
+      [0.6, `rgb(${160 + dayShift}, ${210 + dayShift}, ${250})`],
+      [1, `rgb(${200 + dayShift}, ${230 + dayShift}, ${255})`],
+    ]);
+    ctx.fillStyle = sky;
+    ctx.fillRect(0, 0, W, H);
+
+    // Sun — gentle pulse
+    const sunPulse = 35 + Math.sin(time * 0.8) * 3;
+    ctx.fillStyle = 'rgba(255, 230, 100, 0.15)';
+    ctx.beginPath();
+    ctx.arc(W * 0.75, H * 0.12, sunPulse * 2.5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#FFE066';
+    ctx.beginPath();
+    ctx.arc(W * 0.75, H * 0.12, sunPulse, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Clouds — drifting
+    this.clouds.forEach(cloud => {
+      const cx = ((cloud.x + time * cloud.speed) % (W + 200)) - 100;
+      const cy = cloud.y + Math.sin(time * 0.5 + cloud.phase) * 5;
+      const s = cloud.scale;
+
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+      ctx.beginPath();
+      ctx.arc(cx, cy, 25 * s, 0, Math.PI * 2);
+      ctx.arc(cx + 22 * s, cy - 8 * s, 20 * s, 0, Math.PI * 2);
+      ctx.arc(cx + 40 * s, cy, 22 * s, 0, Math.PI * 2);
+      ctx.arc(cx + 18 * s, cy + 5 * s, 18 * s, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // Far hills — parallax breathing
+    const hillBreath = Math.sin(time * 0.3) * 3;
+    ctx.fillStyle = '#7CAE7A';
+    ctx.beginPath();
+    ctx.moveTo(0, H * 0.55);
+    for (let x = 0; x <= W; x += 40) {
+      const h = Math.sin(x * 0.003 + 1) * 40 + Math.sin(x * 0.007) * 20 + hillBreath;
+      ctx.lineTo(x, H * 0.52 - h);
+    }
+    ctx.lineTo(W, H);
+    ctx.lineTo(0, H);
+    ctx.closePath();
+    ctx.fill();
+
+    // Near hills
+    ctx.fillStyle = '#5B9A5B';
+    ctx.beginPath();
+    ctx.moveTo(0, H * 0.65);
+    for (let x = 0; x <= W; x += 30) {
+      const h = Math.sin(x * 0.005 + 2) * 30 + Math.sin(x * 0.01) * 15 + hillBreath * 0.5;
+      ctx.lineTo(x, H * 0.62 - h);
+    }
+    ctx.lineTo(W, H);
+    ctx.lineTo(0, H);
+    ctx.closePath();
+    ctx.fill();
+
+    // Ground
+    ctx.fillStyle = '#4A8C4A';
+    ctx.fillRect(0, H * 0.7, W, H * 0.3);
+
+    // Grass details
+    ctx.strokeStyle = '#3D7A3D';
+    ctx.lineWidth = 1.5;
+    for (let x = 0; x < W; x += 15) {
+      const grassSway = Math.sin(time * 2 + x * 0.1) * 4;
+      const grassH = 8 + Math.sin(x * 0.3) * 5;
+      ctx.beginPath();
+      ctx.moveTo(x, H * 0.7);
+      ctx.quadraticCurveTo(x + grassSway, H * 0.7 - grassH, x + grassSway * 1.2, H * 0.7 - grassH * 1.2);
+      ctx.stroke();
+    }
+
+    // Trees — swaying
+    this.trees.forEach(tree => {
+      const sway = Math.sin(time * tree.swaySpeed + tree.swayPhase) * 4 * tree.scale;
+      const baseY = H * 0.7;
+      const s = tree.scale;
+      const tx = tree.x;
+
+      // Trunk
+      ctx.fillStyle = '#5D4037';
+      ctx.beginPath();
+      ctx.moveTo(tx - 5 * s, baseY);
+      ctx.lineTo(tx - 3 * s + sway * 0.3, baseY - 50 * s);
+      ctx.lineTo(tx + 3 * s + sway * 0.3, baseY - 50 * s);
+      ctx.lineTo(tx + 5 * s, baseY);
+      ctx.closePath();
+      ctx.fill();
+
+      // Foliage
+      if (tree.type === 'pine') {
+        ctx.fillStyle = '#2E7D32';
+        for (let i = 0; i < 3; i++) {
+          const ly = baseY - 35 * s - i * 22 * s;
+          const lw = (25 - i * 6) * s;
+          ctx.beginPath();
+          ctx.moveTo(tx + sway * (0.5 + i * 0.2), ly - 20 * s);
+          ctx.lineTo(tx - lw + sway * (0.3 + i * 0.1), ly);
+          ctx.lineTo(tx + lw + sway * (0.3 + i * 0.1), ly);
+          ctx.closePath();
+          ctx.fill();
+        }
+      } else {
+        ctx.fillStyle = '#388E3C';
+        ctx.beginPath();
+        ctx.arc(tx + sway, baseY - 65 * s, 28 * s, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#2E7D32';
+        ctx.beginPath();
+        ctx.arc(tx - 12 * s + sway * 0.8, baseY - 55 * s, 20 * s, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(tx + 14 * s + sway * 1.1, baseY - 58 * s, 18 * s, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    });
+
+    // Ground path
+    ctx.fillStyle = '#8D6E63';
+    ctx.beginPath();
+    ctx.moveTo(W * 0.3, H);
+    ctx.quadraticCurveTo(W * 0.45, H * 0.75, W * 0.5, H * 0.7);
+    ctx.quadraticCurveTo(W * 0.55, H * 0.75, W * 0.7, H);
+    ctx.closePath();
+    ctx.fill();
+  }
+}
+
+// ─── OFFICE BACKGROUND ────────────────────────────
+
+class OfficeBackground extends CrusaderBackground {
+  draw(time) {
+    const ctx = this.ctx;
+    const W = this.W;
+    const H = this.H;
+
+    // Wall
+    ctx.fillStyle = '#E8E0D4';
+    ctx.fillRect(0, 0, W, H * 0.7);
+
+    // Floor
+    ctx.fillStyle = '#8B7355';
+    ctx.fillRect(0, H * 0.7, W, H * 0.3);
+
+    // Floor reflection
+    const floorGrad = this._gradient(0, H * 0.7, 0, H, [
+      [0, 'rgba(255, 255, 255, 0.1)'],
+      [1, 'rgba(0, 0, 0, 0.05)'],
+    ]);
+    ctx.fillStyle = floorGrad;
+    ctx.fillRect(0, H * 0.7, W, H * 0.3);
+
+    // Window — with breathing light
+    const lightPulse = 0.8 + Math.sin(time * 0.4) * 0.1;
+    ctx.fillStyle = `rgba(200, 220, 255, ${lightPulse})`;
+    ctx.fillRect(W * 0.1, H * 0.08, W * 0.35, H * 0.45);
+    // Window frame
+    ctx.strokeStyle = '#5D4037';
+    ctx.lineWidth = 6;
+    ctx.strokeRect(W * 0.1, H * 0.08, W * 0.35, H * 0.45);
+    // Window cross
+    ctx.beginPath();
+    ctx.moveTo(W * 0.275, H * 0.08);
+    ctx.lineTo(W * 0.275, H * 0.53);
+    ctx.moveTo(W * 0.1, H * 0.3);
+    ctx.lineTo(W * 0.45, H * 0.3);
+    ctx.stroke();
+
+    // Light rays from window — breathing
+    ctx.fillStyle = `rgba(255, 250, 220, ${0.03 + Math.sin(time * 0.5) * 0.015})`;
+    ctx.beginPath();
+    ctx.moveTo(W * 0.1, H * 0.53);
+    ctx.lineTo(W * 0.45, H * 0.53);
+    ctx.lineTo(W * 0.65, H * 0.7);
+    ctx.lineTo(0, H * 0.7);
+    ctx.closePath();
+    ctx.fill();
+
+    // Desk
+    ctx.fillStyle = '#5D4037';
+    ctx.fillRect(W * 0.55, H * 0.5, W * 0.35, H * 0.04);
+    // Desk legs
+    ctx.fillRect(W * 0.57, H * 0.54, 0.015 * W, H * 0.16);
+    ctx.fillRect(W * 0.87, H * 0.54, 0.015 * W, H * 0.16);
+
+    // Monitor on desk
+    ctx.fillStyle = '#333';
+    ctx.fillRect(W * 0.65, H * 0.3, W * 0.15, H * 0.2);
+    // Screen glow — breathing
+    const screenGlow = 0.7 + Math.sin(time * 1.5) * 0.2;
+    ctx.fillStyle = `rgba(100, 150, 255, ${screenGlow})`;
+    ctx.fillRect(W * 0.655, H * 0.31, W * 0.14, H * 0.18);
+    // Monitor stand
+    ctx.fillStyle = '#333';
+    ctx.fillRect(W * 0.715, H * 0.5, W * 0.02, -H * 0.02);
+
+    // Plant — breathing/swaying
+    const plantSway = Math.sin(time * 1.2) * 3;
+    const plantX = W * 0.92;
+    const plantY = H * 0.5;
+    // Pot
+    ctx.fillStyle = '#A0522D';
+    ctx.beginPath();
+    ctx.moveTo(plantX - 15, plantY);
+    ctx.lineTo(plantX - 12, plantY + 25);
+    ctx.lineTo(plantX + 12, plantY + 25);
+    ctx.lineTo(plantX + 15, plantY);
+    ctx.closePath();
+    ctx.fill();
+    // Leaves
+    ctx.fillStyle = '#4CAF50';
+    for (let i = 0; i < 5; i++) {
+      const angle = (i / 5) * Math.PI - Math.PI / 2 + plantSway * 0.02;
+      const leafLen = 20 + Math.sin(i * 2) * 8;
+      ctx.beginPath();
+      ctx.ellipse(
+        plantX + Math.cos(angle) * leafLen * 0.5 + plantSway * (i % 2 ? 1 : -1) * 0.3,
+        plantY - 5 + Math.sin(angle) * leafLen * 0.5,
+        leafLen * 0.6, 6, angle, 0, Math.PI * 2
+      );
+      ctx.fill();
+    }
+
+    // Wall art
+    ctx.strokeStyle = '#8D6E63';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(W * 0.6, H * 0.08, W * 0.12, H * 0.15);
+    ctx.fillStyle = '#E0D0C0';
+    ctx.fillRect(W * 0.605, H * 0.085, W * 0.11, H * 0.14);
+
+    // Baseboard
+    ctx.fillStyle = '#5D4037';
+    ctx.fillRect(0, H * 0.68, W, H * 0.02);
+  }
+}
+
+// ─── ABSTRACT BACKGROUND ──────────────────────────
+
+class AbstractBackground extends CrusaderBackground {
+  constructor(ctx, width, height, options = {}) {
+    super(ctx, width, height, options);
+    this.shapes = this._generateShapes(20);
+  }
+
+  _generateShapes(count) {
+    const shapes = [];
+    for (let i = 0; i < count; i++) {
+      shapes.push({
+        x: Math.random() * this.W,
+        y: Math.random() * this.H,
+        size: 20 + Math.random() * 60,
+        rotation: Math.random() * Math.PI * 2,
+        rotSpeed: (Math.random() - 0.5) * 0.5,
+        hue: Math.floor(Math.random() * 360),
+        type: ['circle', 'square', 'triangle'][Math.floor(Math.random() * 3)],
+        phase: Math.random() * Math.PI * 2,
+        floatSpeed: 0.3 + Math.random() * 0.7,
+      });
+    }
+    return shapes;
+  }
+
+  draw(time) {
+    const ctx = this.ctx;
+    const W = this.W;
+    const H = this.H;
+
+    // Deep background — breathing gradient
+    const hueShift = time * 10;
+    const bg = this._gradient(0, 0, W, H, [
+      [0, `hsl(${(220 + hueShift) % 360}, 30%, 8%)`],
+      [0.5, `hsl(${(250 + hueShift) % 360}, 25%, 12%)`],
+      [1, `hsl(${(280 + hueShift) % 360}, 30%, 8%)`],
+    ]);
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    // Floating shapes
+    this.shapes.forEach(shape => {
+      const fx = shape.x + Math.sin(time * shape.floatSpeed + shape.phase) * 30;
+      const fy = shape.y + Math.cos(time * shape.floatSpeed * 0.7 + shape.phase) * 20;
+      const rot = shape.rotation + time * shape.rotSpeed;
+      const alpha = 0.1 + Math.sin(time * 0.5 + shape.phase) * 0.08;
+      const pulse = shape.size + Math.sin(time + shape.phase) * 5;
+
+      ctx.save();
+      ctx.translate(fx, fy);
+      ctx.rotate(rot);
+      ctx.fillStyle = `hsla(${shape.hue}, 60%, 50%, ${alpha})`;
+      ctx.strokeStyle = `hsla(${shape.hue}, 70%, 60%, ${alpha * 2})`;
+      ctx.lineWidth = 1.5;
+
+      switch (shape.type) {
+        case 'circle':
+          ctx.beginPath();
+          ctx.arc(0, 0, pulse / 2, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+          break;
+        case 'square':
+          ctx.fillRect(-pulse / 2, -pulse / 2, pulse, pulse);
+          ctx.strokeRect(-pulse / 2, -pulse / 2, pulse, pulse);
+          break;
+        case 'triangle':
+          ctx.beginPath();
+          ctx.moveTo(0, -pulse / 2);
+          ctx.lineTo(-pulse / 2, pulse / 2);
+          ctx.lineTo(pulse / 2, pulse / 2);
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+          break;
+      }
+      ctx.restore();
+    });
+
+    // Grid overlay — subtle breathing
+    ctx.strokeStyle = `rgba(255, 255, 255, ${0.03 + Math.sin(time * 0.4) * 0.01})`;
+    ctx.lineWidth = 0.5;
+    const gridSize = 80;
+    for (let x = 0; x < W; x += gridSize) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, H);
+      ctx.stroke();
+    }
+    for (let y = 0; y < H; y += gridSize) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(W, y);
+      ctx.stroke();
+    }
+  }
+}
+
+// Export
+if (typeof module !== 'undefined') {
+  module.exports = { CrusaderBackground, CityBackground, NatureBackground, OfficeBackground, AbstractBackground };
+}
+
+
+// ════════════════════════════════════════════════════
+// EFFECTS.JS (embedded)
+// ════════════════════════════════════════════════════
+/**
+ * CRUSADER Delta — F03A L'INTERPRÉTEUR
+ * effects.js
+ *
+ * Effets visuels Canvas 2D pour enrichir les scènes.
+ * - ParticleSystem   : Particules génériques (poussière, pluie, neige, étincelles)
+ * - ScreenShake      : Tremblement d'écran pour les moments dramatiques
+ * - VignetteEffect   : Assombrissement des bords
+ * - TextOverlay      : Texte animé avec typing effect
+ */
+
+// ─── PARTICLE SYSTEM ──────────────────────────────
+
+class ParticleSystem {
+  constructor(ctx, width, height, options = {}) {
+    this.ctx = ctx;
+    this.W = width;
+    this.H = height;
+    this.type = options.type || 'dust'; // dust, rain, snow, sparks
+    this.count = options.count || 50;
+    this.particles = [];
+    this._init();
+  }
+
+  _init() {
+    for (let i = 0; i < this.count; i++) {
+      this.particles.push(this._createParticle());
+    }
+  }
+
+  _createParticle() {
+    const configs = {
+      dust: {
+        x: Math.random() * this.W,
+        y: Math.random() * this.H,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: -0.2 - Math.random() * 0.3,
+        size: 1 + Math.random() * 2.5,
+        alpha: 0.1 + Math.random() * 0.3,
+        color: '255, 255, 255',
+        life: Math.random(),
+      },
+      rain: {
+        x: Math.random() * this.W,
+        y: Math.random() * this.H,
+        vx: -1,
+        vy: 8 + Math.random() * 6,
+        size: 1,
+        length: 10 + Math.random() * 15,
+        alpha: 0.2 + Math.random() * 0.3,
+        color: '150, 180, 255',
+        life: Math.random(),
+      },
+      snow: {
+        x: Math.random() * this.W,
+        y: Math.random() * this.H,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: 0.5 + Math.random() * 1.5,
+        size: 2 + Math.random() * 4,
+        alpha: 0.3 + Math.random() * 0.5,
+        color: '255, 255, 255',
+        wobble: Math.random() * Math.PI * 2,
+        wobbleSpeed: 1 + Math.random() * 2,
+        life: Math.random(),
+      },
+      sparks: {
+        x: this.W * 0.5 + (Math.random() - 0.5) * 100,
+        y: this.H * 0.5,
+        vx: (Math.random() - 0.5) * 4,
+        vy: -2 - Math.random() * 4,
+        size: 1 + Math.random() * 2,
+        alpha: 0.5 + Math.random() * 0.5,
+        color: '255, 200, 50',
+        life: Math.random(),
+        decay: 0.005 + Math.random() * 0.01,
+      },
+    };
+    return { ...configs[this.type] };
+  }
+
+  draw(time) {
+    const ctx = this.ctx;
+
+    this.particles.forEach((p, i) => {
+      // Update position
+      p.x += p.vx;
+      p.y += p.vy;
+
+      // Type-specific behavior
+      if (this.type === 'snow') {
+        p.x += Math.sin(time * p.wobbleSpeed + p.wobble) * 0.5;
+      }
+
+      if (this.type === 'sparks') {
+        p.vy += 0.05; // gravity
+        p.alpha -= p.decay;
+      }
+
+      if (this.type === 'dust') {
+        p.alpha = (0.1 + Math.random() * 0.2) * (0.5 + Math.sin(time + i) * 0.5);
+      }
+
+      // Recycle particles
+      if (p.y > this.H + 20 || p.y < -20 || p.x > this.W + 20 || p.x < -20 || p.alpha <= 0) {
+        const newP = this._createParticle();
+        if (this.type === 'rain' || this.type === 'snow') newP.y = -10;
+        Object.assign(p, newP);
+      }
+
+      // Draw
+      ctx.fillStyle = `rgba(${p.color}, ${Math.max(0, p.alpha)})`;
+
+      if (this.type === 'rain') {
+        ctx.strokeStyle = `rgba(${p.color}, ${p.alpha})`;
+        ctx.lineWidth = p.size;
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p.x + p.vx * 2, p.y - p.length);
+        ctx.stroke();
+      } else {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    });
+  }
+}
+
+// ─── SCREEN SHAKE ─────────────────────────────────
+
+class ScreenShake {
+  constructor() {
+    this.intensity = 0;
+    this.decay = 0.95;
+  }
+
+  trigger(intensity = 10) {
+    this.intensity = intensity;
+  }
+
+  apply(ctx) {
+    if (this.intensity > 0.5) {
+      const dx = (Math.random() - 0.5) * this.intensity;
+      const dy = (Math.random() - 0.5) * this.intensity;
+      ctx.translate(dx, dy);
+      this.intensity *= this.decay;
+    } else {
+      this.intensity = 0;
+    }
+  }
+}
+
+// ─── VIGNETTE EFFECT ──────────────────────────────
+
+class VignetteEffect {
+  constructor(ctx, width, height, options = {}) {
+    this.ctx = ctx;
+    this.W = width;
+    this.H = height;
+    this.intensity = options.intensity || 0.4;
+    this.breathe = options.breathe !== false;
+  }
+
+  draw(time) {
+    const ctx = this.ctx;
+    const cx = this.W / 2;
+    const cy = this.H / 2;
+    const radius = Math.max(this.W, this.H) * 0.7;
+    const intensity = this.breathe
+      ? this.intensity + Math.sin(time * 0.3) * 0.05
+      : this.intensity;
+
+    const grad = ctx.createRadialGradient(cx, cy, radius * 0.3, cx, cy, radius);
+    grad.addColorStop(0, 'rgba(0, 0, 0, 0)');
+    grad.addColorStop(1, `rgba(0, 0, 0, ${intensity})`);
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, this.W, this.H);
+  }
+}
+
+// ─── TEXT OVERLAY ─────────────────────────────────
+
+class TextOverlay {
+  constructor(ctx, options = {}) {
+    this.ctx = ctx;
+    this.font = options.font || 'bold 32px sans-serif';
+    this.color = options.color || '#FFFFFF';
+    this.shadowColor = options.shadowColor || 'rgba(0,0,0,0.5)';
+    this.align = options.align || 'center';
+  }
+
+  draw(text, x, y, time, options = {}) {
+    const ctx = this.ctx;
+    const typing = options.typing || false;
+    const fadeIn = options.fadeIn || false;
+
+    let displayText = text;
+    if (typing && time !== undefined) {
+      const charsVisible = Math.floor(time * (options.typingSpeed || 15));
+      displayText = text.substring(0, Math.min(charsVisible, text.length));
+    }
+
+    let alpha = 1;
+    if (fadeIn && time !== undefined) {
+      alpha = Math.min(1, time * 2);
+    }
+
+    ctx.save();
+    ctx.font = this.font;
+    ctx.textAlign = this.align;
+    ctx.textBaseline = 'middle';
+
+    // Shadow
+    ctx.fillStyle = this.shadowColor;
+    ctx.fillText(displayText, x + 2, y + 2);
+
+    // Text
+    ctx.fillStyle = this.color;
+    ctx.globalAlpha = alpha;
+    ctx.fillText(displayText, x, y);
+
+    ctx.restore();
+  }
+}
+
+// Export
+if (typeof module !== 'undefined') {
+  module.exports = { ParticleSystem, ScreenShake, VignetteEffect, TextOverlay };
+}
+
+
+
+
+// ════════════════════════════════════════════════════
+// CRUSADER DELTA — F02 CASTELLAN PREVIEW ENGINE v3
+// ════════════════════════════════════════════════════
+
+const FONTS = [
+  "Cinzel", "Playfair Display", "Cormorant Garamond", "Montserrat",
+  "Oswald", "Bebas Neue", "Caveat", "Permanent Marker",
+  "Patrick Hand", "Courier Prime", "Space Mono", "Arial Black"
+];
+const FONTS_WITH_OTHER = [...FONTS, "__other__"];
+const FONT_LABELS = [
+  "Cinzel — Serif élégant", "Playfair Display — Serif", "Cormorant Garamond — Serif fin",
+  "Montserrat — Sans moderne", "Oswald — Sans condensé", "Bebas Neue — Sans display",
+  "Caveat — Handwriting", "Permanent Marker — Marker", "Patrick Hand — Whiteboard",
+  "Courier Prime — Monospace", "Space Mono — Mono tech", "Arial Black — Display bold",
+  "— Autre police —"
+];
+
+const BG_OPTIONS = [
+  { label: "Couleur unie", value: "solid" },
+  { label: "Quadrillé bleu", value: "grid_dark" },
+  { label: "Bleu uni", value: "solid_blue" },
+  { label: "Papier neuf", value: "paper_new" },
+  { label: "Papier froissé", value: "paper_crumpled" },
+  { label: "Papyrus ancien", value: "papyrus_old" },
+];
+
+const defaults = {
+  // Format
+  format: "horizontal",
+  // Capsules
+  world_scale: 0.85,
+  world_next_scale: 0.35,
+  world_opacity: 1.0,
+  world_next_opacity: 0.3,
+  // Camera
+  camera_amplitude: 200,
+  camera_spacing: 1500,
+  // Background
+  background_type: "solid",
+  background_color: "#0D0D1A",
+  background_scale: 1.0,
+  // Titles
+  world_title_visible: true,
+  world_title_font: "Cinzel",
+  world_title_size: 32,
+  world_title_color: "#C5A44E",
+  world_title_position: "left",
+  world_title_speed: 12,
+  world_title_gap: 20,
+  // Subtitles
+  font_primary: "Cinzel",
+  font_accent: "Playfair Display",
+  font_primary_other: "",
+  font_accent_other: "",
+  subtitle_font: "Cinzel",
+  subtitle_size: 44,
+  subtitle_color: "#FFFFFF",
+  subtitle_position: "bottom",
+  subtitle_align: "center",
+  subtitle_word_fade: 3,
+  subtitle_anim_enabled: true,
+  subtitle_anim_speed: 5,
+  // Accent / mots forts
+  accent_color: "#FFD700",
+  accent_size: 48,
+  accent_font: "Playfair Display",
+  // Production
+  production_title: "Jordan Belfort",
+  // Effects
+  grain_intensity: 0.15,
+  vignette: true,
+  // Character
+  character_scale: 2.5,
+  // Transitions
+  transition_duration: 0.5,
+  transition_frames: 12,
+};
+
+let storyboard = {
+  "version": "1.0",
+  "title": "CRUSADER Delta — VibeForge",
+  "engine": "VibeForge (Canvas 2D)",
+  "global": {
+    "fps": 30,
+    "width": 1920,
+    "height": 1080,
+    "character_scale": 2.5,
+    "transition_duration": 0.5,
+    "production_title": "Jordan Belfort",
+    "grain_intensity": 0.12,
+    "vignette": true,
+    "subtitle_font": "Georgia, serif",
+    "subtitle_size": 44,
+    "subtitle_color": "#FFFFFF",
+    "accent_color": "#FFD700",
+    "title_font": "Georgia, serif",
+    "title_size": 32,
+    "world_title_visible": true,
+    "background_color": "#0D0D1A"
+  },
+  "character": {
+    "palette": {
+      "skin": "#F4C280",
+      "outline": "#2C3E50",
+      "hair": "#34495E",
+      "shirt": "#3498DB",
+      "pants": "#2C3E50",
+      "shoes": "#1A1A2E"
+    }
+  },
+  "scenes": [
+    {
+      "id": "scene_01",
+      "name": "Intro — Nature Walk",
+      "duration": 3.0,
+      "background": "nature",
+      "character": {
+        "posture": "walk",
+        "emotion": "happy",
+        "direction": 1,
+        "start_x": 150,
+        "end_x": 1500,
+        "y_ratio": 0.72
+      },
+      "effects": {
+        "particles": null,
+        "vignette": true
+      },
+      "text": "Le voyage commence...",
+      "world_title": "Intro — Nature Walk"
+    },
+    {
+      "id": "scene_02",
+      "name": "Nature — Contemplation",
+      "duration": 3.0,
+      "background": "nature",
+      "character": {
+        "posture": "idle",
+        "emotion": "neutral",
+        "direction": 1,
+        "start_x": 960,
+        "end_x": 960,
+        "y_ratio": 0.72
+      },
+      "effects": {
+        "particles": null,
+        "vignette": true
+      },
+      "text": "",
+      "world_title": "Nature — Contemplation"
+    },
+    {
+      "id": "scene_03",
+      "name": "City — Night Walk",
+      "duration": 3.0,
+      "background": "city",
+      "character": {
+        "posture": "walk",
+        "emotion": "neutral",
+        "direction": 1,
+        "start_x": 200,
+        "end_x": 1200,
+        "y_ratio": 0.72
+      },
+      "effects": {
+        "particles": "dust",
+        "vignette": true
+      },
+      "text": "La ville ne dort jamais",
+      "world_title": "City — Night Walk"
+    },
+    {
+      "id": "scene_04",
+      "name": "City — Conversation",
+      "duration": 3.0,
+      "background": "city",
+      "character": {
+        "posture": "talk",
+        "emotion": "happy",
+        "direction": 1,
+        "start_x": 700,
+        "end_x": 900,
+        "y_ratio": 0.72
+      },
+      "effects": {
+        "particles": "dust",
+        "vignette": true
+      },
+      "text": "",
+      "world_title": "City — Conversation"
+    },
+    {
+      "id": "scene_05",
+      "name": "Office — Deep Thought",
+      "duration": 3.0,
+      "background": "office",
+      "character": {
+        "posture": "sit",
+        "emotion": "thinking",
+        "direction": -1,
+        "start_x": 450,
+        "end_x": 450,
+        "y_ratio": 0.72
+      },
+      "effects": {
+        "particles": null,
+        "vignette": true
+      },
+      "text": "Et si on changeait tout ?",
+      "world_title": "Office — Deep Thought"
+    },
+    {
+      "id": "scene_06",
+      "name": "Office — Eureka",
+      "duration": 3.0,
+      "background": "office",
+      "character": {
+        "posture": "gesture",
+        "emotion": "surprised",
+        "direction": -1,
+        "start_x": 500,
+        "end_x": 600,
+        "y_ratio": 0.72
+      },
+      "effects": {
+        "particles": "sparks",
+        "vignette": true
+      },
+      "text": "Eureka !",
+      "world_title": "Office — Eureka"
+    },
+    {
+      "id": "scene_07",
+      "name": "Abstract — Creative Space",
+      "duration": 3.0,
+      "background": "abstract",
+      "character": {
+        "posture": "idle",
+        "emotion": "happy",
+        "direction": 1,
+        "start_x": 960,
+        "end_x": 960,
+        "y_ratio": 0.6
+      },
+      "effects": {
+        "particles": "sparks",
+        "vignette": true
+      },
+      "text": "",
+      "world_title": "Abstract — Creative Space"
+    },
+    {
+      "id": "scene_08",
+      "name": "City — Melancholic Return",
+      "duration": 3.0,
+      "background": "city",
+      "character": {
+        "posture": "walk",
+        "emotion": "sad",
+        "direction": 1,
+        "start_x": 300,
+        "end_x": 1400,
+        "y_ratio": 0.72
+      },
+      "effects": {
+        "particles": "dust",
+        "vignette": true
+      },
+      "text": "Parfois il faut avancer...",
+      "world_title": "City — Melancholic Return"
+    },
+    {
+      "id": "scene_09",
+      "name": "Nature — Joyful Conclusion",
+      "duration": 3.0,
+      "background": "nature",
+      "character": {
+        "posture": "gesture",
+        "emotion": "happy",
+        "direction": 1,
+        "start_x": 800,
+        "end_x": 1000,
+        "y_ratio": 0.72
+      },
+      "effects": {
+        "particles": null,
+        "vignette": true
+      },
+      "text": "Le meilleur est à venir",
+      "world_title": "Nature — Joyful Conclusion"
+    },
+    {
+      "id": "scene_10",
+      "name": "Abstract — Fade Out",
+      "duration": 3.0,
+      "background": "abstract",
+      "character": {
+        "posture": "idle",
+        "emotion": "neutral",
+        "direction": 1,
+        "start_x": 960,
+        "end_x": 960,
+        "y_ratio": 0.6
+      },
+      "effects": {
+        "particles": null,
+        "vignette": true
+      },
+      "text": "FIN",
+      "world_title": "Abstract — Fade Out"
+    }
+  ]
+};
+
+let styleOverrides = {};
+let currentSceneIndex = 0;
+let playing = false;
+let animTime = 0;
+let playStartTime = 0;
+let sceneStartTime = 0;
+let animFrameId = null;
+
+function getS(key) {
+  return styleOverrides[key] ?? storyboard.global?.[key] ?? defaults[key];
+}
+function setS(key, val) {
+  styleOverrides[key] = val;
+  if (storyboard.global) storyboard.global[key] = val;
+}
+
+// ─── Background instances ───
+const bgInstances = {};
+function getBackground(ctx, w, h, type) {
+  const key = type + '_' + w + '_' + h;
+  if (!bgInstances[key]) {
+    switch (type) {
+      case 'city':     bgInstances[key] = new CityBackground(ctx, w, h); break;
+      case 'nature':   bgInstances[key] = new NatureBackground(ctx, w, h); break;
+      case 'office':   bgInstances[key] = new OfficeBackground(ctx, w, h); break;
+      case 'abstract': bgInstances[key] = new AbstractBackground(ctx, w, h); break;
+      default:         bgInstances[key] = new AbstractBackground(ctx, w, h);
+    }
+  }
+  return bgInstances[key];
+}
+
+const charInstances = {};
+function getCharacter(ctx, key) {
+  if (!charInstances[key]) {
+    charInstances[key] = new CrusaderCharacter(ctx, {
+      scale: parseFloat(getS('character_scale')),
+      palette: storyboard.character?.palette,
+    });
+  }
+  return charInstances[key];
+}
+function rebuildCharacters() { Object.keys(charInstances).forEach(k => delete charInstances[k]); }
+
+const particleInstances = {};
+function getParticles(ctx, w, h, type) {
+  if (!type) return null;
+  const key = type + '_' + w + '_' + h;
+  if (!particleInstances[key]) {
+    particleInstances[key] = new ParticleSystem(ctx, w, h, { type, count: 50 });
+  }
+  return particleInstances[key];
+}
+
+
+// ════════════════════════════════════════════════════
+// ════════════════════════════════════════════════════
+// BACKGROUND TEXTURES — Real PNGs from gamma
+// ════════════════════════════════════════════════════
+
+const BG_IMAGE_URLS = {
+  grid_dark: "https://raw.githubusercontent.com/kioka8877-ux/CRUSADER/main/gamma/F02_PREVIEW/dist/bg_grid_dark.png",
+  solid_blue: "https://raw.githubusercontent.com/kioka8877-ux/CRUSADER/main/gamma/F02_PREVIEW/dist/bg_solid_blue.png",
+  paper_new: "https://raw.githubusercontent.com/kioka8877-ux/CRUSADER/main/gamma/F02_PREVIEW/dist/bg_paper_new.png",
+  paper_crumpled: "https://raw.githubusercontent.com/kioka8877-ux/CRUSADER/main/gamma/F02_PREVIEW/dist/bg_paper_crumpled.png",
+  papyrus_old: "https://raw.githubusercontent.com/kioka8877-ux/CRUSADER/main/gamma/F02_PREVIEW/dist/bg_papyrus_old.png",
+};
+
+const bgImages = {};
+let bgImagesLoaded = false;
+
+// Preload all background images
+(function preloadBgImages() {
+  const keys = Object.keys(BG_IMAGE_URLS);
+  let loaded = 0;
+  keys.forEach(key => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => {
+      bgImages[key] = img;
+      loaded++;
+      if (loaded === keys.length) bgImagesLoaded = true;
+    };
+    img.onerror = () => {
+      console.warn("Failed to load bg:", key);
+      loaded++;
+      if (loaded === keys.length) bgImagesLoaded = true;
+    };
+    img.src = BG_IMAGE_URLS[key];
+  });
+})();
+
+function drawBgTexture(ctx, W, H, type) {
+  const bgColor = getS('background_color');
+  const bgScale = parseFloat(getS('background_scale')) || 1.0;
+
+  if (type === 'solid' || !type) {
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, W, H);
+    return;
+  }
+
+  const img = bgImages[type];
+  if (img && img.complete && img.naturalWidth > 0) {
+    // Draw the actual PNG — cover-fit THEN apply bgScale on top
+    ctx.save();
+    const coverScale = Math.max(W / img.naturalWidth, H / img.naturalHeight);
+    const finalScale = coverScale * bgScale;
+    const dw = img.naturalWidth * finalScale;
+    const dh = img.naturalHeight * finalScale;
+    const dx = (W - dw) / 2;
+    const dy = (H - dh) / 2;
+    ctx.drawImage(img, dx, dy, dw, dh);
+    ctx.restore();
+  } else {
+    // Fallback while loading
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, W, H);
+    ctx.font = "14px 'Courier Prime', monospace";
+    ctx.fillStyle = "rgba(197,164,78,0.3)";
+    ctx.textAlign = "center";
+    ctx.fillText("Chargement fond...", W/2, H/2);
+  }
+}
+
+
+function renderCanvas(canvasId, charKey) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width;
+  const H = canvas.height;
+
+  const scene = storyboard.scenes[currentSceneIndex];
+  if (!scene) return;
+
+  const totalDur = storyboard.scenes.reduce((s, sc) => s + sc.duration, 0);
+  let elapsed = 0;
+  for (let i = 0; i < currentSceneIndex; i++) elapsed += storyboard.scenes[i].duration;
+
+  let progress = 0.5;
+  let sceneTime = animTime;
+
+  if (playing) {
+    const now = performance.now() / 1000;
+    const sceneElapsed = now - sceneStartTime;
+    progress = Math.min(1, sceneElapsed / scene.duration);
+    sceneTime = now - playStartTime;
+  }
+
+  ctx.clearRect(0, 0, W, H);
+
+  // ─── 1. Background texture (full canvas — visible around the capsule) ───
+  const bgType = getS('background_type');
+  drawBgTexture(ctx, W, H, bgType);
+
+  // ─── 2. Capsule: draw scene at world_scale inside a centered rect ───
+  const worldScale = parseFloat(getS('world_scale')) || 0.85;
+  const worldOpacity = parseFloat(getS('world_opacity'));
+
+  const capsuleW = W * worldScale;
+  const capsuleH = H * worldScale;
+  const capsuleX = (W - capsuleW) / 2;
+  const capsuleY = (H - capsuleH) / 2;
+
+  ctx.save();
+  ctx.globalAlpha = worldOpacity;
+
+  // Clip to capsule rect with rounded corners
+  const cr = 12 * (W / 1920);
+  ctx.beginPath();
+  ctx.moveTo(capsuleX + cr, capsuleY);
+  ctx.lineTo(capsuleX + capsuleW - cr, capsuleY);
+  ctx.quadraticCurveTo(capsuleX + capsuleW, capsuleY, capsuleX + capsuleW, capsuleY + cr);
+  ctx.lineTo(capsuleX + capsuleW, capsuleY + capsuleH - cr);
+  ctx.quadraticCurveTo(capsuleX + capsuleW, capsuleY + capsuleH, capsuleX + capsuleW - cr, capsuleY + capsuleH);
+  ctx.lineTo(capsuleX + cr, capsuleY + capsuleH);
+  ctx.quadraticCurveTo(capsuleX, capsuleY + capsuleH, capsuleX, capsuleY + capsuleH - cr);
+  ctx.lineTo(capsuleX, capsuleY + cr);
+  ctx.quadraticCurveTo(capsuleX, capsuleY, capsuleX + cr, capsuleY);
+  ctx.closePath();
+  ctx.clip();
+
+  // Translate + scale so scene fills the capsule
+  ctx.translate(capsuleX, capsuleY);
+  ctx.scale(worldScale, worldScale);
+
+  // Scene background (nature/city/office/abstract)
+  const bg = getBackground(ctx, W, H, scene.background);
+  bg.draw(sceneTime);
+
+  // Character
+  const charData = scene.character;
+  const cx = charData.start_x + (charData.end_x - charData.start_x) * progress;
+  const cy = H * charData.y_ratio;
+
+  const char = getCharacter(ctx, charKey);
+  char.scale = parseFloat(getS('character_scale'));
+  char.setState(charData.posture, charData.emotion, charData.direction);
+  char.draw(cx, cy, sceneTime);
+
+  // Particles
+  const particles = getParticles(ctx, W, H, scene.effects?.particles);
+  if (particles) {
+    particles.update(sceneTime);
+    particles.draw();
+  }
+
+  // Vignette (inside capsule)
+  if (getS('vignette')) {
+    const vg = ctx.createRadialGradient(W/2, H/2, W*0.3, W/2, H/2, W*0.75);
+    vg.addColorStop(0, 'rgba(0,0,0,0)');
+    vg.addColorStop(1, 'rgba(0,0,0,0.5)');
+    ctx.fillStyle = vg;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  // Grain (inside capsule)
+  const grainIntensity = parseFloat(getS('grain_intensity'));
+  if (grainIntensity > 0.01 && W <= 960) {
+    // Only apply grain on small canvases (iPhone) for perf
+    const id = ctx.getImageData(0, 0, W/worldScale, H/worldScale);
+    const px = id.data;
+    const step = Math.max(8, Math.floor(16 / grainIntensity));
+    for (let i = 0; i < px.length; i += step * 4) {
+      const n = (Math.random() - 0.5) * 255 * grainIntensity;
+      px[i] = Math.min(255, Math.max(0, px[i] + n));
+      px[i+1] = Math.min(255, Math.max(0, px[i+1] + n));
+      px[i+2] = Math.min(255, Math.max(0, px[i+2] + n));
+    }
+    ctx.putImageData(id, 0, 0);
+  }
+
+  ctx.restore(); // end capsule clip + transform
+
+  // ─── Capsule shadow/border ───
+  ctx.strokeStyle = 'rgba(197,164,78,0.3)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(capsuleX + cr, capsuleY);
+  ctx.lineTo(capsuleX + capsuleW - cr, capsuleY);
+  ctx.quadraticCurveTo(capsuleX + capsuleW, capsuleY, capsuleX + capsuleW, capsuleY + cr);
+  ctx.lineTo(capsuleX + capsuleW, capsuleY + capsuleH - cr);
+  ctx.quadraticCurveTo(capsuleX + capsuleW, capsuleY + capsuleH, capsuleX + capsuleW - cr, capsuleY + capsuleH);
+  ctx.lineTo(capsuleX + cr, capsuleY + capsuleH);
+  ctx.quadraticCurveTo(capsuleX, capsuleY + capsuleH, capsuleX, capsuleY + capsuleH - cr);
+  ctx.lineTo(capsuleX, capsuleY + cr);
+  ctx.quadraticCurveTo(capsuleX, capsuleY, capsuleX + cr, capsuleY);
+  ctx.closePath();
+  ctx.stroke();
+
+  // ─── HUD Overlay (drawn OUTSIDE capsule, on full canvas) ───
+  const sf = W / 1920;
+  const fontPrimary = getS('font_primary') || 'Cinzel';
+  const fontAccent = getS('font_accent') || 'Playfair Display';
+  const accentColor = getS('accent_color');
+  const accentSize = parseFloat(getS('accent_size')) || 48;
+  const titleFont = getS('world_title_font') || fontPrimary;
+
+  // Title bar
+  ctx.fillStyle = 'rgba(0,0,0,0.7)';
+  ctx.fillRect(0, 0, W, 48 * sf);
+  ctx.fillStyle = accentColor;
+  ctx.fillRect(0, 48 * sf, W, 3 * sf);
+
+  ctx.font = `bold ${20 * sf}px '${titleFont}', Georgia, serif`;
+  ctx.fillStyle = accentColor;
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('⚔ ' + getS('production_title'), 16 * sf, 26 * sf);
+
+  ctx.font = `${13 * sf}px 'Courier Prime', monospace`;
+  ctx.fillStyle = '#666';
+  ctx.textAlign = 'right';
+  ctx.fillText(`CASTELLAN · ${W}×${H} · ${storyboard.global?.fps || 30}fps`, W - 16 * sf, 26 * sf);
+
+  // Scene title — alternance dessus/droite (comme gamma)
+  if (getS('world_title_visible') && scene.world_title) {
+    const tSize = parseFloat(getS('world_title_size'));
+    const tGap = parseFloat(getS('world_title_gap') || 20);
+    const tColor = getS('world_title_color');
+    const titleSpeed = parseInt(getS('world_title_speed')) || 12;
+    const isAbove = currentSceneIndex % 2 === 0;
+
+    // Smoothstep easing based on scene progress
+    const tProg = Math.min(1, progress * (30 / Math.max(1, titleSpeed)));
+    const tEased = tProg * tProg * (3 - 2 * tProg);
+
+    const titleFontPx = Math.max(tSize * sf, 10);
+    const gapPx = tGap * sf;
+
+    ctx.save();
+    ctx.globalAlpha = tEased;
+    ctx.font = `bold ${titleFontPx}px '${titleFont}', Georgia, serif`;
+    ctx.fillStyle = tColor;
+    ctx.shadowColor = 'rgba(0,0,0,0.85)';
+    ctx.shadowBlur = 8 * sf;
+    ctx.shadowOffsetY = 2 * sf;
+
+    if (isAbove) {
+      // Au-dessus de la capsule, centré horizontalement — drop animation
+      const dropOffset = -30 * sf * (1 - tEased);
+      const tx = capsuleX + capsuleW / 2;
+      const ty = capsuleY - gapPx + dropOffset;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'bottom';
+      ctx.fillText(scene.world_title, tx, ty);
+
+      // Scene counter
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetY = 0;
+      ctx.font = `${14 * sf}px '${titleFont}', monospace`;
+      ctx.fillStyle = '#666';
+      ctx.globalAlpha = tEased * 0.7;
+      ctx.fillText(`SCENE ${currentSceneIndex + 1} / ${storyboard.scenes.length}`, tx, ty - titleFontPx - 4 * sf);
+    } else {
+      // À droite de la capsule, centré verticalement — slide animation
+      const slideOffset = 40 * sf * (1 - tEased);
+      const tx = capsuleX + capsuleW + gapPx + slideOffset;
+      const ty = capsuleY + capsuleH / 2;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(scene.world_title, tx, ty);
+
+      // Scene counter
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetY = 0;
+      ctx.font = `${14 * sf}px '${titleFont}', monospace`;
+      ctx.fillStyle = '#666';
+      ctx.globalAlpha = tEased * 0.7;
+      ctx.fillText(`SCENE ${currentSceneIndex + 1} / ${storyboard.scenes.length}`, tx, ty + titleFontPx + 4 * sf);
+    }
+    ctx.restore();
+  }
+
+  // ─── Subtitle with **mots forts** ───
+  if (scene.text) {
+    const subSize = parseFloat(getS('subtitle_size'));
+    const subColor = getS('subtitle_color');
+    const subPos = getS('subtitle_position');
+    const subAlign = getS('subtitle_align');
+    const animEnabled = getS('subtitle_anim_enabled');
+    const animSpeed = parseInt(getS('subtitle_anim_speed')) || 5;
+
+    const parts = parseStrongWords(scene.text);
+    const totalChars = parts.reduce((s, p) => s + p.text.length, 0);
+
+    let visibleChars;
+    if (animEnabled) {
+      const typingProgress = Math.min(1, progress * (30 / Math.max(1, animSpeed)));
+      visibleChars = Math.floor(totalChars * typingProgress);
+    } else {
+      visibleChars = totalChars;
+    }
+
+    if (visibleChars > 0) {
+      let charCount = 0;
+      const visibleParts = [];
+      for (const part of parts) {
+        const remaining = visibleChars - charCount;
+        if (remaining <= 0) break;
+        const shown = part.text.substring(0, remaining);
+        visibleParts.push({ text: shown, strong: part.strong });
+        charCount += part.text.length;
+      }
+
+      // Measure total width
+      let totalWidth = 0;
+      for (const part of visibleParts) {
+        const fontSize = part.strong ? accentSize : subSize;
+        const font = part.strong ? fontAccent : fontPrimary;
+        ctx.font = `${part.strong?'bold ':' '}${fontSize * sf}px '${font}', Georgia, serif`;
+        totalWidth += ctx.measureText(part.text).width;
+      }
+
+      // Position Y
+      let subY;
+      if (subPos === 'top') subY = H * 0.15;
+      else if (subPos === 'center') subY = H * 0.5;
+      else subY = H - 100 * sf;
+
+      // Draw each part (no pill background)
+      const maxFontSize = Math.max(subSize, accentSize);
+      let drawX = W / 2 - totalWidth / 2;
+      const drawY = subY + (maxFontSize * sf) / 2;
+      ctx.textBaseline = 'middle';
+      ctx.textAlign = 'left';
+
+      for (const part of visibleParts) {
+        const fontSize = part.strong ? accentSize : subSize;
+        const font = part.strong ? fontAccent : fontPrimary;
+        ctx.font = `${part.strong?'bold ':''}${fontSize * sf}px '${font}', Georgia, serif`;
+        ctx.fillStyle = part.strong ? accentColor : subColor;
+        ctx.fillText(part.text, drawX, drawY);
+        drawX += ctx.measureText(part.text).width;
+      }
+    }
+  }
+
+  // Progress bar
+  ctx.fillStyle = 'rgba(0,0,0,0.4)';
+  ctx.fillRect(0, H - 6 * sf, W, 6 * sf);
+  ctx.fillStyle = accentColor;
+  const totalElapsed = elapsed + scene.duration * progress;
+  ctx.fillRect(0, H - 6 * sf, W * (totalElapsed / totalDur), 6 * sf);
+}
+
+// Parse **strong words** from text
+function parseStrongWords(text) {
+  const parts = [];
+  const regex = /\*\*(.+?)\*\*/g;
+  let lastIndex = 0;
+  let match;
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push({ text: text.slice(lastIndex, match.index), strong: false });
+    }
+    parts.push({ text: match[1], strong: true });
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < text.length) {
+    parts.push({ text: text.slice(lastIndex), strong: false });
+  }
+  if (parts.length === 0) parts.push({ text, strong: false });
+  return parts;
+}
+
+// ════════════════════════════════════════════════════
+// ANIMATION LOOP
+// ════════════════════════════════════════════════════
+
+function renderLoop() {
+  try {
+    if (playing) {
+      const now = performance.now() / 1000;
+      const sceneElapsed = now - sceneStartTime;
+      const scene = storyboard.scenes[currentSceneIndex];
+      if (sceneElapsed >= scene.duration) {
+        if (currentSceneIndex < storyboard.scenes.length - 1) {
+          currentSceneIndex++;
+          sceneStartTime = now;
+          loadSceneEditor();
+          buildSceneList();
+        } else { stopPlay(); }
+      }
+      updateTimelineSlider();
+    }
+    animTime += 1/60;
+    renderCanvas('canvas-desktop', 'desktop');
+    renderCanvas('canvas-iphone', 'iphone');
+  } catch (e) { console.error('renderLoop error:', e); }
+  animFrameId = requestAnimationFrame(renderLoop);
+}
+
+function togglePlay() { if (playing) stopPlay(); else startPlay(); }
+function startPlay() {
+  playing = true;
+  const now = performance.now() / 1000;
+  playStartTime = now;
+  sceneStartTime = now;
+  document.getElementById('btnPlay').textContent = '⏸ Pause';
+}
+function stopPlay() {
+  playing = false;
+  document.getElementById('btnPlay').textContent = '▶ Play';
+}
+function goToScene(i) {
+  currentSceneIndex = Math.max(0, Math.min(i, storyboard.scenes.length - 1));
+  if (playing) sceneStartTime = performance.now() / 1000;
+  try { loadSceneEditor(); } catch(e) { console.error('loadSceneEditor:', e); }
+  buildSceneList();
+  updateTimelineSlider();
+}
+
+function updateTimelineSlider() {
+  const totalDur = storyboard.scenes.reduce((s, sc) => s + sc.duration, 0);
+  let elapsed = 0;
+  for (let i = 0; i < currentSceneIndex; i++) elapsed += storyboard.scenes[i].duration;
+  if (playing) { elapsed += (performance.now() / 1000) - sceneStartTime; }
+  else { elapsed += storyboard.scenes[currentSceneIndex].duration * 0.5; }
+  document.getElementById('timeline').value = (elapsed / totalDur) * 100;
+  document.getElementById('frameLabel').textContent = `${elapsed.toFixed(1)}s / ${totalDur.toFixed(1)}s`;
+}
+
+document.getElementById('timeline').addEventListener('input', function() {
+  if (playing) stopPlay();
+  const pct = parseFloat(this.value) / 100;
+  const totalDur = storyboard.scenes.reduce((s, sc) => s + sc.duration, 0);
+  let target = pct * totalDur, elapsed = 0;
+  for (let i = 0; i < storyboard.scenes.length; i++) {
+    if (elapsed + storyboard.scenes[i].duration >= target) {
+      currentSceneIndex = i;
+      loadSceneEditor();
+      buildSceneList();
+      break;
+    }
+    elapsed += storyboard.scenes[i].duration;
+  }
+});
+
+function updateCanvasFormat() {
+  const fmt = getS('format');
+  const dc = document.getElementById('canvas-desktop');
+  const db = document.querySelector('.viewport-desktop');
+  if (fmt === 'vertical') {
+    dc.width = 1080; dc.height = 1920;
+    db.style.aspectRatio = '9/16'; db.style.maxWidth = '400px'; db.style.margin = '0 auto';
+  } else {
+    dc.width = 1920; dc.height = 1080;
+    db.style.aspectRatio = '16/9'; db.style.maxWidth = ''; db.style.margin = '';
+  }
+  Object.keys(bgInstances).forEach(k => delete bgInstances[k]);
+  rebuildCharacters();
+}
+
+function buildControls() {
+  const c = document.getElementById('controls');
+  c.innerHTML = `
+    ${section("📐 Format")}
+    ${radioGroup("format", [
+      {value:"horizontal", label:"Horizontal — 1920×1080"},
+      {value:"vertical", label:"Vertical — 1080×1920"}
+    ])}
+
+    ${section("📐 Capsules (Worlds)")}
+    ${slider("world_scale", "Taille visuel actif", 0.2, 1, 0.05)}
+    ${slider("world_next_scale", "Taille visuel N+1", 0.1, 1, 0.05)}
+    ${slider("world_opacity", "Opacité visuel actif", 0, 1, 0.05)}
+    ${slider("world_next_opacity", "Opacité visuel N+1", 0, 1, 0.01)}
+
+    ${section("🎥 Caméra sinusoïdale")}
+    ${slider("camera_amplitude", "Amplitude (px)", 0, 500, 10)}
+    ${slider("camera_spacing", "Espacement (px)", 500, 3000, 50)}
+
+    ${section("🖼️ Background")}
+    ${selectCtrl("background_type", "Type de fond",
+      BG_OPTIONS.map(o=>o.value), BG_OPTIONS.map(o=>o.label))}
+    ${colorCtrl("background_color", "Couleur fond")}
+    ${slider("background_scale", "Scale fond", 0.5, 2, 0.05)}
+
+    ${section("📝 Typographie")}
+    ${fontSelect("font_primary", "Police principale")}
+    ${fontSelect("font_accent", "Police accent (mots forts)")}
+    ${slider("subtitle_size", "Taille sous-titres (px)", 16, 120, 2)}
+    ${positionButtons("subtitle_position", "Position sous-titres")}
+
+    ${section("🎨 Couleurs")}
+    ${colorCtrl("subtitle_color", "Couleur sous-titres")}
+    ${colorCtrl("accent_color", "Couleur accent")}
+    ${colorCtrl("background_color", "Fond (si pas d'image)")}
+
+    ${section("💪 Mots forts (accent)")}
+    <div style="font-size:10px;color:var(--text-dim);margin-bottom:6px;line-height:1.4;">
+      Les mots entre <b style="color:var(--gold)">**doubles astérisques**</b> dans les sous-titres
+      utilisent la police accent avec ces paramètres.
+    </div>
+    ${fontSelect("accent_font", "Police mots forts")}
+    ${slider("accent_size", "Taille mots forts (px)", 16, 120, 2)}
+    ${colorCtrl("accent_color", "Couleur mots forts")}
+
+    ${section("🏷️ Titres (scène)")}
+    ${checkbox("world_title_visible", "Afficher les titres")}
+    ${fontSelect("world_title_font", "Police titre")}
+    ${slider("world_title_size", "Taille titre", 14, 60, 2)}
+    ${colorCtrl("world_title_color", "Couleur titre")}
+    ${slider("world_title_speed", "Vitesse anim (frames)", 4, 30, 1)}
+    ${slider("world_title_gap", "Espace titre↔visuel (px)", 0, 80, 2)}
+
+    ${section("📺 Animation sous-titres")}
+    ${checkbox("subtitle_anim_enabled", "Animation activée")}
+    ${slider("subtitle_anim_speed", "Vitesse (frames)", 1, 15, 1)}
+    ${slider("subtitle_word_fade", "Fondu mot (frames)", 1, 12, 1)}
+
+    ${section("🔄 Prévisualisation transition")}
+    <div style="position:relative;height:56px;background:#111;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:6px;">
+      <div id="tp-n" style="position:absolute;top:8px;left:8px;width:52px;height:40px;background:rgba(119,170,255,0.8);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:bold;color:#000;">N</div>
+      <div id="tp-n1" style="position:absolute;top:8px;right:8px;width:52px;height:40px;background:rgba(255,170,119,0.8);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:bold;color:#000;opacity:0.3;transform:scale(0.5);transform-origin:right center;">N+1</div>
+      <div id="tp-arrow" style="position:absolute;top:24px;left:68px;right:68px;height:2px;background:#e00;transform:scaleX(0);transform-origin:left center;opacity:0;"></div>
+    </div>
+    <div style="display:flex;gap:4px;margin-bottom:4px;">
+      <button class="btn-small" style="flex:1;font-size:10px;padding:4px;" onclick="runTransPreview(8)">8f</button>
+      <button class="btn-small" style="flex:1;font-size:10px;padding:4px;" onclick="runTransPreview(12)">12f</button>
+      <button class="btn-small" style="flex:1;font-size:10px;padding:4px;" onclick="runTransPreview(18)">18f</button>
+      <button class="btn-small" style="flex:1;font-size:10px;padding:4px;" onclick="runTransPreview(30)">30f</button>
+    </div>
+    <button class="btn-small" onclick="runTransPreview(lastTransFrames||12)" style="width:100%;font-size:10px;">▶ Rejouer</button>
+
+    ${section("🧍 Personnage")}
+    ${slider("character_scale", "Taille personnage", 0.5, 5, 0.1)}
+    ${slider("transition_duration", "Transition (s)", 0, 3, 0.1)}
+
+    ${section("🎬 Production")}
+    ${textInput("production_title", "Titre production")}
+
+    ${section("🎨 Effets")}
+    ${slider("grain_intensity", "Grain", 0, 1, 0.01)}
+    ${checkbox("vignette", "Vignetage activé")}
+  `;
+
+  bindControlEvents();
+}
+
+
+// ─── Control builder helpers ───
+function section(t) { return `<div class="section-title">${t}</div>`; }
+
+function slider(key, label, min, max, step) {
+  const v = getS(key);
+  return `<div class="ctrl-row"><label><span>${label}</span><span class="val">${v}</span></label><input type="range" data-key="${key}" min="${min}" max="${max}" step="${step}" value="${v}"></div>`;
+}
+
+function selectCtrl(key, label, values, labels) {
+  const v = getS(key);
+  const opts = values.map((val, i) => `<option value="${val}" ${String(val)===String(v)?"selected":""}>${labels[i]}</option>`).join('');
+  return `<div class="ctrl-row"><label>${label}</label><select data-key="${key}">${opts}</select></div>`;
+}
+
+function fontSelect(key, label) {
+  const v = getS(key);
+  const otherKey = key + '_other';
+  const isOther = !FONTS.includes(v) && v !== '';
+  const opts = FONTS_WITH_OTHER.map((f, i) => {
+    const selected = (f === v || (f === '__other__' && isOther)) ? 'selected' : '';
+    return `<option value="${f}" ${selected}>${FONT_LABELS[i]}</option>`;
+  }).join('');
+  const showOther = isOther || v === '__other__' ? '' : 'display:none;';
+  return `<div class="ctrl-row">
+    <label>${label}</label>
+    <select data-key="${key}" data-font="true" onchange="onFontChange('${key}','${otherKey}',this)">${opts}</select>
+    <input type="text" data-key="${otherKey}" value="${isOther ? v : ''}" placeholder="Nom exact de la police…" 
+      style="${showOther}margin-top:3px;background:#1A1A1A;border:1px solid var(--gold-dim);border-radius:var(--radius);padding:3px 6px;font-size:11px;color:var(--bone);font-family:var(--mono);width:100%;"
+      oninput="setS('${key}', this.value)">
+  </div>`;
+}
+
+function onFontChange(key, otherKey, selectEl) {
+  const val = selectEl.value;
+  const otherInput = selectEl.parentElement.querySelector(`input[data-key="${otherKey}"]`);
+  if (val === '__other__') {
+    otherInput.style.display = '';
+    otherInput.focus();
+  } else {
+    otherInput.style.display = 'none';
+    setS(key, val);
+  }
+}
+
+function colorCtrl(key, label) {
+  const v = getS(key);
+  return `<div class="ctrl-row" style="display:flex;align-items:center;gap:8px"><input type="color" data-key="${key}" value="${v}"><label style="flex:1">${label}</label><span class="val" style="font-size:10px">${v}</span></div>`;
+}
+
+function checkbox(key, label) {
+  const v = getS(key);
+  return `<div class="ctrl-row"><label style="gap:8px;cursor:pointer;display:flex;align-items:center"><input type="checkbox" data-key="${key}" ${v?"checked":""}> ${label}</label></div>`;
+}
+
+function textInput(key, label) {
+  const v = getS(key);
+  return `<div class="ctrl-row"><label>${label}</label><input type="text" data-key="${key}" value="${v||''}" style="width:100%;margin-top:2px;background:#1A1A1A;border:1px solid var(--gold-dim);border-radius:var(--radius);padding:3px 6px;font-size:11px;color:var(--bone);font-family:var(--mono);"></div>`;
+}
+
+function radioGroup(key, options) {
+  const v = getS(key);
+  return `<div class="ctrl-row" style="display:flex;gap:6px">${options.map(o => `
+    <label style="flex:1;display:flex;align-items:center;gap:4px;padding:6px 8px;background:${o.value===v?'var(--gold-glow)':'#1A1A1A'};border:1px solid ${o.value===v?'var(--gold-dim)':'var(--border)'};border-radius:var(--radius);cursor:pointer;font-size:10px;color:${o.value===v?'var(--gold)':'var(--bone)'}">
+      <input type="radio" name="${key}" value="${o.value}" ${o.value===v?"checked":""} style="accent-color:var(--gold)"> ${o.label}
+    </label>`).join('')}</div>`;
+}
+
+function positionButtons(key, label) {
+  const v = getS(key);
+  return `<div class="ctrl-row">
+    <label style="margin-bottom:4px">${label}</label>
+    <div style="display:flex;gap:6px;">
+      ${['top','center','bottom'].map(pos => {
+        const active = pos === v;
+        const barPos = pos === 'top' ? 'top:4px' : pos === 'center' ? 'top:50%;transform:translateY(-50%)' : 'bottom:4px';
+        const lbl = pos === 'top' ? 'Haut' : pos === 'center' ? 'Centre' : 'Bas';
+        return `<button class="btn-small" style="flex:1;padding:4px;${active?'border-color:var(--gold);color:var(--gold);background:var(--gold-glow)':''}" 
+          onclick="setS('${key}','${pos}');buildControls()">
+          <div style="position:relative;width:100%;height:28px;background:#111;border-radius:2px;margin-bottom:2px;">
+            <div style="position:absolute;left:15%;right:15%;height:4px;background:${active?'var(--gold)':'#555'};border-radius:1px;${barPos}"></div>
+          </div>
+          <span style="font-size:9px">${lbl}</span>
+        </button>`;
+      }).join('')}
+    </div>
+  </div>`;
+}
+
+// ─── Transition preview animation ───
+let lastTransFrames = 12;
+function runTransPreview(frames) {
+  lastTransFrames = frames;
+  setS('transition_frames', frames);
+  const n = document.getElementById('tp-n');
+  const n1 = document.getElementById('tp-n1');
+  const arrow = document.getElementById('tp-arrow');
+
+  // Reset
+  n.style.transition = 'none';
+  n1.style.transition = 'none';
+  arrow.style.transition = 'none';
+  n.style.opacity = '1'; n.style.transform = 'scale(1)';
+  n1.style.opacity = '0.3'; n1.style.transform = 'scale(0.5)';
+  arrow.style.transform = 'scaleX(0)'; arrow.style.opacity = '0';
+
+  requestAnimationFrame(() => {
+    const dur = (frames / 30).toFixed(2) + 's';
+    n.style.transition = `all ${dur} ease-in-out`;
+    n1.style.transition = `all ${dur} ease-in-out`;
+    arrow.style.transition = `all ${dur} ease-in-out`;
+
+    requestAnimationFrame(() => {
+      n.style.opacity = '0.3'; n.style.transform = 'scale(0.5)';
+      n1.style.opacity = '1'; n1.style.transform = 'scale(1)';
+      arrow.style.transform = 'scaleX(1)'; arrow.style.opacity = '1';
+    });
+  });
+}
+
+// ─── Bind all control events ───
+function bindControlEvents() {
+  const c = document.getElementById('controls');
+  c.querySelectorAll('input[type=range]').forEach(el => {
+    el.addEventListener('input', () => {
+      const v = parseFloat(el.value);
+      setS(el.dataset.key, v);
+      const valEl = el.closest('.ctrl-row').querySelector('.val');
+      if (valEl) valEl.textContent = v;
+      if (el.dataset.key === 'character_scale') rebuildCharacters();
+    });
+  });
+  c.querySelectorAll('select:not([data-font])').forEach(el => {
+    el.addEventListener('change', () => {
+      setS(el.dataset.key, el.value);
+      if (el.dataset.key === 'background_type') drawBgTextures();
+    });
+  });
+  c.querySelectorAll('select[data-font]').forEach(el => {
+    // Handled by onFontChange inline
+  });
+  c.querySelectorAll('input[type=checkbox]').forEach(el => {
+    el.addEventListener('change', () => setS(el.dataset.key, el.checked));
+  });
+  c.querySelectorAll('input[type=color]').forEach(el => {
+    el.addEventListener('input', () => {
+      setS(el.dataset.key, el.value);
+      const valEl = el.closest('.ctrl-row').querySelector('.val');
+      if (valEl) valEl.textContent = el.value;
+    });
+  });
+  c.querySelectorAll('input[type=text]').forEach(el => {
+    if (el.dataset.key && !el.dataset.key.endsWith('_other')) {
+      el.addEventListener('input', () => setS(el.dataset.key, el.value));
+    }
+  });
+  c.querySelectorAll('input[name=format]').forEach(el => {
+    el.addEventListener('change', () => {
+      setS('format', el.value);
+      updateCanvasFormat();
+    });
+  });
+}
+
+// ════════════════════════════════════════════════════
+// SCENE LIST + EDITOR
+// ════════════════════════════════════════════════════
+
+function buildSceneList() {
+  const container = document.getElementById('sceneList');
+  const bgEmoji = { nature:'🌿', city:'🌃', office:'🏢', abstract:'✨' };
+  container.innerHTML = storyboard.scenes.map((scene, i) => `
+    <div class="scene-item ${i===currentSceneIndex?'active':''}" onclick="goToScene(${i})">
+      <span class="snum">${i+1}</span>
+      <span class="sname">${bgEmoji[scene.background]||'🎬'} ${scene.name}</span>
+      <span class="sdur">${scene.duration}s</span>
+    </div>
+  `).join('');
+}
+
+function loadSceneEditor() {
+  const scene = storyboard.scenes[currentSceneIndex];
+  const ed = document.getElementById('sceneEditor');
+  ed.innerHTML = `
+    <div class="scene-field">
+      <label>Nom</label>
+      <input type="text" value="${scene.name||''}" onchange="updateSceneField('name', this.value)"/>
+    </div>
+    <div class="field-row">
+      <div class="scene-field">
+        <label>Durée (s)</label>
+        <input type="number" value="${scene.duration}" min="0.5" max="60" step="0.5" onchange="updateSceneField('duration', parseFloat(this.value))"/>
+      </div>
+      <div class="scene-field">
+        <label>Décor</label>
+        <select onchange="updateSceneField('background', this.value)">
+          <option value="nature" ${scene.background==='nature'?'selected':''}>🌿 Nature</option>
+          <option value="city" ${scene.background==='city'?'selected':''}>🌃 Ville</option>
+          <option value="office" ${scene.background==='office'?'selected':''}>🏢 Bureau</option>
+          <option value="abstract" ${scene.background==='abstract'?'selected':''}>✨ Abstrait</option>
+        </select>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="scene-field">
+        <label>Posture</label>
+        <select onchange="updateCharField('posture', this.value)">
+          ${['idle','walk','talk','gesture','sit'].map(p => `<option value="${p}" ${scene.character.posture===p?'selected':''}>${p}</option>`).join('')}
+        </select>
+      </div>
+      <div class="scene-field">
+        <label>Émotion</label>
+        <select onchange="updateCharField('emotion', this.value)">
+          ${['neutral','happy','sad','angry','surprised','thinking'].map(e => `<option value="${e}" ${scene.character.emotion===e?'selected':''}>${e}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="scene-field">
+        <label>Direction</label>
+        <select onchange="updateCharField('direction', parseInt(this.value))">
+          <option value="1" ${scene.character.direction===1?'selected':''}>→ Droite</option>
+          <option value="-1" ${scene.character.direction===-1?'selected':''}>← Gauche</option>
+        </select>
+      </div>
+      <div class="scene-field">
+        <label>Y ratio</label>
+        <input type="number" value="${scene.character.y_ratio}" min="0.2" max="0.95" step="0.02" onchange="updateCharField('y_ratio', parseFloat(this.value))"/>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="scene-field">
+        <label>Start X</label>
+        <input type="number" value="${scene.character.start_x}" min="0" max="1920" step="10" onchange="updateCharField('start_x', parseInt(this.value))"/>
+      </div>
+      <div class="scene-field">
+        <label>End X</label>
+        <input type="number" value="${scene.character.end_x}" min="0" max="1920" step="10" onchange="updateCharField('end_x', parseInt(this.value))"/>
+      </div>
+    </div>
+    <div class="scene-field">
+      <label>Particules</label>
+      <select onchange="updateEffectField('particles', this.value || null)">
+        <option value="" ${!scene.effects?.particles?'selected':''}>Aucune</option>
+        <option value="dust" ${scene.effects?.particles==='dust'?'selected':''}>Poussière</option>
+        <option value="rain" ${scene.effects?.particles==='rain'?'selected':''}>Pluie</option>
+        <option value="snow" ${scene.effects?.particles==='snow'?'selected':''}>Neige</option>
+        <option value="sparks" ${scene.effects?.particles==='sparks'?'selected':''}>Étincelles</option>
+      </select>
+    </div>
+    <div class="scene-field">
+      <label>Titre de scène</label>
+      <input type="text" value="${scene.world_title||''}" onchange="updateSceneField('world_title', this.value)"/>
+    </div>
+    <div class="scene-field">
+      <label>Sous-titre <span style="color:var(--text-dim);font-size:9px">(**mot** = accent)</span></label>
+      <textarea rows="2" onchange="updateSceneField('text', this.value)">${scene.text||''}</textarea>
+    </div>
+  `;
+  updateFooterInfo();
+}
+
+function updateSceneField(field, value) {
+  storyboard.scenes[currentSceneIndex][field] = value;
+  if (field === 'background') Object.keys(bgInstances).forEach(k => delete bgInstances[k]);
+  buildSceneList();
+  updateFooterInfo();
+}
+function updateCharField(field, value) { storyboard.scenes[currentSceneIndex].character[field] = value; }
+function updateEffectField(field, value) {
+  if (!storyboard.scenes[currentSceneIndex].effects) storyboard.scenes[currentSceneIndex].effects = {};
+  storyboard.scenes[currentSceneIndex].effects[field] = value || null;
+  Object.keys(particleInstances).forEach(k => delete particleInstances[k]);
+}
+
+function addScene() {
+  const n = storyboard.scenes.length + 1;
+  storyboard.scenes.push({
+    id: 'scene_' + String(n).padStart(2,'0'),
+    name: 'Nouvelle scène', duration: 3.0, background: 'nature',
+    character: { posture:'idle', emotion:'neutral', direction:1, start_x:960, end_x:960, y_ratio:0.72 },
+    effects: { particles:null, vignette:true }, text: '', world_title: 'Nouvelle scène',
+  });
+  currentSceneIndex = storyboard.scenes.length - 1;
+  buildSceneList(); loadSceneEditor(); showToast('Scène ajoutée ✅');
+}
+
+function deleteScene() {
+  if (storyboard.scenes.length <= 1) { showToast('Au moins 1 scène requise'); return; }
+  storyboard.scenes.splice(currentSceneIndex, 1);
+  if (currentSceneIndex >= storyboard.scenes.length) currentSceneIndex--;
+  buildSceneList(); loadSceneEditor(); showToast('Scène supprimée');
+}
+
+function updateFooterInfo() {
+  const totalDur = storyboard.scenes.reduce((s, sc) => s + sc.duration, 0);
+  const fps = storyboard.global?.fps || 30;
+  document.getElementById('progressInfo').textContent = 
+    `${storyboard.scenes.length} scènes · ${totalDur.toFixed(1)}s · ${Math.ceil(totalDur * fps)} frames @ ${fps}fps`;
+}
+
+// ════════════════════════════════════════════════════
+// IMPORT / EXPORT
+// ════════════════════════════════════════════════════
+
+function exportStoryboard() {
+  const merged = JSON.parse(JSON.stringify(storyboard));
+  Object.keys(styleOverrides).forEach(k => { merged.global[k] = styleOverrides[k]; });
+  const json = JSON.stringify(merged, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'storyboard.json'; a.click();
+  URL.revokeObjectURL(url);
+  showToast('⚔ storyboard.json exporté');
+}
+
+function importStoryboard() { document.getElementById('fileInput').click(); }
+function handleImport(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      storyboard = JSON.parse(e.target.result);
+      styleOverrides = {};
+      currentSceneIndex = 0;
+      Object.keys(bgInstances).forEach(k => delete bgInstances[k]);
+      Object.keys(particleInstances).forEach(k => delete particleInstances[k]);
+      rebuildCharacters();
+      buildControls(); buildSceneList(); loadSceneEditor();
+      showToast('Storyboard importé ✅');
+    } catch (err) { showToast('Erreur JSON: ' + err.message); }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ════════════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════════════
+buildControls();
+buildSceneList();
+loadSceneEditor();
+renderLoop();
+
+</script>
+</body>
+</html>
