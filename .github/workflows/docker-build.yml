@@ -7,10 +7,10 @@ on:
   push:
     branches: [main]
     paths:
-      - "alpha/F03_SIGISMUND/CODEBASE/Dockerfile"
-      - "alpha/F03_SIGISMUND/CODEBASE/docker-fonts-dl.js"
-      - "alpha/F03_SIGISMUND/CODEBASE/package.json"
-      - "alpha/F03_SIGISMUND/CODEBASE/package-lock.json"
+      - "gamma/F03_SIGISMUND/CODEBASE/Dockerfile"
+      - "gamma/F03_SIGISMUND/CODEBASE/docker-fonts-dl.js"
+      - "gamma/F03_SIGISMUND/CODEBASE/package.json"
+      - "gamma/F03_SIGISMUND/CODEBASE/package-lock.json"
 
 jobs:
   build-and-push:
