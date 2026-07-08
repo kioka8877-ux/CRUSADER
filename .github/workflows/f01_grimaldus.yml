@@ -10,6 +10,10 @@ on:
         description: "Mode de production (alpha|beta|gamma)"
         required: false
         default: "gamma"
+      skip_f01a:
+        description: "Skip F01A (silences already removed by operator)"
+        required: false
+        default: "false"
 
 jobs:
   grimaldus:
@@ -21,10 +25,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: V�rification FFmpeg
+      - name: Vérification FFmpeg
         run: |
           if command -v ffmpeg >/dev/null 2>&1; then
-            echo "[FFMPEG] ? $(ffmpeg -version 2>&1 | head -1)"
+            echo "[FFMPEG] ✅ $(ffmpeg -version 2>&1 | head -1)"
           else
             sudo apt-get update -qq
             sudo apt-get install -y --no-install-recommends ffmpeg
@@ -35,10 +39,12 @@ jobs:
 
       - name: Copier audio depuis le repo
         run: |
-          mkdir -p /tmp/f01_in
+          mkdir -p /tmp/f01_in /tmp/f01_out
           cp ${{ github.event.inputs.mode }}/SHARED/IN/audio_raw.mp3 /tmp/f01_in/audio_raw.mp3
           echo "[F01] audio_raw.mp3 copié depuis repo — $(du -h /tmp/f01_in/audio_raw.mp3 | cut -f1)"
-      - name: F01A - Suppression silences
+
+      - name: F01A - Suppression silences (auto)
+        if: ${{ github.event.inputs.skip_f01a != 'true' }}
         run: |
           python3 -c "
           import sys, json, os
@@ -50,8 +56,22 @@ jobs:
           silences = detect_silences('/tmp/f01_in/audio_raw.mp3', -40.0, 0.5)
           with open('/tmp/f01_out/silence_map.json', 'w') as f:
               json.dump({'silences': silences, 'silence_count': len(silences)}, f, indent=2)
-          print(f'[F01A] {len(silences)} silences supprim�s - audio_clean.mp3 produit')
+          print(f'[F01A] {len(silences)} silences supprimés - audio_clean.mp3 produit')
           "
+
+      - name: F01A - Copier audio_clean depuis repo (operator decision)
+        if: ${{ github.event.inputs.skip_f01a == 'true' }}
+        run: |
+          MODE=${{ github.event.inputs.mode }}
+          F01A_OUT="${MODE}/F01_GRIMALDUS/F01A_CASTELLAN_AUDIO/OUT"
+          echo "[F01A] SKIP — Using operator-validated audio_clean.mp3 from repo"
+          cp "${F01A_OUT}/audio_clean.mp3" /tmp/f01_out/audio_clean.mp3
+          if [ -f "${F01A_OUT}/silence_map.json" ]; then
+            cp "${F01A_OUT}/silence_map.json" /tmp/f01_out/silence_map.json
+          else
+            echo '{"operator_mode": true}' > /tmp/f01_out/silence_map.json
+          fi
+          echo "[F01A] audio_clean.mp3 — $(du -h /tmp/f01_out/audio_clean.mp3 | cut -f1)"
 
       - name: F01B - Transcription Whisper
         run: |
@@ -60,14 +80,14 @@ jobs:
             --output /tmp/f01_out \
             --model medium
 
-      - name: V�rifier les sorties F01
+      - name: Vérifier les sorties F01
         run: |
           echo "[F01] Artefacts produits :"
           for F in audio_clean.mp3 timing.json silence_map.json; do
             if [ -f "/tmp/f01_out/$F" ]; then
-              echo "  ? $F - $(du -h /tmp/f01_out/$F | cut -f1)"
+              echo "  ✅ $F - $(du -h /tmp/f01_out/$F | cut -f1)"
             else
-              echo "  ? $F - ABSENT"
+              echo "  ❌ $F - ABSENT"
               exit 1
             fi
           done
@@ -77,7 +97,7 @@ jobs:
               t = json.load(f)
           meta  = t.get('meta', {})
           words = t.get('words', [])
-          print(f'[F01B] Dur�e: {meta.get(\"duration_seconds\", \"?\")}s | Frames: {meta.get(\"total_frames\", \"?\")} | Mots: {len(words)}')
+          print(f'[F01B] Durée: {meta.get(\"duration_seconds\", \"?\")}s | Frames: {meta.get(\"total_frames\", \"?\")} | Mots: {len(words)}')
           "
 
       - name: Commit outputs vers F01 OUT

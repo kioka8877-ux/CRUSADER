@@ -1,0 +1,45 @@
+{
+  "silences_removed": [
+    {
+      "duration": 0.9515,
+      "end": 97.0473,
+      "start": 96.0958
+    },
+    {
+      "duration": 0.6134,
+      "end": 115.2718,
+      "start": 114.6585
+    },
+    {
+      "duration": 0.9759,
+      "end": 130.4566,
+      "start": 129.4807
+    },
+    {
+      "duration": 0.9895,
+      "end": 133.9472,
+      "start": 132.9578
+    }
+  ],
+  "silences_kept": [
+    {
+      "duration": 0.5757,
+      "end": 142.2643,
+      "start": 141.6885
+    },
+    {
+      "duration": 0.9011,
+      "end": 144.6636,
+      "start": 143.7625
+    },
+    {
+      "duration": 0.5443,
+      "end": 178.5369,
+      "start": 177.9927
+    }
+  ],
+  "original_duration": 332.52,
+  "new_duration": 328.992,
+  "removed_count": 4,
+  "total_removed_seconds": 3.5303
+}
