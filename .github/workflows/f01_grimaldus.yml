@@ -20,6 +20,8 @@ jobs:
     name: "F01A (silences) + F01B (Whisper)"
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
