@@ -1,80 +1,32 @@
 {
   "version": "1.0",
-  "run_id": "CRS_20260618_0718",
-  "production_title": "Jordan Belfort",
-  "gate_actuelle": "CLOSE",
-  "statut": "VICTORIA_AETERNA",
-  "etapes_completees": [
-    "F01",
-    "F02",
-    "F03",
-    "F04",
-    "CLOSE"
-  ],
+  "run_id": "CRS_20260708_0608",
+  "production_title": "6 Iconic American Brands That Disappeared Forever",
+  "gate_actuelle": "G1",
+  "statut": "EN_COURS",
+  "etapes_completees": [],
   "repo_root": null,
   "github_repo": "kioka8877-ux/CRUSADER",
   "artefacts": {
     "audio_raw": "SHARED/IN/audio_raw.mp3",
-    "audio_clean": "F01_GRIMALDUS/F01A_CASTELLAN_AUDIO/OUT/audio_clean.mp3",
-    "timing_json": "F01_GRIMALDUS/F01B_GRIMALDUS/OUT/timing.json",
-    "roadmap_json": "SHARED/OUT/roadmap.json",
-    "short_render": "F03_SIGISMUND/OUT/short_render.mp4",
-    "youtube_final": "F04_HELBRECHT/OUT/youtube_final.mp4"
+    "audio_clean": null,
+    "timing_json": null,
+    "roadmap_json": null,
+    "short_render": null,
+    "youtube_final": null
   },
-  "gh_runs": {
-    "f01": 27743322921,
-    "f03": 27805729066,
-    "f04": 27807245804
-  },
-  "gh_actions": {
-    "run_id": "CRS_20260618_0718",
-    "gh_run_id": 27807245804,
-    "status": "completed",
-    "workers": 10
-  },
+  "gh_runs": {},
+  "gh_actions": {},
   "f03_meta": {
     "fps": 30,
     "composition": "CrusaderShort",
-    "total_frames": 3276,
+    "total_frames": null,
     "format": "horizontal",
     "width": 1920,
     "height": 1080
   },
-  "f04_meta": {
-    "output_file": "youtube_long.mp4",
-    "size_mb": 76,
-    "title": "Jordan Belfort",
-    "codec": "h264"
-  },
-  "derniere_mise_a_jour": "2026-07-02T07:06:18.752297+01:00",
+  "f04_meta": {},
+  "derniere_mise_a_jour": "2026-07-08T06:08:47.005450+00:00",
   "instructions_cold_start": "Lire CRS_COLD_START.md. Cloner le repo. Mode gamma sur main. python CRS_EXECUTEUR.py --resume",
-  "canonical_mode": "gamma",
-  "promotion": {
-    "source_branch": "beta-test3-f03",
-    "promoted_at": "2026-07-02T07:06:18.752297+01:00",
-    "reason": "Pipeline F03+F04+F05 validated — promoted to gamma on main",
-    "last_successful_runs": {
-      "f03_sigismund": {
-        "gh_run_id": 28564290541,
-        "status": "success",
-        "branch": "beta-test3-f03",
-        "fixes": [
-          "Background.jsx condition",
-          "WorldTitle.jsx fallback",
-          "WorldScene.jsx overflow"
-        ]
-      },
-      "f04_helbrecht": {
-        "gh_run_id": 28568107103,
-        "status": "success",
-        "branch": "beta-test3-f03"
-      },
-      "f05_luther": {
-        "gh_run_id": 28568107103,
-        "job": "F05 LUTHER — Effacement empreinte",
-        "status": "success",
-        "verdict": "clean — zero Remotion/Puppeteer/Chromium traces"
-      }
-    }
-  }
+  "canonical_mode": "gamma"
 }
