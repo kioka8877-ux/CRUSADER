@@ -2,31 +2,99 @@
   "version": "1.0",
   "run_id": "CRS_20260708_0608",
   "production_title": "6 Iconic American Brands That Disappeared Forever",
-  "gate_actuelle": "G1",
+  "gate_actuelle": "G2",
   "statut": "EN_COURS",
-  "etapes_completees": [],
+  "etapes_completees": [
+    "F01"
+  ],
   "repo_root": null,
   "github_repo": "kioka8877-ux/CRUSADER",
   "artefacts": {
     "audio_raw": "SHARED/IN/audio_raw.mp3",
-    "audio_clean": null,
-    "timing_json": null,
+    "audio_clean": "F01_GRIMALDUS/F01B_GRIMALDUS/OUT/audio_clean.mp3",
+    "timing_json": "F01_GRIMALDUS/F01B_GRIMALDUS/OUT/timing.json",
     "roadmap_json": null,
     "short_render": null,
     "youtube_final": null
   },
-  "gh_runs": {},
-  "gh_actions": {},
+  "gh_runs": {
+    "f01": 28923465281
+  },
+  "gh_actions": {
+    "run_id": "CRS_20260708_0608",
+    "gh_run_id": 28923465281,
+    "status": "completed",
+    "workers": 10
+  },
+  "f01_meta": {
+    "duration_seconds": 328.93,
+    "fps": 30,
+    "total_frames": 9868,
+    "segments": 152,
+    "words": 1180,
+    "model": "medium",
+    "silence_removed": {
+      "count": 4,
+      "total_seconds": 3.53,
+      "operator_validated": true
+    }
+  },
   "f03_meta": {
     "fps": 30,
     "composition": "CrusaderShort",
-    "total_frames": null,
+    "total_frames": 9868,
     "format": "horizontal",
     "width": 1920,
     "height": 1080
   },
   "f04_meta": {},
-  "derniere_mise_a_jour": "2026-07-08T06:08:47.005450+00:00",
+  "derniere_mise_a_jour": "2026-07-08T07:14:41.799814+00:00",
   "instructions_cold_start": "Lire CRS_COLD_START.md. Cloner le repo. Mode gamma sur main. python CRS_EXECUTEUR.py --resume",
-  "canonical_mode": "gamma"
+  "canonical_mode": "gamma",
+  "error_log": [
+    {
+      "gate": "G1",
+      "erreur": "F01 lancé sans consulter l'opérateur",
+      "cause": "Pipeline non respecté — F01A (silence) = décision opérateur",
+      "fix": "Toujours lancer le viewer F01A d'abord, attendre validation opérateur",
+      "regle": "F01A = JAMAIS automatique. Opérateur décide les silences."
+    },
+    {
+      "gate": "G1",
+      "erreur": "Viewer F01A inaccessible (Flask + sandbox sans port)",
+      "cause": "Le viewer original est un serveur Flask, le sandbox n'expose pas de ports",
+      "fix": "Créé generate_standalone_viewer.py — génère un HTML autonome avec audio base64 + waveform + silences",
+      "regle": "Utiliser generate_standalone_viewer.py pour exporter le viewer en HTML standalone"
+    },
+    {
+      "gate": "G1",
+      "erreur": "Whisper timeout en local (sandbox)",
+      "cause": "Modèle medium trop lourd pour le sandbox",
+      "fix": "Toujours lancer F01B sur GitHub Actions, pas en local",
+      "regle": "F01B = GitHub Actions uniquement. Utiliser skip_f01a=true quand opérateur a validé."
+    },
+    {
+      "gate": "G1",
+      "erreur": "Workflow F01 sans mode gamma",
+      "cause": "Input mode ne listait que alpha|beta",
+      "fix": "Ajouté gamma dans la description + default: gamma"
+    },
+    {
+      "gate": "G1",
+      "erreur": "Workflow F01 faisait F01A automatiquement",
+      "cause": "Pas de mécanisme pour skip quand opérateur a validé",
+      "fix": "Ajouté input skip_f01a avec condition if sur les steps"
+    },
+    {
+      "gate": "G1",
+      "erreur": "Push denied 403 sur GitHub Actions",
+      "cause": "GITHUB_TOKEN par défaut read-only depuis 2023",
+      "fix": "Ajouté permissions: contents: write dans le job",
+      "regle": "Tous les workflows qui push doivent avoir permissions: contents: write"
+    }
+  ],
+  "process_notes": {
+    "f01a_process": "1. Lancer crs_f01a.py en background (Flask). 2. Lancer generate_standalone_viewer.py. 3. Exporter le HTML à l'opérateur. 4. Opérateur valide → JSON decision. 5. Générer audio_clean.mp3 en local. 6. Push audio_clean.mp3. 7. Trigger F01B sur GH Actions avec skip_f01a=true.",
+    "viewer_location": "F01_GRIMALDUS/F01A_CASTELLAN_AUDIO/CODEBASE/generate_standalone_viewer.py"
+  }
 }

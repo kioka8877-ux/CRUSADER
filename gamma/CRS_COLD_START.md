@@ -125,7 +125,33 @@ Si la production était à G3 ou G4, les artefacts sont sur la GH Release — pa
 
 ---
 
-## 9. Spec visuelle BETA (Remotion F03)
+## 9. Leçons G1 — Process F01A (silence removal)
+
+**F01A = JAMAIS automatique.** L'opérateur décide quels silences supprimer.
+
+Process correct :
+```bash
+# 1. Lancer le serveur F01A en background
+cd gamma/F01_GRIMALDUS/F01A_CASTELLAN_AUDIO
+python CODEBASE/crs_f01a.py --input IN --output OUT --port 5001 &
+
+# 2. Générer le viewer standalone (HTML exportable à l'opérateur)
+python CODEBASE/generate_standalone_viewer.py --port 5001 --audio IN/audio_raw.mp3 --output viewer_standalone.html
+
+# 3. Exporter viewer_standalone.html à l'opérateur
+# 4. Opérateur écoute, coche/décoche silences, clique VALIDATE, copie le JSON
+# 5. Agent génère audio_clean.mp3 en local (FFmpeg trim+concat)
+# 6. Push audio_clean.mp3 dans F01A/OUT/
+# 7. Trigger F01B sur GitHub Actions avec skip_f01a=true
+```
+
+**Permissions GitHub Actions :** tout workflow qui push doit avoir `permissions: contents: write` dans le job.
+
+**F01B = GitHub Actions uniquement.** Ne jamais tenter Whisper en local dans le sandbox.
+
+---
+
+## 10. Spec visuelle BETA (Remotion F03)
 
 Voir `TRACKING/CRUSADER_CAMPAIGN_LOG.md` section CAMP_03 pour la spec complète.
 
