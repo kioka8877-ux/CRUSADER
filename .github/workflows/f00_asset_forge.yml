@@ -190,6 +190,21 @@ jobs:
           cd F00_ASSET_FORGE/CODEBASE
           python crs_f00_index.py --forge-root .. 2>&1 | tee /tmp/index_log.txt
 
+      # === STEP 5b: CANVAS ===
+      - name: F00-5b CANVAS — Create contact sheet for oracle vision
+        run: |
+          cd F00_ASSET_FORGE/CODEBASE
+          python crs_f00_canvas.py --forge-root .. --output ../CANVAS 2>&1 | tee /tmp/canvas_log.txt
+          
+          # Lister les toiles générées
+          echo "=== Toiles générées ==="
+          find ../CANVAS -name "canvas_*.png" -type f -exec ls -lh {} \;
+          
+          # Afficher les prompts pour l'oracle
+          echo ""
+          echo "=== PROMPTS ORACLE ==="
+          python crs_f00_canvas.py --forge-root .. --prompt-only 2>&1 | tail -50
+
       # === STEP 6: COMMIT ===
       - name: F00-6 COMMIT — Push to f00-asset-forge
         run: |
@@ -230,6 +245,9 @@ jobs:
           echo ""
           echo "--- INDEX ---"
           cat /tmp/index_log.txt 2>/dev/null || echo "N/A"
+          echo ""
+          echo "--- CANVAS ---"
+          cat /tmp/canvas_log.txt 2>/dev/null | tail -10 || echo "N/A"
           echo ""
           echo "--- BANQUES ---"
           echo "BANK_A (characters): $(find F00_ASSET_FORGE/BANK_A_CHARACTERS -type f | wc -l) fichiers"
