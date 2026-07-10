@@ -1,0 +1,224 @@
+name: F00 ASSET FORGE - Ingest + Extract + Process + Index
+
+on:
+  workflow_dispatch:
+    inputs:
+      video_urls:
+        description: "URLs vidéo séparées par virgules (NASA, NOAA, ESA, USGS, Internet Archive, YouTube)"
+        required: true
+      mode:
+        description: "Mode de traitement (characters|nature|backgrounds|all)"
+        required: false
+        default: "all"
+      extract_fps:
+        description: "Frames par seconde pour l'extraction"
+        required: false
+        default: "1"
+      gif_duration:
+        description: "Durée des GIFs en secondes"
+        required: false
+        default: "3"
+      clip_duration:
+        description: "Durée des clips MP4 en secondes"
+        required: false
+        default: "8"
+
+jobs:
+  asset_forge:
+    name: "F00 — Ingest + Extract + Process + Index"
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: write
+
+    steps:
+      # === CHECKOUT (branche f00-asset-forge, pas main) ===
+      - name: Checkout f00-asset-forge branch
+        uses: actions/checkout@v4
+        with:
+          ref: f00-asset-forge
+
+      # === INSTALL DEPENDENCIES ===
+      - name: Install yt-dlp
+        run: |
+          curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
+          chmod a+rx /usr/local/bin/yt-dlp
+          yt-dlp --version
+
+      - name: Install Python dependencies
+        run: |
+          pip install rembg[cpu] pillow
+          python -c "from rembg import remove; print('rembg OK')"
+          python -c "from PIL import Image; print('pillow OK')"
+
+      - name: Vérification FFmpeg
+        run: |
+          ffmpeg -version | head -1
+          ffprobe -version | head -1
+
+      # === STEP 1: INGEST ===
+      - name: F00-1 INGEST — Download source videos
+        id: ingest
+        run: |
+          cd F00_ASSET_FORGE/CODEBASE
+          python crs_f00_ingest.py "${{ inputs.video_urls }}" --output /tmp/downloads 2>&1 | tee /tmp/ingest_log.txt
+          echo "INGEST_DONE=true" >> $GITHUB_OUTPUT
+
+      # === STEP 2: EXTRACT ===
+      - name: F00-2 EXTRACT — FFmpeg batch extraction
+        id: extract
+        run: |
+          cd F00_ASSET_FORGE/CODEBASE
+          
+          # Pour chaque vidéo téléchargée, extraire frames + GIFs + clips
+          VIDEO_FILES=$(find /tmp/downloads -type f \( -name "*.mp4" -o -name "*.webm" -o -name "*.mov" \) | head -20)
+          
+          TOTAL_FRAMES=0
+          TOTAL_GIFS=0
+          TOTAL_CLIPS=0
+          
+          for VIDEO in $VIDEO_FILES; do
+            echo "=== Extraction: $VIDEO ==="
+            python crs_f00_extract.py "$VIDEO" \
+              --output /tmp/extracted \
+              --fps ${{ inputs.extract_fps }} \
+              --gif-duration ${{ inputs.gif_duration }} \
+              --clip-duration ${{ inputs.clip_duration }} 2>&1 | tee -a /tmp/extract_log.txt
+          done
+          
+          echo "EXTRACT_DONE=true" >> $GITHUB_OUTPUT
+
+      # === STEP 3: PROCESS ===
+      - name: F00-3 PROCESS — Rembg + chroma key
+        id: process
+        run: |
+          cd F00_ASSET_FORGE/CODEBASE
+          
+          MODE="${{ inputs.mode }}"
+          
+          # Traiter les frames de chaque vidéo extraite
+          for FRAMES_DIR in /tmp/extracted/*/frames; do
+            if [ -d "$FRAMES_DIR" ]; then
+              echo "=== Processing frames: $FRAMES_DIR ==="
+              python crs_f00_process.py \
+                --frames "$FRAMES_DIR" \
+                --output /tmp/processed/frames \
+                --mode "$MODE" 2>&1 | tee -a /tmp/process_log.txt
+            fi
+          done
+          
+          # Traiter les GIFs
+          for GIFS_DIR in /tmp/extracted/*/gifs; do
+            if [ -d "$GIFS_DIR" ]; then
+              echo "=== Processing GIFs: $GIFS_DIR ==="
+              python crs_f00_process.py \
+                --gifs "$GIFS_DIR" \
+                --output /tmp/processed/gifs \
+                --mode "$MODE" 2>&1 | tee -a /tmp/process_log.txt
+            fi
+          done
+          
+          echo "PROCESS_DONE=true" >> $GITHUB_OUTPUT
+
+      # === STEP 4: DISTRIBUTE TO BANKS ===
+      - name: F00-4 DISTRIBUTE — Copy processed assets to banks
+        run: |
+          MODE="${{ inputs.mode }}"
+          FORGE_ROOT="F00_ASSET_FORGE"
+          
+          # Distribuer les frames traitées selon leur type
+          # Pour le mode "all", les frames sont auto-classifiées
+          # Pour les modes spécifiques, tout va dans la banque correspondante
+          
+          if [ "$MODE" = "characters" ] || [ "$MODE" = "all" ]; then
+            # Les PNG transparents (Rembg) → BANK_A
+            mkdir -p $FORGE_ROOT/BANK_A_CHARACTERS/standing
+            find /tmp/processed/frames -name "*.png" -type f | while read f; do
+              cp "$f" $FORGE_ROOT/BANK_A_CHARACTERS/standing/ 2>/dev/null || true
+            done
+          fi
+          
+          if [ "$MODE" = "nature" ] || [ "$MODE" = "all" ]; then
+            # Les PNG/GIF chroma key → BANK_B
+            mkdir -p $FORGE_ROOT/BANK_B_NATURE/fire
+            find /tmp/processed/frames -name "*.png" -type f | while read f; do
+              cp "$f" $FORGE_ROOT/BANK_B_NATURE/fire/ 2>/dev/null || true
+            done
+            find /tmp/processed/gifs -name "*.gif" -type f | while read f; do
+              cp "$f" $FORGE_ROOT/BANK_B_NATURE/fire/ 2>/dev/null || true
+            done
+          fi
+          
+          if [ "$MODE" = "backgrounds" ] || [ "$MODE" = "all" ]; then
+            # Les PNG non traités → BANK_C
+            mkdir -p $FORGE_ROOT/BANK_C_BACKGROUNDS/outdoor
+            find /tmp/processed/frames -name "*.png" -type f | while read f; do
+              cp "$f" $FORGE_ROOT/BANK_C_BACKGROUNDS/outdoor/ 2>/dev/null || true
+            done
+          fi
+          
+          # Les clips → BANK_D (toujours)
+          mkdir -p $FORGE_ROOT/BANK_D_CLIPS
+          find /tmp/extracted -name "clip_*.mp4" -type f | while read f; do
+            cp "$f" $FORGE_ROOT/BANK_D_CLIPS/ 2>/dev/null || true
+          done
+          
+          echo "Distribution terminée"
+          echo "=== Contenu des banques ==="
+          find $FORGE_ROOT/BANK_* -type f | wc -l
+          echo "fichiers dans les banques"
+
+      # === STEP 5: INDEX ===
+      - name: F00-5 INDEX — Update index.json
+        run: |
+          cd F00_ASSET_FORGE/CODEBASE
+          python crs_f00_index.py --forge-root .. 2>&1 | tee /tmp/index_log.txt
+
+      # === STEP 6: COMMIT ===
+      - name: F00-6 COMMIT — Push to f00-asset-forge
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add F00_ASSET_FORGE/
+          
+          if git diff --cached --quiet; then
+            echo "Aucun changement à committer"
+          else
+            COMMIT_MSG="f00: asset forge run — $(date -u '+%Y-%m-%d %H:%M') UTC"
+            COMMIT_MSG+=" | mode=${{ inputs.mode }}"
+            COMMIT_MSG+=" | urls=${{ inputs.video_urls }}"
+            git commit -m "$COMMIT_MSG"
+            git push
+            echo "Commité et poussé: $COMMIT_MSG"
+          fi
+
+      # === RÉSUMÉ ===
+      - name: Résumé du run
+        run: |
+          echo "=========================================="
+          echo "  F00 ASSET FORGE — RÉSUMÉ DU RUN"
+          echo "=========================================="
+          echo ""
+          echo "Mode: ${{ inputs.mode }}"
+          echo "URLs: ${{ inputs.video_urls }}"
+          echo ""
+          echo "--- INGEST ---"
+          cat /tmp/ingest_log.txt 2>/dev/null | tail -5 || echo "N/A"
+          echo ""
+          echo "--- EXTRACT ---"
+          cat /tmp/extract_log.txt 2>/dev/null | tail -5 || echo "N/A"
+          echo ""
+          echo "--- PROCESS ---"
+          cat /tmp/process_log.txt 2>/dev/null | tail -5 || echo "N/A"
+          echo ""
+          echo "--- INDEX ---"
+          cat /tmp/index_log.txt 2>/dev/null || echo "N/A"
+          echo ""
+          echo "--- BANQUES ---"
+          echo "BANK_A (characters): $(find F00_ASSET_FORGE/BANK_A_CHARACTERS -type f | wc -l) fichiers"
+          echo "BANK_B (nature): $(find F00_ASSET_FORGE/BANK_B_NATURE -type f | wc -l) fichiers"
+          echo "BANK_C (backgrounds): $(find F00_ASSET_FORGE/BANK_C_BACKGROUNDS -type f | wc -l) fichiers"
+          echo "BANK_D (clips): $(find F00_ASSET_FORGE/BANK_D_CLIPS -type f | wc -l) fichiers"
+          echo ""
+          echo "=========================================="
