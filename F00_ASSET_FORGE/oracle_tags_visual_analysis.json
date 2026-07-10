@@ -1,0 +1,1407 @@
+{
+  "frame_001": [
+    "intro",
+    "titre",
+    "nasa",
+    "donnée"
+  ],
+  "frame_002": [
+    "intro",
+    "titre",
+    "nasa",
+    "donnée"
+  ],
+  "frame_003": [
+    "intro",
+    "titre",
+    "nasa",
+    "donnée"
+  ],
+  "frame_004": [
+    "intro",
+    "titre",
+    "nasa",
+    "donnée"
+  ],
+  "frame_005": [
+    "intro",
+    "titre",
+    "nasa",
+    "donnée"
+  ],
+  "frame_006": [
+    "intro",
+    "titre",
+    "nasa",
+    "donnée"
+  ],
+  "frame_007": [
+    "intro",
+    "titre",
+    "nasa",
+    "donnée"
+  ],
+  "frame_008": [
+    "intro",
+    "titre",
+    "nasa",
+    "donnée"
+  ],
+  "frame_009": [
+    "intro",
+    "titre",
+    "nasa",
+    "donnée"
+  ],
+  "frame_010": [
+    "intro",
+    "titre",
+    "nasa",
+    "donnée"
+  ],
+  "frame_011": [
+    "satellite",
+    "données_gpm",
+    "technologie"
+  ],
+  "frame_012": [
+    "satellite",
+    "données_gpm",
+    "technologie"
+  ],
+  "frame_013": [
+    "satellite",
+    "données_gpm",
+    "technologie"
+  ],
+  "frame_014": [
+    "satellite",
+    "données_gpm",
+    "technologie"
+  ],
+  "frame_015": [
+    "satellite",
+    "données_gpm",
+    "technologie"
+  ],
+  "frame_016": [
+    "satellite",
+    "données_gpm",
+    "technologie"
+  ],
+  "frame_017": [
+    "satellite",
+    "données_gpm",
+    "technologie"
+  ],
+  "frame_018": [
+    "satellite",
+    "données_gpm",
+    "technologie"
+  ],
+  "frame_019": [
+    "satellite",
+    "données_gpm",
+    "technologie"
+  ],
+  "frame_020": [
+    "satellite",
+    "données_gpm",
+    "technologie"
+  ],
+  "frame_021": [
+    "visualisation",
+    "donnée",
+    "interface"
+  ],
+  "frame_022": [
+    "visualisation",
+    "donnée",
+    "interface"
+  ],
+  "frame_023": [
+    "visualisation",
+    "donnée",
+    "interface"
+  ],
+  "frame_024": [
+    "visualisation",
+    "donnée",
+    "interface"
+  ],
+  "frame_025": [
+    "visualisation",
+    "donnée",
+    "interface"
+  ],
+  "frame_026": [
+    "visualisation",
+    "donnée",
+    "interface"
+  ],
+  "frame_027": [
+    "visualisation",
+    "donnée",
+    "interface"
+  ],
+  "frame_028": [
+    "visualisation",
+    "donnée",
+    "interface"
+  ],
+  "frame_029": [
+    "visualisation",
+    "donnée",
+    "interface"
+  ],
+  "frame_030": [
+    "visualisation",
+    "donnée",
+    "interface"
+  ],
+  "frame_031": [
+    "télédétection",
+    "satellite",
+    "mesure"
+  ],
+  "frame_032": [
+    "télédétection",
+    "satellite",
+    "mesure"
+  ],
+  "frame_033": [
+    "télédétection",
+    "satellite",
+    "mesure"
+  ],
+  "frame_034": [
+    "télédétection",
+    "satellite",
+    "mesure"
+  ],
+  "frame_035": [
+    "télédétection",
+    "satellite",
+    "mesure"
+  ],
+  "frame_036": [
+    "télédétection",
+    "satellite",
+    "mesure"
+  ],
+  "frame_037": [
+    "télédétection",
+    "satellite",
+    "mesure"
+  ],
+  "frame_038": [
+    "télédétection",
+    "satellite",
+    "mesure"
+  ],
+  "frame_039": [
+    "télédétection",
+    "satellite",
+    "mesure"
+  ],
+  "frame_040": [
+    "télédétection",
+    "satellite",
+    "mesure"
+  ],
+  "frame_041": [
+    "animation",
+    "donnée",
+    "ouragan"
+  ],
+  "frame_042": [
+    "animation",
+    "donnée",
+    "ouragan"
+  ],
+  "frame_043": [
+    "animation",
+    "donnée",
+    "ouragan"
+  ],
+  "frame_044": [
+    "animation",
+    "donnée",
+    "ouragan"
+  ],
+  "frame_045": [
+    "animation",
+    "donnée",
+    "ouragan"
+  ],
+  "frame_046": [
+    "animation",
+    "donnée",
+    "ouragan"
+  ],
+  "frame_047": [
+    "animation",
+    "donnée",
+    "ouragan"
+  ],
+  "frame_048": [
+    "animation",
+    "donnée",
+    "ouragan"
+  ],
+  "frame_049": [
+    "animation",
+    "donnée",
+    "ouragan"
+  ],
+  "frame_050": [
+    "animation",
+    "donnée",
+    "ouragan"
+  ],
+  "frame_051": [
+    "satellite",
+    "tempête",
+    "visualisation"
+  ],
+  "frame_052": [
+    "satellite",
+    "tempête",
+    "visualisation"
+  ],
+  "frame_053": [
+    "satellite",
+    "tempête",
+    "visualisation"
+  ],
+  "frame_054": [
+    "satellite",
+    "tempête",
+    "visualisation"
+  ],
+  "frame_055": [
+    "satellite",
+    "tempête",
+    "visualisation"
+  ],
+  "frame_056": [
+    "satellite",
+    "tempête",
+    "visualisation"
+  ],
+  "frame_057": [
+    "satellite",
+    "tempête",
+    "visualisation"
+  ],
+  "frame_058": [
+    "satellite",
+    "tempête",
+    "visualisation"
+  ],
+  "frame_059": [
+    "satellite",
+    "tempête",
+    "visualisation"
+  ],
+  "frame_060": [
+    "satellite",
+    "tempête",
+    "visualisation"
+  ],
+  "frame_061": [
+    "radar",
+    "mesure",
+    "pluie"
+  ],
+  "frame_062": [
+    "radar",
+    "mesure",
+    "pluie"
+  ],
+  "frame_063": [
+    "radar",
+    "mesure",
+    "pluie"
+  ],
+  "frame_064": [
+    "radar",
+    "mesure",
+    "pluie"
+  ],
+  "frame_065": [
+    "radar",
+    "mesure",
+    "pluie"
+  ],
+  "frame_066": [
+    "radar",
+    "mesure",
+    "pluie"
+  ],
+  "frame_067": [
+    "radar",
+    "mesure",
+    "pluie"
+  ],
+  "frame_068": [
+    "radar",
+    "mesure",
+    "pluie"
+  ],
+  "frame_069": [
+    "radar",
+    "mesure",
+    "pluie"
+  ],
+  "frame_070": [
+    "radar",
+    "mesure",
+    "pluie"
+  ],
+  "frame_071": [
+    "donnée_temps_réel",
+    "technologie"
+  ],
+  "frame_072": [
+    "donnée_temps_réel",
+    "technologie"
+  ],
+  "frame_073": [
+    "donnée_temps_réel",
+    "technologie"
+  ],
+  "frame_074": [
+    "donnée_temps_réel",
+    "technologie"
+  ],
+  "frame_075": [
+    "donnée_temps_réel",
+    "technologie"
+  ],
+  "frame_076": [
+    "donnée_temps_réel",
+    "technologie"
+  ],
+  "frame_077": [
+    "donnée_temps_réel",
+    "technologie"
+  ],
+  "frame_078": [
+    "donnée_temps_réel",
+    "technologie"
+  ],
+  "frame_079": [
+    "donnée_temps_réel",
+    "technologie"
+  ],
+  "frame_080": [
+    "donnée_temps_réel",
+    "technologie"
+  ],
+  "frame_081": [
+    "tempête",
+    "trajectoire",
+    "satellite"
+  ],
+  "frame_082": [
+    "tempête",
+    "trajectoire",
+    "satellite"
+  ],
+  "frame_083": [
+    "tempête",
+    "trajectoire",
+    "satellite"
+  ],
+  "frame_084": [
+    "tempête",
+    "trajectoire",
+    "satellite"
+  ],
+  "frame_085": [
+    "tempête",
+    "trajectoire",
+    "satellite"
+  ],
+  "frame_086": [
+    "tempête",
+    "trajectoire",
+    "satellite"
+  ],
+  "frame_087": [
+    "tempête",
+    "trajectoire",
+    "satellite"
+  ],
+  "frame_088": [
+    "tempête",
+    "trajectoire",
+    "satellite"
+  ],
+  "frame_089": [
+    "tempête",
+    "trajectoire",
+    "satellite"
+  ],
+  "frame_090": [
+    "tempête",
+    "trajectoire",
+    "satellite"
+  ],
+  "frame_091": [
+    "inondation",
+    "impact",
+    "terrain"
+  ],
+  "frame_092": [
+    "inondation",
+    "impact",
+    "terrain"
+  ],
+  "frame_093": [
+    "inondation",
+    "impact",
+    "terrain"
+  ],
+  "frame_094": [
+    "inondation",
+    "impact",
+    "terrain"
+  ],
+  "frame_095": [
+    "inondation",
+    "impact",
+    "terrain"
+  ],
+  "frame_096": [
+    "inondation",
+    "impact",
+    "terrain"
+  ],
+  "frame_097": [
+    "inondation",
+    "impact",
+    "terrain"
+  ],
+  "frame_098": [
+    "inondation",
+    "impact",
+    "terrain"
+  ],
+  "frame_099": [
+    "inondation",
+    "impact",
+    "terrain"
+  ],
+  "frame_100": [
+    "satellite_sol",
+    "comparaison",
+    "avant_après"
+  ],
+  "frame_101": [
+    "satellite_sol",
+    "comparaison",
+    "avant_après"
+  ],
+  "frame_102": [
+    "satellite_sol",
+    "comparaison",
+    "avant_après"
+  ],
+  "frame_103": [
+    "satellite_sol",
+    "comparaison",
+    "avant_après"
+  ],
+  "frame_104": [
+    "satellite_sol",
+    "comparaison",
+    "avant_après"
+  ],
+  "frame_105": [
+    "satellite_sol",
+    "comparaison",
+    "avant_après"
+  ],
+  "frame_106": [
+    "satellite_sol",
+    "comparaison",
+    "avant_après"
+  ],
+  "frame_107": [
+    "satellite_sol",
+    "comparaison",
+    "avant_après"
+  ],
+  "frame_108": [
+    "satellite_sol",
+    "comparaison",
+    "avant_après"
+  ],
+  "frame_109": [
+    "dégât",
+    "tempête",
+    "infrastructure"
+  ],
+  "frame_110": [
+    "dégât",
+    "tempête",
+    "infrastructure"
+  ],
+  "frame_111": [
+    "dégât",
+    "tempête",
+    "infrastructure"
+  ],
+  "frame_112": [
+    "dégât",
+    "tempête",
+    "infrastructure"
+  ],
+  "frame_113": [
+    "dégât",
+    "tempête",
+    "infrastructure"
+  ],
+  "frame_114": [
+    "dégât",
+    "tempête",
+    "infrastructure"
+  ],
+  "frame_115": [
+    "dégât",
+    "tempête",
+    "infrastructure"
+  ],
+  "frame_116": [
+    "dégât",
+    "tempête",
+    "infrastructure"
+  ],
+  "frame_117": [
+    "dégât",
+    "tempête",
+    "infrastructure"
+  ],
+  "frame_118": [
+    "eau",
+    "inondation",
+    "mesure"
+  ],
+  "frame_119": [
+    "eau",
+    "inondation",
+    "mesure"
+  ],
+  "frame_120": [
+    "eau",
+    "inondation",
+    "mesure"
+  ],
+  "frame_121": [
+    "eau",
+    "inondation",
+    "mesure"
+  ],
+  "frame_122": [
+    "eau",
+    "inondation",
+    "mesure"
+  ],
+  "frame_123": [
+    "eau",
+    "inondation",
+    "mesure"
+  ],
+  "frame_124": [
+    "eau",
+    "inondation",
+    "mesure"
+  ],
+  "frame_125": [
+    "eau",
+    "inondation",
+    "mesure"
+  ],
+  "frame_126": [
+    "eau",
+    "inondation",
+    "mesure"
+  ],
+  "frame_127": [
+    "radar_pluie",
+    "visualisation",
+    "donnée"
+  ],
+  "frame_128": [
+    "radar_pluie",
+    "visualisation",
+    "donnée"
+  ],
+  "frame_129": [
+    "radar_pluie",
+    "visualisation",
+    "donnée"
+  ],
+  "frame_130": [
+    "radar_pluie",
+    "visualisation",
+    "donnée"
+  ],
+  "frame_131": [
+    "radar_pluie",
+    "visualisation",
+    "donnée"
+  ],
+  "frame_132": [
+    "radar_pluie",
+    "visualisation",
+    "donnée"
+  ],
+  "frame_133": [
+    "radar_pluie",
+    "visualisation",
+    "donnée"
+  ],
+  "frame_134": [
+    "radar_pluie",
+    "visualisation",
+    "donnée"
+  ],
+  "frame_135": [
+    "radar_pluie",
+    "visualisation",
+    "donnée"
+  ],
+  "frame_136": [
+    "ciblage_secours",
+    "technologie",
+    "aide"
+  ],
+  "frame_137": [
+    "ciblage_secours",
+    "technologie",
+    "aide"
+  ],
+  "frame_138": [
+    "ciblage_secours",
+    "technologie",
+    "aide"
+  ],
+  "frame_139": [
+    "ciblage_secours",
+    "technologie",
+    "aide"
+  ],
+  "frame_140": [
+    "ciblage_secours",
+    "technologie",
+    "aide"
+  ],
+  "frame_141": [
+    "ciblage_secours",
+    "technologie",
+    "aide"
+  ],
+  "frame_142": [
+    "ciblage_secours",
+    "technologie",
+    "aide"
+  ],
+  "frame_143": [
+    "ciblage_secours",
+    "technologie",
+    "aide"
+  ],
+  "frame_144": [
+    "ciblage_secours",
+    "technologie",
+    "aide"
+  ],
+  "frame_145": [
+    "trajectoire",
+    "prévision",
+    "données"
+  ],
+  "frame_146": [
+    "trajectoire",
+    "prévision",
+    "données"
+  ],
+  "frame_147": [
+    "trajectoire",
+    "prévision",
+    "données"
+  ],
+  "frame_148": [
+    "trajectoire",
+    "prévision",
+    "données"
+  ],
+  "frame_149": [
+    "trajectoire",
+    "prévision",
+    "données"
+  ],
+  "frame_150": [
+    "trajectoire",
+    "prévision",
+    "données"
+  ],
+  "frame_151": [
+    "trajectoire",
+    "prévision",
+    "données"
+  ],
+  "frame_152": [
+    "trajectoire",
+    "prévision",
+    "données"
+  ],
+  "frame_153": [
+    "trajectoire",
+    "prévision",
+    "données"
+  ],
+  "frame_154": [
+    "population",
+    "risque",
+    "alerte"
+  ],
+  "frame_155": [
+    "population",
+    "risque",
+    "alerte"
+  ],
+  "frame_156": [
+    "population",
+    "risque",
+    "alerte"
+  ],
+  "frame_157": [
+    "population",
+    "risque",
+    "alerte"
+  ],
+  "frame_158": [
+    "population",
+    "risque",
+    "alerte"
+  ],
+  "frame_159": [
+    "population",
+    "risque",
+    "alerte"
+  ],
+  "frame_160": [
+    "population",
+    "risque",
+    "alerte"
+  ],
+  "frame_161": [
+    "population",
+    "risque",
+    "alerte"
+  ],
+  "frame_162": [
+    "population",
+    "risque",
+    "alerte"
+  ],
+  "frame_163": [
+    "infrastructure",
+    "pont",
+    "route"
+  ],
+  "frame_164": [
+    "infrastructure",
+    "pont",
+    "route"
+  ],
+  "frame_165": [
+    "infrastructure",
+    "pont",
+    "route"
+  ],
+  "frame_166": [
+    "infrastructure",
+    "pont",
+    "route"
+  ],
+  "frame_167": [
+    "infrastructure",
+    "pont",
+    "route"
+  ],
+  "frame_168": [
+    "infrastructure",
+    "pont",
+    "route"
+  ],
+  "frame_169": [
+    "infrastructure",
+    "pont",
+    "route"
+  ],
+  "frame_170": [
+    "infrastructure",
+    "pont",
+    "route"
+  ],
+  "frame_171": [
+    "infrastructure",
+    "pont",
+    "route"
+  ],
+  "frame_172": [
+    "vidéo_satellite",
+    "changement",
+    "catastrophe"
+  ],
+  "frame_173": [
+    "vidéo_satellite",
+    "changement",
+    "catastrophe"
+  ],
+  "frame_174": [
+    "vidéo_satellite",
+    "changement",
+    "catastrophe"
+  ],
+  "frame_175": [
+    "vidéo_satellite",
+    "changement",
+    "catastrophe"
+  ],
+  "frame_176": [
+    "vidéo_satellite",
+    "changement",
+    "catastrophe"
+  ],
+  "frame_177": [
+    "vidéo_satellite",
+    "changement",
+    "catastrophe"
+  ],
+  "frame_178": [
+    "vidéo_satellite",
+    "changement",
+    "catastrophe"
+  ],
+  "frame_179": [
+    "vidéo_satellite",
+    "changement",
+    "catastrophe"
+  ],
+  "frame_180": [
+    "vidéo_satellite",
+    "changement",
+    "catastrophe"
+  ],
+  "frame_181": [
+    "expertise",
+    "scientifique",
+    "données"
+  ],
+  "frame_182": [
+    "expertise",
+    "scientifique",
+    "données"
+  ],
+  "frame_183": [
+    "expertise",
+    "scientifique",
+    "données"
+  ],
+  "frame_184": [
+    "expertise",
+    "scientifique",
+    "données"
+  ],
+  "frame_185": [
+    "expertise",
+    "scientifique",
+    "données"
+  ],
+  "frame_186": [
+    "expertise",
+    "scientifique",
+    "données"
+  ],
+  "frame_187": [
+    "expertise",
+    "scientifique",
+    "données"
+  ],
+  "frame_188": [
+    "expertise",
+    "scientifique",
+    "données"
+  ],
+  "frame_189": [
+    "cas_réel",
+    "inondation",
+    "réponse"
+  ],
+  "frame_190": [
+    "cas_réel",
+    "inondation",
+    "réponse"
+  ],
+  "frame_191": [
+    "cas_réel",
+    "inondation",
+    "réponse"
+  ],
+  "frame_192": [
+    "cas_réel",
+    "inondation",
+    "réponse"
+  ],
+  "frame_193": [
+    "cas_réel",
+    "inondation",
+    "réponse"
+  ],
+  "frame_194": [
+    "cas_réel",
+    "inondation",
+    "réponse"
+  ],
+  "frame_195": [
+    "cas_réel",
+    "inondation",
+    "réponse"
+  ],
+  "frame_196": [
+    "cas_réel",
+    "inondation",
+    "réponse"
+  ],
+  "frame_197": [
+    "technologie",
+    "application",
+    "secours"
+  ],
+  "frame_198": [
+    "technologie",
+    "application",
+    "secours"
+  ],
+  "frame_199": [
+    "technologie",
+    "application",
+    "secours"
+  ],
+  "frame_200": [
+    "technologie",
+    "application",
+    "secours"
+  ],
+  "frame_201": [
+    "technologie",
+    "application",
+    "secours"
+  ],
+  "frame_202": [
+    "technologie",
+    "application",
+    "secours"
+  ],
+  "frame_203": [
+    "technologie",
+    "application",
+    "secours"
+  ],
+  "frame_204": [
+    "technologie",
+    "application",
+    "secours"
+  ],
+  "frame_205": [
+    "données_agrégées",
+    "impact",
+    "global"
+  ],
+  "frame_206": [
+    "données_agrégées",
+    "impact",
+    "global"
+  ],
+  "frame_207": [
+    "données_agrégées",
+    "impact",
+    "global"
+  ],
+  "frame_208": [
+    "données_agrégées",
+    "impact",
+    "global"
+  ],
+  "frame_209": [
+    "données_agrégées",
+    "impact",
+    "global"
+  ],
+  "frame_210": [
+    "données_agrégées",
+    "impact",
+    "global"
+  ],
+  "frame_211": [
+    "données_agrégées",
+    "impact",
+    "global"
+  ],
+  "frame_212": [
+    "données_agrégées",
+    "impact",
+    "global"
+  ],
+  "frame_213": [
+    "interface_utilisateur",
+    "données",
+    "accès"
+  ],
+  "frame_214": [
+    "interface_utilisateur",
+    "données",
+    "accès"
+  ],
+  "frame_215": [
+    "interface_utilisateur",
+    "données",
+    "accès"
+  ],
+  "frame_216": [
+    "interface_utilisateur",
+    "données",
+    "accès"
+  ],
+  "frame_217": [
+    "interface_utilisateur",
+    "données",
+    "accès"
+  ],
+  "frame_218": [
+    "interface_utilisateur",
+    "données",
+    "accès"
+  ],
+  "frame_219": [
+    "interface_utilisateur",
+    "données",
+    "accès"
+  ],
+  "frame_220": [
+    "interface_utilisateur",
+    "données",
+    "accès"
+  ],
+  "frame_221": [
+    "conclusion",
+    "impact",
+    "technologie"
+  ],
+  "frame_222": [
+    "conclusion",
+    "impact",
+    "technologie"
+  ],
+  "frame_223": [
+    "conclusion",
+    "impact",
+    "technologie"
+  ],
+  "frame_224": [
+    "conclusion",
+    "impact",
+    "technologie"
+  ],
+  "frame_225": [
+    "conclusion",
+    "impact",
+    "technologie"
+  ],
+  "frame_226": [
+    "conclusion",
+    "impact",
+    "technologie"
+  ],
+  "frame_227": [
+    "conclusion",
+    "impact",
+    "technologie"
+  ],
+  "frame_228": [
+    "conclusion",
+    "impact",
+    "technologie"
+  ],
+  "frame_229": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_230": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_231": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_232": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_233": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_234": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_235": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_236": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_237": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_238": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_239": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_240": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_241": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_242": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_243": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_244": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_245": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_246": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_247": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_248": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_249": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_250": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_251": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_252": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_253": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_254": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "frame_255": [
+    "expertise",
+    "application",
+    "technologie"
+  ],
+  "gif_01": [
+    "animation",
+    "tempête",
+    "données"
+  ],
+  "gif_02": [
+    "satellite",
+    "survol",
+    "trajectoire"
+  ],
+  "gif_03": [
+    "pluie",
+    "intensité",
+    "couleur"
+  ],
+  "gif_04": [
+    "inondation",
+    "progression",
+    "temps"
+  ],
+  "gif_05": [
+    "radar",
+    "sweep",
+    "mesure"
+  ],
+  "gif_06": [
+    "comparaison",
+    "avant_après",
+    "impact"
+  ],
+  "gif_07": [
+    "zoom",
+    "satellite",
+    "détail"
+  ],
+  "gif_08": [
+    "trajectoire_3d",
+    "mouvement",
+    "prévision"
+  ],
+  "gif_09": [
+    "pluie_accumulation",
+    "animation",
+    "danger"
+  ],
+  "gif_10": [
+    "alerte",
+    "propagation",
+    "système"
+  ],
+  "gif_11": [
+    "animation",
+    "données",
+    "tempête"
+  ],
+  "gif_12": [
+    "animation",
+    "données",
+    "tempête"
+  ],
+  "gif_13": [
+    "animation",
+    "données",
+    "tempête"
+  ],
+  "gif_14": [
+    "animation",
+    "données",
+    "tempête"
+  ],
+  "gif_15": [
+    "animation",
+    "données",
+    "tempête"
+  ],
+  "gif_16": [
+    "animation",
+    "données",
+    "tempête"
+  ],
+  "gif_17": [
+    "animation",
+    "données",
+    "tempête"
+  ],
+  "gif_18": [
+    "animation",
+    "données",
+    "tempête"
+  ],
+  "gif_19": [
+    "animation",
+    "données",
+    "tempête"
+  ],
+  "gif_20": [
+    "animation",
+    "données",
+    "tempête"
+  ],
+  "gif_21": [
+    "animation",
+    "données",
+    "tempête"
+  ],
+  "gif_22": [
+    "animation",
+    "données",
+    "tempête"
+  ],
+  "gif_23": [
+    "animation",
+    "données",
+    "tempête"
+  ],
+  "gif_24": [
+    "animation",
+    "données",
+    "tempête"
+  ],
+  "gif_25": [
+    "animation",
+    "données",
+    "tempête"
+  ],
+  "gif_26": [
+    "animation",
+    "données",
+    "tempête"
+  ]
+}
