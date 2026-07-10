@@ -15,7 +15,17 @@
       "indexed_at": "2026-07-10T07:23:31.020029+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "dark intro title screens transition",
+      "narrative_tags": [
+        "introduction",
+        "branding"
+      ],
+      "usage_tags": [
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.852907+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_002",
@@ -28,7 +38,18 @@
       "indexed_at": "2026-07-10T07:23:31.023848+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite Earth weather data overlay",
+      "narrative_tags": [
+        "planète",
+        "observation",
+        "technologie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.852930+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_003",
@@ -41,7 +62,19 @@
       "indexed_at": "2026-07-10T07:23:31.024287+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "dark stormy footage clouds turbulent",
+      "narrative_tags": [
+        "tempête",
+        "menace",
+        "atmosphère"
+      ],
+      "usage_tags": [
+        "illustration",
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.852938+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_004",
@@ -54,7 +87,19 @@
       "indexed_at": "2026-07-10T07:23:31.024840+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "flooding muddy water rushing through bridge",
+      "narrative_tags": [
+        "inondation",
+        "puissance",
+        "danger"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.852947+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_005",
@@ -67,7 +112,18 @@
       "indexed_at": "2026-07-10T07:23:31.025465+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "rushing floodwater debris brown current",
+      "narrative_tags": [
+        "inondation",
+        "destruction",
+        "force"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.852953+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_006",
@@ -80,7 +136,18 @@
       "indexed_at": "2026-07-10T07:23:31.026177+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "flooded residential street houses submerged",
+      "narrative_tags": [
+        "inondation",
+        "dévastation",
+        "communauté"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.852957+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_007",
@@ -93,7 +160,20 @@
       "indexed_at": "2026-07-10T07:23:31.026887+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "people walking storm rain rescue workers",
+      "narrative_tags": [
+        "courage",
+        "secours",
+        "tempête",
+        "résilience"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.852962+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_008",
@@ -106,7 +186,20 @@
       "indexed_at": "2026-07-10T07:23:31.026943+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "rescue workers yellow vests flooded road",
+      "narrative_tags": [
+        "secours",
+        "héroïsme",
+        "courage",
+        "urgence"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.852966+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_009",
@@ -119,7 +212,18 @@
       "indexed_at": "2026-07-10T07:23:31.027015+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "emergency vehicle rescue operation flood zone",
+      "narrative_tags": [
+        "secours",
+        "intervention",
+        "urgence"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.852970+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_010",
@@ -132,7 +236,19 @@
       "indexed_at": "2026-07-10T07:23:31.027087+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "hurricane spiral satellite view rotating",
+      "narrative_tags": [
+        "ouragan",
+        "puissance",
+        "nature"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.852975+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_011",
@@ -145,7 +261,18 @@
       "indexed_at": "2026-07-10T07:23:31.027150+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "precipitation radar data colorful animated",
+      "narrative_tags": [
+        "données",
+        "précipitation",
+        "science"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.852979+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_012",
@@ -158,7 +285,18 @@
       "indexed_at": "2026-07-10T07:23:31.028005+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "hurricane satellite monochrome eye detail",
+      "narrative_tags": [
+        "ouragan",
+        "surveillance",
+        "structure"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.852984+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_013",
@@ -171,7 +309,18 @@
       "indexed_at": "2026-07-10T07:23:31.028934+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "precipitation measurement charts data bars",
+      "narrative_tags": [
+        "données",
+        "mesure",
+        "analyse"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.852988+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_014",
@@ -184,7 +333,18 @@
       "indexed_at": "2026-07-10T07:23:31.030055+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "scientist Scott Braun speaking interview",
+      "narrative_tags": [
+        "expert",
+        "explication",
+        "recherche"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.852993+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_015",
@@ -197,7 +357,17 @@
       "indexed_at": "2026-07-10T07:23:31.031118+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "scientist speaking dark background portrait",
+      "narrative_tags": [
+        "expert",
+        "interview"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.852997+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_016",
@@ -210,7 +380,18 @@
       "indexed_at": "2026-07-10T07:23:31.032044+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D Earth globe precipitation data rotating",
+      "narrative_tags": [
+        "planète",
+        "couverture",
+        "satellite"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853001+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_017",
@@ -223,7 +404,18 @@
       "indexed_at": "2026-07-10T07:23:31.033023+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "rocket launch facility pad preparation",
+      "narrative_tags": [
+        "lancement",
+        "fusée",
+        "technologie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853006+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_018",
@@ -236,7 +428,18 @@
       "indexed_at": "2026-07-10T07:23:31.034084+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "GPM satellite 3D rendering dark space",
+      "narrative_tags": [
+        "satellite",
+        "espace",
+        "technologie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853010+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_019",
@@ -249,7 +452,18 @@
       "indexed_at": "2026-07-10T07:23:31.034858+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "dark data visualization screens measurement",
+      "narrative_tags": [
+        "données",
+        "instrument",
+        "mesure"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853015+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_020",
@@ -262,7 +476,18 @@
       "indexed_at": "2026-07-10T07:23:31.035614+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite measurement data overlay display",
+      "narrative_tags": [
+        "données",
+        "technologie",
+        "surveillance"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853019+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_021",
@@ -275,7 +500,18 @@
       "indexed_at": "2026-07-10T07:23:31.036412+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "scientist Candace Carlisle speaking GPM",
+      "narrative_tags": [
+        "expert",
+        "explication",
+        "mission"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853023+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_022",
@@ -288,7 +524,20 @@
       "indexed_at": "2026-07-10T07:23:31.037232+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D precipitation radar towers green red",
+      "narrative_tags": [
+        "données",
+        "3D",
+        "intensité",
+        "radar"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853028+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_023",
@@ -301,7 +550,21 @@
       "indexed_at": "2026-07-10T07:23:31.038029+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "rescue workers wading deep floodwater yellow",
+      "narrative_tags": [
+        "secours",
+        "héroïsme",
+        "courage",
+        "tempête",
+        "dévouement"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853032+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_024",
@@ -314,7 +577,19 @@
       "indexed_at": "2026-07-10T07:23:31.038761+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Earth globe rotating blue green continents",
+      "narrative_tags": [
+        "planète",
+        "géographie",
+        "global"
+      ],
+      "usage_tags": [
+        "illustration",
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853037+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_025",
@@ -327,7 +602,18 @@
       "indexed_at": "2026-07-10T07:23:31.039485+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "credits GODDARD branding text screens",
+      "narrative_tags": [
+        "crédits",
+        "NASA",
+        "attribution"
+      ],
+      "usage_tags": [
+        "outro"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853041+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_026",
@@ -340,7 +626,18 @@
       "indexed_at": "2026-07-10T07:23:31.040321+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite closeup instrument detail space",
+      "narrative_tags": [
+        "satellite",
+        "technologie",
+        "ingénierie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853046+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_027",
@@ -353,7 +650,19 @@
       "indexed_at": "2026-07-10T07:23:31.041124+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "blue vehicle submerged in floodwater",
+      "narrative_tags": [
+        "inondation",
+        "perte",
+        "destruction"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803150+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_028",
@@ -366,7 +675,17 @@
       "indexed_at": "2026-07-10T07:23:31.041822+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "blue car submerged flooding street",
+      "narrative_tags": [
+        "inondation",
+        "perte"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803154+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_029",
@@ -379,7 +698,17 @@
       "indexed_at": "2026-07-10T07:23:31.042541+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "vehicles caught in rising floodwater",
+      "narrative_tags": [
+        "inondation",
+        "piège"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803158+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_030",
@@ -392,7 +721,17 @@
       "indexed_at": "2026-07-10T07:23:31.043195+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "car trapped flooding brown water",
+      "narrative_tags": [
+        "inondation",
+        "danger"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803163+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_031",
@@ -405,7 +744,17 @@
       "indexed_at": "2026-07-10T07:23:31.043750+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "flooded road green trees rural",
+      "narrative_tags": [
+        "inondation",
+        "communauté"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803169+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_032",
@@ -418,7 +767,17 @@
       "indexed_at": "2026-07-10T07:23:31.044245+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "flooded residential street calm water",
+      "narrative_tags": [
+        "inondation",
+        "dévastation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803174+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_033",
@@ -431,7 +790,17 @@
       "indexed_at": "2026-07-10T07:23:31.044810+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "flooded road trees reflection water",
+      "narrative_tags": [
+        "inondation",
+        "calme"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803178+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_034",
@@ -444,7 +813,17 @@
       "indexed_at": "2026-07-10T07:23:31.045349+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "road submerged flooding green surroundings",
+      "narrative_tags": [
+        "inondation",
+        "isolement"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803182+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_035",
@@ -457,7 +836,17 @@
       "indexed_at": "2026-07-10T07:23:31.045871+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "flooded road water level rising",
+      "narrative_tags": [
+        "inondation",
+        "montée"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803187+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_036",
@@ -470,7 +859,17 @@
       "indexed_at": "2026-07-10T07:23:31.046518+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "rushing flood current through town",
+      "narrative_tags": [
+        "inondation",
+        "force"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803191+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_037",
@@ -483,7 +882,17 @@
       "indexed_at": "2026-07-10T07:23:31.047124+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "debris in floodwater rushing current",
+      "narrative_tags": [
+        "destruction",
+        "inondation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803196+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_038",
@@ -496,7 +905,17 @@
       "indexed_at": "2026-07-10T07:23:31.047710+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "flooded intersection houses partly submerged",
+      "narrative_tags": [
+        "inondation",
+        "communauté"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803200+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_039",
@@ -509,7 +928,18 @@
       "indexed_at": "2026-07-10T07:23:31.048240+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "white house flooded yard water",
+      "narrative_tags": [
+        "inondation",
+        "résidentiel",
+        "perte"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803204+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_040",
@@ -522,7 +952,17 @@
       "indexed_at": "2026-07-10T07:23:31.048777+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "overexposed flooded scene bright haze",
+      "narrative_tags": [
+        "inondation",
+        "brouillard"
+      ],
+      "usage_tags": [
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803208+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_041",
@@ -535,7 +975,18 @@
       "indexed_at": "2026-07-10T07:23:31.049206+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "damaged building aftermath debris rubble",
+      "narrative_tags": [
+        "destruction",
+        "historique",
+        "conséquence"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803212+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_042",
@@ -548,7 +999,17 @@
       "indexed_at": "2026-07-10T07:23:31.049707+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "historical hurricane 1938 text overlay",
+      "narrative_tags": [
+        "historique",
+        "référence"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803217+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_043",
@@ -561,7 +1022,17 @@
       "indexed_at": "2026-07-10T07:23:31.050331+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Great New England Hurricane 1938 text",
+      "narrative_tags": [
+        "historique",
+        "référence"
+      ],
+      "usage_tags": [
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803221+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_044",
@@ -574,7 +1045,17 @@
       "indexed_at": "2026-07-10T07:23:31.050845+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Great New England Hurricane 1938 title",
+      "narrative_tags": [
+        "historique",
+        "référence"
+      ],
+      "usage_tags": [
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803228+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_045",
@@ -587,7 +1068,17 @@
       "indexed_at": "2026-07-10T07:23:31.051432+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Great New England Hurricane 1938 card",
+      "narrative_tags": [
+        "historique",
+        "référence"
+      ],
+      "usage_tags": [
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803232+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_046",
@@ -600,7 +1091,17 @@
       "indexed_at": "2026-07-10T07:23:31.051958+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "historical footage dark damaged area",
+      "narrative_tags": [
+        "historique",
+        "destruction"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803236+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_047",
@@ -613,7 +1114,17 @@
       "indexed_at": "2026-07-10T07:23:31.052462+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "historical hurricane damage building",
+      "narrative_tags": [
+        "historique",
+        "destruction"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803240+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_048",
@@ -626,7 +1137,17 @@
       "indexed_at": "2026-07-10T07:23:31.052883+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "dark historical storm aftermath",
+      "narrative_tags": [
+        "historique",
+        "conséquence"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803247+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_049",
@@ -639,7 +1160,17 @@
       "indexed_at": "2026-07-10T07:23:31.053183+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "dark scene interior storm damage",
+      "narrative_tags": [
+        "destruction",
+        "intérieur"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803251+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_050",
@@ -652,7 +1183,17 @@
       "indexed_at": "2026-07-10T07:23:31.053517+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "dark damaged structure post storm",
+      "narrative_tags": [
+        "destruction",
+        "conséquence"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803255+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_051",
@@ -665,7 +1206,19 @@
       "indexed_at": "2026-07-10T07:23:31.055088+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "person blue raincoat walking in storm",
+      "narrative_tags": [
+        "courage",
+        "tempête",
+        "résilience"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803259+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_052",
@@ -678,7 +1231,19 @@
       "indexed_at": "2026-07-10T07:23:31.056607+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "people walking bikes flooded street rain",
+      "narrative_tags": [
+        "courage",
+        "communauté",
+        "tempête"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803263+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_053",
@@ -691,7 +1256,18 @@
       "indexed_at": "2026-07-10T07:23:31.057873+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "people navigating flooded street rescue",
+      "narrative_tags": [
+        "courage",
+        "secours",
+        "résilience"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803267+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_054",
@@ -704,7 +1280,18 @@
       "indexed_at": "2026-07-10T07:23:31.058868+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "houses deep floodwater residential area",
+      "narrative_tags": [
+        "inondation",
+        "dévastation",
+        "perte"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803271+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_055",
@@ -717,7 +1304,17 @@
       "indexed_at": "2026-07-10T07:23:31.059807+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "white house submerged flood brown water",
+      "narrative_tags": [
+        "inondation",
+        "résidentiel"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803275+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_056",
@@ -730,7 +1327,17 @@
       "indexed_at": "2026-07-10T07:23:31.060796+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "flooded street houses underwater",
+      "narrative_tags": [
+        "inondation",
+        "communauté"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803279+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_057",
@@ -743,7 +1350,17 @@
       "indexed_at": "2026-07-10T07:23:31.062049+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "residential flooding deep water debris",
+      "narrative_tags": [
+        "inondation",
+        "destruction"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803283+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_058",
@@ -756,7 +1373,19 @@
       "indexed_at": "2026-07-10T07:23:31.063290+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "rescue worker yellow vest flooded road",
+      "narrative_tags": [
+        "secours",
+        "courage",
+        "urgence"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803287+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_059",
@@ -769,7 +1398,19 @@
       "indexed_at": "2026-07-10T07:23:31.064294+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "emergency workers yellow safety vests flood",
+      "narrative_tags": [
+        "secours",
+        "héroïsme",
+        "urgence"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803291+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_060",
@@ -782,7 +1423,18 @@
       "indexed_at": "2026-07-10T07:23:31.065258+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "rescue workers directing traffic flood zone",
+      "narrative_tags": [
+        "secours",
+        "organisation",
+        "urgence"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803295+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_061",
@@ -795,7 +1447,18 @@
       "indexed_at": "2026-07-10T07:23:31.066408+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "yellow vest worker flooded intersection",
+      "narrative_tags": [
+        "secours",
+        "courage",
+        "dévouement"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803299+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_062",
@@ -808,7 +1471,18 @@
       "indexed_at": "2026-07-10T07:23:31.067512+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "emergency vehicle rescue workers rain",
+      "narrative_tags": [
+        "secours",
+        "intervention",
+        "urgence"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803303+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_063",
@@ -821,7 +1495,17 @@
       "indexed_at": "2026-07-10T07:23:31.068610+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "aerial satellite view hurricane tracking",
+      "narrative_tags": [
+        "technologie",
+        "surveillance"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803307+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_064",
@@ -834,7 +1518,19 @@
       "indexed_at": "2026-07-10T07:23:31.069842+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "hurricane eye wall closeup satellite",
+      "narrative_tags": [
+        "ouragan",
+        "puissance",
+        "nature"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803311+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_065",
@@ -847,7 +1543,19 @@
       "indexed_at": "2026-07-10T07:23:31.070984+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "massive hurricane spiral cloud bands",
+      "narrative_tags": [
+        "ouragan",
+        "ampleur",
+        "force"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803315+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_066",
@@ -860,7 +1568,17 @@
       "indexed_at": "2026-07-10T07:23:31.071975+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "hurricane eye detail satellite infrared",
+      "narrative_tags": [
+        "ouragan",
+        "structure"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803319+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_067",
@@ -873,7 +1591,17 @@
       "indexed_at": "2026-07-10T07:23:31.072710+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "hurricane cloud formation overhead view",
+      "narrative_tags": [
+        "ouragan",
+        "immensité"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803323+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_068",
@@ -886,7 +1614,17 @@
       "indexed_at": "2026-07-10T07:23:31.073485+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "storm system satellite overhead dark",
+      "narrative_tags": [
+        "tempête",
+        "surveillance"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803327+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_069",
@@ -899,7 +1637,17 @@
       "indexed_at": "2026-07-10T07:23:31.074318+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "dark storm clouds satellite view",
+      "narrative_tags": [
+        "tempête",
+        "menace"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803331+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_070",
@@ -912,7 +1660,17 @@
       "indexed_at": "2026-07-10T07:23:31.075062+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "storm system cloud structure detail",
+      "narrative_tags": [
+        "tempête",
+        "structure"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803335+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_071",
@@ -925,7 +1683,18 @@
       "indexed_at": "2026-07-10T07:23:31.075828+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "precipitation radar data colorful map",
+      "narrative_tags": [
+        "données",
+        "mesure",
+        "science"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803339+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_072",
@@ -938,7 +1707,17 @@
       "indexed_at": "2026-07-10T07:23:31.076757+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "weather radar green yellow red display",
+      "narrative_tags": [
+        "données",
+        "précipitation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803343+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_073",
@@ -951,7 +1730,17 @@
       "indexed_at": "2026-07-10T07:23:31.077994+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "precipitation data visualization colorful",
+      "narrative_tags": [
+        "données",
+        "technologie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803347+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_074",
@@ -964,7 +1753,17 @@
       "indexed_at": "2026-07-10T07:23:31.079205+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "rainfall measurement data colored map",
+      "narrative_tags": [
+        "données",
+        "précipitation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803351+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_075",
@@ -977,7 +1776,17 @@
       "indexed_at": "2026-07-10T07:23:31.080112+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "precipitation intensity map radar view",
+      "narrative_tags": [
+        "données",
+        "intensité"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803355+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_076",
@@ -990,7 +1799,17 @@
       "indexed_at": "2026-07-10T07:23:31.081064+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite tracking map hurricane path",
+      "narrative_tags": [
+        "trajectoire",
+        "prévision"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803359+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_077",
@@ -1003,7 +1822,17 @@
       "indexed_at": "2026-07-10T07:23:31.081912+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "hurricane path ocean satellite view",
+      "narrative_tags": [
+        "trajectoire",
+        "ouragan"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803363+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_078",
@@ -1016,7 +1845,18 @@
       "indexed_at": "2026-07-10T07:23:31.082652+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "wide satellite view storm over ocean",
+      "narrative_tags": [
+        "ouragan",
+        "ampleur",
+        "océan"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803367+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_079",
@@ -1029,7 +1869,18 @@
       "indexed_at": "2026-07-10T07:23:31.083172+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "precipitation measurement chart data graph",
+      "narrative_tags": [
+        "données",
+        "mesure",
+        "science"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803371+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_080",
@@ -1042,7 +1893,18 @@
       "indexed_at": "2026-07-10T07:23:31.083688+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "TRMM precipitation data chart colorful",
+      "narrative_tags": [
+        "données",
+        "TRMM",
+        "technologie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803375+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_081",
@@ -1055,7 +1917,17 @@
       "indexed_at": "2026-07-10T07:23:31.084214+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "precipitation data comparison chart",
+      "narrative_tags": [
+        "données",
+        "comparaison"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803379+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_082",
@@ -1068,7 +1940,17 @@
       "indexed_at": "2026-07-10T07:23:31.084757+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "rainfall measurement satellite data bars",
+      "narrative_tags": [
+        "données",
+        "mesure"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803383+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_083",
@@ -1081,7 +1963,17 @@
       "indexed_at": "2026-07-10T07:23:31.085311+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "precipitation chart frequency analysis",
+      "narrative_tags": [
+        "données",
+        "analyse"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803387+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_084",
@@ -1094,7 +1986,17 @@
       "indexed_at": "2026-07-10T07:23:31.086152+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "hurricane satellite infrared B&W image",
+      "narrative_tags": [
+        "ouragan",
+        "surveillance"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803391+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_085",
@@ -1107,7 +2009,17 @@
       "indexed_at": "2026-07-10T07:23:31.086964+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "hurricane structure satellite closeup",
+      "narrative_tags": [
+        "ouragan",
+        "structure"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803395+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_086",
@@ -1120,7 +2032,17 @@
       "indexed_at": "2026-07-10T07:23:31.087669+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "storm spiral satellite monochrome",
+      "narrative_tags": [
+        "ouragan",
+        "puissance"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803399+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_087",
@@ -1133,7 +2055,19 @@
       "indexed_at": "2026-07-10T07:23:31.088391+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "hurricane eye infrared satellite dark",
+      "narrative_tags": [
+        "ouragan",
+        "œil",
+        "puissance"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803403+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_088",
@@ -1146,7 +2080,17 @@
       "indexed_at": "2026-07-10T07:23:31.089080+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "hurricane satellite view B&W detail",
+      "narrative_tags": [
+        "ouragan",
+        "surveillance"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803407+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_089",
@@ -1159,7 +2103,17 @@
       "indexed_at": "2026-07-10T07:23:31.089762+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "storm system monochrome satellite",
+      "narrative_tags": [
+        "tempête",
+        "observation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803411+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_090",
@@ -1172,7 +2126,17 @@
       "indexed_at": "2026-07-10T07:23:31.090488+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "hurricane satellite infrared overhead",
+      "narrative_tags": [
+        "ouragan",
+        "technologie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803415+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_091",
@@ -1185,7 +2149,18 @@
       "indexed_at": "2026-07-10T07:23:31.091029+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "scientist Scott Braun speaking interview",
+      "narrative_tags": [
+        "expert",
+        "explication",
+        "science"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803418+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_092",
@@ -1198,7 +2173,17 @@
       "indexed_at": "2026-07-10T07:23:31.091801+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Scott Braun talking hurricane research",
+      "narrative_tags": [
+        "expert",
+        "recherche"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803422+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_093",
@@ -1211,7 +2196,17 @@
       "indexed_at": "2026-07-10T07:23:31.092658+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Scott Braun interview name overlay",
+      "narrative_tags": [
+        "expert",
+        "crédibilité"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803426+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_094",
@@ -1224,7 +2219,17 @@
       "indexed_at": "2026-07-10T07:23:31.093472+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Scott Braun explaining TRMM data",
+      "narrative_tags": [
+        "expert",
+        "explication"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803430+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_095",
@@ -1237,7 +2242,17 @@
       "indexed_at": "2026-07-10T07:23:31.094301+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Scott Braun speaking gesturing",
+      "narrative_tags": [
+        "expert",
+        "communication"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803435+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_096",
@@ -1250,7 +2265,17 @@
       "indexed_at": "2026-07-10T07:23:31.095096+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Scott Braun interview dark background",
+      "narrative_tags": [
+        "expert",
+        "interview"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803442+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_097",
@@ -1263,7 +2288,17 @@
       "indexed_at": "2026-07-10T07:23:31.095944+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Scott Braun speaking closeup",
+      "narrative_tags": [
+        "expert",
+        "explication"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803446+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_098",
@@ -1276,7 +2311,17 @@
       "indexed_at": "2026-07-10T07:23:31.096752+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Scott Braun interview final frame",
+      "narrative_tags": [
+        "expert",
+        "interview"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803450+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_099",
@@ -1289,7 +2334,18 @@
       "indexed_at": "2026-07-10T07:23:31.097543+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D Earth globe precipitation overlay blue",
+      "narrative_tags": [
+        "planète",
+        "données",
+        "précipitation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803454+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_100",
@@ -1302,7 +2358,18 @@
       "indexed_at": "2026-07-10T07:23:31.098359+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "rotating Earth precipitation data cyan",
+      "narrative_tags": [
+        "planète",
+        "couverture",
+        "surveillance"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803458+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_101",
@@ -1315,7 +2382,18 @@
       "indexed_at": "2026-07-10T07:23:31.099113+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D globe TRMM coverage latitude bands",
+      "narrative_tags": [
+        "satellite",
+        "couverture",
+        "limite"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803464+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_102",
@@ -1328,7 +2406,17 @@
       "indexed_at": "2026-07-10T07:23:31.099891+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Earth globe precipitation data rotating",
+      "narrative_tags": [
+        "planète",
+        "données"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803468+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_103",
@@ -1341,7 +2429,17 @@
       "indexed_at": "2026-07-10T07:23:31.100695+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D globe blue precipitation overlay",
+      "narrative_tags": [
+        "planète",
+        "précipitation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803472+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_104",
@@ -1354,7 +2452,17 @@
       "indexed_at": "2026-07-10T07:23:31.101520+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "rotating globe rainfall data view",
+      "narrative_tags": [
+        "planète",
+        "surveillance"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803476+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_105",
@@ -1367,7 +2475,17 @@
       "indexed_at": "2026-07-10T07:23:31.102410+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Earth globe precipitation coverage side",
+      "narrative_tags": [
+        "planète",
+        "couverture"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803480+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_106",
@@ -1380,7 +2498,18 @@
       "indexed_at": "2026-07-10T07:23:31.103364+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D globe precipitation data Americas",
+      "narrative_tags": [
+        "planète",
+        "données",
+        "Amériques"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803484+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_107",
@@ -1393,7 +2522,17 @@
       "indexed_at": "2026-07-10T07:23:31.104343+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Earth globe rainfall overlay blue cyan",
+      "narrative_tags": [
+        "planète",
+        "précipitation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803488+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_108",
@@ -1406,7 +2545,17 @@
       "indexed_at": "2026-07-10T07:23:31.105231+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "globe precipitation data text overlay",
+      "narrative_tags": [
+        "planète",
+        "information"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803492+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_109",
@@ -1419,7 +2568,17 @@
       "indexed_at": "2026-07-10T07:23:31.106010+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "male scientist speaking dark background",
+      "narrative_tags": [
+        "expert",
+        "explication"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803496+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_110",
@@ -1432,7 +2591,17 @@
       "indexed_at": "2026-07-10T07:23:31.106870+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "scientist interview dark studio",
+      "narrative_tags": [
+        "expert",
+        "interview"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803500+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_111",
@@ -1445,7 +2614,17 @@
       "indexed_at": "2026-07-10T07:23:31.107703+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "researcher explaining hurricane data",
+      "narrative_tags": [
+        "expert",
+        "recherche"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803504+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_112",
@@ -1458,7 +2637,17 @@
       "indexed_at": "2026-07-10T07:23:31.108572+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "scientist talking closeup portrait",
+      "narrative_tags": [
+        "expert",
+        "communication"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803508+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_113",
@@ -1471,7 +2660,17 @@
       "indexed_at": "2026-07-10T07:23:31.109378+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "scientist gesturing explaining concept",
+      "narrative_tags": [
+        "expert",
+        "pédagogie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803512+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_114",
@@ -1484,7 +2683,17 @@
       "indexed_at": "2026-07-10T07:23:31.110898+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "researcher interview concluded frame",
+      "narrative_tags": [
+        "expert",
+        "interview"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803516+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_115",
@@ -1497,7 +2706,19 @@
       "indexed_at": "2026-07-10T07:23:31.112440+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "city skyline urban buildings dusk",
+      "narrative_tags": [
+        "urbain",
+        "civilisation",
+        "vulnérabilité"
+      ],
+      "usage_tags": [
+        "illustration",
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803520+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_116",
@@ -1510,7 +2731,17 @@
       "indexed_at": "2026-07-10T07:23:31.113867+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "urban street buildings perspective",
+      "narrative_tags": [
+        "urbain",
+        "quotidien"
+      ],
+      "usage_tags": [
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803524+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_117",
@@ -1523,7 +2754,17 @@
       "indexed_at": "2026-07-10T07:23:31.114716+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D Earth globe green continents",
+      "narrative_tags": [
+        "planète",
+        "géographie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803528+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_118",
@@ -1536,7 +2777,17 @@
       "indexed_at": "2026-07-10T07:23:31.115403+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Earth globe Africa Europe view",
+      "narrative_tags": [
+        "planète",
+        "global"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803532+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_119",
@@ -1549,7 +2800,17 @@
       "indexed_at": "2026-07-10T07:23:31.116056+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "rotating Earth globe green blue",
+      "narrative_tags": [
+        "planète",
+        "rotation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803536+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_120",
@@ -1562,7 +2823,17 @@
       "indexed_at": "2026-07-10T07:23:31.116932+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Earth globe Americas view clean",
+      "narrative_tags": [
+        "planète",
+        "Amériques"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803540+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_121",
@@ -1575,7 +2846,18 @@
       "indexed_at": "2026-07-10T07:23:31.118011+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "scientist Candace Carlisle speaking",
+      "narrative_tags": [
+        "expert",
+        "explication",
+        "science"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803544+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_122",
@@ -1588,7 +2870,17 @@
       "indexed_at": "2026-07-10T07:23:31.119319+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Candace Carlisle interview GPM mission",
+      "narrative_tags": [
+        "expert",
+        "mission"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803548+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_123",
@@ -1601,7 +2893,17 @@
       "indexed_at": "2026-07-10T07:23:31.119902+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Candace Carlisle name overlay title",
+      "narrative_tags": [
+        "expert",
+        "crédibilité"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803552+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_124",
@@ -1614,7 +2916,17 @@
       "indexed_at": "2026-07-10T07:23:31.120559+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Candace Carlisle explaining measurements",
+      "narrative_tags": [
+        "expert",
+        "explication"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803556+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_125",
@@ -1627,7 +2939,17 @@
       "indexed_at": "2026-07-10T07:23:31.121161+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Candace Carlisle speaking gesturing",
+      "narrative_tags": [
+        "expert",
+        "communication"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803560+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_126",
@@ -1640,7 +2962,17 @@
       "indexed_at": "2026-07-10T07:23:31.121828+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Candace Carlisle interview continued",
+      "narrative_tags": [
+        "expert",
+        "pédagogie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803564+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_127",
@@ -1653,7 +2985,17 @@
       "indexed_at": "2026-07-10T07:23:31.122493+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Candace Carlisle explaining coverage",
+      "narrative_tags": [
+        "expert",
+        "couverture"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803568+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_128",
@@ -1666,7 +3008,17 @@
       "indexed_at": "2026-07-10T07:23:31.123165+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Candace Carlisle speaking closeup",
+      "narrative_tags": [
+        "expert",
+        "explication"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803572+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_129",
@@ -1679,7 +3031,17 @@
       "indexed_at": "2026-07-10T07:23:31.123837+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Candace Carlisle interview portrait",
+      "narrative_tags": [
+        "expert",
+        "interview"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803575+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_130",
@@ -1692,7 +3054,17 @@
       "indexed_at": "2026-07-10T07:23:31.124445+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Candace Carlisle speaking final frame",
+      "narrative_tags": [
+        "expert",
+        "interview"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803579+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_131",
@@ -1705,7 +3077,18 @@
       "indexed_at": "2026-07-10T07:23:31.125028+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D globe GPM coverage wider latitude",
+      "narrative_tags": [
+        "satellite",
+        "amélioration",
+        "couverture"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803583+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_132",
@@ -1718,7 +3101,17 @@
       "indexed_at": "2026-07-10T07:23:31.125642+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Earth globe GPM precipitation blue",
+      "narrative_tags": [
+        "satellite",
+        "données"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803587+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_133",
@@ -1731,7 +3124,17 @@
       "indexed_at": "2026-07-10T07:23:31.126245+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "globe GPM vs TRMM coverage comparison",
+      "narrative_tags": [
+        "comparaison",
+        "amélioration"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803591+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_134",
@@ -1744,7 +3147,17 @@
       "indexed_at": "2026-07-10T07:23:31.126795+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Earth globe GPM coverage latitude bands",
+      "narrative_tags": [
+        "satellite",
+        "couverture"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803595+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_135",
@@ -1757,7 +3170,17 @@
       "indexed_at": "2026-07-10T07:23:31.127326+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D globe precipitation coverage expanded",
+      "narrative_tags": [
+        "satellite",
+        "progrès"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803599+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_136",
@@ -1770,7 +3193,17 @@
       "indexed_at": "2026-07-10T07:23:31.127828+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "globe precipitation data latitude lines",
+      "narrative_tags": [
+        "données",
+        "géographie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803603+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_137",
@@ -1783,7 +3216,17 @@
       "indexed_at": "2026-07-10T07:23:31.128326+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "globe precipitation coverage Arctic view",
+      "narrative_tags": [
+        "données",
+        "couverture"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803607+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_138",
@@ -1796,7 +3239,17 @@
       "indexed_at": "2026-07-10T07:23:31.128726+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Earth globe tilted showing latitude",
+      "narrative_tags": [
+        "planète",
+        "couverture"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803611+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_139",
@@ -1809,7 +3262,17 @@
       "indexed_at": "2026-07-10T07:23:31.129118+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "globe precipitation data overlay blue",
+      "narrative_tags": [
+        "données",
+        "précipitation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803644+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_140",
@@ -1822,7 +3285,17 @@
       "indexed_at": "2026-07-10T07:23:31.129531+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Earth globe constellation coverage",
+      "narrative_tags": [
+        "satellite",
+        "constellation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803655+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_141",
@@ -1835,7 +3308,17 @@
       "indexed_at": "2026-07-10T07:23:31.129956+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "globe full coverage precipitation blue",
+      "narrative_tags": [
+        "satellite",
+        "couverture"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803660+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_142",
@@ -1848,7 +3331,17 @@
       "indexed_at": "2026-07-10T07:23:31.130444+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "GPM satellite animation globe orbit",
+      "narrative_tags": [
+        "satellite",
+        "orbite"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803713+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_143",
@@ -1861,7 +3354,17 @@
       "indexed_at": "2026-07-10T07:23:31.131339+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite orbit Earth globe animation",
+      "narrative_tags": [
+        "satellite",
+        "mouvement"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803722+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_144",
@@ -1874,7 +3377,17 @@
       "indexed_at": "2026-07-10T07:23:31.132395+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "GPM orbit swath Earth visualization",
+      "narrative_tags": [
+        "satellite",
+        "balayage"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803727+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_145",
@@ -1887,7 +3400,18 @@
       "indexed_at": "2026-07-10T07:23:31.133246+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "precipitation time lapse 1hr label globe",
+      "narrative_tags": [
+        "temps",
+        "mesure",
+        "précipitation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803731+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_146",
@@ -1900,7 +3424,17 @@
       "indexed_at": "2026-07-10T07:23:31.133987+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "precipitation accumulation 1hr globe",
+      "narrative_tags": [
+        "temps",
+        "accumulation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803739+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_147",
@@ -1913,7 +3447,17 @@
       "indexed_at": "2026-07-10T07:23:31.134747+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "precipitation time lapse 1hr data",
+      "narrative_tags": [
+        "temps",
+        "données"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803744+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_148",
@@ -1926,7 +3470,17 @@
       "indexed_at": "2026-07-10T07:23:31.135530+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "precipitation accumulation 2hr globe",
+      "narrative_tags": [
+        "temps",
+        "accumulation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803748+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_149",
@@ -1939,7 +3493,17 @@
       "indexed_at": "2026-07-10T07:23:31.136329+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "precipitation time lapse 2hr data",
+      "narrative_tags": [
+        "temps",
+        "progression"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803752+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_150",
@@ -1952,7 +3516,18 @@
       "indexed_at": "2026-07-10T07:23:31.137109+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "precipitation accumulation 2hr colorful",
+      "narrative_tags": [
+        "temps",
+        "données",
+        "intensité"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803756+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_151",
@@ -1965,7 +3540,18 @@
       "indexed_at": "2026-07-10T07:23:31.137885+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "GPM satellite orbit Earth 3hr label",
+      "narrative_tags": [
+        "satellite",
+        "technologie",
+        "couverture"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803760+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_152",
@@ -1978,7 +3564,17 @@
       "indexed_at": "2026-07-10T07:23:31.138660+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "GPM satellite 3D rendering orbit",
+      "narrative_tags": [
+        "satellite",
+        "ingénierie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803765+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_153",
@@ -1991,7 +3587,17 @@
       "indexed_at": "2026-07-10T07:23:31.139429+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite spacecraft dark space",
+      "narrative_tags": [
+        "satellite",
+        "espace"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803769+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_154",
@@ -2004,7 +3610,17 @@
       "indexed_at": "2026-07-10T07:23:31.140189+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "GPM spacecraft 3D model detail",
+      "narrative_tags": [
+        "satellite",
+        "technologie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803773+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_155",
@@ -2017,7 +3633,17 @@
       "indexed_at": "2026-07-10T07:23:31.140961+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite solar panels space rendering",
+      "narrative_tags": [
+        "satellite",
+        "ingénierie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803777+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_156",
@@ -2030,7 +3656,17 @@
       "indexed_at": "2026-07-10T07:23:31.141744+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "globe small Earth from space",
+      "narrative_tags": [
+        "planète",
+        "perspective"
+      ],
+      "usage_tags": [
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803781+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_157",
@@ -2043,7 +3679,18 @@
       "indexed_at": "2026-07-10T07:23:31.142484+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Tanegashima Space Complex Japan text",
+      "narrative_tags": [
+        "lancement",
+        "Japon",
+        "infrastructure"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803785+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_158",
@@ -2056,7 +3703,17 @@
       "indexed_at": "2026-07-10T07:23:31.142686+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Tanegashima launch facility text",
+      "narrative_tags": [
+        "lancement",
+        "base"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803789+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_159",
@@ -2069,7 +3726,18 @@
       "indexed_at": "2026-07-10T07:23:31.142940+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "rocket launch pad facility aerial",
+      "narrative_tags": [
+        "lancement",
+        "fusée",
+        "technologie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803794+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_160",
@@ -2082,7 +3750,17 @@
       "indexed_at": "2026-07-10T07:23:31.143263+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "rocket on launch pad ready",
+      "narrative_tags": [
+        "lancement",
+        "préparation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803798+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_161",
@@ -2095,7 +3773,17 @@
       "indexed_at": "2026-07-10T07:23:31.143565+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Tanegashima launch complex overview",
+      "narrative_tags": [
+        "lancement",
+        "infrastructure"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803802+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_162",
@@ -2108,7 +3796,17 @@
       "indexed_at": "2026-07-10T07:23:31.143853+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "launch facility rocket preparation",
+      "narrative_tags": [
+        "lancement",
+        "fusée"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803806+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_163",
@@ -2121,7 +3819,17 @@
       "indexed_at": "2026-07-10T07:23:31.144945+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "rocket launch pad closeup detail",
+      "narrative_tags": [
+        "lancement",
+        "technologie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803810+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_164",
@@ -2134,7 +3842,18 @@
       "indexed_at": "2026-07-10T07:23:31.146052+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "GPM logo blue glowing neon",
+      "narrative_tags": [
+        "branding",
+        "mission",
+        "identité"
+      ],
+      "usage_tags": [
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803814+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_165",
@@ -2147,7 +3866,17 @@
       "indexed_at": "2026-07-10T07:23:31.147094+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "GPM logo animated blue glow",
+      "narrative_tags": [
+        "branding",
+        "mission"
+      ],
+      "usage_tags": [
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803818+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_166",
@@ -2160,7 +3889,18 @@
       "indexed_at": "2026-07-10T07:23:31.147641+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "GPM satellite sunlit orbit rendering",
+      "narrative_tags": [
+        "satellite",
+        "espace",
+        "beauté"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803822+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_167",
@@ -2173,7 +3913,17 @@
       "indexed_at": "2026-07-10T07:23:31.148345+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite orbit Earth horizon glow",
+      "narrative_tags": [
+        "satellite",
+        "espace"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803826+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_168",
@@ -2186,7 +3936,17 @@
       "indexed_at": "2026-07-10T07:23:31.149006+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "GPM satellite Earth atmosphere edge",
+      "narrative_tags": [
+        "satellite",
+        "atmosphère"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803830+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_169",
@@ -2199,7 +3959,19 @@
       "indexed_at": "2026-07-10T07:23:31.149684+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite orbit dawn Earth horizon",
+      "narrative_tags": [
+        "satellite",
+        "aube",
+        "espace"
+      ],
+      "usage_tags": [
+        "illustration",
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803834+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_170",
@@ -2212,7 +3984,17 @@
       "indexed_at": "2026-07-10T07:23:31.150367+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "GPM satellite 3D close orbit view",
+      "narrative_tags": [
+        "satellite",
+        "technologie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803838+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_171",
@@ -2225,7 +4007,17 @@
       "indexed_at": "2026-07-10T07:23:31.151057+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite rendering dark space Earth",
+      "narrative_tags": [
+        "satellite",
+        "espace"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803842+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_172",
@@ -2238,7 +4030,17 @@
       "indexed_at": "2026-07-10T07:23:31.151941+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite components detail space view",
+      "narrative_tags": [
+        "satellite",
+        "ingénierie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803846+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_173",
@@ -2251,7 +4053,17 @@
       "indexed_at": "2026-07-10T07:23:31.153089+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite radar instrument detail 3D",
+      "narrative_tags": [
+        "instrument",
+        "technologie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803850+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_174",
@@ -2264,7 +4076,17 @@
       "indexed_at": "2026-07-10T07:23:31.154081+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "GPM radar instrument grid detail",
+      "narrative_tags": [
+        "instrument",
+        "précision"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803854+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_175",
@@ -2277,7 +4099,17 @@
       "indexed_at": "2026-07-10T07:23:31.154595+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite instrument close rendering",
+      "narrative_tags": [
+        "instrument",
+        "technologie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803858+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_176",
@@ -2290,7 +4122,17 @@
       "indexed_at": "2026-07-10T07:23:31.155312+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "radar instrument panel honeycomb pattern",
+      "narrative_tags": [
+        "instrument",
+        "ingénierie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803862+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_177",
@@ -2303,7 +4145,17 @@
       "indexed_at": "2026-07-10T07:23:31.155957+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite component assembly 3D view",
+      "narrative_tags": [
+        "satellite",
+        "construction"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803866+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_178",
@@ -2316,7 +4168,17 @@
       "indexed_at": "2026-07-10T07:23:31.156301+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "GPM satellite assembly rendering dark",
+      "narrative_tags": [
+        "satellite",
+        "ingénierie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803870+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_179",
@@ -2329,7 +4191,17 @@
       "indexed_at": "2026-07-10T07:23:31.156691+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite technical component detail",
+      "narrative_tags": [
+        "satellite",
+        "technologie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803874+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_180",
@@ -2342,7 +4214,17 @@
       "indexed_at": "2026-07-10T07:23:31.157094+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite panel grid technical view",
+      "narrative_tags": [
+        "instrument",
+        "précision"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803878+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_181",
@@ -2355,7 +4237,17 @@
       "indexed_at": "2026-07-10T07:23:31.157519+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "data visualization satellite measurement",
+      "narrative_tags": [
+        "données",
+        "mesure"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803882+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_182",
@@ -2368,7 +4260,17 @@
       "indexed_at": "2026-07-10T07:23:31.157967+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "precipitation data graph dark background",
+      "narrative_tags": [
+        "données",
+        "analyse"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803886+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_183",
@@ -2381,7 +4283,17 @@
       "indexed_at": "2026-07-10T07:23:31.158458+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite measurement data colorful",
+      "narrative_tags": [
+        "données",
+        "technologie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803891+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_184",
@@ -2394,7 +4306,17 @@
       "indexed_at": "2026-07-10T07:23:31.158964+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "dark data visualization screen",
+      "narrative_tags": [
+        "données",
+        "mesure"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803894+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_185",
@@ -2407,7 +4329,17 @@
       "indexed_at": "2026-07-10T07:23:31.159851+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "measurement data dark overlay",
+      "narrative_tags": [
+        "données",
+        "analyse"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803898+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_186",
@@ -2420,7 +4352,17 @@
       "indexed_at": "2026-07-10T07:23:31.160898+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "precipitation data dark background",
+      "narrative_tags": [
+        "données",
+        "mesure"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803902+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_187",
@@ -2433,7 +4375,17 @@
       "indexed_at": "2026-07-10T07:23:31.162038+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite measurement visualization",
+      "narrative_tags": [
+        "données",
+        "technologie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803906+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_188",
@@ -2446,7 +4398,17 @@
       "indexed_at": "2026-07-10T07:23:31.163142+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "data screen dark precipitation view",
+      "narrative_tags": [
+        "données",
+        "mesure"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803911+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_189",
@@ -2459,7 +4421,17 @@
       "indexed_at": "2026-07-10T07:23:31.163871+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "dark frame satellite data overlay",
+      "narrative_tags": [
+        "données",
+        "mesure"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803915+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_190",
@@ -2472,7 +4444,17 @@
       "indexed_at": "2026-07-10T07:23:31.164713+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "dark measurement screen display",
+      "narrative_tags": [
+        "données",
+        "instrument"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803919+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_191",
@@ -2485,7 +4467,17 @@
       "indexed_at": "2026-07-10T07:23:31.165605+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "precipitation measurement dark frame",
+      "narrative_tags": [
+        "données",
+        "mesure"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803923+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_192",
@@ -2498,7 +4490,17 @@
       "indexed_at": "2026-07-10T07:23:31.166462+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "dark data display radar view",
+      "narrative_tags": [
+        "données",
+        "radar"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803927+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_193",
@@ -2511,7 +4513,17 @@
       "indexed_at": "2026-07-10T07:23:31.167507+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite measurement dark overlay",
+      "narrative_tags": [
+        "données",
+        "mesure"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803931+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_194",
@@ -2524,7 +4536,17 @@
       "indexed_at": "2026-07-10T07:23:31.168634+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "dark frame data visualization blue",
+      "narrative_tags": [
+        "données",
+        "mesure"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803935+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_195",
@@ -2537,7 +4559,17 @@
       "indexed_at": "2026-07-10T07:23:31.169741+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "precipitation data dark screen",
+      "narrative_tags": [
+        "données",
+        "analyse"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803939+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_196",
@@ -2550,7 +4582,17 @@
       "indexed_at": "2026-07-10T07:23:31.170906+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "data visualization colored overlay",
+      "narrative_tags": [
+        "données",
+        "visualisation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803943+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_197",
@@ -2563,7 +4605,17 @@
       "indexed_at": "2026-07-10T07:23:31.171997+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "precipitation measurement graphic",
+      "narrative_tags": [
+        "données",
+        "mesure"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803950+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_198",
@@ -2576,7 +4628,17 @@
       "indexed_at": "2026-07-10T07:23:31.173087+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite data overlay graphic view",
+      "narrative_tags": [
+        "données",
+        "technologie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803954+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_199",
@@ -2589,7 +4651,17 @@
       "indexed_at": "2026-07-10T07:23:31.173557+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D globe precipitation cyan blue data",
+      "narrative_tags": [
+        "planète",
+        "précipitation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803958+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_200",
@@ -2602,7 +4674,17 @@
       "indexed_at": "2026-07-10T07:23:31.174370+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Earth globe precipitation overlay",
+      "narrative_tags": [
+        "planète",
+        "données"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803962+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_201",
@@ -2615,7 +4697,17 @@
       "indexed_at": "2026-07-10T07:23:31.175114+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "globe rotating precipitation blue",
+      "narrative_tags": [
+        "planète",
+        "couverture"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803966+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_202",
@@ -2628,7 +4720,17 @@
       "indexed_at": "2026-07-10T07:23:31.176082+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Earth globe rain data blue overlay",
+      "narrative_tags": [
+        "planète",
+        "précipitation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803970+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_203",
@@ -2641,7 +4743,17 @@
       "indexed_at": "2026-07-10T07:23:31.176726+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "globe precipitation Americas view",
+      "narrative_tags": [
+        "planète",
+        "données"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803974+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_204",
@@ -2654,7 +4766,18 @@
       "indexed_at": "2026-07-10T07:23:31.177647+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D precipitation radar data green red",
+      "narrative_tags": [
+        "données",
+        "intensité",
+        "3D"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803978+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_205",
@@ -2667,7 +4790,18 @@
       "indexed_at": "2026-07-10T07:23:31.178861+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D radar precipitation structure",
+      "narrative_tags": [
+        "données",
+        "structure",
+        "radar"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803982+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_206",
@@ -2680,7 +4814,17 @@
       "indexed_at": "2026-07-10T07:23:31.180447+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D precipitation visualization colorful",
+      "narrative_tags": [
+        "données",
+        "visualisation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803986+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_207",
@@ -2693,7 +4837,17 @@
       "indexed_at": "2026-07-10T07:23:31.182006+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "radar 3D precipitation green columns",
+      "narrative_tags": [
+        "données",
+        "intensité"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803990+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_208",
@@ -2706,7 +4860,17 @@
       "indexed_at": "2026-07-10T07:23:31.183560+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D precipitation towers data display",
+      "narrative_tags": [
+        "données",
+        "structure"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803994+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_209",
@@ -2719,7 +4883,17 @@
       "indexed_at": "2026-07-10T07:23:31.184333+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D radar data precipitation green red",
+      "narrative_tags": [
+        "données",
+        "3D"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.803998+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_210",
@@ -2732,7 +4906,17 @@
       "indexed_at": "2026-07-10T07:23:31.185223+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D precipitation structure colorful",
+      "narrative_tags": [
+        "données",
+        "visualisation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804003+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_211",
@@ -2745,7 +4929,17 @@
       "indexed_at": "2026-07-10T07:23:31.186175+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "scientist speaking dark background",
+      "narrative_tags": [
+        "expert",
+        "explication"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804007+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_212",
@@ -2758,7 +4952,17 @@
       "indexed_at": "2026-07-10T07:23:31.187164+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "researcher explaining hurricane impact",
+      "narrative_tags": [
+        "expert",
+        "impact"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804011+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_213",
@@ -2771,7 +4975,17 @@
       "indexed_at": "2026-07-10T07:23:31.188068+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "scientist interview portrait view",
+      "narrative_tags": [
+        "expert",
+        "interview"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804015+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_214",
@@ -2784,7 +4998,18 @@
       "indexed_at": "2026-07-10T07:23:31.188757+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "globe precipitation 1hr time label",
+      "narrative_tags": [
+        "temps",
+        "couverture",
+        "données"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804019+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_215",
@@ -2797,7 +5022,17 @@
       "indexed_at": "2026-07-10T07:23:31.189449+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "globe precipitation 1hr overlay",
+      "narrative_tags": [
+        "temps",
+        "précipitation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804023+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_216",
@@ -2810,7 +5045,17 @@
       "indexed_at": "2026-07-10T07:23:31.190137+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "globe 1hr precipitation measurement",
+      "narrative_tags": [
+        "temps",
+        "données"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804034+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_217",
@@ -2823,7 +5068,17 @@
       "indexed_at": "2026-07-10T07:23:31.190858+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "globe 1hr rainfall coverage display",
+      "narrative_tags": [
+        "temps",
+        "couverture"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804038+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_218",
@@ -2836,7 +5091,17 @@
       "indexed_at": "2026-07-10T07:23:31.191939+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "globe 2hr precipitation accumulation",
+      "narrative_tags": [
+        "temps",
+        "accumulation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804043+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_219",
@@ -2849,7 +5114,19 @@
       "indexed_at": "2026-07-10T07:23:31.192895+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "hurricane satellite view ocean swirl",
+      "narrative_tags": [
+        "ouragan",
+        "océan",
+        "puissance"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804047+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_220",
@@ -2862,7 +5139,18 @@
       "indexed_at": "2026-07-10T07:23:31.194047+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D precipitation data radar structure",
+      "narrative_tags": [
+        "données",
+        "3D",
+        "radar"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804051+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_221",
@@ -2875,7 +5163,17 @@
       "indexed_at": "2026-07-10T07:23:31.194971+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D radar data colorful precipitation",
+      "narrative_tags": [
+        "données",
+        "3D"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804055+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_222",
@@ -2888,7 +5186,17 @@
       "indexed_at": "2026-07-10T07:23:31.195967+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D precipitation towers green red",
+      "narrative_tags": [
+        "données",
+        "intensité"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804059+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_223",
@@ -2901,7 +5209,17 @@
       "indexed_at": "2026-07-10T07:23:31.196991+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D radar precipitation visualization",
+      "narrative_tags": [
+        "données",
+        "visualisation"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804065+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_224",
@@ -2914,7 +5232,17 @@
       "indexed_at": "2026-07-10T07:23:31.197840+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D precipitation structure detailed",
+      "narrative_tags": [
+        "données",
+        "structure"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804072+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_225",
@@ -2927,7 +5255,18 @@
       "indexed_at": "2026-07-10T07:23:31.198684+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D radar data towers colorful close",
+      "narrative_tags": [
+        "données",
+        "3D",
+        "intensité"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804079+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_226",
@@ -2940,7 +5279,18 @@
       "indexed_at": "2026-07-10T07:23:31.199660+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "brown floodwater residential street deep",
+      "narrative_tags": [
+        "inondation",
+        "dévastation",
+        "danger"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804085+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_227",
@@ -2953,7 +5303,20 @@
       "indexed_at": "2026-07-10T07:23:31.200916+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "rescue workers yellow vests flooded street",
+      "narrative_tags": [
+        "secours",
+        "héroïsme",
+        "courage",
+        "tempête"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804093+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_228",
@@ -2966,7 +5329,19 @@
       "indexed_at": "2026-07-10T07:23:31.202202+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "emergency workers wading through flood",
+      "narrative_tags": [
+        "secours",
+        "courage",
+        "dévouement"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804100+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_229",
@@ -2979,7 +5354,19 @@
       "indexed_at": "2026-07-10T07:23:31.203287+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "rescue team yellow vests deep floodwater",
+      "narrative_tags": [
+        "secours",
+        "héroïsme",
+        "urgence"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804107+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_230",
@@ -2992,7 +5379,19 @@
       "indexed_at": "2026-07-10T07:23:31.204565+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "rescuers walking flooded town center",
+      "narrative_tags": [
+        "secours",
+        "courage",
+        "communauté"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804114+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_231",
@@ -3005,7 +5404,19 @@
       "indexed_at": "2026-07-10T07:23:31.205671+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "emergency crew yellow vests flood response",
+      "narrative_tags": [
+        "secours",
+        "intervention",
+        "urgence"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804122+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_232",
@@ -3018,7 +5429,18 @@
       "indexed_at": "2026-07-10T07:23:31.206944+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "misty flooded street rescue workers",
+      "narrative_tags": [
+        "secours",
+        "brouillard",
+        "danger"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804128+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_233",
@@ -3031,7 +5453,18 @@
       "indexed_at": "2026-07-10T07:23:31.207508+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "foggy flood scene rescue operation",
+      "narrative_tags": [
+        "secours",
+        "conditions",
+        "difficulté"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804140+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_234",
@@ -3044,7 +5477,17 @@
       "indexed_at": "2026-07-10T07:23:31.208367+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "TROPICAL CYCLONES title text dark",
+      "narrative_tags": [
+        "titre",
+        "cyclone"
+      ],
+      "usage_tags": [
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804147+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_235",
@@ -3057,7 +5500,17 @@
       "indexed_at": "2026-07-10T07:23:31.209098+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "TROPICAL CYCLONES title card blue",
+      "narrative_tags": [
+        "titre",
+        "cyclone"
+      ],
+      "usage_tags": [
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804155+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_236",
@@ -3070,7 +5523,17 @@
       "indexed_at": "2026-07-10T07:23:31.209695+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "GPM logo blue glowing 3D",
+      "narrative_tags": [
+        "branding",
+        "mission"
+      ],
+      "usage_tags": [
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804162+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_237",
@@ -3083,7 +5546,17 @@
       "indexed_at": "2026-07-10T07:23:31.210344+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "GPM logo neon blue animated",
+      "narrative_tags": [
+        "branding",
+        "identité"
+      ],
+      "usage_tags": [
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804167+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_238",
@@ -3096,7 +5569,17 @@
       "indexed_at": "2026-07-10T07:23:31.210869+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "scientist speaking final remarks",
+      "narrative_tags": [
+        "expert",
+        "conclusion"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804171+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_239",
@@ -3109,7 +5592,17 @@
       "indexed_at": "2026-07-10T07:23:31.211378+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "scientist portrait interview closing",
+      "narrative_tags": [
+        "expert",
+        "interview"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804175+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_240",
@@ -3122,7 +5615,17 @@
       "indexed_at": "2026-07-10T07:23:31.211468+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "scientist speaking final frame",
+      "narrative_tags": [
+        "expert",
+        "conclusion"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804179+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_241",
@@ -3135,7 +5638,17 @@
       "indexed_at": "2026-07-10T07:23:31.211784+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "credits footage courtesy text",
+      "narrative_tags": [
+        "crédits",
+        "attribution"
+      ],
+      "usage_tags": [
+        "outro"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804187+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_242",
@@ -3148,7 +5661,17 @@
       "indexed_at": "2026-07-10T07:23:31.212024+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "credits names list text screen",
+      "narrative_tags": [
+        "crédits",
+        "attribution"
+      ],
+      "usage_tags": [
+        "outro"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804192+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_243",
@@ -3161,7 +5684,17 @@
       "indexed_at": "2026-07-10T07:23:31.212274+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "credits footage courtesy screen",
+      "narrative_tags": [
+        "crédits",
+        "attribution"
+      ],
+      "usage_tags": [
+        "outro"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804196+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_244",
@@ -3174,7 +5707,17 @@
       "indexed_at": "2026-07-10T07:23:31.212360+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "credits final names list text",
+      "narrative_tags": [
+        "crédits",
+        "attribution"
+      ],
+      "usage_tags": [
+        "outro"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804200+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_245",
@@ -3187,7 +5730,17 @@
       "indexed_at": "2026-07-10T07:23:31.213061+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite spacecraft dark space view",
+      "narrative_tags": [
+        "satellite",
+        "espace"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804205+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_246",
@@ -3200,7 +5753,17 @@
       "indexed_at": "2026-07-10T07:23:31.213784+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite Earth atmosphere glow",
+      "narrative_tags": [
+        "satellite",
+        "atmosphère"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804212+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_247",
@@ -3213,7 +5776,17 @@
       "indexed_at": "2026-07-10T07:23:31.214506+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite orbit Earth blue horizon",
+      "narrative_tags": [
+        "satellite",
+        "espace"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804220+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_248",
@@ -3226,7 +5799,17 @@
       "indexed_at": "2026-07-10T07:23:31.215215+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite rendering space dark",
+      "narrative_tags": [
+        "satellite",
+        "espace"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804232+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_249",
@@ -3239,7 +5822,17 @@
       "indexed_at": "2026-07-10T07:23:31.215924+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "GODDARD Space Flight Center logo",
+      "narrative_tags": [
+        "branding",
+        "NASA"
+      ],
+      "usage_tags": [
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804240+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_250",
@@ -3252,7 +5845,17 @@
       "indexed_at": "2026-07-10T07:23:31.216641+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "GODDARD logo dark background",
+      "narrative_tags": [
+        "branding",
+        "NASA"
+      ],
+      "usage_tags": [
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804247+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_251",
@@ -3265,7 +5868,17 @@
       "indexed_at": "2026-07-10T07:23:31.217352+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite closeup space dark",
+      "narrative_tags": [
+        "satellite",
+        "technologie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804255+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_252",
@@ -3278,7 +5891,17 @@
       "indexed_at": "2026-07-10T07:23:31.218053+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite instrument panel closeup",
+      "narrative_tags": [
+        "instrument",
+        "technologie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804262+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_253",
@@ -3291,7 +5914,17 @@
       "indexed_at": "2026-07-10T07:23:31.218803+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite detail rendering space",
+      "narrative_tags": [
+        "satellite",
+        "ingénierie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804267+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_254",
@@ -3304,7 +5937,17 @@
       "indexed_at": "2026-07-10T07:23:31.219539+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite closeup dark space view",
+      "narrative_tags": [
+        "satellite",
+        "espace"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804271+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_255",
@@ -3317,7 +5960,17 @@
       "indexed_at": "2026-07-10T07:23:31.219859+00:00",
       "width": 1280,
       "height": 720,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite final frame space dark",
+      "narrative_tags": [
+        "satellite",
+        "espace"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:46.804275+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_256",
@@ -3330,7 +5983,17 @@
       "indexed_at": "2026-07-10T07:23:31.220787+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "dark intro title screens transition",
+      "narrative_tags": [
+        "introduction",
+        "branding"
+      ],
+      "usage_tags": [
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853066+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_257",
@@ -3343,7 +6006,18 @@
       "indexed_at": "2026-07-10T07:23:31.226176+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite Earth weather data overlay",
+      "narrative_tags": [
+        "planète",
+        "observation",
+        "technologie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853071+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_258",
@@ -3356,7 +6030,19 @@
       "indexed_at": "2026-07-10T07:23:31.228808+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "dark stormy footage clouds turbulent",
+      "narrative_tags": [
+        "tempête",
+        "menace",
+        "atmosphère"
+      ],
+      "usage_tags": [
+        "illustration",
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853076+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_259",
@@ -3369,7 +6055,19 @@
       "indexed_at": "2026-07-10T07:23:31.230373+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "flooding muddy water rushing through bridge",
+      "narrative_tags": [
+        "inondation",
+        "puissance",
+        "danger"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853081+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_260",
@@ -3382,7 +6080,18 @@
       "indexed_at": "2026-07-10T07:23:31.231851+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "rushing floodwater debris brown current",
+      "narrative_tags": [
+        "inondation",
+        "destruction",
+        "force"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853086+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_261",
@@ -3395,7 +6104,18 @@
       "indexed_at": "2026-07-10T07:23:31.235509+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "flooded residential street houses submerged",
+      "narrative_tags": [
+        "inondation",
+        "dévastation",
+        "communauté"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853090+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_262",
@@ -3408,7 +6128,20 @@
       "indexed_at": "2026-07-10T07:23:31.238607+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "people walking storm rain rescue workers",
+      "narrative_tags": [
+        "courage",
+        "secours",
+        "tempête",
+        "résilience"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853095+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_263",
@@ -3421,7 +6154,20 @@
       "indexed_at": "2026-07-10T07:23:31.241371+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": false
+      "has_transparency": false,
+      "visual_description": "rescue workers yellow vests flooded road",
+      "narrative_tags": [
+        "secours",
+        "héroïsme",
+        "courage",
+        "urgence"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853099+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_264",
@@ -3434,7 +6180,18 @@
       "indexed_at": "2026-07-10T07:23:31.242882+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "emergency vehicle rescue operation flood zone",
+      "narrative_tags": [
+        "secours",
+        "intervention",
+        "urgence"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853103+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_265",
@@ -3447,7 +6204,19 @@
       "indexed_at": "2026-07-10T07:23:31.244608+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "hurricane spiral satellite view rotating",
+      "narrative_tags": [
+        "ouragan",
+        "puissance",
+        "nature"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853108+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_266",
@@ -3460,7 +6229,18 @@
       "indexed_at": "2026-07-10T07:23:31.246838+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "precipitation radar data colorful animated",
+      "narrative_tags": [
+        "données",
+        "précipitation",
+        "science"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853113+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_267",
@@ -3473,7 +6253,18 @@
       "indexed_at": "2026-07-10T07:23:31.248704+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "hurricane satellite monochrome eye detail",
+      "narrative_tags": [
+        "ouragan",
+        "surveillance",
+        "structure"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853117+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_268",
@@ -3486,7 +6277,18 @@
       "indexed_at": "2026-07-10T07:23:31.250822+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": false
+      "has_transparency": false,
+      "visual_description": "precipitation measurement charts data bars",
+      "narrative_tags": [
+        "données",
+        "mesure",
+        "analyse"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853122+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_269",
@@ -3499,7 +6301,18 @@
       "indexed_at": "2026-07-10T07:23:31.252334+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "scientist Scott Braun speaking interview",
+      "narrative_tags": [
+        "expert",
+        "explication",
+        "recherche"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853126+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_270",
@@ -3512,7 +6325,17 @@
       "indexed_at": "2026-07-10T07:23:31.254021+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "scientist speaking dark background portrait",
+      "narrative_tags": [
+        "expert",
+        "interview"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853133+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_271",
@@ -3525,7 +6348,18 @@
       "indexed_at": "2026-07-10T07:23:31.255718+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D Earth globe precipitation data rotating",
+      "narrative_tags": [
+        "planète",
+        "couverture",
+        "satellite"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853138+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_272",
@@ -3538,7 +6372,18 @@
       "indexed_at": "2026-07-10T07:23:31.256885+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "rocket launch facility pad preparation",
+      "narrative_tags": [
+        "lancement",
+        "fusée",
+        "technologie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853142+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_273",
@@ -3551,7 +6396,18 @@
       "indexed_at": "2026-07-10T07:23:31.258734+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "GPM satellite 3D rendering dark space",
+      "narrative_tags": [
+        "satellite",
+        "espace",
+        "technologie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853147+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_274",
@@ -3564,7 +6420,18 @@
       "indexed_at": "2026-07-10T07:23:31.259828+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "dark data visualization screens measurement",
+      "narrative_tags": [
+        "données",
+        "instrument",
+        "mesure"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853152+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_275",
@@ -3577,7 +6444,18 @@
       "indexed_at": "2026-07-10T07:23:31.262440+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite measurement data overlay display",
+      "narrative_tags": [
+        "données",
+        "technologie",
+        "surveillance"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853156+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_276",
@@ -3590,7 +6468,18 @@
       "indexed_at": "2026-07-10T07:23:31.264627+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "scientist Candace Carlisle speaking GPM",
+      "narrative_tags": [
+        "expert",
+        "explication",
+        "mission"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853160+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_277",
@@ -3603,7 +6492,20 @@
       "indexed_at": "2026-07-10T07:23:31.266368+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "3D precipitation radar towers green red",
+      "narrative_tags": [
+        "données",
+        "3D",
+        "intensité",
+        "radar"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853165+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_278",
@@ -3616,7 +6518,21 @@
       "indexed_at": "2026-07-10T07:23:31.268325+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": false
+      "has_transparency": false,
+      "visual_description": "rescue workers wading deep floodwater yellow",
+      "narrative_tags": [
+        "secours",
+        "héroïsme",
+        "courage",
+        "tempête",
+        "dévouement"
+      ],
+      "usage_tags": [
+        "illustration",
+        "emphase"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853169+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_279",
@@ -3629,7 +6545,19 @@
       "indexed_at": "2026-07-10T07:23:31.271473+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "Earth globe rotating blue green continents",
+      "narrative_tags": [
+        "planète",
+        "géographie",
+        "global"
+      ],
+      "usage_tags": [
+        "illustration",
+        "transition"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853174+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_280",
@@ -3642,7 +6570,18 @@
       "indexed_at": "2026-07-10T07:23:31.271756+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "credits GODDARD branding text screens",
+      "narrative_tags": [
+        "crédits",
+        "NASA",
+        "attribution"
+      ],
+      "usage_tags": [
+        "outro"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853178+00:00",
+      "tagged_by": "oracle"
     },
     {
       "id": "nat_281",
@@ -3655,7 +6594,18 @@
       "indexed_at": "2026-07-10T07:23:31.273231+00:00",
       "width": 480,
       "height": 270,
-      "has_transparency": true
+      "has_transparency": true,
+      "visual_description": "satellite closeup instrument detail space",
+      "narrative_tags": [
+        "satellite",
+        "technologie",
+        "ingénierie"
+      ],
+      "usage_tags": [
+        "illustration"
+      ],
+      "tagged_at": "2026-07-10T09:24:59.853183+00:00",
+      "tagged_by": "oracle"
     }
   ],
   "backgrounds": [],
@@ -3760,5 +6710,2987 @@
       "format": "mp4"
     }
   ],
-  "last_updated": "2026-07-10T07:23:31.344004+00:00"
+  "last_updated": "2026-07-10T07:23:31.344004+00:00",
+  "tag_index": {
+    "introduction": [
+      "nat_001",
+      "nat_256"
+    ],
+    "branding": [
+      "nat_001",
+      "nat_025",
+      "nat_164",
+      "nat_165",
+      "nat_236",
+      "nat_237",
+      "nat_249",
+      "nat_250",
+      "nat_256",
+      "nat_280"
+    ],
+    "transition": [
+      "nat_001",
+      "nat_003",
+      "nat_024",
+      "nat_040",
+      "nat_043",
+      "nat_044",
+      "nat_045",
+      "nat_115",
+      "nat_116",
+      "nat_156",
+      "nat_164",
+      "nat_165",
+      "nat_169",
+      "nat_234",
+      "nat_235",
+      "nat_236",
+      "nat_237",
+      "nat_249",
+      "nat_250",
+      "nat_256",
+      "nat_258",
+      "nat_279"
+    ],
+    "dark": [
+      "nat_001",
+      "nat_003",
+      "nat_015",
+      "nat_018",
+      "nat_019",
+      "nat_046",
+      "nat_048",
+      "nat_049",
+      "nat_050",
+      "nat_068",
+      "nat_069",
+      "nat_087",
+      "nat_096",
+      "nat_109",
+      "nat_110",
+      "nat_153",
+      "nat_171",
+      "nat_178",
+      "nat_182",
+      "nat_184",
+      "nat_185",
+      "nat_186",
+      "nat_188",
+      "nat_189",
+      "nat_190",
+      "nat_191",
+      "nat_192",
+      "nat_193",
+      "nat_194",
+      "nat_195",
+      "nat_211",
+      "nat_234",
+      "nat_245",
+      "nat_248",
+      "nat_250",
+      "nat_251",
+      "nat_254",
+      "nat_255",
+      "nat_256",
+      "nat_258",
+      "nat_270",
+      "nat_273",
+      "nat_274"
+    ],
+    "intro": [
+      "nat_001",
+      "nat_256"
+    ],
+    "title": [
+      "nat_001",
+      "nat_044",
+      "nat_123",
+      "nat_234",
+      "nat_235",
+      "nat_256"
+    ],
+    "screens": [
+      "nat_001",
+      "nat_019",
+      "nat_025",
+      "nat_256",
+      "nat_274",
+      "nat_280"
+    ],
+    "planète": [
+      "nat_002",
+      "nat_016",
+      "nat_024",
+      "nat_099",
+      "nat_100",
+      "nat_102",
+      "nat_103",
+      "nat_104",
+      "nat_105",
+      "nat_106",
+      "nat_107",
+      "nat_108",
+      "nat_117",
+      "nat_118",
+      "nat_119",
+      "nat_120",
+      "nat_138",
+      "nat_156",
+      "nat_199",
+      "nat_200",
+      "nat_201",
+      "nat_202",
+      "nat_203",
+      "nat_257",
+      "nat_271",
+      "nat_279"
+    ],
+    "observation": [
+      "nat_002",
+      "nat_089",
+      "nat_257"
+    ],
+    "technologie": [
+      "nat_002",
+      "nat_017",
+      "nat_018",
+      "nat_020",
+      "nat_026",
+      "nat_063",
+      "nat_073",
+      "nat_080",
+      "nat_090",
+      "nat_151",
+      "nat_154",
+      "nat_159",
+      "nat_163",
+      "nat_170",
+      "nat_173",
+      "nat_175",
+      "nat_179",
+      "nat_183",
+      "nat_187",
+      "nat_198",
+      "nat_251",
+      "nat_252",
+      "nat_257",
+      "nat_272",
+      "nat_273",
+      "nat_275",
+      "nat_281"
+    ],
+    "illustration": [
+      "nat_002",
+      "nat_003",
+      "nat_004",
+      "nat_005",
+      "nat_006",
+      "nat_007",
+      "nat_008",
+      "nat_009",
+      "nat_010",
+      "nat_011",
+      "nat_012",
+      "nat_013",
+      "nat_014",
+      "nat_015",
+      "nat_016",
+      "nat_017",
+      "nat_018",
+      "nat_019",
+      "nat_020",
+      "nat_021",
+      "nat_022",
+      "nat_023",
+      "nat_024",
+      "nat_026",
+      "nat_027",
+      "nat_028",
+      "nat_029",
+      "nat_030",
+      "nat_031",
+      "nat_032",
+      "nat_033",
+      "nat_034",
+      "nat_035",
+      "nat_036",
+      "nat_037",
+      "nat_038",
+      "nat_039",
+      "nat_041",
+      "nat_042",
+      "nat_046",
+      "nat_047",
+      "nat_048",
+      "nat_049",
+      "nat_050",
+      "nat_051",
+      "nat_052",
+      "nat_053",
+      "nat_054",
+      "nat_055",
+      "nat_056",
+      "nat_057",
+      "nat_058",
+      "nat_059",
+      "nat_060",
+      "nat_061",
+      "nat_062",
+      "nat_063",
+      "nat_064",
+      "nat_065",
+      "nat_066",
+      "nat_067",
+      "nat_068",
+      "nat_069",
+      "nat_070",
+      "nat_071",
+      "nat_072",
+      "nat_073",
+      "nat_074",
+      "nat_075",
+      "nat_076",
+      "nat_077",
+      "nat_078",
+      "nat_079",
+      "nat_080",
+      "nat_081",
+      "nat_082",
+      "nat_083",
+      "nat_084",
+      "nat_085",
+      "nat_086",
+      "nat_087",
+      "nat_088",
+      "nat_089",
+      "nat_090",
+      "nat_091",
+      "nat_092",
+      "nat_093",
+      "nat_094",
+      "nat_095",
+      "nat_096",
+      "nat_097",
+      "nat_098",
+      "nat_099",
+      "nat_100",
+      "nat_101",
+      "nat_102",
+      "nat_103",
+      "nat_104",
+      "nat_105",
+      "nat_106",
+      "nat_107",
+      "nat_108",
+      "nat_109",
+      "nat_110",
+      "nat_111",
+      "nat_112",
+      "nat_113",
+      "nat_114",
+      "nat_115",
+      "nat_117",
+      "nat_118",
+      "nat_119",
+      "nat_120",
+      "nat_121",
+      "nat_122",
+      "nat_123",
+      "nat_124",
+      "nat_125",
+      "nat_126",
+      "nat_127",
+      "nat_128",
+      "nat_129",
+      "nat_130",
+      "nat_131",
+      "nat_132",
+      "nat_133",
+      "nat_134",
+      "nat_135",
+      "nat_136",
+      "nat_137",
+      "nat_138",
+      "nat_139",
+      "nat_140",
+      "nat_141",
+      "nat_142",
+      "nat_143",
+      "nat_144",
+      "nat_145",
+      "nat_146",
+      "nat_147",
+      "nat_148",
+      "nat_149",
+      "nat_150",
+      "nat_151",
+      "nat_152",
+      "nat_153",
+      "nat_154",
+      "nat_155",
+      "nat_157",
+      "nat_158",
+      "nat_159",
+      "nat_160",
+      "nat_161",
+      "nat_162",
+      "nat_163",
+      "nat_166",
+      "nat_167",
+      "nat_168",
+      "nat_169",
+      "nat_170",
+      "nat_171",
+      "nat_172",
+      "nat_173",
+      "nat_174",
+      "nat_175",
+      "nat_176",
+      "nat_177",
+      "nat_178",
+      "nat_179",
+      "nat_180",
+      "nat_181",
+      "nat_182",
+      "nat_183",
+      "nat_184",
+      "nat_185",
+      "nat_186",
+      "nat_187",
+      "nat_188",
+      "nat_189",
+      "nat_190",
+      "nat_191",
+      "nat_192",
+      "nat_193",
+      "nat_194",
+      "nat_195",
+      "nat_196",
+      "nat_197",
+      "nat_198",
+      "nat_199",
+      "nat_200",
+      "nat_201",
+      "nat_202",
+      "nat_203",
+      "nat_204",
+      "nat_205",
+      "nat_206",
+      "nat_207",
+      "nat_208",
+      "nat_209",
+      "nat_210",
+      "nat_211",
+      "nat_212",
+      "nat_213",
+      "nat_214",
+      "nat_215",
+      "nat_216",
+      "nat_217",
+      "nat_218",
+      "nat_219",
+      "nat_220",
+      "nat_221",
+      "nat_222",
+      "nat_223",
+      "nat_224",
+      "nat_225",
+      "nat_226",
+      "nat_227",
+      "nat_228",
+      "nat_229",
+      "nat_230",
+      "nat_231",
+      "nat_232",
+      "nat_233",
+      "nat_238",
+      "nat_239",
+      "nat_240",
+      "nat_245",
+      "nat_246",
+      "nat_247",
+      "nat_248",
+      "nat_251",
+      "nat_252",
+      "nat_253",
+      "nat_254",
+      "nat_255",
+      "nat_257",
+      "nat_258",
+      "nat_259",
+      "nat_260",
+      "nat_261",
+      "nat_262",
+      "nat_263",
+      "nat_264",
+      "nat_265",
+      "nat_266",
+      "nat_267",
+      "nat_268",
+      "nat_269",
+      "nat_270",
+      "nat_271",
+      "nat_272",
+      "nat_273",
+      "nat_274",
+      "nat_275",
+      "nat_276",
+      "nat_277",
+      "nat_278",
+      "nat_279",
+      "nat_281"
+    ],
+    "satellite": [
+      "nat_002",
+      "nat_010",
+      "nat_012",
+      "nat_016",
+      "nat_018",
+      "nat_020",
+      "nat_026",
+      "nat_063",
+      "nat_064",
+      "nat_066",
+      "nat_068",
+      "nat_069",
+      "nat_076",
+      "nat_077",
+      "nat_078",
+      "nat_082",
+      "nat_084",
+      "nat_085",
+      "nat_086",
+      "nat_087",
+      "nat_088",
+      "nat_089",
+      "nat_090",
+      "nat_101",
+      "nat_131",
+      "nat_132",
+      "nat_134",
+      "nat_135",
+      "nat_140",
+      "nat_141",
+      "nat_142",
+      "nat_143",
+      "nat_144",
+      "nat_151",
+      "nat_152",
+      "nat_153",
+      "nat_154",
+      "nat_155",
+      "nat_166",
+      "nat_167",
+      "nat_168",
+      "nat_169",
+      "nat_170",
+      "nat_171",
+      "nat_172",
+      "nat_173",
+      "nat_175",
+      "nat_177",
+      "nat_178",
+      "nat_179",
+      "nat_180",
+      "nat_181",
+      "nat_183",
+      "nat_187",
+      "nat_189",
+      "nat_193",
+      "nat_198",
+      "nat_219",
+      "nat_245",
+      "nat_246",
+      "nat_247",
+      "nat_248",
+      "nat_251",
+      "nat_252",
+      "nat_253",
+      "nat_254",
+      "nat_255",
+      "nat_257",
+      "nat_265",
+      "nat_267",
+      "nat_271",
+      "nat_273",
+      "nat_275",
+      "nat_281"
+    ],
+    "earth": [
+      "nat_002",
+      "nat_016",
+      "nat_024",
+      "nat_099",
+      "nat_100",
+      "nat_102",
+      "nat_105",
+      "nat_107",
+      "nat_117",
+      "nat_118",
+      "nat_119",
+      "nat_120",
+      "nat_132",
+      "nat_134",
+      "nat_138",
+      "nat_140",
+      "nat_143",
+      "nat_144",
+      "nat_151",
+      "nat_156",
+      "nat_167",
+      "nat_168",
+      "nat_169",
+      "nat_171",
+      "nat_200",
+      "nat_202",
+      "nat_246",
+      "nat_247",
+      "nat_257",
+      "nat_271",
+      "nat_279"
+    ],
+    "weather": [
+      "nat_002",
+      "nat_072",
+      "nat_257"
+    ],
+    "data": [
+      "nat_002",
+      "nat_011",
+      "nat_013",
+      "nat_016",
+      "nat_019",
+      "nat_020",
+      "nat_071",
+      "nat_073",
+      "nat_074",
+      "nat_079",
+      "nat_080",
+      "nat_081",
+      "nat_082",
+      "nat_094",
+      "nat_100",
+      "nat_102",
+      "nat_104",
+      "nat_106",
+      "nat_108",
+      "nat_111",
+      "nat_136",
+      "nat_139",
+      "nat_147",
+      "nat_149",
+      "nat_181",
+      "nat_182",
+      "nat_183",
+      "nat_184",
+      "nat_185",
+      "nat_186",
+      "nat_188",
+      "nat_189",
+      "nat_192",
+      "nat_194",
+      "nat_195",
+      "nat_196",
+      "nat_198",
+      "nat_199",
+      "nat_202",
+      "nat_204",
+      "nat_208",
+      "nat_209",
+      "nat_220",
+      "nat_221",
+      "nat_225",
+      "nat_257",
+      "nat_266",
+      "nat_268",
+      "nat_271",
+      "nat_274",
+      "nat_275"
+    ],
+    "overlay": [
+      "nat_002",
+      "nat_020",
+      "nat_042",
+      "nat_093",
+      "nat_099",
+      "nat_103",
+      "nat_107",
+      "nat_108",
+      "nat_123",
+      "nat_139",
+      "nat_185",
+      "nat_189",
+      "nat_193",
+      "nat_196",
+      "nat_198",
+      "nat_200",
+      "nat_202",
+      "nat_215",
+      "nat_257",
+      "nat_275"
+    ],
+    "tempête": [
+      "nat_003",
+      "nat_007",
+      "nat_023",
+      "nat_051",
+      "nat_052",
+      "nat_068",
+      "nat_069",
+      "nat_070",
+      "nat_089",
+      "nat_227",
+      "nat_258",
+      "nat_262",
+      "nat_278"
+    ],
+    "menace": [
+      "nat_003",
+      "nat_069",
+      "nat_258"
+    ],
+    "atmosphère": [
+      "nat_003",
+      "nat_168",
+      "nat_246",
+      "nat_258"
+    ],
+    "stormy": [
+      "nat_003",
+      "nat_258"
+    ],
+    "footage": [
+      "nat_003",
+      "nat_046",
+      "nat_241",
+      "nat_243",
+      "nat_258"
+    ],
+    "clouds": [
+      "nat_003",
+      "nat_069",
+      "nat_258"
+    ],
+    "turbulent": [
+      "nat_003",
+      "nat_258"
+    ],
+    "inondation": [
+      "nat_004",
+      "nat_005",
+      "nat_006",
+      "nat_027",
+      "nat_028",
+      "nat_029",
+      "nat_030",
+      "nat_031",
+      "nat_032",
+      "nat_033",
+      "nat_034",
+      "nat_035",
+      "nat_036",
+      "nat_037",
+      "nat_038",
+      "nat_039",
+      "nat_040",
+      "nat_054",
+      "nat_055",
+      "nat_056",
+      "nat_057",
+      "nat_226",
+      "nat_259",
+      "nat_260",
+      "nat_261"
+    ],
+    "puissance": [
+      "nat_004",
+      "nat_010",
+      "nat_064",
+      "nat_086",
+      "nat_087",
+      "nat_219",
+      "nat_259",
+      "nat_265"
+    ],
+    "danger": [
+      "nat_004",
+      "nat_030",
+      "nat_226",
+      "nat_232",
+      "nat_259"
+    ],
+    "emphase": [
+      "nat_004",
+      "nat_007",
+      "nat_008",
+      "nat_010",
+      "nat_022",
+      "nat_023",
+      "nat_027",
+      "nat_051",
+      "nat_052",
+      "nat_058",
+      "nat_059",
+      "nat_064",
+      "nat_065",
+      "nat_087",
+      "nat_219",
+      "nat_227",
+      "nat_228",
+      "nat_229",
+      "nat_230",
+      "nat_231",
+      "nat_259",
+      "nat_262",
+      "nat_263",
+      "nat_265",
+      "nat_277",
+      "nat_278"
+    ],
+    "flooding": [
+      "nat_004",
+      "nat_028",
+      "nat_030",
+      "nat_034",
+      "nat_057",
+      "nat_259"
+    ],
+    "muddy": [
+      "nat_004",
+      "nat_259"
+    ],
+    "water": [
+      "nat_004",
+      "nat_030",
+      "nat_032",
+      "nat_033",
+      "nat_035",
+      "nat_039",
+      "nat_055",
+      "nat_057",
+      "nat_259"
+    ],
+    "rushing": [
+      "nat_004",
+      "nat_005",
+      "nat_036",
+      "nat_037",
+      "nat_259",
+      "nat_260"
+    ],
+    "through": [
+      "nat_004",
+      "nat_036",
+      "nat_228",
+      "nat_259"
+    ],
+    "bridge": [
+      "nat_004",
+      "nat_259"
+    ],
+    "destruction": [
+      "nat_005",
+      "nat_027",
+      "nat_037",
+      "nat_041",
+      "nat_046",
+      "nat_047",
+      "nat_049",
+      "nat_050",
+      "nat_057",
+      "nat_260"
+    ],
+    "force": [
+      "nat_005",
+      "nat_036",
+      "nat_065",
+      "nat_260"
+    ],
+    "floodwater": [
+      "nat_005",
+      "nat_023",
+      "nat_027",
+      "nat_029",
+      "nat_037",
+      "nat_054",
+      "nat_226",
+      "nat_229",
+      "nat_260",
+      "nat_278"
+    ],
+    "debris": [
+      "nat_005",
+      "nat_037",
+      "nat_041",
+      "nat_057",
+      "nat_260"
+    ],
+    "brown": [
+      "nat_005",
+      "nat_030",
+      "nat_055",
+      "nat_226",
+      "nat_260"
+    ],
+    "current": [
+      "nat_005",
+      "nat_036",
+      "nat_037",
+      "nat_260"
+    ],
+    "dévastation": [
+      "nat_006",
+      "nat_032",
+      "nat_054",
+      "nat_226",
+      "nat_261"
+    ],
+    "communauté": [
+      "nat_006",
+      "nat_031",
+      "nat_038",
+      "nat_052",
+      "nat_056",
+      "nat_230",
+      "nat_261"
+    ],
+    "flooded": [
+      "nat_006",
+      "nat_008",
+      "nat_031",
+      "nat_032",
+      "nat_033",
+      "nat_035",
+      "nat_038",
+      "nat_039",
+      "nat_040",
+      "nat_052",
+      "nat_053",
+      "nat_056",
+      "nat_058",
+      "nat_061",
+      "nat_227",
+      "nat_230",
+      "nat_232",
+      "nat_261",
+      "nat_263"
+    ],
+    "residential": [
+      "nat_006",
+      "nat_032",
+      "nat_054",
+      "nat_057",
+      "nat_226",
+      "nat_261"
+    ],
+    "street": [
+      "nat_006",
+      "nat_028",
+      "nat_032",
+      "nat_052",
+      "nat_053",
+      "nat_056",
+      "nat_116",
+      "nat_226",
+      "nat_227",
+      "nat_232",
+      "nat_261"
+    ],
+    "houses": [
+      "nat_006",
+      "nat_038",
+      "nat_054",
+      "nat_056",
+      "nat_261"
+    ],
+    "submerged": [
+      "nat_006",
+      "nat_027",
+      "nat_028",
+      "nat_034",
+      "nat_038",
+      "nat_055",
+      "nat_261"
+    ],
+    "courage": [
+      "nat_007",
+      "nat_008",
+      "nat_023",
+      "nat_051",
+      "nat_052",
+      "nat_053",
+      "nat_058",
+      "nat_061",
+      "nat_227",
+      "nat_228",
+      "nat_230",
+      "nat_262",
+      "nat_263",
+      "nat_278"
+    ],
+    "secours": [
+      "nat_007",
+      "nat_008",
+      "nat_009",
+      "nat_023",
+      "nat_053",
+      "nat_058",
+      "nat_059",
+      "nat_060",
+      "nat_061",
+      "nat_062",
+      "nat_227",
+      "nat_228",
+      "nat_229",
+      "nat_230",
+      "nat_231",
+      "nat_232",
+      "nat_233",
+      "nat_262",
+      "nat_263",
+      "nat_264",
+      "nat_278"
+    ],
+    "résilience": [
+      "nat_007",
+      "nat_051",
+      "nat_053",
+      "nat_262"
+    ],
+    "people": [
+      "nat_007",
+      "nat_052",
+      "nat_053",
+      "nat_262"
+    ],
+    "walking": [
+      "nat_007",
+      "nat_051",
+      "nat_052",
+      "nat_230",
+      "nat_262"
+    ],
+    "storm": [
+      "nat_007",
+      "nat_048",
+      "nat_049",
+      "nat_050",
+      "nat_051",
+      "nat_068",
+      "nat_069",
+      "nat_070",
+      "nat_078",
+      "nat_086",
+      "nat_089",
+      "nat_262"
+    ],
+    "rain": [
+      "nat_007",
+      "nat_052",
+      "nat_062",
+      "nat_202",
+      "nat_262"
+    ],
+    "rescue": [
+      "nat_007",
+      "nat_008",
+      "nat_009",
+      "nat_023",
+      "nat_053",
+      "nat_058",
+      "nat_060",
+      "nat_062",
+      "nat_227",
+      "nat_229",
+      "nat_232",
+      "nat_233",
+      "nat_262",
+      "nat_263",
+      "nat_264",
+      "nat_278"
+    ],
+    "workers": [
+      "nat_007",
+      "nat_008",
+      "nat_023",
+      "nat_059",
+      "nat_060",
+      "nat_062",
+      "nat_227",
+      "nat_228",
+      "nat_232",
+      "nat_262",
+      "nat_263",
+      "nat_278"
+    ],
+    "héroïsme": [
+      "nat_008",
+      "nat_023",
+      "nat_059",
+      "nat_227",
+      "nat_229",
+      "nat_263",
+      "nat_278"
+    ],
+    "urgence": [
+      "nat_008",
+      "nat_009",
+      "nat_058",
+      "nat_059",
+      "nat_060",
+      "nat_062",
+      "nat_229",
+      "nat_231",
+      "nat_263",
+      "nat_264"
+    ],
+    "yellow": [
+      "nat_008",
+      "nat_023",
+      "nat_058",
+      "nat_059",
+      "nat_061",
+      "nat_072",
+      "nat_227",
+      "nat_229",
+      "nat_231",
+      "nat_263",
+      "nat_278"
+    ],
+    "vests": [
+      "nat_008",
+      "nat_059",
+      "nat_227",
+      "nat_229",
+      "nat_231",
+      "nat_263"
+    ],
+    "road": [
+      "nat_008",
+      "nat_031",
+      "nat_033",
+      "nat_034",
+      "nat_035",
+      "nat_058",
+      "nat_263"
+    ],
+    "intervention": [
+      "nat_009",
+      "nat_062",
+      "nat_231",
+      "nat_264"
+    ],
+    "emergency": [
+      "nat_009",
+      "nat_059",
+      "nat_062",
+      "nat_228",
+      "nat_231",
+      "nat_264"
+    ],
+    "vehicle": [
+      "nat_009",
+      "nat_027",
+      "nat_062",
+      "nat_264"
+    ],
+    "operation": [
+      "nat_009",
+      "nat_233",
+      "nat_264"
+    ],
+    "flood": [
+      "nat_009",
+      "nat_036",
+      "nat_055",
+      "nat_059",
+      "nat_060",
+      "nat_228",
+      "nat_231",
+      "nat_233",
+      "nat_264"
+    ],
+    "zone": [
+      "nat_009",
+      "nat_060",
+      "nat_264"
+    ],
+    "ouragan": [
+      "nat_010",
+      "nat_012",
+      "nat_064",
+      "nat_065",
+      "nat_066",
+      "nat_067",
+      "nat_077",
+      "nat_078",
+      "nat_084",
+      "nat_085",
+      "nat_086",
+      "nat_087",
+      "nat_088",
+      "nat_090",
+      "nat_219",
+      "nat_265",
+      "nat_267"
+    ],
+    "nature": [
+      "nat_010",
+      "nat_064",
+      "nat_265"
+    ],
+    "hurricane": [
+      "nat_010",
+      "nat_012",
+      "nat_042",
+      "nat_043",
+      "nat_044",
+      "nat_045",
+      "nat_047",
+      "nat_063",
+      "nat_064",
+      "nat_065",
+      "nat_066",
+      "nat_067",
+      "nat_076",
+      "nat_077",
+      "nat_084",
+      "nat_085",
+      "nat_087",
+      "nat_088",
+      "nat_090",
+      "nat_092",
+      "nat_111",
+      "nat_212",
+      "nat_219",
+      "nat_265",
+      "nat_267"
+    ],
+    "spiral": [
+      "nat_010",
+      "nat_065",
+      "nat_086",
+      "nat_265"
+    ],
+    "view": [
+      "nat_010",
+      "nat_063",
+      "nat_067",
+      "nat_069",
+      "nat_075",
+      "nat_077",
+      "nat_078",
+      "nat_088",
+      "nat_104",
+      "nat_118",
+      "nat_120",
+      "nat_137",
+      "nat_170",
+      "nat_172",
+      "nat_177",
+      "nat_180",
+      "nat_188",
+      "nat_192",
+      "nat_198",
+      "nat_203",
+      "nat_213",
+      "nat_219",
+      "nat_245",
+      "nat_254",
+      "nat_265"
+    ],
+    "rotating": [
+      "nat_010",
+      "nat_016",
+      "nat_024",
+      "nat_100",
+      "nat_102",
+      "nat_104",
+      "nat_119",
+      "nat_201",
+      "nat_265",
+      "nat_271",
+      "nat_279"
+    ],
+    "données": [
+      "nat_011",
+      "nat_013",
+      "nat_019",
+      "nat_020",
+      "nat_022",
+      "nat_071",
+      "nat_072",
+      "nat_073",
+      "nat_074",
+      "nat_075",
+      "nat_079",
+      "nat_080",
+      "nat_081",
+      "nat_082",
+      "nat_083",
+      "nat_099",
+      "nat_102",
+      "nat_106",
+      "nat_132",
+      "nat_136",
+      "nat_137",
+      "nat_139",
+      "nat_147",
+      "nat_150",
+      "nat_181",
+      "nat_182",
+      "nat_183",
+      "nat_184",
+      "nat_185",
+      "nat_186",
+      "nat_187",
+      "nat_188",
+      "nat_189",
+      "nat_190",
+      "nat_191",
+      "nat_192",
+      "nat_193",
+      "nat_194",
+      "nat_195",
+      "nat_196",
+      "nat_197",
+      "nat_198",
+      "nat_200",
+      "nat_203",
+      "nat_204",
+      "nat_205",
+      "nat_206",
+      "nat_207",
+      "nat_208",
+      "nat_209",
+      "nat_210",
+      "nat_214",
+      "nat_216",
+      "nat_220",
+      "nat_221",
+      "nat_222",
+      "nat_223",
+      "nat_224",
+      "nat_225",
+      "nat_266",
+      "nat_268",
+      "nat_274",
+      "nat_275",
+      "nat_277"
+    ],
+    "précipitation": [
+      "nat_011",
+      "nat_072",
+      "nat_074",
+      "nat_099",
+      "nat_103",
+      "nat_107",
+      "nat_139",
+      "nat_145",
+      "nat_199",
+      "nat_202",
+      "nat_215",
+      "nat_266"
+    ],
+    "science": [
+      "nat_011",
+      "nat_071",
+      "nat_079",
+      "nat_091",
+      "nat_121",
+      "nat_266"
+    ],
+    "precipitation": [
+      "nat_011",
+      "nat_013",
+      "nat_016",
+      "nat_022",
+      "nat_071",
+      "nat_073",
+      "nat_075",
+      "nat_079",
+      "nat_080",
+      "nat_081",
+      "nat_083",
+      "nat_099",
+      "nat_100",
+      "nat_102",
+      "nat_103",
+      "nat_105",
+      "nat_106",
+      "nat_108",
+      "nat_132",
+      "nat_135",
+      "nat_136",
+      "nat_137",
+      "nat_139",
+      "nat_141",
+      "nat_145",
+      "nat_146",
+      "nat_147",
+      "nat_148",
+      "nat_149",
+      "nat_150",
+      "nat_182",
+      "nat_186",
+      "nat_188",
+      "nat_191",
+      "nat_195",
+      "nat_197",
+      "nat_199",
+      "nat_200",
+      "nat_201",
+      "nat_203",
+      "nat_204",
+      "nat_205",
+      "nat_206",
+      "nat_207",
+      "nat_208",
+      "nat_209",
+      "nat_210",
+      "nat_214",
+      "nat_215",
+      "nat_216",
+      "nat_218",
+      "nat_220",
+      "nat_221",
+      "nat_222",
+      "nat_223",
+      "nat_224",
+      "nat_266",
+      "nat_268",
+      "nat_271",
+      "nat_277"
+    ],
+    "radar": [
+      "nat_011",
+      "nat_022",
+      "nat_071",
+      "nat_072",
+      "nat_075",
+      "nat_173",
+      "nat_174",
+      "nat_176",
+      "nat_192",
+      "nat_204",
+      "nat_205",
+      "nat_207",
+      "nat_209",
+      "nat_220",
+      "nat_221",
+      "nat_223",
+      "nat_225",
+      "nat_266",
+      "nat_277"
+    ],
+    "colorful": [
+      "nat_011",
+      "nat_071",
+      "nat_073",
+      "nat_080",
+      "nat_150",
+      "nat_183",
+      "nat_206",
+      "nat_210",
+      "nat_221",
+      "nat_225",
+      "nat_266"
+    ],
+    "animated": [
+      "nat_011",
+      "nat_165",
+      "nat_237",
+      "nat_266"
+    ],
+    "surveillance": [
+      "nat_012",
+      "nat_020",
+      "nat_063",
+      "nat_068",
+      "nat_084",
+      "nat_088",
+      "nat_100",
+      "nat_104",
+      "nat_267",
+      "nat_275"
+    ],
+    "structure": [
+      "nat_012",
+      "nat_050",
+      "nat_066",
+      "nat_070",
+      "nat_085",
+      "nat_205",
+      "nat_208",
+      "nat_210",
+      "nat_220",
+      "nat_224",
+      "nat_267"
+    ],
+    "monochrome": [
+      "nat_012",
+      "nat_086",
+      "nat_089",
+      "nat_267"
+    ],
+    "eye": [
+      "nat_012",
+      "nat_064",
+      "nat_066",
+      "nat_087",
+      "nat_267"
+    ],
+    "detail": [
+      "nat_012",
+      "nat_026",
+      "nat_066",
+      "nat_070",
+      "nat_088",
+      "nat_154",
+      "nat_163",
+      "nat_172",
+      "nat_173",
+      "nat_174",
+      "nat_179",
+      "nat_253",
+      "nat_267",
+      "nat_281"
+    ],
+    "mesure": [
+      "nat_013",
+      "nat_019",
+      "nat_071",
+      "nat_079",
+      "nat_082",
+      "nat_145",
+      "nat_181",
+      "nat_184",
+      "nat_186",
+      "nat_188",
+      "nat_189",
+      "nat_191",
+      "nat_193",
+      "nat_194",
+      "nat_197",
+      "nat_268",
+      "nat_274"
+    ],
+    "analyse": [
+      "nat_013",
+      "nat_083",
+      "nat_182",
+      "nat_185",
+      "nat_195",
+      "nat_268"
+    ],
+    "measurement": [
+      "nat_013",
+      "nat_019",
+      "nat_020",
+      "nat_074",
+      "nat_079",
+      "nat_082",
+      "nat_181",
+      "nat_183",
+      "nat_185",
+      "nat_187",
+      "nat_190",
+      "nat_191",
+      "nat_193",
+      "nat_197",
+      "nat_216",
+      "nat_268",
+      "nat_274",
+      "nat_275"
+    ],
+    "charts": [
+      "nat_013",
+      "nat_268"
+    ],
+    "bars": [
+      "nat_013",
+      "nat_082",
+      "nat_268"
+    ],
+    "expert": [
+      "nat_014",
+      "nat_015",
+      "nat_021",
+      "nat_091",
+      "nat_092",
+      "nat_093",
+      "nat_094",
+      "nat_095",
+      "nat_096",
+      "nat_097",
+      "nat_098",
+      "nat_109",
+      "nat_110",
+      "nat_111",
+      "nat_112",
+      "nat_113",
+      "nat_114",
+      "nat_121",
+      "nat_122",
+      "nat_123",
+      "nat_124",
+      "nat_125",
+      "nat_126",
+      "nat_127",
+      "nat_128",
+      "nat_129",
+      "nat_130",
+      "nat_211",
+      "nat_212",
+      "nat_213",
+      "nat_238",
+      "nat_239",
+      "nat_240",
+      "nat_269",
+      "nat_270",
+      "nat_276"
+    ],
+    "explication": [
+      "nat_014",
+      "nat_021",
+      "nat_091",
+      "nat_094",
+      "nat_097",
+      "nat_109",
+      "nat_121",
+      "nat_124",
+      "nat_128",
+      "nat_211",
+      "nat_269",
+      "nat_276"
+    ],
+    "recherche": [
+      "nat_014",
+      "nat_092",
+      "nat_111",
+      "nat_269"
+    ],
+    "scientist": [
+      "nat_014",
+      "nat_015",
+      "nat_021",
+      "nat_091",
+      "nat_109",
+      "nat_110",
+      "nat_112",
+      "nat_113",
+      "nat_121",
+      "nat_211",
+      "nat_213",
+      "nat_238",
+      "nat_239",
+      "nat_240",
+      "nat_269",
+      "nat_270",
+      "nat_276"
+    ],
+    "scott": [
+      "nat_014",
+      "nat_091",
+      "nat_092",
+      "nat_093",
+      "nat_094",
+      "nat_095",
+      "nat_096",
+      "nat_097",
+      "nat_098",
+      "nat_269"
+    ],
+    "braun": [
+      "nat_014",
+      "nat_091",
+      "nat_092",
+      "nat_093",
+      "nat_094",
+      "nat_095",
+      "nat_096",
+      "nat_097",
+      "nat_098",
+      "nat_269"
+    ],
+    "speaking": [
+      "nat_014",
+      "nat_015",
+      "nat_021",
+      "nat_091",
+      "nat_095",
+      "nat_097",
+      "nat_109",
+      "nat_121",
+      "nat_125",
+      "nat_128",
+      "nat_130",
+      "nat_211",
+      "nat_238",
+      "nat_240",
+      "nat_269",
+      "nat_270",
+      "nat_276"
+    ],
+    "interview": [
+      "nat_014",
+      "nat_015",
+      "nat_091",
+      "nat_093",
+      "nat_096",
+      "nat_098",
+      "nat_110",
+      "nat_114",
+      "nat_122",
+      "nat_126",
+      "nat_129",
+      "nat_130",
+      "nat_213",
+      "nat_239",
+      "nat_269",
+      "nat_270"
+    ],
+    "background": [
+      "nat_015",
+      "nat_096",
+      "nat_109",
+      "nat_182",
+      "nat_186",
+      "nat_211",
+      "nat_250",
+      "nat_270"
+    ],
+    "portrait": [
+      "nat_015",
+      "nat_112",
+      "nat_129",
+      "nat_213",
+      "nat_239",
+      "nat_270"
+    ],
+    "couverture": [
+      "nat_016",
+      "nat_100",
+      "nat_101",
+      "nat_105",
+      "nat_127",
+      "nat_131",
+      "nat_134",
+      "nat_137",
+      "nat_138",
+      "nat_141",
+      "nat_151",
+      "nat_201",
+      "nat_214",
+      "nat_217",
+      "nat_271"
+    ],
+    "globe": [
+      "nat_016",
+      "nat_024",
+      "nat_099",
+      "nat_101",
+      "nat_102",
+      "nat_103",
+      "nat_104",
+      "nat_105",
+      "nat_106",
+      "nat_107",
+      "nat_108",
+      "nat_117",
+      "nat_118",
+      "nat_119",
+      "nat_120",
+      "nat_131",
+      "nat_132",
+      "nat_133",
+      "nat_134",
+      "nat_135",
+      "nat_136",
+      "nat_137",
+      "nat_138",
+      "nat_139",
+      "nat_140",
+      "nat_141",
+      "nat_142",
+      "nat_143",
+      "nat_145",
+      "nat_146",
+      "nat_148",
+      "nat_156",
+      "nat_199",
+      "nat_200",
+      "nat_201",
+      "nat_202",
+      "nat_203",
+      "nat_214",
+      "nat_215",
+      "nat_216",
+      "nat_217",
+      "nat_218",
+      "nat_271",
+      "nat_279"
+    ],
+    "lancement": [
+      "nat_017",
+      "nat_157",
+      "nat_158",
+      "nat_159",
+      "nat_160",
+      "nat_161",
+      "nat_162",
+      "nat_163",
+      "nat_272"
+    ],
+    "fusée": [
+      "nat_017",
+      "nat_159",
+      "nat_162",
+      "nat_272"
+    ],
+    "rocket": [
+      "nat_017",
+      "nat_159",
+      "nat_160",
+      "nat_162",
+      "nat_163",
+      "nat_272"
+    ],
+    "launch": [
+      "nat_017",
+      "nat_158",
+      "nat_159",
+      "nat_160",
+      "nat_161",
+      "nat_162",
+      "nat_163",
+      "nat_272"
+    ],
+    "facility": [
+      "nat_017",
+      "nat_158",
+      "nat_159",
+      "nat_162",
+      "nat_272"
+    ],
+    "pad": [
+      "nat_017",
+      "nat_159",
+      "nat_160",
+      "nat_163",
+      "nat_272"
+    ],
+    "preparation": [
+      "nat_017",
+      "nat_162",
+      "nat_272"
+    ],
+    "espace": [
+      "nat_018",
+      "nat_153",
+      "nat_166",
+      "nat_167",
+      "nat_169",
+      "nat_171",
+      "nat_245",
+      "nat_247",
+      "nat_248",
+      "nat_254",
+      "nat_255",
+      "nat_273"
+    ],
+    "gpm": [
+      "nat_018",
+      "nat_021",
+      "nat_122",
+      "nat_131",
+      "nat_132",
+      "nat_133",
+      "nat_134",
+      "nat_142",
+      "nat_144",
+      "nat_151",
+      "nat_152",
+      "nat_154",
+      "nat_164",
+      "nat_165",
+      "nat_166",
+      "nat_168",
+      "nat_170",
+      "nat_174",
+      "nat_178",
+      "nat_236",
+      "nat_237",
+      "nat_273",
+      "nat_276"
+    ],
+    "rendering": [
+      "nat_018",
+      "nat_152",
+      "nat_155",
+      "nat_166",
+      "nat_171",
+      "nat_175",
+      "nat_178",
+      "nat_248",
+      "nat_253",
+      "nat_273"
+    ],
+    "space": [
+      "nat_018",
+      "nat_026",
+      "nat_153",
+      "nat_155",
+      "nat_156",
+      "nat_157",
+      "nat_171",
+      "nat_172",
+      "nat_245",
+      "nat_248",
+      "nat_249",
+      "nat_251",
+      "nat_253",
+      "nat_254",
+      "nat_255",
+      "nat_273",
+      "nat_281"
+    ],
+    "instrument": [
+      "nat_019",
+      "nat_026",
+      "nat_173",
+      "nat_174",
+      "nat_175",
+      "nat_176",
+      "nat_180",
+      "nat_190",
+      "nat_252",
+      "nat_274",
+      "nat_281"
+    ],
+    "visualization": [
+      "nat_019",
+      "nat_073",
+      "nat_144",
+      "nat_181",
+      "nat_184",
+      "nat_187",
+      "nat_194",
+      "nat_196",
+      "nat_206",
+      "nat_223",
+      "nat_274"
+    ],
+    "display": [
+      "nat_020",
+      "nat_072",
+      "nat_190",
+      "nat_192",
+      "nat_208",
+      "nat_217",
+      "nat_275"
+    ],
+    "mission": [
+      "nat_021",
+      "nat_122",
+      "nat_164",
+      "nat_165",
+      "nat_236",
+      "nat_276"
+    ],
+    "candace": [
+      "nat_021",
+      "nat_121",
+      "nat_122",
+      "nat_123",
+      "nat_124",
+      "nat_125",
+      "nat_126",
+      "nat_127",
+      "nat_128",
+      "nat_129",
+      "nat_130",
+      "nat_276"
+    ],
+    "carlisle": [
+      "nat_021",
+      "nat_121",
+      "nat_122",
+      "nat_123",
+      "nat_124",
+      "nat_125",
+      "nat_126",
+      "nat_127",
+      "nat_128",
+      "nat_129",
+      "nat_130",
+      "nat_276"
+    ],
+    "3d": [
+      "nat_022",
+      "nat_204",
+      "nat_209",
+      "nat_220",
+      "nat_221",
+      "nat_225",
+      "nat_277"
+    ],
+    "intensité": [
+      "nat_022",
+      "nat_075",
+      "nat_150",
+      "nat_204",
+      "nat_207",
+      "nat_222",
+      "nat_225",
+      "nat_277"
+    ],
+    "towers": [
+      "nat_022",
+      "nat_208",
+      "nat_222",
+      "nat_225",
+      "nat_277"
+    ],
+    "green": [
+      "nat_022",
+      "nat_024",
+      "nat_031",
+      "nat_034",
+      "nat_072",
+      "nat_117",
+      "nat_119",
+      "nat_204",
+      "nat_207",
+      "nat_209",
+      "nat_222",
+      "nat_277",
+      "nat_279"
+    ],
+    "red": [
+      "nat_022",
+      "nat_072",
+      "nat_204",
+      "nat_209",
+      "nat_222",
+      "nat_277"
+    ],
+    "dévouement": [
+      "nat_023",
+      "nat_061",
+      "nat_228",
+      "nat_278"
+    ],
+    "wading": [
+      "nat_023",
+      "nat_228",
+      "nat_278"
+    ],
+    "deep": [
+      "nat_023",
+      "nat_054",
+      "nat_057",
+      "nat_226",
+      "nat_229",
+      "nat_278"
+    ],
+    "géographie": [
+      "nat_024",
+      "nat_117",
+      "nat_136",
+      "nat_279"
+    ],
+    "global": [
+      "nat_024",
+      "nat_118",
+      "nat_279"
+    ],
+    "blue": [
+      "nat_024",
+      "nat_027",
+      "nat_028",
+      "nat_051",
+      "nat_099",
+      "nat_103",
+      "nat_107",
+      "nat_119",
+      "nat_132",
+      "nat_139",
+      "nat_141",
+      "nat_164",
+      "nat_165",
+      "nat_194",
+      "nat_199",
+      "nat_201",
+      "nat_202",
+      "nat_235",
+      "nat_236",
+      "nat_237",
+      "nat_247",
+      "nat_279"
+    ],
+    "continents": [
+      "nat_024",
+      "nat_117",
+      "nat_279"
+    ],
+    "crédits": [
+      "nat_025",
+      "nat_241",
+      "nat_242",
+      "nat_243",
+      "nat_244",
+      "nat_280"
+    ],
+    "nasa": [
+      "nat_025",
+      "nat_249",
+      "nat_250",
+      "nat_280"
+    ],
+    "attribution": [
+      "nat_025",
+      "nat_241",
+      "nat_242",
+      "nat_243",
+      "nat_244",
+      "nat_280"
+    ],
+    "outro": [
+      "nat_025",
+      "nat_241",
+      "nat_242",
+      "nat_243",
+      "nat_244",
+      "nat_280"
+    ],
+    "credits": [
+      "nat_025",
+      "nat_241",
+      "nat_242",
+      "nat_243",
+      "nat_244",
+      "nat_280"
+    ],
+    "goddard": [
+      "nat_025",
+      "nat_249",
+      "nat_250",
+      "nat_280"
+    ],
+    "text": [
+      "nat_025",
+      "nat_042",
+      "nat_043",
+      "nat_108",
+      "nat_157",
+      "nat_158",
+      "nat_234",
+      "nat_241",
+      "nat_242",
+      "nat_244",
+      "nat_280"
+    ],
+    "ingénierie": [
+      "nat_026",
+      "nat_152",
+      "nat_155",
+      "nat_172",
+      "nat_176",
+      "nat_178",
+      "nat_253",
+      "nat_281"
+    ],
+    "closeup": [
+      "nat_026",
+      "nat_064",
+      "nat_085",
+      "nat_097",
+      "nat_112",
+      "nat_128",
+      "nat_163",
+      "nat_251",
+      "nat_252",
+      "nat_254",
+      "nat_281"
+    ],
+    "perte": [
+      "nat_027",
+      "nat_028",
+      "nat_039",
+      "nat_054"
+    ],
+    "car": [
+      "nat_028",
+      "nat_030"
+    ],
+    "piège": [
+      "nat_029"
+    ],
+    "vehicles": [
+      "nat_029"
+    ],
+    "caught": [
+      "nat_029"
+    ],
+    "rising": [
+      "nat_029",
+      "nat_035"
+    ],
+    "trapped": [
+      "nat_030"
+    ],
+    "trees": [
+      "nat_031",
+      "nat_033"
+    ],
+    "rural": [
+      "nat_031"
+    ],
+    "calm": [
+      "nat_032"
+    ],
+    "calme": [
+      "nat_033"
+    ],
+    "reflection": [
+      "nat_033"
+    ],
+    "isolement": [
+      "nat_034"
+    ],
+    "surroundings": [
+      "nat_034"
+    ],
+    "montée": [
+      "nat_035"
+    ],
+    "level": [
+      "nat_035"
+    ],
+    "town": [
+      "nat_036",
+      "nat_230"
+    ],
+    "intersection": [
+      "nat_038",
+      "nat_061"
+    ],
+    "partly": [
+      "nat_038"
+    ],
+    "résidentiel": [
+      "nat_039",
+      "nat_055"
+    ],
+    "white": [
+      "nat_039",
+      "nat_055"
+    ],
+    "house": [
+      "nat_039",
+      "nat_055"
+    ],
+    "yard": [
+      "nat_039"
+    ],
+    "brouillard": [
+      "nat_040",
+      "nat_232"
+    ],
+    "overexposed": [
+      "nat_040"
+    ],
+    "scene": [
+      "nat_040",
+      "nat_049",
+      "nat_233"
+    ],
+    "bright": [
+      "nat_040"
+    ],
+    "haze": [
+      "nat_040"
+    ],
+    "historique": [
+      "nat_041",
+      "nat_042",
+      "nat_043",
+      "nat_044",
+      "nat_045",
+      "nat_046",
+      "nat_047",
+      "nat_048"
+    ],
+    "conséquence": [
+      "nat_041",
+      "nat_048",
+      "nat_050"
+    ],
+    "damaged": [
+      "nat_041",
+      "nat_046",
+      "nat_050"
+    ],
+    "building": [
+      "nat_041",
+      "nat_047"
+    ],
+    "aftermath": [
+      "nat_041",
+      "nat_048"
+    ],
+    "rubble": [
+      "nat_041"
+    ],
+    "référence": [
+      "nat_042",
+      "nat_043",
+      "nat_044",
+      "nat_045"
+    ],
+    "historical": [
+      "nat_042",
+      "nat_046",
+      "nat_047",
+      "nat_048"
+    ],
+    "1938": [
+      "nat_042",
+      "nat_043",
+      "nat_044",
+      "nat_045"
+    ],
+    "great": [
+      "nat_043",
+      "nat_044",
+      "nat_045"
+    ],
+    "new": [
+      "nat_043",
+      "nat_044",
+      "nat_045"
+    ],
+    "england": [
+      "nat_043",
+      "nat_044",
+      "nat_045"
+    ],
+    "card": [
+      "nat_045",
+      "nat_235"
+    ],
+    "area": [
+      "nat_046",
+      "nat_054"
+    ],
+    "damage": [
+      "nat_047",
+      "nat_049"
+    ],
+    "intérieur": [
+      "nat_049"
+    ],
+    "interior": [
+      "nat_049"
+    ],
+    "post": [
+      "nat_050"
+    ],
+    "person": [
+      "nat_051"
+    ],
+    "raincoat": [
+      "nat_051"
+    ],
+    "bikes": [
+      "nat_052"
+    ],
+    "navigating": [
+      "nat_053"
+    ],
+    "underwater": [
+      "nat_056"
+    ],
+    "worker": [
+      "nat_058",
+      "nat_061"
+    ],
+    "vest": [
+      "nat_058",
+      "nat_061"
+    ],
+    "safety": [
+      "nat_059"
+    ],
+    "organisation": [
+      "nat_060"
+    ],
+    "directing": [
+      "nat_060"
+    ],
+    "traffic": [
+      "nat_060"
+    ],
+    "aerial": [
+      "nat_063",
+      "nat_159"
+    ],
+    "tracking": [
+      "nat_063",
+      "nat_076"
+    ],
+    "wall": [
+      "nat_064"
+    ],
+    "ampleur": [
+      "nat_065",
+      "nat_078"
+    ],
+    "massive": [
+      "nat_065"
+    ],
+    "cloud": [
+      "nat_065",
+      "nat_067",
+      "nat_070"
+    ],
+    "bands": [
+      "nat_065",
+      "nat_101",
+      "nat_134"
+    ],
+    "infrared": [
+      "nat_066",
+      "nat_084",
+      "nat_087",
+      "nat_090"
+    ],
+    "immensité": [
+      "nat_067"
+    ],
+    "formation": [
+      "nat_067"
+    ],
+    "overhead": [
+      "nat_067",
+      "nat_068",
+      "nat_090"
+    ],
+    "system": [
+      "nat_068",
+      "nat_070",
+      "nat_089"
+    ],
+    "map": [
+      "nat_071",
+      "nat_074",
+      "nat_075",
+      "nat_076"
+    ],
+    "rainfall": [
+      "nat_074",
+      "nat_082",
+      "nat_104",
+      "nat_107",
+      "nat_217"
+    ],
+    "colored": [
+      "nat_074",
+      "nat_196"
+    ],
+    "intensity": [
+      "nat_075"
+    ],
+    "trajectoire": [
+      "nat_076",
+      "nat_077"
+    ],
+    "prévision": [
+      "nat_076"
+    ],
+    "path": [
+      "nat_076",
+      "nat_077"
+    ],
+    "ocean": [
+      "nat_077",
+      "nat_078",
+      "nat_219"
+    ],
+    "océan": [
+      "nat_078",
+      "nat_219"
+    ],
+    "wide": [
+      "nat_078"
+    ],
+    "over": [
+      "nat_078"
+    ],
+    "chart": [
+      "nat_079",
+      "nat_080",
+      "nat_081",
+      "nat_083"
+    ],
+    "graph": [
+      "nat_079",
+      "nat_182"
+    ],
+    "trmm": [
+      "nat_080",
+      "nat_094",
+      "nat_101",
+      "nat_133"
+    ],
+    "comparaison": [
+      "nat_081",
+      "nat_133"
+    ],
+    "comparison": [
+      "nat_081",
+      "nat_133"
+    ],
+    "frequency": [
+      "nat_083"
+    ],
+    "analysis": [
+      "nat_083"
+    ],
+    "b&w": [
+      "nat_084",
+      "nat_088"
+    ],
+    "image": [
+      "nat_084"
+    ],
+    "œil": [
+      "nat_087"
+    ],
+    "talking": [
+      "nat_092",
+      "nat_112"
+    ],
+    "research": [
+      "nat_092"
+    ],
+    "crédibilité": [
+      "nat_093",
+      "nat_123"
+    ],
+    "name": [
+      "nat_093",
+      "nat_123"
+    ],
+    "explaining": [
+      "nat_094",
+      "nat_111",
+      "nat_113",
+      "nat_124",
+      "nat_127",
+      "nat_212"
+    ],
+    "communication": [
+      "nat_095",
+      "nat_112",
+      "nat_125"
+    ],
+    "gesturing": [
+      "nat_095",
+      "nat_113",
+      "nat_125"
+    ],
+    "final": [
+      "nat_098",
+      "nat_130",
+      "nat_238",
+      "nat_240",
+      "nat_244",
+      "nat_255"
+    ],
+    "frame": [
+      "nat_098",
+      "nat_114",
+      "nat_130",
+      "nat_189",
+      "nat_191",
+      "nat_194",
+      "nat_240",
+      "nat_255"
+    ],
+    "cyan": [
+      "nat_100",
+      "nat_107",
+      "nat_199"
+    ],
+    "limite": [
+      "nat_101"
+    ],
+    "coverage": [
+      "nat_101",
+      "nat_105",
+      "nat_127",
+      "nat_131",
+      "nat_133",
+      "nat_134",
+      "nat_135",
+      "nat_137",
+      "nat_140",
+      "nat_141",
+      "nat_217"
+    ],
+    "latitude": [
+      "nat_101",
+      "nat_131",
+      "nat_134",
+      "nat_136",
+      "nat_138"
+    ],
+    "side": [
+      "nat_105"
+    ],
+    "amériques": [
+      "nat_106",
+      "nat_120"
+    ],
+    "americas": [
+      "nat_106",
+      "nat_120",
+      "nat_203"
+    ],
+    "information": [
+      "nat_108"
+    ],
+    "male": [
+      "nat_109"
+    ],
+    "studio": [
+      "nat_110"
+    ],
+    "researcher": [
+      "nat_111",
+      "nat_114",
+      "nat_212"
+    ],
+    "pédagogie": [
+      "nat_113",
+      "nat_126"
+    ],
+    "concept": [
+      "nat_113"
+    ],
+    "concluded": [
+      "nat_114"
+    ],
+    "urbain": [
+      "nat_115",
+      "nat_116"
+    ],
+    "civilisation": [
+      "nat_115"
+    ],
+    "vulnérabilité": [
+      "nat_115"
+    ],
+    "city": [
+      "nat_115"
+    ],
+    "skyline": [
+      "nat_115"
+    ],
+    "urban": [
+      "nat_115",
+      "nat_116"
+    ],
+    "buildings": [
+      "nat_115",
+      "nat_116"
+    ],
+    "dusk": [
+      "nat_115"
+    ],
+    "quotidien": [
+      "nat_116"
+    ],
+    "perspective": [
+      "nat_116",
+      "nat_156"
+    ],
+    "africa": [
+      "nat_118"
+    ],
+    "europe": [
+      "nat_118"
+    ],
+    "rotation": [
+      "nat_119"
+    ],
+    "clean": [
+      "nat_120"
+    ],
+    "measurements": [
+      "nat_124"
+    ],
+    "continued": [
+      "nat_126"
+    ],
+    "amélioration": [
+      "nat_131",
+      "nat_133"
+    ],
+    "wider": [
+      "nat_131"
+    ],
+    "progrès": [
+      "nat_135"
+    ],
+    "expanded": [
+      "nat_135"
+    ],
+    "lines": [
+      "nat_136"
+    ],
+    "arctic": [
+      "nat_137"
+    ],
+    "tilted": [
+      "nat_138"
+    ],
+    "showing": [
+      "nat_138"
+    ],
+    "constellation": [
+      "nat_140"
+    ],
+    "full": [
+      "nat_141"
+    ],
+    "orbite": [
+      "nat_142"
+    ],
+    "animation": [
+      "nat_142",
+      "nat_143"
+    ],
+    "orbit": [
+      "nat_142",
+      "nat_143",
+      "nat_144",
+      "nat_151",
+      "nat_152",
+      "nat_166",
+      "nat_167",
+      "nat_169",
+      "nat_170",
+      "nat_247"
+    ],
+    "mouvement": [
+      "nat_143"
+    ],
+    "balayage": [
+      "nat_144"
+    ],
+    "swath": [
+      "nat_144"
+    ],
+    "temps": [
+      "nat_145",
+      "nat_146",
+      "nat_147",
+      "nat_148",
+      "nat_149",
+      "nat_150",
+      "nat_214",
+      "nat_215",
+      "nat_216",
+      "nat_217",
+      "nat_218"
+    ],
+    "time": [
+      "nat_145",
+      "nat_147",
+      "nat_149",
+      "nat_214"
+    ],
+    "lapse": [
+      "nat_145",
+      "nat_147",
+      "nat_149"
+    ],
+    "1hr": [
+      "nat_145",
+      "nat_146",
+      "nat_147",
+      "nat_214",
+      "nat_215",
+      "nat_216",
+      "nat_217"
+    ],
+    "label": [
+      "nat_145",
+      "nat_151",
+      "nat_214"
+    ],
+    "accumulation": [
+      "nat_146",
+      "nat_148",
+      "nat_150",
+      "nat_218"
+    ],
+    "2hr": [
+      "nat_148",
+      "nat_149",
+      "nat_150",
+      "nat_218"
+    ],
+    "progression": [
+      "nat_149"
+    ],
+    "3hr": [
+      "nat_151"
+    ],
+    "spacecraft": [
+      "nat_153",
+      "nat_154",
+      "nat_245"
+    ],
+    "model": [
+      "nat_154"
+    ],
+    "solar": [
+      "nat_155"
+    ],
+    "panels": [
+      "nat_155"
+    ],
+    "small": [
+      "nat_156"
+    ],
+    "from": [
+      "nat_156"
+    ],
+    "japon": [
+      "nat_157"
+    ],
+    "infrastructure": [
+      "nat_157",
+      "nat_161"
+    ],
+    "tanegashima": [
+      "nat_157",
+      "nat_158",
+      "nat_161"
+    ],
+    "complex": [
+      "nat_157",
+      "nat_161"
+    ],
+    "japan": [
+      "nat_157"
+    ],
+    "base": [
+      "nat_158"
+    ],
+    "préparation": [
+      "nat_160"
+    ],
+    "ready": [
+      "nat_160"
+    ],
+    "overview": [
+      "nat_161"
+    ],
+    "identité": [
+      "nat_164",
+      "nat_237"
+    ],
+    "logo": [
+      "nat_164",
+      "nat_165",
+      "nat_236",
+      "nat_237",
+      "nat_249",
+      "nat_250"
+    ],
+    "glowing": [
+      "nat_164",
+      "nat_236"
+    ],
+    "neon": [
+      "nat_164",
+      "nat_237"
+    ],
+    "glow": [
+      "nat_165",
+      "nat_167",
+      "nat_246"
+    ],
+    "beauté": [
+      "nat_166"
+    ],
+    "sunlit": [
+      "nat_166"
+    ],
+    "horizon": [
+      "nat_167",
+      "nat_169",
+      "nat_247"
+    ],
+    "atmosphere": [
+      "nat_168",
+      "nat_246"
+    ],
+    "edge": [
+      "nat_168"
+    ],
+    "aube": [
+      "nat_169"
+    ],
+    "dawn": [
+      "nat_169"
+    ],
+    "close": [
+      "nat_170",
+      "nat_175",
+      "nat_225"
+    ],
+    "components": [
+      "nat_172"
+    ],
+    "précision": [
+      "nat_174",
+      "nat_180"
+    ],
+    "grid": [
+      "nat_174",
+      "nat_180"
+    ],
+    "panel": [
+      "nat_176",
+      "nat_180",
+      "nat_252"
+    ],
+    "honeycomb": [
+      "nat_176"
+    ],
+    "pattern": [
+      "nat_176"
+    ],
+    "construction": [
+      "nat_177"
+    ],
+    "component": [
+      "nat_177",
+      "nat_179"
+    ],
+    "assembly": [
+      "nat_177",
+      "nat_178"
+    ],
+    "technical": [
+      "nat_179",
+      "nat_180"
+    ],
+    "screen": [
+      "nat_184",
+      "nat_188",
+      "nat_190",
+      "nat_195",
+      "nat_242",
+      "nat_243"
+    ],
+    "visualisation": [
+      "nat_196",
+      "nat_206",
+      "nat_210",
+      "nat_223"
+    ],
+    "graphic": [
+      "nat_197",
+      "nat_198"
+    ],
+    "columns": [
+      "nat_207"
+    ],
+    "impact": [
+      "nat_212"
+    ],
+    "swirl": [
+      "nat_219"
+    ],
+    "detailed": [
+      "nat_224"
+    ],
+    "team": [
+      "nat_229"
+    ],
+    "rescuers": [
+      "nat_230"
+    ],
+    "center": [
+      "nat_230",
+      "nat_249"
+    ],
+    "crew": [
+      "nat_231"
+    ],
+    "response": [
+      "nat_231"
+    ],
+    "misty": [
+      "nat_232"
+    ],
+    "conditions": [
+      "nat_233"
+    ],
+    "difficulté": [
+      "nat_233"
+    ],
+    "foggy": [
+      "nat_233"
+    ],
+    "titre": [
+      "nat_234",
+      "nat_235"
+    ],
+    "cyclone": [
+      "nat_234",
+      "nat_235"
+    ],
+    "tropical": [
+      "nat_234",
+      "nat_235"
+    ],
+    "cyclones": [
+      "nat_234",
+      "nat_235"
+    ],
+    "conclusion": [
+      "nat_238",
+      "nat_240"
+    ],
+    "remarks": [
+      "nat_238"
+    ],
+    "closing": [
+      "nat_239"
+    ],
+    "courtesy": [
+      "nat_241",
+      "nat_243"
+    ],
+    "names": [
+      "nat_242",
+      "nat_244"
+    ],
+    "list": [
+      "nat_242",
+      "nat_244"
+    ],
+    "flight": [
+      "nat_249"
+    ]
+  },
+  "last_tagged": "2026-07-10T09:24:59.857585+00:00"
 }
