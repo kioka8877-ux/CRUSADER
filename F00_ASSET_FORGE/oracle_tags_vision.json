@@ -1,0 +1,47 @@
+{
+  "frame_001": {
+    "visual": "Satellite view of Earth, blue ocean, clouds",
+    "narrative": [
+      "satellite",
+      "globe",
+      "intro"
+    ],
+    "usage": "intro"
+  },
+  "frame_002": {
+    "visual": "Satellite view of Earth, blue ocean, clouds",
+    "narrative": [
+      "satellite",
+      "globe",
+      "intro"
+    ],
+    "usage": "intro"
+  },
+  "frame_003": {
+    "visual": "Satellite view of Earth, blue ocean, clouds",
+    "narrative": [
+      "satellite",
+      "globe",
+      "intro"
+    ],
+    "usage": "intro"
+  },
+  "frame_004": {
+    "visual": "Satellite view of Earth, blue ocean, clouds",
+    "narrative": [
+      "satellite",
+      "globe",
+      "intro"
+    ],
+    "usage": "intro"
+  },
+  "frame_005": {
+    "visual": "Satellite view of Earth, tropical cyclone forming",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "animation"
+    ],
+    "usage": "illustration"
+  }
+}
