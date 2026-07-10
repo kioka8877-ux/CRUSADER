@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """
 CRS F00 — VISION TAGGER (Gemini 2.5 Flash)
-Analyse les canvases (grilles de frames) avec Gemini Vision API et assigne
-des tags RÉELS basés sur ce que l'IA voit dans chaque cellule.
+Analyse les canvases (grilles de frames) rangée par rangée avec Gemini Vision API.
 
-Stratégie: envoyer les canvases entiers (grilles 15×N) au lieu d'images
-individuelles → 4 appels API au lieu de 281 → économise le quota.
+Stratégie: envoyer chaque RANGÉE du canvas (15 cellules) séparément à Gemini.
+- Band 1 (90 frames) = 6 rangées × 15 cellules = 6 appels
+- Band 2 (90 frames) = 6 rangées × 15 cellules = 6 appels  
+- Band 3 (75 frames) = 5 rangées × 15 cellules = 5 appels
+- GIFs (26) = 2 rangées = 2 appels
+Total: ~19 appels API (au lieu de 281 individuels)
 
 Usage:
   python crs_f00_vision_tagger.py --forge-root .. --output ../oracle_tags_vision.json
@@ -13,11 +16,6 @@ Usage:
 Prérequis:
   - GEMINI_API_KEY dans l'environnement (secret GitHub)
   - pip install google-genai pillow
-
-Sortie:
-  - oracle_tags_vision.json : tags visuels pour chaque asset
-  - Met à jour index.json avec les vrais tags
-  - Met à jour tag_index.json (reverse-index)
 """
 
 import os
@@ -26,7 +24,6 @@ import json
 import time
 import re
 import argparse
-from pathlib import Path
 from datetime import datetime, timezone
 from io import BytesIO
 
@@ -42,35 +39,41 @@ except ImportError as e:
 
 # === CONFIG ===
 MODEL_NAME = "gemini-2.5-flash"
-RATE_LIMIT_DELAY = 5  # secondes entre chaque appel canvas
-MAX_RETRIES = 3
+RATE_LIMIT_DELAY = 3  # secondes entre chaque appel
+MAX_RETRIES = 4
 RETRY_DELAY = 30  # secondes (pour 429 rate limit)
-MAX_CANVAS_WIDTH = 1536  # redimensionner pour Gemini
+MAX_ROW_WIDTH = 2048  # largeur max pour une rangée envoyée à Gemini
+CELLS_PER_ROW = 15  # nombre de cellules par rangée dans le canvas
+
+# Config canvas (doit correspondre à crs_f00_canvas.py)
+THUMB_W = 256
+THUMB_H = 144
+LABEL_H = 28
+PADDING = 4
+CELL_W = THUMB_W + PADDING  # 260
+CELL_H = THUMB_H + LABEL_H + PADDING  # 176
 
 
 # === PROMPT ===
-CANVAS_PROMPT = """You are looking at a contact sheet (grid) of video frames from a NASA/GPM educational video about hurricanes, floods, and satellite weather data.
+ROW_PROMPT = """You are looking at a single ROW from a contact sheet of video frames from a NASA/GPM educational video about hurricanes, floods, and satellite weather data.
 
-The grid has 15 columns. Each cell contains one frame with a yellow number label.
-Number the cells left-to-right, top-to-bottom starting from 1.
+This row contains exactly 15 cells, numbered left to right starting from {start_num}.
+Each cell has a yellow number label and a video frame thumbnail.
 
-For EACH numbered cell, provide:
-- "n": the cell number (integer)
-- "v": 5-8 word English description of what you see
-- "t": array of 2-3 French storytelling tags (from: danger, secours, satellite, tempete, inondation, science, technologie, mesure, prevision, alerte, population, infrastructure, expertise, donnees, nature, humanite, espoir, destruction, ouragan, vent, pluie, eau, carte, globe, animation, graphique, interview, explication, intro, transition)
-- "u": 1 usage tag (illustration, transition, background, overlay, intro, outro, b-roll)
+For EACH of the 15 cells, provide a JSON object:
+- "n": cell number (integer, starting from {start_num})
+- "v": 5-8 word English description of what you see in the frame
+- "t": array of 2-3 French storytelling tags (choose from: danger, secours, satellite, tempete, inondation, science, technologie, mesure, prevision, alerte, population, infrastructure, expertise, donnees, nature, humanite, espoir, destruction, ouragan, vent, pluie, eau, carte, globe, animation, graphique, interview, explication, intro, transition)
+- "u": single usage tag string (one of: illustration, transition, background, overlay, intro, outro, b-roll)
 
-Return a JSON array of objects, one per cell. Be accurate - only describe what you actually see."""
+Return a JSON array of 15 objects. Be accurate - only describe what you actually see."""
 
 
 def robust_json_parse(text: str) -> list:
-    """
-    Parse la réponse JSON de Gemini de manière robuste.
-    Gère: markdown, troncature, virgules trailing, etc.
-    """
+    """Parse la réponse JSON de Gemini de manière robuste."""
     text = text.strip()
 
-    # Retirer markdown ```json ... ```
+    # Retirer markdown
     if "```" in text:
         parts = text.split("```")
         for p in parts:
@@ -92,7 +95,6 @@ def robust_json_parse(text: str) -> list:
     match = re.search(r'\[.*\]', text, re.DOTALL)
     if match:
         fragment = match.group()
-        # Nettoyer virgules trailing
         fragment = re.sub(r',\s*]', ']', fragment)
         fragment = re.sub(r',\s*}', '}', fragment)
         try:
@@ -100,58 +102,75 @@ def robust_json_parse(text: str) -> list:
         except:
             pass
 
-    # Dernier recours: extraire les objets individuels avec regex
+    # Extraire objets individuels
     objects = re.findall(r'\{[^}]+\}', text)
     results = []
     for obj_str in objects:
         try:
-            results.append(json.loads(obj_str))
+            obj = json.loads(obj_str)
+            # S'assurer que "u" est une string, pas un array
+            if isinstance(obj.get("u"), list):
+                obj["u"] = obj["u"][0] if obj["u"] else "illustration"
+            results.append(obj)
         except:
             n_match = re.search(r'"n"\s*:\s*(\d+)', obj_str)
             v_match = re.search(r'"v"\s*:\s*"([^"]*)"', obj_str)
-            t_match = re.findall(r'"([^"]*)"', obj_str)
             if n_match:
+                # Extraire les tags entre crochets
+                t_section = re.search(r'"t"\s*:\s*\[([^\]]*)\]', obj_str)
+                tags = re.findall(r'"([^"]*)"', t_section.group(1)) if t_section else []
                 results.append({
                     "n": int(n_match.group(1)),
                     "v": v_match.group(1) if v_match else "",
-                    "t": [t for t in t_match if not t.isdigit() and len(t) > 1][:3],
+                    "t": [t for t in tags if not t.isdigit() and len(t) > 1][:3],
                     "u": "illustration"
                 })
     return results
 
 
-def analyze_canvas(client, canvas_path: str, canvas_name: str) -> list:
-    """
-    Envoie un canvas (grille de frames) à Gemini Vision et récupère les tags.
-    """
-    img = Image.open(canvas_path)
+def extract_row_from_canvas(canvas_img, row_idx: int, total_rows: int) -> Image.Image:
+    """Extrait une rangée du canvas."""
+    w, h = canvas_img.size
+    row_h = h // total_rows
+    y_start = row_idx * row_h
+    y_end = (row_idx + 1) * row_h if row_idx < total_rows - 1 else h
+    return canvas_img.crop((0, y_start, w, y_end))
 
+
+def analyze_row(client, row_img: Image.Image, start_num: int) -> list:
+    """Envoie une rangée à Gemini Vision et récupère les tags."""
     # Redimensionner si trop grand
-    if img.size[0] > MAX_CANVAS_WIDTH:
-        ratio = MAX_CANVAS_WIDTH / img.size[0]
-        new_size = (int(img.size[0] * ratio), int(img.size[1] * ratio))
-        img = img.resize(new_size, Image.LANCZOS)
+    if row_img.size[0] > MAX_ROW_WIDTH:
+        ratio = MAX_ROW_WIDTH / row_img.size[0]
+        new_size = (int(row_img.size[0] * ratio), int(row_img.size[1] * ratio))
+        row_img = row_img.resize(new_size, Image.LANCZOS)
 
-    # Convertir en RGB si nécessaire
-    if img.mode in ('RGBA', 'P'):
-        img = img.convert('RGB')
+    if row_img.mode in ('RGBA', 'P'):
+        row_img = row_img.convert('RGB')
 
-    print(f"  Canvas: {canvas_name} ({img.size[0]}×{img.size[1]})")
+    prompt = ROW_PROMPT.format(start_num=start_num)
 
     for attempt in range(MAX_RETRIES):
         try:
             response = client.models.generate_content(
                 model=MODEL_NAME,
-                contents=[CANVAS_PROMPT, img],
+                contents=[prompt, row_img],
                 config=types.GenerateContentConfig(
                     temperature=0.3,
-                    max_output_tokens=8000,
+                    max_output_tokens=4000,
                     response_mime_type="application/json"
                 )
             )
 
             results = robust_json_parse(response.text)
-            print(f"  ✅ {len(results)} cells décrites")
+
+            # Normaliser: s'assurer que "u" est une string
+            for r in results:
+                if isinstance(r.get("u"), list):
+                    r["u"] = r["u"][0] if r["u"] else "illustration"
+                if isinstance(r.get("t"), str):
+                    r["t"] = [r["t"]]
+
             return results
 
         except Exception as e:
@@ -162,7 +181,7 @@ def analyze_canvas(client, canvas_path: str, canvas_name: str) -> list:
                 time.sleep(wait_time)
             elif attempt < MAX_RETRIES - 1:
                 print(f"  ⚠️ Erreur (tentative {attempt+1}): {error_str[:80]}")
-                time.sleep(RETRY_DELAY)
+                time.sleep(10)
             else:
                 print(f"  ❌ Échec: {error_str[:100]}")
                 return []
@@ -170,38 +189,41 @@ def analyze_canvas(client, canvas_path: str, canvas_name: str) -> list:
     return []
 
 
-def process_all_canvases(forge_root: str, output_path: str):
-    """
-    Parcourt tous les canvases et les analyse avec Gemini Vision.
-    """
+def find_canvases(forge_root: str) -> list:
+    """Trouve tous les canvases à analyser."""
+    canvases = []
+    
+    # Chercher dans CANVAS/
     canvas_dir = os.path.join(forge_root, "CANVAS")
-
-    # Chercher les canvases de frames
-    canvas_files = []
     if os.path.exists(canvas_dir):
         for f in sorted(os.listdir(canvas_dir)):
             if f.startswith("canvas_frames") and f.endswith(".png"):
-                canvas_files.append(("frames", os.path.join(canvas_dir, f)))
+                canvases.append(("frames", os.path.join(canvas_dir, f)))
             elif f.startswith("canvas_gifs") and f.endswith(".png"):
-                canvas_files.append(("gifs", os.path.join(canvas_dir, f)))
-
-    # Fallback: utiliser les canvases de .uploads si CANVAS n'existe pas
-    if not canvas_files:
+                canvases.append(("gifs", os.path.join(canvas_dir, f)))
+    
+    # Fallback: .uploads/
+    if not canvases:
         upload_dir = "/home/user/.uploads"
-        for f in sorted(os.listdir(upload_dir)) if os.path.exists(upload_dir) else []:
-            if f.startswith("canvas_band") and f.endswith((".png", ".jpg")):
-                canvas_files.append(("frames", os.path.join(upload_dir, f)))
-            elif f.startswith("canvas_gifs") and f.endswith((".png", ".jpg")):
-                canvas_files.append(("gifs", os.path.join(upload_dir, f)))
+        if os.path.exists(upload_dir):
+            for f in sorted(os.listdir(upload_dir)):
+                if f.startswith("canvas_band") and f.endswith((".png", ".jpg")):
+                    canvases.append(("frames", os.path.join(upload_dir, f)))
+                elif f.startswith("canvas_gifs") and f.endswith((".png", ".jpg")):
+                    canvases.append(("gifs", os.path.join(upload_dir, f)))
+    
+    return canvases
 
-    if not canvas_files:
+
+def process_all_canvases(forge_root: str, output_path: str):
+    """Analyse tous les canvases rangée par rangée."""
+    canvases = find_canvases(forge_root)
+    
+    if not canvases:
         print("[VISION] ERREUR: Aucun canvas trouvé!")
-        print(f"[VISION] Cherché dans: {canvas_dir}")
         return {}
 
-    print(f"\n[VISION] {len(canvas_files)} canvases à analyser:")
-    for ctype, cpath in canvas_files:
-        print(f"  - {ctype}: {os.path.basename(cpath)}")
+    print(f"\n[VISION] {len(canvases)} canvases à analyser")
 
     # Configurer Gemini
     api_key = os.environ.get("GEMINI_API_KEY")
@@ -212,58 +234,102 @@ def process_all_canvases(forge_root: str, output_path: str):
     client = genai.Client(api_key=api_key)
     print(f"[VISION] Gemini configuré: {MODEL_NAME}")
 
-    # Charger les tags existants (pour reprise)
+    # Charger tags existants (mode reprise)
     all_tags = {}
     if os.path.exists(output_path):
         with open(output_path, "r") as f:
             all_tags = json.load(f)
         print(f"[VISION] {len(all_tags)} tags existants chargés (mode reprise)")
 
-    # Analyser chaque canvas
-    for canvas_type, canvas_path in canvas_files:
-        canvas_name = os.path.basename(canvas_path)
-        print(f"\n[VISION] === {canvas_name} ===")
+    total_api_calls = 0
 
-        # Déterminer le offset de numérotation
-        # Band 1 = frames 1-90, Band 2 = frames 91-180, Band 3 = frames 181-255
+    for canvas_type, canvas_path in canvases:
+        canvas_name = os.path.basename(canvas_path)
+        canvas_img = Image.open(canvas_path)
+        w, h = canvas_img.size
+
+        # Déterminer le nombre de rangées
+        total_rows = h // CELL_H
+        if h % CELL_H > CELL_H // 2:
+            total_rows += 1
+        
+        # Déterminer l'offset de numérotation
         offset = 0
         if "band2" in canvas_name.lower():
             offset = 90
         elif "band3" in canvas_name.lower():
             offset = 180
-        elif "gifs" in canvas_name.lower():
-            offset = 0  # GIFs sont numérotés séparément
 
-        results = analyze_canvas(client, canvas_path, canvas_name)
+        # Pour les canvases générés par le workflow (canvas_frames_nature_fire.png)
+        # Il n'y a qu'un seul canvas avec toutes les frames → 255 frames
+        # Dans ce cas, offset = 0 et on numérote à partir de 1
+        if "nature_fire" in canvas_name.lower() and canvas_type == "frames":
+            offset = 0
+            # 255 frames / 15 cols = 17 rangées
+            total_rows = h // CELL_H
 
-        # Convertir les résultats en tags par asset
-        for r in results:
-            cell_num = r.get("n", 0)
-            if cell_num == 0:
+        print(f"\n[VISION] === {canvas_name} ({w}×{h}) ===")
+        print(f"  Type: {canvas_type} | Rangées: {total_rows} | Offset: {offset}")
+
+        for row_idx in range(total_rows):
+            start_num = (row_idx * CELLS_PER_ROW) + 1 + offset
+            row_name = f"rangée {row_idx+1}/{total_rows} (cells {start_num}-{start_num+CELLS_PER_ROW-1})"
+
+            # Skip si tous les cells de cette rangée sont déjà taggés
+            all_done = True
+            for c in range(CELLS_PER_ROW):
+                cell_num = start_num + c
+                if canvas_type == "gifs":
+                    asset_id = f"gif_{cell_num:02d}"
+                else:
+                    asset_id = f"frame_{cell_num:03d}"
+                if asset_id not in all_tags or "erreur" in str(all_tags.get(asset_id, {}).get("narrative", [])):
+                    all_done = False
+                    break
+            if all_done:
+                print(f"  [{row_name}] déjà taggé, skip")
                 continue
 
-            if canvas_type == "gifs":
-                asset_id = f"gif_{cell_num:02d}"
-            else:
-                frame_num = cell_num + offset
-                asset_id = f"frame_{frame_num:03d}"
+            print(f"  [{row_name}] analyse...", end=" ", flush=True)
 
-            all_tags[asset_id] = {
-                "visual": r.get("v", ""),
-                "narrative": r.get("t", []),
-                "usage": r.get("u", []),
-            }
+            # Extraire la rangée
+            row_img = extract_row_from_canvas(canvas_img, row_idx, total_rows)
 
-        # Sauvegarder après chaque canvas
-        with open(output_path, "w", encoding="utf-8") as f:
-            json.dump(all_tags, f, indent=2, ensure_ascii=False)
-        print(f"  💾 Sauvegardé: {len(all_tags)} tags")
+            # Analyser
+            results = analyze_row(client, row_img, start_num)
+            total_api_calls += 1
 
-        # Rate limiting entre canvases
-        time.sleep(RATE_LIMIT_DELAY)
+            # Convertir en tags
+            tagged_in_row = 0
+            for r in results:
+                cell_num = r.get("n", 0)
+                if cell_num == 0:
+                    continue
+
+                if canvas_type == "gifs":
+                    asset_id = f"gif_{cell_num:02d}"
+                else:
+                    asset_id = f"frame_{cell_num:03d}"
+
+                all_tags[asset_id] = {
+                    "visual": r.get("v", ""),
+                    "narrative": r.get("t", []) if isinstance(r.get("t"), list) else [r.get("t", "")],
+                    "usage": r.get("u", "illustration") if isinstance(r.get("u"), str) else (r.get("u", ["illustration"])[0] if r.get("u") else "illustration"),
+                }
+                tagged_in_row += 1
+
+            print(f"✅ {tagged_in_row} cells")
+
+            # Sauvegarder après chaque rangée
+            with open(output_path, "w", encoding="utf-8") as f:
+                json.dump(all_tags, f, indent=2, ensure_ascii=False)
+
+            # Rate limiting
+            time.sleep(RATE_LIMIT_DELAY)
 
     # Résumé
     print(f"\n[VISION] === RÉSUMÉ ===")
+    print(f"  Appels API: {total_api_calls}")
     print(f"  Total tags: {len(all_tags)}")
     frames_count = sum(1 for k in all_tags if k.startswith("frame_"))
     gifs_count = sum(1 for k in all_tags if k.startswith("gif_"))
@@ -280,25 +346,31 @@ def update_index(tags: dict, index_path: str):
 
     updated = 0
     for asset_id, tag_data in tags.items():
+        narrative = tag_data.get("narrative", [])
+        if isinstance(narrative, str):
+            narrative = [narrative]
+        
+        usage = tag_data.get("usage", "illustration")
+        if isinstance(usage, list):
+            usage = usage[0] if usage else "illustration"
+
         if asset_id in index:
-            index[asset_id]["tags"] = tag_data.get("narrative", [])
+            index[asset_id]["tags"] = narrative
             index[asset_id]["visual_description"] = tag_data.get("visual", "")
-            index[asset_id]["usage_tags"] = tag_data.get("usage", [])
+            index[asset_id]["usage_tags"] = [usage]
             index[asset_id]["tagged_by"] = "gemini-2.5-flash"
             index[asset_id]["tagged_at"] = datetime.now(timezone.utc).isoformat()
-            updated += 1
         else:
-            # Créer l'entrée si elle n'existe pas
             index[asset_id] = {
                 "type": "frame" if asset_id.startswith("frame_") else "gif",
-                "tags": tag_data.get("narrative", []),
+                "tags": narrative,
                 "visual_description": tag_data.get("visual", ""),
-                "usage_tags": tag_data.get("usage", []),
+                "usage_tags": [usage],
                 "tagged_by": "gemini-2.5-flash",
                 "tagged_at": datetime.now(timezone.utc).isoformat(),
                 "source": "F00 ASSET FORGE"
             }
-            updated += 1
+        updated += 1
 
     with open(index_path, "w", encoding="utf-8") as f:
         json.dump(index, f, indent=2, ensure_ascii=False)
@@ -317,10 +389,14 @@ def build_tag_index(index_path: str, output_path: str):
             continue
 
         all_tags = []
-        all_tags.extend(asset_data.get("tags", []))
-        all_tags.extend(asset_data.get("usage_tags", []))
+        narrative = asset_data.get("tags", [])
+        if isinstance(narrative, list):
+            all_tags.extend(narrative)
+        
+        usage = asset_data.get("usage_tags", [])
+        if isinstance(usage, list):
+            all_tags.extend(usage)
 
-        # Indexer aussi les mots de la description visuelle
         visual = asset_data.get("visual_description", "")
         if visual:
             words = [w.lower().strip(".,;:!?") for w in visual.split() if len(w) > 2]
@@ -340,7 +416,6 @@ def build_tag_index(index_path: str, output_path: str):
 
     print(f"[VISION] tag_index.json créé: {len(tag_index)} tags uniques")
 
-    # Afficher top tags
     sorted_tags = sorted(tag_index.items(), key=lambda x: len(x[1]), reverse=True)
     print(f"\n[VISION] Top 15 tags:")
     for i, (tag, assets) in enumerate(sorted_tags[:15], 1):
@@ -348,7 +423,7 @@ def build_tag_index(index_path: str, output_path: str):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="F00 Vision Tagger — Gemini 2.5 Flash")
+    parser = argparse.ArgumentParser(description="F00 Vision Tagger — Gemini 2.5 Flash (Row Mode)")
     parser.add_argument("--forge-root", default="..", help="Racine F00_ASSET_FORGE")
     parser.add_argument("--output", default="../oracle_tags_vision.json", help="Fichier de sortie")
     parser.add_argument("--index", default="../index.json", help="index.json à mettre à jour")
@@ -357,29 +432,22 @@ def main():
     args = parser.parse_args()
 
     print("=" * 60)
-    print("  F00 VISION TAGGER — Gemini 2.5 Flash (Canvas Mode)")
+    print("  F00 VISION TAGGER — Gemini 2.5 Flash (Row Mode)")
     print("=" * 60)
 
-    # Analyser tous les canvases
     tags = process_all_canvases(args.forge_root, args.output)
 
     if not tags:
         print("[VISION] Aucun tag généré — arrêt")
         return
 
-    # Mettre à jour index.json
     if not args.skip_index:
         print(f"\n[VISION] Mise à jour de {args.index}...")
         update_index(tags, args.index)
-
-        # Construire le tag_index
         print(f"\n[VISION] Construction du tag_index...")
         build_tag_index(args.index, args.tag_index)
 
     print(f"\n[VISION] ✅ Terminé !")
-    print(f"  Tags: {args.output}")
-    print(f"  Index: {args.index}")
-    print(f"  Tag index: {args.tag_index}")
 
 
 if __name__ == "__main__":
