@@ -32,9 +32,11 @@ jobs:
       contents: write
 
     steps:
-      # === CHECKOUT ===
-      - name: Checkout
+      # === CHECKOUT (branche f00-asset-forge, pas main) ===
+      - name: Checkout f00-asset-forge branch
         uses: actions/checkout@v4
+        with:
+          ref: f00-asset-forge
 
       # === INSTALL DEPENDENCIES ===
       - name: Install yt-dlp
