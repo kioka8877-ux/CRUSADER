@@ -51,8 +51,10 @@ jobs:
           python -c "from rembg import remove; print('rembg OK')"
           python -c "from PIL import Image; print('pillow OK')"
 
-      - name: Vérification FFmpeg
+      - name: Install FFmpeg
         run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
           ffmpeg -version | head -1
           ffprobe -version | head -1
 
@@ -71,11 +73,9 @@ jobs:
           cd F00_ASSET_FORGE/CODEBASE
           
           # Pour chaque vidéo téléchargée, extraire frames + GIFs + clips
+          # IFS=$'\n' pour gérer les espaces dans les noms de fichiers
+          IFS=$'\n'
           VIDEO_FILES=$(find /tmp/downloads -type f \( -name "*.mp4" -o -name "*.webm" -o -name "*.mov" \) | head -20)
-          
-          TOTAL_FRAMES=0
-          TOTAL_GIFS=0
-          TOTAL_CLIPS=0
           
           for VIDEO in $VIDEO_FILES; do
             echo "=== Extraction: $VIDEO ==="
@@ -84,6 +84,12 @@ jobs:
               --fps ${{ inputs.extract_fps }} \
               --gif-duration ${{ inputs.gif_duration }} \
               --clip-duration ${{ inputs.clip_duration }} 2>&1 | tee -a /tmp/extract_log.txt
+            # Fail si le script Python échoue
+            PIPE_STATUS=${PIPESTATUS[0]}
+            if [ $PIPE_STATUS -ne 0 ]; then
+              echo "ERREUR: extraction échouée pour $VIDEO (exit code $PIPE_STATUS)"
+              exit 1
+            fi
           done
           
           echo "EXTRACT_DONE=true" >> $GITHUB_OUTPUT
@@ -104,6 +110,11 @@ jobs:
                 --frames "$FRAMES_DIR" \
                 --output /tmp/processed/frames \
                 --mode "$MODE" 2>&1 | tee -a /tmp/process_log.txt
+              PIPE_STATUS=${PIPESTATUS[0]}
+              if [ $PIPE_STATUS -ne 0 ]; then
+                echo "ERREUR: processing frames échoué pour $FRAMES_DIR"
+                exit 1
+              fi
             fi
           done
           
@@ -115,6 +126,11 @@ jobs:
                 --gifs "$GIFS_DIR" \
                 --output /tmp/processed/gifs \
                 --mode "$MODE" 2>&1 | tee -a /tmp/process_log.txt
+              PIPE_STATUS=${PIPESTATUS[0]}
+              if [ $PIPE_STATUS -ne 0 ]; then
+                echo "ERREUR: processing GIFs échoué pour $GIFS_DIR"
+                exit 1
+              fi
             fi
           done
           
