@@ -205,6 +205,29 @@ jobs:
           echo "=== PROMPTS ORACLE ==="
           python crs_f00_canvas.py --forge-root .. --prompt-only 2>&1 | tail -50
 
+      # === STEP 5c: VISION TAGGER ===
+      - name: F00-5c VISION — Gemini 2.5 Flash canvas analysis
+        if: ${{ env.GEMINI_API_KEY != '' }}
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          cd F00_ASSET_FORGE/CODEBASE
+          pip install google-genai pillow
+          python crs_f00_vision_tagger.py \
+            --forge-root .. \
+            --output ../oracle_tags_vision.json \
+            --index ../index.json \
+            --tag-index ../tag_index.json 2>&1 | tee /tmp/vision_log.txt
+          echo "VISION_DONE=true" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: F00-5c VISION — Skip (no GEMINI_API_KEY)
+        if: ${{ env.GEMINI_API_KEY == '' }}
+        run: |
+          echo "⚠️ GEMINI_API_KEY non défini — étape vision tagger ignorée"
+          echo "Ajoutez le secret GEMINI_API_KEY dans Settings > Secrets > Actions"
+          echo "Obtenez une clé gratuite sur https://aistudio.google.com/apikey"
+
       # === STEP 6: COMMIT ===
       - name: F00-6 COMMIT — Push to f00-asset-forge
         run: |
