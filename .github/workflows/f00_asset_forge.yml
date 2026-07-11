@@ -205,14 +205,14 @@ jobs:
           echo "=== PROMPTS ORACLE ==="
           python crs_f00_canvas.py --forge-root .. --prompt-only 2>&1 | tail -50
 
-      # === STEP 5c: VISION TAGGER ===
-      - name: F00-5c VISION — Gemini 2.5 Flash canvas analysis
-        if: ${{ env.GEMINI_API_KEY != '' }}
+      # === STEP 5c: VISION TAGGER (OpenRouter) ===
+      - name: F00-5c VISION — OpenRouter Gemma 3 12B canvas analysis
+        if: ${{ env.OPENROUTER_API_KEY != '' }}
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: |
           cd F00_ASSET_FORGE/CODEBASE
-          pip install google-genai pillow
+          pip install openai pillow
           python crs_f00_vision_tagger.py \
             --forge-root .. \
             --output ../oracle_tags_vision.json \
@@ -221,12 +221,12 @@ jobs:
           echo "VISION_DONE=true" >> $GITHUB_OUTPUT
         continue-on-error: true
 
-      - name: F00-5c VISION — Skip (no GEMINI_API_KEY)
-        if: ${{ env.GEMINI_API_KEY == '' }}
+      - name: F00-5c VISION — Skip (no OPENROUTER_API_KEY)
+        if: ${{ env.OPENROUTER_API_KEY == '' }}
         run: |
-          echo "⚠️ GEMINI_API_KEY non défini — étape vision tagger ignorée"
-          echo "Ajoutez le secret GEMINI_API_KEY dans Settings > Secrets > Actions"
-          echo "Obtenez une clé gratuite sur https://aistudio.google.com/apikey"
+          echo "⚠️ OPENROUTER_API_KEY non défini — étape vision tagger ignorée"
+          echo "Ajoutez le secret OPENROUTER_API_KEY dans Settings > Secrets > Actions"
+          echo "Obtenez une clé gratuite sur https://openrouter.ai/keys"
 
       # === STEP 6: COMMIT ===
       - name: F00-6 COMMIT — Push to f00-asset-forge

@@ -1,21 +1,20 @@
 #!/usr/bin/env python3
 """
-CRS F00 — VISION TAGGER (Gemini 2.5 Flash)
-Analyse les canvases (grilles de frames) rangée par rangée avec Gemini Vision API.
+CRS F00 — VISION TAGGER (OpenRouter)
+Analyse les canvases rangée par rangée avec un modèle vision via OpenRouter.
+API OpenAI-compatible → utilise le SDK openai.
 
-Stratégie: envoyer chaque RANGÉE du canvas (15 cellules) séparément à Gemini.
-- Band 1 (90 frames) = 6 rangées × 15 cellules = 6 appels
-- Band 2 (90 frames) = 6 rangées × 15 cellules = 6 appels  
-- Band 3 (75 frames) = 5 rangées × 15 cellules = 5 appels
-- GIFs (26) = 2 rangées = 2 appels
-Total: ~19 appels API (au lieu de 281 individuels)
+Modèle: google/gemma-3-12b-it (gratuit, $0/token, vision)
+Stratégie: envoyer chaque RANGÉE du canvas (15 cellules) séparément.
+- 255 frames / 15 = 17 rangées + 2 rangées GIFs = ~19 appels
+- Rate limit OpenRouter: 20 req/min (largement suffisant)
 
 Usage:
   python crs_f00_vision_tagger.py --forge-root .. --output ../oracle_tags_vision.json
 
 Prérequis:
-  - GEMINI_API_KEY dans l'environnement (secret GitHub)
-  - pip install google-genai pillow
+  - OPENROUTER_API_KEY dans l'environnement (secret GitHub)
+  - pip install openai pillow
 """
 
 import os
@@ -23,27 +22,27 @@ import sys
 import json
 import time
 import re
+import base64
+import io
 import argparse
 from datetime import datetime, timezone
-from io import BytesIO
 
 try:
-    from google import genai
-    from google.genai import types
+    from openai import OpenAI
     from PIL import Image
 except ImportError as e:
     print(f"[VISION] ERREUR: dépendance manquante: {e}")
-    print("[VISION] Installer avec: pip install google-genai pillow")
+    print("[VISION] Installer avec: pip install openai pillow")
     sys.exit(1)
 
 
 # === CONFIG ===
-MODEL_NAME = "gemini-2.5-flash"
+MODEL_NAME = "google/gemma-3-12b-it"
 RATE_LIMIT_DELAY = 3  # secondes entre chaque appel
-MAX_RETRIES = 4
-RETRY_DELAY = 30  # secondes (pour 429 rate limit)
-MAX_ROW_WIDTH = 2048  # largeur max pour une rangée envoyée à Gemini
-CELLS_PER_ROW = 15  # nombre de cellules par rangée dans le canvas
+MAX_RETRIES = 3
+RETRY_DELAY = 10  # secondes
+MAX_ROW_WIDTH = 2048
+CELLS_PER_ROW = 15
 
 # Config canvas (doit correspondre à crs_f00_canvas.py)
 THUMB_W = 256
@@ -70,10 +69,10 @@ Return a JSON array of 15 objects. Be accurate - only describe what you actually
 
 
 def robust_json_parse(text: str) -> list:
-    """Parse la réponse JSON de Gemini de manière robuste."""
+    """Parse la réponse JSON de manière robuste."""
     text = text.strip()
 
-    # Retirer markdown
+    # Retirer markdown ```json ... ```
     if "```" in text:
         parts = text.split("```")
         for p in parts:
@@ -102,21 +101,21 @@ def robust_json_parse(text: str) -> list:
         except:
             pass
 
-    # Extraire objets individuels
+    # Extraire objets individuels avec regex
     objects = re.findall(r'\{[^}]+\}', text)
     results = []
     for obj_str in objects:
         try:
             obj = json.loads(obj_str)
-            # S'assurer que "u" est une string, pas un array
             if isinstance(obj.get("u"), list):
                 obj["u"] = obj["u"][0] if obj["u"] else "illustration"
+            if isinstance(obj.get("t"), str):
+                obj["t"] = [obj["t"]]
             results.append(obj)
         except:
             n_match = re.search(r'"n"\s*:\s*(\d+)', obj_str)
             v_match = re.search(r'"v"\s*:\s*"([^"]*)"', obj_str)
             if n_match:
-                # Extraire les tags entre crochets
                 t_section = re.search(r'"t"\s*:\s*\[([^\]]*)\]', obj_str)
                 tags = re.findall(r'"([^"]*)"', t_section.group(1)) if t_section else []
                 results.append({
@@ -126,6 +125,13 @@ def robust_json_parse(text: str) -> list:
                     "u": "illustration"
                 })
     return results
+
+
+def image_to_base64(img: Image.Image) -> str:
+    """Convertit une PIL Image en base64 JPEG."""
+    buf = io.BytesIO()
+    img.save(buf, format='JPEG', quality=85)
+    return base64.b64encode(buf.getvalue()).decode()
 
 
 def extract_row_from_canvas(canvas_img, row_idx: int, total_rows: int) -> Image.Image:
@@ -138,7 +144,7 @@ def extract_row_from_canvas(canvas_img, row_idx: int, total_rows: int) -> Image.
 
 
 def analyze_row(client, row_img: Image.Image, start_num: int) -> list:
-    """Envoie une rangée à Gemini Vision et récupère les tags."""
+    """Envoie une rangée à OpenRouter Vision et récupère les tags."""
     # Redimensionner si trop grand
     if row_img.size[0] > MAX_ROW_WIDTH:
         ratio = MAX_ROW_WIDTH / row_img.size[0]
@@ -148,23 +154,30 @@ def analyze_row(client, row_img: Image.Image, start_num: int) -> list:
     if row_img.mode in ('RGBA', 'P'):
         row_img = row_img.convert('RGB')
 
+    img_b64 = image_to_base64(row_img)
     prompt = ROW_PROMPT.format(start_num=start_num)
 
     for attempt in range(MAX_RETRIES):
         try:
-            response = client.models.generate_content(
+            response = client.chat.completions.create(
                 model=MODEL_NAME,
-                contents=[prompt, row_img],
-                config=types.GenerateContentConfig(
-                    temperature=0.3,
-                    max_output_tokens=4000,
-                    response_mime_type="application/json"
-                )
+                messages=[
+                    {
+                        "role": "user",
+                        "content": [
+                            {"type": "text", "text": prompt},
+                            {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{img_b64}"}}
+                        ]
+                    }
+                ],
+                temperature=0.3,
+                max_tokens=4000,
             )
 
-            results = robust_json_parse(response.text)
+            text = response.choices[0].message.content.strip()
+            results = robust_json_parse(text)
 
-            # Normaliser: s'assurer que "u" est une string
+            # Normaliser
             for r in results:
                 if isinstance(r.get("u"), list):
                     r["u"] = r["u"][0] if r["u"] else "illustration"
@@ -175,13 +188,13 @@ def analyze_row(client, row_img: Image.Image, start_num: int) -> list:
 
         except Exception as e:
             error_str = str(e)
-            if "429" in error_str or "RESOURCE_EXHAUSTED" in error_str:
-                wait_time = RETRY_DELAY * (attempt + 1)
+            if "429" in error_str:
+                wait_time = RETRY_DELAY * (attempt + 2)
                 print(f"  ⚠️ Rate limit, attente {wait_time}s... (tentative {attempt+1}/{MAX_RETRIES})")
                 time.sleep(wait_time)
             elif attempt < MAX_RETRIES - 1:
                 print(f"  ⚠️ Erreur (tentative {attempt+1}): {error_str[:80]}")
-                time.sleep(10)
+                time.sleep(RETRY_DELAY)
             else:
                 print(f"  ❌ Échec: {error_str[:100]}")
                 return []
@@ -192,8 +205,7 @@ def analyze_row(client, row_img: Image.Image, start_num: int) -> list:
 def find_canvases(forge_root: str) -> list:
     """Trouve tous les canvases à analyser."""
     canvases = []
-    
-    # Chercher dans CANVAS/
+
     canvas_dir = os.path.join(forge_root, "CANVAS")
     if os.path.exists(canvas_dir):
         for f in sorted(os.listdir(canvas_dir)):
@@ -201,7 +213,7 @@ def find_canvases(forge_root: str) -> list:
                 canvases.append(("frames", os.path.join(canvas_dir, f)))
             elif f.startswith("canvas_gifs") and f.endswith(".png"):
                 canvases.append(("gifs", os.path.join(canvas_dir, f)))
-    
+
     # Fallback: .uploads/
     if not canvases:
         upload_dir = "/home/user/.uploads"
@@ -211,28 +223,31 @@ def find_canvases(forge_root: str) -> list:
                     canvases.append(("frames", os.path.join(upload_dir, f)))
                 elif f.startswith("canvas_gifs") and f.endswith((".png", ".jpg")):
                     canvases.append(("gifs", os.path.join(upload_dir, f)))
-    
+
     return canvases
 
 
 def process_all_canvases(forge_root: str, output_path: str):
     """Analyse tous les canvases rangée par rangée."""
     canvases = find_canvases(forge_root)
-    
+
     if not canvases:
         print("[VISION] ERREUR: Aucun canvas trouvé!")
         return {}
 
     print(f"\n[VISION] {len(canvases)} canvases à analyser")
 
-    # Configurer Gemini
-    api_key = os.environ.get("GEMINI_API_KEY")
+    # Configurer OpenRouter
+    api_key = os.environ.get("OPENROUTER_API_KEY")
     if not api_key:
-        print("[VISION] ERREUR: GEMINI_API_KEY non défini")
+        print("[VISION] ERREUR: OPENROUTER_API_KEY non défini")
         sys.exit(1)
 
-    client = genai.Client(api_key=api_key)
-    print(f"[VISION] Gemini configuré: {MODEL_NAME}")
+    client = OpenAI(
+        base_url="https://openrouter.ai/api/v1",
+        api_key=api_key,
+    )
+    print(f"[VISION] OpenRouter configuré: {MODEL_NAME}")
 
     # Charger tags existants (mode reprise)
     all_tags = {}
@@ -252,21 +267,15 @@ def process_all_canvases(forge_root: str, output_path: str):
         total_rows = h // CELL_H
         if h % CELL_H > CELL_H // 2:
             total_rows += 1
-        
-        # Déterminer l'offset de numérotation
+
+        # Offset de numérotation
         offset = 0
         if "band2" in canvas_name.lower():
             offset = 90
         elif "band3" in canvas_name.lower():
             offset = 180
-
-        # Pour les canvases générés par le workflow (canvas_frames_nature_fire.png)
-        # Il n'y a qu'un seul canvas avec toutes les frames → 255 frames
-        # Dans ce cas, offset = 0 et on numérote à partir de 1
         if "nature_fire" in canvas_name.lower() and canvas_type == "frames":
             offset = 0
-            # 255 frames / 15 cols = 17 rangées
-            total_rows = h // CELL_H
 
         print(f"\n[VISION] === {canvas_name} ({w}×{h}) ===")
         print(f"  Type: {canvas_type} | Rangées: {total_rows} | Offset: {offset}")
@@ -275,7 +284,7 @@ def process_all_canvases(forge_root: str, output_path: str):
             start_num = (row_idx * CELLS_PER_ROW) + 1 + offset
             row_name = f"rangée {row_idx+1}/{total_rows} (cells {start_num}-{start_num+CELLS_PER_ROW-1})"
 
-            # Skip si tous les cells de cette rangée sont déjà taggés
+            # Skip si déjà taggé
             all_done = True
             for c in range(CELLS_PER_ROW):
                 cell_num = start_num + c
@@ -292,14 +301,10 @@ def process_all_canvases(forge_root: str, output_path: str):
 
             print(f"  [{row_name}] analyse...", end=" ", flush=True)
 
-            # Extraire la rangée
             row_img = extract_row_from_canvas(canvas_img, row_idx, total_rows)
-
-            # Analyser
             results = analyze_row(client, row_img, start_num)
             total_api_calls += 1
 
-            # Convertir en tags
             tagged_in_row = 0
             for r in results:
                 cell_num = r.get("n", 0)
@@ -311,10 +316,18 @@ def process_all_canvases(forge_root: str, output_path: str):
                 else:
                     asset_id = f"frame_{cell_num:03d}"
 
+                narrative = r.get("t", [])
+                if isinstance(narrative, str):
+                    narrative = [narrative]
+
+                usage = r.get("u", "illustration")
+                if isinstance(usage, list):
+                    usage = usage[0] if usage else "illustration"
+
                 all_tags[asset_id] = {
                     "visual": r.get("v", ""),
-                    "narrative": r.get("t", []) if isinstance(r.get("t"), list) else [r.get("t", "")],
-                    "usage": r.get("u", "illustration") if isinstance(r.get("u"), str) else (r.get("u", ["illustration"])[0] if r.get("u") else "illustration"),
+                    "narrative": narrative,
+                    "usage": usage,
                 }
                 tagged_in_row += 1
 
@@ -324,7 +337,6 @@ def process_all_canvases(forge_root: str, output_path: str):
             with open(output_path, "w", encoding="utf-8") as f:
                 json.dump(all_tags, f, indent=2, ensure_ascii=False)
 
-            # Rate limiting
             time.sleep(RATE_LIMIT_DELAY)
 
     # Résumé
@@ -349,7 +361,7 @@ def update_index(tags: dict, index_path: str):
         narrative = tag_data.get("narrative", [])
         if isinstance(narrative, str):
             narrative = [narrative]
-        
+
         usage = tag_data.get("usage", "illustration")
         if isinstance(usage, list):
             usage = usage[0] if usage else "illustration"
@@ -358,7 +370,7 @@ def update_index(tags: dict, index_path: str):
             index[asset_id]["tags"] = narrative
             index[asset_id]["visual_description"] = tag_data.get("visual", "")
             index[asset_id]["usage_tags"] = [usage]
-            index[asset_id]["tagged_by"] = "gemini-2.5-flash"
+            index[asset_id]["tagged_by"] = "openrouter-gemma-3-12b"
             index[asset_id]["tagged_at"] = datetime.now(timezone.utc).isoformat()
         else:
             index[asset_id] = {
@@ -366,7 +378,7 @@ def update_index(tags: dict, index_path: str):
                 "tags": narrative,
                 "visual_description": tag_data.get("visual", ""),
                 "usage_tags": [usage],
-                "tagged_by": "gemini-2.5-flash",
+                "tagged_by": "openrouter-gemma-3-12b",
                 "tagged_at": datetime.now(timezone.utc).isoformat(),
                 "source": "F00 ASSET FORGE"
             }
@@ -392,7 +404,7 @@ def build_tag_index(index_path: str, output_path: str):
         narrative = asset_data.get("tags", [])
         if isinstance(narrative, list):
             all_tags.extend(narrative)
-        
+
         usage = asset_data.get("usage_tags", [])
         if isinstance(usage, list):
             all_tags.extend(usage)
@@ -423,7 +435,7 @@ def build_tag_index(index_path: str, output_path: str):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="F00 Vision Tagger — Gemini 2.5 Flash (Row Mode)")
+    parser = argparse.ArgumentParser(description="F00 Vision Tagger — OpenRouter (Gemma 3 12B)")
     parser.add_argument("--forge-root", default="..", help="Racine F00_ASSET_FORGE")
     parser.add_argument("--output", default="../oracle_tags_vision.json", help="Fichier de sortie")
     parser.add_argument("--index", default="../index.json", help="index.json à mettre à jour")
@@ -432,7 +444,7 @@ def main():
     args = parser.parse_args()
 
     print("=" * 60)
-    print("  F00 VISION TAGGER — Gemini 2.5 Flash (Row Mode)")
+    print("  F00 VISION TAGGER — OpenRouter (Gemma 3 12B)")
     print("=" * 60)
 
     tags = process_all_canvases(args.forge_root, args.output)
