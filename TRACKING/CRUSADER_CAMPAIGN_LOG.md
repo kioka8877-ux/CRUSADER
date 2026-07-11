@@ -21,6 +21,7 @@
 [██]    2/2 metaprompts scellés
 [████]  4/4 gates opérateur — Sandbox = télécommande uniquement
 [█]     CAMP_03 EN COURS — CRUSADER BETA (redesign visuel caméra)
+[█]     DELTA-TEST3 EN COURS — Variation gamma pour vidéos à chapitres
 
 ---
 
@@ -234,3 +235,73 @@ F04 HELBRECHT  → youtube_short.mp4 ──► Téléchargement opérateur
 - META_01_SCRIPT.md — Script viral via Claude
 - META_02_VISUELS.md — Visuels Gemini 3.1 Pro
 - Statut: SCELLÉS — prêts à l'emploi
+
+
+---
+
+## ⚔ DELTA-TEST3 — EN COURS — VARIATION GAMMA (VIDÉOS À CHAPITRES)
+
+**2026-07-11 → LANCÉ — BRANCHE delta-test3 CRÉÉE DEPUIS main**
+
+### Objectif
+Créer une variation de gamma pour produire des **vidéos à chapitres** : un sujet abordé en N sous-catégories (ex: 7 types de tornades dans une seule vidéo). Gamma reste intact en production.
+
+### Concept
+Une miniature PNG avec des icônes numérotées sert de fil conducteur visuel. Entre chaque chapitre :
+1. La miniature apparaît → la caméra virtuelle se déplace vers l'icône du chapitre suivant (pan/zoom 2D, waypoints normalisés)
+2. La miniature disparaît → la narration du chapitre joue (identique gamma : photos, sous-titres Whisper, Ken Burns)
+3. La miniature revient → la caméra glisse vers l'icône suivante
+4. Et ainsi de suite jusqu'au dernier chapitre
+
+### Architecture retenue
+- **Rendu hybride** inspiré de CYPHER/hybrid-snowfall : séquences miniature + séquences narration assemblées par FFmpeg
+- **Approche A (waypoints 2D sur PNG)** : coordonnées `{x, y}` normalisées 0-1 + interpolation spring dans Remotion. Pas de Three.js.
+- **Zéro nouvelle dépendance** — même stack Remotion ^4.0 + React 18
+
+### Frégates touchées
+| Frégate | Modification | Statut |
+|---------|-------------|--------|
+| F01A | Aucune | INTACTE |
+| F01B | Aucune — timing.json Whisper pilote tout | INTACTE |
+| **F02 CASTELLAN** | Ajout onglet "MINIATURE" dans le viewer (upload PNG, clic pour placer balises, preview caméra animé) | À CODER |
+| **F03 SIGISMUND** | Nouveau composant `ThumbnailSequence.jsx` + logique hybride dans `Root.jsx` + extraction `NarrationChapter.jsx` | À CODER |
+| F04 HELBRECHT | Aucune | INTACTE |
+| F05 LUTHER | Aucune | INTACTE |
+
+### Contrat de données — roadmap.json (delta)
+Le `roadmap.json` gagne un bloc `thumbnail_plan` à côté du `timeline[]` existant :
+```json
+{
+  "meta": {...},
+  "style": {...},
+  "timeline": [...],
+  "thumbnail_plan": {
+    "file": "thumbnail.png",
+    "transition_frames": 45,
+    "chapters": [
+      { "id": 1, "label": "Rope", "start_segment": 0, "waypoint": {"x": 0.18, "y": 0.72} }
+    ]
+  }
+}
+```
+`start_segment` = index dans `timing.json → segments[]` (fourni par Whisper).
+
+### État DELTA-TEST3
+| Tâche | Statut |
+|-------|--------|
+| Branche `delta-test3` créée depuis `main` | FAIT 2026-07-11 |
+| Note technique `DELTA_TECH_NOTE.md` placée dans `gamma/` | FAIT 2026-07-11 |
+| Tracking docs mis à jour (campaign log + transfer log) | FAIT 2026-07-11 |
+| F02 — onglet MINIATURE + canvas waypoints | À CODER |
+| F03 — `ThumbnailSequence.jsx` | À CODER |
+| F03 — `Root.jsx` logique hybride | À CODER |
+| F03 — extraction `NarrationChapter.jsx` | À CODER |
+| CRS_CUSTOS.py — `thumbnail_plan` dans manifeste F02 OUT | À CODER |
+| Test sur script tornades | À FAIRE |
+
+### Références
+- Note technique complète : `gamma/DELTA_TECH_NOTE.md`
+- Inspiration hybride : `kioka8877-ux/CYPHER` branche `hybrid-snowfall` — F03_DEATHWING + F03_GAMMA
+- Miniature de référence : 7 icônes tornades sur fond blanc, cercles colorés (vert → jaune → orange → rouge)
+
+*"The Crusade endures. New fronts open."* — High Marshal Helbrecht

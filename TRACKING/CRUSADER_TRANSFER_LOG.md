@@ -53,6 +53,31 @@ Champs beta supplémentaires :
   sfx_trigger : true|false — override éditorial du pattern SFX
   trans_frames : 8|12|18|30 — durée de la transition caméra en frames (défaut 12)
 
+### roadmap.json (produit par F02 CASTELLAN — delta-test3, schéma avec thumbnail_plan)
+{
+  "meta": { "fps": 30, "format": "vertical", "width": 1080, "height": 1920, "audio_path": "./assets/audio_clean.mp3" },
+  "style": { "font_primary": "Cinzel", "subtitle_color": "#FFFFFF", "accent_color": "#FFD700", "grain_intensity": 0.15, "vignette": true, "background_color": "#F5F0E8" },
+  "timeline": [ { "id": 0, "image_file": "00_00_270.png", "text_subtitles": "...", "start_frame": 0, "end_frame": 96 } ],
+  "thumbnail_plan": {
+    "file": "thumbnail.png",
+    "transition_frames": 45,
+    "chapters": [
+      { "id": 1, "label": "Rope",     "start_segment": 0,  "waypoint": {"x": 0.18, "y": 0.72} },
+      { "id": 2, "label": "Cone",     "start_segment": 12, "waypoint": {"x": 0.35, "y": 0.45} },
+      { "id": 3, "label": "Elephant", "start_segment": 24, "waypoint": {"x": 0.52, "y": 0.30} }
+    ]
+  },
+  "validated_by_magos": true
+}
+Champs delta supplémentaires :
+  thumbnail_plan : objet optionnel — si présent, F03 active le mode hybride (séquences miniature + narration)
+  thumbnail_plan.file : chemin vers le PNG de la miniature
+  thumbnail_plan.transition_frames : durée du mouvement caméra entre icônes (défaut 45)
+  thumbnail_plan.chapters[] : liste ordonnée des chapitres
+  thumbnail_plan.chapters[].start_segment : index dans timing.json → segments[] (où commence la narration de ce chapitre)
+  thumbnail_plan.chapters[].waypoint : coordonnées normalisées 0-1 de l'icône sur le PNG
+  thumbnail_plan.chapters[].label : titre du chapitre (affiché dans le viewer)
+
 ---
 
 ## Matrice des Routes Légales
@@ -60,7 +85,7 @@ Champs beta supplémentaires :
 | Source   | Destination | Fichiers transférés                          |
 |----------|-------------|----------------------------------------------|
 | SHARED   | F01 IN      | audio_clean.mp3                              |
-| SHARED   | F02 IN      | images/                                      |
+| SHARED   | F02 IN      | images/, thumbnail.png (delta)               |
 | SHARED   | F03 IN      | audio_clean.mp3, images/                     |
 | F01 OUT  | F02 IN      | timing.json                                  |
 | F01 OUT  | F03 IN      | timing.json                                  |
