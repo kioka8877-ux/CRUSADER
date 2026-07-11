@@ -2,2546 +2,4201 @@
   "frame_001": {
     "type": "frame",
     "tags": [
-      "satellite",
       "globe",
-      "intro"
+      "animation",
+      "nature"
     ],
     "source": "F00 ASSET FORGE",
-    "visual_description": "Satellite view of Earth, blue ocean, clouds",
-    "usage_tags": "intro",
-    "tagged_by": "gemini-2.5-flash",
-    "tagged_at": "2026-07-10T10:40:55.645756+00:00"
+    "visual_description": "Animated globe showing blue water and landmasses.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334178+00:00"
   },
   "frame_002": {
     "type": "frame",
     "tags": [
-      "satellite",
       "globe",
-      "intro"
+      "animation",
+      "eau"
     ],
     "source": "F00 ASSET FORGE",
-    "visual_description": "Satellite view of Earth, blue ocean, clouds",
-    "usage_tags": "intro",
-    "tagged_by": "gemini-2.5-flash",
-    "tagged_at": "2026-07-10T10:40:55.645778+00:00"
+    "visual_description": "Animated globe with swirling blue water patterns.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334198+00:00"
   },
   "frame_003": {
     "type": "frame",
     "tags": [
-      "satellite",
       "globe",
-      "intro"
+      "animation",
+      "eau"
     ],
     "source": "F00 ASSET FORGE",
-    "visual_description": "Satellite view of Earth, blue ocean, clouds",
-    "usage_tags": "intro",
-    "tagged_by": "gemini-2.5-flash",
-    "tagged_at": "2026-07-10T10:40:55.645782+00:00"
+    "visual_description": "Animated globe with swirling blue water patterns.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334202+00:00"
   },
   "frame_004": {
     "type": "frame",
     "tags": [
-      "satellite",
       "globe",
-      "intro"
+      "animation",
+      "eau"
     ],
     "source": "F00 ASSET FORGE",
-    "visual_description": "Satellite view of Earth, blue ocean, clouds",
-    "usage_tags": "intro",
-    "tagged_by": "gemini-2.5-flash",
-    "tagged_at": "2026-07-10T10:40:55.645784+00:00"
+    "visual_description": "Animated globe with swirling blue water patterns.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334205+00:00"
   },
   "frame_005": {
     "type": "frame",
     "tags": [
-      "satellite",
-      "ouragan",
-      "animation"
+      "globe",
+      "animation",
+      "eau"
     ],
     "source": "F00 ASSET FORGE",
-    "visual_description": "Satellite view of Earth, tropical cyclone forming",
-    "usage_tags": "illustration",
-    "tagged_by": "gemini-2.5-flash",
-    "tagged_at": "2026-07-10T10:40:55.645786+00:00"
+    "visual_description": "Animated globe with swirling blue water patterns.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334208+00:00"
   },
   "frame_006": {
     "type": "frame",
     "tags": [
-      "intro",
-      "titre",
-      "nasa",
-      "donnée"
+      "globe",
+      "animation",
+      "eau"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Animated globe with swirling blue water patterns.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334210+00:00"
   },
   "frame_007": {
     "type": "frame",
     "tags": [
-      "intro",
-      "titre",
-      "nasa",
-      "donnée"
+      "globe",
+      "animation",
+      "eau"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Animated globe with swirling blue water patterns.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334213+00:00"
   },
   "frame_008": {
     "type": "frame",
     "tags": [
-      "intro",
-      "titre",
-      "nasa",
-      "donnée"
+      "globe",
+      "animation",
+      "eau"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Animated globe with swirling blue water patterns.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334216+00:00"
   },
   "frame_009": {
     "type": "frame",
     "tags": [
-      "intro",
-      "titre",
-      "nasa",
-      "donnée"
+      "globe",
+      "animation",
+      "eau"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Animated globe with swirling blue water patterns.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334218+00:00"
   },
   "frame_010": {
     "type": "frame",
     "tags": [
-      "intro",
-      "titre",
-      "nasa",
-      "donnée"
+      "transition",
+      "explication"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark screen with white text overlay, unreadable.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334221+00:00"
   },
   "frame_011": {
     "type": "frame",
     "tags": [
-      "satellite",
-      "données_gpm",
-      "technologie"
+      "transition",
+      "explication"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark screen with white text overlay, unreadable.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334224+00:00"
   },
   "frame_012": {
     "type": "frame",
     "tags": [
-      "satellite",
-      "données_gpm",
-      "technologie"
+      "transition",
+      "explication"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark screen with white text overlay, unreadable.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334226+00:00"
   },
   "frame_013": {
     "type": "frame",
     "tags": [
-      "satellite",
-      "données_gpm",
-      "technologie"
+      "destruction",
+      "infrastructure",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Damaged power lines and trees after a storm.",
+    "usage_tags": [
+      "b-roll"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334229+00:00"
   },
   "frame_014": {
     "type": "frame",
     "tags": [
-      "satellite",
-      "données_gpm",
-      "technologie"
+      "destruction",
+      "infrastructure",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Damaged power lines and trees after a storm.",
+    "usage_tags": [
+      "b-roll"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334231+00:00"
   },
   "frame_015": {
     "type": "frame",
     "tags": [
-      "satellite",
-      "données_gpm",
-      "technologie"
+      "destruction",
+      "infrastructure",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Damaged power lines and trees after a storm.",
+    "usage_tags": [
+      "b-roll"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334234+00:00"
   },
   "frame_016": {
     "type": "frame",
     "tags": [
-      "satellite",
-      "données_gpm",
-      "technologie"
+      "pluie",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dense forest with heavy rain and blurred foliage.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334236+00:00"
   },
   "frame_017": {
     "type": "frame",
     "tags": [
-      "satellite",
-      "données_gpm",
-      "technologie"
+      "pluie",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blurred forest scene with strong rain and dark trees.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334239+00:00"
   },
   "frame_018": {
     "type": "frame",
     "tags": [
-      "satellite",
-      "données_gpm",
-      "technologie"
+      "pluie",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Heavy rain falling through blurred forest canopy.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334241+00:00"
   },
   "frame_019": {
     "type": "frame",
     "tags": [
-      "satellite",
-      "données_gpm",
-      "technologie"
+      "pluie",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blurred view of a forest with heavy rainfall.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334243+00:00"
   },
   "frame_020": {
     "type": "frame",
     "tags": [
-      "satellite",
-      "données_gpm",
-      "technologie"
+      "pluie",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Rain falling on blurred trees and dense foliage.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334245+00:00"
   },
   "frame_021": {
     "type": "frame",
     "tags": [
-      "visualisation",
-      "donnée",
-      "interface"
+      "pluie",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blurred forest scene with very heavy rain falling.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334250+00:00"
   },
   "frame_022": {
     "type": "frame",
     "tags": [
-      "visualisation",
-      "donnée",
-      "interface"
+      "pluie",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blurred view of a forest with heavy rain.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334253+00:00"
   },
   "frame_023": {
     "type": "frame",
     "tags": [
-      "visualisation",
-      "donnée",
-      "interface"
+      "pluie",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blurred forest scene with rain and dark trees.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334255+00:00"
   },
   "frame_024": {
     "type": "frame",
     "tags": [
-      "visualisation",
-      "donnée",
-      "interface"
+      "pluie",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blurred view of a forest with strong rainfall.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334257+00:00"
   },
   "frame_025": {
     "type": "frame",
     "tags": [
-      "visualisation",
-      "donnée",
-      "interface"
+      "pluie",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blurred forest with rain and dense foliage.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334259+00:00"
   },
   "frame_026": {
     "type": "frame",
     "tags": [
-      "visualisation",
-      "donnée",
-      "interface"
+      "pluie",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blurred view of a forest with heavy rain.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334261+00:00"
   },
   "frame_027": {
     "type": "frame",
     "tags": [
-      "visualisation",
-      "donnée",
-      "interface"
+      "pluie",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blurred forest scene with rain and dark trees.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334264+00:00"
   },
   "frame_028": {
     "type": "frame",
     "tags": [
-      "visualisation",
-      "donnée",
-      "interface"
+      "pluie",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blurred view of a forest with heavy rainfall.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334266+00:00"
   },
   "frame_029": {
     "type": "frame",
     "tags": [
-      "visualisation",
-      "donnée",
-      "interface"
+      "pluie",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blurred forest with rain and dense foliage.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334269+00:00"
   },
   "frame_030": {
     "type": "frame",
     "tags": [
-      "visualisation",
-      "donnée",
-      "interface"
+      "pluie",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blurred view of a forest with strong rainfall.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334271+00:00"
   },
   "frame_031": {
     "type": "frame",
     "tags": [
-      "télédétection",
-      "satellite",
-      "mesure"
+      "transition",
+      "nature",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark image with bright, swirling white light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334273+00:00"
   },
   "frame_032": {
     "type": "frame",
     "tags": [
-      "télédétection",
-      "satellite",
-      "mesure"
+      "transition",
+      "nature",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark image with bright, swirling white light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334275+00:00"
   },
   "frame_033": {
     "type": "frame",
     "tags": [
-      "télédétection",
-      "satellite",
-      "mesure"
+      "transition",
+      "nature",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark image with bright, swirling white light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334278+00:00"
   },
   "frame_034": {
     "type": "frame",
     "tags": [
-      "télédétection",
-      "satellite",
-      "mesure"
+      "transition",
+      "nature",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark image with bright, swirling white light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334280+00:00"
   },
   "frame_035": {
     "type": "frame",
     "tags": [
-      "télédétection",
-      "satellite",
-      "mesure"
+      "transition",
+      "nature",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark image with bright, swirling white light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334282+00:00"
   },
   "frame_036": {
     "type": "frame",
     "tags": [
-      "télédétection",
-      "satellite",
-      "mesure"
+      "transition",
+      "nature",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark image with bright, swirling white light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334284+00:00"
   },
   "frame_037": {
     "type": "frame",
     "tags": [
-      "télédétection",
-      "satellite",
-      "mesure"
+      "transition",
+      "nature",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark image with bright, swirling white light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334287+00:00"
   },
   "frame_038": {
     "type": "frame",
     "tags": [
-      "télédétection",
-      "satellite",
-      "mesure"
+      "transition",
+      "nature",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark image with bright, swirling white light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334289+00:00"
   },
   "frame_039": {
     "type": "frame",
     "tags": [
-      "télédétection",
-      "satellite",
-      "mesure"
+      "transition",
+      "nature",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark image with bright, swirling white light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334291+00:00"
   },
   "frame_040": {
     "type": "frame",
     "tags": [
-      "télédétection",
-      "satellite",
-      "mesure"
+      "transition",
+      "nature",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark image with bright, swirling white light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334295+00:00"
   },
   "frame_041": {
     "type": "frame",
     "tags": [
-      "animation",
-      "donnée",
-      "ouragan"
+      "transition",
+      "nature",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark image with bright, swirling white light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334298+00:00"
   },
   "frame_042": {
     "type": "frame",
     "tags": [
-      "animation",
-      "donnée",
-      "ouragan"
+      "transition",
+      "nature",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark image with bright, swirling white light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334300+00:00"
   },
   "frame_043": {
     "type": "frame",
     "tags": [
-      "animation",
-      "donnée",
-      "ouragan"
+      "transition",
+      "nature",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark image with bright, swirling white light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334302+00:00"
   },
   "frame_044": {
     "type": "frame",
     "tags": [
-      "animation",
-      "donnée",
-      "ouragan"
+      "transition",
+      "nature",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark image with bright, swirling white light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334307+00:00"
   },
   "frame_045": {
     "type": "frame",
     "tags": [
-      "animation",
-      "donnée",
-      "ouragan"
+      "transition",
+      "nature",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark image with bright, swirling white light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334309+00:00"
   },
   "frame_046": {
     "type": "frame",
     "tags": [
-      "animation",
-      "donnée",
-      "ouragan"
+      "inondation",
+      "destruction",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark, blurry image of flooded street and buildings.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334312+00:00"
   },
   "frame_047": {
     "type": "frame",
     "tags": [
-      "animation",
-      "donnée",
-      "ouragan"
+      "pluie",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "White, blurry image, likely rain or snow.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334314+00:00"
   },
   "frame_048": {
     "type": "frame",
     "tags": [
-      "animation",
-      "donnée",
-      "ouragan"
+      "inondation",
+      "destruction",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blurry image of a dark, flooded street.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334317+00:00"
   },
   "frame_049": {
     "type": "frame",
     "tags": [
-      "animation",
-      "donnée",
-      "ouragan"
+      "inondation",
+      "destruction",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blurred image of a flooded street with a car.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334319+00:00"
   },
   "frame_050": {
     "type": "frame",
     "tags": [
-      "animation",
-      "donnée",
-      "ouragan"
+      "inondation",
+      "nature",
+      "infrastructure"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Flooded street with a yellow and black pole.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334321+00:00"
   },
   "frame_051": {
     "type": "frame",
     "tags": [
-      "satellite",
-      "tempête",
-      "visualisation"
+      "inondation",
+      "destruction",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Flooded street with several cars submerged in water.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334323+00:00"
   },
   "frame_052": {
     "type": "frame",
     "tags": [
-      "satellite",
-      "tempête",
-      "visualisation"
+      "inondation",
+      "destruction",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Flooded street with a dark car partially submerged.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334326+00:00"
   },
   "frame_053": {
     "type": "frame",
     "tags": [
-      "satellite",
-      "tempête",
-      "visualisation"
+      "inondation",
+      "destruction",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Flooded street with a dark SUV in the water.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334328+00:00"
   },
   "frame_054": {
     "type": "frame",
     "tags": [
-      "satellite",
-      "tempête",
-      "visualisation"
+      "inondation",
+      "destruction",
+      "infrastructure"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Flooded street with a white house and water.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334330+00:00"
   },
   "frame_055": {
     "type": "frame",
     "tags": [
-      "satellite",
-      "tempête",
-      "visualisation"
+      "inondation",
+      "destruction",
+      "infrastructure"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Flooded street with a white house and water damage.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334332+00:00"
   },
   "frame_056": {
     "type": "frame",
     "tags": [
-      "satellite",
-      "tempête",
-      "visualisation"
+      "inondation",
+      "destruction",
+      "infrastructure"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Flooded street with a white house and a tree.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334334+00:00"
   },
   "frame_057": {
     "type": "frame",
     "tags": [
-      "satellite",
-      "tempête",
-      "visualisation"
+      "inondation",
+      "destruction",
+      "infrastructure"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Flooded street with a white house and a red roof.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334337+00:00"
   },
   "frame_058": {
     "type": "frame",
     "tags": [
-      "satellite",
-      "tempête",
-      "visualisation"
+      "inondation",
+      "destruction",
+      "infrastructure"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Flooded street with a white house and a car.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334339+00:00"
   },
   "frame_059": {
     "type": "frame",
     "tags": [
-      "satellite",
-      "tempête",
-      "visualisation"
+      "inondation",
+      "destruction",
+      "infrastructure"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Flooded street with a yellow sign and water.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334341+00:00"
   },
   "frame_060": {
     "type": "frame",
     "tags": [
-      "satellite",
-      "tempête",
-      "visualisation"
+      "inondation",
+      "destruction",
+      "infrastructure"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Flooded street with a red and white barrier.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334345+00:00"
   },
   "frame_061": {
     "type": "frame",
     "tags": [
-      "radar",
-      "mesure",
-      "pluie"
+      "inondation",
+      "danger",
+      "population"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blurred view of flooded street with red lights.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334347+00:00"
   },
   "frame_062": {
     "type": "frame",
     "tags": [
-      "radar",
-      "mesure",
-      "pluie"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "White and grey swirling cloud patterns.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334350+00:00"
   },
   "frame_063": {
     "type": "frame",
     "tags": [
-      "radar",
-      "mesure",
-      "pluie"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Grey swirling cloud patterns, light blue tint.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334352+00:00"
   },
   "frame_064": {
     "type": "frame",
     "tags": [
-      "radar",
-      "mesure",
-      "pluie"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Grey and white swirling cloud patterns.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334354+00:00"
   },
   "frame_065": {
     "type": "frame",
     "tags": [
-      "radar",
-      "mesure",
-      "pluie"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Grey and white swirling cloud patterns.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334356+00:00"
   },
   "frame_066": {
     "type": "frame",
     "tags": [
-      "radar",
-      "mesure",
-      "pluie"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Grey and white swirling cloud patterns.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334358+00:00"
   },
   "frame_067": {
     "type": "frame",
     "tags": [
-      "radar",
-      "mesure",
-      "pluie"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Grey and white swirling cloud patterns.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334360+00:00"
   },
   "frame_068": {
     "type": "frame",
     "tags": [
-      "radar",
-      "mesure",
-      "pluie"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Grey and white swirling cloud patterns.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334362+00:00"
   },
   "frame_069": {
     "type": "frame",
     "tags": [
-      "radar",
-      "mesure",
-      "pluie"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Grey and white swirling cloud patterns.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334365+00:00"
   },
   "frame_070": {
     "type": "frame",
     "tags": [
-      "radar",
-      "mesure",
-      "pluie"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Grey and white swirling cloud patterns.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334367+00:00"
   },
   "frame_071": {
     "type": "frame",
     "tags": [
-      "donnée_temps_réel",
-      "technologie"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Grey and white swirling cloud patterns.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334369+00:00"
   },
   "frame_072": {
     "type": "frame",
     "tags": [
-      "donnée_temps_réel",
-      "technologie"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Grey and white swirling cloud patterns.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334371+00:00"
   },
   "frame_073": {
     "type": "frame",
     "tags": [
-      "donnée_temps_réel",
-      "technologie"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Abstract colorful swirling patterns.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334373+00:00"
   },
   "frame_074": {
     "type": "frame",
     "tags": [
-      "donnée_temps_réel",
-      "technologie"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Abstract colorful swirling patterns.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334375+00:00"
   },
   "frame_075": {
     "type": "frame",
     "tags": [
-      "donnée_temps_réel",
-      "technologie"
+      "satellite",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "White and grey blurred image, arched shape.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334377+00:00"
   },
   "frame_076": {
     "type": "frame",
     "tags": [
-      "donnée_temps_réel",
-      "technologie"
+      "globe",
+      "nature",
+      "satellite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue globe with swirling cloud patterns visible.",
+    "usage_tags": [
+      "background"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334380+00:00"
   },
   "frame_077": {
     "type": "frame",
     "tags": [
-      "donnée_temps_réel",
-      "technologie"
+      "nature",
+      "satellite",
+      "carte"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Green and blue landmass with cloud cover.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334382+00:00"
   },
   "frame_078": {
     "type": "frame",
     "tags": [
-      "donnée_temps_réel",
-      "technologie"
+      "graphique",
+      "science",
+      "donnees"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Graph showing fluctuating data with colored lines.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334384+00:00"
   },
   "frame_079": {
     "type": "frame",
     "tags": [
-      "donnée_temps_réel",
-      "technologie"
+      "graphique",
+      "science",
+      "donnees"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Graph showing fluctuating data with colored lines.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334388+00:00"
   },
   "frame_080": {
     "type": "frame",
     "tags": [
-      "donnée_temps_réel",
-      "technologie"
+      "graphique",
+      "science",
+      "donnees"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Graph showing fluctuating data with colored lines.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334390+00:00"
   },
   "frame_081": {
     "type": "frame",
     "tags": [
-      "tempête",
-      "trajectoire",
-      "satellite"
+      "graphique",
+      "science",
+      "donnees"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Graph showing fluctuating data with colored lines.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334393+00:00"
   },
   "frame_082": {
     "type": "frame",
     "tags": [
-      "tempête",
-      "trajectoire",
-      "satellite"
+      "graphique",
+      "science",
+      "donnees"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Graph showing fluctuating data with colored lines.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334395+00:00"
   },
   "frame_083": {
     "type": "frame",
     "tags": [
-      "tempête",
-      "trajectoire",
+      "tempete",
+      "nature",
       "satellite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Swirling cloud patterns over a dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334397+00:00"
   },
   "frame_084": {
     "type": "frame",
     "tags": [
-      "tempête",
-      "trajectoire",
-      "satellite"
+      "tempete",
+      "nature",
+      "destruction"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark, swirling cloud patterns with a red tint.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334399+00:00"
   },
   "frame_085": {
     "type": "frame",
     "tags": [
-      "tempête",
-      "trajectoire",
-      "satellite"
+      "tempete",
+      "nature",
+      "destruction"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark, swirling cloud patterns with a red tint.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334401+00:00"
   },
   "frame_086": {
     "type": "frame",
     "tags": [
-      "tempête",
-      "trajectoire",
-      "satellite"
+      "tempete",
+      "nature",
+      "destruction"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark, swirling cloud patterns with a red tint.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334404+00:00"
   },
   "frame_087": {
     "type": "frame",
     "tags": [
-      "tempête",
-      "trajectoire",
-      "satellite"
+      "tempete",
+      "nature",
+      "destruction"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark, swirling cloud patterns with a red tint.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334406+00:00"
   },
   "frame_088": {
     "type": "frame",
     "tags": [
-      "tempête",
-      "trajectoire",
-      "satellite"
+      "tempete",
+      "nature",
+      "destruction"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark, swirling cloud patterns with a red tint.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334408+00:00"
   },
   "frame_089": {
     "type": "frame",
     "tags": [
-      "tempête",
-      "trajectoire",
-      "satellite"
+      "tempete",
+      "nature",
+      "destruction"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark, swirling cloud patterns with a red tint.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334410+00:00"
   },
   "frame_090": {
     "type": "frame",
     "tags": [
-      "tempête",
-      "trajectoire",
-      "satellite"
+      "tempete",
+      "nature",
+      "destruction"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark, swirling cloud patterns with a red tint.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334412+00:00"
   },
   "frame_091": {
     "type": "frame",
     "tags": [
-      "inondation",
-      "impact",
-      "terrain"
+      "expertise",
+      "interview",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Man in suit standing in front of a screen.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334414+00:00"
   },
   "frame_092": {
     "type": "frame",
     "tags": [
-      "inondation",
-      "impact",
-      "terrain"
+      "expertise",
+      "interview",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Man in suit standing in front of a screen.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334416+00:00"
   },
   "frame_093": {
     "type": "frame",
     "tags": [
-      "inondation",
-      "impact",
-      "terrain"
+      "expertise",
+      "interview",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Man in suit standing in front of a screen.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334419+00:00"
   },
   "frame_094": {
     "type": "frame",
     "tags": [
-      "inondation",
-      "impact",
-      "terrain"
+      "expertise",
+      "interview",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Man in suit standing in front of a screen.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334421+00:00"
   },
   "frame_095": {
     "type": "frame",
     "tags": [
-      "inondation",
-      "impact",
-      "terrain"
+      "expertise",
+      "interview",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Man in suit standing in front of a screen.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334423+00:00"
   },
   "frame_096": {
     "type": "frame",
     "tags": [
-      "inondation",
-      "impact",
-      "terrain"
+      "expertise",
+      "interview",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Man in suit standing in front of a screen.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334426+00:00"
   },
   "frame_097": {
     "type": "frame",
     "tags": [
-      "inondation",
-      "impact",
-      "terrain"
+      "expertise",
+      "interview",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Man in suit standing in front of a screen.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334428+00:00"
   },
   "frame_098": {
     "type": "frame",
     "tags": [
-      "inondation",
-      "impact",
-      "terrain"
+      "expertise",
+      "interview",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Man in suit standing in front of a screen.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334430+00:00"
   },
   "frame_099": {
     "type": "frame",
     "tags": [
-      "inondation",
-      "impact",
-      "terrain"
+      "satellite",
+      "ouragan",
+      "donnees"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image of a hurricane, blue and white.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334434+00:00"
   },
   "frame_100": {
     "type": "frame",
     "tags": [
-      "satellite_sol",
-      "comparaison",
-      "avant_après"
+      "satellite",
+      "ouragan",
+      "donnees"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image of a hurricane, blue and green.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334437+00:00"
   },
   "frame_101": {
     "type": "frame",
     "tags": [
-      "satellite_sol",
-      "comparaison",
-      "avant_après"
+      "satellite",
+      "ouragan",
+      "donnees"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image of a hurricane, blue and yellow.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334439+00:00"
   },
   "frame_102": {
     "type": "frame",
     "tags": [
-      "satellite_sol",
-      "comparaison",
-      "avant_après"
+      "satellite",
+      "ouragan",
+      "donnees"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image of a hurricane, blue and red.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334441+00:00"
   },
   "frame_103": {
     "type": "frame",
     "tags": [
-      "satellite_sol",
-      "comparaison",
-      "avant_après"
+      "satellite",
+      "ouragan",
+      "donnees"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image of a hurricane, blue and white.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334443+00:00"
   },
   "frame_104": {
     "type": "frame",
     "tags": [
-      "satellite_sol",
-      "comparaison",
-      "avant_après"
+      "satellite",
+      "ouragan",
+      "donnees"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image of a hurricane, blue and green.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334445+00:00"
   },
   "frame_105": {
     "type": "frame",
     "tags": [
-      "satellite_sol",
-      "comparaison",
-      "avant_après"
+      "satellite",
+      "ouragan",
+      "donnees"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image of a hurricane, blue and yellow.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334448+00:00"
   },
   "frame_106": {
     "type": "frame",
     "tags": [
-      "satellite_sol",
-      "comparaison",
-      "avant_après"
+      "satellite",
+      "donnees",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Colorful satellite image, blue and yellow swirls.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334450+00:00"
   },
   "frame_107": {
     "type": "frame",
     "tags": [
-      "satellite_sol",
-      "comparaison",
-      "avant_après"
+      "satellite",
+      "donnees",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image with blue and yellow swirls.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334452+00:00"
   },
   "frame_108": {
     "type": "frame",
     "tags": [
-      "satellite_sol",
-      "comparaison",
-      "avant_après"
+      "satellite",
+      "donnees",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image, blue and yellow swirling pattern.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334454+00:00"
   },
   "frame_109": {
     "type": "frame",
     "tags": [
-      "dégât",
-      "tempête",
-      "infrastructure"
+      "satellite",
+      "donnees",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image with swirling blue and yellow.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334456+00:00"
   },
   "frame_110": {
     "type": "frame",
     "tags": [
-      "dégât",
-      "tempête",
-      "infrastructure"
+      "satellite",
+      "donnees",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image, blue and yellow swirling colors.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334458+00:00"
   },
   "frame_111": {
     "type": "frame",
     "tags": [
-      "dégât",
-      "tempête",
-      "infrastructure"
+      "satellite",
+      "donnees",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image with swirling blue and yellow.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334460+00:00"
   },
   "frame_112": {
     "type": "frame",
     "tags": [
-      "dégât",
-      "tempête",
-      "infrastructure"
+      "satellite",
+      "donnees",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image with swirling blue and yellow.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334462+00:00"
   },
   "frame_113": {
     "type": "frame",
     "tags": [
-      "dégât",
-      "tempête",
-      "infrastructure"
+      "satellite",
+      "donnees",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image, swirling blue and yellow colors.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334466+00:00"
   },
   "frame_114": {
     "type": "frame",
     "tags": [
-      "dégât",
-      "tempête",
-      "infrastructure"
+      "satellite",
+      "donnees",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image with swirling blue and yellow.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334468+00:00"
   },
   "frame_115": {
     "type": "frame",
     "tags": [
-      "dégât",
-      "tempête",
-      "infrastructure"
+      "satellite",
+      "donnees",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image with swirling blue and yellow.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334471+00:00"
   },
   "frame_116": {
     "type": "frame",
     "tags": [
-      "dégât",
-      "tempête",
-      "infrastructure"
+      "satellite",
+      "donnees",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image with swirling blue and yellow.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334473+00:00"
   },
   "frame_117": {
     "type": "frame",
     "tags": [
-      "dégât",
-      "tempête",
-      "infrastructure"
+      "satellite",
+      "donnees",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image with swirling blue and yellow.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334475+00:00"
   },
   "frame_118": {
     "type": "frame",
     "tags": [
-      "eau",
-      "inondation",
-      "mesure"
+      "satellite",
+      "donnees",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image with swirling blue and yellow.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334479+00:00"
   },
   "frame_119": {
     "type": "frame",
     "tags": [
-      "eau",
-      "inondation",
-      "mesure"
+      "satellite",
+      "donnees",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image with swirling blue and yellow.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334482+00:00"
   },
   "frame_120": {
     "type": "frame",
     "tags": [
-      "eau",
-      "inondation",
-      "mesure"
+      "satellite",
+      "donnees",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image with swirling blue and yellow.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334484+00:00"
   },
   "frame_121": {
     "type": "frame",
     "tags": [
-      "eau",
       "inondation",
-      "mesure"
+      "destruction",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Flooded street with damaged buildings and debris.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334486+00:00"
   },
   "frame_122": {
     "type": "frame",
     "tags": [
-      "eau",
-      "inondation",
-      "mesure"
+      "population",
+      "danger",
+      "humanite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of a person looking concerned and worried.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334489+00:00"
   },
   "frame_123": {
     "type": "frame",
     "tags": [
-      "eau",
-      "inondation",
-      "mesure"
+      "population",
+      "danger",
+      "humanite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Person looking concerned, dark clothing, blurred background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334491+00:00"
   },
   "frame_124": {
     "type": "frame",
     "tags": [
-      "eau",
-      "inondation",
-      "mesure"
+      "population",
+      "danger",
+      "humanite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Person looking concerned, dark clothing, blurred background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334493+00:00"
   },
   "frame_125": {
     "type": "frame",
     "tags": [
-      "eau",
-      "inondation",
-      "mesure"
+      "population",
+      "danger",
+      "humanite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Person looking concerned, dark clothing, blurred background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334495+00:00"
   },
   "frame_126": {
     "type": "frame",
     "tags": [
-      "eau",
-      "inondation",
-      "mesure"
+      "population",
+      "danger",
+      "humanite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Person looking concerned, dark clothing, blurred background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334497+00:00"
   },
   "frame_127": {
     "type": "frame",
     "tags": [
-      "radar_pluie",
-      "visualisation",
-      "donnée"
+      "population",
+      "danger",
+      "humanite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Person looking concerned, dark clothing, blurred background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334499+00:00"
   },
   "frame_128": {
     "type": "frame",
     "tags": [
-      "radar_pluie",
-      "visualisation",
-      "donnée"
+      "population",
+      "danger",
+      "humanite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Person looking concerned, dark clothing, blurred background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334501+00:00"
   },
   "frame_129": {
     "type": "frame",
     "tags": [
-      "radar_pluie",
-      "visualisation",
-      "donnée"
+      "population",
+      "danger",
+      "humanite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Person looking concerned, dark clothing, blurred background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334503+00:00"
   },
   "frame_130": {
     "type": "frame",
     "tags": [
-      "radar_pluie",
-      "visualisation",
-      "donnée"
+      "population",
+      "danger",
+      "humanite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Person looking concerned, dark clothing, blurred background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334505+00:00"
   },
   "frame_131": {
     "type": "frame",
     "tags": [
-      "radar_pluie",
-      "visualisation",
-      "donnée"
+      "satellite",
+      "donnees",
+      "animation"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Rotating globe with animated green data overlay.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334508+00:00"
   },
   "frame_132": {
     "type": "frame",
     "tags": [
-      "radar_pluie",
-      "visualisation",
-      "donnée"
+      "satellite",
+      "donnees",
+      "animation"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Rotating globe with animated blue data overlay.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334510+00:00"
   },
   "frame_133": {
     "type": "frame",
     "tags": [
-      "radar_pluie",
-      "visualisation",
-      "donnée"
+      "satellite",
+      "donnees",
+      "animation"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Rotating globe with animated green data overlay.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334512+00:00"
   },
   "frame_134": {
     "type": "frame",
     "tags": [
-      "radar_pluie",
-      "visualisation",
-      "donnée"
+      "satellite",
+      "donnees",
+      "animation"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Rotating globe with animated blue data overlay.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334514+00:00"
   },
   "frame_135": {
     "type": "frame",
     "tags": [
-      "radar_pluie",
-      "visualisation",
-      "donnée"
+      "satellite",
+      "donnees",
+      "animation"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Rotating globe with animated green data overlay.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334516+00:00"
   },
   "frame_136": {
     "type": "frame",
     "tags": [
-      "ciblage_secours",
-      "technologie",
-      "aide"
+      "satellite",
+      "nature",
+      "globe"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Green and blue swirling cloud pattern on globe.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334518+00:00"
   },
   "frame_137": {
     "type": "frame",
     "tags": [
-      "ciblage_secours",
-      "technologie",
-      "aide"
+      "satellite",
+      "nature",
+      "globe"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue and green swirling cloud pattern on globe.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334521+00:00"
   },
   "frame_138": {
     "type": "frame",
     "tags": [
-      "ciblage_secours",
-      "technologie",
-      "aide"
+      "satellite",
+      "nature",
+      "globe"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue and green swirling cloud pattern on globe.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334524+00:00"
   },
   "frame_139": {
     "type": "frame",
     "tags": [
-      "ciblage_secours",
-      "technologie",
-      "aide"
+      "satellite",
+      "nature",
+      "globe"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue and green swirling cloud pattern on globe.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334527+00:00"
   },
   "frame_140": {
     "type": "frame",
     "tags": [
-      "ciblage_secours",
-      "technologie",
-      "aide"
+      "satellite",
+      "nature",
+      "globe"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue and green swirling cloud pattern on globe.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334528+00:00"
   },
   "frame_141": {
     "type": "frame",
     "tags": [
-      "ciblage_secours",
-      "technologie",
-      "aide"
+      "satellite",
+      "nature",
+      "globe"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue and green swirling cloud pattern on globe.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334531+00:00"
   },
   "frame_142": {
     "type": "frame",
     "tags": [
-      "ciblage_secours",
-      "technologie",
-      "aide"
+      "satellite",
+      "nature",
+      "globe"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue and green swirling cloud pattern on globe.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334533+00:00"
   },
   "frame_143": {
     "type": "frame",
     "tags": [
-      "ciblage_secours",
-      "technologie",
-      "aide"
+      "satellite",
+      "nature",
+      "globe"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue and green swirling cloud pattern on globe.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334535+00:00"
   },
   "frame_144": {
     "type": "frame",
     "tags": [
-      "ciblage_secours",
-      "technologie",
-      "aide"
+      "satellite",
+      "nature",
+      "globe"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue and green swirling cloud pattern on globe.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334537+00:00"
   },
   "frame_145": {
     "type": "frame",
     "tags": [
-      "trajectoire",
-      "prévision",
-      "données"
+      "satellite",
+      "nature",
+      "globe"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue and green swirling cloud pattern on globe.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334539+00:00"
   },
   "frame_146": {
     "type": "frame",
     "tags": [
-      "trajectoire",
-      "prévision",
-      "données"
+      "satellite",
+      "nature",
+      "globe"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue and green swirling cloud pattern on globe.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334542+00:00"
   },
   "frame_147": {
     "type": "frame",
     "tags": [
-      "trajectoire",
-      "prévision",
-      "données"
+      "satellite",
+      "nature",
+      "globe"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue and green swirling cloud pattern on globe.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334544+00:00"
   },
   "frame_148": {
     "type": "frame",
     "tags": [
-      "trajectoire",
-      "prévision",
-      "données"
+      "satellite",
+      "nature",
+      "globe"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue and green swirling cloud pattern on globe.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334546+00:00"
   },
   "frame_149": {
     "type": "frame",
     "tags": [
-      "trajectoire",
-      "prévision",
-      "données"
+      "satellite",
+      "nature",
+      "globe"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue and green swirling cloud pattern on globe.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334548+00:00"
   },
   "frame_150": {
     "type": "frame",
     "tags": [
-      "trajectoire",
-      "prévision",
-      "données"
+      "satellite",
+      "nature",
+      "globe"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue and green swirling cloud pattern on globe.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334550+00:00"
   },
   "frame_151": {
     "type": "frame",
     "tags": [
-      "trajectoire",
-      "prévision",
-      "données"
+      "satellite",
+      "ouragan",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image showing a swirling hurricane shape.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334552+00:00"
   },
   "frame_152": {
     "type": "frame",
     "tags": [
-      "trajectoire",
-      "prévision",
-      "données"
+      "satellite",
+      "ouragan",
+      "pluie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image of a hurricane, blue and white colors.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334554+00:00"
   },
   "frame_153": {
     "type": "frame",
     "tags": [
-      "trajectoire",
-      "prévision",
-      "données"
+      "satellite",
+      "ouragan",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Hurricane shape in satellite view, blue and red.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334557+00:00"
   },
   "frame_154": {
     "type": "frame",
     "tags": [
-      "population",
-      "risque",
-      "alerte"
+      "satellite",
+      "ouragan",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image of a hurricane, swirling pattern.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334559+00:00"
   },
   "frame_155": {
     "type": "frame",
     "tags": [
-      "population",
-      "risque",
-      "alerte"
+      "satellite",
+      "ouragan",
+      "pluie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Hurricane shape in satellite view, blue and white.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334561+00:00"
   },
   "frame_156": {
     "type": "frame",
     "tags": [
-      "population",
-      "risque",
-      "alerte"
+      "satellite",
+      "ouragan",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite view of a hurricane, swirling colors.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334564+00:00"
   },
   "frame_157": {
     "type": "frame",
     "tags": [
-      "population",
-      "risque",
-      "alerte"
+      "satellite",
+      "ouragan",
+      "pluie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image of a hurricane, white and blue.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334567+00:00"
   },
   "frame_158": {
     "type": "frame",
     "tags": [
-      "population",
-      "risque",
-      "alerte"
+      "satellite",
+      "ouragan",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image showing a hurricane shape.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334569+00:00"
   },
   "frame_159": {
     "type": "frame",
     "tags": [
-      "population",
-      "risque",
-      "alerte"
+      "satellite",
+      "ouragan",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite view of a hurricane, swirling pattern.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334571+00:00"
   },
   "frame_160": {
     "type": "frame",
     "tags": [
-      "population",
-      "risque",
-      "alerte"
+      "satellite",
+      "ouragan",
+      "pluie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image of a hurricane, blue and white.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334574+00:00"
   },
   "frame_161": {
     "type": "frame",
     "tags": [
-      "population",
-      "risque",
-      "alerte"
+      "satellite",
+      "ouragan",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite view of a hurricane, swirling colors.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334593+00:00"
   },
   "frame_162": {
     "type": "frame",
     "tags": [
-      "population",
-      "risque",
-      "alerte"
+      "ouragan",
+      "carte",
+      "science"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of a hurricane cone graphic.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334595+00:00"
   },
   "frame_163": {
     "type": "frame",
     "tags": [
-      "infrastructure",
-      "pont",
-      "route"
+      "ouragan",
+      "carte",
+      "science"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of a hurricane cone graphic, yellow.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334597+00:00"
   },
   "frame_164": {
     "type": "frame",
     "tags": [
-      "infrastructure",
-      "pont",
-      "route"
+      "ouragan",
+      "carte",
+      "science"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of a hurricane cone graphic, orange.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334599+00:00"
   },
   "frame_165": {
     "type": "frame",
     "tags": [
-      "infrastructure",
-      "pont",
-      "route"
+      "ouragan",
+      "carte",
+      "science"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of a hurricane cone graphic, yellow.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334604+00:00"
   },
   "frame_166": {
     "type": "frame",
     "tags": [
-      "infrastructure",
-      "pont",
-      "route"
+      "tempete",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark, swirling clouds with a bright, central light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334606+00:00"
   },
   "frame_167": {
     "type": "frame",
     "tags": [
-      "infrastructure",
-      "pont",
-      "route"
+      "tempete",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark clouds swirling, with a faint light in the center.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334608+00:00"
   },
   "frame_168": {
     "type": "frame",
     "tags": [
-      "infrastructure",
-      "pont",
-      "route"
+      "tempete",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark swirling clouds with a brighter, central glow.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334610+00:00"
   },
   "frame_169": {
     "type": "frame",
     "tags": [
-      "infrastructure",
-      "pont",
-      "route"
+      "tempete",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark clouds swirling, with a bright, circular light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334612+00:00"
   },
   "frame_170": {
     "type": "frame",
     "tags": [
-      "infrastructure",
-      "pont",
-      "route"
+      "tempete",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark swirling clouds with a bright, central light source.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334614+00:00"
   },
   "frame_171": {
     "type": "frame",
     "tags": [
-      "infrastructure",
-      "pont",
-      "route"
+      "tempete",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark, swirling clouds with a bright, circular center.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334616+00:00"
   },
   "frame_172": {
     "type": "frame",
     "tags": [
-      "vidéo_satellite",
-      "changement",
-      "catastrophe"
+      "tempete",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark swirling clouds with a bright, central light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334618+00:00"
   },
   "frame_173": {
     "type": "frame",
     "tags": [
-      "vidéo_satellite",
-      "changement",
-      "catastrophe"
+      "tempete",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark swirling clouds with a bright, central glow.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334620+00:00"
   },
   "frame_174": {
     "type": "frame",
     "tags": [
-      "vidéo_satellite",
-      "changement",
-      "catastrophe"
+      "tempete",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark clouds swirling, with a bright, central light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334622+00:00"
   },
   "frame_175": {
     "type": "frame",
     "tags": [
-      "vidéo_satellite",
-      "changement",
-      "catastrophe"
+      "tempete",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark swirling clouds with a bright, circular center.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334625+00:00"
   },
   "frame_176": {
     "type": "frame",
     "tags": [
-      "vidéo_satellite",
-      "changement",
-      "catastrophe"
+      "tempete",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark swirling clouds with a bright, central light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334627+00:00"
   },
   "frame_177": {
     "type": "frame",
     "tags": [
-      "vidéo_satellite",
-      "changement",
-      "catastrophe"
+      "tempete",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark swirling clouds with a bright, central glow.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334631+00:00"
   },
   "frame_178": {
     "type": "frame",
     "tags": [
-      "vidéo_satellite",
-      "changement",
-      "catastrophe"
+      "tempete",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark clouds swirling, with a bright, central light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334633+00:00"
   },
   "frame_179": {
     "type": "frame",
     "tags": [
-      "vidéo_satellite",
-      "changement",
-      "catastrophe"
+      "tempete",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark swirling clouds with a bright, circular center.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334635+00:00"
   },
   "frame_180": {
     "type": "frame",
     "tags": [
-      "vidéo_satellite",
-      "changement",
-      "catastrophe"
+      "tempete",
+      "nature",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark swirling clouds with a bright, central light.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334637+00:00"
   },
   "frame_181": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "scientifique",
-      "données"
+      "satellite",
+      "tempete",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite view of a swirling storm over water.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334639+00:00"
   },
   "frame_182": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "scientifique",
-      "données"
+      "tempete",
+      "nature",
+      "danger"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close up of swirling storm clouds over dark water.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334644+00:00"
   },
   "frame_183": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "scientifique",
-      "données"
+      "satellite",
+      "tempete",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite view of a swirling storm with green center.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334646+00:00"
   },
   "frame_184": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "scientifique",
-      "données"
+      "tempete",
+      "nature",
+      "danger"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Swirling storm clouds over dark water, viewed from above.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334648+00:00"
   },
   "frame_185": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "scientifique",
-      "données"
+      "satellite",
+      "tempete",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite view of a large swirling storm system.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334650+00:00"
   },
   "frame_186": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "scientifique",
-      "données"
+      "tempete",
+      "nature",
+      "danger"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark water with swirling storm clouds above.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334652+00:00"
   },
   "frame_187": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "scientifique",
-      "données"
+      "satellite",
+      "tempete",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite view of a swirling storm with bright center.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334654+00:00"
   },
   "frame_188": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "scientifique",
-      "données"
+      "tempete",
+      "nature",
+      "danger"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark water with swirling storm clouds and lightning.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334656+00:00"
   },
   "frame_189": {
     "type": "frame",
     "tags": [
-      "cas_réel",
-      "inondation",
-      "réponse"
+      "satellite",
+      "tempete",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite view of a large storm system with swirling clouds.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334658+00:00"
   },
   "frame_190": {
     "type": "frame",
     "tags": [
-      "cas_réel",
-      "inondation",
-      "réponse"
+      "tempete",
+      "nature",
+      "danger"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Swirling storm clouds over dark water, with light flashes.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334661+00:00"
   },
   "frame_191": {
     "type": "frame",
     "tags": [
-      "cas_réel",
-      "inondation",
-      "réponse"
+      "satellite",
+      "tempete",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite view of a storm with a distinct eye shape.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334663+00:00"
   },
   "frame_192": {
     "type": "frame",
     "tags": [
-      "cas_réel",
-      "inondation",
-      "réponse"
+      "tempete",
+      "nature",
+      "danger"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark water with swirling storm clouds and a pink line.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334665+00:00"
   },
   "frame_193": {
     "type": "frame",
     "tags": [
-      "cas_réel",
-      "inondation",
-      "réponse"
+      "satellite",
+      "tempete",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite view of a large swirling storm system.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334667+00:00"
   },
   "frame_194": {
     "type": "frame",
     "tags": [
-      "cas_réel",
-      "inondation",
-      "réponse"
+      "tempete",
+      "nature",
+      "danger"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Swirling storm clouds over dark water, with bright flashes.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334670+00:00"
   },
   "frame_195": {
     "type": "frame",
     "tags": [
-      "cas_réel",
-      "inondation",
-      "réponse"
+      "satellite",
+      "tempete",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite view of a storm with swirling clouds and water.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334672+00:00"
   },
   "frame_196": {
     "type": "frame",
     "tags": [
-      "cas_réel",
-      "inondation",
-      "réponse"
+      "satellite",
+      "tempete",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue satellite image of a swirling storm system.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334675+00:00"
   },
   "frame_197": {
     "type": "frame",
     "tags": [
-      "technologie",
-      "application",
-      "secours"
+      "satellite",
+      "tempete",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of a swirling blue and green storm.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334678+00:00"
   },
   "frame_198": {
     "type": "frame",
     "tags": [
-      "technologie",
-      "application",
-      "secours"
+      "satellite",
+      "ouragan",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite view of a large, circular storm.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334680+00:00"
   },
   "frame_199": {
     "type": "frame",
     "tags": [
-      "technologie",
-      "application",
-      "secours"
+      "animation",
+      "graphique",
+      "science"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Animated graphic showing storm movement and paths.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334682+00:00"
   },
   "frame_200": {
     "type": "frame",
     "tags": [
-      "technologie",
-      "application",
-      "secours"
+      "animation",
+      "graphique",
+      "vent"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Animated graphic of a hurricane's swirling winds.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334684+00:00"
   },
   "frame_201": {
     "type": "frame",
     "tags": [
-      "technologie",
-      "application",
-      "secours"
+      "animation",
+      "graphique",
+      "mesure"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Animated graphic showing storm intensity and scale.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334686+00:00"
   },
   "frame_202": {
     "type": "frame",
     "tags": [
-      "technologie",
-      "application",
-      "secours"
+      "animation",
+      "graphique",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Animated graphic of a storm's path over land.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334688+00:00"
   },
   "frame_203": {
     "type": "frame",
     "tags": [
-      "technologie",
-      "application",
-      "secours"
+      "animation",
+      "graphique",
+      "destruction"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Animated graphic showing storm's impact on coastline.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334690+00:00"
   },
   "frame_204": {
     "type": "frame",
     "tags": [
-      "technologie",
-      "application",
-      "secours"
+      "interview",
+      "expertise",
+      "humanite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of a man speaking in a professional setting.",
+    "usage_tags": [
+      "b-roll"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334692+00:00"
   },
   "frame_205": {
     "type": "frame",
     "tags": [
-      "données_agrégées",
-      "impact",
-      "global"
+      "interview",
+      "expertise",
+      "humanite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of a man speaking with a serious expression.",
+    "usage_tags": [
+      "b-roll"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334694+00:00"
   },
   "frame_206": {
     "type": "frame",
     "tags": [
-      "données_agrégées",
-      "impact",
-      "global"
+      "interview",
+      "expertise",
+      "humanite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of a man speaking in a professional setting.",
+    "usage_tags": [
+      "b-roll"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334696+00:00"
   },
   "frame_207": {
     "type": "frame",
     "tags": [
-      "données_agrégées",
-      "impact",
-      "global"
+      "interview",
+      "expertise",
+      "humanite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of a man speaking with a concerned expression.",
+    "usage_tags": [
+      "b-roll"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334698+00:00"
   },
   "frame_208": {
     "type": "frame",
     "tags": [
-      "données_agrégées",
-      "impact",
-      "global"
+      "interview",
+      "expertise",
+      "humanite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of a man speaking, looking directly at camera.",
+    "usage_tags": [
+      "b-roll"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334700+00:00"
   },
   "frame_209": {
     "type": "frame",
     "tags": [
-      "données_agrégées",
-      "impact",
-      "global"
+      "interview",
+      "expertise",
+      "humanite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of a man speaking in a professional setting.",
+    "usage_tags": [
+      "b-roll"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334703+00:00"
   },
   "frame_210": {
     "type": "frame",
     "tags": [
-      "données_agrégées",
-      "impact",
-      "global"
+      "interview",
+      "expertise",
+      "humanite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of a man speaking with a thoughtful expression.",
+    "usage_tags": [
+      "b-roll"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334705+00:00"
   },
   "frame_211": {
     "type": "frame",
     "tags": [
-      "données_agrégées",
-      "impact",
-      "global"
+      "humanite",
+      "interview"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of a person's face, looking serious.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334707+00:00"
   },
   "frame_212": {
     "type": "frame",
     "tags": [
-      "données_agrégées",
-      "impact",
-      "global"
+      "humanite",
+      "interview"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of a person's face, looking concerned.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334709+00:00"
   },
   "frame_213": {
     "type": "frame",
     "tags": [
-      "interface_utilisateur",
-      "données",
-      "accès"
+      "humanite",
+      "interview"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of a person's face, slightly smiling.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334712+00:00"
   },
   "frame_214": {
     "type": "frame",
     "tags": [
-      "interface_utilisateur",
-      "données",
-      "accès"
+      "satellite",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite view of swirling cloud formations.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334713+00:00"
   },
   "frame_215": {
     "type": "frame",
     "tags": [
-      "interface_utilisateur",
-      "données",
-      "accès"
+      "satellite",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite view of swirling cloud formations, blue hue.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334716+00:00"
   },
   "frame_216": {
     "type": "frame",
     "tags": [
-      "interface_utilisateur",
-      "données",
-      "accès"
+      "satellite",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite view of swirling cloud formations, purple hue.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334720+00:00"
   },
   "frame_217": {
     "type": "frame",
     "tags": [
-      "interface_utilisateur",
-      "données",
-      "accès"
+      "satellite",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite view of swirling cloud formations, white hue.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334722+00:00"
   },
   "frame_218": {
     "type": "frame",
     "tags": [
-      "interface_utilisateur",
-      "données",
-      "accès"
+      "satellite",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite view of swirling cloud formations, orange hue.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334724+00:00"
   },
   "frame_219": {
     "type": "frame",
     "tags": [
-      "interface_utilisateur",
-      "données",
-      "accès"
+      "satellite",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite view of swirling cloud formations, red hue.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334726+00:00"
   },
   "frame_220": {
     "type": "frame",
     "tags": [
-      "interface_utilisateur",
-      "données",
-      "accès"
+      "satellite",
+      "ouragan",
+      "mesure"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image of a hurricane, green and white.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334728+00:00"
   },
   "frame_221": {
     "type": "frame",
     "tags": [
-      "conclusion",
-      "impact",
-      "technologie"
+      "satellite",
+      "ouragan",
+      "mesure"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image of a hurricane, green and yellow.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334730+00:00"
   },
   "frame_222": {
     "type": "frame",
     "tags": [
-      "conclusion",
-      "impact",
-      "technologie"
+      "satellite",
+      "ouragan",
+      "mesure"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image of a hurricane, green and red.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334733+00:00"
   },
   "frame_223": {
     "type": "frame",
     "tags": [
-      "conclusion",
-      "impact",
-      "technologie"
+      "inondation",
+      "destruction"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Flooded street with cars partially submerged.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334735+00:00"
   },
   "frame_224": {
     "type": "frame",
     "tags": [
-      "conclusion",
-      "impact",
-      "technologie"
+      "inondation",
+      "destruction"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Flooded street with cars, blurred motion effect.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334737+00:00"
   },
   "frame_225": {
     "type": "frame",
     "tags": [
-      "conclusion",
-      "impact",
-      "technologie"
+      "inondation",
+      "destruction"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Interior of a building, water damage visible.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334739+00:00"
   },
   "frame_226": {
     "type": "frame",
     "tags": [
-      "conclusion",
-      "impact",
-      "technologie"
+      "inondation",
+      "nature",
+      "eau"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Brown water flowing quickly through a flooded area.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334741+00:00"
   },
   "frame_227": {
     "type": "frame",
     "tags": [
-      "conclusion",
-      "impact",
-      "technologie"
+      "inondation",
+      "destruction",
+      "eau"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Flooded street with debris and murky brown water.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334743+00:00"
   },
   "frame_228": {
     "type": "frame",
     "tags": [
-      "conclusion",
-      "impact",
-      "technologie"
+      "inondation",
+      "nature",
+      "eau"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Brown water flowing through a dense, green forest.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334745+00:00"
   },
   "frame_229": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "inondation",
+      "population",
+      "danger"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Flooded street with a green and yellow safety cone.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334747+00:00"
   },
   "frame_230": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "inondation",
+      "nature",
+      "eau"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Flooded street with brown water and green foliage.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334749+00:00"
   },
   "frame_231": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "satellite",
+      "technologie",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark blue screen with a bright white circular glow.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334751+00:00"
   },
   "frame_232": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "satellite",
+      "technologie",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark blue screen with a bright white circular glow.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334754+00:00"
   },
   "frame_233": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "satellite",
+      "technologie",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark blue screen with a bright white circular glow.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334756+00:00"
   },
   "frame_234": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "satellite",
+      "technologie",
+      "donnees"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "GPM logo with blue and yellow circular design.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334758+00:00"
   },
   "frame_235": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "satellite",
+      "technologie",
+      "donnees"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "GPM logo with blue and yellow circular design.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334762+00:00"
   },
   "frame_236": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "satellite",
+      "technologie",
+      "donnees"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "GPM logo with blue and yellow circular design.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334764+00:00"
   },
   "frame_237": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "satellite",
+      "technologie",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark blue screen with a bright white circular glow.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334766+00:00"
   },
   "frame_238": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "satellite",
+      "technologie",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark blue screen with a bright white circular glow.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334768+00:00"
   },
   "frame_239": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "satellite",
+      "technologie",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark blue screen with a bright white circular glow.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334770+00:00"
   },
   "frame_240": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "satellite",
+      "technologie",
+      "transition"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark blue screen with a bright white circular glow.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334773+00:00"
   },
   "frame_241": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "tempete",
+      "nature",
+      "satellite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "White swirling cloud pattern against dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334775+00:00"
   },
   "frame_242": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "tempete",
+      "nature",
+      "satellite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "White swirling cloud pattern against dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334777+00:00"
   },
   "frame_243": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "tempete",
+      "nature",
+      "satellite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "White swirling cloud pattern against dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334779+00:00"
   },
   "frame_244": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "tempete",
+      "nature",
+      "satellite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "White swirling cloud pattern against dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334780+00:00"
   },
   "frame_245": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "tempete",
+      "nature",
+      "satellite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "White swirling cloud pattern against dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334782+00:00"
   },
   "frame_246": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "tempete",
+      "nature",
+      "satellite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "White swirling cloud pattern against dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334784+00:00"
   },
   "frame_247": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "tempete",
+      "nature",
+      "satellite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "White swirling cloud pattern against dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334786+00:00"
   },
   "frame_248": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "tempete",
+      "nature",
+      "satellite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "White swirling cloud pattern against dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334788+00:00"
   },
   "frame_249": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "tempete",
+      "nature",
+      "satellite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "White swirling cloud pattern against dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334792+00:00"
   },
   "frame_250": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "tempete",
+      "nature",
+      "satellite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "White swirling cloud pattern against dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334794+00:00"
   },
   "frame_251": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "tempete",
+      "nature",
+      "satellite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "White swirling cloud pattern against dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334796+00:00"
   },
   "frame_252": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "tempete",
+      "nature",
+      "satellite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "White swirling cloud pattern against dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334798+00:00"
   },
   "frame_253": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "tempete",
+      "nature",
+      "satellite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "White swirling cloud pattern against dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334800+00:00"
   },
   "frame_254": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "tempete",
+      "nature",
+      "satellite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "White swirling cloud pattern against dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334802+00:00"
   },
   "frame_255": {
     "type": "frame",
     "tags": [
-      "expertise",
-      "application",
-      "technologie"
+      "tempete",
+      "nature",
+      "satellite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "White swirling cloud pattern against dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334806+00:00"
   },
   "gif_01": {
     "type": "gif",
     "tags": [
-      "animation",
-      "tempête",
-      "données"
+      "globe",
+      "nature",
+      "satellite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue globe with swirling white cloud patterns.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334808+00:00"
   },
   "gif_02": {
     "type": "gif",
     "tags": [
       "satellite",
-      "survol",
-      "trajectoire"
+      "tempete",
+      "donnees"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Satellite image of a large storm system.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334810+00:00"
   },
   "gif_03": {
     "type": "gif",
     "tags": [
-      "pluie",
-      "intensité",
-      "couleur"
+      "inondation",
+      "destruction",
+      "nature"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of swirling water and debris.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334812+00:00"
   },
   "gif_04": {
     "type": "gif",
     "tags": [
-      "inondation",
-      "progression",
-      "temps"
+      "carte",
+      "animation",
+      "prevision"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Animated map showing storm path and intensity.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334814+00:00"
   },
   "gif_05": {
     "type": "gif",
     "tags": [
-      "radar",
-      "sweep",
-      "mesure"
+      "technologie",
+      "mesure",
+      "donnees"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of a weather radar screen.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334816+00:00"
   },
   "gif_06": {
     "type": "gif",
     "tags": [
-      "comparaison",
-      "avant_après",
-      "impact"
+      "inondation",
+      "infrastructure",
+      "destruction"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Aerial view of flooded streets and houses.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334818+00:00"
   },
   "gif_07": {
     "type": "gif",
     "tags": [
-      "zoom",
-      "satellite",
-      "détail"
+      "expertise",
+      "donnees",
+      "humanite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of a person looking at a screen.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334820+00:00"
   },
   "gif_08": {
     "type": "gif",
     "tags": [
-      "trajectoire_3d",
-      "mouvement",
-      "prévision"
+      "ouragan",
+      "animation",
+      "graphique"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Animated graphic showing hurricane wind speeds.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334822+00:00"
   },
   "gif_09": {
     "type": "gif",
     "tags": [
-      "pluie_accumulation",
-      "animation",
-      "danger"
+      "satellite",
+      "technologie",
+      "mesure"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of a satellite dish.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334825+00:00"
   },
   "gif_10": {
     "type": "gif",
     "tags": [
-      "alerte",
-      "propagation",
-      "système"
+      "inondation",
+      "animation",
+      "eau"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Animated graphic of water flowing across land.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334827+00:00"
   },
   "gif_11": {
     "type": "gif",
     "tags": [
-      "animation",
-      "données",
-      "tempête"
+      "donnees",
+      "science",
+      "technologie"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of a computer screen with data.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334829+00:00"
   },
   "gif_12": {
     "type": "gif",
     "tags": [
-      "animation",
-      "données",
-      "tempête"
+      "interview",
+      "expertise",
+      "explication"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Close-up of a person speaking into a microphone.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334831+00:00"
   },
   "gif_13": {
     "type": "gif",
     "tags": [
+      "ouragan",
       "animation",
-      "données",
-      "tempête"
+      "explication"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Animated graphic showing a hurricane's structure.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334833+00:00"
   },
   "gif_14": {
     "type": "gif",
     "tags": [
-      "animation",
-      "données",
-      "tempête"
+      "transition",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Abstract swirling colors, likely a transition.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334835+00:00"
   },
   "gif_15": {
     "type": "gif",
     "tags": [
-      "animation",
-      "données",
-      "tempête"
+      "transition",
+      "nature",
+      "satellite"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue and white swirling patterns, abstract.",
+    "usage_tags": [
+      "transition"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334837+00:00"
   },
   "gif_16": {
     "type": "gif",
     "tags": [
-      "animation",
-      "données",
-      "tempête"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Dark blue and purple swirling cloud formations.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334839+00:00"
   },
   "gif_17": {
     "type": "gif",
     "tags": [
-      "animation",
-      "données",
-      "tempête"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue and purple swirling cloud formations, dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334841+00:00"
   },
   "gif_18": {
     "type": "gif",
     "tags": [
-      "animation",
-      "données",
-      "tempête"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue and purple swirling cloud formations, dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334843+00:00"
   },
   "gif_19": {
     "type": "gif",
     "tags": [
-      "animation",
-      "données",
-      "tempête"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue and purple swirling cloud formations, dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334847+00:00"
   },
   "gif_20": {
     "type": "gif",
     "tags": [
-      "animation",
-      "données",
-      "tempête"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue and purple swirling cloud formations, dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334849+00:00"
   },
   "gif_21": {
     "type": "gif",
     "tags": [
-      "animation",
-      "données",
-      "tempête"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Blue and purple swirling cloud formations, dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334851+00:00"
   },
   "gif_22": {
     "type": "gif",
     "tags": [
-      "animation",
-      "données",
-      "tempête"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Green and blue swirling cloud formations, dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334853+00:00"
   },
   "gif_23": {
     "type": "gif",
     "tags": [
-      "animation",
-      "données",
-      "tempête"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Green and blue swirling cloud formations, dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334855+00:00"
   },
   "gif_24": {
     "type": "gif",
     "tags": [
-      "animation",
-      "données",
-      "tempête"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Green and blue swirling cloud formations, dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334857+00:00"
   },
   "gif_25": {
     "type": "gif",
     "tags": [
-      "animation",
-      "données",
-      "tempête"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Green and blue swirling cloud formations, dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334859+00:00"
   },
   "gif_26": {
     "type": "gif",
     "tags": [
-      "animation",
-      "données",
-      "tempête"
+      "satellite",
+      "nature",
+      "tempete"
     ],
-    "source": "F00 ASSET FORGE"
+    "source": "F00 ASSET FORGE",
+    "visual_description": "Green and blue swirling cloud formations, dark background.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334861+00:00"
   },
   "nature": [
     {
@@ -6299,5 +7954,65 @@
       "format": "mp4"
     }
   ],
-  "last_updated": "2026-07-10T10:36:21.690105+00:00"
+  "last_updated": "2026-07-11T22:24:21.526022+00:00",
+  "gif_27": {
+    "type": "gif",
+    "tags": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "visual_description": "Dark blue and purple swirling cloud formations.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334864+00:00",
+    "source": "F00 ASSET FORGE"
+  },
+  "gif_28": {
+    "type": "gif",
+    "tags": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "visual_description": "Dark blue and purple swirling cloud formations.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334868+00:00",
+    "source": "F00 ASSET FORGE"
+  },
+  "gif_29": {
+    "type": "gif",
+    "tags": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "visual_description": "Dark blue and purple swirling cloud formations.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334870+00:00",
+    "source": "F00 ASSET FORGE"
+  },
+  "gif_30": {
+    "type": "gif",
+    "tags": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "visual_description": "Dark blue and purple swirling cloud formations.",
+    "usage_tags": [
+      "illustration"
+    ],
+    "tagged_by": "openrouter-gemma-3-12b",
+    "tagged_at": "2026-07-11T22:31:34.334872+00:00",
+    "source": "F00 ASSET FORGE"
+  }
 }
