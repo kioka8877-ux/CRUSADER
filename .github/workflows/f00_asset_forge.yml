@@ -104,41 +104,45 @@ jobs:
           
           echo "EXTRACT_DONE=true" >> $GITHUB_OUTPUT
 
-      # === STEP 3: PROCESS ===
-      - name: F00-3 PROCESS — Rembg + chroma key
+      # === STEP 3: PROCESS (per-video subdirs) ===
+      - name: F00-3 PROCESS — Rembg + chroma key (per-video)
         id: process
         run: |
           cd F00_ASSET_FORGE/CODEBASE
           
           MODE="${{ inputs.mode }}"
           
-          # Traiter les frames de chaque vidéo extraite
-          for FRAMES_DIR in /tmp/extracted/*/frames; do
+          # Traiter chaque vidéo dans son propre sous-dossier
+          # /tmp/extracted/<video_name>/frames → /tmp/processed/<video_name>/frames
+          for VIDEO_DIR in /tmp/extracted/*/; do
+            VIDEO_NAME=$(basename "$VIDEO_DIR")
+            echo "=== Processing video: $VIDEO_NAME ==="
+            
+            FRAMES_DIR="$VIDEO_DIR/frames"
+            GIFS_DIR="$VIDEO_DIR/gifs"
+            
             if [ -d "$FRAMES_DIR" ]; then
-              echo "=== Processing frames: $FRAMES_DIR ==="
+              echo "  Frames: $FRAMES_DIR → /tmp/processed/$VIDEO_NAME/frames"
               python crs_f00_process.py \
                 --frames "$FRAMES_DIR" \
-                --output /tmp/processed/frames \
+                --output "/tmp/processed/$VIDEO_NAME/frames" \
                 --mode "$MODE" 2>&1 | tee -a /tmp/process_log.txt
               PIPE_STATUS=${PIPESTATUS[0]}
               if [ $PIPE_STATUS -ne 0 ]; then
-                echo "ERREUR: processing frames échoué pour $FRAMES_DIR"
+                echo "ERREUR: processing frames échoué pour $VIDEO_NAME"
                 exit 1
               fi
             fi
-          done
-          
-          # Traiter les GIFs
-          for GIFS_DIR in /tmp/extracted/*/gifs; do
+            
             if [ -d "$GIFS_DIR" ]; then
-              echo "=== Processing GIFs: $GIFS_DIR ==="
+              echo "  GIFs: $GIFS_DIR → /tmp/processed/$VIDEO_NAME/gifs"
               python crs_f00_process.py \
                 --gifs "$GIFS_DIR" \
-                --output /tmp/processed/gifs \
+                --output "/tmp/processed/$VIDEO_NAME/gifs" \
                 --mode "$MODE" 2>&1 | tee -a /tmp/process_log.txt
               PIPE_STATUS=${PIPESTATUS[0]}
               if [ $PIPE_STATUS -ne 0 ]; then
-                echo "ERREUR: processing GIFs échoué pour $GIFS_DIR"
+                echo "ERREUR: processing GIFs échoué pour $VIDEO_NAME"
                 exit 1
               fi
             fi
@@ -146,53 +150,77 @@ jobs:
           
           echo "PROCESS_DONE=true" >> $GITHUB_OUTPUT
 
-      # === STEP 4: DISTRIBUTE TO BANKS ===
-      - name: F00-4 DISTRIBUTE — Copy processed assets to banks
+      # === STEP 4: DISTRIBUTE TO BANKS (per-video subdirs) ===
+      - name: F00-4 DISTRIBUTE — Copy assets to per-video subfolders
         run: |
           MODE="${{ inputs.mode }}"
           FORGE_ROOT="F00_ASSET_FORGE"
           
-          # Distribuer les frames traitées selon leur type
-          # Pour le mode "all", les frames sont auto-classifiées
-          # Pour les modes spécifiques, tout va dans la banque correspondante
+          # Chaque vidéo source obtient son propre sous-dossier
+          # BANK_B_NATURE/fire/<video_name>/frame_000001.png
+          # Cela évite l'écrasement entre vidéos
           
-          if [ "$MODE" = "characters" ] || [ "$MODE" = "all" ]; then
-            # Les PNG transparents (Rembg) → BANK_A
-            mkdir -p $FORGE_ROOT/BANK_A_CHARACTERS/standing
-            find /tmp/processed/frames -name "*.png" -type f | while read f; do
-              cp "$f" $FORGE_ROOT/BANK_A_CHARACTERS/standing/ 2>/dev/null || true
+          if [ "$MODE" = "nature" ] || [ "$MODE" = "all" ]; then
+            for VIDEO_DIR in /tmp/processed/*/; do
+              VIDEO_NAME=$(basename "$VIDEO_DIR")
+              TARGET="$FORGE_ROOT/BANK_B_NATURE/fire/$VIDEO_NAME"
+              mkdir -p "$TARGET"
+              
+              # Copier les frames
+              if [ -d "$VIDEO_DIR/frames" ]; then
+                cp "$VIDEO_DIR/frames/"*.png "$TARGET/" 2>/dev/null || true
+                echo "  $VIDEO_NAME: $(ls "$TARGET/"*.png 2>/dev/null | wc -l) frames"
+              fi
+              
+              # Copier les GIFs
+              if [ -d "$VIDEO_DIR/gifs" ]; then
+                cp "$VIDEO_DIR/gifs/"*.gif "$TARGET/" 2>/dev/null || true
+                echo "  $VIDEO_NAME: $(ls "$TARGET/"*.gif 2>/dev/null | wc -l) GIFs"
+              fi
             done
           fi
           
-          if [ "$MODE" = "nature" ] || [ "$MODE" = "all" ]; then
-            # Les PNG/GIF chroma key → BANK_B
-            mkdir -p $FORGE_ROOT/BANK_B_NATURE/fire
-            find /tmp/processed/frames -name "*.png" -type f | while read f; do
-              cp "$f" $FORGE_ROOT/BANK_B_NATURE/fire/ 2>/dev/null || true
-            done
-            find /tmp/processed/gifs -name "*.gif" -type f | while read f; do
-              cp "$f" $FORGE_ROOT/BANK_B_NATURE/fire/ 2>/dev/null || true
+          if [ "$MODE" = "characters" ] || [ "$MODE" = "all" ]; then
+            for VIDEO_DIR in /tmp/processed/*/; do
+              VIDEO_NAME=$(basename "$VIDEO_DIR")
+              TARGET="$FORGE_ROOT/BANK_A_CHARACTERS/standing/$VIDEO_NAME"
+              mkdir -p "$TARGET"
+              if [ -d "$VIDEO_DIR/frames" ]; then
+                cp "$VIDEO_DIR/frames/"*.png "$TARGET/" 2>/dev/null || true
+              fi
             done
           fi
           
           if [ "$MODE" = "backgrounds" ] || [ "$MODE" = "all" ]; then
-            # Les PNG non traités → BANK_C
-            mkdir -p $FORGE_ROOT/BANK_C_BACKGROUNDS/outdoor
-            find /tmp/processed/frames -name "*.png" -type f | while read f; do
-              cp "$f" $FORGE_ROOT/BANK_C_BACKGROUNDS/outdoor/ 2>/dev/null || true
+            for VIDEO_DIR in /tmp/processed/*/; do
+              VIDEO_NAME=$(basename "$VIDEO_DIR")
+              TARGET="$FORGE_ROOT/BANK_C_BACKGROUNDS/outdoor/$VIDEO_NAME"
+              mkdir -p "$TARGET"
+              if [ -d "$VIDEO_DIR/frames" ]; then
+                cp "$VIDEO_DIR/frames/"*.png "$TARGET/" 2>/dev/null || true
+              fi
             done
           fi
           
-          # Les clips → BANK_D (toujours)
-          mkdir -p $FORGE_ROOT/BANK_D_CLIPS
-          find /tmp/extracted -name "clip_*.mp4" -type f | while read f; do
-            cp "$f" $FORGE_ROOT/BANK_D_CLIPS/ 2>/dev/null || true
+          # Les clips → BANK_D (par vidéo aussi)
+          for VIDEO_DIR in /tmp/extracted/*/; do
+            VIDEO_NAME=$(basename "$VIDEO_DIR")
+            TARGET="$FORGE_ROOT/BANK_D_CLIPS/$VIDEO_NAME"
+            mkdir -p "$TARGET"
+            if [ -d "$VIDEO_DIR/clips" ]; then
+              cp "$VIDEO_DIR/clips/"*.mp4 "$TARGET/" 2>/dev/null || true
+            fi
           done
           
           echo "Distribution terminée"
           echo "=== Contenu des banques ==="
-          find $FORGE_ROOT/BANK_* -type f | wc -l
+          find $FORGE_ROOT/BANK_* -type f -not -name ".gitkeep" | wc -l
           echo "fichiers dans les banques"
+          echo ""
+          echo "=== Sous-dossiers par vidéo ==="
+          find $FORGE_ROOT/BANK_B_NATURE/fire -mindepth 1 -maxdepth 1 -type d | while read d; do
+            echo "  $(basename $d): $(find $d -type f | wc -l) fichiers"
+          done
 
       # === STEP 5: INDEX ===
       - name: F00-5 INDEX — Update index.json

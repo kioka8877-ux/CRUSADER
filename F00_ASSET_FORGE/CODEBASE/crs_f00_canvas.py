@@ -238,6 +238,10 @@ def create_canvas_all_banks(forge_root: str, output_dir: str = None) -> list[dic
     """
     Parcourt toutes les banques et crée les toiles pour chaque sous-dossier
     qui contient des frames ou des GIFs.
+    
+    Supporte 2 niveaux de profondeur:
+      BANK_B_NATURE/fire/  → frames directement (ancien format)
+      BANK_B_NATURE/fire/<video_name>/  → frames par vidéo (nouveau format)
     """
     if output_dir is None:
         output_dir = os.path.join(forge_root, "CANVAS")
@@ -246,7 +250,6 @@ def create_canvas_all_banks(forge_root: str, output_dir: str = None) -> list[dic
 
     all_manifests = []
 
-    # Parcourir BANK_A, BANK_B, BANK_C, BANK_D
     banks = [
         ("BANK_A_CHARACTERS", "characters"),
         ("BANK_B_NATURE", "nature"),
@@ -259,27 +262,46 @@ def create_canvas_all_banks(forge_root: str, output_dir: str = None) -> list[dic
         if not os.path.exists(bank_path):
             continue
 
-        # Parcourir les sous-dossiers
+        # Parcourir les sous-dossiers (ex: fire, space, weather)
         for sub in sorted(os.listdir(bank_path)):
             sub_path = os.path.join(bank_path, sub)
             if not os.path.isdir(sub_path):
                 continue
 
-            # Vérifier s'il y a des PNG ou GIF
+            # Niveau 1: frames/GIFs directement dans sub_path (ancien format)
             has_png = any(Path(sub_path).glob("*.png"))
             has_gif = any(Path(sub_path).glob("*.gif"))
 
-            if not has_png and not has_gif:
-                continue
+            if has_png or has_gif:
+                source_name = f"{category}_{sub}"
+                print(f"\n[CANVAS] Traitement: {source_name}")
+                manifest = create_canvas_for_bank(sub_path, output_dir, source_name)
+                manifest["bank"] = bank_name
+                manifest["category"] = category
+                manifest["subcategory"] = sub
+                manifest["video_source"] = None
+                all_manifests.append(manifest)
 
-            source_name = f"{category}_{sub}"
-            print(f"\n[CANVAS] Traitement: {source_name}")
+            # Niveau 2: sous-dossiers par vidéo (nouveau format)
+            for video_name in sorted(os.listdir(sub_path)):
+                video_path = os.path.join(sub_path, video_name)
+                if not os.path.isdir(video_path):
+                    continue
 
-            manifest = create_canvas_for_bank(sub_path, output_dir, source_name)
-            manifest["bank"] = bank_name
-            manifest["category"] = category
-            manifest["subcategory"] = sub
-            all_manifests.append(manifest)
+                has_png_v = any(Path(video_path).glob("*.png"))
+                has_gif_v = any(Path(video_path).glob("*.gif"))
+
+                if not has_png_v and not has_gif_v:
+                    continue
+
+                source_name = f"{category}_{sub}_{video_name}"
+                print(f"\n[CANVAS] Traitement: {source_name}")
+                manifest = create_canvas_for_bank(video_path, output_dir, source_name)
+                manifest["bank"] = bank_name
+                manifest["category"] = category
+                manifest["subcategory"] = sub
+                manifest["video_source"] = video_name
+                all_manifests.append(manifest)
 
     # Manifest global
     global_manifest_path = os.path.join(output_dir, "canvas_manifest_global.json")

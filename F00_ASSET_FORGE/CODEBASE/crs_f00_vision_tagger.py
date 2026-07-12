@@ -268,17 +268,33 @@ def process_all_canvases(forge_root: str, output_path: str):
         if h % CELL_H > CELL_H // 2:
             total_rows += 1
 
-        # Offset de numérotation
+        # Offset de numérotation — TOUJOURS 0 car chaque canvas commence à 1
+        # (avec les sous-dossiers par vidéo, chaque canvas est indépendant)
         offset = 0
-        if "band2" in canvas_name.lower():
-            offset = 90
-        elif "band3" in canvas_name.lower():
-            offset = 180
-        if "nature_fire" in canvas_name.lower() and canvas_type == "frames":
-            offset = 0
+
+        # Déterminer le préfixe d'asset (frame_ ou gif_) selon le nom du canvas
+        if "gifs" in canvas_name.lower():
+            asset_prefix = "gif"
+        else:
+            asset_prefix = "frame"
+
+        # Extraire le nom de la vidéo source du nom du canvas
+        # Format: canvas_frames_nature_fire_<video_name>.png
+        # ou: canvas_frames_nature_fire.png (ancien format)
+        video_source = None
+        parts = canvas_name.replace(".png", "").replace(".jpg", "").split("_")
+        if len(parts) > 4:
+            # canvas_frames_nature_fire_<video_name> → video_name = parts[4:]
+            video_source = "_".join(parts[4:])
+
+        # Construire le préfixe d'asset avec vidéo source si présent
+        if video_source:
+            asset_id_prefix = f"{video_source}/"
+        else:
+            asset_id_prefix = ""
 
         print(f"\n[VISION] === {canvas_name} ({w}×{h}) ===")
-        print(f"  Type: {canvas_type} | Rangées: {total_rows} | Offset: {offset}")
+        print(f"  Type: {canvas_type} | Rangées: {total_rows} | Video: {video_source or 'N/A'}")
 
         for row_idx in range(total_rows):
             start_num = (row_idx * CELLS_PER_ROW) + 1 + offset
@@ -292,6 +308,8 @@ def process_all_canvases(forge_root: str, output_path: str):
                     asset_id = f"gif_{cell_num:02d}"
                 else:
                     asset_id = f"frame_{cell_num:03d}"
+                if video_source:
+                    asset_id = f"{video_source}_{asset_id}"
                 if asset_id not in all_tags or "erreur" in str(all_tags.get(asset_id, {}).get("narrative", [])):
                     all_done = False
                     break
@@ -316,6 +334,10 @@ def process_all_canvases(forge_root: str, output_path: str):
                 else:
                     asset_id = f"frame_{cell_num:03d}"
 
+                # Préfixer avec le nom de la vidéo si présent
+                if video_source:
+                    asset_id = f"{video_source}_{asset_id}"
+
                 narrative = r.get("t", [])
                 if isinstance(narrative, str):
                     narrative = [narrative]
@@ -328,6 +350,7 @@ def process_all_canvases(forge_root: str, output_path: str):
                     "visual": r.get("v", ""),
                     "narrative": narrative,
                     "usage": usage,
+                    "video_source": video_source,
                 }
                 tagged_in_row += 1
 
