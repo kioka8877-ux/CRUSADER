@@ -84,7 +84,7 @@ jobs:
 
           echo "[ASSETS] T?l?chargement depuis : $BASE_URL"
 
-          for FNAME in timing.json roadmap.json audio_clean.mp3 images.zip; do
+          for FNAME in timing.json roadmap.json audio_clean.mp3 images.zip thumbnail.png; do
             if wget -q \
               --header="Authorization: token $GH_TOKEN" \
               -O "/tmp/assets/${FNAME}" \
@@ -117,6 +117,7 @@ jobs:
           cp /tmp/assets/timing.json     ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
           cp /tmp/assets/roadmap.json    ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
           cp /tmp/assets/audio_clean.mp3 ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
+          cp /tmp/assets/thumbnail.png   ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
           if [ -d /tmp/assets/images ]; then
             cp -r /tmp/assets/images/. ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/
           fi
@@ -233,7 +234,7 @@ jobs:
           mkdir -p /tmp/assets
           BASE_URL="https://github.com/${{ github.repository }}/releases/download/${{ github.event.inputs.run_id }}"
 
-          for FNAME in timing.json roadmap.json audio_clean.mp3 images.zip; do
+          for FNAME in timing.json roadmap.json audio_clean.mp3 images.zip thumbnail.png; do
             if wget -q \
               --header="Authorization: token $GH_TOKEN" \
               -O "/tmp/assets/${FNAME}" \
@@ -254,6 +255,7 @@ jobs:
           cp /tmp/assets/timing.json     ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
           cp /tmp/assets/roadmap.json    ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
           cp /tmp/assets/audio_clean.mp3 ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
+          cp /tmp/assets/thumbnail.png   ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
           if [ -d /tmp/assets/images ]; then
             cp -r /tmp/assets/images/. ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/
           fi
