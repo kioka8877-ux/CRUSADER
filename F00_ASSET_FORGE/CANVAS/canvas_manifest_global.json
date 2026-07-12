@@ -294,6 +294,7 @@
     },
     "bank": "BANK_B_NATURE",
     "category": "nature",
-    "subcategory": "fire"
+    "subcategory": "fire",
+    "video_source": null
   }
 ]
