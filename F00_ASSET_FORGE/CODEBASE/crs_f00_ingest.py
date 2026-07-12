@@ -2,7 +2,7 @@
 """
 CRS F00 — INGEST
 Télécharge des vidéos sources depuis URLs (NASA, NOAA, ESA, USGS, Internet Archive, YouTube).
-Utilise yt-dlp pour le téléchargement.
+Utilise yt-dlp pour le télchargement, avec fallback curl (SSL bypass si nécessaire).
 """
 
 import os
@@ -15,17 +15,18 @@ from urllib.parse import urlparse
 
 def download_video(url: str, output_dir: str = "./downloads") -> str:
     """
-    Télécharge une vidéo via yt-dlp.
+    Télécharge une vidéo via yt-dlp, puis curl avec SSL bypass si nécessaire.
     Retourne le chemin du fichier téléchargé.
     """
     os.makedirs(output_dir, exist_ok=True)
 
-    # Format : best video mp4, fallback best
+    # Étape 1: yt-dlp
     cmd = [
         "yt-dlp",
         "-f", "best[ext=mp4]/best",
         "--no-playlist",
         "--no-warnings",
+        "--no-check-certificates",  # Bypass SSL verification
         "-o", f"{output_dir}/%(title)s.%(ext)s",
         url
     ]
@@ -33,26 +34,49 @@ def download_video(url: str, output_dir: str = "./downloads") -> str:
     print(f"[INGEST] Téléchargement: {url}")
     result = subprocess.run(cmd, capture_output=True, text=True)
 
-    if result.returncode != 0:
-        print(f"[INGEST] ERREUR yt-dlp: {result.stderr}")
-        # Fallback : download direct si URL directe (.mp4)
-        if url.endswith((".mp4", ".webm", ".mov")):
-            print(f"[INGEST] Fallback download direct: {url}")
-            filename = os.path.basename(urlparse(url).path)
-            filepath = os.path.join(output_dir, filename)
-            subprocess.run(["curl", "-sL", "-o", filepath, url], check=True)
+    if result.returncode == 0:
+        files = list(Path(output_dir).glob("*"))
+        if files:
+            latest = max(files, key=lambda f: f.stat().st_mtime)
+            if latest.stat().st_size > 0:
+                print(f"[INGEST] Téléchargé: {latest} ({latest.stat().st_size / 1e6:.1f} MB)")
+                return str(latest)
+
+    print(f"[INGEST] yt-dlp échec, fallback curl...")
+
+    # Étape 2: curl avec SSL bypass pour URLs directes
+    if url.endswith((".mp4", ".webm", ".mov", ".mkv")):
+        filename = os.path.basename(urlparse(url).path)
+        filepath = os.path.join(output_dir, filename)
+
+        # curl avec --insecure pour bypass SSL
+        curl_cmd = [
+            "curl", "-sL", "--insecure",
+            "-o", filepath,
+            url
+        ]
+        result2 = subprocess.run(curl_cmd, capture_output=True, text=True)
+
+        if result2.returncode == 0 and os.path.exists(filepath) and os.path.getsize(filepath) > 0:
+            size_mb = os.path.getsize(filepath) / 1e6
+            print(f"[INGEST] Téléchargé (curl): {filepath} ({size_mb:.1f} MB)")
             return filepath
-        raise RuntimeError(f"Échec téléchargement: {url}\n{result.stderr}")
 
-    # Trouver le fichier téléchargé
-    files = list(Path(output_dir).glob("*"))
-    if not files:
-        raise RuntimeError(f"Aucun fichier trouvé après téléchargement: {url}")
+        # Étape 3: wget fallback
+        print(f"[INGEST] curl échec, fallback wget...")
+        wget_cmd = [
+            "wget", "--no-check-certificate",
+            "-q", "-O", filepath,
+            url
+        ]
+        result3 = subprocess.run(wget_cmd, capture_output=True, text=True)
 
-    # Le plus récent
-    latest = max(files, key=lambda f: f.stat().st_mtime)
-    print(f"[INGEST] Téléchargé: {latest} ({latest.stat().st_size / 1e6:.1f} MB)")
-    return str(latest)
+        if result3.returncode == 0 and os.path.exists(filepath) and os.path.getsize(filepath) > 0:
+            size_mb = os.path.getsize(filepath) / 1e6
+            print(f"[INGEST] Téléchargé (wget): {filepath} ({size_mb:.1f} MB)")
+            return filepath
+
+    raise RuntimeError(f"Échec téléchargement: {url} (yt-dlp + curl + wget ont tous échoué)")
 
 
 def ingest_urls(urls: list[str], output_dir: str = "./downloads") -> list[dict]:
@@ -85,7 +109,6 @@ def ingest_urls(urls: list[str], output_dir: str = "./downloads") -> list[dict]:
 
 
 if __name__ == "__main__":
-    # Usage: python crs_f00_ingest.py "url1,url2" --output ./downloads
     import argparse
     parser = argparse.ArgumentParser(description="F00 INGEST — Download source videos")
     parser.add_argument("urls", help="URLs séparées par virgules")
