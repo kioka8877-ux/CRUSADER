@@ -178,6 +178,38 @@ def validate_thumbnail_plan(roadmap_path):
 
     return errors == 0
 
+
+def validate_thumbnail_file_for_f03(base, roadmap_rel_path):
+    """DELTA-TEST3 : si roadmap.json contient thumbnail_plan, verifie que
+    thumbnail.png est present dans F03_SIGISMUND/IN/ avant le rendu."""
+    roadmap_full = os.path.join(base, roadmap_rel_path)
+    if not os.path.exists(roadmap_full):
+        return True
+
+    try:
+        with open(roadmap_full, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except (json.JSONDecodeError, OSError):
+        return True
+
+    plan = data.get("thumbnail_plan")
+    if not plan:
+        return True  # Mode gamma standard
+
+    thumb_path = os.path.join(base, "F03_SIGISMUND", "IN", "thumbnail.png")
+    if not os.path.exists(thumb_path):
+        log_fail("thumbnail.png absent — requis car roadmap.json contient thumbnail_plan")
+        log_fail(f"  Attendu : {thumb_path}")
+        return False
+
+    size = os.path.getsize(thumb_path)
+    if size < 1000:
+        log_fail(f"thumbnail.png trop petit ({size} bytes)")
+        return False
+
+    log_ok(f"thumbnail.png present ({size:,} bytes)")
+    return True
+
 def validate_file(full_path, spec):
     """Valide un fichier selon son spec. Affiche le résultat. Retourne bool."""
     if not os.path.exists(full_path):
