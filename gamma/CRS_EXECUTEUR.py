@@ -316,7 +316,22 @@ def cmd_gate_g3(token, ledger):
     meta         = timing.get("meta", {})
     total_frames = meta.get("total_frames", 0)
     fps          = meta.get("fps", 30)
-    composition  = ledger.get("f03_meta", {}).get("composition", "CrusaderShort")
+
+    # DELTA-TEST3 : auto-detect CrusaderDelta si roadmap.json contient thumbnail_plan
+    roadmap_data = {}
+    if roadmap_path.exists():
+        with open(roadmap_path) as f:
+            roadmap_data = json.load(f)
+    plan = roadmap_data.get("thumbnail_plan")
+    if plan and plan.get("chapters"):
+        composition   = "CrusaderDelta"
+        trans_frames  = plan.get("transition_frames", 45)
+        n_chapters    = len(plan["chapters"])
+        total_frames  = total_frames + trans_frames * n_chapters
+        print(f"[G3] Mode DELTA detecte — {n_chapters} chapitres, {trans_frames}f/transition")
+        print(f"[G3] Composition : CrusaderDelta — durée totale : {total_frames} frames")
+    else:
+        composition = ledger.get("f03_meta", {}).get("composition", "CrusaderShort")
 
     # Vérifier si Release run_id existe, sinon recréer
     h = _h(token)
@@ -338,6 +353,12 @@ def cmd_gate_g3(token, ledger):
         upload_asset_bytes(upload_url, "images.zip", zip_data, "application/zip", token)
         print(f"[UPLOAD] images.zip ({img_count} images) ✅")
 
+    # DELTA-TEST3 : uploader thumbnail.png si présent (requis pour CrusaderDelta)
+    thumb_path = F02_IN / "thumbnail.png"
+    if thumb_path.exists():
+        upload_asset(upload_url, "thumbnail.png", thumb_path, "image/png", token)
+        print(f"[G3] thumbnail.png uploadé vers la release")
+
     gh_run_id, url = trigger_workflow_and_get_url(
         "f03_render.yml",
         {
@@ -350,7 +371,8 @@ def cmd_gate_g3(token, ledger):
     )
 
     ledger.setdefault("gh_runs", {})["f03"] = gh_run_id
-    ledger["f03_meta"]["total_frames"] = total_frames
+    ledger.setdefault("f03_meta", {})["total_frames"] = total_frames
+    ledger.setdefault("f03_meta", {})["composition"]  = composition
     ledger["gate_actuelle"] = "G4"
     ledger.setdefault("etapes_completees", []).append("F03_triggered")
     save_ledger(ledger)
