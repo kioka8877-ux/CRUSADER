@@ -390,6 +390,15 @@
     </div>
 
     <div class="section">
+      <div class="section-title">Vitesse de narration</div>
+      <div class="control-group">
+        <label>Vitesse <span id="speedVal">1.00×</span></label>
+        <input type="range" id="speedSlider" min="0.70" max="1.50" step="0.05" value="1.00">
+        <div class="control-hint">0.70× (lent) → 1.00 (normal) → 1.50× (rapide)</div>
+      </div>
+    </div>
+
+    <div class="section">
       <div class="section-title">Action</div>
       <button class="btn-validate" id="btnValidate" onclick="validateAndProcess()" disabled>
         VALIDER &amp; PRODUIRE audio_clean.mp3
@@ -447,6 +456,7 @@ let state = {
   mode:         'preserve',
   thresholdDb:  -40.0,
   minDuration:  0.5,
+  speed:        1.0,
   waveformData: null,
   analyzeData:  null,
   duration:     0,
@@ -478,6 +488,12 @@ function bindControls() {
     state.minDuration = parseFloat(mdSlider.value);
     document.getElementById('minDurVal').textContent = `${parseFloat(mdSlider.value).toFixed(1)} s`;
     scheduleAnalyze();
+  });
+
+  const spSlider = document.getElementById('speedSlider');
+  spSlider.addEventListener('input', () => {
+    state.speed = parseFloat(spSlider.value);
+    document.getElementById('speedVal').textContent = `${state.speed.toFixed(2)}×`;
   });
 }
 
@@ -561,8 +577,9 @@ async function validateAndProcess() {
       remove_silences: state.mode === 'remove',
       threshold_db:    state.thresholdDb,
       min_duration:    state.minDuration,
+      speed:           state.speed,
     };
-    const r = await fetch('/api/process', {
+    const r = await fetch('/api/validate', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify(payload),
@@ -574,9 +591,10 @@ async function validateAndProcess() {
       document.getElementById('statusPill').className = 'status-pill error';
     } else {
       const modeLabel = d.mode === 'removed' ? 'SUPPRIMÉS' : 'CONSERVÉS';
+      const speedLabel = state.speed !== 1.0 ? ` — vitesse ×${state.speed.toFixed(2)}` : '';
       log(
-        `✓ MISSION ACCOMPLIE — Silences ${modeLabel} — ` +
-        `${d.duration_in.toFixed(1)}s → ${d.duration_out.toFixed(1)}s — audio_clean.mp3 produit`,
+        `✓ VALIDÉ — Silences ${modeLabel}${speedLabel} — ` +
+        `${d.duration_out.toFixed(1)}s — audio_clean.mp3 prêt — F01B peut démarrer`,
         'ok'
       );
       document.getElementById('statusPill').textContent = 'AUDIO CLEAN PRODUIT';
@@ -714,3 +732,4 @@ function log(msg, type) {
 </script>
 </body>
 </html>
+
