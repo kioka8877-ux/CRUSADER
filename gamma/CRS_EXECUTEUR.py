@@ -125,7 +125,7 @@ def trigger_workflow_and_get_url(workflow_file, inputs, token, repo):
         requests.post(
             f"{GH_API}/repos/{repo}/actions/workflows/{workflow_file}/dispatches",
             headers=h,
-            json={"ref": "main", "inputs": inputs},
+            json={"ref": "delta-test3", "inputs": inputs},
         ),
         "workflow dispatch",
     )
@@ -179,51 +179,89 @@ def zip_images(images_dir):
 
 # ─── START ────────────────────────────────────────────────────────────────────
 
+def commit_file_to_repo(local_path, repo_path, commit_msg, token, repo, branch="delta-test3"):
+    """Commit un fichier local vers le repo GitHub sur la branche donnée."""
+    import base64 as _b64
+    with open(local_path, "rb") as f:
+        content_b64 = _b64.b64encode(f.read()).decode()
+    h = _h(token)
+    r = requests.get(f"{GH_API}/repos/{repo}/contents/{repo_path}?ref={branch}", headers=h)
+    sha = r.json().get("sha") if r.ok else None
+    payload = {"message": commit_msg, "content": content_b64, "branch": branch}
+    if sha:
+        payload["sha"] = sha
+    r = requests.put(f"{GH_API}/repos/{repo}/contents/{repo_path}", headers=h, json=payload)
+    if not r.ok:
+        raise RuntimeError(f"[COMMIT] {repo_path} — {r.status_code}\n{r.text[:400]}")
+    return r.json().get("commit", {}).get("sha", "?")
+
 def cmd_start(title, token, ledger):
     print("\n═══════════════════════════════════════════")
-    print("  CRUSADER — START")
+    print("  CRUSADER — START (delta F01A local)")
     print("═══════════════════════════════════════════\n")
 
     repo   = ledger["github_repo"]
     ts     = datetime.datetime.now().strftime("%Y%m%d_%H%M")
     run_id = f"CRS_{ts}"
 
-    audio  = SHARED_IN / "audio_raw.mp3"
-    images = SHARED_IN / "images"
+    audio = SHARED_IN / "audio_raw.mp3"
     if not audio.exists():
         print(f"[START] ERREUR : audio_raw.mp3 absent dans {SHARED_IN}")
         sys.exit(1)
-    if not images.exists() or not any(images.iterdir()):
-        print(f"[START] ERREUR : images/ absent ou vide dans {SHARED_IN}")
+
+    F01A_OUT.mkdir(parents=True, exist_ok=True)
+
+    # ── F01A : viewer silences + vitesse (local, stdlib) ──────────────────────
+    print("[F01A] Démarrage du viewer silences+vitesse sur port 5001...")
+    try:
+        port_url = subprocess.check_output(["/app/export-port.sh", "5001"], text=True).strip()
+        print(f"[F01A] Viewer disponible : {port_url}")
+    except Exception:
+        print("[F01A] Viewer disponible sur : http://localhost:5001/")
+
+    print("[F01A] En attente de ta validation (le serveur s'arrête automatiquement)...")
+    subprocess.run([
+        sys.executable,
+        str(REPO_ROOT / "CRS_F01A_SERVER.py"),
+        "--audio", str(audio),
+        "--out",   str(F01A_OUT),
+        "--port",  "5001",
+    ], cwd=REPO_ROOT)
+
+    audio_clean = F01A_OUT / "audio_clean.mp3"
+    if not audio_clean.exists():
+        print("[F01A] ERREUR : audio_clean.mp3 non produit — validez le viewer.")
         sys.exit(1)
+    print(f"[F01A] audio_clean.mp3 produit ✅")
 
-    release    = create_or_reset_release(run_id, f"[CRUSADER] {run_id} — {title}", token, repo)
-    upload_url = release["upload_url"].split("{")[0]
+    # ── Commit audio_clean.mp3 dans le repo ───────────────────────────────────
+    print("[START] Commit audio_clean.mp3 vers le repo...")
+    repo_audio_path = "gamma/F01_GRIMALDUS/F01A_CASTELLAN_AUDIO/OUT/audio_clean.mp3"
+    sha = commit_file_to_repo(audio_clean, repo_audio_path,
+                              f"feat(F01A): audio_clean.mp3 — {run_id}", token, repo)
+    print(f"[START] Commit : {sha}")
 
-    upload_asset(upload_url, "audio_raw.mp3", audio, "audio/mpeg", token)
-
-    zip_data, img_count = zip_images(images)
-    upload_asset_bytes(upload_url, "images.zip", zip_data, "application/zip", token)
-    print(f"[UPLOAD] images.zip ({img_count} images) ✅")
-
+    # ── Trigger F01B (Whisper) ─────────────────────────────────────────────────
     gh_run_id, url = trigger_workflow_and_get_url(
-        "f01_grimaldus.yml", {"run_id": run_id}, token, repo
+        "f01b_grimaldus.yml",
+        {"run_id": run_id, "mode": "gamma"},
+        token, repo,
     )
 
     ledger.update({
         "run_id":            run_id,
         "production_title":  title,
         "gate_actuelle":     "G2",
-        "etapes_completees": ["F01_triggered"],
-        "gh_runs":           {"f01": gh_run_id},
+        "etapes_completees": ["F01A_validated", "F01B_triggered"],
+        "gh_runs":           {"f01b": gh_run_id},
         "repo_root":         str(REPO_ROOT),
     })
     save_ledger(ledger)
 
     print("\n════════════════════════════════════════════")
-    print("  GATE 1 — F01 EN COURS SUR GITHUB ACTIONS")
+    print("  F01B (Whisper) EN COURS SUR GITHUB ACTIONS")
     print(f"  Surveille : {url}")
-    print("  Quand F01 terminé → python CRS_EXECUTEUR.py --gate G2")
+    print("  Quand F01B terminé → python CRS_EXECUTEUR.py --gate G2")
     print("════════════════════════════════════════════\n")
 
 # ─── GATE G2 : Viewer F02 ─────────────────────────────────────────────────────
@@ -234,15 +272,16 @@ def cmd_gate_g2(token, ledger):
     print("═══════════════════════════════════════════\n")
 
     repo          = ledger["github_repo"]
-    gh_run_id_f01 = ledger.get("gh_runs", {}).get("f01")
-    if not gh_run_id_f01:
-        print("[G2] ERREUR : run ID F01 absent du ledger. Relancez --start.")
+    gh_run_id_f01b = ledger.get("gh_runs", {}).get("f01b")
+    run_id         = ledger.get("run_id", "")
+    if not gh_run_id_f01b:
+        print("[G2] ERREUR : run ID F01B absent du ledger. Relancez --start.")
         sys.exit(1)
 
-    # Télécharger artefacts F01
+    # Télécharger artefacts F01B (timing.json)
     F01_OUT.mkdir(parents=True, exist_ok=True)
-    print("[G2] Téléchargement artefacts F01...")
-    download_artifact_to(gh_run_id_f01, "f01-output", F01_OUT, token, repo)
+    print("[G2] Téléchargement artefacts F01B (timing.json)...")
+    download_artifact_to(gh_run_id_f01b, f"f01b-output-{run_id}", F01_OUT, token, repo)
 
     timing_path = F01_OUT / "timing.json"
     if not timing_path.exists():
@@ -258,7 +297,10 @@ def cmd_gate_g2(token, ledger):
     F02_IN.mkdir(parents=True, exist_ok=True)
     F02_OUT.mkdir(parents=True, exist_ok=True)
     shutil.copy2(timing_path, F02_IN / "timing.json")
-    shutil.copy2(F01_OUT / "audio_clean.mp3", F02_IN / "audio_clean.mp3")
+    audio_clean_src = F01A_OUT / "audio_clean.mp3"
+    if not audio_clean_src.exists():
+        audio_clean_src = F01_OUT / "audio_clean.mp3"
+    shutil.copy2(audio_clean_src, F02_IN / "audio_clean.mp3")
     images_dst = F02_IN / "images"
     if images_dst.exists():
         shutil.rmtree(images_dst)
@@ -525,3 +567,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
