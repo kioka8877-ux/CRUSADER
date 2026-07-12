@@ -1954,6 +1954,12 @@ document.getElementById('thumbnailFileInput').addEventListener('change', functio
     }
   };
   reader.readAsDataURL(file);
+
+  // DELTA-TEST3 : upload binaire vers le serveur F02
+  fetch('/api/thumbnail-upload', { method: 'POST', headers: { 'Content-Type': file.type }, body: file })
+    .then(r => r.ok ? r.json() : Promise.reject(r.statusText))
+    .then(() => showToast('Miniature envoyée au serveur ✓'))
+    .catch(err => showToast('Upload échoué : ' + err, true));
 });
 
 // ── Canvas click → place waypoint ────────────────────────────────────────
