@@ -163,17 +163,18 @@ def extract_clips(video_path: str, output_dir: str, duration: int = 8, interval:
 
 
 def extract_all(video_path: str, output_base: str, fps: int = 1,
-                gif_duration: int = 3, clip_duration: int = 8) -> dict:
+                gif_duration: int = 3, clip_duration: int = 3,
+                gif_count: int = 5, clip_count: int = 5) -> dict:
     """
     Extrait frames + GIFs + clips depuis une vidéo.
-    Retourne un dict avec les chemins.
+    gif_count/clip_count: nombre de GIFs/clips à répartir uniformément.
     """
     video_name = Path(video_path).stem
     base = os.path.join(output_base, video_name)
 
     frames = extract_frames(video_path, os.path.join(base, "frames"), fps)
-    gifs = extract_gifs(video_path, os.path.join(base, "gifs"), gif_duration)
-    clips = extract_clips(video_path, os.path.join(base, "clips"), clip_duration)
+    gifs = extract_gifs(video_path, os.path.join(base, "gifs"), gif_duration, count=gif_count)
+    clips = extract_clips(video_path, os.path.join(base, "clips"), clip_duration, count=clip_count)
 
     return {
         "video": video_path,
@@ -194,11 +195,14 @@ if __name__ == "__main__":
     parser.add_argument("--output", default="./extracted", help="Dossier de sortie")
     parser.add_argument("--fps", type=int, default=1, help="Frames par seconde")
     parser.add_argument("--gif-duration", type=int, default=3, help="Durée GIFs (s)")
-    parser.add_argument("--clip-duration", type=int, default=8, help="Durée clips (s)")
+    parser.add_argument("--clip-duration", type=int, default=3, help="Durée clips (s)")
+    parser.add_argument("--gif-count", type=int, default=5, help="Nombre de GIFs (répartis uniformément)")
+    parser.add_argument("--clip-count", type=int, default=5, help="Nombre de clips (répartis uniformément)")
     args = parser.parse_args()
 
     result = extract_all(args.video, args.output, args.fps,
-                         args.gif_duration, args.clip_duration)
+                         args.gif_duration, args.clip_duration,
+                         args.gif_count, args.clip_count)
     print(f"\n[EXTRACT] Terminé: {result['frame_count']} frames, "
           f"{result['gif_count']} GIFs, {result['clip_count']} clips")
     print(json.dumps(result, indent=2))

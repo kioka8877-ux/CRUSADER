@@ -21,7 +21,15 @@ on:
       clip_duration:
         description: "Durée des clips MP4 en secondes"
         required: false
-        default: "8"
+        default: "3"
+      gif_count:
+        description: "Nombre de GIFs par vidéo (répartis uniformément)"
+        required: false
+        default: "5"
+      clip_count:
+        description: "Nombre de clips par vidéo (répartis uniformément)"
+        required: false
+        default: "5"
 
 jobs:
   asset_forge:
@@ -83,7 +91,9 @@ jobs:
               --output /tmp/extracted \
               --fps ${{ inputs.extract_fps }} \
               --gif-duration ${{ inputs.gif_duration }} \
-              --clip-duration ${{ inputs.clip_duration }} 2>&1 | tee -a /tmp/extract_log.txt
+              --clip-duration ${{ inputs.clip_duration }} \
+              --gif-count ${{ inputs.gif_count }} \
+              --clip-count ${{ inputs.clip_count }} 2>&1 | tee -a /tmp/extract_log.txt
             # Fail si le script Python échoue
             PIPE_STATUS=${PIPESTATUS[0]}
             if [ $PIPE_STATUS -ne 0 ]; then
