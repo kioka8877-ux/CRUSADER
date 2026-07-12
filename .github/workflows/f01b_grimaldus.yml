@@ -1,0 +1,99 @@
+name: F01B GRIMALDUS - Whisper Transcription
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "Identifiant du run (ex: CRS_20260712_1200)"
+        required: true
+      mode:
+        description: "Mode de production (gamma|delta)"
+        required: false
+        default: "gamma"
+      whisper_model:
+        description: "Modèle Whisper (tiny|base|small|medium|large-v3)"
+        required: false
+        default: "medium"
+
+jobs:
+  grimaldus:
+    name: "F01B — Whisper → timing.json"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: delta-test3
+
+      - name: Installer faster-whisper
+        run: pip install faster-whisper --quiet
+
+      - name: Préparer audio_clean.mp3
+        run: |
+          MODE=${{ github.event.inputs.mode }}
+          AUDIO_SRC="${MODE}/F01_GRIMALDUS/F01A_CASTELLAN_AUDIO/OUT/audio_clean.mp3"
+          mkdir -p /tmp/f01b_in /tmp/f01b_out
+          if [ ! -f "$AUDIO_SRC" ]; then
+            echo "[F01B] ERREUR : audio_clean.mp3 introuvable dans $AUDIO_SRC"
+            echo "[F01B] Assurez-vous que le viewer F01A a validé l'audio avant de lancer F01B."
+            exit 1
+          fi
+          cp "$AUDIO_SRC" /tmp/f01b_in/audio_clean.mp3
+          echo "[F01B] audio_clean.mp3 prêt — $(du -h /tmp/f01b_in/audio_clean.mp3 | cut -f1)"
+
+      - name: F01B — Transcription Whisper
+        run: |
+          python3 ${{ github.event.inputs.mode }}/F01_GRIMALDUS/F01B_GRIMALDUS/CODEBASE/crs_f01_grimaldus.py \
+            --input  /tmp/f01b_in \
+            --output /tmp/f01b_out \
+            --model  ${{ github.event.inputs.whisper_model }}
+
+      - name: Valider timing.json
+        run: |
+          if [ ! -f "/tmp/f01b_out/timing.json" ]; then
+            echo "[F01B] ERREUR : timing.json absent"
+            exit 1
+          fi
+          python3 -c "
+          import json
+          with open('/tmp/f01b_out/timing.json') as f:
+              t = json.load(f)
+          meta  = t.get('meta', {})
+          words = t.get('words', [])
+          segs  = t.get('segments', [])
+          print(f'[F01B] Durée       : {meta.get(\"duration_seconds\", \"?\")}s')
+          print(f'[F01B] Frames      : {meta.get(\"total_frames\", \"?\")}')
+          print(f'[F01B] Mots        : {len(words)}')
+          print(f'[F01B] Segments    : {len(segs)}')
+          print(f'[F01B] Mots forts  : {meta.get(\"strong_word_count\", 0)}')
+          print(f'[F01B] Langue      : {meta.get(\"language\", \"?\")} ({meta.get(\"language_probability\", 0):.4f})')
+          "
+
+      - name: Commit timing.json dans F01B/OUT
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          MODE=${{ github.event.inputs.mode }}
+          OUT_DIR="${MODE}/F01_GRIMALDUS/F01B_GRIMALDUS/OUT"
+          mkdir -p "${OUT_DIR}"
+          cp /tmp/f01b_out/timing.json "${OUT_DIR}/"
+          git config user.name "CRUSADER-CI"
+          git config user.email "ci@crusader"
+          git add "${OUT_DIR}/timing.json"
+          if git diff --cached --quiet; then
+            echo "[F01B] Rien à committer."
+          else
+            git commit -m "ci(F01B): timing.json — ${{ github.event.inputs.run_id }}"
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:delta-test3
+          fi
+
+      - name: Upload artefacts F01B
+        uses: actions/upload-artifact@v4
+        with:
+          name: f01b-output-${{ github.event.inputs.run_id }}
+          path: /tmp/f01b_out/timing.json
+          retention-days: 7
