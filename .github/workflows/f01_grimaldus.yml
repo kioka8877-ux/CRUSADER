@@ -117,7 +117,7 @@ jobs:
           git config user.email "ci@crusader"
           git add "${OUT_DIR}/"
           git commit -m "ci(F01): outputs ${{ github.event.inputs.run_id }} → OUT/"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:delta-test3
 
       - name: Upload artefacts F01
         uses: actions/upload-artifact@v4
@@ -128,3 +128,4 @@ jobs:
             /tmp/f01_out/timing.json
             /tmp/f01_out/silence_map.json
           retention-days: 7
+
