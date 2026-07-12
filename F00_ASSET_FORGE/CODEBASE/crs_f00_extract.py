@@ -56,9 +56,12 @@ def extract_frames(video_path: str, output_dir: str, fps: int = 1) -> list[str]:
     return [str(f) for f in frames]
 
 
-def extract_gifs(video_path: str, output_dir: str, duration: int = 3, interval: int = 10) -> list[str]:
+def extract_gifs(video_path: str, output_dir: str, duration: int = 3,
+                 interval: int = None, count: int = None) -> list[str]:
     """
-    Extrait des GIFs animés de {duration} secondes, toutes les {interval} secondes.
+    Extrait des GIFs animés de {duration} secondes.
+    Si count est défini: répartit uniformément {count} GIFs sur la durée totale.
+    Sinon: utilise interval (toutes les {interval} secondes).
     """
     os.makedirs(output_dir, exist_ok=True)
     gifs = []
@@ -72,21 +75,38 @@ def extract_gifs(video_path: str, output_dir: str, duration: int = 3, interval: 
         print("[EXTRACT] Impossible de déterminer la durée, skip GIFs")
         return []
 
-    # Calculer combien de GIFs on peut faire
-    start = 0
-    gif_num = 1
-    while start + duration <= total_duration:
+    # Calculer les points de départ
+    if count is not None and count > 0:
+        # Mode count: répartir uniformément
+        if count == 1:
+            starts = [total_duration / 2 - duration / 2]
+        else:
+            step = (total_duration - duration) / (count - 1)
+            starts = [i * step for i in range(count)]
+        starts = [max(0, s) for s in starts]
+        print(f"[EXTRACT] Mode count: {count} GIFs de {duration}s répartis sur {total_duration:.0f}s")
+    else:
+        # Mode interval
+        iv = interval or max(duration * 2, 10)
+        starts = []
+        s = 0
+        while s + duration <= total_duration:
+            starts.append(s)
+            s += iv
+        print(f"[EXTRACT] Mode interval: GIFs de {duration}s toutes les {iv}s")
+
+    for gif_num, start in enumerate(starts, 1):
         gif_path = os.path.join(output_dir, f"gif_{gif_num:04d}.gif")
 
         # Palette + GIF en 2 passes pour la qualité
         palette_cmd = [
-            "ffmpeg", "-ss", str(start), "-t", str(duration),
+            "ffmpeg", "-ss", f"{start:.2f}", "-t", str(duration),
             "-i", video_path,
             "-vf", "fps=15,scale=480:-1:flags=lanczos,palettegen",
             "-y", "/tmp/palette.png"
         ]
         gif_cmd = [
-            "ffmpeg", "-ss", str(start), "-t", str(duration),
+            "ffmpeg", "-ss", f"{start:.2f}", "-t", str(duration),
             "-i", video_path, "-i", "/tmp/palette.png",
             "-lavfi", "fps=15,scale=480:-1:flags=lanczos[x];[x][1:v]paletteuse",
             "-y", gif_path
@@ -97,20 +117,20 @@ def extract_gifs(video_path: str, output_dir: str, duration: int = 3, interval: 
 
         if result.returncode == 0 and os.path.exists(gif_path):
             gifs.append(gif_path)
-            print(f"[EXTRACT] GIF {gif_num}: {start}s→{start+duration}s")
+            print(f"[EXTRACT] GIF {gif_num}: {start:.1f}s→{start+duration:.1f}s")
         else:
-            print(f"[EXTRACT] GIF {gif_num} échoué (start={start}s)")
-
-        start += interval
-        gif_num += 1
+            print(f"[EXTRACT] GIF {gif_num} échoué (start={start:.1f}s)")
 
     print(f"[EXTRACT] {len(gifs)} GIFs extraits")
     return gifs
 
 
-def extract_clips(video_path: str, output_dir: str, duration: int = 8, interval: int = 30) -> list[str]:
+def extract_clips(video_path: str, output_dir: str, duration: int = 3,
+                  interval: int = None, count: int = None) -> list[str]:
     """
-    Extrait des clips MP4 courts de {duration} secondes, toutes les {interval} secondes.
+    Extrait des clips MP4 courts de {duration} secondes.
+    Si count est défini: répartit uniformément {count} clips sur la durée totale.
+    Sinon: utilise interval (toutes les {interval} secondes).
     """
     os.makedirs(output_dir, exist_ok=True)
     clips = []
@@ -124,13 +144,29 @@ def extract_clips(video_path: str, output_dir: str, duration: int = 8, interval:
         print("[EXTRACT] Impossible de déterminer la durée, skip clips")
         return []
 
-    start = 0
-    clip_num = 1
-    while start + duration <= total_duration:
+    # Calculer les points de départ
+    if count is not None and count > 0:
+        if count == 1:
+            starts = [total_duration / 2 - duration / 2]
+        else:
+            step = (total_duration - duration) / (count - 1)
+            starts = [i * step for i in range(count)]
+        starts = [max(0, s) for s in starts]
+        print(f"[EXTRACT] Mode count: {count} clips de {duration}s répartis sur {total_duration:.0f}s")
+    else:
+        iv = interval or max(duration * 3, 30)
+        starts = []
+        s = 0
+        while s + duration <= total_duration:
+            starts.append(s)
+            s += iv
+        print(f"[EXTRACT] Mode interval: clips de {duration}s toutes les {iv}s")
+
+    for clip_num, start in enumerate(starts, 1):
         clip_path = os.path.join(output_dir, f"clip_{clip_num:04d}.mp4")
 
         cmd = [
-            "ffmpeg", "-ss", str(start), "-t", str(duration),
+            "ffmpeg", "-ss", f"{start:.2f}", "-t", str(duration),
             "-i", video_path,
             "-c", "copy",
             "-y", clip_path
@@ -140,11 +176,11 @@ def extract_clips(video_path: str, output_dir: str, duration: int = 8, interval:
 
         if result.returncode == 0 and os.path.exists(clip_path):
             clips.append(clip_path)
-            print(f"[EXTRACT] Clip {clip_num}: {start}s→{start+duration}s")
+            print(f"[EXTRACT] Clip {clip_num}: {start:.1f}s→{start+duration:.1f}s")
         else:
             # Fallback : re-encode si copy échoue
             cmd_reencode = [
-                "ffmpeg", "-ss", str(start), "-t", str(duration),
+                "ffmpeg", "-ss", f"{start:.2f}", "-t", str(duration),
                 "-i", video_path,
                 "-c:v", "libx264", "-preset", "fast",
                 "-c:a", "aac",
@@ -153,27 +189,25 @@ def extract_clips(video_path: str, output_dir: str, duration: int = 8, interval:
             result2 = subprocess.run(cmd_reencode, capture_output=True, text=True)
             if result2.returncode == 0 and os.path.exists(clip_path):
                 clips.append(clip_path)
-                print(f"[EXTRACT] Clip {clip_num} (re-encode): {start}s→{start+duration}s")
-
-        start += interval
-        clip_num += 1
+                print(f"[EXTRACT] Clip {clip_num} (re-encode): {start:.1f}s→{start+duration:.1f}s")
 
     print(f"[EXTRACT] {len(clips)} clips extraits")
     return clips
 
 
 def extract_all(video_path: str, output_base: str, fps: int = 1,
-                gif_duration: int = 3, clip_duration: int = 8) -> dict:
+                gif_duration: int = 3, clip_duration: int = 3,
+                gif_count: int = 5, clip_count: int = 5) -> dict:
     """
     Extrait frames + GIFs + clips depuis une vidéo.
-    Retourne un dict avec les chemins.
+    gif_count/clip_count: nombre de GIFs/clips à répartir uniformément.
     """
     video_name = Path(video_path).stem
     base = os.path.join(output_base, video_name)
 
     frames = extract_frames(video_path, os.path.join(base, "frames"), fps)
-    gifs = extract_gifs(video_path, os.path.join(base, "gifs"), gif_duration)
-    clips = extract_clips(video_path, os.path.join(base, "clips"), clip_duration)
+    gifs = extract_gifs(video_path, os.path.join(base, "gifs"), gif_duration, count=gif_count)
+    clips = extract_clips(video_path, os.path.join(base, "clips"), clip_duration, count=clip_count)
 
     return {
         "video": video_path,
@@ -194,11 +228,14 @@ if __name__ == "__main__":
     parser.add_argument("--output", default="./extracted", help="Dossier de sortie")
     parser.add_argument("--fps", type=int, default=1, help="Frames par seconde")
     parser.add_argument("--gif-duration", type=int, default=3, help="Durée GIFs (s)")
-    parser.add_argument("--clip-duration", type=int, default=8, help="Durée clips (s)")
+    parser.add_argument("--clip-duration", type=int, default=3, help="Durée clips (s)")
+    parser.add_argument("--gif-count", type=int, default=5, help="Nombre de GIFs (répartis uniformément)")
+    parser.add_argument("--clip-count", type=int, default=5, help="Nombre de clips (répartis uniformément)")
     args = parser.parse_args()
 
     result = extract_all(args.video, args.output, args.fps,
-                         args.gif_duration, args.clip_duration)
+                         args.gif_duration, args.clip_duration,
+                         args.gif_count, args.clip_count)
     print(f"\n[EXTRACT] Terminé: {result['frame_count']} frames, "
           f"{result['gif_count']} GIFs, {result['clip_count']} clips")
     print(json.dumps(result, indent=2))

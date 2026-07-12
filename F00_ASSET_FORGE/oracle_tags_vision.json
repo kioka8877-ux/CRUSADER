@@ -1,0 +1,2551 @@
+{
+  "frame_001": {
+    "visual": "Animated globe showing blue water and landmasses.",
+    "narrative": [
+      "globe",
+      "animation",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_002": {
+    "visual": "Animated globe with swirling blue water patterns.",
+    "narrative": [
+      "globe",
+      "animation",
+      "eau"
+    ],
+    "usage": "illustration"
+  },
+  "frame_003": {
+    "visual": "Animated globe with swirling blue water patterns.",
+    "narrative": [
+      "globe",
+      "animation",
+      "eau"
+    ],
+    "usage": "illustration"
+  },
+  "frame_004": {
+    "visual": "Animated globe with swirling blue water patterns.",
+    "narrative": [
+      "globe",
+      "animation",
+      "eau"
+    ],
+    "usage": "illustration"
+  },
+  "frame_005": {
+    "visual": "Animated globe with swirling blue water patterns.",
+    "narrative": [
+      "globe",
+      "animation",
+      "eau"
+    ],
+    "usage": "illustration"
+  },
+  "frame_006": {
+    "visual": "Animated globe with swirling blue water patterns.",
+    "narrative": [
+      "globe",
+      "animation",
+      "eau"
+    ],
+    "usage": "illustration"
+  },
+  "frame_007": {
+    "visual": "Animated globe with swirling blue water patterns.",
+    "narrative": [
+      "globe",
+      "animation",
+      "eau"
+    ],
+    "usage": "illustration"
+  },
+  "frame_008": {
+    "visual": "Animated globe with swirling blue water patterns.",
+    "narrative": [
+      "globe",
+      "animation",
+      "eau"
+    ],
+    "usage": "illustration"
+  },
+  "frame_009": {
+    "visual": "Animated globe with swirling blue water patterns.",
+    "narrative": [
+      "globe",
+      "animation",
+      "eau"
+    ],
+    "usage": "illustration"
+  },
+  "frame_010": {
+    "visual": "Dark screen with white text overlay, unreadable.",
+    "narrative": [
+      "transition",
+      "explication"
+    ],
+    "usage": "transition"
+  },
+  "frame_011": {
+    "visual": "Dark screen with white text overlay, unreadable.",
+    "narrative": [
+      "transition",
+      "explication"
+    ],
+    "usage": "transition"
+  },
+  "frame_012": {
+    "visual": "Dark screen with white text overlay, unreadable.",
+    "narrative": [
+      "transition",
+      "explication"
+    ],
+    "usage": "transition"
+  },
+  "frame_013": {
+    "visual": "Damaged power lines and trees after a storm.",
+    "narrative": [
+      "destruction",
+      "infrastructure",
+      "nature"
+    ],
+    "usage": "b-roll"
+  },
+  "frame_014": {
+    "visual": "Damaged power lines and trees after a storm.",
+    "narrative": [
+      "destruction",
+      "infrastructure",
+      "nature"
+    ],
+    "usage": "b-roll"
+  },
+  "frame_015": {
+    "visual": "Damaged power lines and trees after a storm.",
+    "narrative": [
+      "destruction",
+      "infrastructure",
+      "nature"
+    ],
+    "usage": "b-roll"
+  },
+  "frame_016": {
+    "visual": "Dense forest with heavy rain and blurred foliage.",
+    "narrative": [
+      "pluie",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_017": {
+    "visual": "Blurred forest scene with strong rain and dark trees.",
+    "narrative": [
+      "pluie",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_018": {
+    "visual": "Heavy rain falling through blurred forest canopy.",
+    "narrative": [
+      "pluie",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_019": {
+    "visual": "Blurred view of a forest with heavy rainfall.",
+    "narrative": [
+      "pluie",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_020": {
+    "visual": "Rain falling on blurred trees and dense foliage.",
+    "narrative": [
+      "pluie",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_021": {
+    "visual": "Blurred forest scene with very heavy rain falling.",
+    "narrative": [
+      "pluie",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_022": {
+    "visual": "Blurred view of a forest with heavy rain.",
+    "narrative": [
+      "pluie",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_023": {
+    "visual": "Blurred forest scene with rain and dark trees.",
+    "narrative": [
+      "pluie",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_024": {
+    "visual": "Blurred view of a forest with strong rainfall.",
+    "narrative": [
+      "pluie",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_025": {
+    "visual": "Blurred forest with rain and dense foliage.",
+    "narrative": [
+      "pluie",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_026": {
+    "visual": "Blurred view of a forest with heavy rain.",
+    "narrative": [
+      "pluie",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_027": {
+    "visual": "Blurred forest scene with rain and dark trees.",
+    "narrative": [
+      "pluie",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_028": {
+    "visual": "Blurred view of a forest with heavy rainfall.",
+    "narrative": [
+      "pluie",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_029": {
+    "visual": "Blurred forest with rain and dense foliage.",
+    "narrative": [
+      "pluie",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_030": {
+    "visual": "Blurred view of a forest with strong rainfall.",
+    "narrative": [
+      "pluie",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_031": {
+    "visual": "Dark image with bright, swirling white light.",
+    "narrative": [
+      "transition",
+      "nature",
+      "technologie"
+    ],
+    "usage": "transition"
+  },
+  "frame_032": {
+    "visual": "Dark image with bright, swirling white light.",
+    "narrative": [
+      "transition",
+      "nature",
+      "technologie"
+    ],
+    "usage": "transition"
+  },
+  "frame_033": {
+    "visual": "Dark image with bright, swirling white light.",
+    "narrative": [
+      "transition",
+      "nature",
+      "technologie"
+    ],
+    "usage": "transition"
+  },
+  "frame_034": {
+    "visual": "Dark image with bright, swirling white light.",
+    "narrative": [
+      "transition",
+      "nature",
+      "technologie"
+    ],
+    "usage": "transition"
+  },
+  "frame_035": {
+    "visual": "Dark image with bright, swirling white light.",
+    "narrative": [
+      "transition",
+      "nature",
+      "technologie"
+    ],
+    "usage": "transition"
+  },
+  "frame_036": {
+    "visual": "Dark image with bright, swirling white light.",
+    "narrative": [
+      "transition",
+      "nature",
+      "technologie"
+    ],
+    "usage": "transition"
+  },
+  "frame_037": {
+    "visual": "Dark image with bright, swirling white light.",
+    "narrative": [
+      "transition",
+      "nature",
+      "technologie"
+    ],
+    "usage": "transition"
+  },
+  "frame_038": {
+    "visual": "Dark image with bright, swirling white light.",
+    "narrative": [
+      "transition",
+      "nature",
+      "technologie"
+    ],
+    "usage": "transition"
+  },
+  "frame_039": {
+    "visual": "Dark image with bright, swirling white light.",
+    "narrative": [
+      "transition",
+      "nature",
+      "technologie"
+    ],
+    "usage": "transition"
+  },
+  "frame_040": {
+    "visual": "Dark image with bright, swirling white light.",
+    "narrative": [
+      "transition",
+      "nature",
+      "technologie"
+    ],
+    "usage": "transition"
+  },
+  "frame_041": {
+    "visual": "Dark image with bright, swirling white light.",
+    "narrative": [
+      "transition",
+      "nature",
+      "technologie"
+    ],
+    "usage": "transition"
+  },
+  "frame_042": {
+    "visual": "Dark image with bright, swirling white light.",
+    "narrative": [
+      "transition",
+      "nature",
+      "technologie"
+    ],
+    "usage": "transition"
+  },
+  "frame_043": {
+    "visual": "Dark image with bright, swirling white light.",
+    "narrative": [
+      "transition",
+      "nature",
+      "technologie"
+    ],
+    "usage": "transition"
+  },
+  "frame_044": {
+    "visual": "Dark image with bright, swirling white light.",
+    "narrative": [
+      "transition",
+      "nature",
+      "technologie"
+    ],
+    "usage": "transition"
+  },
+  "frame_045": {
+    "visual": "Dark image with bright, swirling white light.",
+    "narrative": [
+      "transition",
+      "nature",
+      "technologie"
+    ],
+    "usage": "transition"
+  },
+  "frame_046": {
+    "visual": "Dark, blurry image of flooded street and buildings.",
+    "narrative": [
+      "inondation",
+      "destruction",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_047": {
+    "visual": "White, blurry image, likely rain or snow.",
+    "narrative": [
+      "pluie",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_048": {
+    "visual": "Blurry image of a dark, flooded street.",
+    "narrative": [
+      "inondation",
+      "destruction",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_049": {
+    "visual": "Blurred image of a flooded street with a car.",
+    "narrative": [
+      "inondation",
+      "destruction",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_050": {
+    "visual": "Flooded street with a yellow and black pole.",
+    "narrative": [
+      "inondation",
+      "nature",
+      "infrastructure"
+    ],
+    "usage": "illustration"
+  },
+  "frame_051": {
+    "visual": "Flooded street with several cars submerged in water.",
+    "narrative": [
+      "inondation",
+      "destruction",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_052": {
+    "visual": "Flooded street with a dark car partially submerged.",
+    "narrative": [
+      "inondation",
+      "destruction",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_053": {
+    "visual": "Flooded street with a dark SUV in the water.",
+    "narrative": [
+      "inondation",
+      "destruction",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_054": {
+    "visual": "Flooded street with a white house and water.",
+    "narrative": [
+      "inondation",
+      "destruction",
+      "infrastructure"
+    ],
+    "usage": "illustration"
+  },
+  "frame_055": {
+    "visual": "Flooded street with a white house and water damage.",
+    "narrative": [
+      "inondation",
+      "destruction",
+      "infrastructure"
+    ],
+    "usage": "illustration"
+  },
+  "frame_056": {
+    "visual": "Flooded street with a white house and a tree.",
+    "narrative": [
+      "inondation",
+      "destruction",
+      "infrastructure"
+    ],
+    "usage": "illustration"
+  },
+  "frame_057": {
+    "visual": "Flooded street with a white house and a red roof.",
+    "narrative": [
+      "inondation",
+      "destruction",
+      "infrastructure"
+    ],
+    "usage": "illustration"
+  },
+  "frame_058": {
+    "visual": "Flooded street with a white house and a car.",
+    "narrative": [
+      "inondation",
+      "destruction",
+      "infrastructure"
+    ],
+    "usage": "illustration"
+  },
+  "frame_059": {
+    "visual": "Flooded street with a yellow sign and water.",
+    "narrative": [
+      "inondation",
+      "destruction",
+      "infrastructure"
+    ],
+    "usage": "illustration"
+  },
+  "frame_060": {
+    "visual": "Flooded street with a red and white barrier.",
+    "narrative": [
+      "inondation",
+      "destruction",
+      "infrastructure"
+    ],
+    "usage": "illustration"
+  },
+  "frame_061": {
+    "visual": "Blurred view of flooded street with red lights.",
+    "narrative": [
+      "inondation",
+      "danger",
+      "population"
+    ],
+    "usage": "illustration"
+  },
+  "frame_062": {
+    "visual": "White and grey swirling cloud patterns.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "frame_063": {
+    "visual": "Grey swirling cloud patterns, light blue tint.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "frame_064": {
+    "visual": "Grey and white swirling cloud patterns.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "frame_065": {
+    "visual": "Grey and white swirling cloud patterns.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "frame_066": {
+    "visual": "Grey and white swirling cloud patterns.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "frame_067": {
+    "visual": "Grey and white swirling cloud patterns.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "frame_068": {
+    "visual": "Grey and white swirling cloud patterns.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "frame_069": {
+    "visual": "Grey and white swirling cloud patterns.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "frame_070": {
+    "visual": "Grey and white swirling cloud patterns.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "frame_071": {
+    "visual": "Grey and white swirling cloud patterns.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "frame_072": {
+    "visual": "Grey and white swirling cloud patterns.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "frame_073": {
+    "visual": "Abstract colorful swirling patterns.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "transition"
+  },
+  "frame_074": {
+    "visual": "Abstract colorful swirling patterns.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "transition"
+  },
+  "frame_075": {
+    "visual": "White and grey blurred image, arched shape.",
+    "narrative": [
+      "satellite",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_076": {
+    "visual": "Blue globe with swirling cloud patterns visible.",
+    "narrative": [
+      "globe",
+      "nature",
+      "satellite"
+    ],
+    "usage": "background"
+  },
+  "frame_077": {
+    "visual": "Green and blue landmass with cloud cover.",
+    "narrative": [
+      "nature",
+      "satellite",
+      "carte"
+    ],
+    "usage": "illustration"
+  },
+  "frame_078": {
+    "visual": "Graph showing fluctuating data with colored lines.",
+    "narrative": [
+      "graphique",
+      "science",
+      "donnees"
+    ],
+    "usage": "illustration"
+  },
+  "frame_079": {
+    "visual": "Graph showing fluctuating data with colored lines.",
+    "narrative": [
+      "graphique",
+      "science",
+      "donnees"
+    ],
+    "usage": "illustration"
+  },
+  "frame_080": {
+    "visual": "Graph showing fluctuating data with colored lines.",
+    "narrative": [
+      "graphique",
+      "science",
+      "donnees"
+    ],
+    "usage": "illustration"
+  },
+  "frame_081": {
+    "visual": "Graph showing fluctuating data with colored lines.",
+    "narrative": [
+      "graphique",
+      "science",
+      "donnees"
+    ],
+    "usage": "illustration"
+  },
+  "frame_082": {
+    "visual": "Graph showing fluctuating data with colored lines.",
+    "narrative": [
+      "graphique",
+      "science",
+      "donnees"
+    ],
+    "usage": "illustration"
+  },
+  "frame_083": {
+    "visual": "Swirling cloud patterns over a dark background.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "satellite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_084": {
+    "visual": "Dark, swirling cloud patterns with a red tint.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "destruction"
+    ],
+    "usage": "illustration"
+  },
+  "frame_085": {
+    "visual": "Dark, swirling cloud patterns with a red tint.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "destruction"
+    ],
+    "usage": "illustration"
+  },
+  "frame_086": {
+    "visual": "Dark, swirling cloud patterns with a red tint.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "destruction"
+    ],
+    "usage": "illustration"
+  },
+  "frame_087": {
+    "visual": "Dark, swirling cloud patterns with a red tint.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "destruction"
+    ],
+    "usage": "illustration"
+  },
+  "frame_088": {
+    "visual": "Dark, swirling cloud patterns with a red tint.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "destruction"
+    ],
+    "usage": "illustration"
+  },
+  "frame_089": {
+    "visual": "Dark, swirling cloud patterns with a red tint.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "destruction"
+    ],
+    "usage": "illustration"
+  },
+  "frame_090": {
+    "visual": "Dark, swirling cloud patterns with a red tint.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "destruction"
+    ],
+    "usage": "illustration"
+  },
+  "frame_091": {
+    "visual": "Man in suit standing in front of a screen.",
+    "narrative": [
+      "expertise",
+      "interview",
+      "technologie"
+    ],
+    "usage": "illustration"
+  },
+  "frame_092": {
+    "visual": "Man in suit standing in front of a screen.",
+    "narrative": [
+      "expertise",
+      "interview",
+      "technologie"
+    ],
+    "usage": "illustration"
+  },
+  "frame_093": {
+    "visual": "Man in suit standing in front of a screen.",
+    "narrative": [
+      "expertise",
+      "interview",
+      "technologie"
+    ],
+    "usage": "illustration"
+  },
+  "frame_094": {
+    "visual": "Man in suit standing in front of a screen.",
+    "narrative": [
+      "expertise",
+      "interview",
+      "technologie"
+    ],
+    "usage": "illustration"
+  },
+  "frame_095": {
+    "visual": "Man in suit standing in front of a screen.",
+    "narrative": [
+      "expertise",
+      "interview",
+      "technologie"
+    ],
+    "usage": "illustration"
+  },
+  "frame_096": {
+    "visual": "Man in suit standing in front of a screen.",
+    "narrative": [
+      "expertise",
+      "interview",
+      "technologie"
+    ],
+    "usage": "illustration"
+  },
+  "frame_097": {
+    "visual": "Man in suit standing in front of a screen.",
+    "narrative": [
+      "expertise",
+      "interview",
+      "technologie"
+    ],
+    "usage": "illustration"
+  },
+  "frame_098": {
+    "visual": "Man in suit standing in front of a screen.",
+    "narrative": [
+      "expertise",
+      "interview",
+      "technologie"
+    ],
+    "usage": "illustration"
+  },
+  "frame_099": {
+    "visual": "Satellite image of a hurricane, blue and white.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "donnees"
+    ],
+    "usage": "illustration"
+  },
+  "frame_100": {
+    "visual": "Satellite image of a hurricane, blue and green.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "donnees"
+    ],
+    "usage": "illustration"
+  },
+  "frame_101": {
+    "visual": "Satellite image of a hurricane, blue and yellow.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "donnees"
+    ],
+    "usage": "illustration"
+  },
+  "frame_102": {
+    "visual": "Satellite image of a hurricane, blue and red.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "donnees"
+    ],
+    "usage": "illustration"
+  },
+  "frame_103": {
+    "visual": "Satellite image of a hurricane, blue and white.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "donnees"
+    ],
+    "usage": "illustration"
+  },
+  "frame_104": {
+    "visual": "Satellite image of a hurricane, blue and green.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "donnees"
+    ],
+    "usage": "illustration"
+  },
+  "frame_105": {
+    "visual": "Satellite image of a hurricane, blue and yellow.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "donnees"
+    ],
+    "usage": "illustration"
+  },
+  "frame_106": {
+    "visual": "Colorful satellite image, blue and yellow swirls.",
+    "narrative": [
+      "satellite",
+      "donnees",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_107": {
+    "visual": "Satellite image with blue and yellow swirls.",
+    "narrative": [
+      "satellite",
+      "donnees",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_108": {
+    "visual": "Satellite image, blue and yellow swirling pattern.",
+    "narrative": [
+      "satellite",
+      "donnees",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_109": {
+    "visual": "Satellite image with swirling blue and yellow.",
+    "narrative": [
+      "satellite",
+      "donnees",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_110": {
+    "visual": "Satellite image, blue and yellow swirling colors.",
+    "narrative": [
+      "satellite",
+      "donnees",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_111": {
+    "visual": "Satellite image with swirling blue and yellow.",
+    "narrative": [
+      "satellite",
+      "donnees",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_112": {
+    "visual": "Satellite image with swirling blue and yellow.",
+    "narrative": [
+      "satellite",
+      "donnees",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_113": {
+    "visual": "Satellite image, swirling blue and yellow colors.",
+    "narrative": [
+      "satellite",
+      "donnees",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_114": {
+    "visual": "Satellite image with swirling blue and yellow.",
+    "narrative": [
+      "satellite",
+      "donnees",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_115": {
+    "visual": "Satellite image with swirling blue and yellow.",
+    "narrative": [
+      "satellite",
+      "donnees",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_116": {
+    "visual": "Satellite image with swirling blue and yellow.",
+    "narrative": [
+      "satellite",
+      "donnees",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_117": {
+    "visual": "Satellite image with swirling blue and yellow.",
+    "narrative": [
+      "satellite",
+      "donnees",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_118": {
+    "visual": "Satellite image with swirling blue and yellow.",
+    "narrative": [
+      "satellite",
+      "donnees",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_119": {
+    "visual": "Satellite image with swirling blue and yellow.",
+    "narrative": [
+      "satellite",
+      "donnees",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_120": {
+    "visual": "Satellite image with swirling blue and yellow.",
+    "narrative": [
+      "satellite",
+      "donnees",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_121": {
+    "visual": "Flooded street with damaged buildings and debris.",
+    "narrative": [
+      "inondation",
+      "destruction",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_122": {
+    "visual": "Close-up of a person looking concerned and worried.",
+    "narrative": [
+      "population",
+      "danger",
+      "humanite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_123": {
+    "visual": "Person looking concerned, dark clothing, blurred background.",
+    "narrative": [
+      "population",
+      "danger",
+      "humanite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_124": {
+    "visual": "Person looking concerned, dark clothing, blurred background.",
+    "narrative": [
+      "population",
+      "danger",
+      "humanite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_125": {
+    "visual": "Person looking concerned, dark clothing, blurred background.",
+    "narrative": [
+      "population",
+      "danger",
+      "humanite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_126": {
+    "visual": "Person looking concerned, dark clothing, blurred background.",
+    "narrative": [
+      "population",
+      "danger",
+      "humanite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_127": {
+    "visual": "Person looking concerned, dark clothing, blurred background.",
+    "narrative": [
+      "population",
+      "danger",
+      "humanite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_128": {
+    "visual": "Person looking concerned, dark clothing, blurred background.",
+    "narrative": [
+      "population",
+      "danger",
+      "humanite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_129": {
+    "visual": "Person looking concerned, dark clothing, blurred background.",
+    "narrative": [
+      "population",
+      "danger",
+      "humanite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_130": {
+    "visual": "Person looking concerned, dark clothing, blurred background.",
+    "narrative": [
+      "population",
+      "danger",
+      "humanite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_131": {
+    "visual": "Rotating globe with animated green data overlay.",
+    "narrative": [
+      "satellite",
+      "donnees",
+      "animation"
+    ],
+    "usage": "illustration"
+  },
+  "frame_132": {
+    "visual": "Rotating globe with animated blue data overlay.",
+    "narrative": [
+      "satellite",
+      "donnees",
+      "animation"
+    ],
+    "usage": "illustration"
+  },
+  "frame_133": {
+    "visual": "Rotating globe with animated green data overlay.",
+    "narrative": [
+      "satellite",
+      "donnees",
+      "animation"
+    ],
+    "usage": "illustration"
+  },
+  "frame_134": {
+    "visual": "Rotating globe with animated blue data overlay.",
+    "narrative": [
+      "satellite",
+      "donnees",
+      "animation"
+    ],
+    "usage": "illustration"
+  },
+  "frame_135": {
+    "visual": "Rotating globe with animated green data overlay.",
+    "narrative": [
+      "satellite",
+      "donnees",
+      "animation"
+    ],
+    "usage": "illustration"
+  },
+  "frame_136": {
+    "visual": "Green and blue swirling cloud pattern on globe.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "globe"
+    ],
+    "usage": "illustration"
+  },
+  "frame_137": {
+    "visual": "Blue and green swirling cloud pattern on globe.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "globe"
+    ],
+    "usage": "illustration"
+  },
+  "frame_138": {
+    "visual": "Blue and green swirling cloud pattern on globe.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "globe"
+    ],
+    "usage": "illustration"
+  },
+  "frame_139": {
+    "visual": "Blue and green swirling cloud pattern on globe.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "globe"
+    ],
+    "usage": "illustration"
+  },
+  "frame_140": {
+    "visual": "Blue and green swirling cloud pattern on globe.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "globe"
+    ],
+    "usage": "illustration"
+  },
+  "frame_141": {
+    "visual": "Blue and green swirling cloud pattern on globe.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "globe"
+    ],
+    "usage": "illustration"
+  },
+  "frame_142": {
+    "visual": "Blue and green swirling cloud pattern on globe.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "globe"
+    ],
+    "usage": "illustration"
+  },
+  "frame_143": {
+    "visual": "Blue and green swirling cloud pattern on globe.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "globe"
+    ],
+    "usage": "illustration"
+  },
+  "frame_144": {
+    "visual": "Blue and green swirling cloud pattern on globe.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "globe"
+    ],
+    "usage": "illustration"
+  },
+  "frame_145": {
+    "visual": "Blue and green swirling cloud pattern on globe.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "globe"
+    ],
+    "usage": "illustration"
+  },
+  "frame_146": {
+    "visual": "Blue and green swirling cloud pattern on globe.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "globe"
+    ],
+    "usage": "illustration"
+  },
+  "frame_147": {
+    "visual": "Blue and green swirling cloud pattern on globe.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "globe"
+    ],
+    "usage": "illustration"
+  },
+  "frame_148": {
+    "visual": "Blue and green swirling cloud pattern on globe.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "globe"
+    ],
+    "usage": "illustration"
+  },
+  "frame_149": {
+    "visual": "Blue and green swirling cloud pattern on globe.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "globe"
+    ],
+    "usage": "illustration"
+  },
+  "frame_150": {
+    "visual": "Blue and green swirling cloud pattern on globe.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "globe"
+    ],
+    "usage": "illustration"
+  },
+  "frame_151": {
+    "visual": "Satellite image showing a swirling hurricane shape.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_152": {
+    "visual": "Satellite image of a hurricane, blue and white colors.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "pluie"
+    ],
+    "usage": "illustration"
+  },
+  "frame_153": {
+    "visual": "Hurricane shape in satellite view, blue and red.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "frame_154": {
+    "visual": "Satellite image of a hurricane, swirling pattern.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_155": {
+    "visual": "Hurricane shape in satellite view, blue and white.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "pluie"
+    ],
+    "usage": "illustration"
+  },
+  "frame_156": {
+    "visual": "Satellite view of a hurricane, swirling colors.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_157": {
+    "visual": "Satellite image of a hurricane, white and blue.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "pluie"
+    ],
+    "usage": "illustration"
+  },
+  "frame_158": {
+    "visual": "Satellite image showing a hurricane shape.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_159": {
+    "visual": "Satellite view of a hurricane, swirling pattern.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "frame_160": {
+    "visual": "Satellite image of a hurricane, blue and white.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "pluie"
+    ],
+    "usage": "illustration"
+  },
+  "frame_161": {
+    "visual": "Satellite view of a hurricane, swirling colors.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_162": {
+    "visual": "Close-up of a hurricane cone graphic.",
+    "narrative": [
+      "ouragan",
+      "carte",
+      "science"
+    ],
+    "usage": "illustration"
+  },
+  "frame_163": {
+    "visual": "Close-up of a hurricane cone graphic, yellow.",
+    "narrative": [
+      "ouragan",
+      "carte",
+      "science"
+    ],
+    "usage": "illustration"
+  },
+  "frame_164": {
+    "visual": "Close-up of a hurricane cone graphic, orange.",
+    "narrative": [
+      "ouragan",
+      "carte",
+      "science"
+    ],
+    "usage": "illustration"
+  },
+  "frame_165": {
+    "visual": "Close-up of a hurricane cone graphic, yellow.",
+    "narrative": [
+      "ouragan",
+      "carte",
+      "science"
+    ],
+    "usage": "illustration"
+  },
+  "frame_166": {
+    "visual": "Dark, swirling clouds with a bright, central light.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_167": {
+    "visual": "Dark clouds swirling, with a faint light in the center.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_168": {
+    "visual": "Dark swirling clouds with a brighter, central glow.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_169": {
+    "visual": "Dark clouds swirling, with a bright, circular light.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_170": {
+    "visual": "Dark swirling clouds with a bright, central light source.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_171": {
+    "visual": "Dark, swirling clouds with a bright, circular center.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_172": {
+    "visual": "Dark swirling clouds with a bright, central light.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_173": {
+    "visual": "Dark swirling clouds with a bright, central glow.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_174": {
+    "visual": "Dark clouds swirling, with a bright, central light.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_175": {
+    "visual": "Dark swirling clouds with a bright, circular center.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_176": {
+    "visual": "Dark swirling clouds with a bright, central light.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_177": {
+    "visual": "Dark swirling clouds with a bright, central glow.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_178": {
+    "visual": "Dark clouds swirling, with a bright, central light.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_179": {
+    "visual": "Dark swirling clouds with a bright, circular center.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_180": {
+    "visual": "Dark swirling clouds with a bright, central light.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_181": {
+    "visual": "Satellite view of a swirling storm over water.",
+    "narrative": [
+      "satellite",
+      "tempete",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_182": {
+    "visual": "Close up of swirling storm clouds over dark water.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "danger"
+    ],
+    "usage": "illustration"
+  },
+  "frame_183": {
+    "visual": "Satellite view of a swirling storm with green center.",
+    "narrative": [
+      "satellite",
+      "tempete",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_184": {
+    "visual": "Swirling storm clouds over dark water, viewed from above.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "danger"
+    ],
+    "usage": "illustration"
+  },
+  "frame_185": {
+    "visual": "Satellite view of a large swirling storm system.",
+    "narrative": [
+      "satellite",
+      "tempete",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_186": {
+    "visual": "Dark water with swirling storm clouds above.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "danger"
+    ],
+    "usage": "illustration"
+  },
+  "frame_187": {
+    "visual": "Satellite view of a swirling storm with bright center.",
+    "narrative": [
+      "satellite",
+      "tempete",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_188": {
+    "visual": "Dark water with swirling storm clouds and lightning.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "danger"
+    ],
+    "usage": "illustration"
+  },
+  "frame_189": {
+    "visual": "Satellite view of a large storm system with swirling clouds.",
+    "narrative": [
+      "satellite",
+      "tempete",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_190": {
+    "visual": "Swirling storm clouds over dark water, with light flashes.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "danger"
+    ],
+    "usage": "illustration"
+  },
+  "frame_191": {
+    "visual": "Satellite view of a storm with a distinct eye shape.",
+    "narrative": [
+      "satellite",
+      "tempete",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_192": {
+    "visual": "Dark water with swirling storm clouds and a pink line.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "danger"
+    ],
+    "usage": "illustration"
+  },
+  "frame_193": {
+    "visual": "Satellite view of a large swirling storm system.",
+    "narrative": [
+      "satellite",
+      "tempete",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_194": {
+    "visual": "Swirling storm clouds over dark water, with bright flashes.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "danger"
+    ],
+    "usage": "illustration"
+  },
+  "frame_195": {
+    "visual": "Satellite view of a storm with swirling clouds and water.",
+    "narrative": [
+      "satellite",
+      "tempete",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_196": {
+    "visual": "Blue satellite image of a swirling storm system.",
+    "narrative": [
+      "satellite",
+      "tempete",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_197": {
+    "visual": "Close-up of a swirling blue and green storm.",
+    "narrative": [
+      "satellite",
+      "tempete",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_198": {
+    "visual": "Satellite view of a large, circular storm.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_199": {
+    "visual": "Animated graphic showing storm movement and paths.",
+    "narrative": [
+      "animation",
+      "graphique",
+      "science"
+    ],
+    "usage": "illustration"
+  },
+  "frame_200": {
+    "visual": "Animated graphic of a hurricane's swirling winds.",
+    "narrative": [
+      "animation",
+      "graphique",
+      "vent"
+    ],
+    "usage": "illustration"
+  },
+  "frame_201": {
+    "visual": "Animated graphic showing storm intensity and scale.",
+    "narrative": [
+      "animation",
+      "graphique",
+      "mesure"
+    ],
+    "usage": "illustration"
+  },
+  "frame_202": {
+    "visual": "Animated graphic of a storm's path over land.",
+    "narrative": [
+      "animation",
+      "graphique",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "frame_203": {
+    "visual": "Animated graphic showing storm's impact on coastline.",
+    "narrative": [
+      "animation",
+      "graphique",
+      "destruction"
+    ],
+    "usage": "illustration"
+  },
+  "frame_204": {
+    "visual": "Close-up of a man speaking in a professional setting.",
+    "narrative": [
+      "interview",
+      "expertise",
+      "humanite"
+    ],
+    "usage": "b-roll"
+  },
+  "frame_205": {
+    "visual": "Close-up of a man speaking with a serious expression.",
+    "narrative": [
+      "interview",
+      "expertise",
+      "humanite"
+    ],
+    "usage": "b-roll"
+  },
+  "frame_206": {
+    "visual": "Close-up of a man speaking in a professional setting.",
+    "narrative": [
+      "interview",
+      "expertise",
+      "humanite"
+    ],
+    "usage": "b-roll"
+  },
+  "frame_207": {
+    "visual": "Close-up of a man speaking with a concerned expression.",
+    "narrative": [
+      "interview",
+      "expertise",
+      "humanite"
+    ],
+    "usage": "b-roll"
+  },
+  "frame_208": {
+    "visual": "Close-up of a man speaking, looking directly at camera.",
+    "narrative": [
+      "interview",
+      "expertise",
+      "humanite"
+    ],
+    "usage": "b-roll"
+  },
+  "frame_209": {
+    "visual": "Close-up of a man speaking in a professional setting.",
+    "narrative": [
+      "interview",
+      "expertise",
+      "humanite"
+    ],
+    "usage": "b-roll"
+  },
+  "frame_210": {
+    "visual": "Close-up of a man speaking with a thoughtful expression.",
+    "narrative": [
+      "interview",
+      "expertise",
+      "humanite"
+    ],
+    "usage": "b-roll"
+  },
+  "frame_211": {
+    "visual": "Close-up of a person's face, looking serious.",
+    "narrative": [
+      "humanite",
+      "interview"
+    ],
+    "usage": "illustration"
+  },
+  "frame_212": {
+    "visual": "Close-up of a person's face, looking concerned.",
+    "narrative": [
+      "humanite",
+      "interview"
+    ],
+    "usage": "illustration"
+  },
+  "frame_213": {
+    "visual": "Close-up of a person's face, slightly smiling.",
+    "narrative": [
+      "humanite",
+      "interview"
+    ],
+    "usage": "illustration"
+  },
+  "frame_214": {
+    "visual": "Satellite view of swirling cloud formations.",
+    "narrative": [
+      "satellite",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "frame_215": {
+    "visual": "Satellite view of swirling cloud formations, blue hue.",
+    "narrative": [
+      "satellite",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "frame_216": {
+    "visual": "Satellite view of swirling cloud formations, purple hue.",
+    "narrative": [
+      "satellite",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "frame_217": {
+    "visual": "Satellite view of swirling cloud formations, white hue.",
+    "narrative": [
+      "satellite",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "frame_218": {
+    "visual": "Satellite view of swirling cloud formations, orange hue.",
+    "narrative": [
+      "satellite",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "frame_219": {
+    "visual": "Satellite view of swirling cloud formations, red hue.",
+    "narrative": [
+      "satellite",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "frame_220": {
+    "visual": "Satellite image of a hurricane, green and white.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "mesure"
+    ],
+    "usage": "illustration"
+  },
+  "frame_221": {
+    "visual": "Satellite image of a hurricane, green and yellow.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "mesure"
+    ],
+    "usage": "illustration"
+  },
+  "frame_222": {
+    "visual": "Satellite image of a hurricane, green and red.",
+    "narrative": [
+      "satellite",
+      "ouragan",
+      "mesure"
+    ],
+    "usage": "illustration"
+  },
+  "frame_223": {
+    "visual": "Flooded street with cars partially submerged.",
+    "narrative": [
+      "inondation",
+      "destruction"
+    ],
+    "usage": "illustration"
+  },
+  "frame_224": {
+    "visual": "Flooded street with cars, blurred motion effect.",
+    "narrative": [
+      "inondation",
+      "destruction"
+    ],
+    "usage": "illustration"
+  },
+  "frame_225": {
+    "visual": "Interior of a building, water damage visible.",
+    "narrative": [
+      "inondation",
+      "destruction"
+    ],
+    "usage": "illustration"
+  },
+  "frame_226": {
+    "visual": "Brown water flowing quickly through a flooded area.",
+    "narrative": [
+      "inondation",
+      "nature",
+      "eau"
+    ],
+    "usage": "illustration"
+  },
+  "frame_227": {
+    "visual": "Flooded street with debris and murky brown water.",
+    "narrative": [
+      "inondation",
+      "destruction",
+      "eau"
+    ],
+    "usage": "illustration"
+  },
+  "frame_228": {
+    "visual": "Brown water flowing through a dense, green forest.",
+    "narrative": [
+      "inondation",
+      "nature",
+      "eau"
+    ],
+    "usage": "illustration"
+  },
+  "frame_229": {
+    "visual": "Flooded street with a green and yellow safety cone.",
+    "narrative": [
+      "inondation",
+      "population",
+      "danger"
+    ],
+    "usage": "illustration"
+  },
+  "frame_230": {
+    "visual": "Flooded street with brown water and green foliage.",
+    "narrative": [
+      "inondation",
+      "nature",
+      "eau"
+    ],
+    "usage": "illustration"
+  },
+  "frame_231": {
+    "visual": "Dark blue screen with a bright white circular glow.",
+    "narrative": [
+      "satellite",
+      "technologie",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_232": {
+    "visual": "Dark blue screen with a bright white circular glow.",
+    "narrative": [
+      "satellite",
+      "technologie",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_233": {
+    "visual": "Dark blue screen with a bright white circular glow.",
+    "narrative": [
+      "satellite",
+      "technologie",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_234": {
+    "visual": "GPM logo with blue and yellow circular design.",
+    "narrative": [
+      "satellite",
+      "technologie",
+      "donnees"
+    ],
+    "usage": "illustration"
+  },
+  "frame_235": {
+    "visual": "GPM logo with blue and yellow circular design.",
+    "narrative": [
+      "satellite",
+      "technologie",
+      "donnees"
+    ],
+    "usage": "illustration"
+  },
+  "frame_236": {
+    "visual": "GPM logo with blue and yellow circular design.",
+    "narrative": [
+      "satellite",
+      "technologie",
+      "donnees"
+    ],
+    "usage": "illustration"
+  },
+  "frame_237": {
+    "visual": "Dark blue screen with a bright white circular glow.",
+    "narrative": [
+      "satellite",
+      "technologie",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_238": {
+    "visual": "Dark blue screen with a bright white circular glow.",
+    "narrative": [
+      "satellite",
+      "technologie",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_239": {
+    "visual": "Dark blue screen with a bright white circular glow.",
+    "narrative": [
+      "satellite",
+      "technologie",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_240": {
+    "visual": "Dark blue screen with a bright white circular glow.",
+    "narrative": [
+      "satellite",
+      "technologie",
+      "transition"
+    ],
+    "usage": "transition"
+  },
+  "frame_241": {
+    "visual": "White swirling cloud pattern against dark background.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "satellite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_242": {
+    "visual": "White swirling cloud pattern against dark background.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "satellite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_243": {
+    "visual": "White swirling cloud pattern against dark background.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "satellite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_244": {
+    "visual": "White swirling cloud pattern against dark background.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "satellite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_245": {
+    "visual": "White swirling cloud pattern against dark background.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "satellite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_246": {
+    "visual": "White swirling cloud pattern against dark background.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "satellite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_247": {
+    "visual": "White swirling cloud pattern against dark background.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "satellite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_248": {
+    "visual": "White swirling cloud pattern against dark background.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "satellite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_249": {
+    "visual": "White swirling cloud pattern against dark background.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "satellite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_250": {
+    "visual": "White swirling cloud pattern against dark background.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "satellite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_251": {
+    "visual": "White swirling cloud pattern against dark background.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "satellite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_252": {
+    "visual": "White swirling cloud pattern against dark background.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "satellite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_253": {
+    "visual": "White swirling cloud pattern against dark background.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "satellite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_254": {
+    "visual": "White swirling cloud pattern against dark background.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "satellite"
+    ],
+    "usage": "illustration"
+  },
+  "frame_255": {
+    "visual": "White swirling cloud pattern against dark background.",
+    "narrative": [
+      "tempete",
+      "nature",
+      "satellite"
+    ],
+    "usage": "illustration"
+  },
+  "gif_01": {
+    "visual": "Blue globe with swirling white cloud patterns.",
+    "narrative": [
+      "globe",
+      "nature",
+      "satellite"
+    ],
+    "usage": "illustration"
+  },
+  "gif_02": {
+    "visual": "Satellite image of a large storm system.",
+    "narrative": [
+      "satellite",
+      "tempete",
+      "donnees"
+    ],
+    "usage": "illustration"
+  },
+  "gif_03": {
+    "visual": "Close-up of swirling water and debris.",
+    "narrative": [
+      "inondation",
+      "destruction",
+      "nature"
+    ],
+    "usage": "illustration"
+  },
+  "gif_04": {
+    "visual": "Animated map showing storm path and intensity.",
+    "narrative": [
+      "carte",
+      "animation",
+      "prevision"
+    ],
+    "usage": "illustration"
+  },
+  "gif_05": {
+    "visual": "Close-up of a weather radar screen.",
+    "narrative": [
+      "technologie",
+      "mesure",
+      "donnees"
+    ],
+    "usage": "illustration"
+  },
+  "gif_06": {
+    "visual": "Aerial view of flooded streets and houses.",
+    "narrative": [
+      "inondation",
+      "infrastructure",
+      "destruction"
+    ],
+    "usage": "illustration"
+  },
+  "gif_07": {
+    "visual": "Close-up of a person looking at a screen.",
+    "narrative": [
+      "expertise",
+      "donnees",
+      "humanite"
+    ],
+    "usage": "illustration"
+  },
+  "gif_08": {
+    "visual": "Animated graphic showing hurricane wind speeds.",
+    "narrative": [
+      "ouragan",
+      "animation",
+      "graphique"
+    ],
+    "usage": "illustration"
+  },
+  "gif_09": {
+    "visual": "Close-up of a satellite dish.",
+    "narrative": [
+      "satellite",
+      "technologie",
+      "mesure"
+    ],
+    "usage": "illustration"
+  },
+  "gif_10": {
+    "visual": "Animated graphic of water flowing across land.",
+    "narrative": [
+      "inondation",
+      "animation",
+      "eau"
+    ],
+    "usage": "illustration"
+  },
+  "gif_11": {
+    "visual": "Close-up of a computer screen with data.",
+    "narrative": [
+      "donnees",
+      "science",
+      "technologie"
+    ],
+    "usage": "illustration"
+  },
+  "gif_12": {
+    "visual": "Close-up of a person speaking into a microphone.",
+    "narrative": [
+      "interview",
+      "expertise",
+      "explication"
+    ],
+    "usage": "illustration"
+  },
+  "gif_13": {
+    "visual": "Animated graphic showing a hurricane's structure.",
+    "narrative": [
+      "ouragan",
+      "animation",
+      "explication"
+    ],
+    "usage": "illustration"
+  },
+  "gif_14": {
+    "visual": "Abstract swirling colors, likely a transition.",
+    "narrative": [
+      "transition",
+      "nature",
+      "tempete"
+    ],
+    "usage": "transition"
+  },
+  "gif_15": {
+    "visual": "Blue and white swirling patterns, abstract.",
+    "narrative": [
+      "transition",
+      "nature",
+      "satellite"
+    ],
+    "usage": "transition"
+  },
+  "gif_16": {
+    "visual": "Dark blue and purple swirling cloud formations.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "gif_17": {
+    "visual": "Blue and purple swirling cloud formations, dark background.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "gif_18": {
+    "visual": "Blue and purple swirling cloud formations, dark background.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "gif_19": {
+    "visual": "Blue and purple swirling cloud formations, dark background.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "gif_20": {
+    "visual": "Blue and purple swirling cloud formations, dark background.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "gif_21": {
+    "visual": "Blue and purple swirling cloud formations, dark background.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "gif_22": {
+    "visual": "Green and blue swirling cloud formations, dark background.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "gif_23": {
+    "visual": "Green and blue swirling cloud formations, dark background.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "gif_24": {
+    "visual": "Green and blue swirling cloud formations, dark background.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "gif_25": {
+    "visual": "Green and blue swirling cloud formations, dark background.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "gif_26": {
+    "visual": "Green and blue swirling cloud formations, dark background.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "gif_27": {
+    "visual": "Dark blue and purple swirling cloud formations.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "gif_28": {
+    "visual": "Dark blue and purple swirling cloud formations.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "gif_29": {
+    "visual": "Dark blue and purple swirling cloud formations.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  },
+  "gif_30": {
+    "visual": "Dark blue and purple swirling cloud formations.",
+    "narrative": [
+      "satellite",
+      "nature",
+      "tempete"
+    ],
+    "usage": "illustration"
+  }
+}
