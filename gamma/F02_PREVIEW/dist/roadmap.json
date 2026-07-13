@@ -10,16 +10,25 @@
   "style": {
     "font_primary": "Cinzel",
     "font_accent": "Playfair Display",
-    "subtitle_size": 44,
+    "subtitle_size": 40,
     "subtitle_position": "bottom",
-    "subtitle_color": "#FFFFFF",
-    "accent_color": "#FFD700",
+    "subtitle_color": "#100f0f",
+    "accent_color": "#080808",
     "background_color": "#F5F0E8",
     "grain_intensity": 0.15,
     "vignette": true,
     "subtitle_anim": true,
     "subtitle_anim_speed": 5,
-    "overlay_global_intensity": 3
+    "overlay_global_intensity": 3,
+    "world_scale": 0.5,
+    "background_image": "bg_paper_crumpled.png",
+    "background_scale": 1.25,
+    "world_title_visible": true,
+    "world_title_color": "#4909fb",
+    "world_title_font": "Arial Black",
+    "world_title_size": 34,
+    "world_title_gap": 56,
+    "subtitle_font": "Arial Black"
   },
   "timeline": [
     {
