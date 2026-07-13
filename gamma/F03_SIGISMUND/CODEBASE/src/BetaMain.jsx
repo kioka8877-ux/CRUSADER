@@ -1,9 +1,11 @@
 /**
  * BetaMain.jsx — Composition principale CRUSADER Beta (v2.1 – sinusoidal camera)
- * PREVIEW MODE: Audio removed (no audio_clean.mp3 in preview build)
+ *
+ * Passe l'intégralité de la timeline et du style au WorldScene sinusoïdal.
+ * Sous-titres gérés par BetaSubtitle (indépendant des Sequences).
  */
 import React from "react";
-import { AbsoluteFill } from "remotion";
+import { AbsoluteFill, Audio, staticFile } from "remotion";
 import { Background } from "./components/Background";
 import { WorldScene } from "./components/WorldScene";
 import { BetaSubtitle } from "./components/BetaSubtitle";
@@ -18,6 +20,7 @@ export const BetaMain = ({ timing, roadmap }) => {
         style={roadmap.style}
         timing={timing}
       />
+      <Audio src={staticFile("audio_clean.mp3")} />
     </AbsoluteFill>
   );
 };
