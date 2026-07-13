@@ -1,15 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 
 /**
- * MiniatureEditor v4 — Mini Créateur avec sélecteur rectangle + waypoints
+ * MiniatureEditor v5 — Rectangle cible pour ch.1 + pan caméra pour ch.2+
  *
- * Workflow par chapitre:
- * 1. Upload image
- * 2. Dessiner un rectangle (sélection de la zone à couper)
- * 3. Placer les waypoints DANS le rectangle (où la caméra passe)
- *    - Chapitre 1: 1 waypoint (zoom in)
- *    - Chapitres suivants: 2 waypoints (pan wp1 → wp2)
- * 4. Découper → fragment PNG (Canvas API, sans perte)
+ * Chapitre 1: dessiner un rectangle cible → le zoom s'arrête exactement sur cette zone
+ * Chapitres 2+: crop + 2 waypoints → fragment plein écran, caméra pan de wp1 à wp2
  */
 export const MiniatureEditor = ({ timeline, onMiniatureChange, onThumbnailUpload, introDuration = 90, zoomLevel = 2.5, onIntroDurationChange, onZoomLevelChange }) => {
   const [numChapters, setNumChapters] = useState(0);
@@ -65,12 +60,11 @@ export const MiniatureEditor = ({ timeline, onMiniatureChange, onThumbnailUpload
     reader.readAsDataURL(file);
   };
 
-  /* ── Dessin du rectangle de sélection ── */
+  /* ── Dessin du rectangle (crop pour ch.2+ OU cible pour ch.1) ── */
   const handleMouseDown = (e) => {
     if (selectedChapter < 0) return;
     const ch = chapters[selectedChapter];
     if (!ch?.imageURL) return;
-    // Si on clique sur un waypoint existant, ne pas dessiner
     if (e.target.classList.contains("wp-dot") || e.target.closest(".wp-dot")) return;
 
     const wrap = canvasWrapRef.current;
@@ -112,7 +106,8 @@ export const MiniatureEditor = ({ timeline, onMiniatureChange, onThumbnailUpload
       return;
     }
 
-    // Sauvegarder le crop et reset waypoints (ils doivent être DANS le crop)
+    // Pour le chapitre 1: le crop EST la cible du zoom (pas de waypoints)
+    // Pour les chapitres 2+: le crop est la zone à découper, waypoints dedans
     setChapters(prev => prev.map((c, i) =>
       i === selectedChapter ? { ...c, crop, waypoints: [], fragment: null } : c
     ));
@@ -120,31 +115,11 @@ export const MiniatureEditor = ({ timeline, onMiniatureChange, onThumbnailUpload
     setDrawCurrent(null);
   };
 
-  /* ── Clic sur l'image → placer waypoint (chapitre 1: pas de crop, clic direct) ── */
-  const handleImageClickDirect = (e) => {
-    if (selectedChapter < 0) return;
-    const ch = chapters[selectedChapter];
-    if (!ch?.imageURL) return;
-    if (e.target.classList.contains("wp-dot") || e.target.closest(".wp-dot")) return;
-
-    const wrap = canvasWrapRef.current;
-    if (!wrap) return;
-    const rect = wrap.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width;
-    const y = (e.clientY - rect.top) / rect.height;
-
-    // Chapitre 1: 1 waypoint, pas de crop, fragment = image complète
-    if (selectedChapter === 0) {
-      setChapters(prev => prev.map((c, i) =>
-        i === 0 ? { ...c, waypoints: [{ x: Math.max(0, Math.min(1, x)), y: Math.max(0, Math.min(1, y)) }] } : c
-      ));
-    }
-  };
-
-  /* ── Clic DANS le rectangle → placer waypoint ── */
+  /* ── Clic DANS le rectangle → placer waypoint (ch.2+ seulement) ── */
   const handleCropClick = (e) => {
     const ch = chapters[selectedChapter];
     if (!ch?.crop) return;
+    if (selectedChapter === 0) return; // ch.1 n'a pas de waypoints
 
     const wrap = canvasWrapRef.current;
     if (!wrap) return;
@@ -159,8 +134,7 @@ export const MiniatureEditor = ({ timeline, onMiniatureChange, onThumbnailUpload
     const wpX = (clickX - ch.crop.x1) / (ch.crop.x2 - ch.crop.x1);
     const wpY = (clickY - ch.crop.y1) / (ch.crop.y2 - ch.crop.y1);
 
-    const isFirst = selectedChapter === 0;
-    const maxPoints = isFirst ? 1 : 2;
+    const maxPoints = 2;
 
     setChapters(prev => prev.map((c, i) => {
       if (i !== selectedChapter) return c;
@@ -203,13 +177,11 @@ export const MiniatureEditor = ({ timeline, onMiniatureChange, onThumbnailUpload
     const imgW = img.naturalWidth;
     const imgH = img.naturalHeight;
 
-    // Coordonnées du crop en pixels
     const sx = ch.crop.x1 * imgW;
     const sy = ch.crop.y1 * imgH;
     const sw = (ch.crop.x2 - ch.crop.x1) * imgW;
     const sh = (ch.crop.y2 - ch.crop.y1) * imgH;
 
-    // Canvas découpe — PNG sans perte
     const canvas = document.createElement("canvas");
     canvas.width = Math.round(sw);
     canvas.height = Math.round(sh);
@@ -253,7 +225,7 @@ export const MiniatureEditor = ({ timeline, onMiniatureChange, onThumbnailUpload
 
   const ch = selectedChapter >= 0 ? chapters[selectedChapter] : null;
   const isFirst = selectedChapter === 0;
-  const maxPoints = isFirst ? 1 : 2;
+  const maxPoints = isFirst ? 0 : 2;
 
   return (
     <div className="flex flex-1 overflow-hidden">
@@ -355,11 +327,13 @@ export const MiniatureEditor = ({ timeline, onMiniatureChange, onThumbnailUpload
             {/* Instructions */}
             <div className="bg-gray-900 rounded-lg p-3 w-full max-w-3xl">
               <h3 className="text-sm font-bold text-amber-400 mb-1">
-                Chapitre {selectedChapter + 1} {isFirst ? "— Zoom in" : ch.isDiagonal ? "— Ligne oblique" : "— Pan"}
+                Chapitre {selectedChapter + 1} {isFirst ? "— Rectangle cible (zoom)" : ch.isDiagonal ? "— Ligne oblique" : "— Pan caméra"}
               </h3>
               <p className="text-xs text-gray-400">
                 {isFirst
-                  ? "Clique sur l'image pour placer le waypoint (zoom in), puis clique sur ✂️ Découper"
+                  ? !ch.crop
+                    ? "Étape 1: Dessine un rectangle sur l'image — c'est la ZONE que la caméra montrera à la fin du zoom"
+                    : "Étape 2: Clique sur ✂️ Valider pour générer le fragment (image complète + cible mémorisée)"
                   : !ch.crop
                     ? "Étape 1: Dessine un rectangle sur l'image pour sélectionner la zone à couper (click-drag)"
                     : ch.waypoints.length < maxPoints
@@ -371,36 +345,32 @@ export const MiniatureEditor = ({ timeline, onMiniatureChange, onThumbnailUpload
             {/* Image avec sélecteur */}
             <div
               ref={canvasWrapRef}
-              onMouseDown={isFirst ? undefined : handleMouseDown}
-              onMouseMove={isFirst ? undefined : handleMouseMove}
-              onMouseUp={isFirst ? undefined : handleMouseUp}
-              onMouseLeave={isFirst ? undefined : handleMouseUp}
-              onClick={isFirst ? handleImageClickDirect : undefined}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
               className="relative border-2 border-amber-900 rounded-lg overflow-hidden bg-black"
               style={{ display: "inline-block", cursor: "crosshair" }}
             >
               <img src={ch.imageURL} alt="Miniature" className="block max-w-full max-h-[45vh] pointer-events-none select-none" />
 
-              {/* Waypoint pour le chapitre 1 (pas de crop, directement sur l'image) */}
-              {isFirst && ch.waypoints.map((wp, i) => (
+              {/* Rectangle cible pour le chapitre 1 */}
+              {isFirst && ch.crop && (
                 <div
-                  key={i}
-                  className="wp-dot absolute w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold"
+                  className="absolute border-2 border-amber-500 bg-amber-500/10"
                   style={{
-                    left: `${wp.x * 100}%`,
-                    top: `${wp.y * 100}%`,
-                    transform: "translate(-50%, -50%)",
-                    background: "#fbbf24",
-                    color: "#000",
-                    border: "2px solid #000",
-                    boxShadow: "0 0 8px rgba(0,0,0,0.8)",
-                    zIndex: 20,
-                    cursor: "pointer",
+                    left: `${ch.crop.x1 * 100}%`,
+                    top: `${ch.crop.y1 * 100}%`,
+                    width: `${(ch.crop.x2 - ch.crop.x1) * 100}%`,
+                    height: `${(ch.crop.y2 - ch.crop.y1) * 100}%`,
+                    zIndex: 10,
                   }}
                 >
-                  {i + 1}
+                  <span className="absolute -top-5 left-0 text-xs font-bold px-1 rounded bg-amber-500 text-black">
+                    Cible zoom
+                  </span>
                 </div>
-              ))}
+              )}
 
               {/* Rectangle de sélection (crop) — chapitres 2+ seulement */}
               {ch.crop && !isFirst && (
@@ -480,18 +450,18 @@ export const MiniatureEditor = ({ timeline, onMiniatureChange, onThumbnailUpload
                 </button>
               )}
 
+              {/* Bouton valider pour le chapitre 1 (crop = cible, pas besoin de waypoints) */}
+              {isFirst && ch.crop && !ch.fragment && (
+                <button onClick={() => cropFragment(selectedChapter)}
+                  className="px-6 py-2 bg-green-700 hover:bg-green-600 rounded text-sm font-semibold">
+                  ✂️ Valider le fragment
+                </button>
+              )}
+
               {ch.crop && ch.waypoints.length >= maxPoints && !ch.fragment && !isFirst && (
                 <button onClick={() => cropFragment(selectedChapter)}
                   className="px-6 py-2 bg-green-700 hover:bg-green-600 rounded text-sm font-semibold">
                   ✂️ Découper le fragment
-                </button>
-              )}
-
-              {/* Bouton découper pour le chapitre 1 (pas besoin de crop) */}
-              {isFirst && ch.waypoints.length >= 1 && !ch.fragment && (
-                <button onClick={() => cropFragment(selectedChapter)}
-                  className="px-6 py-2 bg-green-700 hover:bg-green-600 rounded text-sm font-semibold">
-                  ✂️ Valider le fragment
                 </button>
               )}
             </div>

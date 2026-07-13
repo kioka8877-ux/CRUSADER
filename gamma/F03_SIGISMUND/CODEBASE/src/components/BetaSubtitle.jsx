@@ -41,7 +41,7 @@ export const BetaSubtitle = ({ timeline, style, timing }) => {
   const accentColor = style.accent_color ?? "#FFD700";
   const position = style.subtitle_position ?? "bottom";
   const align = style.subtitle_align ?? "center";
-  const wordFadeFrames = style.subtitle_word_fade ?? 3;
+  const wordFadeFrames = style.subtitle_word_fade ?? 6;
 
   /* —— Durée locale du segment —— */
   const nextSeg = timeline[segIdx + 1] || null;
@@ -114,7 +114,7 @@ export const BetaSubtitle = ({ timeline, style, timing }) => {
               color: w.is_strong ? accentColor : color,
               opacity: wordOpacity,
               transform: `scale(${wordScale})`,
-              display: "inline",
+              display: "inline-block",
             }}
           >
             {w.word}

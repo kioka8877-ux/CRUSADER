@@ -72,11 +72,27 @@ export default function App() {
     }));
   };
 
+  const [showExportModal, setShowExportModal] = useState(false);
+  const [exportJSON, setExportJSON] = useState("");
+
   const handleExport = () => {
-    const blob = new Blob(
-      [JSON.stringify(roadmap, null, 2)],
-      { type: "application/json" }
-    );
+    const json = JSON.stringify(roadmap, null, 2);
+    setExportJSON(json);
+    setShowExportModal(true);
+  };
+
+  const copyExportJSON = () => {
+    navigator.clipboard.writeText(exportJSON).then(() => {
+      alert("roadmap.json copié dans le presse-papier !");
+    }).catch(() => {
+      // Fallback: sélectionner le textarea
+      const ta = document.getElementById("export-textarea");
+      if (ta) { ta.select(); document.execCommand("copy"); alert("Copié !"); }
+    });
+  };
+
+  const downloadExportJSON = () => {
+    const blob = new Blob([exportJSON], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -284,6 +300,92 @@ export default function App() {
               />
             </DeviceFrame>
           </main>
+        </div>
+      )}
+      {/* Export Modal */}
+      {showExportModal && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0, left: 0, right: 0, bottom: 0,
+            background: "rgba(0,0,0,0.8)",
+            zIndex: 9999,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "20px",
+          }}
+          onClick={() => setShowExportModal(false)}
+        >
+          <div
+            style={{
+              background: "#1a1a1a",
+              border: "1px solid #444",
+              borderRadius: 8,
+              padding: 20,
+              maxWidth: "90%",
+              maxHeight: "90%",
+              display: "flex",
+              flexDirection: "column",
+              gap: 12,
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <h2 style={{ color: "#C5A44E", fontSize: 18, fontWeight: "bold" }}>📦 roadmap.json export</h2>
+              <button
+                onClick={() => setShowExportModal(false)}
+                style={{ background: "none", border: "none", color: "#888", fontSize: 20, cursor: "pointer" }}
+              >✕</button>
+            </div>
+            <div style={{ display: "flex", gap: 8 }}>
+              <button
+                onClick={copyExportJSON}
+                style={{
+                  padding: "8px 16px",
+                  background: "#C5A44E",
+                  color: "#000",
+                  border: "none",
+                  borderRadius: 4,
+                  fontWeight: "bold",
+                  cursor: "pointer",
+                }}
+              >📋 Copier dans le presse-papier</button>
+              <button
+                onClick={downloadExportJSON}
+                style={{
+                  padding: "8px 16px",
+                  background: "#333",
+                  color: "#C5A44E",
+                  border: "1px solid #555",
+                  borderRadius: 4,
+                  cursor: "pointer",
+                }}
+              >⬇️ Télécharger (si autorisé)</button>
+            </div>
+            <textarea
+              id="export-textarea"
+              value={exportJSON}
+              readOnly
+              style={{
+                width: "700px",
+                maxWidth: "80vw",
+                height: "400px",
+                maxHeight: "60vh",
+                background: "#0d0d0d",
+                color: "#ccc",
+                border: "1px solid #333",
+                borderRadius: 4,
+                padding: 12,
+                fontFamily: "monospace",
+                fontSize: 11,
+                resize: "both",
+              }}
+            />
+            <p style={{ color: "#666", fontSize: 12 }}>
+              Astuce: Ctrl+A dans la zone de texte puis Ctrl+C pour copier manuellement.
+            </p>
+          </div>
         </div>
       )}
     </div>

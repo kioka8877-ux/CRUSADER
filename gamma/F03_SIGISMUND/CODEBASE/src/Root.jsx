@@ -70,16 +70,10 @@ export const Root = () => {
       height={1920}
       calculateMetadata={async () => {
         const { timing, roadmap } = fetchData();
-        const hasPlan = roadmap.thumbnail_plan && roadmap.thumbnail_plan.chapters;
-        let duration = timing.meta.total_frames;
-        if (hasPlan) {
-          // Durée hybride = transitions + narration
-          const transFrames = roadmap.thumbnail_plan.transition_frames || 45;
-          const chapters = roadmap.thumbnail_plan.chapters;
-          let extra = transFrames * chapters.length;
-          // La narration totale = timing.meta.total_frames (inchangé)
-          duration = extra + timing.meta.total_frames;
-        }
+        const hasPlan = roadmap.miniature && roadmap.miniature.chapters;
+        // Approche overlay: les miniatures sont superposées pendant intro_duration
+        // au début de chaque chapitre — pas de frames supplémentaires
+        const duration = timing.meta.total_frames;
         return {
           durationInFrames: duration,
           fps: timing.meta.fps,
