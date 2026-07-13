@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { Player } from "@remotion/player";
-import { BetaMain } from "@f03/BetaMain";
+import { BetaMain } from "./preview/BetaMain";
 import { ControlPanel } from "./ControlPanel";
 import { DeviceFrame } from "./DeviceFrame";
 import "./index.css";
