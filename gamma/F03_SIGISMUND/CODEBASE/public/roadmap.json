@@ -41,7 +41,8 @@
       "end": 5.32,
       "overlay_type": "vent",
       "overlay_intensite": 2,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "A tropical storm, a sustained winds between 39 and 73 miles per hour."
     },
     {
       "id": 2,
@@ -52,7 +53,8 @@
       "end": 9.26,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "This is the stage at which the system receives a name from a predetermined list maintained"
     },
     {
       "id": 3,
@@ -63,7 +65,8 @@
       "end": 11.08,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "by the World Meteorological Organization."
     },
     {
       "id": 4,
@@ -74,7 +77,8 @@
       "end": 15.18,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "The naming system was introduced in 1923, initially using only female names."
     },
     {
       "id": 5,
@@ -85,7 +89,8 @@
       "end": 17.14,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "gif"
+      "media_type": "gif",
+      "text_subtitles": "Male names were added in 1979."
     },
     {
       "id": 6,
@@ -96,7 +101,8 @@
       "end": 21.26,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "If a storm causes exceptional damage or death, its name is permanently retired."
     },
     {
       "id": 7,
@@ -107,7 +113,8 @@
       "end": 25.1,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "Since Saint-Quentin-Carte, over 90 names have been retired from the Atlantic list,"
     },
     {
       "id": 8,
@@ -118,7 +125,8 @@
       "end": 27.22,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "including Katrina, Harvey and Maria."
     },
     {
       "id": 9,
@@ -129,7 +137,8 @@
       "end": 28.54,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "Category 1 hurricane."
     },
     {
       "id": 10,
@@ -140,7 +149,8 @@
       "end": 32.66,
       "overlay_type": "vent",
       "overlay_intensite": 2,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "A category 1 hurricane has sustained winds between 75 and 95 miles per hour."
     },
     {
       "id": 11,
@@ -151,7 +161,8 @@
       "end": 37.62,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "On the Saffir-Simpson scale, it is classified as causing minimal structural damage to well-built homes."
     },
     {
       "id": 12,
@@ -162,7 +173,8 @@
       "end": 39.7,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "However, the term minimal is misleading."
     },
     {
       "id": 13,
@@ -173,7 +185,8 @@
       "end": 44.14,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "The category 1 hurricane can topple trees, snap powerlines and leave entire regions"
     },
     {
       "id": 14,
@@ -184,7 +197,8 @@
       "end": 45.72,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "without electricity for days."
     },
     {
       "id": 15,
@@ -195,7 +209,8 @@
       "end": 50.08,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "Hurricane Dolly in 2008 made landfall in Texas as a category 1 and still caused"
     },
     {
       "id": 16,
@@ -206,7 +221,8 @@
       "end": 52.42,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "over 1.5 billion dollars in damage."
     },
     {
       "id": 17,
@@ -217,7 +233,8 @@
       "end": 55.32,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "No hurricane should be taken lightly because of its category number."
     },
     {
       "id": 18,
@@ -228,7 +245,8 @@
       "end": 56.86,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "Category 3 hurricane."
     },
     {
       "id": 19,
@@ -239,7 +257,8 @@
       "end": 60.86,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "Category 3 hurricane is the threshold for what meteorologists classify as a major hurricane."
     },
     {
       "id": 20,
@@ -250,7 +269,8 @@
       "end": 64.7,
       "overlay_type": "vent",
       "overlay_intensite": 2,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "Sustained winds range from 111 to 129 miles per hour."
     },
     {
       "id": 21,
@@ -261,7 +281,8 @@
       "end": 68.6,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "gif"
+      "media_type": "gif",
+      "text_subtitles": "At this intensity, well-built homes can suffer structural damage including the"
     },
     {
       "id": 22,
@@ -272,7 +293,8 @@
       "end": 70.64,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "removal of roof decking and gable ends."
     },
     {
       "id": 23,
@@ -283,7 +305,8 @@
       "end": 74.16,
       "overlay_type": "pluie",
       "overlay_intensite": 2,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "Hurricane Tien Water may be unavailable for weeks after the storm passes."
     },
     {
       "id": 24,
@@ -294,7 +317,8 @@
       "end": 77.98,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "Hurricane Katrina made its final landfall near the Louisiana-Mississippi border"
     },
     {
       "id": 25,
@@ -305,7 +329,8 @@
       "end": 80.04,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "as a category 3 in 2005."
     },
     {
       "id": 26,
@@ -316,7 +341,8 @@
       "end": 84.66,
       "overlay_type": "pluie",
       "overlay_intensite": 2,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "Despite weakening from its peak intensity, it produced a storm surge exceeding 25 feet"
     },
     {
       "id": 27,
@@ -327,7 +353,8 @@
       "end": 87.6,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "and caused over 125 billion dollars in damage,"
     },
     {
       "id": 28,
@@ -338,7 +365,8 @@
       "end": 91.3,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "making it one of the costliest natural disasters in human history."
     },
     {
       "id": 29,
@@ -349,7 +377,8 @@
       "end": 95.12,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "Category 5 is the highest classification on the Saphir-Simpson scale,"
     },
     {
       "id": 30,
@@ -360,7 +389,8 @@
       "end": 98.58,
       "overlay_type": "vent",
       "overlay_intensite": 2,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "with sustained winds of 157 miles per hour or greater."
     },
     {
       "id": 31,
@@ -371,7 +401,8 @@
       "end": 101.74,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "At this intensity, a high percentage of homes will be destroyed,"
     },
     {
       "id": 32,
@@ -382,7 +413,8 @@
       "end": 104.32,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "with total roof failure and wall collapse."
     },
     {
       "id": 33,
@@ -393,7 +425,8 @@
       "end": 107.36,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "The affected area may be uninhabitable for weeks or months."
     },
     {
       "id": 34,
@@ -404,7 +437,8 @@
       "end": 109.66,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "In the entire recorded history of Atlantic hurricanes,"
     },
     {
       "id": 35,
@@ -415,7 +449,8 @@
       "end": 113.88,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "only four category 5 storms have made landfall in the continental United States."
     },
     {
       "id": 36,
@@ -426,7 +461,8 @@
       "end": 116.46,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "The Labor Day Hurricane of Nineteenth 35,"
     },
     {
       "id": 37,
@@ -437,7 +473,8 @@
       "end": 118.44,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "gif"
+      "media_type": "gif",
+      "text_subtitles": "Hurricane Cami in Nineteenth 92,"
     },
     {
       "id": 38,
@@ -448,7 +485,8 @@
       "end": 120.36,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "and Hurricane Michael in 2018."
     },
     {
       "id": 39,
@@ -459,7 +497,8 @@
       "end": 125.0,
       "overlay_type": "vent",
       "overlay_intensite": 2,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "Hurricane Irma in 2017 maintained category 5 intensity winds of"
     },
     {
       "id": 40,
@@ -470,7 +509,8 @@
       "end": 128.3,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "1.85 miles per hour for 37 consecutive hours."
     },
     {
       "id": 41,
@@ -481,7 +521,8 @@
       "end": 132.02,
       "overlay_type": "vent",
       "overlay_intensite": 2,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "The longest any cyclone on Earth has ever sustained that wind speed."
     },
     {
       "id": 42,
@@ -492,7 +533,8 @@
       "end": 135.5,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "A single hurricane releases the energy equivalent of roughly"
     },
     {
       "id": 43,
@@ -503,7 +545,8 @@
       "end": 137.74,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "through the formation of a typhoon."
     },
     {
       "id": 44,
@@ -514,7 +557,8 @@
       "end": 141.56,
       "overlay_type": "vent",
       "overlay_intensite": 2,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "A super typhoon is a typhoon with sustained winds of"
     },
     {
       "id": 45,
@@ -525,7 +569,8 @@
       "end": 143.52,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "1.15 miles per hour or greater."
     },
     {
       "id": 46,
@@ -536,7 +581,8 @@
       "end": 147.46,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "Equivalent to a strong category 4, or category 5 hurricane."
     },
     {
       "id": 47,
@@ -547,7 +593,8 @@
       "end": 150.2,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "Typhoon Haiyan struck the Philippines in 2003"
     },
     {
       "id": 48,
@@ -558,7 +605,8 @@
       "end": 153.72,
       "overlay_type": "vent",
       "overlay_intensite": 2,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "with sustained winds of one of the strongest landfalls ever recorded."
     },
     {
       "id": 49,
@@ -569,7 +617,8 @@
       "end": 157.36,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "It killed over 6,300 people and displaced 4 million."
     },
     {
       "id": 50,
@@ -580,7 +629,8 @@
       "end": 162.54,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "Typhoon Tip in 1979 holds the record for the largest tropical cyclone ever measured,"
     },
     {
       "id": 51,
@@ -591,7 +641,8 @@
       "end": 165.86,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "with a circulation spanning 1,300 kms in diameter."
     },
     {
       "id": 52,
@@ -602,7 +653,8 @@
       "end": 168.62,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "That is wider than the distance from New York City to Houston."
     },
     {
       "id": 53,
@@ -613,7 +665,8 @@
       "end": 169.6,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "gif"
+      "media_type": "gif",
+      "text_subtitles": "Cyclone"
     },
     {
       "id": 54,
@@ -624,7 +677,8 @@
       "end": 171.64,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "Along the Indian Ocean and South Pacific,"
     },
     {
       "id": 55,
@@ -635,7 +689,8 @@
       "end": 173.62,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "the same type of storm is called a cyclone."
     },
     {
       "id": 56,
@@ -646,7 +701,8 @@
       "end": 174.84,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "The physics are identical,"
     },
     {
       "id": 57,
@@ -657,7 +713,8 @@
       "end": 177.24,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "but cyclones south of the equator rotate clockwise,"
     },
     {
       "id": 58,
@@ -668,7 +725,8 @@
       "end": 180.3,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "opposite to hurricanes and typhoons in the Northern Hemisphere."
     },
     {
       "id": 59,
@@ -679,7 +737,8 @@
       "end": 182.0,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "This is caused by the Coriolis effect."
     },
     {
       "id": 60,
@@ -690,7 +749,8 @@
       "end": 185.64,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "The deadliest tropical cyclone in recorded history was the Bola Cyclone,"
     },
     {
       "id": 61,
@@ -701,7 +761,8 @@
       "end": 187.82,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "which struck Bangladesh in 1970"
     },
     {
       "id": 62,
@@ -712,7 +773,8 @@
       "end": 191.0,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "and killed an estimated 300,000 to 500,000 people,"
     },
     {
       "id": 63,
@@ -723,7 +785,8 @@
       "end": 195.06,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "making it one of the single deadliest natural disasters in human history."
     },
     {
       "id": 64,
@@ -734,7 +797,8 @@
       "end": 196.4,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "Bomb Cyclone"
     },
     {
       "id": 65,
@@ -745,7 +809,8 @@
       "end": 199.72,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "A bomb cyclone, formerly known as Explosive Sixogenesis,"
     },
     {
       "id": 66,
@@ -756,7 +821,8 @@
       "end": 202.46,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "occurs when at least 24 millibars in 24 hours."
     },
     {
       "id": 67,
@@ -767,7 +833,8 @@
       "end": 207.04,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "This rapid intensification can turn an ordinary storm into a monster in less than a day."
     },
     {
       "id": 68,
@@ -778,7 +845,8 @@
       "end": 210.84,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "While the term is most commonly applied to extra-tropical winter storms,"
     },
     {
       "id": 69,
@@ -789,7 +857,8 @@
       "end": 213.54,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "gif"
+      "media_type": "gif",
+      "text_subtitles": "tropical cyclones can also have explosive intensification."
     },
     {
       "id": 70,
@@ -800,7 +869,8 @@
       "end": 218.18,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "Hurricane Patricia in Winiflux intensified a tropical storm to a Category 5 hurricane,"
     },
     {
       "id": 71,
@@ -811,7 +881,8 @@
       "end": 222.02,
       "overlay_type": "vent",
       "overlay_intensite": 2,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "with winds of 215 miles per hour in just 24 hours,"
     },
     {
       "id": 72,
@@ -822,7 +893,8 @@
       "end": 225.62,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "the most rapid intensification ever recorded in the Western Hemisphere."
     },
     {
       "id": 73,
@@ -833,7 +905,8 @@
       "end": 226.6,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "Hypercane"
     },
     {
       "id": 74,
@@ -844,7 +917,8 @@
       "end": 231.24,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "A hypercane is a hypocentric tropical cyclone that is theoretically possible under extreme conditions."
     },
     {
       "id": 75,
@@ -855,7 +929,8 @@
       "end": 235.64,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "First proposed by MIT atmospheric scientist Kerry Emanuel in 2014,"
     },
     {
       "id": 76,
@@ -866,7 +941,8 @@
       "end": 241.8,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "a hypercane could form if ocean surface temperatures reached approximately 50 degrees Celsius,"
     },
     {
       "id": 77,
@@ -877,7 +953,8 @@
       "end": 245.52,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "roughly 20 degrees warmer than the hottest ocean temperatures recorded today."
     },
     {
       "id": 78,
@@ -888,7 +965,8 @@
       "end": 249.56,
       "overlay_type": "vent",
       "overlay_intensite": 2,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "A hypercane would produce sustained winds exceeding 500 miles per hour"
     },
     {
       "id": 79,
@@ -899,7 +977,8 @@
       "end": 253.84,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "and an high wall reaching into the stratosphere at an altitude of over 20 miles."
     },
     {
       "id": 80,
@@ -910,7 +989,8 @@
       "end": 260.32,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "Some scientists have speculated that hypercanes may have formed in the aftermath of the asteroid impact that killed the dinosaurs,"
     },
     {
       "id": 81,
@@ -921,7 +1001,8 @@
       "end": 264.24,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "when ocean temperatures near the impact site could have temporarily exceeded the threshold."
     },
     {
       "id": 82,
@@ -932,7 +1013,8 @@
       "end": 267.52,
       "overlay_type": "defaut",
       "overlay_intensite": 1,
-      "media_type": "image"
+      "media_type": "image",
+      "text_subtitles": "However, no hypercane has ever been confirmed to exist."
     }
   ],
   "validated_by_magos": true,
