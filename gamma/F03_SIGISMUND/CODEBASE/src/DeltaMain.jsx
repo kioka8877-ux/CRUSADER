@@ -1,14 +1,18 @@
 /**
- * DeltaMain.jsx — F03 SIGISMUND (v2 — overlay approach)
+ * DeltaMain.jsx — F03 SIGISMUND (v3 — announce-sync)
  *
- * Au lieu d'une timeline séquentielle [Thumb][Narr][Thumb][Narr],
- * on utilise une approche OVERLAY :
- * - Le contenu normal (BetaMain: capsules + sous-titres + audio) est TOUJOURS rendu
- * - La miniature est superposée pendant intro_duration frames au début de chaque chapitre
+ * BREAKING CHANGE: la miniature apparaît PENDANT l'annonce du nom du chapitre,
+ * pas pendant un silence/intro_duration fixe.
+ *
+ * Source de vérité: announce_start_frame → announce_end_frame
+ * - Contenu normal (BetaMain: capsules + sous-titres + audio) TOUJOURS rendu
+ * - Miniature overlay PENDANT l'annonce du nom
  * - Ch.1: zoom vers le rectangle cible (crop)
  * - Ch.2+: pan caméra sur l'image complète de wp1 → wp2
+ * - Fade in/out au début/fin de l'annonce
  *
- * Si roadmap.miniature est absent → fallback sur Main (gamma standard).
+ * Fallback: si pas d'announce frames → utilise start_segment + intro_duration (legacy)
+ * Si roadmap.miniature absent → fallback sur Main (gamma standard).
  */
 import React from "react";
 import { AbsoluteFill, Audio, staticFile, useCurrentFrame, useVideoConfig, interpolate } from "remotion";
@@ -18,8 +22,6 @@ import { BetaSubtitle } from "./components/BetaSubtitle";
 import { Main } from "./Main";
 
 export const DeltaMain = ({ timing, roadmap }) => {
-  const { durationInFrames } = useVideoConfig();
-
   // Fallback si pas de miniature
   if (!roadmap.miniature || !roadmap.miniature.chapters || roadmap.miniature.chapters.length === 0) {
     return <Main timing={timing} roadmap={roadmap} />;
@@ -39,17 +41,31 @@ export const DeltaMain = ({ timing, roadmap }) => {
 
       {/* === Overlays miniatures par chapitre === */}
       {chapters.map((chapter, idx) => {
-        if (!chapter.start_segment) return null;
-        const seg = timeline.find(s => s.id === chapter.start_segment);
-        if (!seg) return null;
+        // ANNOUNCE-SYNC: use announce_start/end_frame if present
+        let startFrame = null;
+        let endFrame = null;
+
+        if (chapter.announce_start_frame != null && chapter.announce_end_frame != null) {
+          startFrame = chapter.announce_start_frame;
+          endFrame = chapter.announce_end_frame;
+        } else if (chapter.start_segment) {
+          // LEGACY fallback
+          const seg = timeline.find(s => s.id === chapter.start_segment);
+          if (seg) {
+            startFrame = seg.start_frame;
+            endFrame = seg.start_frame + introDuration;
+          }
+        }
+
+        if (startFrame == null) return null;
 
         return (
           <MiniatureOverlay
             key={idx}
             chapter={chapter}
             chapterIdx={idx}
-            chapterStartFrame={seg.start_frame}
-            introDuration={introDuration}
+            announceStart={startFrame}
+            announceEnd={endFrame}
           />
         );
       })}
@@ -61,27 +77,31 @@ export const DeltaMain = ({ timing, roadmap }) => {
 };
 
 /**
- * MiniatureOverlay — affiche la miniature par-dessus le contenu pendant intro_duration frames.
- * Ch.1: zoom vers rectangle cible (crop)
- * Ch.2+: pan caméra sur image complète de wp1 → wp2
+ * MiniatureOverlay — affiche la miniature pendant la fenêtre d'annonce.
  */
-const MiniatureOverlay = ({ chapter, chapterIdx, chapterStartFrame, introDuration }) => {
+const MiniatureOverlay = ({ chapter, chapterIdx, announceStart, announceEnd }) => {
   const frame = useCurrentFrame();
   const { width, height } = useVideoConfig();
 
-  const localFrame = frame - chapterStartFrame;
-  const hasIntro = (chapter.imageURL || chapter.fragment) && localFrame >= 0 && localFrame < introDuration;
+  const localFrame = frame - announceStart;
+  const announceDuration = announceEnd - announceStart;
+  const hasIntro = (chapter.imageURL || chapter.fragment) && localFrame >= 0 && localFrame < announceDuration;
 
   if (!hasIntro) return null;
 
   // === Opacity ===
+  const fadeInFrames = 3;
   const fadeOutFrames = 5;
   let miniOpacity = 0;
 
-  if (localFrame < introDuration - fadeOutFrames) {
+  if (localFrame < fadeInFrames) {
+    miniOpacity = interpolate(localFrame, [0, fadeInFrames], [0, 1], {
+      extrapolateLeft: "clamp", extrapolateRight: "clamp",
+    });
+  } else if (localFrame < announceDuration - fadeOutFrames) {
     miniOpacity = 1;
   } else {
-    miniOpacity = interpolate(localFrame, [introDuration - fadeOutFrames, introDuration], [1, 0], {
+    miniOpacity = interpolate(localFrame, [announceDuration - fadeOutFrames, announceDuration], [1, 0], {
       extrapolateLeft: "clamp", extrapolateRight: "clamp",
     });
   }
@@ -103,7 +123,7 @@ const MiniatureOverlay = ({ chapter, chapterIdx, chapterStartFrame, introDuratio
     const finalTx = -finalScale * (cropCenterX - 0.5) * width;
     const finalTy = -finalScale * (cropCenterY - 0.5) * height;
 
-    const zoomDuration = Math.floor(introDuration / 2);
+    const zoomDuration = Math.floor(announceDuration / 2);
 
     if (localFrame < zoomDuration) {
       const t = interpolate(localFrame, [0, zoomDuration], [0, 1], {
@@ -124,7 +144,6 @@ const MiniatureOverlay = ({ chapter, chapterIdx, chapterStartFrame, introDuratio
     const crop = chapter.crop;
     const wps = chapter.waypoints;
 
-    // Convertir waypoints de coordonnées crop → image complète
     const wp1Full = {
       x: crop.x1 + wps[0].x * (crop.x2 - crop.x1),
       y: crop.y1 + wps[0].y * (crop.y2 - crop.y1),
@@ -134,7 +153,6 @@ const MiniatureOverlay = ({ chapter, chapterIdx, chapterStartFrame, introDuratio
       y: crop.y1 + wps[1].y * (crop.y2 - crop.y1),
     };
 
-    // Scale auto pour couvrir l'écran pendant tout le pan
     const maxOffsetX = Math.max(Math.abs(wp1Full.x - 0.5), Math.abs(wp2Full.x - 0.5));
     const maxOffsetY = Math.max(Math.abs(wp1Full.y - 0.5), Math.abs(wp2Full.y - 0.5));
     const maxOffset = Math.max(maxOffsetX, maxOffsetY);
@@ -147,7 +165,7 @@ const MiniatureOverlay = ({ chapter, chapterIdx, chapterStartFrame, introDuratio
     const tx2 = -panScale * (wp2Full.x - 0.5) * width;
     const ty2 = -panScale * (wp2Full.y - 0.5) * height;
 
-    const panDuration = Math.floor(introDuration * 0.7);
+    const panDuration = Math.floor(announceDuration * 0.7);
 
     if (localFrame < panDuration) {
       const t = interpolate(localFrame, [0, panDuration], [0, 1], {
