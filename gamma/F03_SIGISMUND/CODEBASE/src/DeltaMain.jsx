@@ -1,15 +1,16 @@
 /**
- * DeltaMain.jsx — F03 SIGISMUND (v3 — announce-sync)
+ * DeltaMain.jsx — F03 SIGISMUND (v4 — announce-sync instant)
  *
- * BREAKING CHANGE: la miniature apparaît PENDANT l'annonce du nom du chapitre,
- * pas pendant un silence/intro_duration fixe.
+ * FIXES v4:
+ * - Miniature instantanée: opacity=1 dès le frame 1 (plus de fadeIn)
+ * - Gap frames 0-19: premier chapitre démarre à frame 0 pour couvrir le vide
+ * - Fade out gardé uniquement à la fin de l'annonce
  *
  * Source de vérité: announce_start_frame → announce_end_frame
  * - Contenu normal (BetaMain: capsules + sous-titres + audio) TOUJOURS rendu
  * - Miniature overlay PENDANT l'annonce du nom
  * - Ch.1: zoom vers le rectangle cible (crop)
  * - Ch.2+: pan caméra sur l'image complète de wp1 → wp2
- * - Fade in/out au début/fin de l'annonce
  *
  * Fallback: si pas d'announce frames → utilise start_segment + intro_duration (legacy)
  * Si roadmap.miniature absent → fallback sur Main (gamma standard).
@@ -59,6 +60,12 @@ export const DeltaMain = ({ timing, roadmap }) => {
 
         if (startFrame == null) return null;
 
+        // FIX: premier chapitre démarre à frame 0 pour couvrir le gap
+        if (idx === 0 && startFrame > 0) {
+          endFrame = endFrame + startFrame; //延长 end par le gap
+          startFrame = 0;
+        }
+
         return (
           <MiniatureOverlay
             key={idx}
@@ -78,6 +85,7 @@ export const DeltaMain = ({ timing, roadmap }) => {
 
 /**
  * MiniatureOverlay — affiche la miniature pendant la fenêtre d'annonce.
+ * FIX v4: opacity instantanée (plus de fadeIn), fade out seulement à la fin.
  */
 const MiniatureOverlay = ({ chapter, chapterIdx, announceStart, announceEnd }) => {
   const frame = useCurrentFrame();
@@ -89,18 +97,11 @@ const MiniatureOverlay = ({ chapter, chapterIdx, announceStart, announceEnd }) =
 
   if (!hasIntro) return null;
 
-  // === Opacity ===
-  const fadeInFrames = 3;
+  // === Opacity — INSTANTANÉ, fade out seulement ===
   const fadeOutFrames = 5;
-  let miniOpacity = 0;
+  let miniOpacity = 1; // FIX: opacity=1 immédiatement, plus de fadeIn
 
-  if (localFrame < fadeInFrames) {
-    miniOpacity = interpolate(localFrame, [0, fadeInFrames], [0, 1], {
-      extrapolateLeft: "clamp", extrapolateRight: "clamp",
-    });
-  } else if (localFrame < announceDuration - fadeOutFrames) {
-    miniOpacity = 1;
-  } else {
+  if (localFrame >= announceDuration - fadeOutFrames) {
     miniOpacity = interpolate(localFrame, [announceDuration - fadeOutFrames, announceDuration], [1, 0], {
       extrapolateLeft: "clamp", extrapolateRight: "clamp",
     });
