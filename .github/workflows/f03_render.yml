@@ -350,7 +350,10 @@ jobs:
         with:
           ffmpeg-version: release
 
-      - name: T?l?charger audio depuis GitHub Release
+      - name: Checkout repo for audio fallback
+        uses: actions/checkout@v4
+
+      - name: Télécharger audio (release + fallback repo)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -359,9 +362,23 @@ jobs:
             --header="Authorization: token $GH_TOKEN" \
             -O /tmp/audio_clean.mp3 \
             "${BASE_URL}/audio_clean.mp3" && \
-            echo "[AUDIO] audio_clean.mp3 - $(du -h /tmp/audio_clean.mp3 | cut -f1) ?" || \
-            echo "[AUDIO] audio_clean.mp3 - ABSENT (vid?o sans audio)"
+            echo "[AUDIO] audio_clean.mp3 depuis release - $(du -h /tmp/audio_clean.mp3 | cut -f1)" || \
+            echo "[AUDIO] Release echoue, fallback repo..."
 
+          # Fallback: copier depuis le repo si la release a echoue
+          if [ ! -s /tmp/audio_clean.mp3 ]; then
+            echo "[AUDIO] Fallback: copie depuis le repo"
+            MODE=${{ github.event.inputs.mode }}
+            cp "${MODE}/F03_SIGISMUND/CODEBASE/public/audio_clean.mp3" /tmp/audio_clean.mp3 2>/dev/null || \
+            cp "${MODE}/F01_GRIMALDUS/F01B_GRIMALDUS/OUT/audio_clean.mp3" /tmp/audio_clean.mp3 2>/dev/null || \
+            echo "[AUDIO] Aucun audio trouve"
+          fi
+
+          if [ -s /tmp/audio_clean.mp3 ]; then
+            echo "[AUDIO] audio_clean.mp3 - $(du -h /tmp/audio_clean.mp3 | cut -f1) OK"
+          else
+            echo "[AUDIO] audio_clean.mp3 - ABSENT (video sans audio)"
+          fi
       - name: T?l?charger tous les chunks
         uses: actions/download-artifact@v4
         with:
@@ -435,32 +452,3 @@ jobs:
           name: resultat-final
           path: /tmp/short_render.mp4
           retention-days: 7
-      - name: Checkout repo for audio fallback
-        uses: actions/checkout@v4
-
-      - name: Télécharger audio (release + fallback repo)
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          BASE_URL="https://github.com/${{ github.repository }}/releases/download/${{ github.event.inputs.run_id }}"
-          wget -q \
-            --header="Authorization: token $GH_TOKEN" \
-            -O /tmp/audio_clean.mp3 \
-            "${BASE_URL}/audio_clean.mp3" && \
-            echo "[AUDIO] audio_clean.mp3 depuis release - $(du -h /tmp/audio_clean.mp3 | cut -f1)" || \
-            echo "[AUDIO] Release echoue, fallback repo..."
-
-          # Fallback: copier depuis le repo si la release a echoue
-          if [ ! -s /tmp/audio_clean.mp3 ]; then
-            echo "[AUDIO] Fallback: copie depuis le repo"
-            MODE=${{ github.event.inputs.mode }}
-            cp "${MODE}/F03_SIGISMUND/CODEBASE/public/audio_clean.mp3" /tmp/audio_clean.mp3 2>/dev/null || \
-            cp "${MODE}/F01_GRIMALDUS/F01B_GRIMALDUS/OUT/audio_clean.mp3" /tmp/audio_clean.mp3 2>/dev/null || \
-            echo "[AUDIO] Aucun audio trouve"
-          fi
-
-          if [ -s /tmp/audio_clean.mp3 ]; then
-            echo "[AUDIO] audio_clean.mp3 - $(du -h /tmp/audio_clean.mp3 | cut -f1) OK"
-          else
-            echo "[AUDIO] audio_clean.mp3 - ABSENT (video sans audio)"
-          fi
