@@ -36,11 +36,17 @@ export const FinalMain = ({ timing, roadmap, miniaturePlan }) => {
     
     // ANNOUNCE-SYNC: use announce_start/end_frame if present
     if (ch.announce_start_frame != null && ch.announce_end_frame != null) {
-      if (frame >= ch.announce_start_frame && frame < ch.announce_end_frame) {
+      let chStart = ch.announce_start_frame;
+      let chEnd = ch.announce_end_frame;
+      if (i === 0 && chStart > 0) {
+        chEnd = chEnd + chStart;
+        chStart = 0;
+      }
+      if (frame >= chStart && frame < chEnd) {
         activeChapter = ch;
         activeChapterIdx = i;
-        announceStart = ch.announce_start_frame;
-        announceEnd = ch.announce_end_frame;
+        announceStart = chStart;
+        announceEnd = chEnd;
       }
     } else {
       // LEGACY fallback: start_segment + intro_duration
@@ -61,18 +67,12 @@ export const FinalMain = ({ timing, roadmap, miniaturePlan }) => {
   const hasIntro = activeChapter && (activeChapter.imageURL || activeChapter.fragment) && localFrame >= 0 && localFrame < announceDuration;
 
   // === Opacity ===
-  const fadeInFrames = 3;
   const fadeOutFrames = 5;
   let miniOpacity = 0;
 
   if (hasIntro) {
-    if (localFrame < fadeInFrames) {
-      miniOpacity = interpolate(localFrame, [0, fadeInFrames], [0, 1], {
-        extrapolateLeft: "clamp", extrapolateRight: "clamp",
-      });
-    } else if (localFrame < announceDuration - fadeOutFrames) {
-      miniOpacity = 1;
-    } else {
+    miniOpacity = 1;
+    if (localFrame >= announceDuration - fadeOutFrames) {
       miniOpacity = interpolate(localFrame, [announceDuration - fadeOutFrames, announceDuration], [1, 0], {
         extrapolateLeft: "clamp", extrapolateRight: "clamp",
       });
