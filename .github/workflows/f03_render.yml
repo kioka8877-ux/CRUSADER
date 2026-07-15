@@ -122,6 +122,15 @@ jobs:
             cp -r /tmp/assets/images/. ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/
           fi
 
+          # FIX: Scene.jsx utilise staticFile("images/...") → besoin de public/images/
+          mkdir -p ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/images
+          cd ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public
+          for f in frame_*.png gif_*.gif custom_*.png custom_*.gif; do
+            [ -f "$f" ] && cp "$f" images/ 2>/dev/null || true
+          done
+          cd -
+          echo "[FIX] images/ subdirectory: $(ls ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/images/ 2>/dev/null | wc -l) files"
+
           echo "[ASSETS] Contenu public/ :"
           ls -lh ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/
 
@@ -259,6 +268,15 @@ jobs:
           if [ -d /tmp/assets/images ]; then
             cp -r /tmp/assets/images/. ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/
           fi
+
+          # FIX: Scene.jsx utilise staticFile("images/...") → besoin de public/images/
+          mkdir -p ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/images
+          cd ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public
+          for f in frame_*.png gif_*.gif custom_*.png custom_*.gif; do
+            [ -f "$f" ] && cp "$f" images/ 2>/dev/null || true
+          done
+          cd -
+          echo "[FIX] images/ subdirectory: $(ls ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/images/ 2>/dev/null | wc -l) files"
 
       - name: Calculer la plage de frames
         id: frames
