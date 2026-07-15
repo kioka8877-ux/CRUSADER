@@ -88,3 +88,20 @@ Stratégie:
 6. Cyclone
 7. Bomb Cyclone
 8. Hypercane
+
+
+---
+
+## Test Production delta-test3 (2026-07-15) ✅
+
+L'injecteur de visuels a été validé en production :
+
+1. **UI curation interactive** — 82 segments avec thumbnails (80×45px JPEG base64)
+2. **Export auto-sync** — le JSON d'export inclut les images uploadées en base64 (`upload_data`)
+3. **Pipeline complet** — upload → resize 1920×1080 → push GitHub → roadmap update → render
+4. **4 visuels remplacés** (seg 1, 2, 4, 5) dont 1 GIF animé (25 frames)
+5. **Zéro aller-retour** — un seul JSON avec images embarquées → décodage → push → render
+
+**Fixes appliqués** :
+- Thumbnails : 82 micro-previews embarquées dans l'HTML (+92KB)
+- Auto-sync : `exportCuration()` inclut `upload_data` (base64) pour chaque upload
