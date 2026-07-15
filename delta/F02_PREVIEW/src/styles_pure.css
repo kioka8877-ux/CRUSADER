@@ -1,0 +1,113 @@
+/* F02 CRUSADER Preview — Black Templars Theme */
+
+/* ── Section titles ── */
+#controls .section-title {
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #C5A44E;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(197, 164, 78, 0.2);
+}
+
+#controls .ctrl-row {
+  margin-bottom: 8px;
+}
+#controls .ctrl-row label {
+  font-size: 11px;
+  color: #999;
+  display: flex;
+  justify-content: space-between;
+}
+#controls .ctrl-row .val {
+  font-family: monospace;
+  color: #C5A44E;
+}
+#controls input[type="range"] {
+  width: 100%;
+  margin-top: 2px;
+  accent-color: #C5A44E;
+}
+#controls select {
+  width: 100%;
+  margin-top: 2px;
+  background: #1A1A1A;
+  border: 1px solid rgba(197, 164, 78, 0.25);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 12px;
+  color: #E8DCC8;
+}
+#controls select:focus {
+  border-color: #C5A44E;
+  outline: none;
+}
+#controls input[type="color"] {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  border: 1px solid rgba(197, 164, 78, 0.3);
+  cursor: pointer;
+  background: transparent;
+}
+#controls input[type="checkbox"] {
+  accent-color: #C5A44E;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* ── Viewport rendering ── */
+.viewport-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.viewport-bg {
+  position: absolute;
+  inset: 0;
+}
+.viewport-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.world-container {
+  position: absolute;
+  will-change: transform;
+}
+.world-node {
+  position: absolute;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.6), 0 0 1px rgba(197,164,78,0.3);
+}
+.world-node img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.subtitle-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 0 5%;
+  pointer-events: none;
+}
+
+/* ── Scrollbar ── */
+#controls::-webkit-scrollbar {
+  width: 4px;
+}
+#controls::-webkit-scrollbar-track {
+  background: transparent;
+}
+#controls::-webkit-scrollbar-thumb {
+  background: rgba(197, 164, 78, 0.3);
+  border-radius: 2px;
+}

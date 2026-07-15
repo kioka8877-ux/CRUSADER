@@ -7,7 +7,7 @@ on:
         description: "Identifiant unique du run (ex: CRS_20240101_1200)"
         required: true
       mode:
-        description: "Mode de production (alpha|beta|gamma)"
+        description: "Mode de production (alpha|beta|gamma|delta)"
         required: false
         default: "alpha"
 

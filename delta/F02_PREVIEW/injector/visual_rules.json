@@ -1,0 +1,66 @@
+{
+  "contract": "visual-injector v1",
+  "description": "Curation des visuels du roadmap — remplace les frames minables de F00",
+  "reserve_dir": "F00_ASSET_FORGE/RESERVE/",
+  "target_size": {
+    "image": {
+      "width": 1920,
+      "height": 1080,
+      "mode": "crop_center"
+    },
+    "gif": {
+      "width": 1920,
+      "height": 1080,
+      "mode": "preserve"
+    }
+  },
+  "rules": [
+    {
+      "id": "transparency_check",
+      "description": "Détecter les PNG avec pixels transparents (alpha=0)",
+      "action": "Flag le visuel comme 'transparent' dans le tableau",
+      "severity": "warning"
+    },
+    {
+      "id": "no_repetition",
+      "description": "Un visuel ne doit pas apparaître 2 segments de suite",
+      "action": "Alerte dans le tableau",
+      "severity": "warning"
+    },
+    {
+      "id": "missing_file",
+      "description": "Le visuel référencé dans le roadmap n'existe pas",
+      "action": "Erreur bloquante",
+      "severity": "critical"
+    },
+    {
+      "id": "size_check",
+      "description": "Le visuel doit faire 1920x1080 (ou être redimensionné)",
+      "action": "Redimensionne automatiquement si upload externe",
+      "severity": "warning"
+    },
+    {
+      "id": "chapter_first_visual",
+      "description": "Le premier visuel de chaque chapitre (pendant l'annonce) doit être le meilleur",
+      "action": "Marque comme 'prioritaire' dans le tableau",
+      "severity": "info"
+    },
+    {
+      "id": "type_match",
+      "description": "media_type doit correspondre au fichier (gif_*.gif = gif, frame_*.png = image)",
+      "action": "Warning si mismatch",
+      "severity": "warning"
+    },
+    {
+      "id": "preserve_roadmap_structure",
+      "description": "L'injecteur ne change que image_file et media_type, jamais start_frame/end_frame/text_subtitles",
+      "severity": "critical"
+    }
+  ],
+  "actions": {
+    "keep": "Garder le visuel actuel",
+    "replace_upload": "Remplacer par un upload depuis PC (redimensionné automatiquement)",
+    "replace_f00": "Remplacer par un visuel depuis la banque F00",
+    "move": "Déplacer le visuel vers un autre segment"
+  }
+}

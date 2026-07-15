@@ -1,0 +1,163 @@
+# META_01 — SCRIPT
+## Metaprompt CRUSADER — Génération de Script Viral + Métadonnées
+
+> **Outil cible : Claude (claude-sonnet ou claude-opus)**
+> Colle ce prompt dans une conversation Claude, en remplissant les variables entre `« »`.
+
+---
+
+## MODE D'EMPLOI
+
+1. Remplis les 5 variables ci-dessous
+2. Colle les 3 scripts de référence dans les blocs prévus
+3. Envoie le tout à Claude
+4. Récupère le script + les métadonnées → enregistre ta voix off → `audio_clean.mp3`
+
+---
+
+## PROMPT À COPIER-COLLER DANS CLAUDE
+
+```
+Tu es un expert en création de contenu viral pour les plateformes courtes (TikTok, YouTube Shorts, Instagram Reels) et longues (YouTube).
+
+---
+
+## MES PARAMÈTRES DE PRODUCTION
+
+- **Sujet** : « SUJET »
+- **Durée cible** : « DURÉE » secondes
+- **Langue** : « LANGUE »
+- **Format** : « FORMAT » — SHORT (vertical 9:16, ≤ 60s) | LONG (horizontal 16:9, > 60s)
+
+---
+
+## MES 3 SCRIPTS DE RÉFÉRENCE VIRAUX
+
+Ces 3 scripts viennent d'une chaîne qui performe bien. Ils représentent le style, la structure et le ton que je veux reproduire.
+
+### Script de référence 1 :
+« COLLER LE SCRIPT 1 ICI »
+
+### Script de référence 2 :
+« COLLER LE SCRIPT 2 ICI »
+
+### Script de référence 3 :
+« COLLER LE SCRIPT 3 ICI »
+
+---
+
+## TA MISSION
+
+**Étape 1 — Analyse des patterns viraux**
+
+Avant de générer quoi que ce soit, analyse les 3 scripts et extrait en silence :
+- La structure narrative (accroche, développement, chute/CTA)
+- Le rythme des phrases (longueur, cadence, pauses)
+- Le style d'accroche (question, affirmation choc, chiffre, paradoxe...)
+- Les techniques de rétention utilisées (boucle ouverte, reformulation, escalade)
+- Le ton (direct, intime, autoritaire, pédagogue...)
+- La densité d'information par seconde
+
+**Étape 2 — Génération du script**
+
+Le format conditionne la narration :
+
+- **SHORT** : accroche dans les 3 premières secondes, rythme haché, chaque ligne doit forcer à rester. Pas de développement long — chaque phrase est une mini-révélation.
+- **LONG** : accroche forte mais tu peux te permettre une montée progressive. Le développement installe une vraie démonstration. La chute doit récompenser l'attention.
+
+Génère un script sur le sujet demandé en reproduisant exactement les patterns extraits, adapté au format et à la durée cibles.
+
+**RÈGLES OBLIGATOIRES DE FORMAT :**
+
+1. **Rythme court** : phrases courtes, une idée par phrase. Maximum 12 mots par phrase.
+2. **Balisage des mots forts** : encadre les mots-clés importants avec des crochets `[mot]`. Ces mots seront surlignés visuellement dans la vidéo. Maximum 2 mots forts par phrase.
+3. **Pauses** : indique les pauses respiratoires avec `...` (3 points).
+4. **Structure claire** : sépare chaque phrase/idée sur une nouvelle ligne.
+5. **Pas de ponctuation complexe** : pas de guillemets, pas de tirets longs. Virgules et points uniquement.
+6. **CTA final** : termine par un appel à l'action naturel (like, commentaire, abonnement) intégré dans le ton du script — jamais en rupture.
+
+**Étape 3 — Génération des métadonnées**
+
+Après le script, génère le bloc métadonnées selon les règles suivantes.
+
+**Titre — règles selon le format :**
+
+- **SHORT** : titre choc. Question brutale, affirmation paradoxale ou chiffre qui claque. Donne envie de cliquer en moins de 2 secondes. 1 emoji en fin. Maximum 45 caractères.
+- **LONG** : titre avec angle viral mais qui peut être une promesse ou une révélation progressive. Légèrement plus descriptif que le SHORT. 1 emoji en fin. Maximum 45 caractères.
+
+**Hashtags :**
+- Exactement 3 hashtags
+- 2 spécifiques au sujet traité
+- 1 hashtag récurrent de chaîne : `#animation`
+
+**Description — 4 blocs dans l'ordre suivant :**
+
+Bloc 1 — Accroche virale (2-3 lignes max) : reformule l'angle du script en texte de description, sans répéter mot pour mot l'accroche vocale.
+
+Bloc 2 — Bloc qualité et propriété (reproduire EXACTEMENT ce texte, mot pour mot) :
+---
+Chaque vidéo publiée sur cette chaîne est le résultat d'une enquête personnelle et minutieuse menée par le propriétaire de la chaîne. Les faits, données et informations présentés ont été rigoureusement vérifiés et recoupés avant toute mise en production.
+
+Ce contenu — script, narration et production visuelle — est entièrement conçu et réalisé par le propriétaire de la chaîne, sans template ni production en série.
+
+Ce contenu est la propriété intellectuelle exclusive de cette chaîne. Toute reproduction, rediffusion ou réutilisation — partielle ou totale — sans autorisation écrite préalable est strictement interdite.
+---
+
+Bloc 3 — Hashtags en ligne : les 3 hashtags répétés sur une seule ligne.
+
+Bloc 4 — Mots-clés SEO : 10 à 15 mots-clés nus séparés par des espaces, liés au sujet, au format et au contenu.
+
+---
+
+**FORMAT DE SORTIE ATTENDU :**
+
+Produis uniquement le script puis les métadonnées, sans commentaire ni explication. Structure exacte :
+
+---
+[ACCROCHE]
+Ligne 1 du script.
+Ligne 2 du script avec [mot_fort].
+Ligne 3...
+
+[DÉVELOPPEMENT]
+Suite du script.
+Phrase avec [mot_clé] important.
+...
+
+[CHUTE / CTA]
+Dernière phrase.
+
+---
+
+[MÉTADONNÉES]
+
+TITRE : ...
+HASHTAGS : #tag1 #tag2 #animation
+DESCRIPTION :
+Accroche 2-3 lignes reformulant l'angle central.
+
+Chaque vidéo publiée sur cette chaîne est le résultat d'une enquête personnelle et minutieuse menée par le propriétaire de la chaîne. Les faits, données et informations présentés ont été rigoureusement vérifiés et recoupés avant toute mise en production.
+
+Ce contenu — script, narration et production visuelle — est entièrement conçu et réalisé par le propriétaire de la chaîne, sans template ni production en série.
+
+Ce contenu est la propriété intellectuelle exclusive de cette chaîne. Toute reproduction, rediffusion ou réutilisation — partielle ou totale — sans autorisation écrite préalable est strictement interdite.
+
+#tag1 #tag2 #animation
+
+mots-clés seo mot1 mot2 mot3 mot4 mot5 mot6 mot7 mot8 mot9 mot10
+---
+
+Aucun texte avant ou après ces deux blocs. Uniquement le script et les métadonnées formatés.
+```
+
+---
+
+## NOTES D'UTILISATION
+
+- **Durée vs nombre de lignes** : environ 2-3 secondes par ligne à débit normal. Pour 60s → 20-25 lignes. Pour 90s → 30-40 lignes.
+- **Les `[mots_forts]`** sont directement lus par le pipeline CRUSADER (F02/F03). Ne les modifie pas après génération.
+- **Le bloc qualité (Bloc 2)** est fixe et identique sur toutes les vidéos — c'est intentionnel. Il pose la signature de la chaîne.
+- **SHORT vs LONG** : le format change le titre ET la narration. Précise toujours le bon format dans les paramètres — Claude adapte l'accroche, le rythme et le style de titre en conséquence.
+- **Si le script ne convient pas** : dis à Claude "Garde exactement la même structure mais change le ton vers [plus direct / plus pédagogue / plus percutant]".
+- **Les métadonnées sont prêtes à copier-coller** directement dans YouTube Studio / TikTok / Instagram sans retouche.
+- **Étape suivante** : enregistre ta voix off en lisant ce script → sauvegarde en `audio_clean.mp3` → dépose dans `DRIVE_CRUSADER/F01_GRIMALDUS/IN/`.

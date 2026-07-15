@@ -18,7 +18,7 @@ on:
         description: "Nombre total de frames ? rendre"
         required: true
       mode:
-        description: "Mode de production (alpha|beta|gamma)"
+        description: "Mode de production (alpha|beta|gamma|delta)"
         required: false
         default: "alpha"
 
@@ -84,7 +84,7 @@ jobs:
 
           echo "[ASSETS] T?l?chargement depuis : $BASE_URL"
 
-          for FNAME in timing.json roadmap.json audio_clean.mp3 images.zip; do
+          for FNAME in timing.json roadmap.json audio_clean.mp3 images.zip thumbnail.png; do
             if wget -q \
               --header="Authorization: token $GH_TOKEN" \
               -O "/tmp/assets/${FNAME}" \
@@ -117,9 +117,19 @@ jobs:
           cp /tmp/assets/timing.json     ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
           cp /tmp/assets/roadmap.json    ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
           cp /tmp/assets/audio_clean.mp3 ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
+          cp /tmp/assets/thumbnail.png   ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
           if [ -d /tmp/assets/images ]; then
             cp -r /tmp/assets/images/. ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/
           fi
+
+          # FIX: Scene.jsx utilise staticFile("images/...") → besoin de public/images/
+          mkdir -p ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/images
+          cd ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public
+          for f in frame_*.png gif_*.gif custom_*.png custom_*.gif; do
+            [ -f "$f" ] && cp "$f" images/ 2>/dev/null || true
+          done
+          cd -
+          echo "[FIX] images/ subdirectory: $(ls ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/images/ 2>/dev/null | wc -l) files"
 
           echo "[ASSETS] Contenu public/ :"
           ls -lh ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/
@@ -233,7 +243,7 @@ jobs:
           mkdir -p /tmp/assets
           BASE_URL="https://github.com/${{ github.repository }}/releases/download/${{ github.event.inputs.run_id }}"
 
-          for FNAME in timing.json roadmap.json audio_clean.mp3 images.zip; do
+          for FNAME in timing.json roadmap.json audio_clean.mp3 images.zip thumbnail.png; do
             if wget -q \
               --header="Authorization: token $GH_TOKEN" \
               -O "/tmp/assets/${FNAME}" \
@@ -254,9 +264,19 @@ jobs:
           cp /tmp/assets/timing.json     ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
           cp /tmp/assets/roadmap.json    ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
           cp /tmp/assets/audio_clean.mp3 ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
+          cp /tmp/assets/thumbnail.png   ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/ 2>/dev/null || true
           if [ -d /tmp/assets/images ]; then
             cp -r /tmp/assets/images/. ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/
           fi
+
+          # FIX: Scene.jsx utilise staticFile("images/...") → besoin de public/images/
+          mkdir -p ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/images
+          cd ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public
+          for f in frame_*.png gif_*.gif custom_*.png custom_*.gif; do
+            [ -f "$f" ] && cp "$f" images/ 2>/dev/null || true
+          done
+          cd -
+          echo "[FIX] images/ subdirectory: $(ls ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/public/images/ 2>/dev/null | wc -l) files"
 
       - name: Calculer la plage de frames
         id: frames
@@ -348,7 +368,10 @@ jobs:
         with:
           ffmpeg-version: release
 
-      - name: T?l?charger audio depuis GitHub Release
+      - name: Checkout repo for audio fallback
+        uses: actions/checkout@v4
+
+      - name: Télécharger audio (release + fallback repo)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -357,9 +380,23 @@ jobs:
             --header="Authorization: token $GH_TOKEN" \
             -O /tmp/audio_clean.mp3 \
             "${BASE_URL}/audio_clean.mp3" && \
-            echo "[AUDIO] audio_clean.mp3 - $(du -h /tmp/audio_clean.mp3 | cut -f1) ?" || \
-            echo "[AUDIO] audio_clean.mp3 - ABSENT (vid?o sans audio)"
+            echo "[AUDIO] audio_clean.mp3 depuis release - $(du -h /tmp/audio_clean.mp3 | cut -f1)" || \
+            echo "[AUDIO] Release echoue, fallback repo..."
 
+          # Fallback: copier depuis le repo si la release a echoue
+          if [ ! -s /tmp/audio_clean.mp3 ]; then
+            echo "[AUDIO] Fallback: copie depuis le repo"
+            MODE=${{ github.event.inputs.mode }}
+            cp "${MODE}/F03_SIGISMUND/CODEBASE/public/audio_clean.mp3" /tmp/audio_clean.mp3 2>/dev/null || \
+            cp "${MODE}/F01_GRIMALDUS/F01B_GRIMALDUS/OUT/audio_clean.mp3" /tmp/audio_clean.mp3 2>/dev/null || \
+            echo "[AUDIO] Aucun audio trouve"
+          fi
+
+          if [ -s /tmp/audio_clean.mp3 ]; then
+            echo "[AUDIO] audio_clean.mp3 - $(du -h /tmp/audio_clean.mp3 | cut -f1) OK"
+          else
+            echo "[AUDIO] audio_clean.mp3 - ABSENT (video sans audio)"
+          fi
       - name: T?l?charger tous les chunks
         uses: actions/download-artifact@v4
         with:
@@ -425,7 +462,7 @@ jobs:
           git config user.email "ci@crusader"
           git add "${OUT_DIR}/"
           git commit -m "ci(F03): short_render.mp4 -> OUT/" || echo "Nothing to commit"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref_name }}
 
       - name: Upload vid?o finale
         uses: actions/upload-artifact@v4

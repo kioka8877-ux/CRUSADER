@@ -1,0 +1,2153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F02 CASTELLAN — Configuration Créative</title>
+<style>
+  :root {
+    --bg:        #111111;
+    --surface:   #1c1c1c;
+    --border:    #333333;
+    --gold:      #c9a84c;
+    --gold-dim:  #8a6f2e;
+    --text:      #ddd8cc;
+    --text-dim:  #888880;
+    --red:       #8b2222;
+    --green:     #2a6b2a;
+    --green-ok:  #4caf50;
+    --radius:    4px;
+    --mono:      'Courier New', Courier, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 13px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Header ── */
+  header {
+    background: #0a0a0a;
+    border-bottom: 2px solid var(--gold);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  header h1 { font-size: 14px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
+  header .subtitle { color: var(--text-dim); font-size: 11px; }
+  header .status-pill {
+    margin-left: auto;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: bold;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+  header .status-pill.ok  { border-color: var(--green-ok); color: var(--green-ok); }
+  header .status-pill.error { border-color: #e55; color: #e55; }
+
+  /* ── Layout ── */
+  .layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    height: calc(100vh - 45px);
+  }
+
+  /* ── Left Panel ── */
+  .config-panel {
+    width: 300px;
+    min-width: 300px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .section-title {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-bottom: 1px solid var(--gold-dim);
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 10px;
+  }
+  .field label { font-size: 11px; color: var(--text-dim); }
+  .field input[type="text"],
+  .field input[type="number"],
+  .field select {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 5px 8px;
+    border-radius: var(--radius);
+    font-family: var(--mono);
+    font-size: 12px;
+    width: 100%;
+  }
+  .field input[type="color"] {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    width: 100%;
+    height: 30px;
+    cursor: pointer;
+    border-radius: var(--radius);
+    padding: 2px;
+  }
+  .field input[type="range"] { width: 100%; accent-color: var(--gold); }
+  .field .range-val { color: var(--gold); font-size: 11px; text-align: right; }
+
+  .radio-group { display: flex; gap: 8px; }
+  .radio-group label {
+    display: flex; align-items: center; gap: 5px;
+    cursor: pointer; font-size: 12px; color: var(--text);
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+  }
+  .radio-group input[type="radio"] { accent-color: var(--gold); }
+  .radio-group label.active { border-color: var(--gold); color: var(--gold); }
+
+  .checkbox-row { display: flex; align-items: center; gap: 8px; }
+  .checkbox-row input[type="checkbox"] { accent-color: var(--gold); cursor: pointer; }
+  .checkbox-row label { cursor: pointer; font-size: 12px; color: var(--text); }
+
+  /* ── Gemini mapping zone ── */
+  .gemini-box {
+    background: #0d1a0d;
+    border: 1px solid var(--gold-dim);
+    border-radius: var(--radius);
+    padding: 10px;
+  }
+  .gemini-box .gemini-hint {
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+  .gemini-textarea {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 6px 8px;
+    border-radius: var(--radius);
+    resize: vertical;
+    min-height: 80px;
+    max-height: 200px;
+    line-height: 1.4;
+  }
+  .gemini-textarea:focus { border-color: var(--gold-dim); outline: none; }
+  .gemini-apply-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .gemini-status {
+    font-size: 10px;
+    color: var(--text-dim);
+    flex: 1;
+  }
+  .gemini-status.ok  { color: var(--green-ok); }
+  .gemini-status.err { color: #e55; }
+
+  /* ── Position selector ── */
+  .pos-group { display: flex; gap: 6px; }
+  .pos-btn {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    padding: 6px 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-dim);
+    font-size: 10px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.15s;
+  }
+  .pos-btn:hover { border-color: var(--gold-dim); color: var(--text); }
+  .pos-btn.active { border-color: var(--gold); color: var(--gold); }
+  .pos-schema {
+    width: 24px;
+    height: 32px;
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    position: relative;
+    opacity: 0.8;
+  }
+  .pos-schema .bar {
+    position: absolute;
+    left: 3px;
+    right: 3px;
+    height: 3px;
+    background: currentColor;
+    border-radius: 1px;
+  }
+  .pos-schema .bar.top    { top: 4px; }
+  .pos-schema .bar.center { top: 50%; transform: translateY(-50%); }
+  .pos-schema .bar.bottom { bottom: 4px; }
+
+  /* ── Font other input ── */
+  .font-other-input {
+    display: none;
+    margin-top: 4px;
+  }
+  .font-other-input.visible { display: block; }
+
+  /* ── Buttons ── */
+  .btn-secondary {
+    background: var(--bg);
+    border: 1px solid var(--gold-dim);
+    color: var(--gold);
+    padding: 6px 12px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    width: 100%;
+    transition: background 0.15s;
+  }
+  .btn-secondary:hover { background: #1a1500; }
+
+  .btn-small {
+    background: var(--gold-dim);
+    border: 1px solid var(--gold);
+    color: #000;
+    padding: 5px 12px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .btn-small:hover { background: var(--gold); }
+
+  /* ── Timeline Panel ── */
+  .timeline-panel {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    background: var(--bg);
+  }
+
+  .timeline-header {
+    display: grid;
+    grid-template-columns: 40px 1fr 155px 95px 195px 52px;
+    gap: 8px;
+    padding: 6px 10px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .segment-row {
+    display: grid;
+    grid-template-columns: 40px 1fr 155px 95px 195px 52px;
+    gap: 8px;
+    align-items: center;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 6px;
+    background: var(--surface);
+    transition: border-color 0.15s;
+  }
+  .segment-row:hover { border-color: var(--gold-dim); }
+  .segment-row.has-image { border-color: #2a4a2a; }
+
+  .seg-id { color: var(--gold); font-size: 12px; font-weight: bold; text-align: center; }
+
+  .seg-text { color: var(--text); font-size: 12px; line-height: 1.4; }
+  .seg-time { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+  .seg-strong { color: var(--gold); font-style: italic; }
+
+  .seg-image-select { display: flex; flex-direction: column; gap: 4px; }
+  .seg-image-select select {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 4px 6px;
+    border-radius: var(--radius);
+    font-family: var(--mono);
+    font-size: 11px;
+    width: 100%;
+  }
+  .seg-image-select select.selected { border-color: var(--green-ok); }
+
+  .img-thumb-wrap {
+    width: 120px;
+    height: 68px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .img-thumb-wrap img { max-width: 100%; max-height: 100%; object-fit: cover; }
+  .img-thumb-wrap .placeholder { color: var(--text-dim); font-size: 10px; text-align: center; }
+
+  /* ── Footer ── */
+  footer {
+    background: #0a0a0a;
+    border-top: 2px solid var(--border);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .progress-info { font-size: 11px; color: var(--text-dim); }
+  .progress-info span { color: var(--gold); }
+
+  .btn-validate {
+    margin-left: auto;
+    background: var(--gold-dim);
+    border: 2px solid var(--gold);
+    color: #000;
+    padding: 10px 30px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: background 0.15s;
+  }
+  .btn-validate:hover { background: var(--gold); }
+  .btn-validate:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .save-status {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: var(--radius);
+    display: none;
+  }
+  .save-status.ok    { background: #1a3a1a; border: 1px solid var(--green-ok); color: var(--green-ok); display: block; }
+  .save-status.error { background: #3a1a1a; border: 1px solid #e55; color: #e55; display: block; }
+
+  /* ── Toast ── */
+  .toast {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    padding: 10px 18px;
+    border-radius: var(--radius);
+    font-size: 12px;
+    z-index: 999;
+    display: none;
+    border: 1px solid;
+  }
+  .toast.ok    { background: #1a3a1a; border-color: var(--green-ok); color: var(--green-ok); display: block; }
+  .toast.error { background: #3a1a1a; border-color: #e55; color: #e55; display: block; }
+
+  /* ── Overlay badges ── */
+  .overlay-badge {
+    display: inline-block;
+    font-size: 9px; padding: 2px 7px; border-radius: 8px;
+    letter-spacing: 1px; text-transform: uppercase; font-weight: bold;
+    margin-top: 4px;
+  }
+  .cat-interieur { background:#2a2a1a; color:#d4c060; border:1px solid #d4c060; }
+  .cat-exterieur { background:#0d1a0d; color:#60d460; border:1px solid #60d460; }
+  .cat-vitre     { background:#0d1a2a; color:#60b4d4; border:1px solid #60b4d4; }
+  .cat-defaut    { background:#1a1a1a; color:#888;    border:1px solid #444;    }
+
+  /* ── Overlay visual preview ── */
+  .overlay-col { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+  .overlay-preview {
+    width: 80px; height: 45px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .overlay-preview .ov-base {
+    position: absolute; inset: 0;
+  }
+  .overlay-preview .ov-bar {
+    position: absolute;
+    height: 4px; border-radius: 2px;
+  }
+  .overlay-preview .ov-drop {
+    position: absolute;
+    width: 1px; border-radius: 1px;
+    transform: rotate(-12deg);
+  }
+  .overlay-preview .ov-glow {
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  /* ── Overlay control column ── */
+  .overlay-ctrl { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .ov-mini {
+    width: 100%; height: 44px;
+    border-radius: 3px; border: 1px solid var(--border);
+    position: relative; overflow: hidden; flex-shrink: 0;
+  }
+  .ov-type-sel {
+    background: var(--bg); border: 1px solid var(--border);
+    color: var(--text); padding: 3px 5px; border-radius: var(--radius);
+    font-family: var(--mono); font-size: 10px; width: 100%;
+  }
+  .intensity-row { display: flex; gap: 3px; }
+  .int-btn {
+    flex: 1; background: var(--bg); border: 1px solid var(--border);
+    color: var(--text-dim); font-family: var(--mono); font-size: 10px;
+    padding: 2px 0; border-radius: var(--radius); cursor: pointer;
+  }
+  .int-btn.active { border-color: var(--gold); color: var(--gold); background: #1a1500; }
+  .int-btn:hover  { border-color: var(--gold-dim); }
+
+  .sfx-btn {
+    background: var(--bg); border: 1px solid var(--border);
+    color: var(--text-dim); font-family: var(--mono); font-size: 9px;
+    padding: 2px 0; border-radius: var(--radius); cursor: pointer;
+    width: 52px; flex-shrink: 0; letter-spacing: 1px; text-transform: uppercase;
+  }
+  .sfx-btn.active { border-color: #e55; color: #e55; background: #200808; }
+  .sfx-btn:hover  { border-color: var(--gold-dim); }
+
+  /* ── Preview button ── */
+  .btn-preview {
+    background: var(--bg); border: 1px solid var(--gold-dim); color: var(--gold);
+    font-family: var(--mono); font-size: 10px; letter-spacing: 1px;
+    text-transform: uppercase; cursor: pointer; border-radius: var(--radius);
+    padding: 4px 6px; white-space: nowrap; writing-mode: horizontal-tb;
+    display: block; width: 100%; margin-top: 2px;
+  }
+  .btn-preview:hover { background: #1a1500; border-color: var(--gold); }
+
+  /* ── Preview Modal ── */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.88);
+    z-index: 1000; display: none; align-items: center; justify-content: center;
+  }
+  .modal-overlay.visible { display: flex; }
+  .modal-box { position: relative; }
+  .modal-close {
+    position: absolute; top: -32px; right: 0;
+    background: none; border: 1px solid var(--border); color: var(--text-dim);
+    font-size: 13px; cursor: pointer; font-family: var(--mono);
+    padding: 3px 10px; border-radius: var(--radius); letter-spacing: 1px;
+  }
+  .modal-close:hover { color: var(--text); border-color: var(--text-dim); }
+  .modal-label {
+    position: absolute; top: -32px; left: 0;
+    font-size: 10px; color: var(--gold); font-family: var(--mono);
+    letter-spacing: 2px; text-transform: uppercase; line-height: 26px;
+  }
+  .preview-frame {
+    position: relative; overflow: hidden;
+    border: 2px solid var(--gold-dim); border-radius: 4px;
+  }
+  .preview-bg {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+  }
+  .preview-overlay { position: absolute; inset: 0; }
+  .preview-subtitle {
+    position: absolute; left: 0; right: 0;
+    padding: 0 20px; text-align: center;
+  }
+  .preview-sub-text {
+    line-height: 1.3;
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.6);
+  }
+  @keyframes sub-slide-in {
+    from { opacity: 0; transform: translateX(-30px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .preview-sub-text.anim-play {
+    animation: sub-slide-in var(--anim-dur, 0.167s) ease-out forwards;
+  }
+  .preview-seg-label {
+    position: absolute; top: 8px; left: 10px;
+    font-size: 9px; color: rgba(255,255,255,0.45);
+    font-family: var(--mono); letter-spacing: 1px; text-transform: uppercase;
+  }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+.tp-animate-n    { transition: transform var(--tp-dur, 400ms) cubic-bezier(0.42,0,0.58,1), opacity var(--tp-dur, 400ms) cubic-bezier(0.42,0,0.58,1); }
+.tp-animate-n1   { transition: transform var(--tp-dur, 400ms) cubic-bezier(0.42,0,0.58,1), opacity var(--tp-dur, 400ms) cubic-bezier(0.42,0,0.58,1); }
+.tp-animate-arr  { transition: transform var(--tp-dur, 400ms) cubic-bezier(0.42,0,0.58,1), opacity calc(var(--tp-dur, 400ms) * 0.4) ease; }
+
+  /* ── DELTA-TEST3 : Tab switcher + MINIATURE panel ── */
+  .tab-switcher {
+    display: flex;
+    gap: 0;
+    background: #0a0a0a;
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+  }
+  .tab-btn {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-dim);
+    padding: 8px 24px;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.15s;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+  .tab-panel { display: none; flex: 1; overflow: hidden; }
+  .tab-panel.visible { display: flex; }
+
+  /* MINIATURE panel layout */
+  .miniature-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+  .miniature-config {
+    width: 300px;
+    min-width: 300px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .miniature-canvas-area {
+    flex: 1;
+    overflow: auto;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 16px;
+  }
+  .miniature-canvas-wrap {
+    position: relative;
+    border: 2px solid var(--gold-dim);
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: crosshair;
+    background: #0a0a0a;
+  }
+  .miniature-canvas-wrap img {
+    display: block;
+    max-width: 100%;
+    max-height: 60vh;
+    pointer-events: none;
+  }
+  .miniature-dot {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: var(--mono);
+    transform: translate(-50%, -50%);
+    border: 2px solid #000;
+    box-shadow: 0 0 8px rgba(0,0,0,0.8);
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.15s;
+  }
+  .miniature-dot:hover { transform: translate(-50%, -50%) scale(1.2); }
+  .miniature-dot.selected {
+    background: #e55;
+    border-color: #fff;
+    z-index: 11;
+  }
+  .miniature-cam-dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #4cf;
+    border: 2px solid #fff;
+    transform: translate(-50%, -50%);
+    z-index: 12;
+    pointer-events: none;
+    box-shadow: 0 0 12px rgba(80,200,255,0.8);
+  }
+  .miniature-cam-line {
+    position: absolute;
+    height: 2px;
+    background: rgba(80,200,255,0.5);
+    transform-origin: left center;
+    z-index: 9;
+    pointer-events: none;
+  }
+  .chapter-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .chapter-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    font-size: 11px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .chapter-item:hover { border-color: var(--gold-dim); }
+  .chapter-item.active { border-color: var(--gold); background: #1a1500; }
+  .chapter-item .ch-num {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--gold-dim);
+    color: #000;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: bold; font-size: 10px;
+    flex-shrink: 0;
+  }
+  .chapter-item.active .ch-num { background: var(--gold); }
+  .chapter-item .ch-label {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 11px;
+    outline: none;
+  }
+  .chapter-item .ch-seg {
+    color: var(--text-dim);
+    font-size: 10px;
+    white-space: nowrap;
+  }
+  .chapter-item .ch-del {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 4px;
+  }
+  .chapter-item .ch-del:hover { color: #e55; }
+  .upload-area {
+    border: 2px dashed var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .upload-area:hover { border-color: var(--gold-dim); }
+  .upload-area input[type="file"] { display: none; }
+  .upload-area .upload-hint {
+    font-size: 11px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .upload-area .upload-hint b { color: var(--gold); }
+  .preview-cam-btn {
+    background: var(--bg);
+    border: 1px solid var(--gold-dim);
+    color: var(--gold);
+    padding: 8px 16px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background 0.15s;
+  }
+  .preview-cam-btn:hover { background: #1a1500; border-color: var(--gold); }
+  .preview-cam-btn.playing { background: #1a3a1a; border-color: var(--green-ok); color: var(--green-ok); }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>&#9876; CRUSADER — F02 CASTELLAN</h1>
+    <div class="subtitle">Config créative + Mapping images → roadmap.json</div>
+  </div>
+  <div id="statusPill" class="status-pill">Chargement…</div>
+</header>
+
+<div class="tab-switcher">
+  <button class="tab-btn active" id="tab-roadmap" onclick="switchTab('roadmap')">Roadmap</button>
+  <button class="tab-btn" id="tab-miniature" onclick="switchTab('miniature')">Miniature</button>
+</div>
+
+<div class="tab-panel visible" id="panel-roadmap"><div class="layout">
+
+  <!-- ── Config Panel ── -->
+  <aside class="config-panel">
+
+    <!-- MAPPING PRÉ-CALCULÉ -->
+    <div>
+      <div class="section-title">Mapping pré-calculé</div>
+      <div class="gemini-box" style="border-color:#3a5a3a;">
+        <div class="gemini-hint" style="color:#7ab87a;">17 segments · 28 images · timestamp auto<br>Overlay = <b>defaut</b> par défaut — ajuste par segment.</div>
+        <textarea id="precomputedMapping" class="gemini-textarea" style="min-height:110px;color:#9ad09a;border-color:#2a4a2a;" readonly>| 00_00_270.png | seg 1 | defaut | 2 |
+| 00_13_300.png | seg 2 | defaut | 2 |
+| 00_24_460.png | seg 3 | defaut | 2 |
+| 00_30_700.png | seg 4 | defaut | 2 |
+| 00_44_420.png | seg 5 | defaut | 2 |
+| 00_49_220.png | seg 6 | defaut | 2 |
+| 01_02_090.png | seg 7 | defaut | 2 |
+| 01_12_570.png | seg 8 | defaut | 2 |
+| 01_19_080.png | seg 9 | defaut | 2 |
+| 01_26_340.png | seg 10 | defaut | 2 |
+| 01_31_340.png | seg 11 | defaut | 2 |
+| 01_40_470.png | seg 12 | defaut | 2 |
+| 01_49_400.png | seg 13 | defaut | 2 |
+| 01_54_000.png | seg 14 | defaut | 2 |
+| 01_57_280.png | seg 15 | defaut | 2 |
+| 01_57_280.png | seg 16 | defaut | 2 |
+| 01_57_280.png | seg 17 | defaut | 2 |</textarea>
+        <div class="gemini-apply-row" style="margin-top:6px;">
+          <span class="gemini-status" id="precomputedStatus">—</span>
+          <button class="btn-small" style="margin-right:4px;" onclick="copyPrecomputed()">Copier</button>
+          <button class="btn-small" onclick="loadPrecomputed()">Charger &amp; Appliquer</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- GEMINI MAPPING -->
+    <div>
+      <div class="section-title">Mapping Gemini (manuel)</div>
+      <div class="gemini-box">
+        <div class="gemini-hint">Colle un tableau modifié ou celui de Gemini.<br>Noms de fichiers : <b>MM_SS_mmm.png</b> (ex. 00_07_340.png)<br>Ctrl+Entrée ou bouton pour appliquer.</div>
+        <textarea
+          id="geminiInput"
+          class="gemini-textarea"
+          placeholder="| 00_00_270.png | seg 1 | INTERIEUR:neons | 2 |&#10;..."
+          onkeydown="if(event.ctrlKey && event.key==='Enter'){ applyGeminiMapping(); }"
+        ></textarea>
+        <div class="gemini-apply-row">
+          <span class="gemini-status" id="geminiStatus">—</span>
+          <button class="btn-small" onclick="applyGeminiMapping()">Appliquer</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMAT -->
+    <div>
+      <div class="section-title">Format</div>
+      <div class="field">
+        <div class="radio-group" id="formatGroup">
+          <label id="lbl-vertical"><input type="radio" name="format" value="vertical"> Vertical<br><small style="color:var(--text-dim)">1080×1920</small></label>
+          <label id="lbl-horizontal"><input type="radio" name="format" value="horizontal" checked> Horizontal<br><small style="color:var(--text-dim)">1920×1080</small></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHIE -->
+    <div>
+      <div class="section-title">Typographie</div>
+
+      <div class="field">
+        <label>Police principale</label>
+        <select id="fontPrimary" onchange="onFontChange('fontPrimary','fontPrimaryOther')">
+          <option value="Cinzel" selected>Cinzel — Serif élégant</option>
+          <option value="Playfair Display">Playfair Display — Serif</option>
+          <option value="Cormorant Garamond">Cormorant Garamond — Serif fin</option>
+          <option value="Montserrat">Montserrat — Sans moderne</option>
+          <option value="Oswald">Oswald — Sans condensé</option>
+          <option value="Bebas Neue">Bebas Neue — Sans display</option>
+          <option value="Caveat">Caveat — Handwriting</option>
+          <option value="Permanent Marker">Permanent Marker — Marker</option>
+          <option value="Patrick Hand">Patrick Hand — Whiteboard</option>
+          <option value="Courier Prime">Courier Prime — Monospace</option>
+          <option value="Space Mono">Space Mono — Mono tech</option>
+          <option value="Arrib Black">Arrib Black — Display bold</option>
+          <option value="__other__">— Autre police —</option>
+        </select>
+        <input type="text" id="fontPrimaryOther" class="font-other-input" placeholder="Nom exact de la police…">
+      </div>
+
+      <div class="field">
+        <label>Police accent (mots forts)</label>
+        <select id="fontAccent" onchange="onFontChange('fontAccent','fontAccentOther')">
+          <option value="Playfair Display" selected>Playfair Display — Serif</option>
+          <option value="Cinzel">Cinzel — Serif élégant</option>
+          <option value="Cormorant Garamond">Cormorant Garamond — Serif fin</option>
+          <option value="Montserrat">Montserrat — Sans moderne</option>
+          <option value="Oswald">Oswald — Sans condensé</option>
+          <option value="Bebas Neue">Bebas Neue — Sans display</option>
+          <option value="Caveat">Caveat — Handwriting</option>
+          <option value="Permanent Marker">Permanent Marker — Marker</option>
+          <option value="Patrick Hand">Patrick Hand — Whiteboard</option>
+          <option value="Courier Prime">Courier Prime — Monospace</option>
+          <option value="Space Mono">Space Mono — Mono tech</option>
+          <option value="Arrib Black">Arrib Black — Display bold</option>
+          <option value="__other__">— Autre police —</option>
+        </select>
+        <input type="text" id="fontAccentOther" class="font-other-input" placeholder="Nom exact de la police…">
+      </div>
+
+      <div class="field">
+        <label>Taille sous-titres — <span class="range-val" id="subtitleSizeVal">72</span> px</label>
+        <input type="range" id="subtitleSize" min="32" max="120" step="2" value="72"
+               oninput="document.getElementById('subtitleSizeVal').textContent=this.value">
+      </div>
+
+      <div class="field">
+        <label>Position sous-titres</label>
+        <div class="pos-group">
+          <button class="pos-btn" data-pos="top" onclick="setPosition('top')">
+            <div class="pos-schema"><div class="bar top"></div></div>
+            Haut
+          </button>
+          <button class="pos-btn" data-pos="center" onclick="setPosition('center')">
+            <div class="pos-schema"><div class="bar center"></div></div>
+            Centre
+          </button>
+          <button class="pos-btn active" data-pos="bottom" onclick="setPosition('bottom')">
+            <div class="pos-schema"><div class="bar bottom"></div></div>
+            Bas
+          </button>
+        </div>
+        <input type="hidden" id="subtitlePosition" value="bottom">
+      </div>
+    </div>
+
+    <!-- COULEURS -->
+    <div>
+      <div class="section-title">Couleurs</div>
+      <div class="field">
+        <label>Couleur sous-titres</label>
+        <input type="color" id="subtitleColor" value="#ffffff">
+      </div>
+      <div class="field">
+        <label>Couleur accent</label>
+        <input type="color" id="accentColor" value="#ffd700">
+      </div>
+      <div class="field">
+        <label>Fond (si pas d'image)</label>
+        <input type="color" id="bgColor" value="#f5f0e8">
+      </div>
+    </div>
+
+    <!-- EFFETS -->
+    <div>
+      <div class="section-title">Effets</div>
+      <div class="field">
+        <label>Grain <span class="range-val" id="grainVal">0.15</span></label>
+        <input type="range" id="grainIntensity" min="0" max="1" step="0.01" value="0.15"
+               oninput="document.getElementById('grainVal').textContent=this.value">
+      </div>
+      <div class="field">
+        <div class="checkbox-row">
+          <input type="checkbox" id="vignette" checked>
+          <label for="vignette">Vignetage activé</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- OVERLAY GLOBAL -->
+    <div>
+      <div class="section-title">Overlay — Contrôle Global</div>
+      <div class="field">
+        <label>Intensité max globale — <span class="range-val" id="ovGlobalVal">3</span></label>
+        <input type="range" id="ovGlobalIntensity" min="1" max="3" step="1" value="3"
+               oninput="document.getElementById('ovGlobalVal').textContent=this.value">
+        <div style="font-size:10px;color:var(--text-dim);margin-top:3px;line-height:1.4;">
+          Gemini fixe l'intensité par image (1-3).<br>Ce curseur <b>plafonne</b> toutes les intensités.
+        </div>
+      </div>
+    </div>
+
+    <!-- ANIMATION -->
+    <div>
+      <div class="section-title">Animation sous-titres</div>
+      <div class="field">
+        <div class="checkbox-row">
+          <input type="checkbox" id="subtitleAnim" checked>
+          <label for="subtitleAnim">Animation activée</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Vitesse — <span class="range-val" id="animSpeedVal">5</span> frames</label>
+        <input type="range" id="animSpeed" min="1" max="15" step="1" value="5"
+               oninput="onAnimSpeedChange(this.value)">
+      </div>
+    </div>
+
+    <!-- SFX BETA -->
+    <div>
+      <div class="section-title" style="color:#e55;border-color:#8b2222;">SFX — Mode Beta</div>
+      <div style="font-size:10px;color:var(--text-dim);line-height:1.6;background:#200808;border:1px solid #5a1a1a;border-radius:var(--radius);padding:8px;">
+        Bouton <b style="color:#e55;">SFX ON/OFF</b> par segment.<br>
+        Défaut auto : ON aux seg 1,2,3,6,9… (pattern 9-cycle).<br>
+        Cliquer sur le bouton bascule l'override éditorial.<br>
+        <span style="color:#888;">assets : SHARED/audio/sfx/</span>
+      </div>
+    </div>
+
+    <!-- TRANSITION PREVIEW -->
+    <div>
+      <div class="section-title" style="color:#7af;border-color:#2255aa;">Prévisualisation transition</div>
+      <div style="font-size:10px;color:var(--text-dim);margin-bottom:6px;">Vitesse sélectionnée dans la timeline :</div>
+      <div id="trans-preview-box" style="position:relative;height:56px;background:#111;border:1px solid #333;border-radius:var(--radius);overflow:hidden;margin-bottom:6px;">
+        <div id="tp-n" style="position:absolute;top:8px;left:8px;width:52px;height:40px;background:#7af;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:bold;color:#000;">N</div>
+        <div id="tp-n1" style="position:absolute;top:8px;right:8px;width:52px;height:40px;background:#fa7;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:bold;color:#000;opacity:0.3;transform:scale(0.5);transform-origin:right center;">N+1</div>
+        <div id="tp-arrow" style="position:absolute;top:24px;left:68px;right:68px;height:2px;background:#e00;transform:scaleX(0);transform-origin:left center;opacity:0;"></div>
+      </div>
+      <div style="display:flex;gap:4px;margin-bottom:4px;">
+        <button class="btn-secondary" style="flex:1;font-size:10px;padding:4px;" onclick="runPreview(8)">8f</button>
+        <button class="btn-secondary" style="flex:1;font-size:10px;padding:4px;" onclick="runPreview(12)">12f</button>
+        <button class="btn-secondary" style="flex:1;font-size:10px;padding:4px;" onclick="runPreview(18)">18f</button>
+        <button class="btn-secondary" style="flex:1;font-size:10px;padding:4px;" onclick="runPreview(30)">30f</button>
+      </div>
+      <button class="btn-secondary" onclick="runPreview(lastPreviewFrames||12)" style="width:100%;font-size:10px;">&#9654; Rejouer</button>
+    </div>
+
+    <!-- ACTIONS -->
+    <div>
+      <div class="section-title">Actions rapides</div>
+      <button class="btn-secondary" onclick="autoMatchByTimestamp()" style="margin-bottom:6px;border-color:var(--gold);color:var(--gold)">&#9733; Auto-match par timestamp</button>
+      <button class="btn-secondary" onclick="autoAssign()">Auto-assigner (proportionnel)</button>
+    </div>
+
+  </aside>
+
+  <!-- ── Timeline Panel ── -->
+  <main class="timeline-panel">
+    <div class="timeline-header">
+      <div>#</div>
+      <div>Sous-titre / Segment</div>
+      <div>Image</div>
+      <div>Aperçu</div>
+      <div>Overlay</div>
+      <div></div>
+    </div>
+    <div id="timeline">
+      <div style="color:var(--text-dim); padding:20px; text-align:center;">Chargement du timing.json…</div>
+    </div>
+  </main>
+
+</div>
+
+
+</div></div><!-- /panel-roadmap -->
+
+<!-- ── DELTA-TEST3 : Panel MINIATURE ── -->
+<div class="tab-panel" id="panel-miniature">
+  <div class="miniature-layout">
+    <!-- Config (gauche 300px) -->
+    <aside class="miniature-config">
+      <div>
+        <div class="section-title">Miniature PNG</div>
+        <div class="upload-area" id="uploadArea" onclick="document.getElementById('thumbnailFileInput').click()">
+          <input type="file" id="thumbnailFileInput" accept="image/png,image/jpeg">
+          <div class="upload-hint">
+            <b>Cliquer pour uploader</b><br>
+            PNG ou JPG<br>
+            <span id="thumbnailName" style="color:var(--gold);"></span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-title">Chapitres</div>
+        <div style="font-size:10px;color:var(--text-dim);margin-bottom:8px;line-height:1.5;">
+          Clique sur un segment pour marquer le début d'un chapitre.<br>
+          Clique sur la miniature pour placer la balise caméra.
+        </div>
+        <div class="chapter-list" id="chapterList">
+          <div style="color:var(--text-dim);font-size:11px;padding:8px;">Aucun chapitre — clique sur la miniature pour commencer.</div>
+        </div>
+        <button class="btn-secondary" style="margin-top:8px;" onclick="addChapter()">+ Ajouter chapitre</button>
+      </div>
+
+      <div>
+        <div class="section-title">Transition caméra</div>
+        <div class="field">
+          <label>Durée — <span class="range-val" id="transFramesVal">45</span> frames</label>
+          <input type="range" id="transFramesInput" min="15" max="90" step="5" value="45"
+                 oninput="document.getElementById('transFramesVal').textContent=this.value; thumbnailPlan.transition_frames=parseInt(this.value)">
+        </div>
+      </div>
+
+      <div>
+        <div class="section-title">Aperçu caméra</div>
+        <button class="preview-cam-btn" id="previewCamBtn" onclick="previewCameraMovement()">▶ Simuler mouvement caméra</button>
+      </div>
+    </aside>
+
+    <!-- Canvas (droite) -->
+    <div class="miniature-canvas-area">
+      <div class="miniature-canvas-wrap" id="miniatureCanvasWrap" style="display:none;">
+        <img id="miniatureImg" src="" alt="Miniature">
+      </div>
+      <div id="miniaturePlaceholder" style="color:var(--text-dim);font-size:13px;text-align:center;padding:40px;">
+        Uploade une miniature PNG pour commencer<br>à placer les balises caméra.
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="progress-info" id="progressInfo">— segments assignés</div>
+  <div class="save-status" id="saveStatus"></div>
+  <button class="btn-validate" id="btnValidate" onclick="saveRoadmap()">
+    Valider &amp; Sauvegarder
+  </button>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<!-- ── Preview Modal ── -->
+<div class="modal-overlay" id="previewModal" onclick="if(event.target===this)closePreview()">
+  <div class="modal-box">
+    <div class="modal-label"></div>
+    <button class="modal-close" onclick="closePreview()">✕ FERMER</button>
+    <div class="preview-frame">
+      <div class="preview-bg"></div>
+      <div class="preview-overlay"></div>
+      <div class="preview-subtitle"><div class="preview-sub-text"></div></div>
+      <div class="preview-seg-label"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── State ──────────────────────────────────────────────────────────────────────
+let timingData = null;
+let imageList  = [];
+const assignments = {};        // segmentId (string) → imageFilename (string)
+const overlayAssignments = {}; // segmentId (string) → { type, intensite }
+const mediaTypes  = {};        // segmentId (string) → 'image' | 'video' | 'gif'
+const sfxTags     = {};        // segmentId (string) → true|false (operator editorial override)
+const transFrames = {};        // segmentId (string) → 8|12|18|30 (transition duration in frames)
+let subtitlePosition = 'bottom';
+
+// ── Init ───────────────────────────────────────────────────────────────────────
+async function init() {
+  await Promise.all([loadTiming(), loadImages()]);
+  renderTimeline();
+  updateProgress();
+}
+
+async function loadTiming() {
+  try {
+    const r = await fetch('/api/timing');
+    if (!r.ok) throw new Error(await r.text());
+    timingData = await r.json();
+    const dur = timingData.meta && timingData.meta.duration_seconds
+      ? timingData.meta.duration_seconds.toFixed(1) + 's'
+      : '—';
+    setStatus('ok', `${timingData.segments.length} segments — ${dur}`);
+
+    // Pre-select format — priority: URL param > timing.json meta > default (horizontal)
+    const urlFmt = new URLSearchParams(window.location.search).get('format');
+    const metaFmt = timingData.meta && timingData.meta.format;
+    const fmt = urlFmt || metaFmt;
+    if (fmt === 'vertical' || fmt === 'horizontal') {
+      document.querySelector(`input[name="format"][value="${fmt}"]`).checked = true;
+      document.getElementById('lbl-vertical').classList.toggle('active',   fmt === 'vertical');
+      document.getElementById('lbl-horizontal').classList.toggle('active', fmt === 'horizontal');
+    }
+  } catch(e) {
+    setStatus('error', 'timing.json introuvable');
+    document.getElementById('timeline').innerHTML =
+      `<div style="color:#e55;padding:20px">Erreur : ${e.message}</div>`;
+  }
+}
+
+async function loadImages() {
+  try {
+    const r = await fetch('/api/images');
+    const d = await r.json();
+    imageList = d.images || [];
+  } catch(e) {
+    imageList = [];
+  }
+}
+
+function setStatus(type, msg) {
+  const el = document.getElementById('statusPill');
+  el.textContent = msg;
+  el.className = 'status-pill ' + type;
+}
+
+// ── Gemini Mapping Parser ──────────────────────────────────────────────────────
+function applyGeminiMapping() {
+  const raw = document.getElementById('geminiInput').value.trim();
+  const statusEl = document.getElementById('geminiStatus');
+
+  if (!raw) {
+    statusEl.textContent = 'Tableau vide.';
+    statusEl.className = 'gemini-status err';
+    return;
+  }
+  if (!timingData) {
+    statusEl.textContent = 'timing.json non chargé.';
+    statusEl.className = 'gemini-status err';
+    return;
+  }
+
+  const lines = raw.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+  const dataLines = lines.filter(l => {
+    // Skip separator lines (|---|...| or |---...|)
+    if (/^\|[-\s|]+\|?$/.test(l)) return false;
+    // Skip header lines (contain "Image", "Nom", "Segment", "fichier")
+    if (/image|nom\s+fichier|segments?\s+couverts/i.test(l)) return false;
+    // Must start with | or contain |
+    return l.includes('|');
+  });
+
+  if (dataLines.length === 0) {
+    statusEl.textContent = 'Aucune ligne de données détectée.';
+    statusEl.className = 'gemini-status err';
+    return;
+  }
+
+  let applied = 0;
+  let errors  = 0;
+
+  dataLines.forEach(line => {
+    // Split by | and clean
+    const cols = line.split('|').map(c => c.trim()).filter(c => c.length > 0);
+    if (cols.length < 2) { errors++; return; }
+
+    // Find image filename (contains .png / .jpg / .jpeg / .webp)
+    const imgCol = cols.find(c => /\.(png|jpg|jpeg|webp|gif)$/i.test(c));
+    if (!imgCol) { errors++; return; }
+    const imgFile = imgCol.trim();
+
+    // Find segment range column (contains "seg" or range like "1-3" or "1, 2, 3")
+    const segCol = cols.find(c => /seg\s*\d|^\d+[-,\s]\d/i.test(c));
+    if (!segCol) { errors++; return; }
+
+    const segNums = parseSegmentRange(segCol);
+    if (segNums.length === 0) { errors++; return; }
+
+    // Detect overlay column (starts with INTERIEUR, EXTERIEUR, VITRE or defaut)
+    const overlayCol = cols.find(c => /^(INTERIEUR|EXTERIEUR|VITRE|defaut)/i.test(c));
+    const overlayVal = overlayCol ? overlayCol.trim() : 'defaut';
+
+    // Detect intensite column (standalone 1, 2 or 3)
+    const intensiteCol = cols.find(c => /^[123]$/.test(c.trim()));
+    const intensiteVal = intensiteCol ? parseInt(intensiteCol, 10) : 2;
+
+    // Apply to segments (1-indexed → array index)
+    segNums.forEach(n => {
+      const idx = n - 1;  // Convert to 0-based
+      if (idx >= 0 && idx < timingData.segments.length) {
+        const seg = timingData.segments[idx];
+        assignments[String(seg.id)] = imgFile;
+        overlayAssignments[String(seg.id)] = { type: overlayVal, intensite: intensiteVal };
+        applied++;
+      }
+    });
+  });
+
+  renderTimeline();
+  updateProgress();
+
+  if (applied > 0) {
+    statusEl.textContent = `${applied} segment(s) assigné(s).`;
+    statusEl.className = 'gemini-status ok';
+    showToast(`Mapping appliqué — ${applied} segments mis à jour.`, 'ok');
+  } else {
+    statusEl.textContent = `0 assigné. Vérifier le format. (${errors} err)`;
+    statusEl.className = 'gemini-status err';
+    showToast('Aucun segment assigné — vérifier le tableau.', 'error');
+  }
+}
+
+function parseSegmentRange(str) {
+  // "seg 1-3" → [1,2,3]
+  // "seg 1, 2, 3" → [1,2,3]
+  // "1-3" → [1,2,3]
+  // "seg 5" → [5]
+  // "1, 2" → [1,2]
+  const clean = str.replace(/seg\s*/gi, '').trim();
+  const nums = [];
+
+  // Range: "1-3"
+  const rangeMatch = clean.match(/^(\d+)\s*[-–]\s*(\d+)$/);
+  if (rangeMatch) {
+    const from = parseInt(rangeMatch[1], 10);
+    const to   = parseInt(rangeMatch[2], 10);
+    for (let i = from; i <= to; i++) nums.push(i);
+    return nums;
+  }
+
+  // List: "1, 2, 3" or "1 2 3"
+  const parts = clean.split(/[\s,]+/).filter(p => /^\d+$/.test(p));
+  if (parts.length > 0) {
+    parts.forEach(p => nums.push(parseInt(p, 10)));
+    return nums;
+  }
+
+  return nums;
+}
+
+// ── Font Dropdown ──────────────────────────────────────────────────────────────
+function onFontChange(selectId, otherId) {
+  const sel = document.getElementById(selectId);
+  const other = document.getElementById(otherId);
+  if (sel.value === '__other__') {
+    other.classList.add('visible');
+    other.focus();
+  } else {
+    other.classList.remove('visible');
+  }
+}
+
+function getFontValue(selectId, otherId) {
+  const sel = document.getElementById(selectId);
+  if (sel.value === '__other__') {
+    return document.getElementById(otherId).value.trim() || 'Cinzel';
+  }
+  return sel.value;
+}
+
+// ── Position Selector ─────────────────────────────────────────────────────────
+function setPosition(pos) {
+  subtitlePosition = pos;
+  document.getElementById('subtitlePosition').value = pos;
+  document.querySelectorAll('.pos-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.pos === pos);
+  });
+}
+
+// ── Overlay Visual Preview ────────────────────────────────────────────────────
+function buildOverlayInner(type, intensite) {
+  let inner = '';
+  if (type === 'defaut' || type === 'INTERIEUR:sombre' || type === 'EXTERIEUR:nuit') {
+    const op = [0, 0.5, 0.7, 0.9][intensite] || 0.7;
+    inner = `
+      <div class="ov-base" style="background:#111;"></div>
+      <div style="position:absolute;left:15%;top:20%;width:3px;height:3px;border-radius:50%;background:rgba(220,215,200,0.9);opacity:${op};"></div>
+      <div style="position:absolute;left:50%;top:55%;width:2px;height:2px;border-radius:50%;background:rgba(220,215,200,0.9);opacity:${op};"></div>
+      <div style="position:absolute;left:75%;top:30%;width:3px;height:3px;border-radius:50%;background:rgba(220,215,200,0.9);opacity:${op};"></div>
+      <div style="position:absolute;left:35%;top:70%;width:2px;height:2px;border-radius:50%;background:rgba(220,215,200,0.9);opacity:${op};"></div>`;
+  } else if (type === 'INTERIEUR:neons' || type === 'INTERIEUR:ecran') {
+    const op = [0, 0.5, 0.7, 0.95][intensite] || 0.7;
+    inner = `
+      <div class="ov-base" style="background:#0a0d14;"></div>
+      <div class="ov-bar" style="top:8%;left:5%;width:42%;background:rgba(180,240,255,0.95);box-shadow:0 0 6px 2px rgba(100,200,255,0.7);opacity:${op};"></div>
+      <div class="ov-bar" style="top:8%;right:5%;width:30%;background:rgba(180,240,255,0.95);box-shadow:0 0 6px 2px rgba(100,200,255,0.7);opacity:${op*0.8};"></div>
+      <div style="position:absolute;top:13%;left:10%;width:80%;height:50%;background:linear-gradient(to bottom,rgba(160,220,255,0.2),transparent);clip-path:polygon(20% 0%,80% 0%,100% 100%,0% 100%);opacity:${op};"></div>`;
+  } else if (type === 'INTERIEUR:lampe') {
+    const op = [0, 0.5, 0.75, 0.95][intensite] || 0.75;
+    inner = `
+      <div class="ov-base" style="background:#0d0a06;"></div>
+      <div class="ov-glow" style="bottom:-10%;left:-5%;width:65%;height:80%;background:radial-gradient(ellipse at 30% 80%,rgba(255,180,50,0.7),rgba(255,140,20,0.2) 50%,transparent 75%);opacity:${op};mix-blend-mode:screen;"></div>`;
+  } else if (type === 'EXTERIEUR:pluie') {
+    const op = [0, 0.5, 0.75, 1.0][intensite] || 0.75;
+    inner = `
+      <div class="ov-base" style="background:linear-gradient(to bottom,rgba(60,75,100,0.9),rgba(40,55,80,0.7));"></div>
+      ${[10,22,35,48,60,72,85].map((x,i) => `<div class="ov-drop" style="left:${x}%;top:${(i*17)%90}%;width:1px;height:${8+i*2}px;background:rgba(180,210,240,0.8);opacity:${op};"></div>`).join('')}`;
+  } else if (type === 'EXTERIEUR:vent') {
+    const op = [0, 0.5, 0.8, 1.0][intensite] || 0.8;
+    inner = `
+      <div class="ov-base" style="background:#0d1a0d;"></div>
+      ${[5,20,38,55,70].map((y,i) => `<div style="position:absolute;left:${5+i*3}%;top:${y}%;width:${18+i*4}px;height:2px;background:rgba(200,220,240,0.7);border-radius:2px;transform:rotate(-8deg);opacity:${op};"></div>`).join('')}`;
+  } else if (type === 'EXTERIEUR:soleil') {
+    const op = [0, 0.4, 0.65, 0.9][intensite] || 0.65;
+    inner = `
+      <div class="ov-base" style="background:#0d0d06;"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 80% 10%,rgba(255,230,100,0.7),rgba(255,200,60,0.15) 55%,transparent 75%);opacity:${op};"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,240,100,0.3) 0%,transparent 45%);opacity:${op};"></div>`;
+  } else if (type === 'VITRE:pluie' || type === 'VITRE:brouillard') {
+    const op = [0, 0.55, 0.8, 1.0][intensite] || 0.8;
+    inner = `
+      <div class="ov-base" style="background:#0a0f14;"></div>
+      <div style="position:absolute;top:20%;left:5%;width:90%;height:40%;background:linear-gradient(to bottom,rgba(80,95,115,0.5),rgba(60,75,95,0.25));border-radius:1px;overflow:hidden;">
+        ${[10,25,42,58,72,85].map((x,i) => `<div style="position:absolute;left:${x}%;top:${(i*21)%100}%;width:1px;height:${7+i}px;background:rgba(180,210,240,0.85);transform:rotate(-10deg);opacity:${op};"></div>`).join('')}
+      </div>`;
+  }
+  return inner;
+}
+
+// kept for Gemini mapping badge (read-only badge, no longer used in timeline rows)
+function buildOverlayPreview(type, intensite) {
+  const cat = (type.split(':')[0] || 'defaut').toLowerCase();
+  const labelMap = { 'INTERIEUR:neons':'néons', 'INTERIEUR:lampe':'lampe', 'INTERIEUR:ecran':'écran',
+    'INTERIEUR:sombre':'sombre', 'EXTERIEUR:pluie':'pluie', 'EXTERIEUR:vent':'vent',
+    'EXTERIEUR:soleil':'soleil', 'EXTERIEUR:nuit':'nuit', 'VITRE:pluie':'vitre·pluie',
+    'VITRE:brouillard':'brouillard', 'defaut':'défaut' };
+  const label = labelMap[type] || escHtml(type);
+  return `<div class="overlay-col">
+    <div class="overlay-preview">${buildOverlayInner(type, intensite)}</div>
+    <span class="overlay-badge cat-${cat}">${label} · ${intensite}</span>
+  </div>`;
+}
+
+// ── Overlay options select ─────────────────────────────────────────────────────
+function buildOverlayOptions(current) {
+  const opts = [
+    ['defaut',              'Défaut'],
+    ['INTERIEUR:neons',     'Int · Néons'],
+    ['INTERIEUR:lampe',     'Int · Lampe'],
+    ['INTERIEUR:ecran',     'Int · Écran'],
+    ['INTERIEUR:sombre',    'Int · Sombre'],
+    ['EXTERIEUR:pluie',     'Ext · Pluie'],
+    ['EXTERIEUR:vent',      'Ext · Vent'],
+    ['EXTERIEUR:soleil',    'Ext · Soleil'],
+    ['EXTERIEUR:nuit',      'Ext · Nuit'],
+    ['VITRE:pluie',         'Vitre · Pluie'],
+    ['VITRE:brouillard',    'Vitre · Brouillard'],
+  ];
+  return opts.map(([v,l]) =>
+    `<option value="${v}"${v===current?' selected':''}>${l}</option>`
+  ).join('');
+}
+
+// ── Overlay interactive controls ──────────────────────────────────────────────
+function onOverlayChange(segId, type) {
+  const curr = overlayAssignments[String(segId)] || { type: 'defaut', intensite: 2 };
+  overlayAssignments[String(segId)] = { type, intensite: curr.intensite };
+  refreshOverlayCtrl(segId);
+}
+
+function setIntensity(segId, val) {
+  const curr = overlayAssignments[String(segId)] || { type: 'defaut', intensite: 2 };
+  overlayAssignments[String(segId)] = { type: curr.type, intensite: val };
+  refreshOverlayCtrl(segId);
+}
+
+function refreshOverlayCtrl(segId) {
+  const ov  = overlayAssignments[String(segId)] || { type: 'defaut', intensite: 2 };
+  const mini = document.getElementById(`ovprev-${segId}`);
+  if (mini) mini.innerHTML = buildOverlayInner(ov.type, ov.intensite);
+  const ctrl = document.getElementById(`ovcol-${segId}`);
+  if (ctrl) {
+    ctrl.querySelectorAll('.int-btn').forEach((btn, i) => {
+      btn.classList.toggle('active', i + 1 === ov.intensite);
+    });
+  }
+}
+
+// ── Preview Modal ─────────────────────────────────────────────────────────────
+function openPreview(segId) {
+  if (!timingData) return;
+  const seg = timingData.segments.find(s => s.id === segId);
+  if (!seg) return;
+
+  const ov       = overlayAssignments[String(segId)] || { type: 'defaut', intensite: 2 };
+  const assigned = assignments[String(segId)] || null;
+
+  const font     = getFontValue('fontPrimary', 'fontPrimaryOther');
+  const size     = parseInt(document.getElementById('subtitleSize').value, 10);
+  const subColor = document.getElementById('subtitleColor').value;
+  const accColor = document.getElementById('accentColor').value;
+  const bgColor  = document.getElementById('bgColor').value;
+  const position = document.getElementById('subtitlePosition').value;
+  const format   = document.querySelector('input[name="format"]:checked').value;
+
+  // Frame size for preview
+  const isVert  = format === 'vertical';
+  const frameW  = isVert ? 270 : 480;
+  const frameH  = isVert ? 480 : 270;
+  const scale   = frameW / (isVert ? 1080 : 1920);
+
+  // Subtitle HTML
+  let subHtml = '';
+  if (seg.words && seg.words.length) {
+    subHtml = seg.words.map(w =>
+      w.is_strong
+        ? `<span style="color:${accColor}">${escHtml(w.word)}</span>`
+        : escHtml(w.word)
+    ).join(' ');
+  } else {
+    subHtml = escHtml(seg.text || '');
+  }
+
+  // Overlay CSS overlay layer
+  const overlayCSS = buildPreviewOverlayCss(ov.type, ov.intensite);
+
+  // Subtitle position
+  const posMap = {
+    top:    `top:5%`,
+    center: `top:50%;transform:translateY(-50%)`,
+    bottom: `bottom:5%`,
+  };
+  const posCSS = posMap[position] || posMap.bottom;
+
+  const modal = document.getElementById('previewModal');
+  const frame = modal.querySelector('.preview-frame');
+  frame.style.width  = frameW + 'px';
+  frame.style.height = frameH + 'px';
+
+  // Background
+  const bgEl = modal.querySelector('.preview-bg');
+  bgEl.style.backgroundImage = assigned
+    ? `url('/api/image/${encodeURIComponent(assigned)}')`
+    : 'none';
+  bgEl.style.backgroundColor = assigned ? '' : bgColor;
+
+  // Overlay
+  modal.querySelector('.preview-overlay').style.cssText = overlayCSS;
+
+  // Subtitle
+  const subEl    = modal.querySelector('.preview-subtitle');
+  const subInner = modal.querySelector('.preview-sub-text');
+  subEl.style.cssText    = `position:absolute;left:0;right:0;padding:0 ${Math.round(16*scale)}px;text-align:center;${posCSS};`;
+  subInner.style.cssText = `font-family:'${font}',sans-serif;font-size:${Math.round(size*scale)}px;color:${subColor};line-height:1.3;text-shadow:1px 1px 4px rgba(0,0,0,0.85),0 0 18px rgba(0,0,0,0.6);`;
+  subInner.innerHTML = subHtml;
+
+  // Animation preview
+  const animOn    = document.getElementById('subtitleAnim').checked;
+  const animSpeed = parseInt(document.getElementById('animSpeed').value, 10);
+  const animMs    = Math.round(animSpeed * 1000 / 30);
+  subInner.classList.remove('anim-play');
+  if (animOn) {
+    subInner.style.setProperty('--anim-dur', animMs + 'ms');
+    void subInner.offsetWidth; // force reflow pour relancer l'animation
+    subInner.classList.add('anim-play');
+  } else {
+    subInner.style.opacity   = '1';
+    subInner.style.transform = 'none';
+  }
+
+  // Label
+  const labelMap = { 'INTERIEUR:neons':'néons','INTERIEUR:lampe':'lampe','INTERIEUR:ecran':'écran',
+    'INTERIEUR:sombre':'sombre','EXTERIEUR:pluie':'pluie','EXTERIEUR:vent':'vent',
+    'EXTERIEUR:soleil':'soleil','EXTERIEUR:nuit':'nuit','VITRE:pluie':'vitre·pluie',
+    'VITRE:brouillard':'brouillard','defaut':'défaut' };
+  modal.querySelector('.modal-label').textContent =
+    `Seg ${segId}  ·  ${labelMap[ov.type]||ov.type}  ·  intensité ${ov.intensite}`;
+
+  modal.classList.add('visible');
+}
+
+function buildPreviewOverlayCss(type, intensite) {
+  const lv = intensite / 3;
+  const base = 'position:absolute;inset:0;';
+  if (type === 'defaut') {
+    const op = 0.06 + lv * 0.12;
+    return `${base}background:rgba(0,0,0,${op.toFixed(2)});`;
+  } else if (type === 'INTERIEUR:neons' || type === 'INTERIEUR:ecran') {
+    const op = (0.18 + lv * 0.28).toFixed(2);
+    return `${base}background:linear-gradient(to bottom,rgba(20,30,70,${op}),rgba(10,18,50,${(op*0.75).toFixed(2)}));`;
+  } else if (type === 'INTERIEUR:lampe') {
+    const op = (0.18 + lv * 0.28).toFixed(2);
+    return `${base}background:radial-gradient(ellipse at 20% 100%,rgba(255,170,40,${(parseFloat(op)+0.22).toFixed(2)}),rgba(200,120,20,${op}) 38%,transparent 72%);`;
+  } else if (type === 'INTERIEUR:sombre') {
+    const op = (0.28 + lv * 0.30).toFixed(2);
+    return `${base}background:rgba(0,0,0,${op});`;
+  } else if (type === 'EXTERIEUR:pluie') {
+    const op = (0.14 + lv * 0.22).toFixed(2);
+    return `${base}background:linear-gradient(to bottom,rgba(40,55,80,${(parseFloat(op)+0.08).toFixed(2)}),rgba(30,45,65,${op}));`;
+  } else if (type === 'EXTERIEUR:vent') {
+    const op = (0.08 + lv * 0.14).toFixed(2);
+    return `${base}background:rgba(20,30,15,${op});`;
+  } else if (type === 'EXTERIEUR:soleil') {
+    const op = (0.08 + lv * 0.18).toFixed(2);
+    return `${base}background:radial-gradient(ellipse at 85% 5%,rgba(255,230,100,${(parseFloat(op)+0.25).toFixed(2)}),rgba(255,200,60,${op}) 45%,transparent 76%);`;
+  } else if (type === 'EXTERIEUR:nuit') {
+    const op = (0.32 + lv * 0.30).toFixed(2);
+    return `${base}background:rgba(5,10,25,${op});`;
+  } else if (type === 'VITRE:pluie' || type === 'VITRE:brouillard') {
+    const op = (0.18 + lv * 0.24).toFixed(2);
+    return `${base}background:rgba(60,80,100,${op});`;
+  }
+  return base;
+}
+
+function closePreview() {
+  document.getElementById('previewModal').classList.remove('visible');
+}
+
+function onAnimSpeedChange(val) {
+  document.getElementById('animSpeedVal').textContent = val;
+}
+
+// ── SFX helpers ───────────────────────────────────────────────────────────────
+function defaultSfxPattern(idx) {
+  // Pattern éditorial par défaut : true aux positions 0,1,2,5,8 (cycle de 9)
+  const p = [true, true, true, false, false, true, false, false, true];
+  return p[idx % p.length];
+}
+
+function onMediaTypeChange(segId, val) {
+  mediaTypes[String(segId)] = val;
+}
+
+function onTransFrameChange(segId, val) {
+  transFrames[String(segId)] = parseInt(val, 10);
+}
+
+function toggleSfx(segId, idx) {
+  const current = sfxTags[String(segId)];
+  const def = defaultSfxPattern(idx);
+  sfxTags[String(segId)] = (current !== undefined) ? !current : !def;
+  const active = sfxTags[String(segId)];
+  const btn = document.getElementById(`sfx-${segId}`);
+  if (btn) {
+    btn.classList.toggle('active', active);
+    btn.textContent = active ? 'SFX ON' : 'SFX OFF';
+  }
+}
+
+// ── Render Timeline ────────────────────────────────────────────────────────────
+function renderTimeline() {
+  if (!timingData) return;
+  const container = document.getElementById('timeline');
+  container.innerHTML = '';
+
+  timingData.segments.forEach((seg, idx) => {
+    const row = document.createElement('div');
+    row.className = 'segment-row';
+    row.id = `row-${seg.id}`;
+
+    let textHtml = seg.text;
+    if (seg.words && seg.words.length) {
+      textHtml = seg.words.map(w =>
+        w.is_strong
+          ? `<span class="seg-strong">${escHtml(w.word)}</span>`
+          : escHtml(w.word)
+      ).join(' ');
+    }
+
+    const assigned   = assignments[String(seg.id)] || '';
+    const selectHtml = buildImageSelect(seg.id, assigned);
+
+    const ov = overlayAssignments[String(seg.id)] || { type: 'defaut', intensite: 2 };
+    const mediaCurrent  = mediaTypes[String(seg.id)]  || 'image';
+    const sfxActive     = sfxTags[String(seg.id)] !== undefined
+      ? sfxTags[String(seg.id)]
+      : defaultSfxPattern(idx);
+    const transCurrent  = transFrames[String(seg.id)] || 12;
+
+    row.innerHTML = `
+      <div class="seg-id">${idx + 1}</div>
+      <div>
+        <div class="seg-text">${textHtml}</div>
+        <div class="seg-time">${fmtTime(seg.start)} → ${fmtTime(seg.end)} | f${seg.start_frame}–f${seg.end_frame}</div>
+      </div>
+      <div class="seg-image-select">${selectHtml}</div>
+      <div class="img-thumb-wrap" id="thumb-${seg.id}">
+        ${assigned
+          ? `<img src="/api/image/${encodeURIComponent(assigned)}" alt="${escHtml(assigned)}">`
+          : '<div class="placeholder">Aucune<br>image</div>'}
+      </div>
+      <div class="overlay-ctrl" id="ovcol-${seg.id}">
+        <div class="ov-mini" id="ovprev-${seg.id}">${buildOverlayInner(ov.type, ov.intensite)}</div>
+        <select class="ov-type-sel" onchange="onOverlayChange(${seg.id}, this.value)">
+          ${buildOverlayOptions(ov.type)}
+        </select>
+        <div class="intensity-row">
+          ${[1,2,3].map(n => `<button class="int-btn${ov.intensite===n?' active':''}" onclick="setIntensity(${seg.id},${n})">${n}</button>`).join('')}
+        </div>
+        <div style="display:flex;gap:3px;margin-top:3px;">
+          <select class="ov-type-sel" style="flex:1;" onchange="onMediaTypeChange(${seg.id}, this.value)">
+            <option value="image"${mediaCurrent==='image'?' selected':''}>Image</option>
+            <option value="video"${mediaCurrent==='video'?' selected':''}>Vidéo</option>
+            <option value="gif"${mediaCurrent==='gif'?' selected':''}>GIF</option>
+          </select>
+          <button id="sfx-${seg.id}" class="sfx-btn${sfxActive?' active':''}" onclick="toggleSfx(${seg.id},${idx})">${sfxActive?'SFX ON':'SFX OFF'}</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:4px;margin-top:4px;">
+          <span style="font-size:10px;color:var(--text-dim);white-space:nowrap;">TRANS</span>
+          <select class="ov-type-sel" style="flex:1;" onchange="onTransFrameChange(${seg.id}, this.value)">
+            <option value="8" ${transCurrent===8?'selected':''}>8f — brutal</option>
+            <option value="12" ${transCurrent===12?'selected':''}>12f — rapide</option>
+            <option value="18" ${transCurrent===18?'selected':''}>18f — smooth</option>
+            <option value="30" ${transCurrent===30?'selected':''}>30f — lent</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-preview" onclick="openPreview(${seg.id})">VOIR</button>
+    `;
+    if (assigned) row.classList.add('has-image');
+    container.appendChild(row);
+  });
+}
+
+function buildImageSelect(segId, currentVal) {
+  const cls = currentVal ? 'selected' : '';
+  let opts = `<option value="">— aucune image —</option>`;
+  imageList.forEach(img => {
+    const sel = img === currentVal ? 'selected' : '';
+    opts += `<option value="${escHtml(img)}" ${sel}>${escHtml(img)}</option>`;
+  });
+  return `<select class="${cls}" onchange="onImageChange(${segId}, this)">${opts}</select>`;
+}
+
+function onImageChange(segId, select) {
+  const val = select.value;
+  assignments[String(segId)] = val;
+  select.className = val ? 'selected' : '';
+
+  const thumb = document.getElementById(`thumb-${segId}`);
+  if (val) {
+    thumb.innerHTML = `<img src="/api/image/${encodeURIComponent(val)}" alt="${escHtml(val)}">`;
+    document.getElementById(`row-${segId}`).classList.add('has-image');
+  } else {
+    thumb.innerHTML = '<div class="placeholder">Aucune<br>image</div>';
+    document.getElementById(`row-${segId}`).classList.remove('has-image');
+  }
+  updateProgress();
+}
+
+// ── Auto-assign (proportionnel) ───────────────────────────────────────────────
+function autoAssign() {
+  if (!timingData || imageList.length === 0) {
+    showToast('Aucune image disponible pour l\'auto-assignation.', 'error');
+    return;
+  }
+  const segs = timingData.segments;
+  segs.forEach((seg, i) => {
+    const imgIdx = Math.floor(i * imageList.length / segs.length);
+    assignments[String(seg.id)] = imageList[imgIdx];
+  });
+  renderTimeline();
+  updateProgress();
+  showToast('Images auto-assignées (proportionnel).', 'ok');
+}
+
+// ── Precomputed mapping helpers ───────────────────────────────────────────────
+function copyPrecomputed() {
+  const ta = document.getElementById('precomputedMapping');
+  navigator.clipboard.writeText(ta.value).then(() => {
+    const st = document.getElementById('precomputedStatus');
+    st.textContent = 'Copié dans le presse-papier.';
+    st.className = 'gemini-status ok';
+    showToast('Mapping copié dans le presse-papier.', 'ok');
+  }).catch(() => {
+    ta.select();
+    document.execCommand('copy');
+    const st = document.getElementById('precomputedStatus');
+    st.textContent = 'Copié (fallback).';
+    st.className = 'gemini-status ok';
+  });
+}
+
+function loadPrecomputed() {
+  const content = document.getElementById('precomputedMapping').value;
+  document.getElementById('geminiInput').value = content;
+  applyGeminiMapping();
+  const st = document.getElementById('precomputedStatus');
+  st.textContent = 'Chargé et appliqué.';
+  st.className = 'gemini-status ok';
+}
+
+// ── Timestamp filename helpers ───────────────────────────────────────────────
+function parseTimestampFromFilename(filename) {
+  // Format attendu: MM_SS_mmm.ext — ex: 00_07_340.png → 7.34s
+  const m = filename.match(/^(\d{2})_(\d{2})_(\d{3})\.\w+$/);
+  if (!m) return null;
+  return parseInt(m[1], 10) * 60 + parseInt(m[2], 10) + parseInt(m[3], 10) / 1000;
+}
+
+function autoMatchByTimestamp() {
+  if (!timingData || imageList.length === 0) {
+    showToast('Aucune image disponible.', 'error');
+    return;
+  }
+
+  const imgWithTs = imageList
+    .map(f => ({ file: f, ts: parseTimestampFromFilename(f) }))
+    .filter(x => x.ts !== null)
+    .sort((a, b) => a.ts - b.ts);
+
+  if (imgWithTs.length === 0) {
+    showToast('Aucun nom au format MM_SS_mmm.png — utilise Auto-assigner (proportionnel).', 'error');
+    return;
+  }
+
+  // Pour chaque segment, trouver l'image dont le ts <= segment.start (la plus récente)
+  timingData.segments.forEach(seg => {
+    const segStart = seg.start || 0;
+    let best = imgWithTs[0];
+    for (const img of imgWithTs) {
+      if (img.ts <= segStart + 0.02) best = img;
+      else break;
+    }
+    assignments[String(seg.id)] = best.file;
+    // Appliquer aussi l'overlay si chargé depuis le mapping Gemini, sinon laisser existant
+  });
+
+  renderTimeline();
+  updateProgress();
+  showToast(`Auto-match timestamp — ${timingData.segments.length} segments assignés.`, 'ok');
+}
+
+// ── Progress ──────────────────────────────────────────────────────────────────
+function updateProgress() {
+  if (!timingData) return;
+  const total = timingData.segments.length;
+  const done  = timingData.segments.filter(s => assignments[String(s.id)]).length;
+  document.getElementById('progressInfo').innerHTML =
+    `<span>${done}/${total}</span> segments assignés`;
+  document.getElementById('btnValidate').disabled = (done === 0);
+}
+
+// ── Transition Preview ────────────────────────────────────────────────────────
+let lastPreviewFrames = 12;
+let _tpTimer = null;
+
+function runPreview(frames) {
+  lastPreviewFrames = frames;
+  const dur = Math.round(frames / 30 * 1000);
+  const box = document.getElementById('trans-preview-box');
+  const nEl  = document.getElementById('tp-n');
+  const n1El = document.getElementById('tp-n1');
+  const arr  = document.getElementById('tp-arrow');
+  if (!box || !nEl || !n1El || !arr) return;
+
+  // reset without animation
+  [nEl, n1El, arr].forEach(el => el.classList.remove('tp-animate-n','tp-animate-n1','tp-animate-arr'));
+  box.style.setProperty('--tp-dur', dur + 'ms');
+  nEl.style.transform  = 'translateX(0) scale(1)';   nEl.style.opacity = '1';
+  n1El.style.transform = 'scale(0.5)'; n1El.style.opacity = '0.3';
+  arr.style.transform  = 'scaleX(0)';  arr.style.opacity  = '0';
+
+  if (_tpTimer) clearTimeout(_tpTimer);
+  _tpTimer = setTimeout(() => {
+    nEl.classList.add('tp-animate-n');
+    n1El.classList.add('tp-animate-n1');
+    arr.classList.add('tp-animate-arr');
+    // N exits right + shrinks, N+1 grows to full, arrow draws then fades
+    nEl.style.transform  = 'translateX(160px) scale(0.15)'; nEl.style.opacity = '0';
+    n1El.style.transform = 'scale(1)';                       n1El.style.opacity = '1';
+    arr.style.transform  = 'scaleX(1)';                      arr.style.opacity  = '1';
+    // arrow fade at impact
+    setTimeout(() => {
+      arr.classList.add('tp-animate-arr');
+      arr.style.opacity = '0';
+    }, dur);
+  }, 50);
+}
+
+// ── Save Roadmap ──────────────────────────────────────────────────────────────
+async function saveRoadmap() {
+  if (!timingData) return;
+
+  const format = document.querySelector('input[name="format"]:checked').value;
+  const dims   = format === 'vertical' ? {width: 1080, height: 1920} : {width: 1920, height: 1080};
+  const fps    = (timingData.meta && timingData.meta.fps) ? timingData.meta.fps : 30;
+
+  const timeline = timingData.segments.map((seg, idx) => {
+    // Fallback: compute start/end from frames if not in timing.json
+    const startSec = (seg.start !== undefined) ? seg.start : (seg.start_frame / fps);
+    const endSec   = (seg.end   !== undefined) ? seg.end   : (seg.end_frame   / fps);
+    return {
+      id:               idx + 1,
+      image_file:       assignments[String(seg.id)] || null,
+      text_subtitles:   seg.text,
+      start_frame:      seg.start_frame,
+      end_frame:        seg.end_frame,
+      start:            parseFloat(startSec.toFixed(3)),
+      end:              parseFloat(endSec.toFixed(3)),
+      overlay_type:     (overlayAssignments[String(seg.id)]?.type      || 'defaut'),
+      overlay_intensite:(overlayAssignments[String(seg.id)]?.intensite || 2),
+      media_type:       (mediaTypes[String(seg.id)]  || 'image'),
+      sfx_trigger:      (sfxTags[String(seg.id)] !== undefined
+                          ? sfxTags[String(seg.id)]
+                          : defaultSfxPattern(idx)),
+      trans_frames:     (transFrames[String(seg.id)] || 12),
+    };
+  });
+
+  const payload = {
+    meta: {
+      fps:           fps,
+      format:        format,
+      width:         dims.width,
+      height:        dims.height,
+      audio_path:    (timingData.meta && timingData.meta.audio_path) ? timingData.meta.audio_path : null,
+      source_timing: 'timing.json',
+    },
+    style: {
+      font_primary:      getFontValue('fontPrimary', 'fontPrimaryOther'),
+      font_accent:       getFontValue('fontAccent',  'fontAccentOther'),
+      subtitle_size:     parseInt(document.getElementById('subtitleSize').value, 10),
+      subtitle_position: document.getElementById('subtitlePosition').value,
+      subtitle_color:    document.getElementById('subtitleColor').value.toUpperCase(),
+      accent_color:      document.getElementById('accentColor').value.toUpperCase(),
+      background_color:  document.getElementById('bgColor').value.toUpperCase(),
+      grain_intensity:   parseFloat(document.getElementById('grainIntensity').value),
+      vignette:          document.getElementById('vignette').checked,
+      subtitle_anim:           document.getElementById('subtitleAnim').checked,
+      subtitle_anim_speed:     parseInt(document.getElementById('animSpeed').value, 10),
+      overlay_global_intensity: parseInt(document.getElementById('ovGlobalIntensity').value, 10),
+    },
+    timeline:           timeline,
+    validated_by_magos: true,
+  };
+
+  // ── DELTA-TEST3 : ajouter thumbnail_plan si des chapitres sont configurés ──
+  if (thumbnailPlan.chapters.length > 0 && thumbnailPlan.file) {
+    payload.thumbnail_plan = {
+      file: thumbnailPlan.file,
+      transition_frames: thumbnailPlan.transition_frames || 45,
+      chapters: thumbnailPlan.chapters.map(ch => ({
+        id: ch.id,
+        label: ch.label || '',
+        start_segment: ch.start_segment,
+        waypoint: ch.waypoint || null,
+      })),
+    };
+  }
+
+  // Warn if audio_path is null
+  if (!payload.meta.audio_path) {
+    console.warn('[CASTELLAN] audio_path non défini dans timing.json — roadmap.json sera incomplet pour F03.');
+  }
+
+  const btn = document.getElementById('btnValidate');
+  btn.disabled  = true;
+  btn.textContent = 'Sauvegarde…';
+
+  try {
+    const r = await fetch('/api/save', {
+      method:  'POST',
+      headers: {'Content-Type': 'application/json'},
+      body:    JSON.stringify(payload),
+    });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || r.statusText);
+
+    const st = document.getElementById('saveStatus');
+    st.textContent = `✓ roadmap.json sauvegardé (${d.size_kb} KB)`;
+    st.className = 'save-status ok';
+    showToast('MISSION ACCOMPLIE — roadmap.json écrit.', 'ok');
+    btn.textContent = '✓ Sauvegardé';
+    btn.style.background   = '#1a3a1a';
+    btn.style.borderColor  = 'var(--green-ok)';
+    btn.style.color        = 'var(--green-ok)';
+  } catch(e) {
+    const st = document.getElementById('saveStatus');
+    st.textContent = `Erreur : ${e.message}`;
+    st.className = 'save-status error';
+    showToast(`Erreur sauvegarde : ${e.message}`, 'error');
+    btn.disabled  = false;
+    btn.textContent = 'Valider & Sauvegarder';
+  }
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function fmtTime(s) {
+  if (s === undefined || s === null) return '??:??';
+  const m   = Math.floor(s / 60);
+  const sec = (s - m * 60).toFixed(2).padStart(5, '0');
+  return `${String(m).padStart(2,'0')}:${sec}`;
+}
+
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className   = 'toast ' + type;
+  clearTimeout(t._to);
+  t._to = setTimeout(() => { t.className = 'toast'; }, 4000);
+}
+
+// ── Format radio visual ────────────────────────────────────────────────────────
+document.querySelectorAll('input[name="format"]').forEach(r => {
+  r.addEventListener('change', () => {
+    document.getElementById('lbl-vertical').classList.toggle('active',   r.value === 'vertical'   && r.checked);
+    document.getElementById('lbl-horizontal').classList.toggle('active', r.value === 'horizontal' && r.checked);
+  });
+});
+document.getElementById('lbl-vertical').classList.add('active');
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+init();
+
+// ── DELTA-TEST3 : Tab switcher + MINIATURE panel ─────────────────────────
+let thumbnailPlan = {
+  file: null,
+  transition_frames: 45,
+  chapters: []
+};
+let thumbnailDataURL = null;  // base64 for preview
+let selectedChapterIdx = -1;
+let camPreviewAnimId = null;
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('visible'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById('panel-' + tab).classList.add('visible');
+}
+
+// ── Thumbnail upload ─────────────────────────────────────────────────────
+document.getElementById('thumbnailFileInput').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  thumbnailPlan.file = file.name;
+  document.getElementById('thumbnailName').textContent = file.name;
+
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    thumbnailDataURL = ev.target.result;
+    const img = document.getElementById('miniatureImg');
+    img.src = thumbnailDataURL;
+    document.getElementById('miniatureCanvasWrap').style.display = 'inline-block';
+    document.getElementById('miniaturePlaceholder').style.display = 'none';
+    // Auto-create first chapter if none
+    if (thumbnailPlan.chapters.length === 0) {
+      addChapter();
+    }
+  };
+  reader.readAsDataURL(file);
+
+  // DELTA-TEST3 : upload binaire vers le serveur F02
+  fetch('/api/thumbnail-upload', { method: 'POST', headers: { 'Content-Type': file.type }, body: file })
+    .then(r => r.ok ? r.json() : Promise.reject(r.statusText))
+    .then(() => showToast('Miniature envoyée au serveur ✓'))
+    .catch(err => showToast('Upload échoué : ' + err, true));
+});
+
+// ── Canvas click → place waypoint ────────────────────────────────────────
+document.getElementById('miniatureCanvasWrap').addEventListener('click', function(e) {
+  if (e.target.classList.contains('miniature-dot') || e.target.closest('.miniature-dot')) return;
+  if (thumbnailPlan.chapters.length === 0) return;
+
+  const img = document.getElementById('miniatureImg');
+  const rect = img.getBoundingClientRect();
+  const x = (e.clientX - rect.left) / rect.width;
+  const y = (e.clientY - rect.top) / rect.height;
+
+  // Assign to selected chapter, or the last one
+  const idx = selectedChapterIdx >= 0 ? selectedChapterIdx : thumbnailPlan.chapters.length - 1;
+  thumbnailPlan.chapters[idx].waypoint = { x: parseFloat(x.toFixed(4)), y: parseFloat(y.toFixed(4)) };
+  selectedChapterIdx = idx;
+  renderChapters();
+  renderDots();
+});
+
+// ── Chapter management ───────────────────────────────────────────────────
+function addChapter() {
+  const idx = thumbnailPlan.chapters.length;
+  const defaultSeg = idx < (timingData ? timingData.segments.length : 0) ? idx : 0;
+  thumbnailPlan.chapters.push({
+    id: idx + 1,
+    label: '',
+    start_segment: defaultSeg,
+    waypoint: null
+  });
+  selectedChapterIdx = idx;
+  renderChapters();
+  renderDots();
+}
+
+function removeChapter(idx) {
+  thumbnailPlan.chapters.splice(idx, 1);
+  // Re-number
+  thumbnailPlan.chapters.forEach((c, i) => c.id = i + 1);
+  if (selectedChapterIdx >= thumbnailPlan.chapters.length) selectedChapterIdx = thumbnailPlan.chapters.length - 1;
+  renderChapters();
+  renderDots();
+}
+
+function selectChapter(idx) {
+  selectedChapterIdx = idx;
+  renderChapters();
+  renderDots();
+}
+
+function updateChapterLabel(idx, val) {
+  thumbnailPlan.chapters[idx].label = val;
+}
+
+function updateChapterSegment(idx, val) {
+  thumbnailPlan.chapters[idx].start_segment = parseInt(val, 10);
+}
+
+// ── Render chapter list ──────────────────────────────────────────────────
+function renderChapters() {
+  const container = document.getElementById('chapterList');
+  if (thumbnailPlan.chapters.length === 0) {
+    container.innerHTML = '<div style="color:var(--text-dim);font-size:11px;padding:8px;">Aucun chapitre — clique sur la miniature pour commencer.</div>';
+    return;
+  }
+
+  container.innerHTML = thumbnailPlan.chapters.map((ch, idx) => {
+    const segCount = timingData ? timingData.segments.length : 0;
+    const segOptions = Array.from({length: segCount}, (_, i) =>
+      `<option value="${i}" ${ch.start_segment === i ? 'selected' : ''}>Seg ${i + 1}</option>`
+    ).join('');
+    const wpStr = ch.waypoint ? `(${ch.waypoint.x.toFixed(2)}, ${ch.waypoint.y.toFixed(2)})` : '— pas de balise —';
+    return `
+      <div class="chapter-item ${idx === selectedChapterIdx ? 'active' : ''}" onclick="selectChapter(${idx})">
+        <div class="ch-num">${ch.id}</div>
+        <input class="ch-label" type="text" placeholder="Nom chapitre..." value="${escHtml(ch.label || '')}"
+               onclick="event.stopPropagation()" oninput="updateChapterLabel(${idx}, this.value)">
+        <select class="ch-seg" onclick="event.stopPropagation()" onchange="updateChapterSegment(${idx}, this.value)">
+          ${segOptions}
+        </select>
+        <span class="ch-seg" style="color:${ch.waypoint ? 'var(--green-ok)' : 'var(--text-dim)'};">${wpStr}</span>
+        <button class="ch-del" onclick="event.stopPropagation();removeChapter(${idx})">×</button>
+      </div>
+    `;
+  }).join('');
+}
+
+// ── Render dots on canvas ────────────────────────────────────────────────
+function renderDots() {
+  const wrap = document.getElementById('miniatureCanvasWrap');
+  // Remove old dots
+  wrap.querySelectorAll('.miniature-dot, .miniature-cam-dot, .miniature-cam-line').forEach(el => el.remove());
+
+  const img = document.getElementById('miniatureImg');
+  if (!img.src) return;
+
+  thumbnailPlan.chapters.forEach((ch, idx) => {
+    if (!ch.waypoint) return;
+    const dot = document.createElement('div');
+    dot.className = 'miniature-dot' + (idx === selectedChapterIdx ? ' selected' : '');
+    dot.textContent = ch.id;
+    dot.style.left = (ch.waypoint.x * 100) + '%';
+    dot.style.top = (ch.waypoint.y * 100) + '%';
+    dot.onclick = (e) => { e.stopPropagation(); selectChapter(idx); };
+    wrap.appendChild(dot);
+  });
+}
+
+// ── Camera movement preview ──────────────────────────────────────────────
+function previewCameraMovement() {
+  const btn = document.getElementById('previewCamBtn');
+  const wrap = document.getElementById('miniatureCanvasWrap');
+
+  // Clear previous preview
+  wrap.querySelectorAll('.miniature-cam-dot, .miniature-cam-line').forEach(el => el.remove());
+  if (camPreviewAnimId) {
+    cancelAnimationFrame(camPreviewAnimId);
+    camPreviewAnimId = null;
+  }
+
+  const chapters = thumbnailPlan.chapters.filter(c => c.waypoint);
+  if (chapters.length < 2) {
+    showToast('Il faut au moins 2 balises placées pour simuler.', 'error');
+    return;
+  }
+
+  btn.classList.add('playing');
+  btn.textContent = '● Simulation en cours...';
+
+  const totalDuration = 4000; // 4s total
+  const segDuration = totalDuration / (chapters.length - 1);
+  const startTime = performance.now();
+
+  function animate(now) {
+    const elapsed = now - startTime;
+    const totalProgress = elapsed / totalDuration;
+
+    if (totalProgress >= 1) {
+      btn.classList.remove('playing');
+      btn.textContent = '▶ Simuler mouvement caméra';
+      wrap.querySelectorAll('.miniature-cam-dot, .miniature-cam-line').forEach(el => el.remove());
+      camPreviewAnimId = null;
+      return;
+    }
+
+    const segIdx = Math.floor(totalProgress * (chapters.length - 1));
+    const segProgress = (totalProgress * (chapters.length - 1)) - segIdx;
+
+    // Spring-like easing
+    const eased = 1 - Math.pow(1 - segProgress, 3);
+
+    const from = chapters[segIdx].waypoint;
+    const to = chapters[segIdx + 1].waypoint;
+    const x = from.x + (to.x - from.x) * eased;
+    const y = from.y + (to.y - from.y) * eased;
+
+    // Remove old cam dot
+    wrap.querySelectorAll('.miniature-cam-dot, .miniature-cam-line').forEach(el => el.remove());
+
+    // Draw line from→to
+    const line = document.createElement('div');
+    line.className = 'miniature-cam-line';
+    const dx = (to.x - from.x) * 100;
+    const dy = (to.y - from.y) * 100;
+    const len = Math.sqrt(dx * dx + dy * dy);
+    const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+    line.style.left = (from.x * 100) + '%';
+    line.style.top = (from.y * 100) + '%';
+    line.style.width = len + '%';
+    line.style.transform = `rotate(${angle}deg)`;
+    wrap.appendChild(line);
+
+    // Draw cam dot
+    const camDot = document.createElement('div');
+    camDot.className = 'miniature-cam-dot';
+    camDot.style.left = (x * 100) + '%';
+    camDot.style.top = (y * 100) + '%';
+    wrap.appendChild(camDot);
+
+    camPreviewAnimId = requestAnimationFrame(animate);
+  }
+
+  camPreviewAnimId = requestAnimationFrame(animate);
+}
+
+
+</script>
+</body>
+</html>
+
+
