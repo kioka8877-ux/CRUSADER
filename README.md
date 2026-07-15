@@ -147,3 +147,28 @@ CRUSADER/
 ---
 
 *Nomenclature tirée du lore Warhammer 40K — Légion des Black Templars.*
+
+
+---
+
+## DELTA-TEST3 — Test Production (2026-07-15) ✅ SUCCÈS
+
+Pipeline CRUSADER gamma validé de bout en bout.
+
+| Étape | Statut | Description |
+|-------|--------|-------------|
+| F00 | ✅ | Assets pré-générés (93 visuels) |
+| F01 | ✅ | Audio + transcription (82 segments, 4:27) |
+| F02 | ✅ | Preview + UI curation + injecteur de visuels |
+| F03 | ✅ | Render CrusaderDelta 8030 frames (10/10 chunks) |
+| F04 | ✅ | Camouflage + finalisation YouTube |
+| F05 | ✅ | Publication |
+
+**Vidéo finale** : 1920×1080, 4:27, 101.6 MB
+**Drive** : https://drive.google.com/file/d/1Lx-e7I4aS32Y7aFZSjm-hP-LHtakr2Q_/view
+
+**Fixes appliqués** :
+- `public/images/` subdirectory pour `staticFile()`
+- Composition `CrusaderDelta` (capsules + announce + subtitles)
+- UI thumbnails (82 micro-previews)
+- Auto-sync base64 (zéro aller-retour curation)
