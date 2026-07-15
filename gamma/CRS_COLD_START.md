@@ -160,3 +160,53 @@ Résumé :
 - Ressort : mass 0.4 / stiffness 210 / damping 14 / 10 frames
 - SFX : index < 3 → à chaque apparition / index ≥ 3 → toutes les 3 apparitions
 - Médias supportés : image, video clip, gif
+
+
+---
+
+## DELTA-TEST3 — Test Production (2026-07-15) ✅
+
+### Résultat : SUCCÈS
+
+Pipeline complet CRUSADER validé de bout en bout sur la branche `delta-test3`.
+
+| Frégate | Statut | Détails |
+|---------|--------|---------|
+| F00 ASSET FORGE | ✅ Pré-généré | 93 visuels (frame_*.png, gif_*.gif, custom_*.png) |
+| F01 GRIMALDUS | ✅ SUCCESS | Audio + transcription — 82 segments, 793 mots, 267.67s |
+| F02 CASTELLAN/PREVIEW | ✅ SUCCESS | Preview + UI curation interactive + injecteur de visuels |
+| F03 SIGISMUND | ✅ SUCCESS | Render Remotion CrusaderDelta — 8030 frames, 10/10 chunks OK |
+| F04 HELBRECHT | ✅ SUCCESS | Camouflage + finalisation YouTube |
+| F05 LUTHER | ✅ SUCCESS | Publication |
+
+### Composition utilisée
+
+`CrusaderDelta` — la composition complète avec :
+- **Capsules WorldScene sinusoïdal** (82 segments, caméra voyage le long d'une courbe)
+- **8 miniatures announce-sync** (overlay pendant l'annonce du nom de chaque chapitre)
+- **Sous-titres mot par mot** synchronisés avec timing.json
+- **Fond papier + grain + vignette** (Background.jsx)
+
+### Fixes appliqués pendant le test
+
+1. **`public/images/` subdirectory** — Scene.jsx utilise `staticFile("images/...")` mais les images sont dans `public/` directement. Fix : créer `public/images/` et copier les fichiers au runtime dans le workflow.
+2. **Composition `CrusaderDelta`** — le workflow utilisait `CrusaderShort` par défaut (Main.jsx = Background + Scene + Subtitle seulement). `CrusaderDelta` ajoute les capsules WorldScene + miniatures announce.
+3. **UI curation thumbnails** — 82 micro-previews (80×45px JPEG) embarquées dans l'HTML pour visualiser tous les visuels.
+4. **Auto-sync base64** — l'export de curation inclut les images uploadées en base64 → zéro aller-retour.
+
+### Vidéo finale
+
+- **Durée** : 4:27 (8030 frames @ 30fps)
+- **Résolution** : 1920×1080
+- **Taille** : 101.6 MB
+- **Google Drive** : https://drive.google.com/file/d/1Lx-e7I4aS32Y7aFZSjm-hP-LHtakr2Q_/view
+
+### GitHub Actions runs
+
+- F03 full render : https://github.com/kioka8877-ux/CRUSADER/actions/runs/29413597705
+- F03 600f test : https://github.com/kioka8877-ux/CRUSADER/actions/runs/29412600871
+- F04 finalisation : https://github.com/kioka8877-ux/CRUSADER/actions/runs/29426866194
+
+### Conclusion
+
+Le pipeline CRUSADER gamma est **validé pour la production**. Tous les modules F00→F05 fonctionnent correctement. La composition `CrusaderDelta` produit une vidéo avec capsules, miniatures announce, sous-titres et visuels personnalisables via l'injecteur.
