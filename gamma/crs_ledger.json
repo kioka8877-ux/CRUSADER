@@ -54,47 +54,87 @@
   "error_log": [
     {
       "gate": "G1",
-      "erreur": "F01 lancé sans consulter l'opérateur",
-      "cause": "Pipeline non respecté — F01A (silence) = décision opérateur",
-      "fix": "Toujours lancer le viewer F01A d'abord, attendre validation opérateur",
-      "regle": "F01A = JAMAIS automatique. Opérateur décide les silences."
+      "erreur": "F01 lanc\u00e9 sans consulter l'op\u00e9rateur",
+      "cause": "Pipeline non respect\u00e9 \u2014 F01A (silence) = d\u00e9cision op\u00e9rateur",
+      "fix": "Toujours lancer le viewer F01A d'abord, attendre validation op\u00e9rateur",
+      "regle": "F01A = JAMAIS automatique. Op\u00e9rateur d\u00e9cide les silences."
     },
     {
       "gate": "G1",
       "erreur": "Viewer F01A inaccessible (Flask + sandbox sans port)",
       "cause": "Le viewer original est un serveur Flask, le sandbox n'expose pas de ports",
-      "fix": "Créé generate_standalone_viewer.py — génère un HTML autonome avec audio base64 + waveform + silences",
+      "fix": "Cr\u00e9\u00e9 generate_standalone_viewer.py \u2014 g\u00e9n\u00e8re un HTML autonome avec audio base64 + waveform + silences",
       "regle": "Utiliser generate_standalone_viewer.py pour exporter le viewer en HTML standalone"
     },
     {
       "gate": "G1",
       "erreur": "Whisper timeout en local (sandbox)",
-      "cause": "Modèle medium trop lourd pour le sandbox",
+      "cause": "Mod\u00e8le medium trop lourd pour le sandbox",
       "fix": "Toujours lancer F01B sur GitHub Actions, pas en local",
-      "regle": "F01B = GitHub Actions uniquement. Utiliser skip_f01a=true quand opérateur a validé."
+      "regle": "F01B = GitHub Actions uniquement. Utiliser skip_f01a=true quand op\u00e9rateur a valid\u00e9."
     },
     {
       "gate": "G1",
       "erreur": "Workflow F01 sans mode gamma",
       "cause": "Input mode ne listait que alpha|beta",
-      "fix": "Ajouté gamma dans la description + default: gamma"
+      "fix": "Ajout\u00e9 gamma dans la description + default: gamma"
     },
     {
       "gate": "G1",
       "erreur": "Workflow F01 faisait F01A automatiquement",
-      "cause": "Pas de mécanisme pour skip quand opérateur a validé",
-      "fix": "Ajouté input skip_f01a avec condition if sur les steps"
+      "cause": "Pas de m\u00e9canisme pour skip quand op\u00e9rateur a valid\u00e9",
+      "fix": "Ajout\u00e9 input skip_f01a avec condition if sur les steps"
     },
     {
       "gate": "G1",
       "erreur": "Push denied 403 sur GitHub Actions",
-      "cause": "GITHUB_TOKEN par défaut read-only depuis 2023",
-      "fix": "Ajouté permissions: contents: write dans le job",
+      "cause": "GITHUB_TOKEN par d\u00e9faut read-only depuis 2023",
+      "fix": "Ajout\u00e9 permissions: contents: write dans le job",
       "regle": "Tous les workflows qui push doivent avoir permissions: contents: write"
     }
   ],
   "process_notes": {
-    "f01a_process": "1. Lancer crs_f01a.py en background (Flask). 2. Lancer generate_standalone_viewer.py. 3. Exporter le HTML à l'opérateur. 4. Opérateur valide → JSON decision. 5. Générer audio_clean.mp3 en local. 6. Push audio_clean.mp3. 7. Trigger F01B sur GH Actions avec skip_f01a=true.",
+    "f01a_process": "1. Lancer crs_f01a.py en background (Flask). 2. Lancer generate_standalone_viewer.py. 3. Exporter le HTML \u00e0 l'op\u00e9rateur. 4. Op\u00e9rateur valide \u2192 JSON decision. 5. G\u00e9n\u00e9rer audio_clean.mp3 en local. 6. Push audio_clean.mp3. 7. Trigger F01B sur GH Actions avec skip_f01a=true.",
     "viewer_location": "F01_GRIMALDUS/F01A_CASTELLAN_AUDIO/CODEBASE/generate_standalone_viewer.py"
-  }
+  },
+  "tests": [
+    {
+      "branch": "delta-test3",
+      "date": "2026-07-15",
+      "status": "SUCCESS",
+      "composition": "CrusaderDelta",
+      "video": {
+        "duration": "4:27",
+        "frames": 8030,
+        "resolution": "1920x1080",
+        "fps": 30,
+        "size_mb": 101.6
+      },
+      "pipeline": {
+        "F00": "N/A (assets pre-generated)",
+        "F01": "SUCCESS - Audio + transcription (82 segments, 793 words)",
+        "F02": "SUCCESS - Preview + curation UI + visual injector",
+        "F03": "SUCCESS - Remotion render CrusaderDelta (10/10 chunks OK)",
+        "F04": "SUCCESS - Camouflage + finalisation YouTube",
+        "F05": "SUCCESS - Publication"
+      },
+      "features_validated": [
+        "Capsules WorldScene sinuso\u00efdal (82 segments)",
+        "8 miniatures announce-sync (overlay pendant annonce nom)",
+        "Sous-titres mot par mot synchronis\u00e9s",
+        "Injecteur de visuels (upload \u2192 resize \u2192 push GitHub \u2192 render)",
+        "UI curation interactive (thumbnails + export base64)",
+        "Fix public/images/ subdirectory pour staticFile()",
+        "Composition CrusaderDelta (vs CrusaderShort)",
+        "Render full 8030 frames sur GitHub Actions (10 chunks parall\u00e8les)"
+      ],
+      "github_runs": {
+        "F03_full": "29413597705",
+        "F03_600f_test": "29412600871",
+        "F04": "29426866194"
+      },
+      "drive_url": "https://drive.google.com/file/d/1Lx-e7I4aS32Y7aFZSjm-hP-LHtakr2Q_/view"
+    }
+  ],
+  "last_updated": "2026-07-15T16:00:00Z"
 }

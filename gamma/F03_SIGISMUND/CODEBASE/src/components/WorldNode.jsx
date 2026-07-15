@@ -1,12 +1,12 @@
 import React from "react";
 import { Img, OffthreadVideo, staticFile } from "remotion";
 
-// Utilise l'API officielle staticFile() de Remotion pour résoudre les assets
-// du dossier public/. Le hack précédent (`/${f}`) ne fonctionne pas dans le
-// runner CI parce que Remotion ne sert pas public/ à la racine en mode bundle.
+// FIX v4: backgroundColor "#000" added to mask transparent pixels in F00 frames.
+// Many F00 frames have alpha=0 pixels (extraction issue). The black background
+// ensures capsules appear filled instead of showing holes.
 export const WorldNode = ({ imageFile, mediaType = "image" }) => {
   const src = staticFile(imageFile);
-  const style = { width: "100%", height: "100%", objectFit: "cover" };
+  const style = { width: "100%", height: "100%", objectFit: "cover", backgroundColor: "#000" };
 
   if (mediaType === "gif") {
     // @remotion/gif — importé dynamiquement pour éviter l'erreur si absent

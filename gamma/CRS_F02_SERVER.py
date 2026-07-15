@@ -116,14 +116,34 @@ def make_handler(input_dir, output_dir, viewer_path, shutdown_event):
                     "roadmap_saved": roadmap_path.exists(),
                 })
 
+            elif path == "/api/thumbnail":
+                # DELTA-TEST3 : servir la miniature uploadée
+                thumb_path = Path(input_dir) / "thumbnail.png"
+                if not thumb_path.exists():
+                    self.send_json({"error": "thumbnail.png introuvable"}, 404)
+                    return
+                self.send_bytes(thumb_path.read_bytes(), "image/png")
+
             else:
                 self.send_json({"error": "Route inconnue"}, 404)
 
         def do_POST(self):
             path = urlparse(self.path).path
 
-            if path != "/api/save":
+            if path != "/api/save" and path != "/api/thumbnail-upload":
                 self.send_json({"error": "Route inconnue"}, 404)
+                return
+
+            if path == "/api/thumbnail-upload":
+                # DELTA-TEST3 : recevoir la miniature PNG
+                length = int(self.headers.get("Content-Length", 0))
+                body = self.rfile.read(length)
+                thumb_path = Path(input_dir) / "thumbnail.png"
+                Path(input_dir).mkdir(parents=True, exist_ok=True)
+                with open(thumb_path, "wb") as f:
+                    f.write(body)
+                print(f"\n[F02] 📸 thumbnail.png sauvegardée ({len(body)} bytes)")
+                self.send_json({"status": "ok", "size": len(body)})
                 return
 
             length = int(self.headers.get("Content-Length", 0))

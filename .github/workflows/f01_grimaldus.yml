@@ -7,7 +7,11 @@ on:
         description: "Identifiant unique du run (ex: CRS_20240101_1200)"
         required: true
       mode:
+<<<<<<< HEAD
         description: "Mode de production (alpha|beta|gamma|delta)"
+=======
+        description: "Mode de production (alpha/beta/gamma/delta)"
+>>>>>>> c0110f4 (DELTA: copy gamma/ from delta-test3 → delta/ on main — production validated)
         required: false
         default: "gamma"
       skip_f01a:

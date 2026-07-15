@@ -13,14 +13,18 @@ on:
       composition:
         description: "Nom de la composition Remotion"
         required: false
-        default: "CrusaderShort"
+        default: "CrusaderDelta"
       total_frames:
         description: "Nombre total de frames ? rendre"
         required: true
       mode:
+<<<<<<< HEAD
         description: "Mode de production (alpha|beta|gamma|delta)"
+=======
+        description: "Mode de production (alpha/beta/gamma/delta)"
+>>>>>>> c0110f4 (DELTA: copy gamma/ from delta-test3 → delta/ on main — production validated)
         required: false
-        default: "alpha"
+        default: "delta"
 
 # ?????????????????????????????????????????????????????????????????????????????
 # ARCHITECTURE
@@ -65,7 +69,7 @@ jobs:
           cp -r $CRUSADER_DEPS/node_modules ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/
           echo "[DEPS] node_modules : OK ($(du -sh ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/node_modules | cut -f1))"
 
-          # Beta : installer les paquets delta absents de l'image Docker
+          # Beta : installer les paquets beta absents de l'image Docker
           if [ "${{ github.event.inputs.mode }}" = "beta" ] || [ "${{ github.event.inputs.mode }}" = "gamma" ]; then
             cd ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE
             npm install --ignore-scripts 2>&1 | tail -5
@@ -226,7 +230,7 @@ jobs:
 
           cp -r $CRUSADER_DEPS/node_modules ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE/
 
-          # Beta : installer les paquets delta absents de l'image Docker
+          # Beta : installer les paquets beta absents de l'image Docker
           if [ "${{ github.event.inputs.mode }}" = "beta" ] || [ "${{ github.event.inputs.mode }}" = "gamma" ]; then
             cd ${{ github.event.inputs.mode }}/F03_SIGISMUND/CODEBASE
             npm install --ignore-scripts 2>&1 | tail -5

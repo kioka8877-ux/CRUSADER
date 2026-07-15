@@ -1,0 +1,6 @@
+{
+  "remove_silences": false,
+  "threshold_db": -40,
+  "min_duration": 0.5,
+  "speed": 0.9
+}

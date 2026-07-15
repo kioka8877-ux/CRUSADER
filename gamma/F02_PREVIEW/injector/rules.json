@@ -1,0 +1,66 @@
+{
+  "contract": "roadmap-injector v1",
+  "description": "Valide et corrige un roadmap.json export\u00e9 par F02 pour qu'il respecte le contrat announce-sync",
+  "source_of_truth": "timing.json (audio + transcription Whisper)",
+  "rules": [
+    {
+      "id": "announce_frames",
+      "field": "miniature.chapters[].announce_start_frame + announce_end_frame",
+      "condition": "Si null ou absent",
+      "action": "D\u00e9tecter dans timing.json le segment qui annonce le nom du chapitre, injecter les frames exactes",
+      "severity": "critical"
+    },
+    {
+      "id": "chapter_labels",
+      "field": "miniature.chapters[].label",
+      "condition": "Si 'Chapitre N' ou g\u00e9n\u00e9rique",
+      "action": "Remplacer par le vrai nom depuis le script audio",
+      "severity": "critical"
+    },
+    {
+      "id": "start_segment",
+      "field": "miniature.chapters[].start_segment",
+      "condition": "Si incorrect (ne correspond pas \u00e0 l'annonce)",
+      "action": "Remapper sur le bon segment timing.json",
+      "severity": "warning"
+    },
+    {
+      "id": "text_subtitles",
+      "field": "timeline[].text_subtitles",
+      "condition": "Si absent",
+      "action": "Injecter depuis timing.json segments",
+      "severity": "critical"
+    },
+    {
+      "id": "timeline_count",
+      "field": "timeline.length",
+      "condition": "Doit == timing.json segments count",
+      "action": "Alerte si mismatch",
+      "severity": "warning"
+    },
+    {
+      "id": "chapter_count",
+      "field": "miniature.chapters.length",
+      "condition": "Doit correspondre au nombre d'annonces dans le script",
+      "action": "Alerte si mismatch",
+      "severity": "warning"
+    },
+    {
+      "id": "preserve_manual",
+      "field": "miniature.chapters[].crop, waypoints, fragment, imageURL",
+      "condition": "Toujours",
+      "action": "NE JAMAIS modifier \u2014 ce sont les crops manuels de l'op\u00e9rateur",
+      "severity": "critical"
+    }
+  ],
+  "chapter_names": [
+    "tropical storm",
+    "category 1 hurricane",
+    "category 3 hurricane",
+    "category 5",
+    "super typhoon",
+    "cyclone",
+    "bomb cyclone",
+    "hypercane"
+  ]
+}

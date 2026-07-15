@@ -66,7 +66,10 @@ MANIFEST = {
         "check-in": {
             "files": [
                 {"path": "F02_CASTELLAN/OUT/roadmap.json", "type": "json", "required_keys": ["meta", "timeline", "style", "validated_by_magos"]},
-            ]
+            ],
+            # DELTA-TEST3 : thumbnail_plan est optionnel dans roadmap.json.
+            # Si présent, CUSTOS valide sa structure après le check standard.
+            # Voir validate_thumbnail_plan() dans la fonction de validation.
         },
     },
     "F03": {
@@ -112,6 +115,100 @@ def log_fail(msg):
 
 def log_info(msg):
     print(f"  [...]  {msg}")
+
+# ─── DELTA-TEST3 : Validation thumbnail_plan ─────────────────────────────
+
+def validate_thumbnail_plan(roadmap_path):
+    """Valide le bloc thumbnail_plan optionnel dans roadmap.json (delta-test3).
+    Si thumbnail_plan est absent, retourne True (mode gamma standard).
+    Si présent, valide la structure : file, transition_frames, chapters[].waypoint."""
+    if not os.path.exists(roadmap_path):
+        return True  # Le check standard gère l'absence
+
+    try:
+        with open(roadmap_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except (json.JSONDecodeError, OSError):
+        return True  # Le check standard gère les erreurs JSON
+
+    plan = data.get("thumbnail_plan")
+    if not plan:
+        return True  # Pas de thumbnail_plan = mode gamma standard, OK
+
+    errors = 0
+
+    if not plan.get("file"):
+        log_fail("thumbnail_plan.file manquant")
+        errors += 1
+    else:
+        log_ok(f"thumbnail_plan.file = {plan['file']}")
+
+    if not isinstance(plan.get("transition_frames"), int) or plan["transition_frames"] < 1:
+        log_fail(f"thumbnail_plan.transition_frames invalide : {plan.get('transition_frames')}")
+        errors += 1
+    else:
+        log_ok(f"thumbnail_plan.transition_frames = {plan['transition_frames']}")
+
+    chapters = plan.get("chapters", [])
+    if not isinstance(chapters, list) or len(chapters) == 0:
+        log_fail("thumbnail_plan.chapters vide ou manquant")
+        errors += 1
+    else:
+        for ch in chapters:
+            ch_id = ch.get("id", "?")
+            if not ch.get("waypoint"):
+                log_fail(f"chapter {ch_id} : waypoint manquant")
+                errors += 1
+            else:
+                wp = ch["waypoint"]
+                if not (0 <= wp.get("x", -1) <= 1 and 0 <= wp.get("y", -1) <= 1):
+                    log_fail(f"chapter {ch_id} : waypoint hors bornes {wp}")
+                    errors += 1
+                else:
+                    log_ok(f"chapter {ch_id} : waypoint ({wp['x']:.2f}, {wp['y']:.2f})")
+
+            if not isinstance(ch.get("start_segment"), int) or ch["start_segment"] < 0:
+                log_fail(f"chapter {ch_id} : start_segment invalide")
+                errors += 1
+
+    if errors == 0:
+        print(f"  [OK]   thumbnail_plan valide — {len(chapters)} chapitre(s)")
+    else:
+        print(f"  [FAIL] thumbnail_plan : {errors} erreur(s)")
+
+    return errors == 0
+
+
+def validate_thumbnail_file_for_f03(base, roadmap_rel_path):
+    """DELTA-TEST3 : si roadmap.json contient thumbnail_plan, verifie que
+    thumbnail.png est present dans F03_SIGISMUND/IN/ avant le rendu."""
+    roadmap_full = os.path.join(base, roadmap_rel_path)
+    if not os.path.exists(roadmap_full):
+        return True
+
+    try:
+        with open(roadmap_full, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except (json.JSONDecodeError, OSError):
+        return True
+
+    plan = data.get("thumbnail_plan")
+    if not plan:
+        return True  # Mode gamma standard
+
+    thumb_path = os.path.join(base, "F03_SIGISMUND", "IN", "thumbnail.png")
+    if not os.path.exists(thumb_path):
+        log_fail("thumbnail.png absent — requis car roadmap.json contient thumbnail_plan")
+        log_fail(f"  Attendu : {thumb_path}")
+        return False
+
+    size = os.path.getsize(thumb_path)
+    if size < 1000:
+        log_fail(f"thumbnail.png trop petit ({size} bytes)")
+        return False
+
+    log_ok(f"thumbnail.png present ({size:,} bytes)")
+    return True
 
 def validate_file(full_path, spec):
     """Valide un fichier selon son spec. Affiche le résultat. Retourne bool."""
@@ -222,6 +319,13 @@ def main():
         names = " | ".join(os.path.basename(s["path"]) for s in one_of)
         log_info(f"Vérification (un parmi) : {names}")
         if not validate_one_of(one_of, base):
+            errors += 1
+
+    # DELTA-TEST3 : Validation thumbnail_plan pour F02 check-in
+    if frigate == "F02" and mode == "check-in":
+        log_info("Vérification thumbnail_plan (delta-test3, optionnel)")
+        roadmap_full = os.path.join(base, "F02_CASTELLAN/OUT/roadmap.json")
+        if not validate_thumbnail_plan(roadmap_full):
             errors += 1
 
     print()

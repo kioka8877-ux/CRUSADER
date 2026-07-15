@@ -133,3 +133,28 @@ python CRS_CUSTOS.py --frigate F03 --mode check-in
 - Google Fonts requiert un accès internet pendant le rendu — Colab en dispose.
 - Si `image_file` est `null` pour un segment, le segment affiche uniquement la couleur de fond.
 - Le `grain_seed` tourne sur 64 valeurs toutes les 3 frames → grain animé sans boucle visible.
+
+
+---
+
+## Test Production delta-test3 (2026-07-15) ✅
+
+### Composition CrusaderDelta validée
+
+- **8030 frames** rendues avec succès (10/10 chunks parallèles)
+- **CrusaderDelta** : Background + WorldScene (capsules sinusoïdales) + BetaSubtitle (mot par mot) + MiniatureOverlay (8 announce-sync)
+- **CrusaderShort** (Main.jsx) : Background + Scene (image + overlay) + Subtitle — sans capsules ni announce
+
+### Fix critique appliqué
+
+`Scene.jsx` utilise `staticFile("images/${segment.image_file}")` → nécessite `public/images/` subdirectory.
+Les images sont dans `public/` directement. Fix ajouté dans `f03_render.yml` :
+```bash
+mkdir -p public/images
+cd public && for f in frame_*.png gif_*.gif custom_*.png custom_*.gif; do cp "$f" images/; done
+```
+
+### GitHub Actions
+
+- F03 full : https://github.com/kioka8877-ux/CRUSADER/actions/runs/29413597705
+- F04 finalisation : https://github.com/kioka8877-ux/CRUSADER/actions/runs/29426866194

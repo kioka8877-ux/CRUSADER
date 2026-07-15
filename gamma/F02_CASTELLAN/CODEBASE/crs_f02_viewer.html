@@ -517,6 +517,207 @@
 .tp-animate-n    { transition: transform var(--tp-dur, 400ms) cubic-bezier(0.42,0,0.58,1), opacity var(--tp-dur, 400ms) cubic-bezier(0.42,0,0.58,1); }
 .tp-animate-n1   { transition: transform var(--tp-dur, 400ms) cubic-bezier(0.42,0,0.58,1), opacity var(--tp-dur, 400ms) cubic-bezier(0.42,0,0.58,1); }
 .tp-animate-arr  { transition: transform var(--tp-dur, 400ms) cubic-bezier(0.42,0,0.58,1), opacity calc(var(--tp-dur, 400ms) * 0.4) ease; }
+
+  /* ── DELTA-TEST3 : Tab switcher + MINIATURE panel ── */
+  .tab-switcher {
+    display: flex;
+    gap: 0;
+    background: #0a0a0a;
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+  }
+  .tab-btn {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-dim);
+    padding: 8px 24px;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.15s;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+  .tab-panel { display: none; flex: 1; overflow: hidden; }
+  .tab-panel.visible { display: flex; }
+
+  /* MINIATURE panel layout */
+  .miniature-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+  .miniature-config {
+    width: 300px;
+    min-width: 300px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .miniature-canvas-area {
+    flex: 1;
+    overflow: auto;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 16px;
+  }
+  .miniature-canvas-wrap {
+    position: relative;
+    border: 2px solid var(--gold-dim);
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: crosshair;
+    background: #0a0a0a;
+  }
+  .miniature-canvas-wrap img {
+    display: block;
+    max-width: 100%;
+    max-height: 60vh;
+    pointer-events: none;
+  }
+  .miniature-dot {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: var(--mono);
+    transform: translate(-50%, -50%);
+    border: 2px solid #000;
+    box-shadow: 0 0 8px rgba(0,0,0,0.8);
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.15s;
+  }
+  .miniature-dot:hover { transform: translate(-50%, -50%) scale(1.2); }
+  .miniature-dot.selected {
+    background: #e55;
+    border-color: #fff;
+    z-index: 11;
+  }
+  .miniature-cam-dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #4cf;
+    border: 2px solid #fff;
+    transform: translate(-50%, -50%);
+    z-index: 12;
+    pointer-events: none;
+    box-shadow: 0 0 12px rgba(80,200,255,0.8);
+  }
+  .miniature-cam-line {
+    position: absolute;
+    height: 2px;
+    background: rgba(80,200,255,0.5);
+    transform-origin: left center;
+    z-index: 9;
+    pointer-events: none;
+  }
+  .chapter-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .chapter-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    font-size: 11px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .chapter-item:hover { border-color: var(--gold-dim); }
+  .chapter-item.active { border-color: var(--gold); background: #1a1500; }
+  .chapter-item .ch-num {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--gold-dim);
+    color: #000;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: bold; font-size: 10px;
+    flex-shrink: 0;
+  }
+  .chapter-item.active .ch-num { background: var(--gold); }
+  .chapter-item .ch-label {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 11px;
+    outline: none;
+  }
+  .chapter-item .ch-seg {
+    color: var(--text-dim);
+    font-size: 10px;
+    white-space: nowrap;
+  }
+  .chapter-item .ch-del {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 4px;
+  }
+  .chapter-item .ch-del:hover { color: #e55; }
+  .upload-area {
+    border: 2px dashed var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .upload-area:hover { border-color: var(--gold-dim); }
+  .upload-area input[type="file"] { display: none; }
+  .upload-area .upload-hint {
+    font-size: 11px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .upload-area .upload-hint b { color: var(--gold); }
+  .preview-cam-btn {
+    background: var(--bg);
+    border: 1px solid var(--gold-dim);
+    color: var(--gold);
+    padding: 8px 16px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background 0.15s;
+  }
+  .preview-cam-btn:hover { background: #1a1500; border-color: var(--gold); }
+  .preview-cam-btn.playing { background: #1a3a1a; border-color: var(--green-ok); color: var(--green-ok); }
+
 </style>
 </head>
 <body>
@@ -529,7 +730,12 @@
   <div id="statusPill" class="status-pill">Chargement…</div>
 </header>
 
-<div class="layout">
+<div class="tab-switcher">
+  <button class="tab-btn active" id="tab-roadmap" onclick="switchTab('roadmap')">Roadmap</button>
+  <button class="tab-btn" id="tab-miniature" onclick="switchTab('miniature')">Miniature</button>
+</div>
+
+<div class="tab-panel visible" id="panel-roadmap"><div class="layout">
 
   <!-- ── Config Panel ── -->
   <aside class="config-panel">
@@ -778,6 +984,65 @@
     </div>
   </main>
 
+</div>
+
+
+</div></div><!-- /panel-roadmap -->
+
+<!-- ── DELTA-TEST3 : Panel MINIATURE ── -->
+<div class="tab-panel" id="panel-miniature">
+  <div class="miniature-layout">
+    <!-- Config (gauche 300px) -->
+    <aside class="miniature-config">
+      <div>
+        <div class="section-title">Miniature PNG</div>
+        <div class="upload-area" id="uploadArea" onclick="document.getElementById('thumbnailFileInput').click()">
+          <input type="file" id="thumbnailFileInput" accept="image/png,image/jpeg">
+          <div class="upload-hint">
+            <b>Cliquer pour uploader</b><br>
+            PNG ou JPG<br>
+            <span id="thumbnailName" style="color:var(--gold);"></span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-title">Chapitres</div>
+        <div style="font-size:10px;color:var(--text-dim);margin-bottom:8px;line-height:1.5;">
+          Clique sur un segment pour marquer le début d'un chapitre.<br>
+          Clique sur la miniature pour placer la balise caméra.
+        </div>
+        <div class="chapter-list" id="chapterList">
+          <div style="color:var(--text-dim);font-size:11px;padding:8px;">Aucun chapitre — clique sur la miniature pour commencer.</div>
+        </div>
+        <button class="btn-secondary" style="margin-top:8px;" onclick="addChapter()">+ Ajouter chapitre</button>
+      </div>
+
+      <div>
+        <div class="section-title">Transition caméra</div>
+        <div class="field">
+          <label>Durée — <span class="range-val" id="transFramesVal">45</span> frames</label>
+          <input type="range" id="transFramesInput" min="15" max="90" step="5" value="45"
+                 oninput="document.getElementById('transFramesVal').textContent=this.value; thumbnailPlan.transition_frames=parseInt(this.value)">
+        </div>
+      </div>
+
+      <div>
+        <div class="section-title">Aperçu caméra</div>
+        <button class="preview-cam-btn" id="previewCamBtn" onclick="previewCameraMovement()">▶ Simuler mouvement caméra</button>
+      </div>
+    </aside>
+
+    <!-- Canvas (droite) -->
+    <div class="miniature-canvas-area">
+      <div class="miniature-canvas-wrap" id="miniatureCanvasWrap" style="display:none;">
+        <img id="miniatureImg" src="" alt="Miniature">
+      </div>
+      <div id="miniaturePlaceholder" style="color:var(--text-dim);font-size:13px;text-align:center;padding:40px;">
+        Uploade une miniature PNG pour commencer<br>à placer les balises caméra.
+      </div>
+    </div>
+  </div>
 </div>
 
 <footer>
@@ -1566,6 +1831,20 @@ async function saveRoadmap() {
     validated_by_magos: true,
   };
 
+  // ── DELTA-TEST3 : ajouter thumbnail_plan si des chapitres sont configurés ──
+  if (thumbnailPlan.chapters.length > 0 && thumbnailPlan.file) {
+    payload.thumbnail_plan = {
+      file: thumbnailPlan.file,
+      transition_frames: thumbnailPlan.transition_frames || 45,
+      chapters: thumbnailPlan.chapters.map(ch => ({
+        id: ch.id,
+        label: ch.label || '',
+        start_segment: ch.start_segment,
+        waypoint: ch.waypoint || null,
+      })),
+    };
+  }
+
   // Warn if audio_path is null
   if (!payload.meta.audio_path) {
     console.warn('[CASTELLAN] audio_path non défini dans timing.json — roadmap.json sera incomplet pour F03.');
@@ -1637,6 +1916,236 @@ document.getElementById('lbl-vertical').classList.add('active');
 
 // ── Boot ──────────────────────────────────────────────────────────────────────
 init();
+
+// ── DELTA-TEST3 : Tab switcher + MINIATURE panel ─────────────────────────
+let thumbnailPlan = {
+  file: null,
+  transition_frames: 45,
+  chapters: []
+};
+let thumbnailDataURL = null;  // base64 for preview
+let selectedChapterIdx = -1;
+let camPreviewAnimId = null;
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('visible'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById('panel-' + tab).classList.add('visible');
+}
+
+// ── Thumbnail upload ─────────────────────────────────────────────────────
+document.getElementById('thumbnailFileInput').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  thumbnailPlan.file = file.name;
+  document.getElementById('thumbnailName').textContent = file.name;
+
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    thumbnailDataURL = ev.target.result;
+    const img = document.getElementById('miniatureImg');
+    img.src = thumbnailDataURL;
+    document.getElementById('miniatureCanvasWrap').style.display = 'inline-block';
+    document.getElementById('miniaturePlaceholder').style.display = 'none';
+    // Auto-create first chapter if none
+    if (thumbnailPlan.chapters.length === 0) {
+      addChapter();
+    }
+  };
+  reader.readAsDataURL(file);
+
+  // DELTA-TEST3 : upload binaire vers le serveur F02
+  fetch('/api/thumbnail-upload', { method: 'POST', headers: { 'Content-Type': file.type }, body: file })
+    .then(r => r.ok ? r.json() : Promise.reject(r.statusText))
+    .then(() => showToast('Miniature envoyée au serveur ✓'))
+    .catch(err => showToast('Upload échoué : ' + err, true));
+});
+
+// ── Canvas click → place waypoint ────────────────────────────────────────
+document.getElementById('miniatureCanvasWrap').addEventListener('click', function(e) {
+  if (e.target.classList.contains('miniature-dot') || e.target.closest('.miniature-dot')) return;
+  if (thumbnailPlan.chapters.length === 0) return;
+
+  const img = document.getElementById('miniatureImg');
+  const rect = img.getBoundingClientRect();
+  const x = (e.clientX - rect.left) / rect.width;
+  const y = (e.clientY - rect.top) / rect.height;
+
+  // Assign to selected chapter, or the last one
+  const idx = selectedChapterIdx >= 0 ? selectedChapterIdx : thumbnailPlan.chapters.length - 1;
+  thumbnailPlan.chapters[idx].waypoint = { x: parseFloat(x.toFixed(4)), y: parseFloat(y.toFixed(4)) };
+  selectedChapterIdx = idx;
+  renderChapters();
+  renderDots();
+});
+
+// ── Chapter management ───────────────────────────────────────────────────
+function addChapter() {
+  const idx = thumbnailPlan.chapters.length;
+  const defaultSeg = idx < (timingData ? timingData.segments.length : 0) ? idx : 0;
+  thumbnailPlan.chapters.push({
+    id: idx + 1,
+    label: '',
+    start_segment: defaultSeg,
+    waypoint: null
+  });
+  selectedChapterIdx = idx;
+  renderChapters();
+  renderDots();
+}
+
+function removeChapter(idx) {
+  thumbnailPlan.chapters.splice(idx, 1);
+  // Re-number
+  thumbnailPlan.chapters.forEach((c, i) => c.id = i + 1);
+  if (selectedChapterIdx >= thumbnailPlan.chapters.length) selectedChapterIdx = thumbnailPlan.chapters.length - 1;
+  renderChapters();
+  renderDots();
+}
+
+function selectChapter(idx) {
+  selectedChapterIdx = idx;
+  renderChapters();
+  renderDots();
+}
+
+function updateChapterLabel(idx, val) {
+  thumbnailPlan.chapters[idx].label = val;
+}
+
+function updateChapterSegment(idx, val) {
+  thumbnailPlan.chapters[idx].start_segment = parseInt(val, 10);
+}
+
+// ── Render chapter list ──────────────────────────────────────────────────
+function renderChapters() {
+  const container = document.getElementById('chapterList');
+  if (thumbnailPlan.chapters.length === 0) {
+    container.innerHTML = '<div style="color:var(--text-dim);font-size:11px;padding:8px;">Aucun chapitre — clique sur la miniature pour commencer.</div>';
+    return;
+  }
+
+  container.innerHTML = thumbnailPlan.chapters.map((ch, idx) => {
+    const segCount = timingData ? timingData.segments.length : 0;
+    const segOptions = Array.from({length: segCount}, (_, i) =>
+      `<option value="${i}" ${ch.start_segment === i ? 'selected' : ''}>Seg ${i + 1}</option>`
+    ).join('');
+    const wpStr = ch.waypoint ? `(${ch.waypoint.x.toFixed(2)}, ${ch.waypoint.y.toFixed(2)})` : '— pas de balise —';
+    return `
+      <div class="chapter-item ${idx === selectedChapterIdx ? 'active' : ''}" onclick="selectChapter(${idx})">
+        <div class="ch-num">${ch.id}</div>
+        <input class="ch-label" type="text" placeholder="Nom chapitre..." value="${escHtml(ch.label || '')}"
+               onclick="event.stopPropagation()" oninput="updateChapterLabel(${idx}, this.value)">
+        <select class="ch-seg" onclick="event.stopPropagation()" onchange="updateChapterSegment(${idx}, this.value)">
+          ${segOptions}
+        </select>
+        <span class="ch-seg" style="color:${ch.waypoint ? 'var(--green-ok)' : 'var(--text-dim)'};">${wpStr}</span>
+        <button class="ch-del" onclick="event.stopPropagation();removeChapter(${idx})">×</button>
+      </div>
+    `;
+  }).join('');
+}
+
+// ── Render dots on canvas ────────────────────────────────────────────────
+function renderDots() {
+  const wrap = document.getElementById('miniatureCanvasWrap');
+  // Remove old dots
+  wrap.querySelectorAll('.miniature-dot, .miniature-cam-dot, .miniature-cam-line').forEach(el => el.remove());
+
+  const img = document.getElementById('miniatureImg');
+  if (!img.src) return;
+
+  thumbnailPlan.chapters.forEach((ch, idx) => {
+    if (!ch.waypoint) return;
+    const dot = document.createElement('div');
+    dot.className = 'miniature-dot' + (idx === selectedChapterIdx ? ' selected' : '');
+    dot.textContent = ch.id;
+    dot.style.left = (ch.waypoint.x * 100) + '%';
+    dot.style.top = (ch.waypoint.y * 100) + '%';
+    dot.onclick = (e) => { e.stopPropagation(); selectChapter(idx); };
+    wrap.appendChild(dot);
+  });
+}
+
+// ── Camera movement preview ──────────────────────────────────────────────
+function previewCameraMovement() {
+  const btn = document.getElementById('previewCamBtn');
+  const wrap = document.getElementById('miniatureCanvasWrap');
+
+  // Clear previous preview
+  wrap.querySelectorAll('.miniature-cam-dot, .miniature-cam-line').forEach(el => el.remove());
+  if (camPreviewAnimId) {
+    cancelAnimationFrame(camPreviewAnimId);
+    camPreviewAnimId = null;
+  }
+
+  const chapters = thumbnailPlan.chapters.filter(c => c.waypoint);
+  if (chapters.length < 2) {
+    showToast('Il faut au moins 2 balises placées pour simuler.', 'error');
+    return;
+  }
+
+  btn.classList.add('playing');
+  btn.textContent = '● Simulation en cours...';
+
+  const totalDuration = 4000; // 4s total
+  const segDuration = totalDuration / (chapters.length - 1);
+  const startTime = performance.now();
+
+  function animate(now) {
+    const elapsed = now - startTime;
+    const totalProgress = elapsed / totalDuration;
+
+    if (totalProgress >= 1) {
+      btn.classList.remove('playing');
+      btn.textContent = '▶ Simuler mouvement caméra';
+      wrap.querySelectorAll('.miniature-cam-dot, .miniature-cam-line').forEach(el => el.remove());
+      camPreviewAnimId = null;
+      return;
+    }
+
+    const segIdx = Math.floor(totalProgress * (chapters.length - 1));
+    const segProgress = (totalProgress * (chapters.length - 1)) - segIdx;
+
+    // Spring-like easing
+    const eased = 1 - Math.pow(1 - segProgress, 3);
+
+    const from = chapters[segIdx].waypoint;
+    const to = chapters[segIdx + 1].waypoint;
+    const x = from.x + (to.x - from.x) * eased;
+    const y = from.y + (to.y - from.y) * eased;
+
+    // Remove old cam dot
+    wrap.querySelectorAll('.miniature-cam-dot, .miniature-cam-line').forEach(el => el.remove());
+
+    // Draw line from→to
+    const line = document.createElement('div');
+    line.className = 'miniature-cam-line';
+    const dx = (to.x - from.x) * 100;
+    const dy = (to.y - from.y) * 100;
+    const len = Math.sqrt(dx * dx + dy * dy);
+    const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+    line.style.left = (from.x * 100) + '%';
+    line.style.top = (from.y * 100) + '%';
+    line.style.width = len + '%';
+    line.style.transform = `rotate(${angle}deg)`;
+    wrap.appendChild(line);
+
+    // Draw cam dot
+    const camDot = document.createElement('div');
+    camDot.className = 'miniature-cam-dot';
+    camDot.style.left = (x * 100) + '%';
+    camDot.style.top = (y * 100) + '%';
+    wrap.appendChild(camDot);
+
+    camPreviewAnimId = requestAnimationFrame(animate);
+  }
+
+  camPreviewAnimId = requestAnimationFrame(animate);
+}
+
+
 </script>
 </body>
 </html>
