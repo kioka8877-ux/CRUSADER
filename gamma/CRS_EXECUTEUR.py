@@ -259,14 +259,21 @@ def cmd_start(title, token, ledger):
     save_ledger(ledger)
 
     # ── F00 ASSETFORGE ──────────────────────────────────────────────────────
-    # Phase 0 : extraction de style depuis la vidéo de référence
-    f00_ref_video = REPO_ROOT / "F00_ASSETFORGE" / "IN" / "reference_video.mp4"
-    if f00_ref_video.exists():
+    # Phase 0 : extraction de style depuis un fichier de référence
+    # (capture d'écran PNG/JPG ou vidéo MP4 — auto-détecté)
+    f00_in_dir = REPO_ROOT / "F00_ASSETFORGE" / "IN"
+    f00_ref = None
+    if f00_in_dir.exists():
+        for f in sorted(f00_in_dir.iterdir()):
+            if f.is_file() and f.suffix.lower() in {".png", ".jpg", ".jpeg", ".webp", ".mp4", ".mov", ".webm"}:
+                f00_ref = f
+                break
+    if f00_ref:
         print("\n[F00] Phase 0 — Style extraction...")
         subprocess.run([
             sys.executable,
             str(REPO_ROOT / "F00_ASSETFORGE" / "CODEBASE" / "crs_f00_phase0.py"),
-            "--input",  str(f00_ref_video),
+            "--input",  str(f00_ref),
             "--output", str(REPO_ROOT / "F00_ASSETFORGE" / "OUT" / "style_prompt.txt"),
         ], cwd=REPO_ROOT)
 
@@ -304,8 +311,8 @@ def cmd_start(title, token, ledger):
         print(f"[F00] Batch lancé : {url_f00}")
         print("[F00] ⚠️  Attendre la fin du batch avant --gate G2.")
     else:
-        print("\n[F00] Pas de vidéo de référence dans F00_ASSETFORGE/IN/ — F00 ignoré.")
-        print("[F00] Pour activer F00 : déposer reference_video.mp4 dans F00_ASSETFORGE/IN/")
+        print("\n[F00] Pas de fichier de référence dans F00_ASSETFORGE/IN/ — F00 ignoré.")
+        print("[F00] Pour activer F00 : déposer une capture d'écran (PNG/JPG) ou vidéo (MP4) dans F00_ASSETFORGE/IN/")
 
     print("\n════════════════════════════════════════════")
     print("  F01B (Whisper) EN COURS SUR GITHUB ACTIONS")
