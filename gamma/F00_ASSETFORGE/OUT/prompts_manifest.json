@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "mode": "GROUPED",
+    "format": "HORIZONTAL",
+    "total_images": 6,
+    "style_prompt_hash": "b582d56a"
+  },
+  "images": [
+    {
+      "filename": "00_00_270.png",
+      "start_seconds": 0.27,
+      "segments_covered": [
+        0,
+        1,
+        2
+      ],
+      "text_source": "POV. You are making $50,000 a minute, but every single dollar is a ticking federal time bomb and the countdown just hit zero. He was not a financial genius. He did not understand quantitative finance or market arbitrage. He understood one thing, human desperation.",
+      "prompt": "A cinematic illustration of a man in an expensive suit sitting at a massive trading desk covered in multiple glowing computer screens showing stock charts and dollar signs. Golden amber lighting from the screens illuminates his face. Stacks of cash and a ticking analog clock on the desk. Dark brown wood paneling behind him. The mood is ominous wealth — everything looks expensive but feels like a bomb about to explode. No text, no watermark.",
+      "overlay": "INTERIEUR:neons",
+      "intensite": 2
+    },
+    {
+      "filename": "00_23_030.png",
+      "start_seconds": 23.03,
+      "segments_covered": [
+        3,
+        4,
+        5
+      ],
+      "text_source": "He took worthless pink sheet stocks and sold them to doctors looking for a miracle. It was not investing. It was financial liquidation. The business model was simple. Hypnotize the buyer, pump the trash stock, dump the shares, collect the cash. The SEC looked away. The banks processed",
+      "prompt": "A dramatic illustration of a stock chart showing a sharp upward arrow painted in gold, with a shadowy figure in a dark suit pulling strings like a puppeteer above it. Pink paper stock certificates scattered on a dark mahogany table. A magnifying glass over a worthless document. The background is deep brown with gold accents. The scene conveys deception and manipulation — wealth built on nothing. No text, no watermark.",
+      "overlay": "INTERIEUR:sombre",
+      "intensite": 3
+    },
+    {
+      "filename": "00_43_550.png",
+      "start_seconds": 43.55,
+      "segments_covered": [
+        6,
+        7,
+        8
+      ],
+      "text_source": "the wire transfers. He bought yachts, helicopters, and a mansion in the Hamptons, an empire built entirely on paper and lies. Part Two. The Mechanism of the Trap. To understand the size of the scam, you must look at the room. 100 phone lines ringing simultaneously, young men",
+      "prompt": "A split composition illustration: on the left side, a luxurious yacht and helicopter against a golden sunset with a sprawling Hamptons mansion. On the right side, a dark fluorescent-lit room with 100 phone lines on a massive switchboard, all ringing simultaneously. The contrast between golden excess and cold industrial deception. Warm gold tones on the left, cold blue fluorescent on the right. No text, no watermark.",
+      "overlay": "INTERIEUR:ecran",
+      "intensite": 2
+    },
+    {
+      "filename": "01_03_930.png",
+      "start_seconds": 63.93,
+      "segments_covered": [
+        9,
+        10,
+        11
+      ],
+      "text_source": "straight out of high school, wearing cheap suits and expensive watches, reading from a laminated script that left no room for objections. They were selling a dream to people who could not afford to lose, but the numbers were completely fabricated. A penny stock has no real value,",
+      "prompt": "A row of young men in ill-fitting cheap dark suits wearing expensive gold watches, sitting at identical desks with telephones, reading from scripts. Fluorescent office lighting overhead. Their faces show aggressive determination. The room is cramped and industrial — no windows, just phones and scripts. Cold blue-tinted lighting with warm gold from the watches. The scene conveys mass-produced deception. No text, no watermark.",
+      "overlay": "INTERIEUR:lampe",
+      "intensite": 2
+    },
+    {
+      "filename": "01_20_730.png",
+      "start_seconds": 80.73,
+      "segments_covered": [
+        12,
+        13,
+        14
+      ],
+      "text_source": "no product, no revenue. It exists only as a digital ticker on a cold computer screen. You artificially constrict the supply. You create a fake panic. The price climbs by 400 percent in 48 hours. Every retail investor watches the chart and feels the burning sting of greed.",
+      "prompt": "An abstract cinematic illustration of a digital stock ticker on a cold dark computer screen showing a penny stock symbol. A shadowy hand manipulates a small supply of tokens, constricting them into a narrow channel. Red and green candlestick chart lines climbing sharply. The background is dark with gold price numbers glowing. A crowd of tiny faceless figures below watching the chart with anxiety. No text, no watermark.",
+      "overlay": "INTERIEUR:ecran",
+      "intensite": 3
+    },
+    {
+      "filename": "01_39_550.png",
+      "start_seconds": 99.55,
+      "segments_covered": [
+        15,
+        16
+      ],
+      "text_source": "They call back. They buy more. They wire their life savings. They think they are with a Wall Street Titan, but they were just funding a three-day drug binge in a five-star",
+      "prompt": "A haunting illustration contrasting two scenes: on one side, ordinary people on phones writing checks and wiring money, their homes modest and dimly lit. On the other side, a luxurious five-star hotel suite with champagne, scattered cash, and white powder on a marble surface. Golden light on the hotel side, cold shadow on the victims' side. The composition conveys the brutal disconnect between the victims' sacrifice and the fraudster's excess. No text, no watermark.",
+      "overlay": "INTERIEUR:neons",
+      "intensite": 3
+    }
+  ]
+}

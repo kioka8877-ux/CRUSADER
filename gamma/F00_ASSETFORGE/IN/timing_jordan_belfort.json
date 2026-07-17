@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "fps": 30,
+    "duration_seconds": 109.19,
+    "total_frames": 3276,
+    "format": "horizontal",
+    "width": 1920,
+    "height": 1080,
+    "source": "reconstructed_from_roadmap_alpha"
+  },
+  "segments": [
+    {
+      "id": 0,
+      "text": "POV. You are making $50,000 a minute, but every single dollar is a ticking federal time",
+      "start": 0.27,
+      "end": 8.91,
+      "words": []
+    },
+    {
+      "id": 1,
+      "text": "bomb and the countdown just hit zero. He was not a financial genius. He did not understand",
+      "start": 8.91,
+      "end": 16.13,
+      "words": []
+    },
+    {
+      "id": 2,
+      "text": "quantitative finance or market arbitrage. He understood one thing, human desperation.",
+      "start": 16.13,
+      "end": 22.51,
+      "words": []
+    },
+    {
+      "id": 3,
+      "text": "He took worthless pink sheet stocks and sold them to doctors looking for a miracle.",
+      "start": 23.03,
+      "end": 28.39,
+      "words": []
+    },
+    {
+      "id": 4,
+      "text": "It was not investing. It was financial liquidation. The business model was simple. Hypnotize the buyer,",
+      "start": 28.39,
+      "end": 35.67,
+      "words": []
+    },
+    {
+      "id": 5,
+      "text": "pump the trash stock, dump the shares, collect the cash. The SEC looked away. The banks processed",
+      "start": 36.25,
+      "end": 43.55,
+      "words": []
+    },
+    {
+      "id": 6,
+      "text": "the wire transfers. He bought yachts, helicopters, and a mansion in the Hamptons, an empire built",
+      "start": 43.55,
+      "end": 50.45,
+      "words": []
+    },
+    {
+      "id": 7,
+      "text": "entirely on paper and lies. Part Two. The Mechanism of the Trap. To understand the size",
+      "start": 50.45,
+      "end": 57.43,
+      "words": []
+    },
+    {
+      "id": 8,
+      "text": "of the scam, you must look at the room. 100 phone lines ringing simultaneously, young men",
+      "start": 57.43,
+      "end": 63.93,
+      "words": []
+    },
+    {
+      "id": 9,
+      "text": "straight out of high school, wearing cheap suits and expensive watches, reading from a laminated",
+      "start": 63.93,
+      "end": 69.17,
+      "words": []
+    },
+    {
+      "id": 10,
+      "text": "script that left no room for objections. They were selling a dream to people who could not",
+      "start": 69.17,
+      "end": 74.11,
+      "words": []
+    },
+    {
+      "id": 11,
+      "text": "afford to lose, but the numbers were completely fabricated. A penny stock has no real value,",
+      "start": 74.11,
+      "end": 80.19,
+      "words": []
+    },
+    {
+      "id": 12,
+      "text": "no product, no revenue. It exists only as a digital ticker on a cold computer screen.",
+      "start": 80.73,
+      "end": 86.53,
+      "words": []
+    },
+    {
+      "id": 13,
+      "text": "You artificially constrict the supply. You create a fake panic. The price climbs by 400 percent in",
+      "start": 86.53,
+      "end": 93.55,
+      "words": []
+    },
+    {
+      "id": 14,
+      "text": "48 hours. Every retail investor watches the chart and feels the burning sting of greed.",
+      "start": 93.55,
+      "end": 99.01,
+      "words": []
+    },
+    {
+      "id": 15,
+      "text": "They call back. They buy more. They wire their life savings. They think they are",
+      "start": 99.55,
+      "end": 104.63,
+      "words": []
+    },
+    {
+      "id": 16,
+      "text": "with a Wall Street Titan, but they were just funding a three-day drug binge in a five-star",
+      "start": 104.63,
+      "end": 109.19,
+      "words": []
+    }
+  ],
+  "words": []
+}
