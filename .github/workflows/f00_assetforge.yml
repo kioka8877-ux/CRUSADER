@@ -60,11 +60,16 @@ jobs:
       - name: Download prompts_manifest.json from Release
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_ID: ${{ inputs.run_id }}
         run: |
           python -c "
           import requests, json, os
-          token = os.environ['GH_TOKEN']
+          # Utilise GH_TOKEN (PAT) en priorité, fallback GITHUB_TOKEN
+          token = os.environ.get('GH_TOKEN') or os.environ.get('GITHUB_TOKEN')
+          if not token:
+              print('ERROR: No token available')
+              exit(1)
           run_id = os.environ['RUN_ID']
           repo = 'kioka8877-ux/CRUSADER'
           h = {'Authorization': f'token {token}', 'Accept': 'application/vnd.github+json'}
@@ -73,6 +78,7 @@ jobs:
           r = requests.get(f'https://api.github.com/repos/{repo}/releases/tags/{run_id}', headers=h)
           if not r.ok:
               print(f'Release {run_id} not found: {r.status_code}')
+              print(f'Response: {r.text[:200]}')
               exit(1)
           
           assets = r.json().get('assets', [])
@@ -85,6 +91,9 @@ jobs:
           # Download
           dl_url = manifest_asset['url']
           r = requests.get(dl_url, headers={**h, 'Accept': 'application/octet-stream'})
+          if not r.ok:
+              print(f'Download failed: {r.status_code}')
+              exit(1)
           with open('prompts_manifest.json', 'wb') as f:
               f.write(r.content)
           print(f'Downloaded prompts_manifest.json ({len(r.content)} bytes)')
@@ -250,6 +259,7 @@ jobs:
       - name: Commit images to repository
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_ID: ${{ inputs.run_id }}
           MODE: ${{ inputs.mode }}
         run: |
