@@ -17,8 +17,11 @@
     "short_render": null,
     "youtube_final": null
   },
+  "f00_mode": "GROUPED",
+  "f00_format": "HORIZONTAL",
   "gh_runs": {
-    "f01": 28923465281
+    "f01": 28923465281,
+    "f00": null
   },
   "gh_actions": {
     "run_id": "CRS_20260708_0608",

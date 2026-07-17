@@ -258,6 +258,55 @@ def cmd_start(title, token, ledger):
     })
     save_ledger(ledger)
 
+    # ── F00 ASSETFORGE ──────────────────────────────────────────────────────
+    # Phase 0 : extraction de style depuis la vidéo de référence
+    f00_ref_video = REPO_ROOT / "F00_ASSETFORGE" / "IN" / "reference_video.mp4"
+    if f00_ref_video.exists():
+        print("\n[F00] Phase 0 — Style extraction...")
+        subprocess.run([
+            sys.executable,
+            str(REPO_ROOT / "F00_ASSETFORGE" / "CODEBASE" / "crs_f00_phase0.py"),
+            "--input",  str(f00_ref_video),
+            "--output", str(REPO_ROOT / "F00_ASSETFORGE" / "OUT" / "style_prompt.txt"),
+        ], cwd=REPO_ROOT)
+
+        # Phase 1 : génération des prompts image
+        print("[F00] Phase 1 — Prompt generation...")
+        f00_mode   = ledger.get("f00_mode", "GROUPED")
+        f00_format = ledger.get("f00_format", "HORIZONTAL")
+        subprocess.run([
+            sys.executable,
+            str(REPO_ROOT / "F00_ASSETFORGE" / "CODEBASE" / "crs_f00_phase1.py"),
+            "--mode",   f00_mode,
+            "--format", f00_format,
+        ], cwd=REPO_ROOT)
+
+        # Gate G1.5 : test sur 1 image avant batch complet
+        print("\n[F00] Phase 2 TEST — Génération image test...")
+        gh_run_id_f00, url_f00 = trigger_workflow_and_get_url(
+            "f00_assetforge.yml",
+            {"run_id": run_id, "mode": "TEST"},
+            token, repo,
+        )
+        print(f"[F00] Run GitHub Actions (TEST) : {url_f00}")
+        print("[F00] ⚠️  Valider l'image test dans les artifacts GitHub avant de continuer.")
+        input("[F00] Appuyer sur ENTRÉE quand l'image test est validée...")
+
+        # Batch complet
+        print("[F00] Phase 2 FULL — Génération batch complet...")
+        gh_run_id_f00, url_f00 = trigger_workflow_and_get_url(
+            "f00_assetforge.yml",
+            {"run_id": run_id, "mode": "FULL"},
+            token, repo,
+        )
+        ledger.setdefault("gh_runs", {})["f00"] = gh_run_id_f00
+        save_ledger(ledger)
+        print(f"[F00] Batch lancé : {url_f00}")
+        print("[F00] ⚠️  Attendre la fin du batch avant --gate G2.")
+    else:
+        print("\n[F00] Pas de vidéo de référence dans F00_ASSETFORGE/IN/ — F00 ignoré.")
+        print("[F00] Pour activer F00 : déposer reference_video.mp4 dans F00_ASSETFORGE/IN/")
+
     print("\n════════════════════════════════════════════")
     print("  F01B (Whisper) EN COURS SUR GITHUB ACTIONS")
     print(f"  Surveille : {url}")

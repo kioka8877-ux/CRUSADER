@@ -103,6 +103,16 @@ MANIFEST = {
             ]
         },
     },
+    "F00": {
+        "check-in": {
+            "files": [
+                {"path": "F00_ASSETFORGE/OUT/style_prompt.txt", "type": "file", "min_size": 100},
+                {"path": "F00_ASSETFORGE/OUT/prompts_manifest.json", "type": "json",
+                 "required_keys": ["meta", "images"]},
+            ],
+            "dirs": ["SHARED/IN/images"],
+        }
+    },
 }
 
 # ─── Helpers ──────────────────────────────────────────────────────────────────
