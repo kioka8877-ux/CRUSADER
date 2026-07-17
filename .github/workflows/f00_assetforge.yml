@@ -39,16 +39,18 @@ jobs:
           pip install kaggle requests
           echo "Kaggle CLI installed"
 
-      # === CONFIGURE KAGGLE CREDENTIALS ===
+      # === CONFIGURE KAGGLE CREDENTIALS (nouveau format KGAT_) ===
       - name: Configure Kaggle credentials
         env:
-          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
           KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
         run: |
           mkdir -p ~/.kaggle
-          echo "{\"username\":\"${KAGGLE_USERNAME}\",\"key\":\"${KAGGLE_KEY}\"}" > ~/.kaggle/kaggle.json
-          chmod 600 ~/.kaggle/kaggle.json
-          echo "Kaggle credentials configured"
+          # Nouveau format : access_token file
+          echo "${KAGGLE_KEY}" > ~/.kaggle/access_token
+          chmod 600 ~/.kaggle/access_token
+          # Aussi set comme env var pour le CLI
+          echo "KAGGLE_API_TOKEN=${KAGGLE_KEY}" >> $GITHUB_ENV
+          echo "Kaggle credentials configured (KGAT token format)"
 
       # === DOWNLOAD MANIFEST ===
       - name: Download prompts_manifest.json from Release
@@ -109,36 +111,47 @@ jobs:
 
       # === UPLOAD MANIFEST AS KAGGLE DATASET ===
       - name: Upload manifest as Kaggle dataset
+        env:
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_KEY }}
+          RUN_ID: ${{ inputs.run_id }}
         run: |
           mkdir -p /tmp/dataset
           cp prompts_manifest_prepared.json /tmp/dataset/prompts_manifest.json
           
           # Create metadata.json for Kaggle dataset
-          cat > /tmp/dataset/dataset-metadata.json << 'EOF'
+          # Utilise un slug généré depuis le run_id
+          SLUG=$(echo "f00-manifest-${RUN_ID}" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]//g')
+          
+          cat > /tmp/dataset/dataset-metadata.json << EOF
           {
-            "title": "f00-assetforge-manifest-${{ inputs.run_id }}",
-            "id": "${{ secrets.KAGGLE_USERNAME }}/f00-manifest-${{ inputs.run_id }}",
+            "title": "f00-assetforge-manifest-${RUN_ID}",
+            "id": "${SLUG}",
             "licenses": [{"name": "CC0-1.0"}]
           }
           EOF
           
           cd /tmp/dataset
           kaggle datasets create -p . 2>&1 || kaggle datasets version -p . 2>&1
-          echo "Dataset uploaded"
+          echo "DATASET_SLUG=${SLUG}" >> $GITHUB_ENV
+          echo "Dataset uploaded: ${SLUG}"
 
       # === PUSH NOTEBOOK TO KAGGLE ===
       - name: Push notebook to Kaggle
         env:
-          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_KEY }}
           RUN_ID: ${{ inputs.run_id }}
         run: |
           mkdir -p /tmp/notebook
           cp gamma/F00_ASSETFORGE/CODEBASE/f00_assetforge_kaggle.ipynb /tmp/notebook/
           
+          SLUG=$(echo "f00-assetforge-${RUN_ID}" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]//g')
+          
           # Create kernel metadata
           cat > /tmp/notebook/kernel-metadata.json << EOF
           {
-            "id": "${KAGGLE_USERNAME}/f00-assetforge-${RUN_ID}",
+            "id": "${SLUG}",
             "title": "f00-assetforge-${RUN_ID}",
             "code_file": "f00_assetforge_kaggle.ipynb",
             "language": "python",
@@ -146,7 +159,7 @@ jobs:
             "is_private": true,
             "enable_gpu": true,
             "enable_internet": true,
-            "dataset_sources": ["${KAGGLE_USERNAME}/f00-manifest-${RUN_ID}"],
+            "dataset_sources": ["${DATASET_SLUG}"],
             "competition_sources": [],
             "kernel_sources": []
           }
@@ -154,31 +167,31 @@ jobs:
           
           cd /tmp/notebook
           kaggle kernels push -p .
-          echo "Notebook pushed to Kaggle"
+          echo "KERNEL_SLUG=${SLUG}" >> $GITHUB_ENV
+          echo "Notebook pushed to Kaggle: ${SLUG}"
 
       # === POLL KAGGLE KERNEL STATUS ===
       - name: Poll Kaggle kernel until complete
         env:
-          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
-          RUN_ID: ${{ inputs.run_id }}
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_KEY }}
         run: |
-          KERNEL_ID="${KAGGLE_USERNAME}/f00-assetforge-${RUN_ID}"
-          echo "Polling kernel: ${KERNEL_ID}"
+          echo "Polling kernel: ${KERNEL_SLUG}"
           
           MAX_WAIT=5400  # 90 minutes max
           POLL_INTERVAL=60
           ELAPSED=0
           
           while [ $ELAPSED -lt $MAX_WAIT ]; do
-              STATUS=$(kaggle kernels status "${KERNEL_ID}" 2>&1 | grep -oP 'status["\s:]+\K\w+' || echo "unknown")
+              STATUS=$(kaggle kernels status "${KERNEL_SLUG}" 2>&1 | grep -oiP '(running|complete|error|cancelled|pending)' | head -1 || echo "unknown")
               echo "[$(( ELAPSED / 60 ))min] Status: ${STATUS}"
               
               if [ "$STATUS" = "complete" ]; then
                   echo "Kernel completed successfully"
                   break
-              elif [ "$STATUS" = "error" ]; then
-                  echo "Kernel failed with error"
-                  kaggle kernels output "${KERNEL_ID}" -p /tmp/kaggle_output 2>&1 || true
+              elif [ "$STATUS" = "error" ] || [ "$STATUS" = "cancelled" ]; then
+                  echo "Kernel failed with status: ${STATUS}"
+                  kaggle kernels output "${KERNEL_SLUG}" -p /tmp/kaggle_output 2>&1 || true
                   exit 1
               fi
               
@@ -194,12 +207,11 @@ jobs:
       # === DOWNLOAD KAGGLE OUTPUT ===
       - name: Download Kaggle kernel output
         env:
-          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
-          RUN_ID: ${{ inputs.run_id }}
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_KEY }}
         run: |
-          KERNEL_ID="${KAGGLE_USERNAME}/f00-assetforge-${RUN_ID}"
           mkdir -p /tmp/kaggle_output
-          kaggle kernels output "${KERNEL_ID}" -p /tmp/kaggle_output
+          kaggle kernels output "${KERNEL_SLUG}" -p /tmp/kaggle_output
           
           echo "=== Kaggle output files ==="
           find /tmp/kaggle_output -type f -exec ls -lh {} \;
@@ -263,14 +275,11 @@ jobs:
       - name: Cleanup Kaggle kernel and dataset
         if: always()
         env:
-          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
-          RUN_ID: ${{ inputs.run_id }}
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_KEY }}
         run: |
-          KERNEL_ID="${KAGGLE_USERNAME}/f00-assetforge-${RUN_ID}"
-          DATASET_ID="${KAGGLE_USERNAME}/f00-manifest-${RUN_ID}"
-          
-          kaggle kernels delete "${KERNEL_ID}" -y 2>&1 || true
-          kaggle datasets delete "${DATASET_ID}" -y 2>&1 || true
+          kaggle kernels delete "${KERNEL_SLUG}" -y 2>&1 || true
+          kaggle datasets delete "${DATASET_SLUG}" -y 2>&1 || true
           echo "Kaggle cleanup done"
 
       # === RÉSUMÉ ===
@@ -283,7 +292,7 @@ jobs:
           echo "Run ID: ${{ inputs.run_id }}"
           echo "Mode:   ${{ inputs.mode }}"
           echo ""
-          IMG_COUNT=$(find gamma/SHARED/IN/images/ -name "*.png" -newer gamma/SHARED/IN/images/.gitkeep 2>/dev/null | wc -l || echo "?")
-          echo "Images générées et commitées: ${IMG_COUNT}"
+          IMG_COUNT=$(find /tmp/generated_images -name "*.png" 2>/dev/null | wc -l || echo "?")
+          echo "Images générées: ${IMG_COUNT}"
           echo ""
           echo "=========================================="
