@@ -175,13 +175,16 @@ jobs:
           mkdir -p /tmp/notebook
           cp /tmp/notebook_ready.ipynb /tmp/notebook/f00_assetforge_kaggle.ipynb
 
-          SLUG_NAME=$(echo "f00-assetforge-${RUN_ID}" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]//g')
+          # Slug = username/f00-assetforge-<timestamp> (unique per run, avoids 409 conflicts)
+          TIMESTAMP=$(date +%s)
+          SLUG_NAME="f00-assetforge-${TIMESTAMP}"
           KERNEL_SLUG="${KAGGLE_USERNAME}/${SLUG_NAME}"
 
+          # Title MUST match slug (Kaggle generates slug from title)
           cat > /tmp/notebook/kernel-metadata.json << EOF
           {
             "id": "${KERNEL_SLUG}",
-            "title": "f00-assetforge-${RUN_ID}",
+            "title": "${SLUG_NAME}",
             "code_file": "f00_assetforge_kaggle.ipynb",
             "language": "python",
             "kernel_type": "notebook",
@@ -197,8 +200,8 @@ jobs:
           echo "=== Kernel metadata ==="
           cat /tmp/notebook/kernel-metadata.json
 
-          # Delete old kernel if exists
-          kaggle kernels delete "${KERNEL_SLUG}" -y 2>&1 || true
+          # Delete old kernel if exists (ignore errors — may not exist or token may lack perms)
+          kaggle kernels delete "${KERNEL_SLUG}" -y 2>&1 || echo "(delete skipped — new unique slug)"
 
           cd /tmp/notebook
           echo "Pushing kernel: ${KERNEL_SLUG}"
