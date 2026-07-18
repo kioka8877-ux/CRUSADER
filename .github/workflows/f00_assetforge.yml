@@ -1,4 +1,4 @@
-name: F00 ASSETFORGE — Image Generation (Kaggle GPU)
+name: F00 ASSETFORGE — Image Generation (CPU, parallel)
 
 on:
   workflow_dispatch:
@@ -15,53 +15,19 @@ permissions:
   contents: write
 
 jobs:
-  generate_images:
-    name: "F00 — Image Generation via Kaggle"
+  # === PREPARE: Download manifest, determine how many images to generate ===
+  prepare:
+    name: "Prepare manifest"
     runs-on: ubuntu-latest
-    timeout-minutes: 30
-
+    outputs:
+      matrix: ${{ steps.build-matrix.outputs.matrix }}
+      image_count: ${{ steps.build-matrix.outputs.image_count }}
     steps:
-      # === CHECKOUT ===
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }}
-          token: ${{ secrets.GITHUB_TOKEN }}
 
-      # === INSTALL PYTHON DEPS ===
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install Kaggle CLI (latest) + dependencies
-        run: |
-          pip install --upgrade kaggle requests
-          kaggle --version
-          echo "Kaggle CLI installed"
-
-      # === CONFIGURE KAGGLE CREDENTIALS ===
-      - name: Configure Kaggle credentials
-        env:
-          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
-          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
-        run: |
-          mkdir -p ~/.kaggle
-          # Format 1: kaggle.json (legacy — username + key)
-          printf '{"username":"%s","key":"%s"}\n' "${KAGGLE_USERNAME}" "${KAGGLE_KEY}" > ~/.kaggle/kaggle.json
-          chmod 600 ~/.kaggle/kaggle.json
-          # Format 2: access_token file (nouveau format KGAT_)
-          echo "${KAGGLE_KEY}" > ~/.kaggle/access_token
-          chmod 600 ~/.kaggle/access_token
-          # Env vars
-          echo "KAGGLE_USERNAME=${KAGGLE_USERNAME}" >> $GITHUB_ENV
-          echo "KAGGLE_KEY=${KAGGLE_KEY}" >> $GITHUB_ENV
-          echo "KAGGLE_API_TOKEN=${KAGGLE_KEY}" >> $GITHUB_ENV
-          echo "Kaggle credentials configured for: ${KAGGLE_USERNAME}"
-          # Verify
-          python3 -c "import json; d=json.load(open('$HOME/.kaggle/kaggle.json')); print(f'Username: {d[\"username\"]}, Key starts: {d[\"key\"][:5]}...')"
-
-      # === DOWNLOAD MANIFEST ===
       - name: Download prompts_manifest.json from Release
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -74,26 +40,23 @@ jobs:
           run_id = os.environ['RUN_ID']
           repo = 'kioka8877-ux/CRUSADER'
           h = {'Authorization': f'token {token}', 'Accept': 'application/vnd.github+json'}
-          
           r = requests.get(f'https://api.github.com/repos/{repo}/releases/tags/{run_id}', headers=h)
           if not r.ok:
               print(f'Release {run_id} not found: {r.status_code}')
               exit(1)
-          
           assets = r.json().get('assets', [])
           manifest_asset = next((a for a in assets if a['name'] == 'prompts_manifest.json'), None)
           if not manifest_asset:
               print(f'prompts_manifest.json not found. Available: {[a[\"name\"] for a in assets]}')
               exit(1)
-          
           r = requests.get(manifest_asset['url'], headers={**h, 'Accept': 'application/octet-stream'})
           with open('prompts_manifest.json', 'wb') as f:
               f.write(r.content)
           print(f'Downloaded prompts_manifest.json ({len(r.content)} bytes)')
           "
 
-      # === PREPARE MANIFEST (TEST vs FULL) ===
-      - name: Prepare manifest for mode
+      - name: Prepare manifest and build matrix
+        id: build-matrix
         run: |
           python3 -c "
           import json
@@ -104,284 +67,138 @@ jobs:
           if mode == 'TEST':
               manifest['images'] = manifest['images'][:1]
               manifest['meta']['total_images'] = 1
-              print('TEST mode: keeping only first image')
           
           with open('prompts_manifest_prepared.json', 'w') as f:
               json.dump(manifest, f, indent=2)
           
-          print(f'Images to generate: {len(manifest[\"images\"])}')
+          count = len(manifest['images'])
+          indices = list(range(count))
+          matrix = json.dumps({'index': indices})
+          
+          print(f'Images to generate: {count}')
+          # Set outputs
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write(f'matrix={matrix}\n')
+              f.write(f'image_count={count}\n')
           "
-
-      # === INJECT MANIFEST INTO NOTEBOOK + PUSH TO KAGGLE ===
-      - name: Inject manifest into notebook and push to Kaggle
         env:
-          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
-          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
-          RUN_ID: ${{ inputs.run_id }}
-        run: |
-          # 1. Inject manifest into notebook — replace the EMBEDDED_MANIFEST placeholder cell
-          python3 << 'PYINJECT'
-          import json, base64
+          GITHUB_OUTPUT: ${{ github.env }}
 
-          # Load notebook
-          with open('gamma/F00_ASSETFORGE/CODEBASE/f00_assetforge_kaggle.ipynb') as f:
-              nb = json.load(f)
+      - name: Upload manifest as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: manifest
+          path: prompts_manifest_prepared.json
+          retention-days: 1
 
-          # Load manifest
-          with open('prompts_manifest_prepared.json') as f:
-              manifest = json.load(f)
+  # === GENERATE: One job per image, all in parallel ===
+  generate:
+    name: "Generate image ${{ matrix.index }}"
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
 
-          # Base64 encode — avoids ALL quoting issues
-          manifest_json_str = json.dumps(manifest, ensure_ascii=False)
-          manifest_b64 = base64.b64encode(manifest_json_str.encode()).decode()
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-          # Find the EMBEDDED_MANIFEST placeholder cell and replace it
-          replaced = False
-          for i, cell in enumerate(nb['cells']):
-              if cell['cell_type'] == 'code':
-                  src = ''.join(cell.get('source', []))
-                  if 'EMBEDDED_MANIFEST = None' in src:
-                      nb['cells'][i]['source'] = [
-                          "# === EMBEDDED MANIFEST (injected by GitHub Actions) ===\n",
-                          "import json as _json, base64 as _b64\n",
-                          "_manifest_b64 = '" + manifest_b64 + "'\n",
-                          "EMBEDDED_MANIFEST = _json.loads(_b64.b64decode(_manifest_b64).decode())\n",
-                          'print("Embedded manifest loaded:", len(EMBEDDED_MANIFEST["images"]), "images")\n',
-                      ]
-                      replaced = True
-                      print(f'Replaced EMBEDDED_MANIFEST placeholder at cell {i}')
-                      break
+      - name: Download manifest
+        uses: actions/download-artifact@v4
+        with:
+          name: manifest
+          path: .
 
-          if not replaced:
-              print('WARNING: EMBEDDED_MANIFEST placeholder not found — inserting at top')
-              inject_cell = {
-                  'cell_type': 'code',
-                  'execution_count': None,
-                  'metadata': {},
-                  'outputs': [],
-                  'source': [
-                      "# === EMBEDDED MANIFEST (injected by GitHub Actions) ===\n",
-                      "import json as _json, base64 as _b64\n",
-                      "_manifest_b64 = '" + manifest_b64 + "'\n",
-                      "EMBEDDED_MANIFEST = _json.loads(_b64.b64decode(_manifest_b64).decode())\n",
-                      'print("Embedded manifest loaded:", len(EMBEDDED_MANIFEST["images"]), "images")\n',
-                  ]
-              }
-              # Insert after first markdown cell
-              insert_idx = 0
-              for j, cell in enumerate(nb['cells']):
-                  if cell['cell_type'] == 'code':
-                      insert_idx = j
-                      break
-              nb['cells'].insert(insert_idx, inject_cell)
-
-          # Save
-          with open('/tmp/notebook_ready.ipynb', 'w') as f:
-              json.dump(nb, f, indent=2)
-
-          print(f'Notebook prepared with embedded manifest ({len(manifest["images"])} images)')
-          print(f'Base64 size: {len(manifest_b64)} chars')
-          PYINJECT
-
-          # Verify the notebook is valid JSON
-          python3 -c "import json; json.load(open('/tmp/notebook_ready.ipynb')); print('Notebook JSON valid')"
-
-          # 2. Push notebook to Kaggle
-          mkdir -p /tmp/notebook
-          cp /tmp/notebook_ready.ipynb /tmp/notebook/f00_assetforge_kaggle.ipynb
-
-          # Slug = username/f00-assetforge-<timestamp> (unique per run, avoids 409 conflicts)
-          TIMESTAMP=$(date +%s)
-          SLUG_NAME="f00-assetforge-${TIMESTAMP}"
-          KERNEL_SLUG="${KAGGLE_USERNAME}/${SLUG_NAME}"
-
-          # Title MUST match slug (Kaggle generates slug from title)
-          cat > /tmp/notebook/kernel-metadata.json << EOF
-          {
-            "id": "${KERNEL_SLUG}",
-            "title": "${SLUG_NAME}",
-            "code_file": "f00_assetforge_kaggle.ipynb",
-            "language": "python",
-            "kernel_type": "notebook",
-            "is_private": true,
-            "enable_gpu": true,
-            "enable_internet": true,
-            "dataset_sources": [],
-            "competition_sources": [],
-            "kernel_sources": []
-          }
-          EOF
-
-          echo "=== Kernel metadata ==="
-          cat /tmp/notebook/kernel-metadata.json
-
-          # Delete old kernel if exists (ignore errors — may not exist or token may lack perms)
-          kaggle kernels delete "${KERNEL_SLUG}" -y 2>&1 || echo "(delete skipped — new unique slug)"
-
-          cd /tmp/notebook
-          echo "Pushing kernel: ${KERNEL_SLUG}"
-          kaggle kernels push -p . 2>&1
-          echo "KERNEL_SLUG=${KERNEL_SLUG}" >> $GITHUB_ENV
-
-          # 3. Verify GPU is enabled
-          echo "=== Verifying kernel settings ==="
-          kaggle kernels status "${KERNEL_SLUG}" 2>&1 || true
-
-      # === POLL KAGGLE KERNEL STATUS ===
-      - name: Poll Kaggle kernel until complete
+      - name: Generate image
         env:
-          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
-          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          echo "Polling kernel: ${KERNEL_SLUG}"
+          # Rename to expected filename
+          mv prompts_manifest_prepared.json prompts_manifest.json 2>/dev/null || true
+          
+          python3 gamma/F00_ASSETFORGE/CODEBASE/crs_f00_generate.py \
+            --manifest prompts_manifest.json \
+            --index ${{ matrix.index }} \
+            --output output/
 
-          # Grace period — le kernel vient d'être push, l'API n'est pas encore à jour
-          echo "Waiting 60s for kernel to initialize..."
-          sleep 60
+      - name: Upload image artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: image-${{ matrix.index }}
+          path: output/
+          retention-days: 1
 
-          MAX_WAIT=1200  # 20 minutes max
-          POLL_INTERVAL=30
-          ELAPSED=0
-          ERROR_COUNT=0
-          MAX_ERRORS=5    # 5 erreurs consécutives = échec réel
-          GRACE_PERIOD=180  # 3 min — ignore "error" pendant cette période
+  # === COLLECT: Gather all images and commit to repo ===
+  collect:
+    name: "Collect and commit images"
+    needs: generate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          token: ${{ secrets.GH_TOKEN }}
 
-          while [ $ELAPSED -lt $MAX_WAIT ]; do
-              RAW_OUTPUT=$(kaggle kernels status "${KERNEL_SLUG}" 2>&1)
-              echo "[$(( ELAPSED / 60 ))min] Raw: ${RAW_OUTPUT}"
+      - name: Download all image artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: image-*
+          merge-multiple: true
+          path: all_images
 
-              if echo "$RAW_OUTPUT" | grep -qi "complete"; then
-                  echo "✓ Kernel completed successfully"
-                  break
-              elif echo "$RAW_OUTPUT" | grep -qi "running"; then
-                  echo "  Status: running..."
-                  ERROR_COUNT=0
-              elif echo "$RAW_OUTPUT" | grep -qi "pending\|queued"; then
-                  echo "  Status: pending/queued..."
-                  ERROR_COUNT=0
-              elif echo "$RAW_OUTPUT" | grep -qi "error"; then
-                  ERROR_COUNT=$((ERROR_COUNT + 1))
-                  echo "  ⚠️ Error detected (count: ${ERROR_COUNT}/${MAX_ERRORS})"
-
-                  # Pendant le grace period, on ignore les erreurs
-                  if [ $ELAPSED -ge $GRACE_PERIOD ] && [ $ERROR_COUNT -ge $MAX_ERRORS ]; then
-                      echo "✗ Kernel failed — too many errors after grace period"
-                      kaggle kernels output "${KERNEL_SLUG}" -p /tmp/kaggle_output 2>&1 || true
-                      for logfile in /tmp/kaggle_output/*.log; do
-                          if [ -f "$logfile" ]; then
-                              echo "=== Error logs ==="
-                              tail -30 "$logfile"
-                          fi
-                      done
-                      exit 1
-                  else
-                      echo "  (within grace period or below error threshold, continuing...)"
-                  fi
-              else
-                  echo "  Status: unknown (waiting)"
-                  ERROR_COUNT=0
-              fi
-
-              sleep $POLL_INTERVAL
-              ELAPSED=$((ELAPSED + POLL_INTERVAL))
-          done
-
-          if [ $ELAPSED -ge $MAX_WAIT ]; then
-              echo "✗ Timeout: kernel did not complete within $((MAX_WAIT / 60)) minutes"
-              kaggle kernels output "${KERNEL_SLUG}" -p /tmp/kaggle_output 2>&1 || true
-              exit 1
-          fi
-
-      # === DOWNLOAD KAGGLE OUTPUT ===
-      - name: Download Kaggle kernel output
-        env:
-          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
-          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+      - name: Show all generated images
         run: |
-          mkdir -p /tmp/kaggle_output
-          kaggle kernels output "${KERNEL_SLUG}" -p /tmp/kaggle_output 2>&1
-
-          echo "=== Kaggle output files ==="
-          find /tmp/kaggle_output -type f -exec ls -lh {} \;
-
-          for logfile in /tmp/kaggle_output/*.log; do
-              if [ -f "$logfile" ]; then
-                  echo "=== Log: $logfile ==="
-                  tail -50 "$logfile"
-              fi
-          done
-
-      # === EXTRACT IMAGES ===
-      - name: Extract generated images
-        run: |
-          mkdir -p /tmp/generated_images
-
-          ZIP_FILE=$(find /tmp/kaggle_output -name "f00_images.zip" | head -1)
-
-          if [ -z "$ZIP_FILE" ]; then
-              echo "No zip found, looking for PNG files directly..."
-              find /tmp/kaggle_output -name "*.png" -exec cp {} /tmp/generated_images/ \;
-          else
-              echo "Extracting from: $ZIP_FILE"
-              unzip -o "$ZIP_FILE" -d /tmp/generated_images/
-          fi
-
           echo "=== Generated images ==="
-          ls -lh /tmp/generated_images/ || echo "No images found"
-          echo "Total: $(find /tmp/generated_images -name '*.png' 2>/dev/null | wc -l) images"
+          find all_images -name "*.png" -exec ls -lh {} \;
+          echo "Total: $(find all_images -name '*.png' | wc -l) images"
 
-      # === COMMIT IMAGES TO SHARED/IN/images/ ===
-      - name: Commit images to repository
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RUN_ID: ${{ inputs.run_id }}
-          MODE: ${{ inputs.mode }}
+      - name: Copy images to SHARED/IN/images/
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
           mkdir -p gamma/SHARED/IN/images/
-
           COPIED=0
-          for img in /tmp/generated_images/*.png; do
+          for img in all_images/*.png; do
               if [ -f "$img" ]; then
                   cp "$img" gamma/SHARED/IN/images/
                   COPIED=$((COPIED + 1))
               fi
           done
-
           echo "Copied $COPIED images to gamma/SHARED/IN/images/"
 
           if [ $COPIED -eq 0 ]; then
-              echo "⚠️ No images generated — check Kaggle logs"
+              echo "⚠️ No images generated"
               exit 1
           fi
 
+      - name: Commit images to repository
+        env:
+          RUN_ID: ${{ inputs.run_id }}
+          MODE: ${{ inputs.mode }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
           git add gamma/SHARED/IN/images/
-
+          
           if git diff --cached --quiet; then
               echo "No changes to commit"
           else
-              COMMIT_MSG="f00(assetforge): ${MODE} run — ${RUN_ID} — ${COPIED} images"
+              IMG_COUNT=$(find gamma/SHARED/IN/images/ -name "*.png" -newer gamma/SHARED/IN/images/.gitkeep 2>/dev/null | wc -l || echo "?")
+              COMMIT_MSG="f00(assetforge): ${MODE} run — ${RUN_ID} — ${IMG_COUNT} images"
               git commit -m "$COMMIT_MSG"
               git push
               echo "✓ Committed and pushed: $COMMIT_MSG"
           fi
 
-      # === CLEANUP KAGGLE ===
-      - name: Cleanup Kaggle kernel
-        if: always()
-        env:
-          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
-          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
-        run: |
-          kaggle kernels delete "${KERNEL_SLUG}" -y 2>&1 || true
-          echo "Kaggle cleanup done"
-
-      # === RÉSUMÉ ===
-      - name: Run summary
-        if: always()
+      - name: Summary
         run: |
           echo "=========================================="
           echo "  F00 ASSETFORGE — RÉSUMÉ DU RUN"
@@ -390,7 +207,7 @@ jobs:
           echo "Run ID: ${{ inputs.run_id }}"
           echo "Mode:   ${{ inputs.mode }}"
           echo ""
-          IMG_COUNT=$(find /tmp/generated_images -name "*.png" 2>/dev/null | wc -l || echo "0")
+          IMG_COUNT=$(find all_images -name "*.png" 2>/dev/null | wc -l || echo "0")
           echo "Images générées: ${IMG_COUNT}"
           echo ""
           echo "=========================================="
