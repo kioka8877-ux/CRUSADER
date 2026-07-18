@@ -94,7 +94,7 @@ jobs:
     name: "Generate image ${{ matrix.index }}"
     needs: prepare
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
