@@ -59,7 +59,7 @@ jobs:
         id: build-matrix
         run: |
           python3 -c "
-          import json
+          import json, os
           with open('prompts_manifest.json') as f:
               manifest = json.load(f)
           
@@ -76,13 +76,11 @@ jobs:
           matrix = json.dumps({'index': indices})
           
           print(f'Images to generate: {count}')
-          # Set outputs
+          # Write to GITHUB_OUTPUT
           with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
               f.write(f'matrix={matrix}\n')
               f.write(f'image_count={count}\n')
           "
-        env:
-          GITHUB_OUTPUT: ${{ github.env }}
 
       - name: Upload manifest as artifact
         uses: actions/upload-artifact@v4
