@@ -5,11 +5,11 @@ crs_f00_generate.py — F00 ASSETFORGE Phase 2 : Image Generation (CPU)
 Génère une image unique depuis le prompts_manifest.json.
 Conçu pour tourner sur GitHub Actions (CPU, ubuntu-latest).
 
+Modèle: stabilityai/sd-turbo (1.5GB, 1-4 steps, rapide sur CPU)
+Fallback: stabilityai/stable-diffusion-2-base si sd-turbo échoue
+
 Usage:
     python crs_f00_generate.py --manifest prompts_manifest.json --index 0 --output output/
-
-Variables d'environnement optionnelles:
-    HF_TOKEN — token HuggingFace (pour télécharger FLUX.1-schnell si gated)
 """
 
 import argparse
@@ -18,7 +18,6 @@ import os
 import sys
 import time
 from pathlib import Path
-
 
 def main():
     parser = argparse.ArgumentParser(description="F00 Phase 2 — Generate single image (CPU)")
@@ -57,45 +56,42 @@ def main():
     # 3. Import torch and diffusers
     print("\n[STEP 2] Loading PyTorch...")
     import torch
-    from diffusers import FluxPipeline
+    from diffusers import AutoPipelineForText2Image
     print(f"  PyTorch: {torch.__version__}")
     print(f"  CUDA available: {torch.cuda.is_available()}")
     print(f"  Device: CPU")
 
-    # 4. Load model
-    print("\n[STEP 3] Loading FLUX.1-schnell...")
-    print("  (This downloads ~12GB on first run, cached afterwards)")
+    # 4. Load model — SD-Turbo (1.5GB, fast on CPU)
+    print("\n[STEP 3] Loading SD-Turbo (stabilityai/sd-turbo)...")
+    print("  (1.5GB download, cached afterwards)")
     t0 = time.time()
 
-    # HF_TOKEN is optional — FLUX.1-schnell is Apache 2.0 (not gated)
     hf_token = os.environ.get("HF_TOKEN")
-    kwargs = {"torch_dtype": torch.float16}
+    kwargs = {"torch_dtype": torch.float32}  # float32 on CPU (float16 is slow on CPU)
     if hf_token:
         kwargs["token"] = hf_token
 
-    # Use float16 to save memory, even on CPU
-    # If float16 fails on CPU, fallback to float32
-    try:
-        pipe = FluxPipeline.from_pretrained(
-            "black-forest-labs/FLUX.1-schnell",
-            **kwargs,
-        )
-    except Exception as e:
-        print(f"  float16 failed: {e}")
-        print("  Retrying with float32...")
-        kwargs["torch_dtype"] = torch.float32
+    pipe = None
+    models_to_try = [
+        "stabilityai/sd-turbo",
+        "stabilityai/sdxl-turbo",
+    ]
+
+    for model_id in models_to_try:
         try:
-            pipe = FluxPipeline.from_pretrained(
-                "black-forest-labs/FLUX.1-schnell",
-                **kwargs,
-            )
-        except Exception as e2:
-            print(f"  float32 also failed: {e2}")
-            # Last resort: try without any token
-            pipe = FluxPipeline.from_pretrained(
-                "black-forest-labs/FLUX.1-schnell",
-                torch_dtype=torch.float32,
-            )
+            print(f"  Trying: {model_id}")
+            pipe = AutoPipelineForText2Image.from_pretrained(model_id, **kwargs)
+            break
+        except Exception as e:
+            print(f"  Failed: {e}")
+            continue
+
+    if pipe is None:
+        print("  All models failed. Trying basic SD 1.5...")
+        pipe = AutoPipelineForText2Image.from_pretrained(
+            "runwayml/stable-diffusion-v1-5",
+            torch_dtype=torch.float32,
+        )
 
     # CPU optimizations
     pipe.enable_attention_slicing()
@@ -113,23 +109,23 @@ def main():
     # 5. Generate image
     print(f"\n[STEP 4] Generating {filename}...")
 
-    # Dimensions — reduced for CPU (faster, less memory)
-    # Generate at 1024x576 then we could upscale, but for now keep it simple
+    # Dimensions — SD-Turbo works best at 512x512, we use 512x288 or 288x512
     if meta["format"] == "VERTICAL":
-        WIDTH, HEIGHT = 768, 1344  # reduced from 1080x1920
+        WIDTH, HEIGHT = 288, 512
     else:
-        WIDTH, HEIGHT = 1344, 768  # reduced from 1920x1080
+        WIDTH, HEIGHT = 512, 288
 
     style_constraints = (
         "No text, no watermark, no logo in the image. "
         "High contrast, clear composition. "
-        "Consistent visual style across all images."
+        "Consistent visual style across all images. "
+        "Digital illustration, cinematic lighting."
     )
     full_prompt = f"{prompt}. {style_constraints}"
 
     print(f"  Prompt: {full_prompt[:100]}...")
     print(f"  Size: {WIDTH}x{HEIGHT}")
-    print(f"  Steps: 4 (FLUX.1-schnell)")
+    print(f"  Steps: 4 (SD-Turbo)")
 
     t0 = time.time()
     result = pipe(
@@ -157,7 +153,7 @@ def main():
         "generation_time_seconds": gen_time,
         "load_time_seconds": load_time,
         "size": f"{WIDTH}x{HEIGHT}",
-        "model": "FLUX.1-schnell",
+        "model": "sd-turbo",
         "device": "cpu",
     }
     meta_path = args.output / f"{filename}.meta.json"
