@@ -217,9 +217,16 @@ jobs:
         run: |
           echo "Polling kernel: ${KERNEL_SLUG}"
 
+          # Grace period — le kernel vient d'être push, l'API n'est pas encore à jour
+          echo "Waiting 60s for kernel to initialize..."
+          sleep 60
+
           MAX_WAIT=1200  # 20 minutes max
           POLL_INTERVAL=30
           ELAPSED=0
+          ERROR_COUNT=0
+          MAX_ERRORS=5    # 5 erreurs consécutives = échec réel
+          GRACE_PERIOD=180  # 3 min — ignore "error" pendant cette période
 
           while [ $ELAPSED -lt $MAX_WAIT ]; do
               RAW_OUTPUT=$(kaggle kernels status "${KERNEL_SLUG}" 2>&1)
@@ -228,22 +235,33 @@ jobs:
               if echo "$RAW_OUTPUT" | grep -qi "complete"; then
                   echo "✓ Kernel completed successfully"
                   break
-              elif echo "$RAW_OUTPUT" | grep -qi "error"; then
-                  echo "✗ Kernel failed with error"
-                  kaggle kernels output "${KERNEL_SLUG}" -p /tmp/kaggle_output 2>&1 || true
-                  for logfile in /tmp/kaggle_output/*.log; do
-                      if [ -f "$logfile" ]; then
-                          echo "=== Error logs ==="
-                          tail -30 "$logfile"
-                      fi
-                  done
-                  exit 1
               elif echo "$RAW_OUTPUT" | grep -qi "running"; then
                   echo "  Status: running..."
+                  ERROR_COUNT=0
               elif echo "$RAW_OUTPUT" | grep -qi "pending\|queued"; then
                   echo "  Status: pending/queued..."
+                  ERROR_COUNT=0
+              elif echo "$RAW_OUTPUT" | grep -qi "error"; then
+                  ERROR_COUNT=$((ERROR_COUNT + 1))
+                  echo "  ⚠️ Error detected (count: ${ERROR_COUNT}/${MAX_ERRORS})"
+
+                  # Pendant le grace period, on ignore les erreurs
+                  if [ $ELAPSED -ge $GRACE_PERIOD ] && [ $ERROR_COUNT -ge $MAX_ERRORS ]; then
+                      echo "✗ Kernel failed — too many errors after grace period"
+                      kaggle kernels output "${KERNEL_SLUG}" -p /tmp/kaggle_output 2>&1 || true
+                      for logfile in /tmp/kaggle_output/*.log; do
+                          if [ -f "$logfile" ]; then
+                              echo "=== Error logs ==="
+                              tail -30 "$logfile"
+                          fi
+                      done
+                      exit 1
+                  else
+                      echo "  (within grace period or below error threshold, continuing...)"
+                  fi
               else
                   echo "  Status: unknown (waiting)"
+                  ERROR_COUNT=0
               fi
 
               sleep $POLL_INTERVAL
