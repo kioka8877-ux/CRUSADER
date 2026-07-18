@@ -67,22 +67,35 @@ def main():
     print("  (This downloads ~12GB on first run, cached afterwards)")
     t0 = time.time()
 
+    # HF_TOKEN is optional — FLUX.1-schnell is Apache 2.0 (not gated)
+    hf_token = os.environ.get("HF_TOKEN")
+    kwargs = {"torch_dtype": torch.float16}
+    if hf_token:
+        kwargs["token"] = hf_token
+
     # Use float16 to save memory, even on CPU
     # If float16 fails on CPU, fallback to float32
     try:
         pipe = FluxPipeline.from_pretrained(
             "black-forest-labs/FLUX.1-schnell",
-            torch_dtype=torch.float16,
-            token=os.environ.get("HF_TOKEN"),
+            **kwargs,
         )
     except Exception as e:
         print(f"  float16 failed: {e}")
         print("  Retrying with float32...")
-        pipe = FluxPipeline.from_pretrained(
-            "black-forest-labs/FLUX.1-schnell",
-            torch_dtype=torch.float32,
-            token=os.environ.get("HF_TOKEN"),
-        )
+        kwargs["torch_dtype"] = torch.float32
+        try:
+            pipe = FluxPipeline.from_pretrained(
+                "black-forest-labs/FLUX.1-schnell",
+                **kwargs,
+            )
+        except Exception as e2:
+            print(f"  float32 also failed: {e2}")
+            # Last resort: try without any token
+            pipe = FluxPipeline.from_pretrained(
+                "black-forest-labs/FLUX.1-schnell",
+                torch_dtype=torch.float32,
+            )
 
     # CPU optimizations
     pipe.enable_attention_slicing()
